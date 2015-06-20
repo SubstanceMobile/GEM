@@ -27,7 +27,6 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     Context context;
     AlbumArtGridClickListener onItemClickedListener;
     SettingsManager settings;
-    Integer DEFAULT_TIME_MINIMUM = 15, DEFAULT_TIME_MAXIMUM = 35;
 
     public AlbumGridAdapter(Context c, List<AlbumGridDataModel> data) {
         inflater = LayoutInflater.from(c);
