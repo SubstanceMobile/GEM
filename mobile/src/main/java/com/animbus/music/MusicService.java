@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.widget.Toast;
+
+import com.animbus.music.data.dataModels.SongInfoHolder;
 
 import java.util.List;
 
@@ -18,6 +21,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     MediaPlayer player;
     Context cxt;
     Integer repeatType;
+    public static Integer REPEAT_TYPE_ALL = 0,REPEAT_TYPE_ONE = 1;
+    List<SongInfoHolder> data;
 
     public MusicService(Context context) {
         player = new MediaPlayer();
@@ -44,27 +49,27 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        if (getRepeatType() != 2) {
-            if (getNextSong() != Long.parseLong(null)) {
+        switch (repeatType) {
+            case 0:
+                playSong(getCurrentSong());
+                break;
+            case 1:
                 playSong(getNextSong());
-            } else {
-                repeat(getRepeatType());
-            }
-        } else {
-            playSong(getCurrentSong());
         }
     }
 
-    public long getCurrentSong() {
-        return Long.parseLong(null);
+    public SongInfoHolder getCurrentSong() {
+        //This will return the currently playing song. 0 because 0 = now playing.
+        return data.get(0);
     }
 
     public void getPrevSong() {
 
     }
 
-    public long getNextSong() {
-        return Long.parseLong(null);
+    public SongInfoHolder getNextSong() {
+        //we use 1 because 0 is current, data.size is previous, and 1 is next
+        return data.get(1);
     }
 
     public void getNowPlayingList() {
@@ -94,9 +99,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         this.repeatType = repeatType;
     }
 
-    public void playSong(long song) {
+    public void playSong(SongInfoHolder songInfo) {
         player.prepareAsync();
-        player.start();
     }
 
     public void playSong(List list, Integer position) {

@@ -46,7 +46,7 @@
             android:background="@color/material_blue_grey_800"
             app:subtitle="Artist"
             app:subtitleTextAppearance="@android:style/TextAppearance.Material.Small"
-            app:title="Album"
+            app:songTitle="Album"
             app:titleMarginStart="56dp"
             app:titleTextAppearance="@android:style/TextAppearance.Material.Display1"/>
         <Space
@@ -67,7 +67,7 @@
             android:layout_height="@dimen/toolbarSize"
             android:background="@android:color/transparent"
             android:fitsSystemWindows="true"
-            app:title="@string/title_activity_albums" />
+            app:songTitle="@string/title_activity_albums" />
     </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

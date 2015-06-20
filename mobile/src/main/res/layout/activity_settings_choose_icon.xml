@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolbarSize"
             android:background="@drawable/gradient_black_ontop"
-            app:title="@string/title_activity_settings_choose_icon" />
+            app:songTitle="@string/title_activity_settings_choose_icon" />
     </FrameLayout>
 
     <android.support.v7.widget.SwitchCompat
