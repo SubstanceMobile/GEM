@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/primaryAlternateColor"
+    android:id="@+id/now_playing_toolbar_root_view">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nowplaying_toolbarSize"
+        android:background="@drawable/ripple_bg"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <com.animbus.music.custom_views.SquareImageViewHeight_Based
+            android:id="@+id/nowplayingtoolbar_albumart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:contentDescription="@string/album_art_hint"
+            android:src="@drawable/ic_album_black_48dp"
+            android:tint="?attr/primaryAlternateTextColor"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-6dp"
+                android:progress="100" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/song_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:padding="@dimen/margin_tiny"
+                        android:text="@string/song_title"
+                        android:textColor="?attr/primaryAlternateTextColor"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/song_artist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/song_artist"
+                        android:textColor="?attr/secondaryAlternateTextColor"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/play_pause_toolbar_button"
+                    android:layout_width="@dimen/nowplaying_toolbar_iconSize"
+                    android:layout_height="@dimen/nowplaying_toolbar_iconSize"
+                    android:layout_margin="@dimen/nowplaying_ripple_padding"
+                    android:animateLayoutChanges="true"
+                    android:background="@drawable/ripple_circle_bg_alt_color"
+                    android:clickable="true"
+                    android:contentDescription="@string/play_pause"
+                    android:cropToPadding="false"
+                    android:onClick="switchTo"
+                    android:padding="@dimen/margin_medium"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_play_arrow_black_48dp"
+                    android:tint="?attr/secondaryAlternateTextColor"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</FrameLayout>

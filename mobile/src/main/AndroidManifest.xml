@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.animbus.music" >
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
+    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/> -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_new_dark"
+        android:label="@string/app_name_actual"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".activities.MyLibrary"
+            android:label="@string/app_name" />
+
+        <activity-alias
+            android:name=".activities.app.icon.new.dark"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher_new_dark"
+            android:label="@string/app_name"
+            android:targetActivity=".activities.MyLibrary" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".activities.app.icon.new.light"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_new_light"
+            android:label="@string/app_name"
+            android:targetActivity=".activities.MyLibrary" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".activities.app.icon.new.color"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_new_color"
+            android:label="@string/app_name"
+            android:targetActivity=".activities.MyLibrary" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".activities.app.icon.old.dark"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_old_dark_swoundwaves"
+            android:label="@string/app_name"
+            android:targetActivity=".activities.MyLibrary" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".activities.app.icon.old.light"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_old_light_soundwaves"
+            android:label="@string/app_name"
+            android:targetActivity=".activities.MyLibrary" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".activities.albums_activity"
+            android:label="@string/title_activity_albums"
+            android:parentActivityName=".activities.MyLibrary"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activities.Settings"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".activities.ChooseIcon"
+            android:label="@string/title_activity_settings_choose_icon" />
+        <activity
+            android:name=".activities.NowPlayingPeek"
+            android:label="@string/title_activity_now_playing_quick_peek" />
+        <activity
+            android:name=".activities.NowPlaying"
+            android:label="@string/title_activity_now_playing" />
+        <activity
+            android:name=".NowPlayingClassic"
+            android:label="@string/title_activity_now_playing_classic" />
+
+        <receiver android:name=".activities.MusicPlaybackWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/music_playback_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".activities.About"
+            android:label="@string/title_activity_about" >
+        </activity>
+    </application>
+
+</manifest>

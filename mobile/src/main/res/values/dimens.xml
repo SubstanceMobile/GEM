@@ -1,0 +1,64 @@
+<resources>
+    <dimen name="none">0dp</dimen>
+    <dimen name="padding">16dp</dimen>
+    <dimen name="toolbarSize">56dp</dimen>
+    <dimen name="systembarPadding">24dp</dimen>
+
+    ListView
+    <dimen name="listViewSize">48dp</dimen>
+    <dimen name="listViewSizeBig">72dp</dimen>
+    <dimen name="listViewSecondaryIcon">24dp</dimen>
+    <dimen name="inBetweenCategoryMargin">8dp</dimen>
+    <dimen name="listviewBaseMargin">16dp</dimen>
+    <dimen name="listviewIconSize">40dp</dimen>
+    <dimen name="gridAlbumArtSize">165dp</dimen>
+    <dimen name="gridAlbumActionButton">48dp</dimen>
+    <dimen name="gridAlbumActionButtonPadding">12dp</dimen>
+    <dimen name="gridAlbumActionButtonMarginFixText">-8dp</dimen>
+    <dimen name="gridAlbumActionButtonMarginFixEdge">-4dp</dimen>
+
+    FAB
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="fab_padding">17dp</dimen>
+    <dimen name="FAB_elevation">10dp</dimen>
+    <dimen name="FAB_press_elevation">0dp</dimen>
+
+    Now Playing Toolbar
+    <dimen name="nowplaying_toolbarSize">64dp</dimen>
+    <dimen name="nowplaying_toolbar_iconSize">48dp</dimen>
+    <dimen name="nowplaying_ripple_padding_layoutsize">56dp</dimen>
+    <dimen name="nowplaying_ripple_padding">4dp</dimen>
+    <dimen name="nowplaying_albumartSize">56dp</dimen>
+
+    AlbumsScreen
+    <dimen name="albums_info_toolbar_size">148dp</dimen>
+    <dimen name="now_playing_seekbar_size">16dp</dimen>
+    <dimen name="now_playing_seekbar_thub_size">1dp</dimen>
+    <dimen name="albums_info_toolbar_size_alt">90dp</dimen>
+    <dimen name="albums_main_toolbar_size">80dp</dimen>
+    <dimen name="toolbar_size_inverted">-56dp</dimen>
+    <dimen name="now_playing_icon_size">56dp</dimen>
+
+    Design Sizes
+    <dimen name="margin_micro">0.5dp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_huge">64dp</dimen>
+    <dimen name="margin_huger">72dp</dimen>
+    <dimen name="margin_biggest">84dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    Navigation Drawer
+    <dimen name="navdrawer_header_height">165dp</dimen>
+    <dimen name="navdrawer_header_text_root_height">56dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+</resources>

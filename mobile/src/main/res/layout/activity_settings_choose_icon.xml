@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.animbus.music.activities.ChooseIcon"
+    android:id="@+id/choose_icon_root_view"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.animbus.music.custom_views.SquareImageViewWidth_Based
+            android:id="@+id/icon_preview_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primaryLight"
+            android:padding="@dimen/margin_biggest"
+            android:src="@mipmap/ic_launcher_new_dark" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/choose_icon_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbarSize"
+            android:background="@drawable/gradient_black_ontop"
+            app:title="@string/title_activity_settings_choose_icon" />
+    </FrameLayout>
+
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/icon_use_light_preview"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/ripple_bg"
+        android:checked="true"
+        android:onClick="onOptionChanged"
+        android:padding="@dimen/margin_medium"
+        android:text="Use light preview background" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/scrollView2"
+        android:layout_weight="1">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon_choices_radiogroup">
+
+            <RadioButton
+                android:id="@+id/settings_radio_new_dark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/listViewSize"
+                android:text="Default Icon"
+                android:checked="false" />
+
+            <RadioButton
+
+                android:id="@+id/settings_radio_new_light"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/listViewSize"
+                android:text="Default Icon Light"
+                android:checked="false" />
+
+            <RadioButton
+                android:id="@+id/settings_radio_new_color"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/listViewSize"
+                android:text="Default Icon Colorful"
+                android:checked="false" />
+
+            <RadioButton
+                android:id="@+id/settings_radio_old_dark"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/listViewSize"
+                android:text="Classic Icon"
+                android:checked="false" />
+
+            <RadioButton
+                android:id="@+id/settings_radio_old_light"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/listViewSize"
+                android:text="Classic Icon Light" />
+
+
+        </RadioGroup>
+    </ScrollView>
+
+</LinearLayout>

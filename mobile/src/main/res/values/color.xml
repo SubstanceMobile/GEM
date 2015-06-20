@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+    Misc.
+    <color name="primaryDark">#ff0f0f0f</color>
+    <color name="primaryLight">#F5F5F5</color>
+    <color name="primaryGreyDark">#ff2d2d2d</color>
+    <color name="primaryGreyLight">#d1d1d1</color>
+    <color name="systembarsDark">#ff0a0a0a</color>
+    <color name="systembarsLight">#757575</color>
+</resources>

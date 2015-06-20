@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent_material_dark</item>
+        <item name="android:windowBackground">@color/primaryDark</item>
+        <item name="primaryTextColor">@color/primary_text_default_material_dark</item>
+        <item name="secondaryTextColor">@color/secondary_text_default_material_dark</item>
+        <item name="primaryAlternateColor">@color/primaryLight</item>
+        <item name="primaryAlternateTextColor">@color/primary_text_default_material_light</item>
+        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_light</item>
+        <item name="rippleColor">@color/ripple_material_dark</item>
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryLight</item>
+        <item name="colorAccent">@color/accent_material_light</item>
+        <item name="android:windowBackground">@color/primaryLight</item>
+        <item name="primaryTextColor">@color/primary_text_default_material_light</item>
+        <item name="secondaryTextColor">@color/secondary_text_default_material_light</item>
+        <item name="primaryAlternateColor">@color/primaryDark</item>
+        <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
+        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
+        <item name="rippleColor">@color/ripple_material_light</item>
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyleLight</item>
+    </style>
+</resources>

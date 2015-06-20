@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--TODO:Use Resorce-->
+    <group
+        android:id="@+id/navdrawer_main_category"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/navdrawer_album_icon"
+            android:icon="@drawable/ic_album_black_48dp"
+            android:title="Albums" />
+        <item
+            android:id="@+id/navdrawer_songs"
+            android:icon="@drawable/ic_audiotrack_black_48dp"
+            android:title="Songs" />
+        <item
+            android:id="@+id/navdrawer_playlists"
+            android:icon="@drawable/ic_queue_music_black_48dp"
+            android:title="Playlists" />
+        <item
+            android:id="@+id/navdrawer_artists"
+            android:icon="@drawable/ic_artist"
+            android:title="Artists" />
+    </group>
+
+    <group
+        android:id="@+id/navdrawer_other_category"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/navdrawer_settings"
+            android:icon="@drawable/ic_setting_dark"
+            android:title="Settings" />
+    </group>
+
+</menu>

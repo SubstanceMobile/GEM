@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/AlbumGridItemRootView">
+
+    <LinearLayout
+        android:id="@+id/AlbumGridItemLayoutView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:elevation="0dp"
+        android:layout_margin="@dimen/margin_micro">
+
+        <LinearLayout
+            android:id="@+id/AlbumArtGridItemLayoutContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <com.animbus.music.custom_views.SquareImageViewWidth_Based
+                android:id="@+id/AlbumArtGridItemAlbumArt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/none"
+                android:src="@drawable/album_art_alt_alt" />
+
+            <LinearLayout
+                android:id="@+id/AlbumArtGridItemInfoBar"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:background="@color/primaryGreyDark"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium">
+
+                    <TextView
+                        android:id="@+id/AlbumArtGridItemInfoTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="ALBUM_NAME"
+                        android:textColor="@color/abc_primary_text_material_dark"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/AlbumArtGridItemInfoArtist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="ALBUM_ARTIST"
+                        android:textColor="@color/abc_secondary_text_material_dark"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ripple_bg"
+        android:elevation="1dp"
+        android:id="@+id/AlbumGridItem"/>
+</FrameLayout>
+
+

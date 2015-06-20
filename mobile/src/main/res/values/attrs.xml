@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="primaryTextColor" format="color" />
+    <attr name="secondaryTextColor" format="color" />
+    <attr name="primaryAlternateColor" format="color" />
+    <attr name="primaryAlternateTextColor" format="color"/>
+    <attr name="secondaryAlternateTextColor" format="color"/>
+    <attr name="themeRippleColor" format="color"/>
+    <attr name="themeRippleColorAlt" format="color"/>
+
+    <attr name="mainStyle" format="reference"/>
+    <attr name="translucentStyle" format="reference" />
+    <attr name="peekTheme" format="reference" />
+</resources>
