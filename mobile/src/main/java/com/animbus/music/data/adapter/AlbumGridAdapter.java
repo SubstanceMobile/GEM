@@ -71,6 +71,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                     }
                 }
             });
+
         } else {
             if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
                 holder.AlbumGridItemHeader.setBackgroundColor(context.getResources().getColor(R.color.primaryGreyLight));
