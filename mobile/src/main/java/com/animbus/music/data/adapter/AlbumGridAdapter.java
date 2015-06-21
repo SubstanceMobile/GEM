@@ -1,6 +1,8 @@
 package com.animbus.music.data.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,9 @@ import android.widget.TextView;
 import com.animbus.music.R;
 import com.animbus.music.data.SettingsManager;
 import com.animbus.music.data.dataModels.AlbumGridDataModel;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +27,6 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     Context context;
     AlbumArtGridClickListener onItemClickedListener;
     SettingsManager settings;
-    Integer DEFAULT_TIME_MINIMUM = 15, DEFAULT_TIME_MAXIMUM = 35;
 
     public AlbumGridAdapter(Context c, List<AlbumGridDataModel> data) {
         inflater = LayoutInflater.from(c);
@@ -42,10 +46,34 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
         holder.AlbumName.setText(current.AlbumGridAlbumName);
         holder.AlbumArtist.setText(current.AlbumGridAlbumArtist);
         holder.AlbumArt.setImageResource(current.AlbumGridAlbumart);
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID,true)) {
-        holder.AlbumGridItemHeader.setBackgroundColor(current.BackgroundColor);
-        holder.AlbumName.setTextColor(current.TitleTextColor);
-        holder.AlbumArtist.setTextColor(current.SubtitleTextColor);
+        Glide.with(context).load(current.AlbumGridAlbumart).asBitmap().into(holder.AlbumArt);
+        if (settings.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
+            Glide.with(context).load(current.AlbumGridAlbumart).asBitmap().into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
+                        @Override
+                        public void onGenerated(Palette palette) {
+                            Palette.Swatch swatch = palette.getVibrantSwatch();
+                            if (swatch != null) {
+                                holder.AlbumGridItemHeader.setBackgroundColor(swatch.getRgb());
+                                holder.AlbumName.setTextColor(swatch.getTitleTextColor());
+                                holder.AlbumArtist.setTextColor(swatch.getBodyTextColor());
+                            } else {
+                                if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
+                                    holder.AlbumGridItemHeader.setBackgroundColor(context.getResources().getColor(R.color.primaryGreyLight));
+                                    holder.AlbumName.setTextColor(context.getResources().getColor(R.color.primary_text_default_material_light));
+                                    holder.AlbumArtist.setTextColor(context.getResources().getColor(R.color.secondary_text_default_material_light));
+                                } else {
+                                    holder.AlbumGridItemHeader.setBackgroundColor(context.getResources().getColor(R.color.primaryGreyDark));
+                                    holder.AlbumName.setTextColor(context.getResources().getColor(R.color.primary_text_default_material_dark));
+                                    holder.AlbumArtist.setTextColor(context.getResources().getColor(R.color.secondary_text_default_material_dark));
+                                }
+                            }
+                        }
+                    });
+                }
+            });
         } else {
             if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
                 holder.AlbumGridItemHeader.setBackgroundColor(context.getResources().getColor(R.color.primaryGreyLight));
@@ -56,7 +84,6 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                 holder.AlbumName.setTextColor(context.getResources().getColor(R.color.primary_text_default_material_dark));
                 holder.AlbumArtist.setTextColor(context.getResources().getColor(R.color.secondary_text_default_material_dark));
             }
-
         }
     }
 

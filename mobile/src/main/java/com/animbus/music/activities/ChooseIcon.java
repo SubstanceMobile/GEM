@@ -3,9 +3,13 @@ package com.animbus.music.activities;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +34,8 @@ public class ChooseIcon extends AppCompatActivity implements RadioGroup.OnChecke
     int ICON_FALSE, ICON_TRUE;
     ComponentName icon, iconOld;
     int checkA, checkB;
-    Intent shortcutClickedIntent, addShortcutIntent;
+    int iconAlt;
+    Intent shortcutClickedIntent, addShortcutIntent, removeShortcutIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +109,8 @@ public class ChooseIcon extends AppCompatActivity implements RadioGroup.OnChecke
         }
 
         if (id == R.id.action_add_to_homescreen) {
-            Toast.makeText(this,"Adding to Homescreen", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(R.id.choose_icon_root_view), "Added Icon", Snackbar.LENGTH_LONG).show();
+            addShortcut();
         }
 
         if (id == android.R.id.home) {
@@ -116,9 +122,21 @@ public class ChooseIcon extends AppCompatActivity implements RadioGroup.OnChecke
 
     private void addShortcut() {
         addShortcutIntent = new Intent();
+        shortcutClickedIntent = new Intent(getApplicationContext(), MyLibrary.class);
+        shortcutClickedIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        shortcutClickedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         addShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutClickedIntent);
         addShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
-        /*addShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON);*/
+        addShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON, getAltIcon());
+        addShortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+        sendBroadcast(addShortcutIntent);
+    }
+
+    private void removeShortcut() {
+        removeShortcutIntent = new Intent();
+        removeShortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.app_name));
+        removeShortcutIntent.setAction("com.android.launcher.action.UNINSTALL_SHORTCUT");
     }
 
     public void onOptionChanged(View v) {
@@ -142,36 +160,45 @@ public class ChooseIcon extends AppCompatActivity implements RadioGroup.OnChecke
         preview.setImageDrawable(currentIcon);
     }
 
+    public Bitmap getAltIcon() {
+        return BitmapFactory.decodeResource(getResources(), iconAlt);
+    }
+
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         settings.setIntSetting(SettingsManager.KEY_SELECTED_ICON_RADIOBUTTON, checkedId);
         switch (checkedId) {
             case R.id.settings_radio_new_dark:
                 currentIcon = getDrawable(R.mipmap.ic_launcher_new_dark);
+                iconAlt = R.mipmap.ic_launcher_new_light;
                 icon = new ComponentName(getPackageName(), "com.animbus.music.activities.app.icon.new.dark");
                 lightBackground.setChecked(true);
                 break;
 
             case R.id.settings_radio_new_light:
                 currentIcon = getDrawable(R.mipmap.ic_launcher_new_light);
+                iconAlt = R.mipmap.ic_launcher_new_dark;
                 icon = new ComponentName(getPackageName(), "com.animbus.music.activities.app.icon.new.light");
                 lightBackground.setChecked(false);
                 break;
 
             case R.id.settings_radio_new_color:
                 currentIcon = getDrawable(R.mipmap.ic_launcher_new_color);
+                iconAlt = R.mipmap.ic_launcher_new_color;
                 icon = new ComponentName(getPackageName(), "com.animbus.music.activities.app.icon.new.color");
                 lightBackground.setChecked(false);
                 break;
 
             case R.id.settings_radio_old_dark:
                 currentIcon = getDrawable(R.mipmap.ic_launcher_old_dark_swoundwaves);
+                iconAlt = R.mipmap.ic_launcher_old_light_soundwaves;
                 icon = new ComponentName(getPackageName(), "com.animbus.music.activities.app.icon.old.dark");
                 lightBackground.setChecked(true);
                 break;
 
             case R.id.settings_radio_old_light:
                 currentIcon = getDrawable(R.mipmap.ic_launcher_old_light_soundwaves);
+                iconAlt = R.mipmap.ic_launcher_old_dark_swoundwaves;
                 icon = new ComponentName(getPackageName(), "com.animbus.music.activities.app.icon.old.light");
                 lightBackground.setChecked(false);
                 break;
