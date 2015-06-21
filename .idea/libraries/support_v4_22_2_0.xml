@@ -9,6 +9,8 @@
       <root url="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/22.2.0/support-v4-22.2.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>
