@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="265dp">
+    android:layout_height="@dimen/navdrawer_header_height">
 
     <ImageView
         android:layout_width="match_parent"
@@ -14,5 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/navdrawer_header_text_root_height"
         android:layout_gravity="bottom"
-        android:background="@drawable/gradient_block_onbottom"></LinearLayout>
+        android:background="@drawable/gradient_block_onbottom">
+
+    </LinearLayout>
 </FrameLayout>

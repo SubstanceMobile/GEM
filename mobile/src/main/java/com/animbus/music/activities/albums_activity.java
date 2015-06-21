@@ -40,7 +40,7 @@ public class albums_activity extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Sets the NavdrawerItemTitle to the intent's data
-        /*infoToolbar.setSongTitle(b.getString("ALBUM_NAME"));
+        /*infoToolbar.setTitle(b.getString("ALBUM_NAME"));
         infoToolbar.setSubtitle(b.getString("ALBUM_ARTIST"));*/
         //Sets the albumart
         albumArtView.setImageResource(b.getInt("ALBUM_ART"));

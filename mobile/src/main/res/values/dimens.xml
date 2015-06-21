@@ -53,7 +53,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     Navigation Drawer
-    <dimen name="navdrawer_header_height">165dp</dimen>
+    <dimen name="navdrawer_header_height">192dp</dimen>
     <dimen name="navdrawer_header_text_root_height">56dp</dimen>
 
     <!--

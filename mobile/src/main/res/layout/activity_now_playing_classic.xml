@@ -28,7 +28,7 @@
             <android.support.v7.widget.Toolbar
                 android:layout_height="@dimen/toolbarSize"
                 android:layout_width="match_parent"
-                app:songTitle="Now Playing"
+                app:title="Now Playing"
                 android:id="@+id/now_playing_classic_appbar"
                 android:background="@drawable/gradient_black_ontop"
                 android:fitsSystemWindows="true" />

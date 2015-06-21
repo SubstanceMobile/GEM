@@ -30,7 +30,7 @@
                     android:layout_height="@dimen/toolbarSize"
                     android:background="@android:color/transparent"
                     android:elevation="0.3dp"
-                    app:songTitle="@string/title_activity_albums" />
+                    app:title="@string/title_activity_albums" />
             </FrameLayout>
 
             <com.animbus.music.custom_views.SquareImageViewHeight_Based
@@ -62,7 +62,7 @@
                     android:background="@color/material_blue_grey_800"
                     app:subtitle="Artist"
                     app:subtitleTextAppearance="@android:style/TextAppearance.Material.Small"
-                    app:songTitle="Album"
+                    app:title="Album"
                     app:titleMarginStart="56dp"
                     app:titleTextAppearance="@android:style/TextAppearance.Material.Display1" />
 

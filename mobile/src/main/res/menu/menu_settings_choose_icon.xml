@@ -2,6 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.animbus.music.activities.ChooseIcon">
-    <item android:id="@+id/action_fix_icons" android:songTitle="@string/action_fix_icons" android:orderInCategory="1" app:showAsAction="never"/>
-    <item android:id="@+id/action_add_to_homescreen" android:songTitle="@string/action_add_oppisite_shortcut" android:orderInCategory="2" app:showAsAction="never"/>
+    <item android:id="@+id/action_fix_icons" android:title="@string/action_fix_icons" android:orderInCategory="1" app:showAsAction="never"/>
+    <item android:id="@+id/action_add_to_homescreen" android:title="@string/action_add_oppisite_shortcut" android:orderInCategory="2" app:showAsAction="never"/>
 </menu>
