@@ -12,18 +12,20 @@ import android.widget.TextView;
 import com.animbus.music.R;
 import com.animbus.music.data.SettingsManager;
 import com.animbus.music.data.dataModels.AlbumGridDataModel;
+import com.animbus.music.data.dataModels.Song;
 import com.animbus.music.data.dataModels.SongDataModel;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongListViewHolder> {
     LayoutInflater inflater;
-    List<SongDataModel> data = Collections.emptyList();
+    List<Song> data = Collections.emptyList();
     Context context;
     SongListItemClickListener onItemClickedListener;
 
-    public SongListAdapter(Context c, List<SongDataModel> data) {
+    public SongListAdapter(Context c, List<Song> data) {
         inflater = LayoutInflater.from(c);
         this.data = data;
         this.context = c;
@@ -37,11 +39,17 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
 
     @Override
     public void onBindViewHolder(final SongListViewHolder holder, int position) {
-        SongDataModel current = data.get(position);
-        holder.SongName.setText(current.title);
-        holder.SongArtist.setText(current.artist);
-        holder.SongDuration.setText(current.songDuration);
-        holder.SongArt.setImageResource(current.albumart);
+        Song current = data.get(position);
+        holder.SongName.setText(current.getSongTitle());
+        holder.SongArtist.setText(current.getSongArtist());
+        long millis = current.getSongDuration();
+        //hh:mm:ss
+        String dur = String.format("%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+        holder.SongDuration.setText(dur);
+        holder.SongArt.setImageResource(R.drawable.album_art_alt_alt);
     }
 
     @Override
@@ -54,7 +62,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
     }
 
     public interface SongListItemClickListener {
-        void SongListItemClicked();
+        void SongListItemClicked(int position, List<Song> data);
     }
 
     class SongListViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -73,7 +81,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
         @Override
         public void onClick(View v) {
             if (onItemClickedListener != null) {
-                onItemClickedListener.SongListItemClicked();
+                onItemClickedListener.SongListItemClicked(getAdapterPosition(), data);
             }
         }
     }

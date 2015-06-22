@@ -44,18 +44,6 @@
 
          </LinearLayout>
 
-         <ImageButton
-             android:layout_width="@dimen/listViewSecondaryIcon"
-             android:layout_height="@dimen/listViewSecondaryIcon"
-             android:id="@+id/item_now_playing_repeat_button"
-             android:layout_margin="@dimen/margin_medium"
-             android:tint="?attr/secondaryTextColor"
-             android:src="@drawable/ic_repeat_black_48dp"
-             android:background="@drawable/ripple_circle_bg"
-             android:scaleType="fitXY"
-             android:layout_gravity="center_vertical"
-             style="@style/Widget.AppCompat.Button.Borderless" />
-
      </LinearLayout>
 
  </FrameLayout>

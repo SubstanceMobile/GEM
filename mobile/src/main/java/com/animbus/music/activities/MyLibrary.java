@@ -3,7 +3,6 @@ package com.animbus.music.activities;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,12 +30,15 @@ import com.animbus.music.data.SettingsManager;
 import com.animbus.music.data.adapter.AlbumGridAdapter;
 import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.data.dataModels.AlbumGridDataModel;
+import com.animbus.music.data.dataModels.Song;
 
 import java.util.List;
 
 
-public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.AlbumArtGridClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.AlbumArtGridClickListener, NavigationView.OnNavigationItemSelectedListener,
+        SongListAdapter.SongListItemClickListener{
     public RecyclerView mainList;
+    MediaController controller;
     String AlbumName, AlbumArtist, currentScreenName;
     int AlbumArt = R.drawable.album_art;
     MediaController musicControl;
@@ -68,6 +70,9 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         drawerContent = (NavigationView) findViewById(R.id.navigation);
 
         drawerContent.setNavigationItemSelectedListener(this);
+        controller = new MediaController(this);
+        controller.setQueue(dataManager.getSongListData());
+        controller.setRepeat(false);
 
         //Basic Stuff
         setSupportActionBar(toolbar);
@@ -222,11 +227,16 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         return true;
     }
 
+    @Override
+    public void SongListItemClicked(int position,List<Song> data) {
+        controller.startPlayback(data, position);
+    }
+
     //This section is where you select which view to see. Only views with back arrows should be set as separate activities.
     //Add code to this section as necessary (For example:If you need to update the list of songs in 'switchToSongs' you can add updateSongList(), or if you add a extra view add it to all sections)
     public void switchToAlbum() {
         //Configures the Recyclerview
-        AlbumGridAdapter adapter = new AlbumGridAdapter(this, dataManager.getAlbumGridData(settings.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)));
+        AlbumGridAdapter adapter = new AlbumGridAdapter(this, dataManager.getAlbumGridData());
         adapter.setOnItemClickedListener(this);
         mainList.setAdapter(adapter);
         mainList.setItemAnimator(new DefaultItemAnimator());
@@ -249,6 +259,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     public void switchToSongs() {
         //Configures the Recyclerview
         SongListAdapter adapter = new SongListAdapter(this, dataManager.getSongListData());
+        adapter.setOnItemClickedListener(this);
         mainList.setAdapter(adapter);
         mainList.setItemAnimator(new DefaultItemAnimator());
         mainList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

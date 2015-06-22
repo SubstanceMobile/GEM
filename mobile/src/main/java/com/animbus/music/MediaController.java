@@ -5,76 +5,59 @@ import android.content.Context;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.animbus.music.data.dataModels.SongInfoHolder;
+import com.animbus.music.data.dataModels.Song;
 
 import java.util.List;
 
-public class MediaController implements MusicService.onStopListner {
+public class MediaController {
     MusicService musicService;
-
-    private ServiceConnection musicConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            MusicService.MusicBinder musicBinder = (MusicService.MusicBinder) service;
-            musicService = musicBinder.getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
+    ServiceConnection musicConnection;
 
     public MediaController(Context context) {
-        musicService.setOnStopListner(this);
-        musicService.setContext(context);
-    }
-
-    @Override
-    public void onStop() {
-        musicService.unbindService(musicConnection);
+        musicService = new MusicService(context);
+        /*context.startService();*/
     }
 
     //This is where the song is set and the playback begins
-    public void startPlayback(SongInfoHolder song) {
+    public void startPlayback(Song song) {
         musicService.playSong(song);
     }
 
-    public void startPlayback(List<SongInfoHolder> data, int position){
+    public void startPlayback(List<Song> data, int position) {
         musicService.playSong(data, position);
     }
 
     //The Controls
-    public void pausePlayback(){
+    public void pausePlayback() {
         musicService.pause();
     }
 
-    public void resumePlayback(){
+    public void resumePlayback() {
         musicService.resume();
     }
 
-    public void playNextSong(){
+    public void playNextSong() {
         musicService.playNext();
     }
 
-    public void playPrevSong(){
+    public void playPrevSong() {
         musicService.playPrev();
     }
 
     //Misc.
-    public List<SongInfoHolder> getQueue(){
+    public List<Song> getQueue() {
         return musicService.getQueue();
     }
 
-    public void setQueue(List<SongInfoHolder> list){
+    public void setQueue(List<Song> list) {
         musicService.setQueue(list);
     }
 
-    public void addToQueue(SongInfoHolder song) {
+    public void addToQueue(Song song) {
         musicService.addToQueue(song);
     }
 
-    public void removeFromQueue(int position){
+    public void removeFromQueue(int position) {
         musicService.removeFromQueue(position);
     }
 

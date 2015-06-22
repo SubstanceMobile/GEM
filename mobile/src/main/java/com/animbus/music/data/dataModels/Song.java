@@ -1,16 +1,32 @@
 package com.animbus.music.data.dataModels;
 
 
-public class SongInfoHolder {
-    public Integer songDuration, songPosition;
-    public String songTitle, songArtist, songGenre;
-    public long songID;
+import android.content.ContentUris;
+import android.net.Uri;
+import android.provider.MediaStore;
 
-    public Integer getSongDuration() {
+import java.net.URI;
+
+public class Song {
+    public Integer songPosition;
+    public String songTitle, songArtist, songGenre;
+    public long songID, songDuration;
+    Uri songURI;
+    boolean repeating;
+
+    public Song() {
+
+    }
+
+    public Uri getSongURI() {
+        return ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, songID);
+    }
+
+    public long getSongDuration() {
         return songDuration;
     }
 
-    public void setSongDuration(Integer songDuration) {
+    public void setSongDuration(long songDuration) {
         this.songDuration = songDuration;
     }
 
@@ -54,4 +70,11 @@ public class SongInfoHolder {
         this.songTitle = songTitle;
     }
 
+    public void setRepeating(boolean repeating) {
+        this.repeating = repeating;
+    }
+
+    public boolean isRepeating() {
+        return repeating;
+    }
 }

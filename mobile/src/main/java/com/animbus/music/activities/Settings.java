@@ -129,6 +129,12 @@ public class Settings extends AppCompatActivity {
         manager.switchDependancy(masterPaletteSwitch, myLibraryPaletteSwitch);
         manager.switchDependancy(masterPaletteSwitch, nowPlayingPaletteSwitch);
 
+        //Disables and hides the peek feature
+        nowPlayingPeekSwitch.setChecked(false);
+        nowPlayingPeekSwitch.setEnabled(false);
+        nowPlayingPeekSwitch.setVisibility(View.GONE);
+
+        //Saves the settings
         saveSettings();
     }
 

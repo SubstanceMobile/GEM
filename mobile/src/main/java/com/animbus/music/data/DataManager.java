@@ -1,17 +1,22 @@
 package com.animbus.music.data;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.provider.MediaStore;
 import android.support.v4.os.AsyncTaskCompat;
 import android.support.v7.graphics.Palette;
 
 import com.animbus.music.R;
 import com.animbus.music.data.dataModels.AlbumGridDataModel;
 import com.animbus.music.data.dataModels.SongDataModel;
+import com.animbus.music.data.dataModels.Song;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +29,7 @@ public class DataManager {
         context = cxt;
     }
 
-    public List<AlbumGridDataModel> getAlbumGridData(Boolean getColors) {
+    public List<AlbumGridDataModel> getAlbumGridData() {
         List<AlbumGridDataModel> data = new ArrayList<>();
         int[] AlbumArts = {R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art,/*later*/R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art};
         String[] AlbumName = {"Tombstone", "Silent Unspeakable Memories", "Better Off Ted",/*Later*/"Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted"};
@@ -34,22 +39,49 @@ public class DataManager {
             current.AlbumGridAlbumart = AlbumArts[i];
             current.AlbumGridAlbumName = AlbumName[i];
             current.AlbumGridAlbumArtist = AlbumArtist[i];
-            if (getColors) {
-                current.BackgroundColor = getColor(AlbumArts[i], BACKGROUND_COLOR);
-                current.TitleTextColor = getColor(AlbumArts[i], TITLE_COLOR);
-                current.SubtitleTextColor = getColor(AlbumArts[i], SUBTITLE_COLOR);
-            }
             data.add(current);
         }
         return data;
     }
 
-    public List<SongDataModel> getSongListData() {
+    public List<Song> getSongListData() {
+        List<Song> data = new ArrayList<>();
+        Cursor musicCursor = context.getContentResolver().query(android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
+        if (musicCursor != null && musicCursor.moveToFirst()) {
+            //Get Columns
+            int titleColumm = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
+            int artistColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+            int idColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+            int durColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
+
+            int column_index = musicCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+
+            // add songs to list
+            do {
+                Song song = new Song();
+                song.setSongTitle(musicCursor.getString(titleColumm));
+                song.setSongArtist(musicCursor.getString(artistColumn));
+                song.setSongID(musicCursor.getLong(idColumn));
+                song.setSongDuration(musicCursor.getLong(durColumn));
+                data.add(song);
+
+            } while (musicCursor.moveToNext());
+        }
+        Collections.sort(data, new Comparator<Song>() {
+            @Override
+            public int compare(Song a, Song b) {
+                return a.getSongTitle().compareTo(b.getSongTitle());
+            }
+        });
+        return data;
+    }
+
+    public List<SongDataModel> getSongListDataFakeData() {
         List<SongDataModel> data = new ArrayList<>();
         String[] SongTitle = {"Song One", "Song Two", "Song Three and Counting", /*Later*/ "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting"};
-        String[] SongArtist = {"Riola Sardo", "Kisaburo Osawa", "Filbert",/*Later*/"Riola Sardo", "Kisaburo Osawa", "Filbert","Riola Sardo", "Kisaburo Osawa", "Filbert","Riola Sardo", "Kisaburo Osawa", "Filbert","Riola Sardo", "Kisaburo Osawa", "Filbert","Riola Sardo", "Kisaburo Osawa", "Filbert"};
-        String[] SongDuration = {"1:49", "2:50", "5:45", /*Later*/"1:49", "2:50", "5:45","1:49", "2:50", "5:45","1:49", "2:50", "5:45","1:49", "2:50", "5:45","1:49", "2:50", "5:45"};
-        int[] SongArt = {R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, /*Later*/R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art,R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art,R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art,R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art,R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art};
+        String[] SongArtist = {"Riola Sardo", "Kisaburo Osawa", "Filbert",/*Later*/"Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert"};
+        String[] SongDuration = {"1:49", "2:50", "5:45", /*Later*/"1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45"};
+        int[] SongArt = {R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, /*Later*/R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art};
         for (int i = 0; i < SongTitle.length && i < SongArtist.length && i < SongArt.length && i < SongDuration.length; i++) {
             SongDataModel current = new SongDataModel();
             current.title = SongTitle[i];

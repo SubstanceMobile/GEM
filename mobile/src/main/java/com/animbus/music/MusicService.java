@@ -8,9 +8,10 @@ import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.animbus.music.data.dataModels.SongInfoHolder;
+import com.animbus.music.data.dataModels.Song;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,9 +22,17 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     Context cxt;
     Boolean doRepeat, isPaused;
     Integer MAX_RESTART_ON_PREV_CLICKED_DUR = /*Time in ms*/ 3000;
-    List<SongInfoHolder> queue;
-    onStopListner onStopListner;
+    List<Song> queue;
     Integer currentPosition;
+
+    public MusicService() {
+        player = new MediaPlayer();
+        player.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
+        player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        player.setOnPreparedListener(this);
+        player.setOnCompletionListener(this);
+        player.setOnErrorListener(this);
+    }
 
     public MusicService(Context context) {
         player = new MediaPlayer();
@@ -50,28 +59,46 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         cxt = context;
     }
 
-    public void playSong(SongInfoHolder songInfo) {
+    public void playSong(Song songInfo) {
+        Boolean error;
+        player.reset();
         try {
             player.setDataSource(cxt, songInfo.getSongURI());
+            error = false;
         } catch (IOException e) {
             e.printStackTrace();
+            error = true;
+            Toast.makeText(cxt, "Error" + " at " + songInfo.getSongURI(), Toast.LENGTH_SHORT).show();
         }
-        player.prepareAsync();
+        if (!error) {
+            player.prepareAsync();
+            setCurrentSongPos(songInfo);
+        }
     }
 
-    public void playSong(List<SongInfoHolder> list, Integer position) {
-        SongInfoHolder songInfo = list.get(position);
-        playSong(songInfo);
+    public void playSong(List<Song> list, Integer position) {
+        Song songInfo = list.get(position);
+        Boolean error;
+        player.reset();
+        try {
+            player.setDataSource(cxt, songInfo.getSongURI());
+            error = false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            error = true;
+            Toast.makeText(cxt, "Error" + " at " + songInfo.getSongURI(), Toast.LENGTH_SHORT).show();
+        }
+        if (!error) {
+            player.prepareAsync();
+            setCurrentSongPos(songInfo);
+        }
+        setCurrentSongPos(position);
     }
 
     public void stopPlayback() {
         player.stop();
         player.release();
-        onStopListner.onStop();
-    }
-
-    public void setOnStopListner(MusicService.onStopListner onStopListner) {
-        this.onStopListner = onStopListner;
+        stopSelf();
     }
 
     @Override
@@ -79,18 +106,30 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         playNext();
     }
 
-    public SongInfoHolder getCurrentSong() {
+    public Song getCurrentSong() {
         //This will return the currently playing song. 0 because 0 = now playing.
         return queue.get(getCurrentSongPos());
     }
 
-    public int getCurrentSongPos(){
+    public int getCurrentSongPos() {
         return currentPosition;
     }
 
-    public SongInfoHolder getPrevSong() {
-        SongInfoHolder song;
-        if (getCurrentSongPos() == 0){
+    public void setCurrentSongPos(int pos){
+        currentPosition = pos;
+    }
+
+    public void setCurrentSongPos(Song song){
+        if (queue != null){
+            queue.indexOf(song);
+        } else {
+            Log.println(Log.ERROR,"TAG_NO_QUEUE","No Queue");
+        }
+    }
+
+    public Song getPrevSong() {
+        Song song;
+        if (getCurrentSongPos() == 0) {
             song = queue.get(queue.size());
         } else {
             song = queue.get(getCurrentSongPos() - 1);
@@ -98,14 +137,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         return song;
     }
 
-    public SongInfoHolder getNextSong() {
-        //we use 1 because 0 is current, queue.size is previous, and 1 is next
+    public Song getNextSong() {
         return queue.get(getCurrentSongPos() + 1);
     }
 
     public void pause() {
         player.pause();
-        isPaused =true;
+        isPaused = true;
     }
 
     public void resume() {
@@ -116,11 +154,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public void playNext() {
         if (doRepeat) {
-            if (getCurrentSong().isRepeating()) {
-                playSong(getCurrentSong());
-            } else {
-                playSong(getNextSong());
-            }
+            playSong(getCurrentSong());
         } else {
             playSong(getNextSong());
         }
@@ -134,7 +168,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         }
     }
 
-    public void addToQueue(SongInfoHolder song) {
+    public void addToQueue(Song song) {
         queue.add(song);
     }
 
@@ -142,11 +176,11 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         queue.remove(position);
     }
 
-    public List<SongInfoHolder> getQueue() {
+    public List<Song> getQueue() {
         return queue;
     }
 
-    public void setQueue(List<SongInfoHolder> queue) {
+    public void setQueue(List<Song> queue) {
         this.queue = queue;
     }
 
@@ -164,10 +198,6 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     @Override
     public void onPrepared(MediaPlayer mp) {
         player.start();
-    }
-
-    interface onStopListner {
-        void onStop();
     }
 
     public class MusicBinder extends Binder {
