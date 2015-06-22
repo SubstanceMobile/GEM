@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -13,16 +12,18 @@ import android.widget.Toast;
 
 import com.animbus.music.data.dataModels.SongInfoHolder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MusicService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
     final IBinder musicBind = new MusicBinder();
-    //Media player, Song List, and Current item_songlist from the array list
     MediaPlayer player;
     Context cxt;
-    Integer repeatType;
-    public static Integer REPEAT_TYPE_ALL = 0,REPEAT_TYPE_ONE = 1;
-    List<SongInfoHolder> data;
+    Boolean doRepeat, isPaused;
+    Integer MAX_RESTART_ON_PREV_CLICKED_DUR = /*Time in ms*/ 3000;
+    List<SongInfoHolder> queue;
+    onStopListner onStopListner;
+    Integer currentPosition;
 
     public MusicService(Context context) {
         player = new MediaPlayer();
@@ -41,70 +42,116 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public boolean onUnbind(Intent intent) {
-        player.stop();
-        player.release();
+        stopPlayback();
         return false;
     }
 
+    public void setContext(Context context) {
+        cxt = context;
+    }
+
+    public void playSong(SongInfoHolder songInfo) {
+        try {
+            player.setDataSource(cxt, songInfo.getSongURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        player.prepareAsync();
+    }
+
+    public void playSong(List<SongInfoHolder> list, Integer position) {
+        SongInfoHolder songInfo = list.get(position);
+        playSong(songInfo);
+    }
+
+    public void stopPlayback() {
+        player.stop();
+        player.release();
+        onStopListner.onStop();
+    }
+
+    public void setOnStopListner(MusicService.onStopListner onStopListner) {
+        this.onStopListner = onStopListner;
+    }
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        switch (repeatType) {
-            case 0:
-                playSong(getCurrentSong());
-                break;
-            case 1:
-                playSong(getNextSong());
-        }
+        playNext();
     }
 
     public SongInfoHolder getCurrentSong() {
         //This will return the currently playing song. 0 because 0 = now playing.
-        return data.get(0);
+        return queue.get(getCurrentSongPos());
     }
 
-    public void getPrevSong() {
+    public int getCurrentSongPos(){
+        return currentPosition;
+    }
 
+    public SongInfoHolder getPrevSong() {
+        SongInfoHolder song;
+        if (getCurrentSongPos() == 0){
+            song = queue.get(queue.size());
+        } else {
+            song = queue.get(getCurrentSongPos() - 1);
+        }
+        return song;
     }
 
     public SongInfoHolder getNextSong() {
-        //we use 1 because 0 is current, data.size is previous, and 1 is next
-        return data.get(1);
+        //we use 1 because 0 is current, queue.size is previous, and 1 is next
+        return queue.get(getCurrentSongPos() + 1);
     }
 
-    public void getNowPlayingList() {
-
+    public void pause() {
+        player.pause();
+        isPaused =true;
     }
 
-    public void setSong() {
-
-    }
-
-    public void repeat(Integer howToRepeat) {
-        switch (howToRepeat) {
-            case 0:
-                player.stop();
-                player.release();
-                break;
-            case 1:
-
+    public void resume() {
+        if (isPaused) {
+            player.start();
         }
     }
 
-    public Integer getRepeatType() {
-        return repeatType;
+    public void playNext() {
+        if (doRepeat) {
+            if (getCurrentSong().isRepeating()) {
+                playSong(getCurrentSong());
+            } else {
+                playSong(getNextSong());
+            }
+        } else {
+            playSong(getNextSong());
+        }
     }
 
-    public void setRepeatType(Integer repeatType) {
-        this.repeatType = repeatType;
+    public void playPrev() {
+        if (player.getCurrentPosition() <= MAX_RESTART_ON_PREV_CLICKED_DUR) {
+            playSong(getCurrentSong());
+        } else {
+            playSong(getPrevSong());
+        }
     }
 
-    public void playSong(SongInfoHolder songInfo) {
-        player.prepareAsync();
+    public void addToQueue(SongInfoHolder song) {
+        queue.add(song);
     }
 
-    public void playSong(List list, Integer position) {
+    public void removeFromQueue(int position) {
+        queue.remove(position);
+    }
 
+    public List<SongInfoHolder> getQueue() {
+        return queue;
+    }
+
+    public void setQueue(List<SongInfoHolder> queue) {
+        this.queue = queue;
+    }
+
+    public void setRepeat(Boolean doRepeat) {
+        this.doRepeat = doRepeat;
     }
 
     @Override
@@ -116,7 +163,11 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onPrepared(MediaPlayer mp) {
+        player.start();
+    }
 
+    interface onStopListner {
+        void onStop();
     }
 
     public class MusicBinder extends Binder {
