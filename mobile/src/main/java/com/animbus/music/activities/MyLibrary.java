@@ -1,6 +1,7 @@
 package com.animbus.music.activities;
 
 import android.app.ActivityManager;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -49,6 +50,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     DrawerLayout drawerLayout;
     NavigationView drawerContent;
     ThemeManager themeManager;
+    View quickToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +70,14 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         dataManager = new DataManager(this);
         mainList = (RecyclerView) findViewById(R.id.MyLibraryMainListLayout);
         drawerContent = (NavigationView) findViewById(R.id.navigation);
+        quickToolbar = (View) findViewById(R.id.mylibrary_toolbar_fragment);
 
         drawerContent.setNavigationItemSelectedListener(this);
         controller = new MediaController(this);
         controller.setQueue(dataManager.getSongListData());
         controller.setRepeat(false);
+
+        quickToolbar.setVisibility(View.GONE);
 
         //Basic Stuff
         setSupportActionBar(toolbar);
@@ -110,7 +115,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         }
 
         //This sets up the RecyclerView to the default screen based on a setting.
-        Integer setting = settings.getIntegerSetting(SettingsManager.KEY_DEFAULT_SCREEN, SettingsManager.SCREEN_ALBUMS);
+        Integer setting = settings.getIntegerSetting(SettingsManager.KEY_DEFAULT_SCREEN, SettingsManager.SCREEN_SONGS);
         if (setting == 0) {
             Toast.makeText(this, "What?", Toast.LENGTH_LONG).show();
         } else if (setting == 1) {
@@ -230,6 +235,9 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     @Override
     public void SongListItemClicked(int position,List<Song> data) {
         controller.startPlayback(data, position);
+
+        //TODO: Set a listener
+        quickToolbar.setVisibility(View.VISIBLE);
     }
 
     //This section is where you select which view to see. Only views with back arrows should be set as separate activities.
@@ -298,8 +306,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     }
 
     public void switchTo(View v) {
-        Intent intent = new Intent(this, NowPlayingPeek.class);
-        startActivity(intent);
+        controller.togglePlayback();
     }
     //End Section
 

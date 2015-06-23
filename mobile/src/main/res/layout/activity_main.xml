@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:name="com.animbus.music.activities.NowPlayingToolbar"
-            android:id="@+id/fragment"
+            android:id="@+id/mylibrary_toolbar_fragment"
             tools:layout="@layout/fragment_now_playing_toolbar" />
 
     </LinearLayout>

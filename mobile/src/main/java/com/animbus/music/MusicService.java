@@ -61,16 +61,16 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public void playSong(Song songInfo) {
         player.reset();
-        Boolean error;
+        Boolean errorHappened;
         try {
             player.setDataSource(cxt, songInfo.getSongURI());
-            error = false;
+            errorHappened = false;
         } catch (IOException e) {
             e.printStackTrace();
-            error = true;
+            errorHappened = true;
             Toast.makeText(cxt, "Error" + " at " + songInfo.getSongURI(), Toast.LENGTH_SHORT).show();
         }
-        if (!error) {
+        if (!errorHappened) {
             player.prepareAsync();
         }
     }
@@ -128,22 +128,25 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public Song getPrevSong() {
         Song song;
         if (getCurrentSongPos() == 0) {
-            song = queue.get(queue.size());
+            //TODO:Look up why its -1
+            song = queue.get(queue.size() - 1);
+            setCurrentSongPos(queue.size() - 1);
         } else {
             song = queue.get(getCurrentSongPos() - 1);
+            setCurrentSongPos(getCurrentSongPos() - 1);
         }
-        setCurrentSongPos(getCurrentSongPos() - 1);
         return song;
     }
 
     public Song getNextSong() {
         Song song;
-        if (getCurrentSongPos() == queue.size()){
+        if (getCurrentSongPos() == queue.size() - 1){
             song = queue.get(0);
+            setCurrentSongPos(0);
         } else {
             song = queue.get(getCurrentSongPos() + 1);
+            setCurrentSongPos(getCurrentSongPos() + 1);
         }
-        setCurrentSongPos(getCurrentSongPos() + 1);
         return song;
     }
 
@@ -158,6 +161,26 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         }
     }
 
+    public void  togglePlayback(){
+        if (player.isPlaying()){
+            pause();
+        } else {
+            resume();
+        }
+    }
+
+    public boolean getShowQuickToolbar(){
+        Boolean show;
+        if (player.isPlaying()){
+            show = true;
+        } else if (isPaused) {
+            show = true;
+        } else {
+            show = false;
+        }
+        return show;
+    }
+
     public void playNext() {
         if (doRepeat) {
             playSong(getCurrentSong());
@@ -167,7 +190,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void playPrev() {
-        if (player.getCurrentPosition() <= MAX_RESTART_ON_PREV_CLICKED_DUR) {
+        if (player.getCurrentPosition() >= MAX_RESTART_ON_PREV_CLICKED_DUR) {
             playSong(getCurrentSong());
         } else {
             playSong(getPrevSong());

@@ -11,7 +11,6 @@ import java.util.List;
 
 public class MediaController {
     MusicService musicService;
-    ServiceConnection musicConnection;
 
     public MediaController(Context context) {
         musicService = new MusicService(context);
@@ -36,6 +35,10 @@ public class MediaController {
 
     public void resumePlayback() {
         musicService.resume();
+    }
+
+    public void togglePlayback(){
+        musicService.togglePlayback();
     }
 
     public void playNextSong() {
@@ -67,4 +70,7 @@ public class MediaController {
         musicService.setRepeat(doRepeat);
     }
 
+    public boolean getShowToolbar(){
+        return musicService.getShowQuickToolbar();
+    }
 }
