@@ -21,35 +21,10 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="GEM" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f580369-2732-471f-bd07-ba08c3386c89" name="Default" comment="It plays music!">
-      <change type="DELETED" beforePath="C:\Users\Adrian\StudioProjects\GEM\.idea\codeStyleSettings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Adrian\StudioProjects\GEM\.idea\dictionaries\Adrian.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Adrian\StudioProjects\GEM\.idea\inspectionProfiles\Project_Default.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Adrian\StudioProjects\GEM\.idea\inspectionProfiles\profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Adrian\StudioProjects\GEM\.idea\libraries\mockable_android_21.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Adrian\StudioProjects\GEM\.idea\libraries\mockable_android_22.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Adrian\StudioProjects\GEM\mobile\src\main\res\layout\item_navigation_drawer.xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Adrian\StudioProjects\GEM\mobile\src\main\java\com\animbus\music\data\dataModels\SongInfoHolder.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/dataModels/Song.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GEM.iml" afterPath="$PROJECT_DIR$/GEM.iml" />
+    <list default="true" id="0f580369-2732-471f-bd07-ba08c3386c89" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/Settings.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/adapter/SongListAdapter.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/adapter/SongListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing_classic.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing_classic.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_nowplaying.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_nowplaying.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/mobile.iml" afterPath="$PROJECT_DIR$/mobile/mobile.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wear/wear.iml" afterPath="$PROJECT_DIR$/wear/wear.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GEM.iws" />
@@ -83,7 +58,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="63" column="62" selection-start-line="63" selection-start-column="62" selection-end-line="63" selection-end-column="62" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1069#1070#0" expanded="false" />
+                <element signature="e#1098#1099#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,37 +71,34 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
+              <caret line="93" column="48" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MusicService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MusicService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="9" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+            <state vertical-scroll-proportion="1.2883506">
+              <caret line="182" column="5" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
               <folding>
                 <element signature="method#MusicService#0;class#MusicService#0" expanded="false" />
                 <element signature="method#MusicService#1;class#MusicService#0" expanded="false" />
                 <element signature="method#onUnbind#0;class#MusicService#0" expanded="false" />
-                <element signature="e#3344#3345#0" expanded="true" />
-                <element signature="e#3382#3383#0" expanded="true" />
-                <element signature="e#3945#3946#0" expanded="true" />
-                <element signature="e#4002#4003#0" expanded="true" />
-                <element signature="e#4603#4604#0" expanded="true" />
-                <element signature="e#4634#4635#0" expanded="true" />
-                <element signature="e#4683#4684#0" expanded="true" />
-                <element signature="e#4721#4722#0" expanded="true" />
-                <element signature="e#4757#4758#0" expanded="true" />
-                <element signature="e#4785#4786#0" expanded="true" />
-                <element signature="e#4831#4832#0" expanded="true" />
-                <element signature="e#4865#4866#0" expanded="true" />
-                <element signature="e#4912#4913#0" expanded="true" />
-                <element signature="e#4952#4953#0" expanded="true" />
-                <element signature="e#5261#5262#0" expanded="true" />
-                <element signature="e#5291#5292#0" expanded="true" />
+                <element signature="method#playSong#0;class#MusicService#0" expanded="false" />
+                <element signature="method#playSong#1;class#MusicService#0" expanded="false" />
+                <element signature="method#stopPlayback#0;class#MusicService#0" expanded="false" />
+                <element signature="method#getCurrentSong#0;class#MusicService#0" expanded="false" />
+                <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
+                <element signature="method#getPrevSong#0;class#MusicService#0" expanded="false" />
+                <element signature="method#getNextSong#0;class#MusicService#0" expanded="false" />
+                <element signature="method#pause#0;class#MusicService#0" expanded="false" />
+                <element signature="method#resume#0;class#MusicService#0" expanded="false" />
+                <element signature="method#playNext#0;class#MusicService#0" expanded="false" />
+                <element signature="method#playPrev#0;class#MusicService#0" expanded="false" />
+                <element signature="method#onError#0;class#MusicService#0" expanded="false" />
+                <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -142,19 +118,7 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="49" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
-              <folding>
-                <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47368422">
-              <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+              <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -164,12 +128,54 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/dataModels/Song.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+              <caret line="18" column="5" selection-start-line="16" selection-start-column="18" selection-end-line="18" selection-end-column="5" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="method#Song#0;class#Song#0" expanded="false" />
                 <element signature="method#getSongURI#0;class#Song#0" expanded="false" />
+                <element signature="e#543#544#0" expanded="false" />
+                <element signature="e#578#579#0" expanded="false" />
+                <element signature="e#632#633#0" expanded="false" />
+                <element signature="e#680#681#0" expanded="false" />
+                <element signature="e#720#721#0" expanded="false" />
+                <element signature="e#755#756#0" expanded="false" />
+                <element signature="e#812#813#0" expanded="false" />
+                <element signature="e#860#861#0" expanded="false" />
+                <element signature="e#897#898#0" expanded="false" />
+                <element signature="e#930#931#0" expanded="false" />
+                <element signature="e#982#983#0" expanded="false" />
+                <element signature="e#1026#1027#0" expanded="false" />
+                <element signature="e#1057#1058#0" expanded="false" />
+                <element signature="e#1086#1087#0" expanded="false" />
+                <element signature="e#1128#1129#0" expanded="false" />
+                <element signature="e#1164#1165#0" expanded="false" />
+                <element signature="e#1200#1201#0" expanded="false" />
+                <element signature="e#1232#1233#0" expanded="false" />
+                <element signature="e#1282#1283#0" expanded="false" />
+                <element signature="e#1324#1325#0" expanded="false" />
+                <element signature="e#1360#1361#0" expanded="false" />
+                <element signature="e#1392#1393#0" expanded="false" />
+                <element signature="e#1442#1443#0" expanded="false" />
+                <element signature="e#1484#1485#0" expanded="false" />
+                <element signature="e#1535#1536#0" expanded="false" />
+                <element signature="e#1577#1578#0" expanded="false" />
+                <element signature="e#1613#1614#0" expanded="false" />
+                <element signature="e#1645#1646#0" expanded="false" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="item_songlist.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2629,11 +2635,12 @@
       <list>
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/adapter/SongListAdapter.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/dataModels/Song.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" />
       </list>
     </option>
   </component>
@@ -2688,6 +2695,28 @@
               <option name="myItemId" value="mobile" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2721,10 +2750,20 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2958,11 +2997,18 @@
       <option name="number" value="Default" />
       <updated>1434995121009</updated>
     </task>
+    <task id="LOCAL-00001" summary="It plays music!">
+      <created>1435014535024</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1435014535024</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1102" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2975,8 +3021,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32853982" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32522124" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32853982" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32300884" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2988,6 +3034,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -3009,7 +3056,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -3017,8 +3064,124 @@
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="36" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+          <caret line="63" column="62" selection-start-line="63" selection-start-column="62" selection-end-line="63" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1069#1070#0" expanded="false" />
+            <element signature="e#1098#1099#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#MusicService#0;class#MusicService#0" expanded="false" />
+            <element signature="method#MusicService#1;class#MusicService#0" expanded="false" />
+            <element signature="method#onUnbind#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playSong#1;class#MusicService#0" expanded="false" />
+            <element signature="method#stopPlayback#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getCurrentSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
+            <element signature="method#getPrevSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getNextSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#pause#0;class#MusicService#0" expanded="false" />
+            <element signature="method#resume#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playNext#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playPrev#0;class#MusicService#0" expanded="false" />
+            <element signature="method#onError#0;class#MusicService#0" expanded="false" />
+            <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/adapter/SongListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/dataModels/Song.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="5" selection-start-line="16" selection-start-column="18" selection-end-line="18" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#Song#0;class#Song#0" expanded="false" />
+            <element signature="method#getSongURI#0;class#Song#0" expanded="false" />
+            <element signature="e#543#544#0" expanded="false" />
+            <element signature="e#578#579#0" expanded="false" />
+            <element signature="e#632#633#0" expanded="false" />
+            <element signature="e#680#681#0" expanded="false" />
+            <element signature="e#720#721#0" expanded="false" />
+            <element signature="e#755#756#0" expanded="false" />
+            <element signature="e#812#813#0" expanded="false" />
+            <element signature="e#860#861#0" expanded="false" />
+            <element signature="e#897#898#0" expanded="false" />
+            <element signature="e#930#931#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1026#1027#0" expanded="false" />
+            <element signature="e#1057#1058#0" expanded="false" />
+            <element signature="e#1086#1087#0" expanded="false" />
+            <element signature="e#1128#1129#0" expanded="false" />
+            <element signature="e#1164#1165#0" expanded="false" />
+            <element signature="e#1200#1201#0" expanded="false" />
+            <element signature="e#1232#1233#0" expanded="false" />
+            <element signature="e#1282#1283#0" expanded="false" />
+            <element signature="e#1324#1325#0" expanded="false" />
+            <element signature="e#1360#1361#0" expanded="false" />
+            <element signature="e#1392#1393#0" expanded="false" />
+            <element signature="e#1442#1443#0" expanded="false" />
+            <element signature="e#1484#1485#0" expanded="false" />
+            <element signature="e#1535#1536#0" expanded="false" />
+            <element signature="e#1577#1578#0" expanded="false" />
+            <element signature="e#1613#1614#0" expanded="false" />
+            <element signature="e#1645#1646#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="36" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1069#1070#0" expanded="false" />
+            <element signature="e#1098#1099#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3038,22 +3201,19 @@
             <element signature="method#MusicService#0;class#MusicService#0" expanded="false" />
             <element signature="method#MusicService#1;class#MusicService#0" expanded="false" />
             <element signature="method#onUnbind#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3344#3345#0" expanded="true" />
-            <element signature="e#3382#3383#0" expanded="true" />
-            <element signature="e#3945#3946#0" expanded="true" />
-            <element signature="e#4002#4003#0" expanded="true" />
-            <element signature="e#4603#4604#0" expanded="true" />
-            <element signature="e#4634#4635#0" expanded="true" />
-            <element signature="e#4683#4684#0" expanded="true" />
-            <element signature="e#4721#4722#0" expanded="true" />
-            <element signature="e#4757#4758#0" expanded="true" />
-            <element signature="e#4785#4786#0" expanded="true" />
-            <element signature="e#4831#4832#0" expanded="true" />
-            <element signature="e#4865#4866#0" expanded="true" />
-            <element signature="e#4912#4913#0" expanded="true" />
-            <element signature="e#4952#4953#0" expanded="true" />
-            <element signature="e#5261#5262#0" expanded="true" />
-            <element signature="e#5291#5292#0" expanded="true" />
+            <element signature="method#playSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playSong#1;class#MusicService#0" expanded="false" />
+            <element signature="method#stopPlayback#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getCurrentSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
+            <element signature="method#getPrevSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getNextSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#pause#0;class#MusicService#0" expanded="false" />
+            <element signature="method#resume#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playNext#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playPrev#0;class#MusicService#0" expanded="false" />
+            <element signature="method#onError#0;class#MusicService#0" expanded="false" />
+            <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3070,9 +3230,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding>
-            <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3089,8 +3247,37 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="98" selection-start-line="25" selection-start-column="98" selection-end-line="25" selection-end-column="98" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#Song#0;class#Song#0" expanded="false" />
             <element signature="method#getSongURI#0;class#Song#0" expanded="false" />
+            <element signature="e#543#544#0" expanded="false" />
+            <element signature="e#578#579#0" expanded="false" />
+            <element signature="e#632#633#0" expanded="false" />
+            <element signature="e#680#681#0" expanded="false" />
+            <element signature="e#720#721#0" expanded="false" />
+            <element signature="e#755#756#0" expanded="false" />
+            <element signature="e#812#813#0" expanded="false" />
+            <element signature="e#860#861#0" expanded="false" />
+            <element signature="e#897#898#0" expanded="false" />
+            <element signature="e#930#931#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1026#1027#0" expanded="false" />
+            <element signature="e#1057#1058#0" expanded="false" />
+            <element signature="e#1086#1087#0" expanded="false" />
+            <element signature="e#1128#1129#0" expanded="false" />
+            <element signature="e#1164#1165#0" expanded="false" />
+            <element signature="e#1200#1201#0" expanded="false" />
+            <element signature="e#1232#1233#0" expanded="false" />
+            <element signature="e#1282#1283#0" expanded="false" />
+            <element signature="e#1324#1325#0" expanded="false" />
+            <element signature="e#1360#1361#0" expanded="false" />
+            <element signature="e#1392#1393#0" expanded="false" />
+            <element signature="e#1442#1443#0" expanded="false" />
+            <element signature="e#1484#1485#0" expanded="false" />
+            <element signature="e#1535#1536#0" expanded="false" />
+            <element signature="e#1577#1578#0" expanded="false" />
+            <element signature="e#1613#1614#0" expanded="false" />
+            <element signature="e#1645#1646#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3099,7 +3286,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1069#1070#0" expanded="false" />
+            <element signature="e#1098#1099#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3119,22 +3310,19 @@
             <element signature="method#MusicService#0;class#MusicService#0" expanded="false" />
             <element signature="method#MusicService#1;class#MusicService#0" expanded="false" />
             <element signature="method#onUnbind#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3344#3345#0" expanded="true" />
-            <element signature="e#3382#3383#0" expanded="true" />
-            <element signature="e#3945#3946#0" expanded="true" />
-            <element signature="e#4002#4003#0" expanded="true" />
-            <element signature="e#4603#4604#0" expanded="true" />
-            <element signature="e#4634#4635#0" expanded="true" />
-            <element signature="e#4683#4684#0" expanded="true" />
-            <element signature="e#4721#4722#0" expanded="true" />
-            <element signature="e#4757#4758#0" expanded="true" />
-            <element signature="e#4785#4786#0" expanded="true" />
-            <element signature="e#4831#4832#0" expanded="true" />
-            <element signature="e#4865#4866#0" expanded="true" />
-            <element signature="e#4912#4913#0" expanded="true" />
-            <element signature="e#4952#4953#0" expanded="true" />
-            <element signature="e#5261#5262#0" expanded="true" />
-            <element signature="e#5291#5292#0" expanded="true" />
+            <element signature="method#playSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playSong#1;class#MusicService#0" expanded="false" />
+            <element signature="method#stopPlayback#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getCurrentSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
+            <element signature="method#getPrevSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getNextSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#pause#0;class#MusicService#0" expanded="false" />
+            <element signature="method#resume#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playNext#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playPrev#0;class#MusicService#0" expanded="false" />
+            <element signature="method#onError#0;class#MusicService#0" expanded="false" />
+            <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3152,8 +3340,37 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#Song#0;class#Song#0" expanded="false" />
             <element signature="method#getSongURI#0;class#Song#0" expanded="false" />
+            <element signature="e#543#544#0" expanded="false" />
+            <element signature="e#578#579#0" expanded="false" />
+            <element signature="e#632#633#0" expanded="false" />
+            <element signature="e#680#681#0" expanded="false" />
+            <element signature="e#720#721#0" expanded="false" />
+            <element signature="e#755#756#0" expanded="false" />
+            <element signature="e#812#813#0" expanded="false" />
+            <element signature="e#860#861#0" expanded="false" />
+            <element signature="e#897#898#0" expanded="false" />
+            <element signature="e#930#931#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1026#1027#0" expanded="false" />
+            <element signature="e#1057#1058#0" expanded="false" />
+            <element signature="e#1086#1087#0" expanded="false" />
+            <element signature="e#1128#1129#0" expanded="false" />
+            <element signature="e#1164#1165#0" expanded="false" />
+            <element signature="e#1200#1201#0" expanded="false" />
+            <element signature="e#1232#1233#0" expanded="false" />
+            <element signature="e#1282#1283#0" expanded="false" />
+            <element signature="e#1324#1325#0" expanded="false" />
+            <element signature="e#1360#1361#0" expanded="false" />
+            <element signature="e#1392#1393#0" expanded="false" />
+            <element signature="e#1442#1443#0" expanded="false" />
+            <element signature="e#1484#1485#0" expanded="false" />
+            <element signature="e#1535#1536#0" expanded="false" />
+            <element signature="e#1577#1578#0" expanded="false" />
+            <element signature="e#1613#1614#0" expanded="false" />
+            <element signature="e#1645#1646#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3162,7 +3379,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1069#1070#0" expanded="false" />
+            <element signature="e#1098#1099#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3182,22 +3403,19 @@
             <element signature="method#MusicService#0;class#MusicService#0" expanded="false" />
             <element signature="method#MusicService#1;class#MusicService#0" expanded="false" />
             <element signature="method#onUnbind#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3344#3345#0" expanded="true" />
-            <element signature="e#3382#3383#0" expanded="true" />
-            <element signature="e#3945#3946#0" expanded="true" />
-            <element signature="e#4002#4003#0" expanded="true" />
-            <element signature="e#4603#4604#0" expanded="true" />
-            <element signature="e#4634#4635#0" expanded="true" />
-            <element signature="e#4683#4684#0" expanded="true" />
-            <element signature="e#4721#4722#0" expanded="true" />
-            <element signature="e#4757#4758#0" expanded="true" />
-            <element signature="e#4785#4786#0" expanded="true" />
-            <element signature="e#4831#4832#0" expanded="true" />
-            <element signature="e#4865#4866#0" expanded="true" />
-            <element signature="e#4912#4913#0" expanded="true" />
-            <element signature="e#4952#4953#0" expanded="true" />
-            <element signature="e#5261#5262#0" expanded="true" />
-            <element signature="e#5291#5292#0" expanded="true" />
+            <element signature="method#playSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playSong#1;class#MusicService#0" expanded="false" />
+            <element signature="method#stopPlayback#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getCurrentSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
+            <element signature="method#getPrevSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getNextSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#pause#0;class#MusicService#0" expanded="false" />
+            <element signature="method#resume#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playNext#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playPrev#0;class#MusicService#0" expanded="false" />
+            <element signature="method#onError#0;class#MusicService#0" expanded="false" />
+            <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3215,9 +3433,117 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#Song#0;class#Song#0" expanded="false" />
             <element signature="method#getSongURI#0;class#Song#0" expanded="false" />
+            <element signature="e#543#544#0" expanded="false" />
+            <element signature="e#578#579#0" expanded="false" />
+            <element signature="e#632#633#0" expanded="false" />
+            <element signature="e#680#681#0" expanded="false" />
+            <element signature="e#720#721#0" expanded="false" />
+            <element signature="e#755#756#0" expanded="false" />
+            <element signature="e#812#813#0" expanded="false" />
+            <element signature="e#860#861#0" expanded="false" />
+            <element signature="e#897#898#0" expanded="false" />
+            <element signature="e#930#931#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1026#1027#0" expanded="false" />
+            <element signature="e#1057#1058#0" expanded="false" />
+            <element signature="e#1086#1087#0" expanded="false" />
+            <element signature="e#1128#1129#0" expanded="false" />
+            <element signature="e#1164#1165#0" expanded="false" />
+            <element signature="e#1200#1201#0" expanded="false" />
+            <element signature="e#1232#1233#0" expanded="false" />
+            <element signature="e#1282#1283#0" expanded="false" />
+            <element signature="e#1324#1325#0" expanded="false" />
+            <element signature="e#1360#1361#0" expanded="false" />
+            <element signature="e#1392#1393#0" expanded="false" />
+            <element signature="e#1442#1443#0" expanded="false" />
+            <element signature="e#1484#1485#0" expanded="false" />
+            <element signature="e#1535#1536#0" expanded="false" />
+            <element signature="e#1577#1578#0" expanded="false" />
+            <element signature="e#1613#1614#0" expanded="false" />
+            <element signature="e#1645#1646#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="62" selection-start-line="63" selection-start-column="62" selection-end-line="63" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1069#1070#0" expanded="false" />
+            <element signature="e#1098#1099#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65397924">
+          <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/dataModels/Song.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="5" selection-start-line="16" selection-start-column="18" selection-end-line="18" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#Song#0;class#Song#0" expanded="false" />
+            <element signature="method#getSongURI#0;class#Song#0" expanded="false" />
+            <element signature="e#543#544#0" expanded="false" />
+            <element signature="e#578#579#0" expanded="false" />
+            <element signature="e#632#633#0" expanded="false" />
+            <element signature="e#680#681#0" expanded="false" />
+            <element signature="e#720#721#0" expanded="false" />
+            <element signature="e#755#756#0" expanded="false" />
+            <element signature="e#812#813#0" expanded="false" />
+            <element signature="e#860#861#0" expanded="false" />
+            <element signature="e#897#898#0" expanded="false" />
+            <element signature="e#930#931#0" expanded="false" />
+            <element signature="e#982#983#0" expanded="false" />
+            <element signature="e#1026#1027#0" expanded="false" />
+            <element signature="e#1057#1058#0" expanded="false" />
+            <element signature="e#1086#1087#0" expanded="false" />
+            <element signature="e#1128#1129#0" expanded="false" />
+            <element signature="e#1164#1165#0" expanded="false" />
+            <element signature="e#1200#1201#0" expanded="false" />
+            <element signature="e#1232#1233#0" expanded="false" />
+            <element signature="e#1282#1283#0" expanded="false" />
+            <element signature="e#1324#1325#0" expanded="false" />
+            <element signature="e#1360#1361#0" expanded="false" />
+            <element signature="e#1392#1393#0" expanded="false" />
+            <element signature="e#1442#1443#0" expanded="false" />
+            <element signature="e#1484#1485#0" expanded="false" />
+            <element signature="e#1535#1536#0" expanded="false" />
+            <element signature="e#1577#1578#0" expanded="false" />
+            <element signature="e#1613#1614#0" expanded="false" />
+            <element signature="e#1645#1646#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="48" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3232,73 +3558,33 @@
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="49" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
-          <folding>
-            <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="62" selection-start-line="63" selection-start-column="62" selection-end-line="63" selection-end-column="62" />
+          <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/dataModels/Song.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-          <folding>
-            <element signature="method#Song#0;class#Song#0" expanded="false" />
-            <element signature="method#getSongURI#0;class#Song#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="9" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+        <state vertical-scroll-proportion="1.2883506">
+          <caret line="182" column="5" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
           <folding>
             <element signature="method#MusicService#0;class#MusicService#0" expanded="false" />
             <element signature="method#MusicService#1;class#MusicService#0" expanded="false" />
             <element signature="method#onUnbind#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3344#3345#0" expanded="true" />
-            <element signature="e#3382#3383#0" expanded="true" />
-            <element signature="e#3945#3946#0" expanded="true" />
-            <element signature="e#4002#4003#0" expanded="true" />
-            <element signature="e#4603#4604#0" expanded="true" />
-            <element signature="e#4634#4635#0" expanded="true" />
-            <element signature="e#4683#4684#0" expanded="true" />
-            <element signature="e#4721#4722#0" expanded="true" />
-            <element signature="e#4757#4758#0" expanded="true" />
-            <element signature="e#4785#4786#0" expanded="true" />
-            <element signature="e#4831#4832#0" expanded="true" />
-            <element signature="e#4865#4866#0" expanded="true" />
-            <element signature="e#4912#4913#0" expanded="true" />
-            <element signature="e#4952#4953#0" expanded="true" />
-            <element signature="e#5261#5262#0" expanded="true" />
-            <element signature="e#5291#5292#0" expanded="true" />
+            <element signature="method#playSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playSong#1;class#MusicService#0" expanded="false" />
+            <element signature="method#stopPlayback#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getCurrentSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
+            <element signature="method#getPrevSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#getNextSong#0;class#MusicService#0" expanded="false" />
+            <element signature="method#pause#0;class#MusicService#0" expanded="false" />
+            <element signature="method#resume#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playNext#0;class#MusicService#0" expanded="false" />
+            <element signature="method#playPrev#0;class#MusicService#0" expanded="false" />
+            <element signature="method#onError#0;class#MusicService#0" expanded="false" />
+            <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47368422">
-          <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>

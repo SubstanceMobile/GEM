@@ -20,7 +20,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     final IBinder musicBind = new MusicBinder();
     MediaPlayer player;
     Context cxt;
-    Boolean doRepeat, isPaused;
+    Boolean doRepeat = false, isPaused;
     Integer MAX_RESTART_ON_PREV_CLICKED_DUR = /*Time in ms*/ 3000;
     List<Song> queue;
     Integer currentPosition;
@@ -60,8 +60,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void playSong(Song songInfo) {
-        Boolean error;
         player.reset();
+        Boolean error;
         try {
             player.setDataSource(cxt, songInfo.getSongURI());
             error = false;
@@ -72,14 +72,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         }
         if (!error) {
             player.prepareAsync();
-            setCurrentSongPos(songInfo);
         }
     }
 
     public void playSong(List<Song> list, Integer position) {
+        player.reset();
         Song songInfo = list.get(position);
         Boolean error;
-        player.reset();
         try {
             player.setDataSource(cxt, songInfo.getSongURI());
             error = false;
@@ -90,7 +89,6 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         }
         if (!error) {
             player.prepareAsync();
-            setCurrentSongPos(songInfo);
         }
         setCurrentSongPos(position);
     }
@@ -134,11 +132,19 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         } else {
             song = queue.get(getCurrentSongPos() - 1);
         }
+        setCurrentSongPos(getCurrentSongPos() - 1);
         return song;
     }
 
     public Song getNextSong() {
-        return queue.get(getCurrentSongPos() + 1);
+        Song song;
+        if (getCurrentSongPos() == queue.size()){
+            song = queue.get(0);
+        } else {
+            song = queue.get(getCurrentSongPos() + 1);
+        }
+        setCurrentSongPos(getCurrentSongPos() + 1);
+        return song;
     }
 
     public void pause() {

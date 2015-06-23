@@ -20,10 +20,12 @@ public class MediaController {
 
     //This is where the song is set and the playback begins
     public void startPlayback(Song song) {
+        musicService.setCurrentSongPos(song);
         musicService.playSong(song);
     }
 
     public void startPlayback(List<Song> data, int position) {
+        musicService.setCurrentSongPos(position);
         musicService.playSong(data, position);
     }
 
@@ -45,12 +47,12 @@ public class MediaController {
     }
 
     //Misc.
-    public List<Song> getQueue() {
-        return musicService.getQueue();
-    }
-
     public void setQueue(List<Song> list) {
         musicService.setQueue(list);
+    }
+
+    public List<Song> getQueue() {
+        return musicService.getQueue();
     }
 
     public void addToQueue(Song song) {
