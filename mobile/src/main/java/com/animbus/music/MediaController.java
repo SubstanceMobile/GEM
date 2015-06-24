@@ -1,9 +1,6 @@
 package com.animbus.music;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 
 import com.animbus.music.data.dataModels.Song;
 
@@ -11,10 +8,19 @@ import java.util.List;
 
 public class MediaController {
     MusicService musicService;
+     public OnUpdateListener onUpdateListener;
 
-    public MediaController(Context context) {
+    private static MediaController instance = new MediaController();
+    public static MediaController getInstance() {
+        return instance;
+    }
+
+    private MediaController(){
+
+    }
+
+    public void setContext(Context context){
         musicService = new MusicService(context);
-        /*context.startService();*/
     }
 
     //This is where the song is set and the playback begins
@@ -42,7 +48,7 @@ public class MediaController {
     }
 
     public void playNextSong() {
-        musicService.playNext();
+        musicService.playNext(true);
     }
 
     public void playPrevSong() {
@@ -72,5 +78,25 @@ public class MediaController {
 
     public boolean getShowToolbar(){
         return musicService.getShowQuickToolbar();
+    }
+
+    public boolean getPlaying(){
+        return musicService.getPlaying();
+    }
+
+    //Change Listener
+    public interface OnUpdateListener {
+        void onUpdate(Song currentSong, Boolean isPlaying, Boolean isPaused, Boolean isRepeating, Boolean isShuffled, List<Song> currentQueue);
+    }
+
+    public void setOnUpdateListener(OnUpdateListener onUpdateListener) {
+        this.onUpdateListener = onUpdateListener;
+    }
+
+    public void requestUpdate(){
+        if (onUpdateListener != null){
+            //TODO:Add shuffle
+            onUpdateListener.onUpdate(musicService.getCurrentSong(), musicService.getPlaying(), musicService.getPaused(), musicService.getRepeating(), null, getQueue());
+        }
     }
 }

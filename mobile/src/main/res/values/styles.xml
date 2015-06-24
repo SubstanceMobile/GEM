@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--Theme Specifiers-->
-    <style name="MainDark">
-        <item name="mainStyle">@style/AppTheme</item>
-        <item name="translucentStyle">@style/AppTheme</item>
-        <item name="peekTheme">@style/AppTheme.QuickPeek</item>
-    </style>
-
-    <style name="MainLight">
-        <item name="mainStyle">@style/AppTheme.Light</item>
-        <item name="translucentStyle">@style/AppTheme.Light.TranslucntAppbar</item>
-        <item name="peekTheme">@style/AppTheme.Light.QuickPeek</item>
-    </style>
-
     <!--The  base theme-->  <!--This is the dark theme-->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">m
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primaryDark</item>
+        <item name="colorPrimaryGrey">@color/primaryGreyDark</item>
         <item name="colorAccent">@color/accent_material_dark</item>
         <item name="android:windowBackground">@color/primaryDark</item>
         <item name="primaryTextColor">@color/primary_text_default_material_dark</item>
@@ -30,6 +18,7 @@
     <!--This is the light theme-->
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primaryLight</item>
+        <item name="colorPrimaryGrey">@color/primaryGreyLight</item>
         <item name="colorAccent">@color/accent_material_light</item>
         <item name="android:windowBackground">@color/primaryLight</item>
         <item name="primaryTextColor">@color/primary_text_default_material_light</item>

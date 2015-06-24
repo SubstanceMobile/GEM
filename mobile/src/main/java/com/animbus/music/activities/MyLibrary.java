@@ -66,16 +66,17 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         //This sets all of the variables
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        musicControl = new MediaController(this);
+        musicControl = MediaController.getInstance();
         dataManager = new DataManager(this);
         mainList = (RecyclerView) findViewById(R.id.MyLibraryMainListLayout);
         drawerContent = (NavigationView) findViewById(R.id.navigation);
         quickToolbar = (View) findViewById(R.id.mylibrary_toolbar_fragment);
 
         drawerContent.setNavigationItemSelectedListener(this);
-        controller = new MediaController(this);
-        controller.setQueue(dataManager.getSongListData());
-        controller.setRepeat(false);
+        musicControl = MediaController.getInstance();
+        musicControl.setContext(this);
+        musicControl.setQueue(dataManager.getSongListData());
+        musicControl.setRepeat(false);
 
         quickToolbar.setVisibility(View.GONE);
 
@@ -234,7 +235,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
 
     @Override
     public void SongListItemClicked(int position,List<Song> data) {
-        controller.startPlayback(data, position);
+        musicControl.startPlayback(data, position);
 
         //TODO: Set a listener
         quickToolbar.setVisibility(View.VISIBLE);
@@ -303,10 +304,6 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         //Closes the Navdrawer
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawers();
-    }
-
-    public void switchTo(View v) {
-        controller.togglePlayback();
     }
     //End Section
 

@@ -24,6 +24,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     Integer MAX_RESTART_ON_PREV_CLICKED_DUR = /*Time in ms*/ 3000;
     List<Song> queue;
     Integer currentPosition;
+    UpdatePushListener pishedListener;
 
     public MusicService() {
         player = new MediaPlayer();
@@ -60,6 +61,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void playSong(Song songInfo) {
+        player.stop();
         player.reset();
         Boolean errorHappened;
         try {
@@ -73,9 +75,12 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         if (!errorHappened) {
             player.prepareAsync();
         }
+        isPaused = false;
+        pushUpdatedInfo();
     }
 
     public void playSong(List<Song> list, Integer position) {
+        player.stop();
         player.reset();
         Song songInfo = list.get(position);
         Boolean error;
@@ -91,17 +96,25 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             player.prepareAsync();
         }
         setCurrentSongPos(position);
+        isPaused = false;
+        pushUpdatedInfo();
     }
 
     public void stopPlayback() {
         player.stop();
         player.release();
+        pushUpdatedInfo();
         stopSelf();
     }
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        playNext();
+        playNext(false);
+        pushUpdatedInfo();
+    }
+
+    public boolean getPlaying() {
+        return player.isPlaying();
     }
 
     public Song getCurrentSong() {
@@ -113,16 +126,18 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         return currentPosition;
     }
 
-    public void setCurrentSongPos(int pos){
+    public void setCurrentSongPos(int pos) {
         currentPosition = pos;
+        pushUpdatedInfo();
     }
 
-    public void setCurrentSongPos(Song song){
-        if (queue != null){
+    public void setCurrentSongPos(Song song) {
+        if (queue != null) {
             queue.indexOf(song);
         } else {
-            Log.println(Log.ERROR,"TAG_NO_QUEUE","No Queue");
+            Log.println(Log.ERROR, "TAG_NO_QUEUE", "No Queue");
         }
+        pushUpdatedInfo();
     }
 
     public Song getPrevSong() {
@@ -135,43 +150,53 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             song = queue.get(getCurrentSongPos() - 1);
             setCurrentSongPos(getCurrentSongPos() - 1);
         }
+        pushUpdatedInfo();
         return song;
     }
 
     public Song getNextSong() {
         Song song;
-        if (getCurrentSongPos() == queue.size() - 1){
+        if (getCurrentSongPos() == queue.size() - 1) {
             song = queue.get(0);
             setCurrentSongPos(0);
         } else {
             song = queue.get(getCurrentSongPos() + 1);
             setCurrentSongPos(getCurrentSongPos() + 1);
         }
+        pushUpdatedInfo();
         return song;
     }
 
     public void pause() {
         player.pause();
         isPaused = true;
+        pushUpdatedInfo();
     }
 
     public void resume() {
         if (isPaused) {
             player.start();
+            isPaused = false;
         }
+        pushUpdatedInfo();
     }
 
-    public void  togglePlayback(){
-        if (player.isPlaying()){
+    public void togglePlayback() {
+        if (player.isPlaying()) {
             pause();
         } else {
             resume();
         }
     }
 
-    public boolean getShowQuickToolbar(){
+    public boolean getPaused() {
+        return isPaused;
+    }
+
+    //TPDO:Remove this
+    public boolean getShowQuickToolbar() {
         Boolean show;
-        if (player.isPlaying()){
+        if (player.isPlaying()) {
             show = true;
         } else if (isPaused) {
             show = true;
@@ -181,9 +206,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         return show;
     }
 
-    public void playNext() {
-        if (doRepeat) {
-            playSong(getCurrentSong());
+    public void playNext(Boolean ignoreRepeat) {
+        if (!ignoreRepeat) {
+            if (doRepeat) {
+                playSong(getCurrentSong());
+            } else {
+                playSong(getNextSong());
+            }
         } else {
             playSong(getNextSong());
         }
@@ -199,10 +228,12 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public void addToQueue(Song song) {
         queue.add(song);
+        pushUpdatedInfo();
     }
 
     public void removeFromQueue(int position) {
         queue.remove(position);
+        pushUpdatedInfo();
     }
 
     public List<Song> getQueue() {
@@ -211,10 +242,16 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public void setQueue(List<Song> queue) {
         this.queue = queue;
+        pushUpdatedInfo();
     }
 
     public void setRepeat(Boolean doRepeat) {
+        pushUpdatedInfo();
         this.doRepeat = doRepeat;
+    }
+
+    public boolean getRepeating() {
+        return doRepeat;
     }
 
     @Override
@@ -226,6 +263,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onPrepared(MediaPlayer mp) {
+        pushUpdatedInfo();
         player.start();
     }
 
@@ -234,4 +272,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             return MusicService.this;
         }
     }
+
+    public void pushUpdatedInfo() {
+        if ()
+    }
+
+    public interface UpdatePushListener {
+        void onPushed();
+    }
+
 }

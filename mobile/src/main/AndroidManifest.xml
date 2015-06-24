@@ -119,6 +119,6 @@
             android:name=".activities.About"
             android:label="@string/title_activity_about" >
         </activity>
-        <service android:name=".MusicService" android:exported="true" android:enabled="true"/>
+        <service android:name=".MusicService" android:exported="true" android:enabled="true" android:process=".MusicService"/>
     </application>
 </manifest>

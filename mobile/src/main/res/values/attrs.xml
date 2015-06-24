@@ -4,6 +4,8 @@
     <attr name="secondaryTextColor" format="color" />
     <attr name="primaryAlternateColor" format="color" />
     <attr name="primaryAlternateTextColor" format="color"/>
+    <attr name="colorPrimaryGrey" format="color"/>
+    <attr name="colorPrimaryGreyAlt" format="color"/>
     <attr name="secondaryAlternateTextColor" format="color"/>
     <attr name="themeRippleColor" format="color"/>
     <attr name="themeRippleColorAlt" format="color"/>
