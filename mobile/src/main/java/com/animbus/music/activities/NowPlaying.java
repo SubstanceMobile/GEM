@@ -1,5 +1,7 @@
 package com.animbus.music.activities;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.animbus.music.MediaController;
 import com.animbus.music.R;
@@ -23,17 +26,18 @@ public class NowPlaying extends AppCompatActivity implements MediaController.OnU
     MediaController mediaController;
     Boolean repeat = false;
     ImageButton shuffleButton, togglePlayButton, repeatButton;
+    TextView songTitle, songArtisrt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settings = new SettingsManager(this);
-        themeManager = new ThemeManager(this, ThemeManager.TYPE_TRANSPARENT_APPBAR);
-
+        themeManager = new ThemeManager(this, ThemeManager.TYPE_NORMAL);
         //Themeing
         setTheme(themeManager.getCurrentTheme());
         setContentView(R.layout.activity_now_playing);
         findViewById(R.id.now_playing_root_view).setBackgroundColor(themeManager.getCurrentBackgroundColor());
+        findViewById(R.id.now_playing_controls_containter_root_view).setBackgroundColor(themeManager.getCurrentGreyColor());
 
         //Toolbar, setting toolbar as Actionbar,Setting the back arrow to be shown, and setting the NavdrawerItemTitle to nothing
         Toolbar toolbar = (Toolbar) findViewById(R.id.now_playing_appbar);
@@ -51,6 +55,9 @@ public class NowPlaying extends AppCompatActivity implements MediaController.OnU
         shuffleButton = (ImageButton) findViewById(R.id.now_playing_shuffle_button);
         togglePlayButton = (ImageButton) findViewById(R.id.now_playing_play_button);
         repeatButton = (ImageButton) findViewById(R.id.now_playing_repeat_button);
+
+        songTitle = (TextView) findViewById(R.id.now_playing_song_title);
+        songArtisrt = (TextView) findViewById(R.id.now_playing_song_artist);
 
         mediaController = MediaController.getInstance();
         mediaController.setOnUpdateListener(this);
@@ -108,7 +115,12 @@ public class NowPlaying extends AppCompatActivity implements MediaController.OnU
     }
 
     @Override
-    public void onUpdate(Song currentSong, Boolean isPlaying, Boolean isPaused, Boolean isRepeating, Boolean isShuffled, List<Song> currentQueue) {
+    public void onUpdate(Song currentSong, Boolean isPaused, Boolean isRepeating, Boolean isShuffled, List<Song> currentQueue) {
+
+        //Title and artist text
+        songTitle.setText(currentSong.getSongTitle());
+        songArtisrt.setText(currentSong.getSongArtist());
+
         //Repeat button icon
         if (isRepeating) {
             repeatButton.setImageResource(R.drawable.ic_repeat_one_black_48dp);
@@ -116,7 +128,8 @@ public class NowPlaying extends AppCompatActivity implements MediaController.OnU
             repeatButton.setImageResource(R.drawable.ic_repeat_black_48dp);
         }
 
-        if (isPlaying) {
+        //Play Button icon
+        if (!isPaused) {
             togglePlayButton.setImageResource(R.drawable.ic_pause_black_48dp);
         } else {
             togglePlayButton.setImageResource(R.drawable.ic_play_arrow_black_48dp);

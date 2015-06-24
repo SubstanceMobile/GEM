@@ -24,7 +24,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     Integer MAX_RESTART_ON_PREV_CLICKED_DUR = /*Time in ms*/ 3000;
     List<Song> queue;
     Integer currentPosition;
-    UpdatePushListener pishedListener;
+    UpdatePushListener pushedListener;
 
     public MusicService() {
         player = new MediaPlayer();
@@ -274,11 +274,16 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void pushUpdatedInfo() {
-        if ()
+        if (pushedListener != null) {
+            pushedListener.onPushed();
+        }
     }
 
     public interface UpdatePushListener {
         void onPushed();
     }
 
+    public void setPushedListener(UpdatePushListener pushedListener) {
+        this.pushedListener = pushedListener;
+    }
 }

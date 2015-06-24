@@ -17,7 +17,9 @@
       <config>
         <devices>
           <device id="Nexus 6" />
+          <device id="Nexus 9" />
         </devices>
+        <target>android-MNC</target>
       </config>
     </shared>
     <layouts>
@@ -28,7 +30,7 @@
       </layout>
       <layout url="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml">
         <config>
-          <theme>@style/AppTheme</theme>
+          <theme>@style/AppTheme.Light</theme>
         </config>
       </layout>
     </layouts>
@@ -37,12 +39,12 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="GEM" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f580369-2732-471f-bd07-ba08c3386c89" name="Default" comment="More bug fixes and play-pause support">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
+    <list default="true" id="0f580369-2732-471f-bd07-ba08c3386c89" name="Default" comment="Play Info Properly Syncs Up">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/NowPlayingClassic.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/NowPlayingClassic.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ThemeManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ThemeManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/styles.xml" />
@@ -90,49 +92,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MusicService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MusicService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8558247">
-              <caret line="283" column="1" selection-start-line="283" selection-start-column="1" selection-end-line="283" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="286" column="8" selection-start-line="286" selection-start-column="8" selection-end-line="286" selection-end-column="45" />
               <folding>
                 <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-                <element signature="e#3378#3379#0" expanded="true" />
-                <element signature="e#3419#3420#0" expanded="true" />
                 <element signature="method#setCurrentSongPos#0;class#MusicService#0" expanded="false" />
                 <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
-                <element signature="e#5237#5238#0" expanded="true" />
-                <element signature="e#5268#5269#0" expanded="true" />
                 <element signature="method#setQueue#0;class#MusicService#0" expanded="false" />
                 <element signature="method#setRepeat#0;class#MusicService#0" expanded="false" />
                 <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
-                <element signature="e#7180#7181#0" expanded="true" />
-                <element signature="e#7200#7201#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MediaController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MediaController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="100" column="5" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.40651387">
+              <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
               <folding>
-                <element signature="e#476#477#0" expanded="true" />
-                <element signature="e#532#533#0" expanded="true" />
+                <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
                 <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-                <element signature="e#1246#1247#0" expanded="true" />
-                <element signature="e#1285#1286#0" expanded="true" />
-                <element signature="e#1421#1422#0" expanded="true" />
-                <element signature="e#1467#1468#0" expanded="true" />
-                <element signature="e#1703#1704#0" expanded="true" />
-                <element signature="e#1751#1752#0" expanded="true" />
-                <element signature="e#1789#1790#0" expanded="true" />
-                <element signature="e#1846#1847#0" expanded="true" />
-                <element signature="e#1880#1881#0" expanded="true" />
-                <element signature="e#1928#1929#0" expanded="true" />
+                <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
                 <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
+                <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+                <element signature="e#2979#2980#0" expanded="true" />
+                <element signature="e#3010#3011#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -152,7 +141,7 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="111" column="28" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -160,14 +149,14 @@
       </file>
       <file leaf-file-name="activity_now_playing.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="159" column="56" selection-start-line="159" selection-start-column="56" selection-end-line="159" selection-end-column="56" />
+              <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -175,7 +164,7 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+              <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -185,7 +174,7 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+              <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -195,8 +184,11 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ThemeManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="80" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
-              <folding />
+              <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
+              <folding>
+                <element signature="method#getCurrentBackgroundColor#0;class#ThemeManager#0" expanded="false" />
+                <element signature="method#getCurrentGreyColor#0;class#ThemeManager#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2667,16 +2659,25 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/dataModels/Song.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicController.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/NowPlayingClassic.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ThemeManager.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Bundled (Maven 3)" />
+      </MavenGeneralSettings>
     </option>
   </component>
   <component name="NamedScopeManager">
@@ -2711,8 +2712,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2739,6 +2741,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="mobile" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2821,9 +2845,18 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3077,7 +3110,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435029976249</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Commit for transfer of project to Substance Project">
+      <created>1435156824586</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1435156824586</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3095,16 +3134,16 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975295" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32743362" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32975295" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32411504" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.375" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3116,8 +3155,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -3137,28 +3176,25 @@
     <MESSAGE value="It plays music!" />
     <MESSAGE value="Fixed bug when plauing songs. Bug whent like this:&#10;-Plays song&#10;-Plays next song&#10;-Loops song&#10;Bug was fixed by doing:&#10;setCurrentSong(getCurrentSongPos + 1)&#10;instead of&#10;setCurrentSong(song)" />
     <MESSAGE value="More bug fixes and play-pause support" />
-    <option name="LAST_COMMIT_MESSAGE" value="More bug fixes and play-pause support" />
+    <MESSAGE value="Commit for transfer of project to Substance Project" />
+    <MESSAGE value="Play Info Properly Syncs Up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Play Info Properly Syncs Up" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ThemeManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="80" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
-          <folding />
+          <folding>
+            <element signature="method#getCurrentBackgroundColor#0;class#ThemeManager#0" expanded="false" />
+            <element signature="method#getCurrentGreyColor#0;class#ThemeManager#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3191,14 +3227,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java">
@@ -3215,17 +3251,11 @@
           <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
           <folding>
             <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3378#3379#0" expanded="true" />
-            <element signature="e#3419#3420#0" expanded="true" />
             <element signature="method#setCurrentSongPos#0;class#MusicService#0" expanded="false" />
             <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
-            <element signature="e#5237#5238#0" expanded="true" />
-            <element signature="e#5268#5269#0" expanded="true" />
             <element signature="method#setQueue#0;class#MusicService#0" expanded="false" />
             <element signature="method#setRepeat#0;class#MusicService#0" expanded="false" />
             <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
-            <element signature="e#7180#7181#0" expanded="true" />
-            <element signature="e#7200#7201#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3242,20 +3272,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
           <folding>
-            <element signature="e#476#477#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
+            <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
             <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-            <element signature="e#1246#1247#0" expanded="true" />
-            <element signature="e#1285#1286#0" expanded="true" />
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1703#1704#0" expanded="true" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#1789#1790#0" expanded="true" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1928#1929#0" expanded="true" />
+            <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
+            <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3268,14 +3291,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java">
@@ -3305,17 +3328,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3378#3379#0" expanded="true" />
-            <element signature="e#3419#3420#0" expanded="true" />
             <element signature="method#setCurrentSongPos#0;class#MusicService#0" expanded="false" />
             <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
-            <element signature="e#5237#5238#0" expanded="true" />
-            <element signature="e#5268#5269#0" expanded="true" />
             <element signature="method#setQueue#0;class#MusicService#0" expanded="false" />
             <element signature="method#setRepeat#0;class#MusicService#0" expanded="false" />
             <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
-            <element signature="e#7180#7181#0" expanded="true" />
-            <element signature="e#7200#7201#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3332,20 +3349,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
           <folding>
-            <element signature="e#476#477#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
+            <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
             <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-            <element signature="e#1246#1247#0" expanded="true" />
-            <element signature="e#1285#1286#0" expanded="true" />
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1703#1704#0" expanded="true" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#1789#1790#0" expanded="true" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1928#1929#0" expanded="true" />
+            <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
+            <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3358,14 +3368,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java">
@@ -3395,17 +3405,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3378#3379#0" expanded="true" />
-            <element signature="e#3419#3420#0" expanded="true" />
             <element signature="method#setCurrentSongPos#0;class#MusicService#0" expanded="false" />
             <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
-            <element signature="e#5237#5238#0" expanded="true" />
-            <element signature="e#5268#5269#0" expanded="true" />
             <element signature="method#setQueue#0;class#MusicService#0" expanded="false" />
             <element signature="method#setRepeat#0;class#MusicService#0" expanded="false" />
             <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
-            <element signature="e#7180#7181#0" expanded="true" />
-            <element signature="e#7200#7201#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3422,20 +3426,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
           <folding>
-            <element signature="e#476#477#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
+            <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
             <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-            <element signature="e#1246#1247#0" expanded="true" />
-            <element signature="e#1285#1286#0" expanded="true" />
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1703#1704#0" expanded="true" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#1789#1790#0" expanded="true" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1928#1929#0" expanded="true" />
+            <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
+            <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3482,17 +3479,11 @@
           <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
           <folding>
             <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3378#3379#0" expanded="true" />
-            <element signature="e#3419#3420#0" expanded="true" />
             <element signature="method#setCurrentSongPos#0;class#MusicService#0" expanded="false" />
             <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
-            <element signature="e#5237#5238#0" expanded="true" />
-            <element signature="e#5268#5269#0" expanded="true" />
             <element signature="method#setQueue#0;class#MusicService#0" expanded="false" />
             <element signature="method#setRepeat#0;class#MusicService#0" expanded="false" />
             <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
-            <element signature="e#7180#7181#0" expanded="true" />
-            <element signature="e#7200#7201#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3538,17 +3529,11 @@
           <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
           <folding>
             <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3378#3379#0" expanded="true" />
-            <element signature="e#3419#3420#0" expanded="true" />
             <element signature="method#setCurrentSongPos#0;class#MusicService#0" expanded="false" />
             <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
-            <element signature="e#5237#5238#0" expanded="true" />
-            <element signature="e#5268#5269#0" expanded="true" />
             <element signature="method#setQueue#0;class#MusicService#0" expanded="false" />
             <element signature="method#setRepeat#0;class#MusicService#0" expanded="false" />
             <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
-            <element signature="e#7180#7181#0" expanded="true" />
-            <element signature="e#7200#7201#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3568,14 +3553,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/data/DataManager.java">
@@ -3593,30 +3578,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-          <folding />
-        </state>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/MyLibrary.java">
@@ -3640,25 +3609,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ThemeManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="80" selection-start-line="65" selection-start-column="80" selection-end-line="65" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="56" selection-start-line="159" selection-start-column="56" selection-end-line="159" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-21/android/media/MediaPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -3667,26 +3617,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java">
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/NowPlayingClassic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="100" column="5" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
-          <folding>
-            <element signature="e#476#477#0" expanded="true" />
-            <element signature="e#532#533#0" expanded="true" />
-            <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
-            <element signature="e#1246#1247#0" expanded="true" />
-            <element signature="e#1285#1286#0" expanded="true" />
-            <element signature="e#1421#1422#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1703#1704#0" expanded="true" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#1789#1790#0" expanded="true" />
-            <element signature="e#1846#1847#0" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1928#1929#0" expanded="true" />
-            <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.33216783">
+          <caret line="23" column="70" selection-start-line="23" selection-start-column="70" selection-end-line="23" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -3698,31 +3632,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java">
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="28" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
+          <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ThemeManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
+          <folding>
+            <element signature="method#getCurrentBackgroundColor#0;class#ThemeManager#0" expanded="false" />
+            <element signature="method#getCurrentGreyColor#0;class#ThemeManager#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MusicService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8558247">
-          <caret line="283" column="1" selection-start-line="283" selection-start-column="1" selection-end-line="283" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="286" column="8" selection-start-line="286" selection-start-column="8" selection-end-line="286" selection-end-column="45" />
           <folding>
             <element signature="method#onCompletion#0;class#MusicService#0" expanded="false" />
-            <element signature="e#3378#3379#0" expanded="true" />
-            <element signature="e#3419#3420#0" expanded="true" />
             <element signature="method#setCurrentSongPos#0;class#MusicService#0" expanded="false" />
             <element signature="method#setCurrentSongPos#1;class#MusicService#0" expanded="false" />
-            <element signature="e#5237#5238#0" expanded="true" />
-            <element signature="e#5268#5269#0" expanded="true" />
             <element signature="method#setQueue#0;class#MusicService#0" expanded="false" />
             <element signature="method#setRepeat#0;class#MusicService#0" expanded="false" />
             <element signature="class#MusicBinder#0;class#MusicService#0" expanded="false" />
-            <element signature="e#7180#7181#0" expanded="true" />
-            <element signature="e#7200#7201#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/activities/NowPlaying.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/MediaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40651387">
+          <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
+          <folding>
+            <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
+            <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
+            <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
+            <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
+            <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -4,13 +4,10 @@
     <attr name="secondaryTextColor" format="color" />
     <attr name="primaryAlternateColor" format="color" />
     <attr name="primaryAlternateTextColor" format="color"/>
-    <attr name="colorPrimaryGrey" format="color"/>
-    <attr name="colorPrimaryGreyAlt" format="color"/>
     <attr name="secondaryAlternateTextColor" format="color"/>
     <attr name="themeRippleColor" format="color"/>
     <attr name="themeRippleColorAlt" format="color"/>
 
-    <attr name="mainStyle" format="reference"/>
-    <attr name="translucentStyle" format="reference" />
-    <attr name="peekTheme" format="reference" />
+    <attr name="primaryGreyColor" format="color"/>
+    <attr name="primaryGreyColorAlt" format="color"/>
 </resources>

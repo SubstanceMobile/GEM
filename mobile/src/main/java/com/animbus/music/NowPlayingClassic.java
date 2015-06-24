@@ -21,7 +21,7 @@ public class NowPlayingClassic extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settings = new SettingsManager(this);
-        themeManager = new ThemeManager(this, ThemeManager.TYPE_TRANSPARENT_APPBAR);
+        themeManager = new ThemeManager(this, ThemeManager.TYPE_NORMAL);
         //Themeing
         setTheme(themeManager.getCurrentTheme());
         setContentView(R.layout.activity_now_playing_classic);

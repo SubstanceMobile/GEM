@@ -5,7 +5,7 @@ import android.content.Context;
 import com.animbus.music.data.SettingsManager;
 
 public class ThemeManager {
-    public static int TYPE_NORMAL = 1, TYPE_TRANSPARENT_APPBAR = 2, TYPE_PEEK = 3;
+    public static int TYPE_NORMAL = 1, TYPE_PEEK = 2;
     SettingsManager settings;
     Integer type;
     Context cxt;
@@ -35,13 +35,6 @@ public class ThemeManager {
                 break;
             case 2:
                 if (useLightTheme) {
-                    theme = R.style.AppTheme_Light_TranslucntAppbar;
-                } else {
-                    theme = R.style.AppTheme;
-                }
-                break;
-            case 3:
-                if (useLightTheme) {
                     theme = R.style.AppTheme_Light_QuickPeek;
                 } else {
                     theme = R.style.AppTheme_QuickPeek;
@@ -62,7 +55,21 @@ public class ThemeManager {
         return color;
     }
 
+    public int getCurrentGreyColorResource(){
+        int color;
+        if (useLightTheme) {
+            color = R.color.primaryGreyLight;
+        } else {
+            color = R.color.primaryGreyDark;
+        }
+        return color;
+    }
+
     public int getCurrentBackgroundColor() {
         return cxt.getResources().getColor(getCurrentBackgroundColorResource());
+    }
+
+    public int getCurrentGreyColor() {
+        return cxt.getResources().getColor(getCurrentGreyColorResource());
     }
 }
