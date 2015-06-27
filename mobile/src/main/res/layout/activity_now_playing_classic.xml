@@ -38,10 +38,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@color/primaryGreyDark"
         android:id="@+id/now_playing_info_toolbar_root"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="100">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -68,7 +69,8 @@
                 android:id="@+id/seekBar2"
                 android:progress="40"
                 android:layout_weight="1"
-                android:padding="@dimen/margin_tiny"/>
+                android:padding="@dimen/margin_tiny"
+                android:progressDrawable="@android:color/transparent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,62 +90,67 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/albums_info_toolbar_size">
+            android:layout_height="0dp"
+            android:layout_weight="100">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:id="@+id/linearLayout" >
 
-                <ImageButton
-                    android:layout_width="@dimen/margin_large"
-                    android:layout_height="@dimen/margin_large"
-                    android:id="@+id/imageButton"
-                    android:src="@drawable/ic_fast_rewind_white_48dp"
-                    android:background="@drawable/ripple_circle_bg"
-                    android:scaleType="fitCenter"
-                    android:layout_margin="@dimen/margin_medium"
-                    style="@style/Widget.AppCompat.Button.Borderless" />
+                    <ImageButton
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="@dimen/now_playing_icon_size"
+                        android:layout_height="@dimen/now_playing_icon_size"
+                        android:id="@+id/imageButton5"
+                        android:src="@drawable/ic_skip_previous_black_48dp"
+                        android:background="@drawable/ripple_circle_bg"
+                        android:scaleType="fitXY"
+                        android:tint="?attr/primaryTextColor"
+                        android:padding="@dimen/margin_medium"
+                        android:layout_gravity="center_vertical"
+                        android:onClick="prevClicked" />
 
-                <ImageButton
-                    android:layout_width="@dimen/margin_large"
-                    android:layout_height="@dimen/margin_large"
-                    android:id="@+id/imageButton5"
-                    android:src="@drawable/ic_play_arrow_grey300_48dp"
-                    android:background="@drawable/ripple_circle_bg"
-                    android:scaleType="fitCenter"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginBottom="@dimen/margin_medium"
-                    android:layout_marginStart="@dimen/margin_huge"
-                    android:layout_marginEnd="@dimen/margin_huge"
-                    style="@style/Widget.AppCompat.Button.Borderless" />
+                    <ImageButton
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="@dimen/now_playing_icon_size"
+                        android:layout_height="@dimen/now_playing_icon_size"
+                        android:id="@+id/imageButton6"
+                        android:src="@drawable/ic_play_arrow_black_48dp"
+                        android:background="@drawable/ripple_circle_bg"
+                        android:scaleType="fitXY"
+                        android:tint="?attr/primaryTextColor"
+                        android:padding="@dimen/margin_medium"
+                        android:layout_gravity="center_vertical"
+                        android:onClick="playButtonClicked" />
 
-                <ImageButton
-                    android:layout_width="@dimen/margin_large"
-                    android:layout_height="@dimen/margin_large"
-                    android:id="@+id/imageButton6"
-                    android:src="@drawable/ic_fast_forward_white_48dp"
-                    android:background="@drawable/ripple_circle_bg"
-                    android:scaleType="fitCenter"
-                    android:layout_margin="@dimen/margin_medium"
-                    style="@style/Widget.AppCompat.Button.Borderless" />
+                    <ImageButton
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="@dimen/now_playing_icon_size"
+                        android:layout_height="@dimen/now_playing_icon_size"
+                        android:id="@+id/imageButton9"
+                        android:src="@drawable/ic_skip_next_black_48dp"
+                        android:background="@drawable/ripple_circle_bg"
+                        android:scaleType="fitXY"
+                        android:tint="?attr/primaryTextColor"
+                        android:padding="@dimen/margin_medium"
+                        android:layout_gravity="center_vertical"
+                        android:onClick="nextClicked" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                </LinearLayout>
 
-            </LinearLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -222,6 +229,19 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
+
+            <ImageButton
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/now_playing_icon_size"
+                android:layout_height="@dimen/now_playing_icon_size"
+                android:id="@+id/imageButton"
+                android:src="@drawable/ic_repeat_black_48dp"
+                android:background="@drawable/ripple_circle_bg"
+                android:scaleType="fitXY"
+                android:tint="?attr/secondaryTextColor"
+                android:padding="@dimen/margin_medium"
+                android:layout_gravity="center_vertical"
+                android:onClick="repeatclicked" />
 
         </LinearLayout>
 
