@@ -40,26 +40,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f580369-2732-471f-bd07-ba08c3386c89" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/ic_launcher_new_color-web.png" afterPath="$PROJECT_DIR$/mobile/src/main/ic_launcher_new_color-web.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-hdpi/ic_launcher_new_color.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-hdpi/ic_launcher_new_color.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-mdpi/ic_launcher_new_color.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-mdpi/ic_launcher_new_color.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xhdpi/ic_launcher_new_color.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xhdpi/ic_launcher_new_color.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxhdpi/ic_launcher_new_color.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxhdpi/ic_launcher_new_color.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxxhdpi/ic_launcher_new_color.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxxhdpi/ic_launcher_new_color.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/ic_launcher_new_dark-web.png" afterPath="$PROJECT_DIR$/mobile/src/main/ic_launcher_new_dark-web.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-hdpi/ic_launcher_new_dark.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-hdpi/ic_launcher_new_dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-mdpi/ic_launcher_new_dark.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-mdpi/ic_launcher_new_dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xhdpi/ic_launcher_new_dark.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xhdpi/ic_launcher_new_dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxhdpi/ic_launcher_new_dark.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxhdpi/ic_launcher_new_dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxxhdpi/ic_launcher_new_dark.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxxhdpi/ic_launcher_new_dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/ic_launcher_new_light-web.png" afterPath="$PROJECT_DIR$/mobile/src/main/ic_launcher_new_light-web.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-hdpi/ic_launcher_new_light.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-hdpi/ic_launcher_new_light.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-mdpi/ic_launcher_new_light.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-mdpi/ic_launcher_new_light.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xhdpi/ic_launcher_new_light.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xhdpi/ic_launcher_new_light.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxhdpi/ic_launcher_new_light.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxhdpi/ic_launcher_new_light.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxxhdpi/ic_launcher_new_light.png" afterPath="$PROJECT_DIR$/mobile/src/main/res/mipmap-xxxhdpi/ic_launcher_new_light.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/PlaybackManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/PlaybackManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing_classic.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing_classic.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GEM.iws" />
@@ -101,22 +82,65 @@
       <file leaf-file-name="PlaybackManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/PlaybackManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.4509804">
-              <caret line="128" column="7" selection-start-line="128" selection-start-column="7" selection-end-line="128" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.30795848">
+              <caret line="411" column="0" selection-start-line="411" selection-start-column="0" selection-end-line="411" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2478#3066#0" expanded="true" />
-                <element signature="e#3065#3066#0" expanded="true" />
-                <element signature="e#3135#3136#0" expanded="true" />
-                <element signature="e#3174#3175#0" expanded="true" />
-                <element signature="e#3744#3745#0" expanded="true" />
-                <element signature="e#3773#3774#0" expanded="true" />
-                <element signature="e#3872#3873#0" expanded="true" />
-                <element signature="e#3907#3908#0" expanded="true" />
-                <element signature="e#6254#6255#0" expanded="true" />
-                <element signature="e#6293#6294#0" expanded="true" />
-                <element signature="e#12725#12726#0" expanded="true" />
-                <element signature="e#12766#12767#0" expanded="true" />
+                <element signature="docComment;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;field#VOLUME_DUCK#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;field#VOLUME_NORMAL#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;field#AUDIO_NO_FOCUS_NO_DUCK#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;field#AUDIO_NO_FOCUS_CAN_DUCK#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;field#AUDIO_FOCUSED#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;field#mCurrentMediaId#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;field#mAudioNoisyIntentFilter#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#stop#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#stop#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#getState#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#setState#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#isPlaying#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#isPlaying#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#getCurrentStreamPosition#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#play#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#play#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="e#5489#5549#0" expanded="false" />
+                <element signature="docComment;method#play#1;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#pause#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#pause#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#seekTo#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#tryToGetAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#tryToGetAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#giveUpAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#giveUpAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#configMediaPlayerState#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#configMediaPlayerState#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#onAudioFocusChange#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#onAudioFocusChange#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="e#11819#11900#0" expanded="false" />
+                <element signature="e#12151#12236#0" expanded="false" />
+                <element signature="e#12386#12462#0" expanded="false" />
+                <element signature="docComment;method#onSeekComplete#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#onSeekComplete#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#onCompletion#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#onCompletion#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="e#13665#13734#0" expanded="false" />
+                <element signature="docComment;method#onPrepared#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#onPrepared#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="e#14107#14183#0" expanded="false" />
+                <element signature="docComment;method#onError#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#onError#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#createMediaPlayerIfNeeded#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#createMediaPlayerIfNeeded#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="e#15284#15344#0" expanded="false" />
+                <element signature="e#15596#15663#0" expanded="false" />
+                <element signature="docComment;method#relaxResources#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#relaxResources#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#registerAudioNoisyReceiver#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="method#unregisterAudioNoisyReceiver#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;class#Callback#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="class#Callback#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#onCompletion#0;class#Callback#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#onPlaybackStatusChanged#0;class#Callback#0;class#PlaybackManager#0" expanded="false" />
+                <element signature="docComment;method#onError#0;class#Callback#0;class#PlaybackManager#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -154,11 +178,40 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#711#712#0" expanded="false" />
+                <element signature="e#742#743#0" expanded="false" />
                 <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
                 <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
+                <element signature="e#1366#1367#0" expanded="false" />
+                <element signature="e#1402#1403#0" expanded="false" />
+                <element signature="e#1438#1439#0" expanded="false" />
+                <element signature="e#1475#1476#0" expanded="false" />
+                <element signature="e#1510#1511#0" expanded="false" />
+                <element signature="e#1555#1556#0" expanded="false" />
+                <element signature="e#1589#1590#0" expanded="false" />
+                <element signature="e#1632#1633#0" expanded="false" />
+                <element signature="e#1666#1667#0" expanded="false" />
+                <element signature="e#1705#1706#0" expanded="false" />
+                <element signature="e#1762#1763#0" expanded="false" />
+                <element signature="e#1805#1806#0" expanded="false" />
+                <element signature="e#1841#1842#0" expanded="false" />
+                <element signature="e#1887#1888#0" expanded="false" />
+                <element signature="e#1928#1929#0" expanded="false" />
+                <element signature="e#1973#1974#0" expanded="false" />
+                <element signature="e#2022#2023#0" expanded="false" />
+                <element signature="e#2076#2077#0" expanded="false" />
+                <element signature="e#2123#2124#0" expanded="false" />
+                <element signature="e#2171#2172#0" expanded="false" />
+                <element signature="e#2209#2210#0" expanded="false" />
+                <element signature="e#2266#2267#0" expanded="false" />
+                <element signature="e#2300#2301#0" expanded="false" />
+                <element signature="e#2348#2349#0" expanded="false" />
                 <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
                 <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
                 <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+                <element signature="e#2979#2980#0" expanded="false" />
+                <element signature="e#3010#3011#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -169,7 +222,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -200,6 +255,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
               <folding>
+                <element signature="imports" expanded="false" />
                 <element signature="method#getCurrentBackgroundColor#0;class#ThemeManager#0" expanded="false" />
                 <element signature="method#getCurrentGreyColor#0;class#ThemeManager#0" expanded="false" />
               </folding>
@@ -3010,7 +3066,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435252594919</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Backup">
+      <created>1435378941033</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1435378941033</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3074,7 +3136,8 @@
     <MESSAGE value="Play Info Properly Syncs Up" />
     <MESSAGE value="Preparing to rebuild the service" />
     <MESSAGE value="First stage of rebuilding playback: still works as normal because new stuff isn't finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="First stage of rebuilding playback: still works as normal because new stuff isn't finished" />
+    <MESSAGE value="Backup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Backup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3095,11 +3158,40 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#711#712#0" expanded="false" />
+            <element signature="e#742#743#0" expanded="false" />
             <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
             <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
+            <element signature="e#1366#1367#0" expanded="false" />
+            <element signature="e#1402#1403#0" expanded="false" />
+            <element signature="e#1438#1439#0" expanded="false" />
+            <element signature="e#1475#1476#0" expanded="false" />
+            <element signature="e#1510#1511#0" expanded="false" />
+            <element signature="e#1555#1556#0" expanded="false" />
+            <element signature="e#1589#1590#0" expanded="false" />
+            <element signature="e#1632#1633#0" expanded="false" />
+            <element signature="e#1666#1667#0" expanded="false" />
+            <element signature="e#1705#1706#0" expanded="false" />
+            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1805#1806#0" expanded="false" />
+            <element signature="e#1841#1842#0" expanded="false" />
+            <element signature="e#1887#1888#0" expanded="false" />
+            <element signature="e#1928#1929#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2022#2023#0" expanded="false" />
+            <element signature="e#2076#2077#0" expanded="false" />
+            <element signature="e#2123#2124#0" expanded="false" />
+            <element signature="e#2171#2172#0" expanded="false" />
+            <element signature="e#2209#2210#0" expanded="false" />
+            <element signature="e#2266#2267#0" expanded="false" />
+            <element signature="e#2300#2301#0" expanded="false" />
+            <element signature="e#2348#2349#0" expanded="false" />
             <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="false" />
+            <element signature="e#3010#3011#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3163,11 +3255,40 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#711#712#0" expanded="false" />
+            <element signature="e#742#743#0" expanded="false" />
             <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
             <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
+            <element signature="e#1366#1367#0" expanded="false" />
+            <element signature="e#1402#1403#0" expanded="false" />
+            <element signature="e#1438#1439#0" expanded="false" />
+            <element signature="e#1475#1476#0" expanded="false" />
+            <element signature="e#1510#1511#0" expanded="false" />
+            <element signature="e#1555#1556#0" expanded="false" />
+            <element signature="e#1589#1590#0" expanded="false" />
+            <element signature="e#1632#1633#0" expanded="false" />
+            <element signature="e#1666#1667#0" expanded="false" />
+            <element signature="e#1705#1706#0" expanded="false" />
+            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1805#1806#0" expanded="false" />
+            <element signature="e#1841#1842#0" expanded="false" />
+            <element signature="e#1887#1888#0" expanded="false" />
+            <element signature="e#1928#1929#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2022#2023#0" expanded="false" />
+            <element signature="e#2076#2077#0" expanded="false" />
+            <element signature="e#2123#2124#0" expanded="false" />
+            <element signature="e#2171#2172#0" expanded="false" />
+            <element signature="e#2209#2210#0" expanded="false" />
+            <element signature="e#2266#2267#0" expanded="false" />
+            <element signature="e#2300#2301#0" expanded="false" />
+            <element signature="e#2348#2349#0" expanded="false" />
             <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="false" />
+            <element signature="e#3010#3011#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3231,11 +3352,40 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#711#712#0" expanded="false" />
+            <element signature="e#742#743#0" expanded="false" />
             <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
             <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
+            <element signature="e#1366#1367#0" expanded="false" />
+            <element signature="e#1402#1403#0" expanded="false" />
+            <element signature="e#1438#1439#0" expanded="false" />
+            <element signature="e#1475#1476#0" expanded="false" />
+            <element signature="e#1510#1511#0" expanded="false" />
+            <element signature="e#1555#1556#0" expanded="false" />
+            <element signature="e#1589#1590#0" expanded="false" />
+            <element signature="e#1632#1633#0" expanded="false" />
+            <element signature="e#1666#1667#0" expanded="false" />
+            <element signature="e#1705#1706#0" expanded="false" />
+            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1805#1806#0" expanded="false" />
+            <element signature="e#1841#1842#0" expanded="false" />
+            <element signature="e#1887#1888#0" expanded="false" />
+            <element signature="e#1928#1929#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2022#2023#0" expanded="false" />
+            <element signature="e#2076#2077#0" expanded="false" />
+            <element signature="e#2123#2124#0" expanded="false" />
+            <element signature="e#2171#2172#0" expanded="false" />
+            <element signature="e#2209#2210#0" expanded="false" />
+            <element signature="e#2266#2267#0" expanded="false" />
+            <element signature="e#2300#2301#0" expanded="false" />
+            <element signature="e#2348#2349#0" expanded="false" />
             <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="false" />
+            <element signature="e#3010#3011#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3435,6 +3585,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="71" column="37" selection-start-line="71" selection-start-column="37" selection-end-line="71" selection-end-column="37" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#getCurrentBackgroundColor#0;class#ThemeManager#0" expanded="false" />
             <element signature="method#getCurrentGreyColor#0;class#ThemeManager#0" expanded="false" />
           </folding>
@@ -3445,7 +3596,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3454,11 +3607,40 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#711#712#0" expanded="false" />
+            <element signature="e#742#743#0" expanded="false" />
             <element signature="method#startPlayback#0;class#MediaController#0" expanded="false" />
             <element signature="method#startPlayback#1;class#MediaController#0" expanded="false" />
+            <element signature="e#1366#1367#0" expanded="false" />
+            <element signature="e#1402#1403#0" expanded="false" />
+            <element signature="e#1438#1439#0" expanded="false" />
+            <element signature="e#1475#1476#0" expanded="false" />
+            <element signature="e#1510#1511#0" expanded="false" />
+            <element signature="e#1555#1556#0" expanded="false" />
+            <element signature="e#1589#1590#0" expanded="false" />
+            <element signature="e#1632#1633#0" expanded="false" />
+            <element signature="e#1666#1667#0" expanded="false" />
+            <element signature="e#1705#1706#0" expanded="false" />
+            <element signature="e#1762#1763#0" expanded="false" />
+            <element signature="e#1805#1806#0" expanded="false" />
+            <element signature="e#1841#1842#0" expanded="false" />
+            <element signature="e#1887#1888#0" expanded="false" />
+            <element signature="e#1928#1929#0" expanded="false" />
+            <element signature="e#1973#1974#0" expanded="false" />
+            <element signature="e#2022#2023#0" expanded="false" />
+            <element signature="e#2076#2077#0" expanded="false" />
+            <element signature="e#2123#2124#0" expanded="false" />
+            <element signature="e#2171#2172#0" expanded="false" />
+            <element signature="e#2209#2210#0" expanded="false" />
+            <element signature="e#2266#2267#0" expanded="false" />
+            <element signature="e#2300#2301#0" expanded="false" />
+            <element signature="e#2348#2349#0" expanded="false" />
             <element signature="class#OnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#setOnUpdateListener#0;class#MediaController#0" expanded="false" />
             <element signature="method#requestUpdate#0;class#MediaController#0" expanded="false" />
+            <element signature="e#2979#2980#0" expanded="false" />
+            <element signature="e#3010#3011#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3520,17 +3702,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing_classic.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3542,24 +3713,78 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/PlaybackManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.4509804">
-          <caret line="128" column="7" selection-start-line="128" selection-start-column="7" selection-end-line="128" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.30795848">
+          <caret line="411" column="0" selection-start-line="411" selection-start-column="0" selection-end-line="411" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2478#3066#0" expanded="true" />
-            <element signature="e#3065#3066#0" expanded="true" />
-            <element signature="e#3135#3136#0" expanded="true" />
-            <element signature="e#3174#3175#0" expanded="true" />
-            <element signature="e#3744#3745#0" expanded="true" />
-            <element signature="e#3773#3774#0" expanded="true" />
-            <element signature="e#3872#3873#0" expanded="true" />
-            <element signature="e#3907#3908#0" expanded="true" />
-            <element signature="e#6254#6255#0" expanded="true" />
-            <element signature="e#6293#6294#0" expanded="true" />
-            <element signature="e#12725#12726#0" expanded="true" />
-            <element signature="e#12766#12767#0" expanded="true" />
+            <element signature="docComment;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;field#VOLUME_DUCK#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;field#VOLUME_NORMAL#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;field#AUDIO_NO_FOCUS_NO_DUCK#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;field#AUDIO_NO_FOCUS_CAN_DUCK#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;field#AUDIO_FOCUSED#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;field#mCurrentMediaId#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;field#mAudioNoisyIntentFilter#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#stop#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#stop#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#getState#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#setState#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#isPlaying#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#isPlaying#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#getCurrentStreamPosition#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#play#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#play#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="e#5489#5549#0" expanded="false" />
+            <element signature="docComment;method#play#1;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#pause#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#pause#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#seekTo#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#tryToGetAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#tryToGetAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#giveUpAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#giveUpAudioFocus#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#configMediaPlayerState#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#configMediaPlayerState#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#onAudioFocusChange#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#onAudioFocusChange#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="e#11819#11900#0" expanded="false" />
+            <element signature="e#12151#12236#0" expanded="false" />
+            <element signature="e#12386#12462#0" expanded="false" />
+            <element signature="docComment;method#onSeekComplete#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#onSeekComplete#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#onCompletion#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#onCompletion#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="e#13665#13734#0" expanded="false" />
+            <element signature="docComment;method#onPrepared#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#onPrepared#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="e#14107#14183#0" expanded="false" />
+            <element signature="docComment;method#onError#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#onError#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#createMediaPlayerIfNeeded#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#createMediaPlayerIfNeeded#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="e#15284#15344#0" expanded="false" />
+            <element signature="e#15596#15663#0" expanded="false" />
+            <element signature="docComment;method#relaxResources#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#relaxResources#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#registerAudioNoisyReceiver#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="method#unregisterAudioNoisyReceiver#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;class#Callback#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="class#Callback#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#onCompletion#0;class#Callback#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#onPlaybackStatusChanged#0;class#Callback#0;class#PlaybackManager#0" expanded="false" />
+            <element signature="docComment;method#onError#0;class#Callback#0;class#PlaybackManager#0" expanded="false" />
           </folding>
         </state>
       </provider>

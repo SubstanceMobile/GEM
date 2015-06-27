@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.session.PlaybackState;
+import android.os.PowerManager;
 import android.util.Log;
 
 import com.animbus.music.data.dataModels.Song;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static android.media.AudioManager.OnAudioFocusChangeListener;
+import static android.media.MediaPlayer.OnSeekCompleteListener;
 import static android.media.MediaPlayer.OnCompletionListener;
 import static android.media.MediaPlayer.OnErrorListener;
 import static android.media.MediaPlayer.OnPreparedListener;
@@ -24,7 +26,7 @@ import static android.media.MediaPlayer.OnPreparedListener;
  * WARNING: This class is extremely experimental.
  */
 
-public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedListener, OnErrorListener, OnCompletionListener {
+public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedListener, OnErrorListener, OnCompletionListener, OnSeekCompleteListener {
 
     /**
      * The volume we set the media player to when GEM loses audio focus, but is allowed to reduce the volume instead of stopping playback.
@@ -233,7 +235,6 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
             }
             //Sets the position of the media player
             mMediaPlayer.seekTo(position);
-            mCurrentPosition = position;
             if (mCallback != null) {
                 mCallback.onPlaybackStatusChanged(mState);
             }
@@ -302,7 +303,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
                         mState = PlaybackState.STATE_PLAYING;
                     } else {
                         mMediaPlayer.seekTo(mCurrentPosition);
-                        mState = PlaybackState.STATE_PLAYING;
+                        mState = PlaybackState.STATE_BUFFERING;
                     }
                 }
                 mPlayOnFocusGain = false;
@@ -334,9 +335,11 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
 
             // If we are playing, we need to reset media player by calling configMediaPlayerState
             // with mAudioFocus properly set.
+            //TOD
             if (mState == PlaybackState.STATE_PLAYING && !canDuck) {
                 // If we don't have audio focus and can't duck, we save the information that
                 // we were playing, so that we can resume playback once we get the focus back.
+                //todo setting
                 mPlayOnFocusGain = true;
             }
         } else {
@@ -344,6 +347,131 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
         }
         configMediaPlayerState();
     }
+
+    /**
+     * Called when MediaPlayer has completed a seek
+     *
+     * @see android.media.MediaPlayer.OnSeekCompleteListener
+     */
+    @Override
+    public void onSeekComplete(MediaPlayer mp) {
+        Log.d(TAG, "onSeekComplete from MediaPlayer:" + mp.getCurrentPosition());
+        mCurrentPosition = mp.getCurrentPosition();
+        if (mState == PlaybackState.STATE_BUFFERING) {
+            mMediaPlayer.start();
+            mState = PlaybackState.STATE_PLAYING;
+        }
+        if (mCallback != null) {
+            mCallback.onPlaybackStatusChanged(mState);
+        }
+    }
+
+    /**
+     * Called when media player is done playing current song.
+     *
+     * @see android.media.MediaPlayer.OnCompletionListener
+     */
+    @Override
+    public void onCompletion(MediaPlayer player) {
+        Log.d(TAG, "onCompletion from MediaPlayer");
+        // The media player finished playing the current song, so we go ahead
+        // and start the next.
+        if (mCallback != null) {
+            mCallback.onCompletion();
+        }
+    }
+
+    /**
+     * Called when media player is done preparing.
+     *
+     * @see android.media.MediaPlayer.OnPreparedListener
+     */
+    @Override
+    public void onPrepared(MediaPlayer player) {
+        Log.d(TAG, "onPrepared from MediaPlayer");
+        // The media player is done preparing. That means we can start playing if we
+        // have audio focus.
+        configMediaPlayerState();
+    }
+
+    /**
+     * Called when there's an error playing media. When this happens, the media
+     * player goes to the Error state. We warn the user about the error and
+     * reset the media player.
+     *
+     * @see android.media.MediaPlayer.OnErrorListener
+     */
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+        Log.e(TAG, "Media player error: what=" + what + ", extra=" + extra);
+        if (mCallback != null) {
+            mCallback.onError("MediaPlayer error " + what + " (" + extra + ")");
+        }
+        return true; // true indicates we handled the error
+    }
+
+    /**
+     * Makes sure the media player exists and has been reset. This will create
+     * the media player if needed, or reset the existing media player if one
+     * already exists.
+     */
+    private void createMediaPlayerIfNeeded() {
+        Log.d(TAG, "createMediaPlayerIfNeeded. needed? "+ (mMediaPlayer==null));
+        if (mMediaPlayer == null) {
+            mMediaPlayer = new MediaPlayer();
+
+            // Make sure the media player will acquire a wake-lock while
+            // playing. If we don't do that, the CPU might go to sleep while the
+            // song is playing, causing playback to stop.
+            mMediaPlayer.setWakeMode(context,
+                    PowerManager.PARTIAL_WAKE_LOCK);
+
+            // we want the media player to notify us when it's ready preparing,
+            // and when it's done playing:
+            mMediaPlayer.setOnPreparedListener(this);
+            mMediaPlayer.setOnCompletionListener(this);
+            mMediaPlayer.setOnErrorListener(this);
+            mMediaPlayer.setOnSeekCompleteListener(this);
+        } else {
+            mMediaPlayer.reset();
+        }
+    }
+
+    /**
+     * Releases resources used by the service for playback. This includes the
+     * "foreground service" status, the wake locks and possibly the MediaPlayer.
+     *
+     * @param releaseMediaPlayer Indicates whether the Media Player should also
+     *            be released or not
+     */
+    private void relaxResources(boolean releaseMediaPlayer) {
+        Log.d(TAG, "relaxResources. releaseMediaPlayer=" + releaseMediaPlayer);
+
+        mService.stopForeground(true);
+
+        // stop and release the Media Player, if it's available
+        if (releaseMediaPlayer && mMediaPlayer != null) {
+            mMediaPlayer.reset();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
+
+    private void registerAudioNoisyReceiver() {
+        if (!mAudioNoisyReceiverRegistered) {
+            mService.registerReceiver(mAudioNoisyReceiver, mAudioNoisyIntentFilter);
+            mAudioNoisyReceiverRegistered = true;
+        }
+    }
+
+    private void unregisterAudioNoisyReceiver() {
+        if (mAudioNoisyReceiverRegistered) {
+            mService.unregisterReceiver(mAudioNoisyReceiver);
+            mAudioNoisyReceiverRegistered = false;
+        }
+    }
+
+
 
     public void setCallback(Callback callback) {
         this.mCallback = callback;
