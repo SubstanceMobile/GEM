@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class NowPlayingToolbar extends Fragment implements View.OnClickListener 
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, true)) {
             startActivity(new Intent(cxt, NowPlayingPeek.class));
         } else {
-            if (settings.getBooleanSetting(SettingsManager.KEY_USE_CLASSIC_NOW_PLAYING, true)) {
+            if (settings.getBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, true)) {
                 startActivity(new Intent(cxt, NowPlayingClassic.class));
             } else {
                 startActivity(new Intent(cxt, NowPlaying.class));

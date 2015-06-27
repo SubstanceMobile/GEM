@@ -73,7 +73,7 @@ public class Settings extends AppCompatActivity {
         myLibraryPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, false));
         masterPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_COLOR_EXTRACTION_MASTER, false));
         nowPlayingPeekSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, true));
-        classicNowPlayingScreenSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_CLASSIC_NOW_PLAYING, true));
+        classicNowPlayingScreenSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, true));
         nowPlayingPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN, true));
         settingChanged(null);
     }
@@ -120,7 +120,7 @@ public class Settings extends AppCompatActivity {
         manager.setBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, myLibraryPaletteSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_USE_COLOR_EXTRACTION_MASTER, masterPaletteSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, nowPlayingPeekSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_CLASSIC_NOW_PLAYING, classicNowPlayingScreenSwitch.isChecked());
+        manager.setBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, classicNowPlayingScreenSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN, nowPlayingPaletteSwitch.isChecked());
     }
 
