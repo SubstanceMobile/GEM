@@ -1,4 +1,4 @@
-package com.animbus.music.data.dataModels;
+package com.animbus.music.data.objects;
 
 
 import android.content.ContentUris;

@@ -8,4 +8,6 @@
     <color name="primaryGreyLight">#d1d1d1</color>
     <color name="systembarsDark">#ff0a0a0a</color>
     <color name="systembarsLight">#757575</color>
+    <color name="navdrawerAccentLight">#212121</color>
+    <color name="navdrawerAccentDark">#B6B6B6</color>
 </resources>

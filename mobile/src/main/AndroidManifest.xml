@@ -7,16 +7,17 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-
+    <uses-permission android:name="com.android.vending.BILLING" />
     <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_new_dark"
         android:label="@string/app_name_actual"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
         <activity
             android:name=".activities.MyLibrary"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"/>
 
         <activity-alias
             android:name=".activities.app.icon.new.dark"
@@ -25,12 +26,11 @@
             android:label="@string/app_name"
             android:targetActivity=".activities.MyLibrary" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.APP_MUSIC" />
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
         <activity-alias
             android:name=".activities.app.icon.new.light"
             android:enabled="false"
@@ -38,12 +38,11 @@
             android:label="@string/app_name"
             android:targetActivity=".activities.MyLibrary" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.APP_MUSIC" />
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
         <activity-alias
             android:name=".activities.app.icon.new.color"
             android:enabled="false"
@@ -51,12 +50,11 @@
             android:label="@string/app_name"
             android:targetActivity=".activities.MyLibrary" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.APP_MUSIC" />
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
         <activity-alias
             android:name=".activities.app.icon.old.dark"
             android:enabled="false"
@@ -64,12 +62,11 @@
             android:label="@string/app_name"
             android:targetActivity=".activities.MyLibrary" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.APP_MUSIC" />
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
         <activity-alias
             android:name=".activities.app.icon.old.light"
             android:enabled="false"
@@ -77,33 +74,30 @@
             android:label="@string/app_name"
             android:targetActivity=".activities.MyLibrary" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.APP_MUSIC" />
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
 
         <activity
-            android:name=".activities.albums_activity"
-            android:label="@string/title_activity_albums"
-            android:parentActivityName=".activities.MyLibrary"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".activities.Settings"
             android:label="@string/title_activity_settings" />
+
         <activity
             android:name=".activities.ChooseIcon"
-            android:label="@string/title_activity_settings_choose_icon" />
+            android:label="@string/title_activity_choose_icon" />
+
         <activity
             android:name=".activities.NowPlayingPeek"
-            android:label="@string/title_activity_now_playing_quick_peek" />
+            android:label="@string/title_activity_quick_peek" />
+
         <activity
             android:name=".activities.NowPlaying"
             android:label="@string/title_activity_now_playing" />
+
         <activity
             android:name=".NowPlayingClassic"
-            android:label="@string/title_activity_now_playing_classic" />
+            android:label="@string/title_activity_now_playing" />
 
         <receiver android:name=".activities.MusicPlaybackWidget" >
             <intent-filter>
@@ -115,10 +109,17 @@
                 android:resource="@xml/music_playback_widget_info" />
         </receiver>
 
+        <service
+            android:name=".MusicService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=".MusicService" />
+
         <activity
-            android:name=".activities.About"
-            android:label="@string/title_activity_about" >
+            android:name=".activities.AlbumColor"
+            android:label="@string/title_activity_album_color" >
         </activity>
-        <service android:name=".MusicService" android:exported="true" android:enabled="true" android:process=".MusicService"/>
+
     </application>
+
 </manifest>

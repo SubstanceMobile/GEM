@@ -16,6 +16,7 @@
         <item name="themeRippleColor">@color/ripple_material_dark</item>
         <item name="themeRippleColorAlt">@color/ripple_material_light</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="navDrawerSelectedColor">@color/navdrawerAccentDark</item>
     </style>
     <!--This is the light theme-->
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
@@ -31,6 +32,7 @@
         <item name="themeRippleColor">@color/ripple_material_light</item>
         <item name="themeRippleColorAlt">@color/ripple_material_dark</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyleLight</item>
+        <item name="navDrawerSelectedColor">@color/navdrawerAccentLight</item>
     </style>
 
     <!--This is for the hamburger menu-->   <!--This is for the dark theme-->
@@ -84,6 +86,14 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+    <style name="AppTheme.Navdrawer" parent="AppTheme">
+        <item name="colorPrimary">@color/accent_material_dark</item>
+    </style>
+
+    <style name="AppTheme.Light.Navdrawer" parent="AppTheme.Light">
+        <item name="colorPrimary">@color/accent_material_light</item>
     </style>
 
 </resources>

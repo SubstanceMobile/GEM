@@ -10,7 +10,7 @@ public class ThemeManager {
     Integer type;
     Context cxt;
 
-    Boolean useLightTheme;
+    public Boolean useLightTheme;
 
     public ThemeManager(Context context, int type) {
         this.type = type;
@@ -51,6 +51,16 @@ public class ThemeManager {
             color = R.color.primaryLight;
         } else {
             color = R.color.primaryDark;
+        }
+        return color;
+    }
+
+    public int getNavdrawerColor(){
+        int color;
+        if (useLightTheme) {
+            color = R.color.secondary_text_default_material_dark;
+        } else {
+            color = R.color.secondary_text_default_material_dark;
         }
         return color;
     }

@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:contentDescription="@string/album_art_hint"
             android:src="@drawable/ic_album_black_48dp"
             android:tint="?attr/primaryAlternateTextColor"/>
 
@@ -52,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:padding="@dimen/margin_tiny"
-                        android:text="@string/song_title"
+                        android:text="SONG_TITLE"
                         android:textColor="?attr/primaryAlternateTextColor"
                         android:textSize="16sp" />
 
@@ -60,7 +59,7 @@
                         android:id="@+id/song_artist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/song_artist"
+                        android:text="Song Artist"
                         android:textColor="?attr/secondaryAlternateTextColor"
                         android:textSize="14sp" />
 
@@ -74,9 +73,7 @@
                     android:animateLayoutChanges="true"
                     android:background="@drawable/ripple_circle_bg_alt_color"
                     android:clickable="true"
-                    android:contentDescription="@string/play_pause"
                     android:cropToPadding="false"
-                    android:onClick="switchTo"
                     android:padding="@dimen/margin_medium"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_play_arrow_black_48dp"

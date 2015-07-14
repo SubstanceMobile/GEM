@@ -11,7 +11,7 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.animbus.music.data.dataModels.Song;
+import com.animbus.music.data.objects.Song;
 
 import java.io.IOException;
 import java.util.List;
@@ -143,7 +143,6 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public Song getPrevSong() {
         Song song;
         if (getCurrentSongPos() == 0) {
-            //TODO:Look up why its -1
             song = queue.get(queue.size() - 1);
             setCurrentSongPos(queue.size() - 1);
         } else {

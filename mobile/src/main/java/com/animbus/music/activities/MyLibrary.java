@@ -1,15 +1,17 @@
 package com.animbus.music.activities;
 
 import android.app.ActivityManager;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Toast;
 
 import com.animbus.music.MediaController;
@@ -30,14 +33,14 @@ import com.animbus.music.data.DataManager;
 import com.animbus.music.data.SettingsManager;
 import com.animbus.music.data.adapter.AlbumGridAdapter;
 import com.animbus.music.data.adapter.SongListAdapter;
-import com.animbus.music.data.dataModels.AlbumGridDataModel;
-import com.animbus.music.data.dataModels.Song;
+import com.animbus.music.data.objects.Album;
+import com.animbus.music.data.objects.Song;
 
 import java.util.List;
 
 
 public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.AlbumArtGridClickListener, NavigationView.OnNavigationItemSelectedListener,
-        SongListAdapter.SongListItemClickListener{
+        SongListAdapter.SongListItemClickListener {
     public RecyclerView mainList;
     MediaController controller;
     String AlbumName, AlbumArtist, currentScreenName;
@@ -51,6 +54,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     NavigationView drawerContent;
     ThemeManager themeManager;
     View quickToolbar;
+    Menu navMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +103,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         } else {
-            toolbar.setTitle(cxt.getResources().getString(R.string.main_title));
+            toolbar.setTitle(cxt.getResources().getString(R.string.title_activity_main));
         }
 
         //Sets Window description in Multitasking menu
@@ -113,20 +117,6 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
                 setTaskDescription(new ActivityManager.TaskDescription(null, bm, cxt.getResources().getColor(R.color.primaryLight)));
                 bm.recycle();
             }
-        }
-
-        //This sets up the RecyclerView to the default screen based on a setting.
-        Integer setting = settings.getIntegerSetting(SettingsManager.KEY_DEFAULT_SCREEN, SettingsManager.SCREEN_SONGS);
-        if (setting == 0) {
-            Toast.makeText(this, "What?", Toast.LENGTH_LONG).show();
-        } else if (setting == 1) {
-            switchToAlbum();
-        } else if (setting == 2) {
-            switchToSongs();
-        } else if (setting == 3) {
-            switchToArtists();
-        } else if (setting == 4) {
-            switchToPlaylists();
         }
     }
 
@@ -152,39 +142,68 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
                 mDrawerToggle.syncState();
             }
         });
-        /*drawerContent.setItemIconTintList(new ColorStateList(
-                new int[][]{
-                        {android.R.attr.state_checked}, //Checked
-                        {} //default
-                },
-                new int[]{
-                        R.attr.colorAccent, //Checked
-                        android.R.attr
-                }
-        ));
-        drawerContent.setItemTextColor(new ColorStateList(
-                new int[][]{
-                        {android.R.attr.state_checked} //Checked
-                },
-                new int[]{
-                        R.attr.colorAccent //Checked
-                }
-        ));*/
+        View header = View.inflate(this, R.layout.navigation_drawer_header, null);
+        drawerContent.addHeaderView(header);
+        drawerContent.inflateMenu(R.menu.navigation_drawer_items);
+
+        //This sets up the RecyclerView to the default screen based on a setting.
+        Integer setting = settings.getIntegerSetting(SettingsManager.KEY_DEFAULT_SCREEN, SettingsManager.SCREEN_ALBUMS);
+        navMenu = drawerContent.getMenu();
+        if (setting == 0) {
+            Toast.makeText(this, "What?", Toast.LENGTH_LONG).show();
+            switchToAlbum();
+            navMenu.findItem(R.id.navdrawer_album_icon).setChecked(true);
+        } else if (setting == 1) {
+            switchToAlbum();
+            navMenu.findItem(R.id.navdrawer_album_icon).setChecked(true);
+        } else if (setting == 2) {
+            switchToSongs();
+            navMenu.findItem(R.id.navdrawer_songs).setChecked(true);
+        } else if (setting == 3) {
+            switchToArtists();
+            navMenu.findItem(R.id.navdrawer_artists).setChecked(true);
+        } else if (setting == 4) {
+            switchToPlaylists();
+            navMenu.findItem(R.id.navdrawer_playlists).setChecked(true);
+        }
+        ColorStateList colorStateList;
+        if (themeManager.useLightTheme) {
+            colorStateList = new ColorStateList(
+                    new int[][]{
+                            {android.R.attr.state_checked}, //When selected
+                            {}
+                    },
+                    new int[]{
+                            getResources().getColor(R.color.accent_material_light), //When selected
+                            getResources().getColor(R.color.secondary_text_default_material_light)
+                    }
+            );
+        } else {
+            colorStateList = new ColorStateList(
+                    new int[][]{
+                            {android.R.attr.state_checked}, //When selected
+                            {}
+                    },
+                    new int[]{
+                            getResources().getColor(R.color.accent_material_dark ), //When selected
+                                    getResources().getColor(R.color.secondary_text_default_material_dark)
+                    }
+            );
+        }
+        drawerContent.setItemIconTintList(colorStateList);
+        drawerContent.setItemTextColor(colorStateList);
+
     }
 
 
     @Override
-    public void AlbumGridItemClicked(View view, int position, List<AlbumGridDataModel> data) {
-        AlbumGridDataModel current = data.get(position);
-        //The intent
-        Intent albums = new Intent(this, albums_activity.class);
-        //The Album Info
-        Bundle albumsInfo = new Bundle();
-        albumsInfo.putString("ALBUM_NAME", current.AlbumGridAlbumName);
-        albumsInfo.putString("ALBUM_ARTIST", current.AlbumGridAlbumArtist);
-        albumsInfo.putInt("ALBUM_ART", current.AlbumGridAlbumart);
-        albums.putExtras(albumsInfo);
-        startActivity(albums);
+    public void AlbumGridItemClicked(View view, int position, List<Album> data) {
+        Snackbar.make(findViewById(R.id.MainView), "Removed for renovation", Snackbar.LENGTH_LONG).setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Dismiss
+            }
+        }).show();
     }
 
 
@@ -234,11 +253,13 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     }
 
     @Override
-    public void SongListItemClicked(int position,List<Song> data) {
+    public void SongListItemClicked(int position, List<Song> data) {
         musicControl.startPlayback(data, position);
 
         //TODO: Set a listener
         quickToolbar.setVisibility(View.VISIBLE);
+        quickToolbar.setTranslationY(200.0f);
+        quickToolbar.animate().translationY(0).start();
     }
 
     //This section is where you select which view to see. Only views with back arrows should be set as separate activities.
@@ -255,8 +276,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         } else if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mainList.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
         }
-        //TODO:Use resource
-        currentScreenName = "Albums";
+        currentScreenName = getResources().getString(R.string.page_albums);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
@@ -272,8 +292,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         mainList.setAdapter(adapter);
         mainList.setItemAnimator(new DefaultItemAnimator());
         mainList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        //TODO:Use Resource
-        currentScreenName = "Songs";
+        currentScreenName = getResources().getString(R.string.page_songs);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
@@ -284,8 +303,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
 
     public void switchToPlaylists() {
         //Sets the current screen
-        //TODO:Use Resource
-        currentScreenName = "Playlists";
+        currentScreenName = getResources().getString(R.string.page_playlists);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
@@ -296,8 +314,7 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
 
     public void switchToArtists() {
         //Sets the current screen
-        //TODO:Use Resource
-        currentScreenName = "Artists";
+        currentScreenName = getResources().getString(R.string.page_artists);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
@@ -316,21 +333,5 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     //This section is where you can open other screens (Now Playing, Albums Details, Playlist Details, etc.)
     //You add the Bundle and Intent for the alternate activities
 
-    //This opens the album details screen
-    public void openAlbums(View v) {
-        //Original Album
-        AlbumName = "Better Off Ted";
-        AlbumArtist = "Filbert";
-        AlbumArt = R.drawable.album_art;
-        //The intent
-        Intent albums = new Intent(this, albums_activity.class);
-        //The Album Info
-        Bundle albumsInfo = new Bundle();
-        albumsInfo.putString("ALBUM_NAME", AlbumName);
-        albumsInfo.putString("ALBUM_ARTIST", AlbumArtist);
-        albumsInfo.putInt("ALBUM_ART", AlbumArt);
-        albums.putExtras(albumsInfo);
-        startActivity(albums);
-    }
     //End Section
 }

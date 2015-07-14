@@ -10,9 +10,8 @@ import android.support.v4.os.AsyncTaskCompat;
 import android.support.v7.graphics.Palette;
 
 import com.animbus.music.R;
-import com.animbus.music.data.dataModels.AlbumGridDataModel;
-import com.animbus.music.data.dataModels.SongDataModel;
-import com.animbus.music.data.dataModels.Song;
+import com.animbus.music.data.objects.Album;
+import com.animbus.music.data.objects.Song;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,13 +28,13 @@ public class DataManager {
         context = cxt;
     }
 
-    public List<AlbumGridDataModel> getAlbumGridData() {
-        List<AlbumGridDataModel> data = new ArrayList<>();
+    public List<Album> getAlbumGridData() {
+        List<Album> data = new ArrayList<>();
         int[] AlbumArts = {R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art,/*later*/R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art, R.drawable.album_art_alt, R.drawable.album_art_alt_alt, R.drawable.album_art};
         String[] AlbumName = {"Tombstone", "Silent Unspeakable Memories", "Better Off Ted",/*Later*/"Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted", "Tombstone", "Silent Unspeakable Memories", "Better Off Ted"};
         String[] AlbumArtist = {"Kisaburo Osawa", "Riola Sardo", "Filbert",/*later*/"Kisaburo Osawa", "Riola Sardo", "Filbert", "Kisaburo Osawa", "Riola Sardo", "Filbert", "Kisaburo Osawa", "Riola Sardo", "Filbert", "Kisaburo Osawa", "Riola Sardo", "Filbert", "Kisaburo Osawa", "Riola Sardo", "Filbert"};
         for (int i = 0; i < AlbumName.length && i < AlbumArts.length; i++) {
-            AlbumGridDataModel current = new AlbumGridDataModel();
+            Album current = new Album();
             current.AlbumGridAlbumart = AlbumArts[i];
             current.AlbumGridAlbumName = AlbumName[i];
             current.AlbumGridAlbumArtist = AlbumArtist[i];
@@ -76,14 +75,14 @@ public class DataManager {
         return data;
     }
 
-    public List<SongDataModel> getSongListDataFakeData() {
+    /*public List<SongDataModel> getSongListDataFakeData() {
         List<SongDataModel> data = new ArrayList<>();
-        String[] SongTitle = {"Song One", "Song Two", "Song Three and Counting", /*Later*/ "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting"};
-        String[] SongArtist = {"Riola Sardo", "Kisaburo Osawa", "Filbert",/*Later*/"Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert"};
-        String[] SongDuration = {"1:49", "2:50", "5:45", /*Later*/"1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45"};
-        int[] SongArt = {R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, /*Later*/R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art};
+        String[] SongTitle = {"Song One", "Song Two", "Song Three and Counting", Later "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting", "Song One", "Song Two", "Song Three and Counting"};
+        String[] SongArtist = {"Riola Sardo", "Kisaburo Osawa", "Filbert",Later"Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert", "Riola Sardo", "Kisaburo Osawa", "Filbert"};
+        String[] SongDuration = {"1:49", "2:50", "5:45", Later"1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45", "1:49", "2:50", "5:45"};
+        int[] SongArt = {R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, LaterR.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art, R.drawable.album_art_alt_alt, R.drawable.album_art_alt, R.drawable.album_art};
         for (int i = 0; i < SongTitle.length && i < SongArtist.length && i < SongArt.length && i < SongDuration.length; i++) {
-            SongDataModel current = new SongDataModel();
+            Song current = new SongDataModel();
             current.title = SongTitle[i];
             current.artist = SongArtist[i];
             current.albumart = SongArt[i];
@@ -91,7 +90,7 @@ public class DataManager {
             data.add(current);
         }
         return data;
-    }
+    }*/
 
     public int getColor(int image, Integer type) {
         ThreadColorExtraction colorThread = new ThreadColorExtraction();

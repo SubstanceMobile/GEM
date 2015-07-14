@@ -15,7 +15,7 @@ import com.animbus.music.MediaController;
 import com.animbus.music.R;
 import com.animbus.music.ThemeManager;
 import com.animbus.music.data.SettingsManager;
-import com.animbus.music.data.dataModels.Song;
+import com.animbus.music.data.objects.Song;
 
 import java.util.List;
 

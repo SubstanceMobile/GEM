@@ -10,7 +10,7 @@ import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.animbus.music.activities.NowPlaying;
-import com.animbus.music.data.dataModels.Song;
+import com.animbus.music.data.objects.Song;
 
 import java.util.List;
 

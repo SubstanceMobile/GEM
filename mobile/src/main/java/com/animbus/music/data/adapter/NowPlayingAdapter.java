@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.animbus.music.R;
-import com.animbus.music.data.dataModels.NowPlayingDatamodel;
+import com.animbus.music.data.objects.NowPlayingDatamodel;
 
 import java.util.Collections;
 import java.util.List;

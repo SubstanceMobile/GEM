@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="false"
     android:fitsSystemWindows="true">
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/MainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alwaysDrawnWithCache="false"
-        android:animateLayoutChanges="true"
         android:orientation="vertical"
         android:fitsSystemWindows="true"
         android:background="?attr/colorPrimary">
@@ -22,7 +23,7 @@
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_default_height_material"
-            app:title="@string/main_title"
+            app:title="@string/title_activity_main"
             style="@style/Widget.AppCompat.Toolbar" />
 
         <LinearLayout
@@ -47,17 +48,16 @@
             tools:layout="@layout/fragment_now_playing_toolbar" />
 
     </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
 
     <!-- Navdrawer Layout -->
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/navigation_drawer_items"
-        app:headerLayout="@layout/navigation_drawer_header"
-        android:fitsSystemWindows="true" />
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"/>
 
 
 </android.support.v4.widget.DrawerLayout>

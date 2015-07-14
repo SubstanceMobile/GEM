@@ -7,19 +7,19 @@
         <item
             android:id="@+id/navdrawer_album_icon"
             android:icon="@drawable/ic_album_black_48dp"
-            android:title="Albums" />
+            android:title="@string/page_albums" />
         <item
             android:id="@+id/navdrawer_songs"
             android:icon="@drawable/ic_audiotrack_black_48dp"
-            android:title="Songs" />
+            android:title="@string/page_songs" />
         <item
             android:id="@+id/navdrawer_playlists"
             android:icon="@drawable/ic_queue_music_black_48dp"
-            android:title="Playlists" />
+            android:title="@string/page_playlists" />
         <item
             android:id="@+id/navdrawer_artists"
             android:icon="@drawable/ic_artist"
-            android:title="Artists" />
+            android:title="@string/page_artists" />
     </group>
 
     <group
@@ -27,8 +27,8 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/navdrawer_settings"
-            android:icon="@drawable/ic_setting_dark"
-            android:title="Settings" />
+            android:icon="@drawable/ic_settings_white_48dp"
+            android:title="@string/action_settings"/>
     </group>
 
 </menu>

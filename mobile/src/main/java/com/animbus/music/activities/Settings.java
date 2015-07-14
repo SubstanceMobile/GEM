@@ -89,7 +89,6 @@ public class Settings extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_about:
-                startActivity(new Intent(this, About.class));
                 break;
             case android.R.id.home:
                 onBackPressed();
