@@ -108,6 +108,16 @@
                 android:id="@+id/settings_MyLibrary_palette_switch"
                 android:onClick="settingChanged" />
 
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:padding="@dimen/margin_medium"
+                android:checked="false"
+                android:background="@drawable/ripple_bg"
+                android:text="@string/settings_use_tabs"
+                android:id="@+id/settings_MyLibrary_tabs_switch"
+                android:onClick="settingChanged" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

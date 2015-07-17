@@ -17,7 +17,7 @@
 
         <activity
             android:name=".activities.MyLibrary"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name" />
 
         <activity-alias
             android:name=".activities.app.icon.new.dark"

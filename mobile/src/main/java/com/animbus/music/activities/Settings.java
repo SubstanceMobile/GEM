@@ -20,7 +20,8 @@ import com.animbus.music.data.SettingsManager;
 
 public class Settings extends AppCompatActivity {
     Toolbar toolbar;
-    SwitchCompat lightThemeSwitch, categoryNamesSwitch, myLibraryPaletteSwitch, masterPaletteSwitch, nowPlayingPaletteSwitch, classicNowPlayingScreenSwitch, nowPlayingPeekSwitch;
+    SwitchCompat lightThemeSwitch, categoryNamesSwitch, myLibraryPaletteSwitch, masterPaletteSwitch, nowPlayingPaletteSwitch,
+            classicNowPlayingScreenSwitch, nowPlayingPeekSwitch, tabsSwitch;
     SettingsManager manager;
     Context context;
     ThemeManager themeManager;
@@ -50,6 +51,7 @@ public class Settings extends AppCompatActivity {
         nowPlayingPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_now_playing_color_extraction);
         classicNowPlayingScreenSwitch = (SwitchCompat) findViewById(R.id.settings_classic_now_playing_switch);
         nowPlayingPeekSwitch = (SwitchCompat) findViewById(R.id.settings_now_playing_peek_switch);
+        tabsSwitch = (SwitchCompat) findViewById(R.id.settings_MyLibrary_tabs_switch);
         loadSettings();
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -75,6 +77,7 @@ public class Settings extends AppCompatActivity {
         nowPlayingPeekSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, true));
         classicNowPlayingScreenSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, true));
         nowPlayingPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN, true));
+        tabsSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_TABS, false));
         settingChanged(null);
     }
 
@@ -121,6 +124,7 @@ public class Settings extends AppCompatActivity {
         manager.setBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, nowPlayingPeekSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, classicNowPlayingScreenSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN, nowPlayingPaletteSwitch.isChecked());
+        manager.setBooleanSetting(SettingsManager.KEY_USE_TABS, tabsSwitch.isChecked());
     }
 
     public void settingChanged(View v) {

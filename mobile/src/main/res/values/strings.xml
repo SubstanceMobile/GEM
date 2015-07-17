@@ -41,6 +41,7 @@
     <string name="settings_header_playback">Playback</string>
     <string name="settings_header_experimental">Experimental</string>
     <string name="settings_experimental_UI_customizer">Tweak UI</string>
+    <string name="settings_use_tabs">Use Tabs</string>
 
     Settings: Choose Icon
     <string name="settings_icon_light_preview_background">Use light preview background</string>
@@ -52,6 +53,9 @@
 
     Misc.
     <string name="appwidget_text">EXAMPLE</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     Unsorted
 

@@ -3,6 +3,7 @@ package com.animbus.music.data.adapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.graphics.Palette;
@@ -72,6 +73,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
 
     private void setColor(Bitmap image, final AlbumGridViewHolder holder, final Album current) {
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
+            setDefaultColors(holder);
             if (image != null) {
                 Palette.from(image).generate(new Palette.PaletteAsyncListener() {
                     @Override
@@ -137,6 +139,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
             } else {
                 setDefaultColors(holder);
             }
+        } else {
             setDefaultColors(holder);
         }
     }
@@ -172,15 +175,9 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     }
 
     private void setDefaultColors(AlbumGridViewHolder holder) {
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            holder.AlbumGridItemHeader.setBackgroundColor(context.getResources().getColor(R.color.primaryGreyLight));
-            holder.AlbumName.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_light));
-            holder.AlbumArtist.setTextColor(context.getResources().getColor(R.color.secondary_text_default_material_light));
-        } else {
-            holder.AlbumGridItemHeader.setBackgroundColor(context.getResources().getColor(R.color.primaryGreyDark));
-            holder.AlbumName.setTextColor(context.getResources().getColor(R.color.abc_primary_text_material_dark));
-            holder.AlbumArtist.setTextColor(context.getResources().getColor(R.color.secondary_text_default_material_dark));
-        }
+            holder.AlbumGridItemHeader.setBackgroundColor(getDefaultBackColor());
+            holder.AlbumName.setTextColor(getDefaultTitleColor());
+            holder.AlbumArtist.setTextColor(getDefaultSubTitleColor());
     }
 
     private void animateCell(AlbumGridViewHolder holder, int pos) {
@@ -188,7 +185,19 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
         if (!current.animated) {
             current.animated = true;
 
-            if (pos <= 5) {
+            int animateTill;
+            if(!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)){
+                animateTill = 5;
+            } else {
+                Configuration configuration = context.getResources().getConfiguration();
+                if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+                    animateTill = 3;
+                } else {
+                    animateTill = 2;
+                }
+            }
+
+            if (pos <= animateTill) {
                 holder.AlbumGridItemRoot.setAlpha(0.0f);
                 holder.AlbumGridItemRoot.setTranslationY(800.0f);
                 int delayPart = pos * 100;

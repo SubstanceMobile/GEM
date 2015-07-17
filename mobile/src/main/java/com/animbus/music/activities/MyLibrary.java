@@ -12,21 +12,25 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Toast;
 
 import com.animbus.music.MediaController;
+import com.animbus.music.PagePlaylists;
+import com.animbus.music.PageSongs;
 import com.animbus.music.R;
 import com.animbus.music.ThemeManager;
 import com.animbus.music.data.DataManager;
@@ -39,9 +43,7 @@ import com.animbus.music.data.objects.Song;
 import java.util.List;
 
 
-public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.AlbumArtGridClickListener, NavigationView.OnNavigationItemSelectedListener,
-        SongListAdapter.SongListItemClickListener {
-    public RecyclerView mainList;
+public class MyLibrary extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     MediaController controller;
     String AlbumName, AlbumArtist, currentScreenName;
     int AlbumArt = R.drawable.album_art;
@@ -53,8 +55,10 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     DrawerLayout drawerLayout;
     NavigationView drawerContent;
     ThemeManager themeManager;
-    View quickToolbar;
+    public View quickToolbar;
     Menu navMenu;
+    ViewPager pager;
+    TabLayout tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +76,6 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         musicControl = MediaController.getInstance();
         dataManager = new DataManager(this);
-        mainList = (RecyclerView) findViewById(R.id.MyLibraryMainListLayout);
         drawerContent = (NavigationView) findViewById(R.id.navigation);
         quickToolbar = (View) findViewById(R.id.mylibrary_toolbar_fragment);
 
@@ -104,6 +107,20 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
             toolbar.setTitle(currentScreenName);
         } else {
             toolbar.setTitle(cxt.getResources().getString(R.string.title_activity_main));
+        }
+
+        pager = (ViewPager) findViewById(R.id.main_view_pager);
+        pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+        pager.setOffscreenPageLimit(3);
+
+        tabs = (TabLayout) findViewById(R.id.main_tab_layout);
+        tabs.setupWithViewPager(pager);
+
+        AppBarLayout appBarBackground = (AppBarLayout) findViewById(R.id.main_app_bar);
+
+        if(!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)){
+            ViewCompat.setElevation(appBarBackground, 0.0f);
+            tabs.setVisibility(View.GONE);
         }
 
         //Sets Window description in Multitasking menu
@@ -155,16 +172,12 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
             navMenu.findItem(R.id.navdrawer_album_icon).setChecked(true);
         } else if (setting == 1) {
             switchToAlbum();
-            navMenu.findItem(R.id.navdrawer_album_icon).setChecked(true);
         } else if (setting == 2) {
             switchToSongs();
-            navMenu.findItem(R.id.navdrawer_songs).setChecked(true);
         } else if (setting == 3) {
             switchToArtists();
-            navMenu.findItem(R.id.navdrawer_artists).setChecked(true);
         } else if (setting == 4) {
             switchToPlaylists();
-            navMenu.findItem(R.id.navdrawer_playlists).setChecked(true);
         }
         ColorStateList colorStateList;
         if (themeManager.useLightTheme) {
@@ -185,8 +198,8 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
                             {}
                     },
                     new int[]{
-                            getResources().getColor(R.color.accent_material_dark ), //When selected
-                                    getResources().getColor(R.color.secondary_text_default_material_dark)
+                            getResources().getColor(R.color.accent_material_dark), //When selected
+                            getResources().getColor(R.color.secondary_text_default_material_dark)
                     }
             );
         }
@@ -194,18 +207,6 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
         drawerContent.setItemTextColor(colorStateList);
 
     }
-
-
-    @Override
-    public void AlbumGridItemClicked(View view, int position, List<Album> data) {
-        Snackbar.make(findViewById(R.id.MainView), "Removed for renovation", Snackbar.LENGTH_LONG).setAction("OK", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Dismiss
-            }
-        }).show();
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -243,40 +244,20 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
                 switchToArtists();
                 break;
             case R.id.navdrawer_settings:
-                Intent intent = new Intent();
-                intent.setClass(this, Settings.class);
-                startActivity(intent);
+                startActivity(new Intent(this, Settings.class));
                 break;
         }
         menuItem.setChecked(true);
         return true;
     }
 
-    @Override
-    public void SongListItemClicked(int position, List<Song> data) {
-        musicControl.startPlayback(data, position);
-
-        //TODO: Set a listener
-        quickToolbar.setVisibility(View.VISIBLE);
-        quickToolbar.setTranslationY(200.0f);
-        quickToolbar.animate().translationY(0).start();
-    }
-
     //This section is where you select which view to see. Only views with back arrows should be set as separate activities.
     //Add code to this section as necessary (For example:If you need to update the list of songs in 'switchToSongs' you can add updateSongList(), or if you add a extra view add it to all sections)
     public void switchToAlbum() {
-        //Configures the Recyclerview
-        AlbumGridAdapter adapter = new AlbumGridAdapter(this, dataManager.getAlbumGridData());
-        adapter.setOnItemClickedListener(this);
-        mainList.setAdapter(adapter);
-        mainList.setItemAnimator(new DefaultItemAnimator());
-        config = getResources().getConfiguration();
-        if (config.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mainList.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
-        } else if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            mainList.setLayoutManager(new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false));
-        }
         currentScreenName = getResources().getString(R.string.page_albums);
+        navMenu.findItem(R.id.navdrawer_album_icon).setChecked(true);
+        tabs.getTabAt(0).select();
+        pager.setCurrentItem(0);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
@@ -286,13 +267,10 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     }
 
     public void switchToSongs() {
-        //Configures the Recyclerview
-        SongListAdapter adapter = new SongListAdapter(this, dataManager.getSongListData());
-        adapter.setOnItemClickedListener(this);
-        mainList.setAdapter(adapter);
-        mainList.setItemAnimator(new DefaultItemAnimator());
-        mainList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         currentScreenName = getResources().getString(R.string.page_songs);
+        navMenu.findItem(R.id.navdrawer_songs).setChecked(true);
+        tabs.getTabAt(1).select();
+        pager.setCurrentItem(1);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
@@ -304,6 +282,9 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     public void switchToPlaylists() {
         //Sets the current screen
         currentScreenName = getResources().getString(R.string.page_playlists);
+        navMenu.findItem(R.id.navdrawer_playlists).setChecked(true);
+        tabs.getTabAt(2).select();
+        pager.setCurrentItem(2);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
@@ -315,12 +296,74 @@ public class MyLibrary extends AppCompatActivity implements AlbumGridAdapter.Alb
     public void switchToArtists() {
         //Sets the current screen
         currentScreenName = getResources().getString(R.string.page_artists);
+        navMenu.findItem(R.id.navdrawer_artists).setChecked(true);
+        tabs.getTabAt(3).select();
+        pager.setCurrentItem(3);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         }
         //Closes the Navdrawer
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawers();
+    }
+
+    class MainPagerAdapter extends FragmentStatePagerAdapter {
+        int lockedPos;
+        boolean isLocked;
+
+
+        public MainPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        private Fragment getListItem(final int position) {
+            if (position == 0) {
+                return PageAlbums.setUp(MyLibrary.this);
+            } else if (position == 1) {
+                return PageSongs.setUp(MyLibrary.this, MyLibrary.this);
+            } else if(position == 2) {
+                return PagePlaylists.setUp(MyLibrary.this);
+            } else if(position == 3){
+                return PageArtists.setUp(MyLibrary.this);
+            } else {
+                return null;
+            }
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return getListItem(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position == 0) {
+                return getResources().getString(R.string.page_albums);
+            } else if (position == 1) {
+                return getResources().getString(R.string.page_songs);
+            } else if (position == 2) {
+                return getResources().getString(R.string.page_playlists);
+            } else if (position == 3) {
+                return getResources().getString(R.string.page_artists);
+            } else {
+                return "";
+            }
+        }
+
+        public void lock(int lockedPos) {
+            this.lockedPos = lockedPos;
+            isLocked = true;
+        }
+
+        public void unlock() {
+            isLocked = false;
+        }
+
     }
     //End Section
 
