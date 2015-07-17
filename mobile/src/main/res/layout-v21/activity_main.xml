@@ -4,7 +4,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="false">
+    android:animateLayoutChanges="false"
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
             android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
@@ -59,7 +61,8 @@
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start" />
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true" />
 
 
 </android.support.v4.widget.DrawerLayout>
