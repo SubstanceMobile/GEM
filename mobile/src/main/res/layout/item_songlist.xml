@@ -7,8 +7,7 @@
      <LinearLayout
          android:layout_width="match_parent"
          android:layout_height="@dimen/listViewSizeBig"
-         android:orientation="horizontal"
-         android:background="@drawable/ripple_bg">
+         android:orientation="horizontal">
 
          <com.animbus.music.custom_views.SquareImageViewHeight_Based
              android:layout_width="0dp"
