@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/nowplaying_toolbarSize"
-        android:background="@drawable/ripple"
+        android:background="?attr/ripple_alt_color"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -71,7 +71,7 @@
                     android:layout_height="@dimen/nowplaying_toolbar_iconSize"
                     android:layout_margin="@dimen/nowplaying_ripple_padding"
                     android:animateLayoutChanges="true"
-                    android:background="@drawable/ripple_circle_alt_color"
+                    android:background="?attr/ripple_alt_color"
                     android:clickable="true"
                     android:cropToPadding="false"
                     android:padding="@dimen/margin_medium"

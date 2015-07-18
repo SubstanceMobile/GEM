@@ -114,7 +114,7 @@
                         android:layout_height="@dimen/now_playing_icon_size"
                         android:id="@+id/imageButton5"
                         android:src="@drawable/ic_skip_previous_black_48dp"
-                        android:background="@drawable/ripple_circle_alt_color"
+                        android:background="@drawable/ripple_circle_dark"
                         android:scaleType="fitXY"
                         android:tint="?attr/primaryTextColor"
                         android:padding="@dimen/margin_medium"
@@ -125,7 +125,7 @@
                         android:layout_height="@dimen/now_playing_icon_size"
                         android:id="@+id/imageButton6"
                         android:src="@drawable/ic_play_arrow_black_48dp"
-                        android:background="@drawable/ripple_circle_alt_color"
+                        android:background="@drawable/ripple_circle_dark"
                         android:scaleType="fitXY"
                         android:tint="?attr/primaryTextColor"
                         android:padding="@dimen/margin_medium"
@@ -136,7 +136,7 @@
                         android:layout_height="@dimen/now_playing_icon_size"
                         android:id="@+id/imageButton9"
                         android:src="@drawable/ic_skip_next_black_48dp"
-                        android:background="@drawable/ripple_circle_alt_color"
+                        android:background="@drawable/ripple_circle_dark"
                         android:scaleType="fitXY"
                         android:tint="?attr/primaryTextColor"
                         android:padding="@dimen/margin_medium"
@@ -188,7 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/listViewSizeBig"
             android:orientation="horizontal"
-            android:background="@drawable/ripple">
+            android:background="@drawable/ripple_light">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -230,7 +230,7 @@
                 android:layout_height="@dimen/now_playing_icon_size"
                 android:id="@+id/imageButton"
                 android:src="@drawable/ic_repeat_black_48dp"
-                android:background="@drawable/ripple_circle"
+                android:background="?attr/ripple_circle"
                 android:scaleType="fitXY"
                 android:tint="?attr/secondaryTextColor"
                 android:padding="@dimen/margin_medium"

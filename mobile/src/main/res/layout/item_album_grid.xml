@@ -71,7 +71,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ripple"
+        android:background="?attr/ripple"
         android:elevation="1dp"
         android:id="@+id/AlbumGridItem"/>
 </FrameLayout>

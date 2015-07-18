@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/listViewSizeBig"
         android:orientation="horizontal"
-        android:background="@drawable/ripple">
+        android:background="?attr/ripple">
 
         <com.animbus.music.custom_views.SquareImageViewHeight_Based
             android:layout_width="0dp"
