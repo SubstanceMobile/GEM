@@ -47,7 +47,6 @@
                 android:id="@+id/settings_light_theme_switch"
                 android:padding="@dimen/margin_medium"
                 android:checked="false"
-                android:background="@drawable/ripple_bg"
                 android:text="Use the light theme"
                 android:onClick="settingChanged" />
 
@@ -57,14 +56,12 @@
                 android:id="@+id/settings_master_color_extraction_switch"
                 android:padding="@dimen/margin_medium"
                 android:checked="false"
-                android:background="@drawable/ripple_bg"
                 android:text="Use color extraction"
                 android:onClick="settingChanged" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/listViewSize"
-                android:background="@drawable/ripple_bg"
                 android:clickable="true"
                 android:onClick="openIconSelector">
 
@@ -94,7 +91,6 @@
                 android:layout_height="48dp"
                 android:padding="@dimen/margin_medium"
                 android:checked="false"
-                android:background="@drawable/ripple_bg"
                 android:text="Use category names instead on &quot;My Library&quot;"
                 android:id="@+id/settings_category_names_switch"
                 android:onClick="settingChanged" />
@@ -103,7 +99,6 @@
                 android:layout_height="48dp"
                 android:padding="@dimen/margin_medium"
                 android:checked="true"
-                android:background="@drawable/ripple_bg"
                 android:text="Use Color Extraction"
                 android:id="@+id/settings_MyLibrary_palette_switch"
                 android:onClick="settingChanged" />
@@ -113,7 +108,6 @@
                 android:layout_height="48dp"
                 android:padding="@dimen/margin_medium"
                 android:checked="false"
-                android:background="@drawable/ripple_bg"
                 android:text="@string/settings_use_tabs"
                 android:id="@+id/settings_MyLibrary_tabs_switch"
                 android:onClick="settingChanged" />
@@ -133,7 +127,6 @@
                 android:layout_height="48dp"
                 android:padding="@dimen/margin_medium"
                 android:checked="true"
-                android:background="@drawable/ripple_bg"
                 android:text="Use the original Now Playing screen"
                 android:id="@+id/settings_classic_now_playing_switch"
                 android:onClick="settingChanged" />
@@ -142,7 +135,6 @@
                 android:layout_height="48dp"
                 android:padding="@dimen/margin_medium"
                 android:checked="true"
-                android:background="@drawable/ripple_bg"
                 android:text="Use Peek"
                 android:id="@+id/settings_now_playing_peek_switch"
                 android:onClick="settingChanged" />
@@ -151,7 +143,6 @@
                 android:layout_height="48dp"
                 android:padding="@dimen/margin_medium"
                 android:checked="true"
-                android:background="@drawable/ripple_bg"
                 android:text="Use Color Extraction"
                 android:id="@+id/settings_now_playing_color_extraction"
                 android:onClick="settingChanged" />

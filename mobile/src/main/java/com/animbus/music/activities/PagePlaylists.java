@@ -1,4 +1,4 @@
-package com.animbus.music;
+package com.animbus.music.activities;
 
 
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.animbus.music.R;
 
 
 /**

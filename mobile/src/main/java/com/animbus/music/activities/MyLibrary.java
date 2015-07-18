@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,7 +20,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,18 +27,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.animbus.music.MediaController;
-import com.animbus.music.PagePlaylists;
-import com.animbus.music.PageSongs;
 import com.animbus.music.R;
 import com.animbus.music.ThemeManager;
+import com.animbus.music.custom_views.LockableViewPager;
 import com.animbus.music.data.DataManager;
 import com.animbus.music.data.SettingsManager;
-import com.animbus.music.data.adapter.AlbumGridAdapter;
-import com.animbus.music.data.adapter.SongListAdapter;
-import com.animbus.music.data.objects.Album;
-import com.animbus.music.data.objects.Song;
-
-import java.util.List;
 
 
 public class MyLibrary extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,7 +48,7 @@ public class MyLibrary extends AppCompatActivity implements NavigationView.OnNav
     ThemeManager themeManager;
     public View quickToolbar;
     Menu navMenu;
-    ViewPager pager;
+    LockableViewPager pager;
     TabLayout tabs;
 
     @Override
@@ -109,7 +100,7 @@ public class MyLibrary extends AppCompatActivity implements NavigationView.OnNav
             toolbar.setTitle(cxt.getResources().getString(R.string.title_activity_main));
         }
 
-        pager = (ViewPager) findViewById(R.id.main_view_pager);
+        pager = (LockableViewPager) findViewById(R.id.main_view_pager);
         pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         pager.setOffscreenPageLimit(3);
 
@@ -120,6 +111,7 @@ public class MyLibrary extends AppCompatActivity implements NavigationView.OnNav
 
         if(!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)){
             ViewCompat.setElevation(appBarBackground, 0.0f);
+            pager.lock();
             tabs.setVisibility(View.GONE);
         }
 
@@ -353,15 +345,6 @@ public class MyLibrary extends AppCompatActivity implements NavigationView.OnNav
             } else {
                 return "";
             }
-        }
-
-        public void lock(int lockedPos) {
-            this.lockedPos = lockedPos;
-            isLocked = true;
-        }
-
-        public void unlock() {
-            isLocked = false;
         }
 
     }

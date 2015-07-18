@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/nowplaying_toolbarSize"
+        android:background="@drawable/ripple"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -25,9 +26,9 @@
 
             <ProgressBar
                 android:id="@+id/progressBar"
-                style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="16dp"
                 android:layout_marginTop="-6dp"
                 android:progress="100" />
 
@@ -50,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:padding="@dimen/margin_tiny"
-                        android:text="SONG_TITLE"
+                        android:text="Song Title"
                         android:textColor="?attr/primaryAlternateTextColor"
                         android:textSize="16sp" />
 
@@ -70,6 +71,7 @@
                     android:layout_height="@dimen/nowplaying_toolbar_iconSize"
                     android:layout_margin="@dimen/nowplaying_ripple_padding"
                     android:animateLayoutChanges="true"
+                    android:background="@drawable/ripple_circle_alt_color"
                     android:clickable="true"
                     android:cropToPadding="false"
                     android:padding="@dimen/margin_medium"

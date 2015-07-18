@@ -33,7 +33,6 @@
         android:id="@+id/icon_use_light_preview"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/ripple_bg"
         android:checked="true"
         android:onClick="onOptionChanged"
         android:padding="@dimen/margin_medium"

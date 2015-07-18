@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
+            android:fitsSystemWindows="true"
             android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
@@ -31,18 +32,18 @@
                     app:title="@string/title_activity_main" />
 
                 <android.support.design.widget.TabLayout
+                    android:id="@+id/main_tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/main_tab_layout"
-                    app:tabMode="fixed"/>
+                    app:tabMode="scrollable" />
 
             </android.support.design.widget.AppBarLayout>
 
-            <android.support.v4.view.ViewPager
+            <com.animbus.music.custom_views.LockableViewPager
                 android:id="@+id/main_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="100"/>
+                android:layout_weight="100" />
 
             <fragment
                 android:id="@+id/mylibrary_toolbar_fragment"
@@ -60,7 +61,8 @@
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start" />
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true" />
 
 
 </android.support.v4.widget.DrawerLayout>

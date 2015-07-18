@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resources>
-    Misc.
     <color name="primaryDark">#ff0f0f0f</color>
     <color name="primaryLight">#F5F5F5</color>
     <color name="primaryGreyDark">#ff2d2d2d</color>
@@ -10,4 +9,6 @@
     <color name="systembarsLight">#757575</color>
     <color name="navdrawerAccentLight">#212121</color>
     <color name="navdrawerAccentDark">#B6B6B6</color>
+    <color name="ripple_dark">@color/ripple_material_dark</color>
+    <color name="ripple_light">#47000000</color>
 </resources>

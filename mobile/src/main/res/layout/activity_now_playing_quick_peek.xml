@@ -71,7 +71,7 @@
                 android:id="@+id/imageButton8"
                 android:layout_margin="@dimen/margin_medium"
                 android:src="@drawable/ic_fast_rewind_black_48dp"
-                android:background="@drawable/ripple_circle_bg"
+                android:background="@drawable/ripple_circle"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_vertical"
                 android:tint="?attr/secondaryAlternateTextColor"/>
@@ -82,7 +82,7 @@
                 android:id="@+id/item_now_playing_repeat_button"
                 android:layout_margin="@dimen/margin_medium"
                 android:src="@drawable/ic_play_arrow_black_48dp"
-                android:background="@drawable/ripple_circle_bg"
+                android:background="@drawable/ripple_circle"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_vertical"
                 style="@style/Widget.AppCompat.Button.Borderless"
@@ -95,7 +95,7 @@
                 android:id="@+id/imageButton7"
                 android:layout_margin="@dimen/margin_medium"
                 android:src="@drawable/ic_fast_forward_black_48dp"
-                android:background="@drawable/ripple_circle_bg"
+                android:background="@drawable/ripple_circle"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_vertical"
                 android:tint="?attr/secondaryAlternateTextColor"/>

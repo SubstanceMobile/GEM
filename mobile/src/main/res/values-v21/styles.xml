@@ -34,8 +34,8 @@
         <item name="primaryAlternateColor">@color/primaryDark</item>
         <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
         <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
-        <item name="themeRippleColor">@color/ripple_material_light</item>
-        <item name="themeRippleColorAlt">@color/ripple_material_dark</item>
+        <item name="themeRippleColor">@color/ripple_light</item>
+        <item name="themeRippleColorAlt">@color/ripple_dark</item>
 
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>

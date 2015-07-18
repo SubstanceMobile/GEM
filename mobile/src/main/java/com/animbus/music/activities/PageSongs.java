@@ -1,4 +1,4 @@
-package com.animbus.music;
+package com.animbus.music.activities;
 
 
 import android.content.Context;
@@ -10,10 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.animbus.music.activities.InstanceSingleton;
-import com.animbus.music.activities.MyLibrary;
+import com.animbus.music.MediaController;
+import com.animbus.music.R;
 import com.animbus.music.data.DataManager;
 import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.data.objects.Song;
