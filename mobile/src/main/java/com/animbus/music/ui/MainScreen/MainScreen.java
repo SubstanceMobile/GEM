@@ -1,4 +1,4 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.MainScreen;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -16,7 +16,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,15 +25,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.animbus.music.MediaController;
+import com.animbus.music.media.Old.MediaController;
 import com.animbus.music.R;
 import com.animbus.music.ThemeManager;
-import com.animbus.music.custom_views.LockableViewPager;
+import com.animbus.music.ui.Settings.Settings;
+import com.animbus.music.CustomViews.LockableViewPager;
 import com.animbus.music.data.DataManager;
-import com.animbus.music.data.SettingsManager;
+import com.animbus.music.SettingsManager;
 
 
-public class MyLibrary extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     MediaController controller;
     String AlbumName, AlbumArtist, currentScreenName;
     int AlbumArt = R.drawable.album_art;
@@ -310,13 +310,13 @@ public class MyLibrary extends AppCompatActivity implements NavigationView.OnNav
 
         private Fragment getListItem(final int position) {
             if (position == 0) {
-                return PageAlbums.setUp(MyLibrary.this);
+                return PageAlbums.setUp(MainScreen.this);
             } else if (position == 1) {
-                return PageSongs.setUp(MyLibrary.this, MyLibrary.this);
+                return PageSongs.setUp(MainScreen.this, MainScreen.this);
             } else if(position == 2) {
-                return PagePlaylists.setUp(MyLibrary.this);
+                return PagePlaylists.setUp(MainScreen.this);
             } else if(position == 3){
-                return PageArtists.setUp(MyLibrary.this);
+                return PageArtists.setUp(MainScreen.this);
             } else {
                 return null;
             }

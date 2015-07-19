@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animbus.music.R;
-import com.animbus.music.data.SettingsManager;
-import com.animbus.music.data.objects.Album;
 import com.animbus.music.data.objects.Song;
 
 import java.util.Collections;

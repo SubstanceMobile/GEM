@@ -1,4 +1,4 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.MainScreen;
 
 
 import android.app.Fragment;
@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.animbus.music.NowPlayingClassic;
+import com.animbus.music.ui.NowPlaying.NowPlaying;
+import com.animbus.music.ui.NowPlaying.NowPlayingClassic;
 import com.animbus.music.R;
-import com.animbus.music.data.SettingsManager;
+import com.animbus.music.ui.NowPlaying.NowPlayingPeek;
+import com.animbus.music.SettingsManager;
 
 /**
  * A simple {@link Fragment} subclass.

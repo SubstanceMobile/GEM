@@ -1,4 +1,4 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.MainScreen;
 
 
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,14 +42,14 @@ public class PageAlbums extends Fragment  implements AlbumGridAdapter.AlbumArtGr
     public static PageAlbums setUp(Context cxt){
         PageAlbums instance = new PageAlbums();
         instance.cxt = cxt;
-        InstanceSingleton.getInstance().fragmentAlbumsCxt = cxt;
+        BackupHub.get().fragmentAlbumsCxt = cxt;
         return instance;
     }
 
     @Override
     public void onStart() {
         if (cxt == null){
-            cxt = InstanceSingleton.getInstance().fragmentAlbumsCxt;
+            cxt = BackupHub.get().fragmentAlbumsCxt;
         }
         super.onStart();
         list = (RecyclerView) getView().findViewById(R.id.page_albums_list);

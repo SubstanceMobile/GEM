@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.animbus.music.activities.Settings"
+    tools:context="com.animbus.music.ui.Settings.Settings"
     android:id="@+id/settings_root_view">
 
     <android.support.v7.widget.Toolbar
@@ -146,6 +146,17 @@
                 android:text="Use Color Extraction"
                 android:id="@+id/settings_now_playing_color_extraction"
                 android:onClick="settingChanged" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/settings_header_experimental"
+                android:id="@+id/textView6"
+                android:textColor="?attr/colorAccent"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small" />
 
         </LinearLayout>
     </ScrollView>

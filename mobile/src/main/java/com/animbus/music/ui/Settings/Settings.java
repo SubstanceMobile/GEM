@@ -1,4 +1,4 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.Settings;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -16,7 +16,8 @@ import android.view.View;
 
 import com.animbus.music.R;
 import com.animbus.music.ThemeManager;
-import com.animbus.music.data.SettingsManager;
+import com.animbus.music.ui.MainScreen.MainScreen;
+import com.animbus.music.SettingsManager;
 
 public class Settings extends AppCompatActivity {
     Toolbar toolbar;
@@ -109,10 +110,10 @@ public class Settings extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        MyLibrary myLibrary = new MyLibrary();
-        Intent intent = new Intent(this, MyLibrary.class);
+        MainScreen mainScreen = new MainScreen();
+        Intent intent = new Intent(this, MainScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        myLibrary.end();
+        mainScreen.end();
         startActivity(intent);
     }
 

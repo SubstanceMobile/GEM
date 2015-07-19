@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/now_playing_album_art_and_appbar">
 
-        <com.animbus.music.custom_views.SquareImageViewWidth_Based
+        <com.animbus.music.CustomViews.SquareImageViewWidth_Based
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/now_playing_album_art"

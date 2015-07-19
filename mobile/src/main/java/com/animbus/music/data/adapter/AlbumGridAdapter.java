@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animbus.music.R;
-import com.animbus.music.data.SettingsManager;
+import com.animbus.music.SettingsManager;
 import com.animbus.music.data.objects.Album;
 
 import java.util.Collections;

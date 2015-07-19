@@ -37,7 +37,7 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <com.animbus.music.custom_views.LockableViewPager
+            <com.animbus.music.CustomViews.LockableViewPager
                 android:id="@+id/main_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -45,7 +45,7 @@
 
             <fragment
                 android:id="@+id/mylibrary_toolbar_fragment"
-                android:name="com.animbus.music.activities.NowPlayingToolbar"
+                android:name="com.animbus.music.ui.MainScreen.NowPlayingToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_now_playing_toolbar" />

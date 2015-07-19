@@ -1,4 +1,4 @@
-package com.animbus.music.custom_views;
+package com.animbus.music.CustomViews;
 
 import android.content.Context;
 import android.graphics.Bitmap;

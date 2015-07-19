@@ -10,6 +10,7 @@ import android.support.v4.os.AsyncTaskCompat;
 import android.support.v7.graphics.Palette;
 
 import com.animbus.music.R;
+import com.animbus.music.SettingsManager;
 import com.animbus.music.data.objects.Album;
 import com.animbus.music.data.objects.Song;
 

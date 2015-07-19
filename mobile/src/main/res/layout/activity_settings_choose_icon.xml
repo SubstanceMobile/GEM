@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.animbus.music.activities.ChooseIcon"
+    tools:context="com.animbus.music.ui.Settings.ChooseIcon"
     android:id="@+id/choose_icon_root_view"
     android:fitsSystemWindows="true">
 
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <com.animbus.music.custom_views.SquareImageViewWidth_Based
+        <com.animbus.music.CustomViews.SquareImageViewWidth_Based
             android:id="@+id/icon_preview_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +57,6 @@
                 android:checked="false" />
 
             <RadioButton
-
                 android:id="@+id/settings_radio_new_light"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/listViewSize"

@@ -1,17 +1,16 @@
-package com.animbus.music;
+package com.animbus.music.ui.NowPlaying;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.animbus.music.activities.Settings;
-import com.animbus.music.data.SettingsManager;
-
-import static com.animbus.music.data.SettingsManager.*;
+import com.animbus.music.R;
+import com.animbus.music.ThemeManager;
+import com.animbus.music.ui.Settings.Settings;
+import com.animbus.music.SettingsManager;
 
 public class NowPlayingClassic extends AppCompatActivity {
     SettingsManager settings;

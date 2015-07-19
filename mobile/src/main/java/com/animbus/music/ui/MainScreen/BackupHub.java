@@ -1,24 +1,24 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.MainScreen;
 
 import android.content.Context;
 
 /**
  * Created by Adrian on 7/15/2015.
  */
-public class InstanceSingleton {
-    private static InstanceSingleton instance = new InstanceSingleton();
+public class BackupHub {
+    private static BackupHub instance = new BackupHub();
 
-    public static InstanceSingleton getInstance() {
+    public static BackupHub get() {
         return instance;
     }
 
-    private InstanceSingleton() {
+    private BackupHub() {
     }
 
 
     public Context fragmentAlbumsCxt;
     public Context fragmentSongsCxt;
-    public MyLibrary fragmentSongsMyLib;
+    public MainScreen fragmentSongsMyLib;
     public Context fragmentPlaylistsCxt;
     public Context fragmentArtistsCxt;
 }

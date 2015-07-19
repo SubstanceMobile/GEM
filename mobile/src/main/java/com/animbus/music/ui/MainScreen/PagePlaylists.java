@@ -1,4 +1,4 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.MainScreen;
 
 
 import android.content.Context;
@@ -10,27 +10,27 @@ import android.view.ViewGroup;
 
 import com.animbus.music.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PageArtists extends Fragment {
+public class PagePlaylists extends Fragment {
 
 
-    public PageArtists() {
+    public PagePlaylists() {
         // Required empty public constructor
     }
 
-    public static PageArtists setUp(Context cxt){
-        PageArtists instance = new PageArtists();
+    public static PagePlaylists setUp(Context cxt){
+        PagePlaylists instance = new PagePlaylists();
         return instance;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_page_artists, container, false);
+        return inflater.inflate(R.layout.fragment_page_playlists, container, false);
     }
 
 

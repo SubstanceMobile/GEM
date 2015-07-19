@@ -1,15 +1,7 @@
-package com.animbus.music;
+package com.animbus.music.media.Old;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.opengl.Visibility;
-import android.support.v7.app.NotificationCompat;
-import android.widget.Toast;
 
-import com.animbus.music.activities.NowPlaying;
 import com.animbus.music.data.objects.Song;
 
 import java.util.List;

@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:weightSum="1">
 
-            <com.animbus.music.custom_views.SquareImageViewWidth_Based
+            <com.animbus.music.CustomViews.SquareImageViewWidth_Based
                 android:id="@+id/AlbumArtGridItemAlbumArt"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/none"

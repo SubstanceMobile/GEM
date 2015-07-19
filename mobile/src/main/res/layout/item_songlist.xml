@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:background="?attr/ripple">
 
-        <com.animbus.music.custom_views.SquareImageViewHeight_Based
+        <com.animbus.music.CustomViews.SquareImageViewHeight_Based
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:src="@drawable/album_art_alt_alt"

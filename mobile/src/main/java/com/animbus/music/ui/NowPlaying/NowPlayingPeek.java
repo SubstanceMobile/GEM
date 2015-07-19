@@ -1,6 +1,5 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.NowPlaying;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animbus.music.R;
-import com.animbus.music.data.SettingsManager;
+import com.animbus.music.SettingsManager;
 
 public class NowPlayingPeek extends AppCompatActivity {
         SettingsManager settings;

@@ -1,18 +1,29 @@
-package com.animbus.music.data;
+package com.animbus.music;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.SwitchCompat;
 
-import com.animbus.music.R;
-
 public class SettingsManager {
-    public static String KEY_USE_LIGHT_THEME = "com.animbus.music.USE_LIGHT_THEME", KEY_USE_DARK_THEME_AT_NIGHT = "com.animbus.music.USE_DARK_THEME_AT_NIGHT", KEY_ICON = "com.animbus.music.CURRENT_ICON", KEY_DEFAULT_SCREEN = "com.animbus.music.DEFAULT_SCREEN", KEY_FIRST_RUN = "com.animbus.music.FIRST_RUN",
-            KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN = "com.animbus.music.USE_CATEGORY_NAMES", KEY_USE_PALETTE_IN_GRID = "com.animbus.music.GRID_PALETTE", KEY_USE_LIGHT_BACKGROUND_IN_ICON_PREVIEW = "com.animbus.music.LIGHT_BACKGROUND_ICON_PREVIEW", KEY_SELECTED_ICON_RADIOBUTTON = "com.animbus.music.SELECTED_ICON_RADIOBUTTON",
-            KEY_USE_COLOR_EXTRACTION_MASTER = "com.animbus.music.USE_PALETTE_MASTER", KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN = "com.animbus.music.NOW_PLAYING_PALETTE", KEY_USE_NOW_PLAYING_PEEK = "com.animbus.music.USE_PEEK_FEATURE", KEY_USE_NEW_NOW_PLAYING = "com.animbus.music.USE_CLASSIC_NOW_PLAYING",
+    public static String
+            KEY_USE_LIGHT_THEME = "com.animbus.music.USE_LIGHT_THEME",
+            KEY_USE_DARK_THEME_AT_NIGHT = "com.animbus.music.USE_DARK_THEME_AT_NIGHT",
+            KEY_ICON = "com.animbus.music.CURRENT_ICON",
+            KEY_DEFAULT_SCREEN = "com.animbus.music.DEFAULT_SCREEN",
+            KEY_FIRST_RUN = "com.animbus.music.FIRST_RUN",
+            KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN = "com.animbus.music.USE_CATEGORY_NAMES",
+            KEY_USE_PALETTE_IN_GRID = "com.animbus.music.GRID_PALETTE",
+            KEY_USE_LIGHT_BACKGROUND_IN_ICON_PREVIEW = "com.animbus.music.LIGHT_BACKGROUND_ICON_PREVIEW",
+            KEY_SELECTED_ICON_RADIOBUTTON = "com.animbus.music.SELECTED_ICON_RADIOBUTTON",
+            KEY_USE_COLOR_EXTRACTION_MASTER = "com.animbus.music.USE_PALETTE_MASTER",
+            KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN = "com.animbus.music.NOW_PLAYING_PALETTE",
+            KEY_USE_NOW_PLAYING_PEEK = "com.animbus.music.USE_PEEK_FEATURE",
+            KEY_USE_NEW_NOW_PLAYING = "com.animbus.music.USE_CLASSIC_NOW_PLAYING",
             KEY_USE_TABS = "com.animbus.music.USE_TABS";
+
     public static Integer TYPE_BOOLEAN = 0, TYPE_STRING = 1, TYPE_INTEGER = 2;
     public static Integer SCREEN_HOME = 0, SCREEN_ALBUMS = 1, SCREEN_SONGS = 2, SCREEN_ARTISTS = 3, SCREEN_PLAYLISTS = 4;
+
     SharedPreferences prefrences;
     SharedPreferences.Editor prefrencesEditor;
     Context context;
@@ -73,14 +84,13 @@ public class SettingsManager {
         }
     }
 
-    public int getExitIcon() {
-        int icon;
-        if (getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            icon = R.drawable.ic_action_exit_light;
+    public void invertedSwitchDependancy(SwitchCompat parentSwitch, SwitchCompat dependantSwitch){
+        if (parentSwitch.isChecked()) {
+            dependantSwitch.setEnabled(false);
+            dependantSwitch.setChecked(true);
         } else {
-            icon = R.drawable.ic_action_exit;
+            dependantSwitch.setEnabled(true);
         }
-        return icon;
     }
 
 }

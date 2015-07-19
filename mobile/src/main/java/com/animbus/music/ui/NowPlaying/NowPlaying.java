@@ -1,7 +1,5 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.NowPlaying;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,10 +9,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.animbus.music.MediaController;
+import com.animbus.music.media.Old.MediaController;
 import com.animbus.music.R;
 import com.animbus.music.ThemeManager;
-import com.animbus.music.data.SettingsManager;
+import com.animbus.music.SettingsManager;
 import com.animbus.music.data.objects.Song;
 
 import java.util.List;

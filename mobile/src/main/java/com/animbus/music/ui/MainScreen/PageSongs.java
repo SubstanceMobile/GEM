@@ -1,4 +1,4 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.MainScreen;
 
 
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.animbus.music.MediaController;
+import com.animbus.music.media.Old.MediaController;
 import com.animbus.music.R;
 import com.animbus.music.data.DataManager;
 import com.animbus.music.data.adapter.SongListAdapter;
@@ -26,18 +26,18 @@ public class PageSongs extends Fragment implements SongListAdapter.SongListItemC
     Context cxt;
     DataManager dataManager;
     RecyclerView list;
-    MyLibrary activity;
+    MainScreen activity;
 
     public PageSongs() {
         // Required empty public constructor
     }
 
-    public static PageSongs setUp(Context cxt, MyLibrary myLibrary){
+    public static PageSongs setUp(Context cxt, MainScreen mainScreen){
         PageSongs instance = new PageSongs();
         instance.cxt = cxt;
-        instance.activity = myLibrary;
-        InstanceSingleton.getInstance().fragmentSongsCxt = cxt;
-        InstanceSingleton.getInstance().fragmentSongsMyLib = myLibrary;
+        instance.activity = mainScreen;
+        BackupHub.get().fragmentSongsCxt = cxt;
+        BackupHub.get().fragmentSongsMyLib = mainScreen;
         return instance;
     }
 
@@ -51,7 +51,7 @@ public class PageSongs extends Fragment implements SongListAdapter.SongListItemC
     @Override
     public void onStart() {
         if (cxt == null){
-            cxt = InstanceSingleton.getInstance().fragmentSongsCxt;
+            cxt = BackupHub.get().fragmentSongsCxt;
         }
         super.onStart();
         list = (RecyclerView) getView().findViewById(R.id.page_songs_list);
@@ -67,7 +67,7 @@ public class PageSongs extends Fragment implements SongListAdapter.SongListItemC
     @Override
     public void SongListItemClicked(int position, List<Song> data) {
         if (activity == null){
-            activity = InstanceSingleton.getInstance().fragmentSongsMyLib;
+            activity = BackupHub.get().fragmentSongsMyLib;
         }
         MediaController controller = MediaController.getInstance();
         controller.startPlayback(data,position);

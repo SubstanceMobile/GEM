@@ -2,8 +2,6 @@ package com.animbus.music;
 
 import android.content.Context;
 
-import com.animbus.music.data.SettingsManager;
-
 public class ThemeManager {
     public static int TYPE_NORMAL = 1, TYPE_PEEK = 2;
     SettingsManager settings;

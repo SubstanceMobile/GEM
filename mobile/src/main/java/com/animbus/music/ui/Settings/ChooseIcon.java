@@ -1,14 +1,12 @@
-package com.animbus.music.activities;
+package com.animbus.music.ui.Settings;
 
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
@@ -19,10 +17,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.animbus.music.R;
-import com.animbus.music.data.SettingsManager;
+import com.animbus.music.ui.MainScreen.MainScreen;
+import com.animbus.music.SettingsManager;
 
 public class ChooseIcon extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     Toolbar toolbar;
@@ -122,7 +120,7 @@ public class ChooseIcon extends AppCompatActivity implements RadioGroup.OnChecke
 
     private void addShortcut() {
         addShortcutIntent = new Intent();
-        shortcutClickedIntent = new Intent(getApplicationContext(), MyLibrary.class);
+        shortcutClickedIntent = new Intent(getApplicationContext(), MainScreen.class);
         shortcutClickedIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         shortcutClickedIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

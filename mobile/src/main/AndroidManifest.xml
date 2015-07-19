@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activities.MyLibrary"
+            android:name=".ui.MainScreen.MainScreen"
             android:label="@string/app_name" />
 
         <activity-alias
@@ -24,7 +24,7 @@
             android:enabled="true"
             android:icon="@mipmap/ic_launcher_new_dark"
             android:label="@string/app_name"
-            android:targetActivity=".activities.MyLibrary" >
+            android:targetActivity=".ui.MainScreen.MainScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,7 +36,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_new_light"
             android:label="@string/app_name"
-            android:targetActivity=".activities.MyLibrary" >
+            android:targetActivity=".ui.MainScreen.MainScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,7 +48,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_new_color"
             android:label="@string/app_name"
-            android:targetActivity=".activities.MyLibrary" >
+            android:targetActivity=".ui.MainScreen.MainScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -60,7 +60,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_old_dark_swoundwaves"
             android:label="@string/app_name"
-            android:targetActivity=".activities.MyLibrary" >
+            android:targetActivity=".ui.MainScreen.MainScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -72,7 +72,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_old_light_soundwaves"
             android:label="@string/app_name"
-            android:targetActivity=".activities.MyLibrary" >
+            android:targetActivity=".ui.MainScreen.MainScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -80,26 +80,26 @@
         </activity-alias>
 
         <activity
-            android:name=".activities.Settings"
+            android:name=".ui.Settings.Settings"
             android:label="@string/title_activity_settings" />
 
         <activity
-            android:name=".activities.ChooseIcon"
+            android:name=".ui.Settings.ChooseIcon"
             android:label="@string/title_activity_choose_icon" />
 
         <activity
-            android:name=".activities.NowPlayingPeek"
+            android:name=".ui.NowPlaying.NowPlayingPeek"
             android:label="@string/title_activity_quick_peek" />
 
         <activity
-            android:name=".activities.NowPlaying"
+            android:name=".ui.NowPlaying.NowPlaying"
             android:label="@string/title_activity_now_playing" />
 
         <activity
-            android:name=".NowPlayingClassic"
+            android:name=".ui.NowPlaying.NowPlayingClassic"
             android:label="@string/title_activity_now_playing" />
 
-        <receiver android:name=".activities.MusicPlaybackWidget" >
+        <receiver android:name=".ui.MusicPlaybackWidget" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -110,13 +110,13 @@
         </receiver>
 
         <service
-            android:name=".MusicService"
+            android:name=".media.Old.MusicService"
             android:enabled="true"
             android:exported="true"
             android:process=".MusicService" />
 
         <activity
-            android:name=".activities.AlbumColor"
+            android:name=".ui.Settings.AlbumColor"
             android:label="@string/title_activity_album_color" >
         </activity>
 
