@@ -25,16 +25,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.animbus.music.media.Old.MediaController;
-import com.animbus.music.R;
-import com.animbus.music.ThemeManager;
-import com.animbus.music.ui.Settings.Settings;
 import com.animbus.music.CustomViews.LockableViewPager;
-import com.animbus.music.data.DataManager;
+import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
+import com.animbus.music.ThemeManager;
+import com.animbus.music.data.DataManager;
+import com.animbus.music.media.Old.MediaController;
+import com.animbus.music.ui.Settings.Settings;
 
 
 public class MainScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public View quickToolbar;
     MediaController controller;
     String AlbumName, AlbumArtist, currentScreenName;
     int AlbumArt = R.drawable.album_art;
@@ -46,7 +47,6 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
     DrawerLayout drawerLayout;
     NavigationView drawerContent;
     ThemeManager themeManager;
-    public View quickToolbar;
     Menu navMenu;
     LockableViewPager pager;
     TabLayout tabs;
@@ -107,10 +107,8 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
         tabs = (TabLayout) findViewById(R.id.main_tab_layout);
         tabs.setupWithViewPager(pager);
 
-        AppBarLayout appBarBackground = (AppBarLayout) findViewById(R.id.main_app_bar);
-
-        if(!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)){
-            ViewCompat.setElevation(appBarBackground, 0.0f);
+        if (!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)) {
+            ViewCompat.setElevation(findViewById(R.id.main_app_bar), 0.0f);
             pager.lock();
             tabs.setVisibility(View.GONE);
         }
@@ -313,9 +311,9 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
                 return PageAlbums.setUp(MainScreen.this);
             } else if (position == 1) {
                 return PageSongs.setUp(MainScreen.this, MainScreen.this);
-            } else if(position == 2) {
+            } else if (position == 2) {
                 return PagePlaylists.setUp(MainScreen.this);
-            } else if(position == 3){
+            } else if (position == 3) {
                 return PageArtists.setUp(MainScreen.this);
             } else {
                 return null;

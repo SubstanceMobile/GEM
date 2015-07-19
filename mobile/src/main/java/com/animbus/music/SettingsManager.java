@@ -2,6 +2,7 @@ package com.animbus.music;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v7.widget.SwitchCompat;
 
 public class SettingsManager {
@@ -72,21 +73,28 @@ public class SettingsManager {
         prefrencesEditor.putString(key, value).apply();
     }
 
-    public void switchDependancy(SwitchCompat parentSwitch, SwitchCompat dependantSwitch) {
-        if (parentSwitch.isChecked()) {
-            dependantSwitch.setEnabled(true);
+    /**
+     * This updates a dependancy between two {@link SwitchCompat}s
+     * @param parentSwitch The switch to get values from
+     * @param disableOn What value the parent switch has to be on to disable the dependant switch. In other words: "Disable dependantSwitch on VALUE"
+     * @param dependantSwitch The switch to where the values are set to
+     * @param setValue What value to set when disabled. In other words: "When disabled, dependentSwitch's value will be VALUE"
+     */
+    public void switchDependancy(SwitchCompat parentSwitch, Boolean disableOn, SwitchCompat dependantSwitch, Boolean setValue){
+        if (!disableOn){
+            if (parentSwitch.isChecked()) {
+                dependantSwitch.setEnabled(true);
+            } else {
+                dependantSwitch.setEnabled(false);
+                dependantSwitch.setChecked(setValue);
+            }
         } else {
-            dependantSwitch.setEnabled(false);
-            dependantSwitch.setChecked(false);
-        }
-    }
-
-    public void invertedSwitchDependancy(SwitchCompat parentSwitch, SwitchCompat dependantSwitch){
-        if (parentSwitch.isChecked()) {
-            dependantSwitch.setEnabled(false);
-            dependantSwitch.setChecked(true);
-        } else {
-            dependantSwitch.setEnabled(true);
+            if (parentSwitch.isChecked()) {
+                dependantSwitch.setEnabled(false);
+                dependantSwitch.setChecked(setValue);
+            } else {
+                dependantSwitch.setEnabled(true);
+            }
         }
     }
 

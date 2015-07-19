@@ -15,26 +15,34 @@ public class LockableViewPager extends ViewPager {
         super(context);
     }
 
-    public LockableViewPager(Context context, AttributeSet attrs){
+    public LockableViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return !locked && super.onInterceptTouchEvent(ev);
+        if (!this.locked) {
+            return super.onInterceptTouchEvent(ev);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        return !locked && super.onTouchEvent(ev);
+        if (!this.locked) {
+            return super.onTouchEvent(ev);
+        } else {
+            return false;
+        }
     }
 
-    public void lock(){
-        locked = false;
-    }
-
-    public void unlock(){
+    public void lock() {
         locked = true;
+    }
+
+    public void unlock() {
+        locked = false;
     }
 
 }

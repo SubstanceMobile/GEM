@@ -23,7 +23,7 @@ import com.animbus.music.ui.MainScreen.MainScreen;
 
 public class Settings extends AppCompatActivity {
     Toolbar toolbar;
-    SwitchCompat lightThemeSwitch, categoryNamesSwitch, myLibraryPaletteSwitch, tabsSwitch;
+    SwitchCompat lightThemeSwitch, pageNamesSwitch, myLibraryPaletteSwitch, tabsSwitch;
     SettingsManager manager;
     Context context;
     ThemeManager themeManager;
@@ -45,7 +45,7 @@ public class Settings extends AppCompatActivity {
         ViewCompat.setElevation(findViewById(R.id.settings_app_bar_layout), 0.0f);
 
         lightThemeSwitch = (SwitchCompat) findViewById(R.id.settings_old_light_theme_switch);
-        categoryNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
+        pageNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
         myLibraryPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
         tabsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tabs_switch);
         loadSettings();
@@ -67,7 +67,7 @@ public class Settings extends AppCompatActivity {
 
     private void loadSettings() {
         lightThemeSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false));
-        categoryNamesSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false));
+        pageNamesSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false));
         myLibraryPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, false));
         tabsSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_TABS, false));
         settingChanged(null);
@@ -116,7 +116,7 @@ public class Settings extends AppCompatActivity {
 
     private void saveSettings() {
         manager.setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, lightThemeSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, categoryNamesSwitch.isChecked());
+        manager.setBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, pageNamesSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, myLibraryPaletteSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, false);
         manager.setBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, false);
@@ -125,6 +125,7 @@ public class Settings extends AppCompatActivity {
 
     public void settingChanged(View v) {
         //This is where you add dependancies
+        manager.switchDependancy(tabsSwitch, true, pageNamesSwitch, false);
 
         //Saves the settings
         saveSettings();
