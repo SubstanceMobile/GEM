@@ -40,6 +40,7 @@
     <string name="settings_alt_now_playing">Use the alternate now playing screen</string>
     <string name="settings_header_playback">Playback</string>
     <string name="settings_header_experimental">Experimental</string>
+    <string name="setting_header__ui_customizer">Tweak UI</string>
     <string name="settings_experimental_UI_customizer">Tweak UI</string>
     <string name="settings_use_tabs">Use Tabs</string>
 
