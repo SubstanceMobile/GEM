@@ -17,8 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:src="@drawable/ic_album_black_48dp"
-            android:tint="?attr/primaryAlternateTextColor"/>
+            android:src="@drawable/album_art"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:layout_marginTop="-6dp"
-                android:progress="100" />
+                android:progress="100"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                     android:layout_gravity="center">
 
                     <TextView
-                        android:id="@+id/song_title"
+                        android:id="@+id/song_toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_small"
@@ -56,7 +56,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/song_artist"
+                        android:id="@+id/song_toolbar_artist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Song Artist"
@@ -70,8 +70,7 @@
                     android:layout_width="@dimen/nowplaying_toolbar_iconSize"
                     android:layout_height="@dimen/nowplaying_toolbar_iconSize"
                     android:layout_margin="@dimen/nowplaying_ripple_padding"
-                    android:animateLayoutChanges="true"
-                    android:background="?attr/ripple_alt_color"
+                    android:background="?attr/ripple_circle_alt_color"
                     android:clickable="true"
                     android:cropToPadding="false"
                     android:padding="@dimen/margin_medium"
@@ -82,6 +81,5 @@
             </LinearLayout>
 
         </RelativeLayout>
-
     </LinearLayout>
 </FrameLayout>

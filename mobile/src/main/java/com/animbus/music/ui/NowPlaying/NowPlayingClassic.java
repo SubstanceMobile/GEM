@@ -10,9 +10,13 @@ import android.view.MenuItem;
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.ThemeManager;
+import com.animbus.music.data.objects.Song;
+import com.animbus.music.media.Old.MediaController;
 import com.animbus.music.ui.Settings.Settings;
 
-public class NowPlayingClassic extends AppCompatActivity {
+import java.util.List;
+
+public class NowPlayingClassic extends AppCompatActivity implements MediaController.OnUpdateListener {
     SettingsManager settings;
     ThemeManager themeManager;
 
@@ -52,5 +56,10 @@ public class NowPlayingClassic extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onUpdate(Song currentSong, Boolean isPaused, Boolean isRepeating, Boolean isShuffled, List<Song> currentQueue) {
+
     }
 }
