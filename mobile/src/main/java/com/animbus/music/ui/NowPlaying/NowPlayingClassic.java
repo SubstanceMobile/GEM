@@ -8,9 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.animbus.music.R;
+import com.animbus.music.SettingsManager;
 import com.animbus.music.ThemeManager;
 import com.animbus.music.ui.Settings.Settings;
-import com.animbus.music.SettingsManager;
 
 public class NowPlayingClassic extends AppCompatActivity {
     SettingsManager settings;
@@ -29,14 +29,8 @@ public class NowPlayingClassic extends AppCompatActivity {
         //Toolbar, setting toolbar as Actionbar,Setting the back arrow to be shown, and setting the NavdrawerItemTitle to nothing
         Toolbar toolbar = (Toolbar) findViewById(R.id.now_playing_classic_appbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(settings.getExitIcon());
-        } else {
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(settings.getExitIcon());
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_exit);
     }
 
     @Override

@@ -13,10 +13,7 @@ public class SettingsManager {
             KEY_FIRST_RUN = "com.animbus.music.FIRST_RUN",
             KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN = "com.animbus.music.USE_CATEGORY_NAMES",
             KEY_USE_PALETTE_IN_GRID = "com.animbus.music.GRID_PALETTE",
-            KEY_USE_LIGHT_BACKGROUND_IN_ICON_PREVIEW = "com.animbus.music.LIGHT_BACKGROUND_ICON_PREVIEW",
             KEY_SELECTED_ICON_RADIOBUTTON = "com.animbus.music.SELECTED_ICON_RADIOBUTTON",
-            KEY_USE_COLOR_EXTRACTION_MASTER = "com.animbus.music.USE_PALETTE_MASTER",
-            KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN = "com.animbus.music.NOW_PLAYING_PALETTE",
             KEY_USE_NOW_PLAYING_PEEK = "com.animbus.music.USE_PEEK_FEATURE",
             KEY_USE_NEW_NOW_PLAYING = "com.animbus.music.USE_CLASSIC_NOW_PLAYING",
             KEY_USE_TABS = "com.animbus.music.USE_TABS";

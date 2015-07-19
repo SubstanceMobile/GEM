@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
@@ -15,14 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animbus.music.R;
+import com.animbus.music.SettingsManager;
 import com.animbus.music.ThemeManager;
 import com.animbus.music.ui.MainScreen.MainScreen;
-import com.animbus.music.SettingsManager;
 
 public class Settings extends AppCompatActivity {
     Toolbar toolbar;
-    SwitchCompat lightThemeSwitch, categoryNamesSwitch, myLibraryPaletteSwitch, masterPaletteSwitch, nowPlayingPaletteSwitch,
-            classicNowPlayingScreenSwitch, nowPlayingPeekSwitch, tabsSwitch;
+    SwitchCompat lightThemeSwitch, categoryNamesSwitch, myLibraryPaletteSwitch, tabsSwitch;
     SettingsManager manager;
     Context context;
     ThemeManager themeManager;
@@ -40,19 +41,13 @@ public class Settings extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.SettingsAppbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            setSupportActionBar(toolbar);
-        }
-        lightThemeSwitch = (SwitchCompat) findViewById(R.id.settings_light_theme_switch);
-        categoryNamesSwitch = (SwitchCompat) findViewById(R.id.settings_category_names_switch);
-        myLibraryPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_MyLibrary_palette_switch);
-        masterPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_master_color_extraction_switch);
-        nowPlayingPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_now_playing_color_extraction);
-        classicNowPlayingScreenSwitch = (SwitchCompat) findViewById(R.id.settings_classic_now_playing_switch);
-        nowPlayingPeekSwitch = (SwitchCompat) findViewById(R.id.settings_now_playing_peek_switch);
-        tabsSwitch = (SwitchCompat) findViewById(R.id.settings_MyLibrary_tabs_switch);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ViewCompat.setElevation(findViewById(R.id.settings_app_bar_layout), 0.0f);
+
+        lightThemeSwitch = (SwitchCompat) findViewById(R.id.settings_old_light_theme_switch);
+        categoryNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
+        myLibraryPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
+        tabsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tabs_switch);
         loadSettings();
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -74,10 +69,6 @@ public class Settings extends AppCompatActivity {
         lightThemeSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false));
         categoryNamesSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false));
         myLibraryPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, false));
-        masterPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_COLOR_EXTRACTION_MASTER, false));
-        nowPlayingPeekSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, true));
-        classicNowPlayingScreenSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, true));
-        nowPlayingPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN, true));
         tabsSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_TABS, false));
         settingChanged(null);
     }
@@ -92,7 +83,13 @@ public class Settings extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_about:
+            case R.id.action_donate:
+                Snackbar.make(findViewById(R.id.settings_root_view), "Thanks for wanting to donate, but this feature isn't fully implimented", Snackbar.LENGTH_LONG).setAction("AWW", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }).show();
                 break;
             case android.R.id.home:
                 onBackPressed();
@@ -121,22 +118,13 @@ public class Settings extends AppCompatActivity {
         manager.setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, lightThemeSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, categoryNamesSwitch.isChecked());
         manager.setBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, myLibraryPaletteSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_COLOR_EXTRACTION_MASTER, masterPaletteSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, nowPlayingPeekSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, classicNowPlayingScreenSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_EXTRACT_COLORS_IN_NOW_PLAYING_SCREEN, nowPlayingPaletteSwitch.isChecked());
+        manager.setBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, false);
+        manager.setBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, false);
         manager.setBooleanSetting(SettingsManager.KEY_USE_TABS, tabsSwitch.isChecked());
     }
 
     public void settingChanged(View v) {
         //This is where you add dependancies
-        manager.switchDependancy(masterPaletteSwitch, myLibraryPaletteSwitch);
-        manager.switchDependancy(masterPaletteSwitch, nowPlayingPaletteSwitch);
-
-        //Disables and hides the peek feature
-        nowPlayingPeekSwitch.setChecked(false);
-        nowPlayingPeekSwitch.setEnabled(false);
-        nowPlayingPeekSwitch.setVisibility(View.GONE);
 
         //Saves the settings
         saveSettings();

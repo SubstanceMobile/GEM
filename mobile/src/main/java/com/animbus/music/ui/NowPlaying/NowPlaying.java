@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.animbus.music.media.Old.MediaController;
 import com.animbus.music.R;
-import com.animbus.music.ThemeManager;
 import com.animbus.music.SettingsManager;
+import com.animbus.music.ThemeManager;
 import com.animbus.music.data.objects.Song;
+import com.animbus.music.media.Old.MediaController;
 
 import java.util.List;
 
@@ -40,14 +40,8 @@ public class NowPlaying extends AppCompatActivity implements MediaController.OnU
         //Toolbar, setting toolbar as Actionbar,Setting the back arrow to be shown, and setting the NavdrawerItemTitle to nothing
         Toolbar toolbar = (Toolbar) findViewById(R.id.now_playing_appbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(settings.getExitIcon());
-        } else {
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(settings.getExitIcon());
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_exit);
         toolbar.setTitle("");
 
         shuffleButton = (ImageButton) findViewById(R.id.now_playing_shuffle_button);
@@ -104,7 +98,7 @@ public class NowPlaying extends AppCompatActivity implements MediaController.OnU
 
     public void repeatclicked(View v) {
         if (repeat) {
-          repeat = false;
+            repeat = false;
         } else {
             repeat = true;
         }
