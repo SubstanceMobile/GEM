@@ -1,66 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--The  base theme-->  <!--This is the dark theme-->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/primaryDark</item>
-        <item name="colorAccent">@color/accent_material_dark</item>
-        <item name="android:statusBarColor">@color/systembarsDark</item>
+    <style name="Base" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@color/primaryDark</item>
-        <item name="android:colorEdgeEffect">@color/primaryLight</item>
+
         <item name="primaryTextColor">@color/primary_text_default_material_dark</item>
         <item name="secondaryTextColor">@color/secondary_text_default_material_dark</item>
-        <item name="primaryAlternateColor">@color/primaryLight</item>
-        <item name="primaryAlternateTextColor">@color/primary_text_default_material_light</item>
-        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_light</item>
+
         <item name="themeRippleColor">@color/ripple_material_dark</item>
         <item name="themeRippleColorAlt">@color/ripple_material_light</item>
-
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
         <item name="ripple">@drawable/ripple_dark</item>
         <item name="ripple_alt_color">@drawable/ripple_light </item>
         <item name="ripple_circle">@drawable/ripple_circle_dark </item>
         <item name="ripple_circle_alt_color">@drawable/ripple_circle_light</item>
-    </style>
-    <!--This is the light theme-->
-    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primaryLight</item>
-        <item name="colorAccent">@color/accent_material_light</item>
-        <item name="android:statusBarColor">@color/systembarsLight</item>
-        <item name="android:navigationBarColor">@color/primaryDark</item>
-        <item name="android:windowBackground">@color/primaryLight</item>
-        <item name="android:colorEdgeEffect">@color/primaryDark</item>
-        <item name="primaryTextColor">@color/primary_text_default_material_light</item>
-        <item name="secondaryTextColor">@color/secondary_text_default_material_light</item>
-        <item name="primaryAlternateColor">@color/primaryDark</item>
-        <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
-        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
-        <item name="themeRippleColor">@color/ripple_light</item>
-        <item name="themeRippleColorAlt">@color/ripple_dark</item>
 
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
+        <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+
+        <item name="android:statusBarColor">@color/systembarsDark</item>
+        <item name="android:colorEdgeEffect">@color/primaryLight</item>
+        <item name="android:navigationBarColor">@color/primaryDark</item>
+
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyleLight</item>
+    </style>
 
+    <style name="Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/primaryLight</item>
+
+        <item name="primaryTextColor">@color/primary_text_default_material_light</item>
+        <item name="secondaryTextColor">@color/secondary_text_default_material_light</item>
+
+        <item name="themeRippleColor">@color/ripple_material_light</item>
+        <item name="themeRippleColorAlt">@color/ripple_material_dark</item>
         <item name="ripple">@drawable/ripple_light</item>
         <item name="ripple_alt_color">@drawable/ripple_dark</item>
         <item name="ripple_circle">@drawable/ripple_circle_light</item>
         <item name="ripple_circle_alt_color">@drawable/ripple_circle_dark</item>
-    </style>
 
-    <style name="AppTheme.QuickPeek" parent="AppTheme">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+        <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
 
-    <style name="AppTheme.Light.QuickPeek" parent="AppTheme.Light">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/systembarsDark</item>
+        <item name="android:colorEdgeEffect">@color/primaryLight</item>
+        <item name="android:navigationBarColor">@color/primaryDark</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 </resources>

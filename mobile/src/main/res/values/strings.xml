@@ -5,18 +5,21 @@
 
     Activities
     <string name="title_activity_albums">Album</string>
-    <string name="title_activity_main">My Library</string>
+    <string name="title_activity_main">Music</string>
+    <string name="title_activity_main_goog_experience">My Library</string>
     <string name="title_activity_now_playing">Now Playing</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_choose_icon">Choose Icon</string>
     <string name="title_activity_quick_peek">Quick Peek</string>
     <string name="title_activity_album_color">Change Color</string>
+    <string name="title_activity_search">Search</string>
 
     Action/Toolbar
     <string name="action_settings">@string/title_activity_settings</string>
     <string name="action_search">Search</string>
-    <string name="action_fix_icons">Fix Icons</string>
-    <string name="action_place_shortcut">Place Opposite Icon on Homescreen</string>
+    <string name="action_reset_icons">Reset Icons</string>
+    <string name="action_test_icons">Enable All Icons (Testing Purposes)</string>
+    <string name="action_place_shortcut">Add this icon to the homescreen</string>
     <string name="action_donate">Donate</string>
 
     Navigation Drawer
@@ -36,22 +39,98 @@
     <string name="settings_ui_customizer_category_album_details">Albums Details</string>
     <string name="settings_ui_customizer_category_now_playing">Now Playing</string>
     <string name="settings_header_playback">Playback</string>
+    <string name="settings_header_dev">Developer</string>
+    <string name="settings_aww">AWW</string>
+
+    <string name="settings_select_base_theme">Select Theme</string>
+    <string name="settings_theme_title_choose">Pick a theme</string>
+    <string name="settings_theme_title_variant">Pick a variant</string>
+    <string name="settings_theme_animbus">Animbus</string>
+    <string name="settings_theme_default">Default</string>
+    <string name="settings_theme_custom">Custom</string>
+    <string name="settings_theme_variant_light">Light</string>
+    <string name="settings_theme_variant_dark">Dark</string>
+    <string name="settings_theme_variant_grey">Grey</string>
+    <string name="settings_theme_variant_default">Default</string>
+
     <string name="settings_header_old">Old</string>
     <string name="settings_old_light_theme">Use Light Theme</string>
     <string name="settings_old_tabs">Use Tabs</string>
+    <string name="settings_old_tabs_icons">Use icons in tabs</string>
+    <string name="settings_old_scrollable">Make tabs scrollable (May fix some issues)</string>
     <string name="settings_old_page_names">Use page names instead of My Library</string>
     <string name="settings_old_color_extraction">Get colors from album art</string>
     <string name="settings_old_choose_icon">Choose launcher icon</string>
-    <string name="settings_header_about">About</string>
-    <string name="settings_about_version">Version</string>
-    <string name="settings_about_version_value">0.0.1.5</string>
 
+    <string name="settings_header_about">About</string>
+    <string name="settings_source_code">Source Code</string>
+    <string name="settings_tap_to_view_code">Tap to view the source code of this app</string>
+    <string name="settings_about_version">Version</string>
+    <string name="settings_about_version_build">Build</string>
+    <string name="settings_about_version_type_internal">Internal</string>
+    <string name="settings_about_version_type_debug">Debug</string>
+
+    <string name="settings_choose_icon_srini">Srini Kumar</string>
+    <string name="settings_choose_icon_alex">Alex Mueller</string>
+    <string name="settings_choose_icon_jaka">Jaka Mušič</string>
+    <string name="settings_choose_icon_nguyen">A. H. Nguyen</string>
+
+    <string name="settings_choose_icon_save_title">Save Changes?</string>
+    <string name="settings_choose_icon_save_message">You modified the icon without saving. Would you like to save?</string>
+    <string name="settings_choose_icon_save_positive">Yes</string>
+    <string name="settings_choose_icon_save_negative">No</string>
+    <string name="settings_choose_icon_save_neutral">Cancel</string>
+
+    <string name="settings_donate_disambiguation_title">Donate Using</string>
+    <string name="settings_donate_disambiguation_play">Google Play</string>
+    <string name="settings_donate_disambiguation_paypal">PayPal</string>
+    <string name="settings_donate_price_title">Select Amount</string>
+    <string name="settings_donate_price_1">$1.00</string>
+    <string name="settings_donate_price_5">$5.00</string>
+    <string name="settings_donate_price_10">$10.00</string>
+    <string name="settings_donate_price_25">$25.00</string>
+    <string name="settings_donate_price_50">$50.00</string>
+    <string name="settings_donate_terms_popup_title">PayPal donations have moved.</string>
+    <string name="settings_donate_terms_popup_message">Google\'s terms state that I do not have a right to add PayPal donations to this app if I want it to stay on the Play Store.
+    You will be redirected to the Google+ Community for this app to donate. Continue?</string>
+    <string name="settings_donate_terms_popup_pos">Yes</string>
+    <string name="settings_donate_terms_popup_neg">No</string>
+
+    <string name="settings_tester_regester_confirmation">You are now a tester</string>
+    <string name="settings_tester_unregister_confirm">You are no longer a tester</string>
+    <string name="settings_tester_unregister_popup_title">Are you sure?</string>
+    <string name="settings_tester_unregister_popup_message">Are you sure you want to stop being a tester?</string>
+    <string name="settings_unregister_popup_yes">Yes</string>
+    <string name="settings_unregister_popup_no">No</string>
+    <string name="settings_tester_already_registered">You are already a tester</string>
+
+    Setup
+    <string name="setup_intro_description">Welcome to GEM Player!</string>
+    <string name="setup_promo_1_title">Customisable</string>
+    <string name="setup_promo_1_desc">With the UI Customizer, you can make GEM look the way <b>you</b> want</string>
+    <string name="setup_promo_2_title">Powerful</string>
+    <string name="setup_promo_2_desc">GEM is a powerful but lightweight music player</string>
+    <string name="setup_end_message">Enjoy!</string>
+
+    Playback
+    <string name="playback_play">Play</string>
+    <string name="playback_pause">Pause</string>
+    <string name="playback_next">Next</string>
+    <string name="playback_prev">Previous</string>
+    <string name="playback_queue">Queue</string>
+    <string name="playback_repeat">Repeat</string>
+    <string name="playback_shuffle">Shuffle</string>
+    
     Misc.
-    <string name="appwidget_text">Go to Google Plus and post "ASDF" in the Animbus Developers or Substance communities</string>
+    <string name="appwidget_text">Why are you using the widget?</string>
+    <string name="msg_coming_soon">Coming Soon</string>
+    <string name="msg_temp_removed">Removed for renovation</string>
+
+    Unsorted
+    <string name="hello_world">Hello world!</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    Unsortedz
+    <string name="title_activity_ui_customiser">UiCustomiser</string>
 
 </resources>

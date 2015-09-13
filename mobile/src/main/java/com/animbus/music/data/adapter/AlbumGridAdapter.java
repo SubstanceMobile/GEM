@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
-import com.animbus.music.data.objects.Album;
+import com.animbus.music.media.objects.Album;
 
 import java.util.Collections;
 import java.util.List;
@@ -61,86 +61,88 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     @Override
     public void onBindViewHolder(final AlbumGridViewHolder holder, final int position) {
         Album current = data.get(position);
-        settings = new SettingsManager(context);
-        holder.AlbumName.setText(current.AlbumGridAlbumName);
-        holder.AlbumArtist.setText(current.AlbumGridAlbumArtist);
-        holder.AlbumArt.setImageResource(current.AlbumGridAlbumart);
-        Bitmap art = ((BitmapDrawable) context.getResources().getDrawable(current.AlbumGridAlbumart)).getBitmap();
-        setColor(art, holder, current);
+        settings = SettingsManager.get();
+        holder.AlbumName.setText(current.getAlbumTitle());
+        holder.AlbumArtist.setText(current.getAlbumArtistName());
+        holder.AlbumArt.setImageBitmap(current.getAlbumArt());
+        setColor(current.getAlbumArt(), holder, current, position);
         animateCell(holder, position);
     }
 
 
-    private void setColor(Bitmap image, final AlbumGridViewHolder holder, final Album current) {
+    private void setColor(Bitmap image, final AlbumGridViewHolder holder, final Album current, final int pos) {
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
             setDefaultColors(holder);
             if (image != null) {
-                Palette.from(image).generate(new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(Palette palette) {
-                        Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                        Palette.Swatch mutedSwatch = palette.getMutedSwatch();
-                        Random colorDelayRandom = new Random();
-                        int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
-                        ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
-                        if (vibrantSwatch != null) {
-                            if (!current.colorAnimated) {
-                                current.colorAnimated = true;
-                                current.BackgroundColor = vibrantSwatch.getRgb();
-                                current.TitleTextColor = vibrantSwatch.getTitleTextColor();
-                                current.SubtitleTextColor = vibrantSwatch.getBodyTextColor();
+                if (!current.defaultArt) {
+                    Palette.from(image).generate(new Palette.PaletteAsyncListener() {
+                        @Override
+                        public void onGenerated(Palette palette) {
+                            Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                            Palette.Swatch mutedSwatch = palette.getMutedSwatch();
+                            Random colorDelayRandom = new Random();
+                            int MAX = COLOR_DELAY_MAX * pos;
+                            int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
+                            ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
+                            if (vibrantSwatch != null) {
+                                if (!current.colorAnimated) {
+                                    current.colorAnimated = true;
+                                    current.BackgroundColor = vibrantSwatch.getRgb();
+                                    current.TitleTextColor = vibrantSwatch.getTitleTextColor();
+                                    current.SubtitleTextColor = vibrantSwatch.getBodyTextColor();
 
-                                backgroundAnimator = ObjectAnimator.ofObject(holder.AlbumGridItemHeader, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
-                                        current.BackgroundColor);
-                                backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                                backgroundAnimator.start();
-                                titleAnimator = ObjectAnimator.ofInt(holder.AlbumName, textColor, getDefaultTitleColor(), current.TitleTextColor);
-                                titleAnimator.setEvaluator(new ArgbEvaluator());
-                                titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                                titleAnimator.start();
-                                subtitleAnimator = ObjectAnimator.ofInt(holder.AlbumArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
-                                subtitleAnimator.setEvaluator(new ArgbEvaluator());
-                                subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                                subtitleAnimator.start();
-                            } else {
-                                holder.AlbumGridItemHeader.setBackgroundColor(current.BackgroundColor);
-                                holder.AlbumName.setTextColor(current.TitleTextColor);
-                                holder.AlbumArtist.setTextColor(current.SubtitleTextColor);
-                            }
-                        } else if (mutedSwatch != null) {
-                            if (!current.colorAnimated) {
-                                current.colorAnimated = true;
-                                current.BackgroundColor = mutedSwatch.getRgb();
-                                current.TitleTextColor = mutedSwatch.getTitleTextColor();
-                                current.SubtitleTextColor = mutedSwatch.getBodyTextColor();
+                                    backgroundAnimator = ObjectAnimator.ofObject(holder.AlbumGridItemHeader, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
+                                            current.BackgroundColor);
+                                    backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                                    backgroundAnimator.start();
+                                    titleAnimator = ObjectAnimator.ofInt(holder.AlbumName, textColor, getDefaultTitleColor(), current.TitleTextColor);
+                                    titleAnimator.setEvaluator(new ArgbEvaluator());
+                                    titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                                    titleAnimator.start();
+                                    subtitleAnimator = ObjectAnimator.ofInt(holder.AlbumArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
+                                    subtitleAnimator.setEvaluator(new ArgbEvaluator());
+                                    subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                                    subtitleAnimator.start();
+                                } else {
+                                    holder.AlbumGridItemHeader.setBackgroundColor(current.BackgroundColor);
+                                    holder.AlbumName.setTextColor(current.TitleTextColor);
+                                    holder.AlbumArtist.setTextColor(current.SubtitleTextColor);
+                                }
+                            } else if (mutedSwatch != null) {
+                                if (!current.colorAnimated) {
+                                    current.colorAnimated = true;
+                                    current.BackgroundColor = mutedSwatch.getRgb();
+                                    current.TitleTextColor = mutedSwatch.getTitleTextColor();
+                                    current.SubtitleTextColor = mutedSwatch.getBodyTextColor();
 
-                                backgroundAnimator = ObjectAnimator.ofObject(holder.AlbumGridItemHeader, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
-                                        current.BackgroundColor);
-                                backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                                backgroundAnimator.start();
-                                titleAnimator = ObjectAnimator.ofInt(holder.AlbumName, textColor, getDefaultTitleColor(), current.TitleTextColor);
-                                titleAnimator.setEvaluator(new ArgbEvaluator());
-                                titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                                titleAnimator.start();
-                                subtitleAnimator = ObjectAnimator.ofInt(holder.AlbumArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
-                                subtitleAnimator.setEvaluator(new ArgbEvaluator());
-                                subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                                subtitleAnimator.start();
+                                    backgroundAnimator = ObjectAnimator.ofObject(holder.AlbumGridItemHeader, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
+                                            current.BackgroundColor);
+                                    backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                                    backgroundAnimator.start();
+                                    titleAnimator = ObjectAnimator.ofInt(holder.AlbumName, textColor, getDefaultTitleColor(), current.TitleTextColor);
+                                    titleAnimator.setEvaluator(new ArgbEvaluator());
+                                    titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                                    titleAnimator.start();
+                                    subtitleAnimator = ObjectAnimator.ofInt(holder.AlbumArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
+                                    subtitleAnimator.setEvaluator(new ArgbEvaluator());
+                                    subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                                    subtitleAnimator.start();
+                                } else {
+                                    holder.AlbumGridItemHeader.setBackgroundColor(current.BackgroundColor);
+                                    holder.AlbumName.setTextColor(current.TitleTextColor);
+                                    holder.AlbumArtist.setTextColor(current.SubtitleTextColor);
+                                }
                             } else {
-                                holder.AlbumGridItemHeader.setBackgroundColor(current.BackgroundColor);
-                                holder.AlbumName.setTextColor(current.TitleTextColor);
-                                holder.AlbumArtist.setTextColor(current.SubtitleTextColor);
+                                setDefaultColors(holder);
                             }
-                        } else {
-                            setDefaultColors(holder);
                         }
-                    }
-                });
+                    });
+                } else {
+                    setDefaultColors(holder);
+                }
             } else {
                 setDefaultColors(holder);
             }
-        } else {
-            setDefaultColors(holder);
         }
     }
 

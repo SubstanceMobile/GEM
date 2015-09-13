@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animbus.music.R;
-import com.animbus.music.data.objects.Song;
+import com.animbus.music.media.objects.Song;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +46,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
                 TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                 TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
         holder.SongDuration.setText(dur);
-        holder.SongArt.setImageResource(R.drawable.album_art_alt_alt);
+        holder.SongArt.setImageBitmap(current.getAlbum().getAlbumArt());
     }
 
     @Override

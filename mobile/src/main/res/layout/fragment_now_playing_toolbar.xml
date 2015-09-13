@@ -2,17 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/primaryAlternateColor"
-    android:id="@+id/now_playing_toolbar_root_view">
+    android:background="?attr/primaryAlternateColor">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/now_playing_toolbar_root_view"
         android:layout_height="@dimen/nowplaying_toolbarSize"
         android:background="?attr/ripple_alt_color"
         android:gravity="start"
         android:orientation="horizontal">
 
-        <com.animbus.music.CustomViews.SquareImageViewHeight_Based
+        <com.animbus.music.customImpls.SquareImageViewHeight_Based
             android:id="@+id/nowplayingtoolbar_albumart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -53,7 +53,10 @@
                         android:padding="@dimen/margin_tiny"
                         android:text="Song Title"
                         android:textColor="?attr/primaryAlternateTextColor"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:maxLines="1"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:ellipsize="marquee" />
 
                     <TextView
                         android:id="@+id/song_toolbar_artist"
@@ -61,7 +64,10 @@
                         android:layout_height="wrap_content"
                         android:text="Song Artist"
                         android:textColor="?attr/secondaryAlternateTextColor"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:maxLines="1"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:ellipsize="marquee" />
 
                 </LinearLayout>
 

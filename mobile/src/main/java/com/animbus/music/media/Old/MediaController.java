@@ -1,14 +1,18 @@
-package com.animbus.music.media.Old;
+/*
+package com.animbus.music.media.old;
 
 import android.content.Context;
 
-import com.animbus.music.data.objects.Song;
+import com.animbus.music.media.MediaNotification;
+import com.animbus.music.media.QueueManager;
+import com.animbus.music.media.objects.Song;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MediaController  implements MusicService.UpdatePushListener{
     MusicService musicService;
-    OnUpdateListener onUpdateListener;
+    ArrayList<OnUpdateListener> listeners = new ArrayList<>();
     Context cxt;
 
     private static MediaController instance = new MediaController();
@@ -20,10 +24,11 @@ public class MediaController  implements MusicService.UpdatePushListener{
 
     }
 
-    public void setContext(Context context){
+    public MediaController setContext(Context context){
         musicService = new MusicService(context);
         cxt = context;
         musicService.setPushedListener(this);
+        return this;
     }
 
     //This is where the song is set and the playback begins
@@ -59,21 +64,6 @@ public class MediaController  implements MusicService.UpdatePushListener{
     }
 
     //Misc.
-    public void setQueue(List<Song> list) {
-        musicService.setQueue(list);
-    }
-
-    public List<Song> getQueue() {
-        return musicService.getQueue();
-    }
-
-    public void addToQueue(Song song) {
-        musicService.addToQueue(song);
-    }
-
-    public void removeFromQueue(int position) {
-        musicService.removeFromQueue(position);
-    }
 
     public void setRepeat(Boolean doRepeat) {
         musicService.setRepeat(doRepeat);
@@ -89,17 +79,16 @@ public class MediaController  implements MusicService.UpdatePushListener{
 
     //Change Listener
     public interface OnUpdateListener {
-        void onUpdate(Song currentSong, Boolean isPaused, Boolean isRepeating, Boolean isShuffled, List<Song> currentQueue);
+        void onUpdate(Song currentSong, Boolean isPaused, Boolean isRepeating, Boolean isShuffled, List<com.animbus.music.media.objects.Song> currentQueue);
     }
 
-    public void setOnUpdateListener(OnUpdateListener onUpdateListener) {
-        this.onUpdateListener = onUpdateListener;
+    public void addOnUpdateListener(OnUpdateListener onUpdateListener) {
+        listeners.add(onUpdateListener);
     }
 
     public void requestUpdate(){
-        if (onUpdateListener != null){
-            //TODO:Add shuffle
-            onUpdateListener.onUpdate(musicService.getCurrentSong(), musicService.getPaused(), musicService.getRepeating(), null, getQueue());
+        for (OnUpdateListener listener : listeners) {
+            listener.onUpdate(musicService.getCurrentSong(), musicService.getPaused(), musicService.getRepeating(), null, QueueManager.get().getCurrentQueueAsSong());
         }
     }
 
@@ -108,3 +97,4 @@ public class MediaController  implements MusicService.UpdatePushListener{
         requestUpdate();
     }
 }
+*/

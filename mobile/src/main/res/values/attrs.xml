@@ -3,19 +3,21 @@
     <attr name="primaryTextColor" format="color" />
     <attr name="secondaryTextColor" format="color" />
     <attr name="primaryAlternateColor" format="color" />
-    <attr name="primaryAlternateTextColor" format="color"/>
-    <attr name="secondaryAlternateTextColor" format="color"/>
-    <attr name="themeRippleColor" format="color"/>
-    <attr name="themeRippleColorAlt" format="color"/>
-    <attr name="navDrawerSelectedColor" format="color"/>
+    <attr name="primaryAlternateTextColor" format="color" />
+    <attr name="secondaryAlternateTextColor" format="color" />
+    <attr name="themeRippleColor" format="color" />
+    <attr name="themeRippleColorAlt" format="color" />
+    <attr name="navDrawerSelectedColor" format="color" />
 
-    <attr name="primaryGreyColor" format="color"/>
-    <attr name="primaryGreyColorAlt" format="color"/>
+    <attr name="primaryGreyColor" format="color" />
+    <attr name="primaryGreyColorAlt" format="color" />
 
-    <attr name="navdrawerTheme" format="reference"/>
+    <attr name="navdrawerTheme" format="reference" />
 
     <attr name="ripple" format="reference" />
     <attr name="ripple_alt_color" format="reference" />
     <attr name="ripple_circle" format="reference" />
     <attr name="ripple_circle_alt_color" format="reference" />
+
+    <attr name="default_status_bar_theme" format="reference" />
 </resources>

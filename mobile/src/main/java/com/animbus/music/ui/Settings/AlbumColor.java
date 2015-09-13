@@ -1,4 +1,4 @@
-package com.animbus.music.ui.Settings;
+package com.animbus.music.ui.settings;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -3,19 +3,20 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'AnimbusDevelopers'
-            keyPassword 'Adrianchik2002'
-            storeFile file('C:/Users/Adrian.Family/Desktop/ApkSigning.jks')
-            storePassword 'Adrianchik2002'
+            keyAlias 'GEM'
+            keyPassword 'AnimbusDevGEM'
+            storeFile file('C:/Users/Adrian/Desktop/Programming/ApkSigning.jks')
+            storePassword 'AnimbusDev'
         }
     }
-    compileSdkVersion 22
+
+    compileSdkVersion 23
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "com.animbus.music"
-        targetSdkVersion 22
-        versionName '0.0.1.5'
-        versionCode 6
+        targetSdkVersion 23
+        versionName '0.1'
+        versionCode 7
         signingConfig signingConfigs.config
         minSdkVersion 17
     }
@@ -25,17 +26,31 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+        internal {
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.config
+            renderscriptDebuggable false
+            renderscriptOptimLevel 3
+            minifyEnabled true
+            zipAlignEnabled true
+        }
+        debug {
+            signingConfig signingConfigs.config
+        }
     }
     productFlavors {
     }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     wearApp project(':wear')
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:support-v4:22.2.1'
-    compile 'com.android.support:palette-v7:22.2.1'
-    compile 'com.android.support:recyclerview-v7:22.2.1'
-    compile 'com.android.support:design:22.2.1'
+    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:support-v4:23.0.0'
+    compile 'com.android.support:palette-v7:23.0.0'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
+    compile 'com.android.support:design:23.0.0'
+    compile 'com.github.paolorotolo:appintro:3.1.0'
 }

@@ -1,4 +1,5 @@
-package com.animbus.music.media.Old;
+/*
+package com.animbus.music.media.old;
 
 import android.app.Service;
 import android.content.Context;
@@ -11,7 +12,8 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.animbus.music.data.objects.Song;
+import com.animbus.music.media.QueueManager;
+import com.animbus.music.media.objects.Song;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,10 +22,11 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     final IBinder musicBind = new MusicBinder();
     MediaPlayer player;
     Context cxt;
-    Boolean doRepeat = false, isPaused;
-    Integer MAX_RESTART_ON_PREV_CLICKED_DUR = /*Time in ms*/ 3000;
-    List<Song> queue;
-    Integer currentPosition;
+    Boolean doRepeat = false, isPaused = false;
+    Integer MAX_RESTART_ON_PREV_CLICKED_DUR = */
+/*Time in ms*//*
+ 3000;
+    Integer currentPosition = 0;
     UpdatePushListener pushedListener;
 
     public MusicService() {
@@ -113,13 +116,24 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         pushUpdatedInfo();
     }
 
+    public List<Song> getQueue(){
+        return QueueManager.get().getCurrentQueueAsSong();
+    }
+
     public boolean getPlaying() {
         return player.isPlaying();
     }
 
     public Song getCurrentSong() {
-        //This will return the currently playing song. 0 because 0 = now playing.
-        return queue.get(getCurrentSongPos());
+        try {
+            return getQueue().get(getCurrentSongPos());
+        } catch (Exception e){
+            Song currentSong = new Song();
+            currentSong.setSongID(0);
+            currentSong.setSongTitle("ERROR");
+            currentSong.setSongArtist("ERROR");
+            return currentSong;
+        }
     }
 
     public int getCurrentSongPos() {
@@ -132,8 +146,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void setCurrentSongPos(Song song) {
-        if (queue != null) {
-            queue.indexOf(song);
+        if (getQueue() != null) {
+            getQueue().indexOf(song);
         } else {
             Log.println(Log.ERROR, "TAG_NO_QUEUE", "No Queue");
         }
@@ -143,10 +157,10 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public Song getPrevSong() {
         Song song;
         if (getCurrentSongPos() == 0) {
-            song = queue.get(queue.size() - 1);
-            setCurrentSongPos(queue.size() - 1);
+            song = getQueue().get(getQueue().size() - 1);
+            setCurrentSongPos(getQueue().size() - 1);
         } else {
-            song = queue.get(getCurrentSongPos() - 1);
+            song = getQueue().get(getCurrentSongPos() - 1);
             setCurrentSongPos(getCurrentSongPos() - 1);
         }
         pushUpdatedInfo();
@@ -155,11 +169,11 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public Song getNextSong() {
         Song song;
-        if (getCurrentSongPos() == queue.size() - 1) {
-            song = queue.get(0);
+        if (getCurrentSongPos() == getQueue().size() - 1) {
+            song = getQueue().get(0);
             setCurrentSongPos(0);
         } else {
-            song = queue.get(getCurrentSongPos() + 1);
+            song = getQueue().get(getCurrentSongPos() + 1);
             setCurrentSongPos(getCurrentSongPos() + 1);
         }
         pushUpdatedInfo();
@@ -226,21 +240,12 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void addToQueue(Song song) {
-        queue.add(song);
+        getQueue().add(song);
         pushUpdatedInfo();
     }
 
     public void removeFromQueue(int position) {
-        queue.remove(position);
-        pushUpdatedInfo();
-    }
-
-    public List<Song> getQueue() {
-        return queue;
-    }
-
-    public void setQueue(List<Song> queue) {
-        this.queue = queue;
+        getQueue().remove(position);
         pushUpdatedInfo();
     }
 
@@ -285,4 +290,4 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public void setPushedListener(UpdatePushListener pushedListener) {
         this.pushedListener = pushedListener;
     }
-}
+}*/

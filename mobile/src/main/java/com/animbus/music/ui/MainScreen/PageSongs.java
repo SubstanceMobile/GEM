@@ -1,4 +1,4 @@
-package com.animbus.music.ui.MainScreen;
+package com.animbus.music.ui.mainScreen;
 
 
 import android.content.Context;
@@ -11,11 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.animbus.music.media.Old.MediaController;
+import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.QueueManager;
+import com.animbus.music.media.objects.Song;
 import com.animbus.music.R;
-import com.animbus.music.data.DataManager;
+import com.animbus.music.media.MediaData;
 import com.animbus.music.data.adapter.SongListAdapter;
-import com.animbus.music.data.objects.Song;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class PageSongs extends Fragment implements SongListAdapter.SongListItemClickListener {
     Context cxt;
-    DataManager dataManager;
+    MediaData dataManager = MediaData.get();
     RecyclerView list;
     MainScreen activity;
 
@@ -55,9 +56,8 @@ public class PageSongs extends Fragment implements SongListAdapter.SongListItemC
         }
         super.onStart();
         list = (RecyclerView) getView().findViewById(R.id.page_songs_list);
-        dataManager = new DataManager(cxt);
         //Configures the Recyclerview
-        SongListAdapter adapter = new SongListAdapter(cxt, dataManager.getSongListData());
+        SongListAdapter adapter = new SongListAdapter(cxt, dataManager.getSongs());
         adapter.setOnItemClickedListener(this);
         list.setAdapter(adapter);
         list.setItemAnimator(new DefaultItemAnimator());
@@ -69,10 +69,11 @@ public class PageSongs extends Fragment implements SongListAdapter.SongListItemC
         if (activity == null){
             activity = BackupHub.get().fragmentSongsMyLib;
         }
-        MediaController controller = MediaController.getInstance();
-        controller.startPlayback(data,position);
+        PlaybackManager.get().play(data, position);
         activity.quickToolbar.setVisibility(View.VISIBLE);
         activity.quickToolbar.setTranslationY(200.0f);
         activity.quickToolbar.animate().translationY(0).start();
+
+
     }
 }

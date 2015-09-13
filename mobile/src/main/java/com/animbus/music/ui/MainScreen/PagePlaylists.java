@@ -1,4 +1,4 @@
-package com.animbus.music.ui.MainScreen;
+package com.animbus.music.ui.mainScreen;
 
 
 import android.content.Context;

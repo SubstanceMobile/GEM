@@ -1,90 +1,255 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.animbus.music.ui.Settings.ChooseIcon"
-    android:id="@+id/choose_icon_root_view"
-    android:fitsSystemWindows="true">
+    android:background="?attr/colorPrimary"
+    android:fitsSystemWindows="false">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <com.animbus.music.CustomViews.SquareImageViewWidth_Based
-            android:id="@+id/icon_preview_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primaryLight"
-            android:padding="@dimen/margin_biggest"
-            android:src="@mipmap/ic_launcher_new_dark" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/choose_icon_app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbarSize"
-            android:background="@drawable/gradient_black_ontop"
-            app:title="@string/title_activity_choose_icon" />
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:elevation="0dp">
+
+                <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/abc_action_bar_default_height_material"
+                    android:id="@+id/choose_icon_appbar"
+                    app:title="Choose Icon"/>
+
+            </android.support.design.widget.AppBarLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView2">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/choose_icon_bottom_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/settings_choose_icon_srini"
+                        android:id="@+id/textView12"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:onClick="openSrini" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/horizontalScrollView" >
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_srini_black"
+                                android:id="@+id/settings_choose_icon_srini_black"
+                                android:onClick="selectIcon" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_srini_white"
+                                android:id="@+id/settings_choose_icon_srini_white"
+                                android:onClick="selectIcon" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_srini_red"
+                                android:id="@+id/settings_choose_icon_srini_red"
+                                android:onClick="selectIcon" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_srini_slate"
+                                android:id="@+id/settings_choose_icon_strini_slate"
+                                android:onClick="selectIcon" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:id="@+id/settings_choose_icon_srini_green"
+                                android:onClick="selectIcon"
+                                android:src="@mipmap/ic_launcher_srini_green" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:id="@+id/settings_choose_icon_srini_blue"
+                                android:onClick="selectIcon"
+                                android:src="@mipmap/ic_launcher_srini_blue" />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/settings_choose_icon_alex"
+                        android:id="@+id/textView14"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:onClick="openAlex" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/horizontalScrollView2" >
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_alex_black"
+                                android:id="@+id/settings_choose_icon_alex_black"
+                                android:onClick="selectIcon" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_alex_white"
+                                android:id="@+id/settings_choose_icon_alex_white"
+                                android:onClick="selectIcon" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_alex_color"
+                                android:id="@+id/settings_choose_icon_alex_color"
+                                android:onClick="selectIcon" />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/settings_choose_icon_jaka"
+                        android:id="@+id/textView15"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:onClick="openJaka" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/horizontalScrollView3" >
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_jaka_dark"
+                                android:id="@+id/settings_choose_icon_jaka_black"
+                                android:onClick="selectIcon" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:src="@mipmap/ic_launcher_jaka_light"
+                                android:id="@+id/settings_choose_icon_jaka_white"
+                                android:onClick="selectIcon" />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="@string/settings_choose_icon_nguyen"
+                        android:id="@+id/textView16"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:onClick="openNguyen" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/horizontalScrollView4"
+                        android:clipToPadding="false">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:id="@+id/settings_choose_icon_nguyen_orange"
+                                android:onClick="selectIcon"
+                                android:src="@mipmap/ic_launcher_nguyen_orange" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:id="@+id/settings_choose_icon_nguyen_green"
+                                android:onClick="selectIcon"
+                                android:src="@mipmap/ic_launcher_nguyen_green" />
+
+                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/choose_icon_height"
+                                android:id="@+id/settings_choose_icon_nguyen_red"
+                                android:onClick="selectIcon"
+                                android:src="@mipmap/ic_launcher_nguyen_red" />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:adjustViewBounds="false"
+            android:onClick="save"
+            android:src="@drawable/ic_save_white_48dp" />
     </FrameLayout>
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/icon_use_light_preview"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:checked="true"
-        android:onClick="onOptionChanged"
-        android:padding="@dimen/margin_medium"
-        android:text="Use light preview background" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/scrollView2"
-        android:layout_weight="1">
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/icon_choices_radiogroup">
-
-            <RadioButton
-                android:id="@+id/settings_radio_new_dark"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/listViewSize"
-                android:text="Default Icon"
-                android:checked="false" />
-
-            <RadioButton
-                android:id="@+id/settings_radio_new_light"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/listViewSize"
-                android:text="Default Icon Light"
-                android:checked="false" />
-
-            <RadioButton
-                android:id="@+id/settings_radio_new_color"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/listViewSize"
-                android:text="Default Icon Colorful"
-                android:checked="false" />
-
-            <RadioButton
-                android:id="@+id/settings_radio_old_dark"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/listViewSize"
-                android:text="Classic Icon"
-                android:checked="false" />
-
-            <RadioButton
-                android:id="@+id/settings_radio_old_light"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/listViewSize"
-                android:text="Classic Icon Light" />
-
-
-        </RadioGroup>
-    </ScrollView>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

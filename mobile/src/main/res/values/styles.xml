@@ -2,108 +2,75 @@
 <resources>
 
     <!--The  base theme-->  <!--This is the dark theme-->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Base">
         <item name="colorPrimary">@color/primaryDark</item>
-        <item name="colorAccent">@color/accent_material_dark</item>
+        <item name="colorAccent">@color/primaryLight</item>
         <item name="primaryGreyColor">@color/primaryGreyDark</item>
         <item name="primaryGreyColorAlt">@color/primaryGreyLight</item>
-        <item name="android:windowBackground">@color/primaryDark</item>
-        <item name="primaryTextColor">@color/primary_text_default_material_dark</item>
-        <item name="secondaryTextColor">@color/secondary_text_default_material_dark</item>
         <item name="primaryAlternateColor">@color/primaryLight</item>
         <item name="primaryAlternateTextColor">@color/primary_text_default_material_light</item>
         <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_light</item>
+    </style>
+
+    <!--This is the light theme-->
+    <style name="AppTheme.Light" parent="Base.Light">
+        <item name="colorPrimary">@color/primaryLight</item>
+        <item name="colorAccent">@color/primaryDark</item>
+        <item name="primaryGreyColor">@color/primaryGreyLight</item>
+        <item name="primaryGreyColorAlt">@color/primaryGreyDark</item>
+        <item name="primaryAlternateColor">@color/primaryDark</item>
+        <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
+        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
+    </style>
+
+    <style name="AppTheme.Animbus" parent="Base.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent_light</item>
+        <item name="primaryGreyColor">@color/primaryGreyLight</item>
+        <item name="primaryGreyColorAlt">@color/primaryGreyDark</item>
+        <item name="primaryAlternateColor">@color/primaryDark</item>
+        <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
+        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
+    </style>
+
+    <style name="Base" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/primaryDark</item>
+
+        <item name="primaryTextColor">@color/primary_text_default_material_dark</item>
+        <item name="secondaryTextColor">@color/secondary_text_default_material_dark</item>
+
         <item name="themeRippleColor">@color/ripple_material_dark</item>
         <item name="themeRippleColorAlt">@color/ripple_material_light</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-        <item name="navDrawerSelectedColor">@color/navdrawerAccentDark</item>
-
         <item name="ripple">@drawable/ripple_dark</item>
         <item name="ripple_alt_color">@drawable/ripple_light </item>
         <item name="ripple_circle">@drawable/ripple_circle_dark </item>
         <item name="ripple_circle_alt_color">@drawable/ripple_circle_light</item>
+
+        <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
-    <!--This is the light theme-->
-    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primaryLight</item>
-        <item name="colorAccent">@color/accent_material_light</item>
-        <item name="primaryGreyColor">@color/primaryGreyLight</item>
+
+    <style name="Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/primaryLight</item>
+
         <item name="primaryTextColor">@color/primary_text_default_material_light</item>
         <item name="secondaryTextColor">@color/secondary_text_default_material_light</item>
-        <item name="primaryAlternateColor">@color/primaryDark</item>
-        <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
-        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
+
         <item name="themeRippleColor">@color/ripple_material_light</item>
         <item name="themeRippleColorAlt">@color/ripple_material_dark</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyleLight</item>
-        <item name="navDrawerSelectedColor">@color/navdrawerAccentLight</item>
-
         <item name="ripple">@drawable/ripple_light</item>
         <item name="ripple_alt_color">@drawable/ripple_dark</item>
         <item name="ripple_circle">@drawable/ripple_circle_light</item>
         <item name="ripple_circle_alt_color">@drawable/ripple_circle_dark</item>
+
+        <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
     </style>
 
-    <!--This is for the hamburger menu-->   <!--This is for the dark theme-->
-    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="spinBars">true</item>
-        <item name="color">@color/secondary_text_default_material_dark</item>
-    </style>
-    <!--This is the light theme-->
-    <style name="DrawerArrowStyleLight" parent="Widget.AppCompat.DrawerArrowToggle">
-        <item name="spinBars">true</item>
-        <item name="color">@color/secondary_text_default_material_light</item>
+    <style name="Base.DarkActionBar" parent="Base">
+        <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
     </style>
 
-    <!--This is the quick peek now playing-->
-    <style name="AppTheme.QuickPeek" parent="Theme.AppCompat.Dialog">
-        <item name="colorPrimary">@color/primaryDark</item>
-        <item name="colorAccent">@color/accent_material_dark</item>
-        <item name="primaryTextColor">@color/primary_text_default_material_dark</item>
-        <item name="secondaryTextColor">@color/secondary_text_default_material_dark</item>
-        <item name="primaryAlternateColor">@color/primaryLight</item>
-        <item name="primaryAlternateTextColor">@color/primary_text_default_material_light</item>
-        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_light</item>
-        <item name="rippleColor">@color/ripple_material_dark</item>
-
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowCloseOnTouchOutside">false</item>
-    </style>
-    <!--This is the quick peek now playing light theme-->
-    <style name="AppTheme.Light.QuickPeek" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorPrimary">@color/primaryLight</item>
-        <item name="colorAccent">@color/accent_material_light</item>
-        <item name="primaryTextColor">@color/primary_text_default_material_light</item>
-        <item name="secondaryTextColor">@color/secondary_text_default_material_light</item>
-        <item name="primaryAlternateColor">@color/primaryDark</item>
-        <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
-        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
-        <item name="rippleColor">@color/ripple_material_light</item>
-
-
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@null</item>
-        <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowCloseOnTouchOutside">false</item>
-    </style>
-
-    <style name="AppTheme.Navdrawer" parent="AppTheme">
-        <item name="colorPrimary">@color/accent_material_dark</item>
-    </style>
-
-    <style name="AppTheme.Light.Navdrawer" parent="AppTheme.Light">
-        <item name="colorPrimary">@color/accent_material_light</item>
+    <style name="Base.Light.DarkActionBar" parent="Base.Light">
+        <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
 
 </resources>

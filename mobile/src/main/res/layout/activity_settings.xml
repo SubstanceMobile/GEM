@@ -1,229 +1,315 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settings_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="com.animbus.music.ui.Settings.Settings"
-    android:id="@+id/settings_root_view">
+    tools:context="com.animbus.music.ui.settings.Settings"
+    android:background="?attr/colorPrimary">
 
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/settings_app_bar_layout" >
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/SettingsAppbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/settings_app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbarSize"
-            android:fitsSystemWindows="true"
-            app:title="Settings" />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.AppBarLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/SettingsAppbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbarSize"
+                android:fitsSystemWindows="true"
+                app:title="Settings" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/scrollView"
-        android:layout_weight="1">
+        </android.support.design.widget.AppBarLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:isScrollContainer="true"
-            android:scrollbars="vertical"
-            android:verticalScrollbarPosition="defaultPosition"
-            android:overScrollMode="always">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/settings_header_tweak_ui"
-                android:id="@+id/textView6"
-                android:textColor="?attr/colorAccent"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_small" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:background="?attr/ripple">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                    android:text="@string/settings_ui_customizer_category_general"
-                    android:id="@+id/textView8"
-                    android:layout_margin="@dimen/margin_medium" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:background="?attr/ripple">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                    android:text="@string/settings_ui_customizer_category_main_screen"
-                    android:id="@+id/textView7"
-                    android:layout_margin="@dimen/margin_medium" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:background="?attr/ripple">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                    android:text="@string/settings_ui_customizer_category_album_details"
-                    android:id="@+id/textView3"
-                    android:layout_margin="@dimen/margin_medium" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:background="?attr/ripple">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                    android:text="@string/settings_ui_customizer_category_now_playing"
-                    android:id="@+id/textView5"
-                    android:layout_margin="@dimen/margin_medium" />
-            </FrameLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/settings_header_playback"
-                android:id="@+id/textView9"
-                android:textColor="?attr/colorAccent"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:visibility="gone" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/settings_header_old"
-                android:id="@+id/textView10"
-                android:textColor="?attr/colorAccent"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_small" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/listViewSize"
-                android:clickable="true"
-                android:onClick="openIconSelector"
-                android:background="?attr/ripple">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                    android:text="@string/settings_old_choose_icon"
-                    android:id="@+id/textView"
-                    android:layout_margin="@dimen/margin_medium" />
-
-            </FrameLayout>
-
-            <android.support.v7.widget.SwitchCompat
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:id="@+id/settings_old_light_theme_switch"
-                android:padding="@dimen/margin_medium"
-                android:checked="false"
-                android:text="@string/settings_old_light_theme"
-                android:onClick="settingChanged" />
-
-            <android.support.v7.widget.SwitchCompat
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:padding="@dimen/margin_medium"
-                android:checked="true"
-                android:text="@string/settings_old_color_extraction"
-                android:id="@+id/settings_old_palette_switch"
-                android:onClick="settingChanged" />
-
-            <android.support.v7.widget.SwitchCompat
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:padding="@dimen/margin_medium"
-                android:checked="false"
-                android:text="@string/settings_old_tabs"
-                android:id="@+id/settings_old_tabs_switch"
-                android:onClick="settingChanged" />
-
-            <android.support.v7.widget.SwitchCompat
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:padding="@dimen/margin_medium"
-                android:checked="false"
-                android:text="@string/settings_old_page_names"
-                android:id="@+id/settings_old_page_names_switch"
-                android:onClick="settingChanged" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/settings_header_about"
-                android:id="@+id/textView12"
-                android:textColor="?attr/colorAccent"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_small" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:background="?attr/ripple"
-                android:orientation="vertical">
+                android:isScrollContainer="true"
+                android:orientation="vertical"
+                android:overScrollMode="always"
+                android:scrollbars="vertical"
+                android:verticalScrollbarPosition="defaultPosition">
 
                 <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                android:text="@string/settings_about_version"
-                android:id="@+id/textView11"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium" />
-
-                <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                    android:text="@string/settings_about_version_value"
-                    android:id="@+id/textView13"
+                    android:layout_marginBottom="@dimen/margin_small"
                     android:layout_marginStart="@dimen/margin_medium"
-                    android:layout_marginBottom="@dimen/margin_medium"
-                    android:textSize="12sp"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/settings_header_tweak_ui"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="?attr/secondaryTextColor" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:onClick="showUiTweaker"
+                    android:id="@+id/settings_ui_tweaker_general">
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:text="@string/settings_ui_customizer_category_general"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:onClick="showUiTweaker"
+                    android:id="@+id/settings_ui_tweaker_home">
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:text="@string/settings_ui_customizer_category_main_screen"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:onClick="showUiTweaker"
+                    android:id="@+id/settings_ui_tweaker_albums">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:text="@string/settings_ui_customizer_category_album_details"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:onClick="showUiTweaker"
+                    android:id="@+id/settings_ui_tweaker_now_playing">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:text="@string/settings_ui_customizer_category_now_playing"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/settings_header_playback"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/secondaryTextColor"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/settings_header_old"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/secondaryTextColor" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/listViewSize"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:onClick="openIconSelector">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:text="@string/settings_old_choose_icon"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:onClick="showThemePicker" >
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:text="@string/settings_select_base_theme"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+                </FrameLayout>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/settings_old_tabs_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:checked="false"
+                    android:onClick="settingChanged"
+                    android:padding="@dimen/margin_medium"
+                    android:text="@string/settings_old_tabs" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/settings_old_palette_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:checked="true"
+                    android:onClick="settingChanged"
+                    android:padding="@dimen/margin_medium"
+                    android:text="@string/settings_old_color_extraction" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/settings_old_tabs_icons"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:checked="false"
+                    android:onClick="settingChanged"
+                    android:padding="@dimen/margin_medium"
+                    android:text="@string/settings_old_tabs_icons" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/settings_old_tab_scrollable_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:checked="true"
+                    android:onClick="settingChanged"
+                    android:padding="@dimen/margin_medium"
+                    android:text="@string/settings_old_scrollable" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/settings_old_page_names_switch"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:checked="false"
+                    android:onClick="settingChanged"
+                    android:padding="@dimen/margin_medium"
+                    android:text="@string/settings_old_page_names" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settings_section_testers">
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text="@string/settings_header_dev"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="?attr/secondaryTextColor" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/settings_header_about"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/secondaryTextColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:onClick="openSourceCode"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:text="@string/settings_source_code"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_medium"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:text="@string/settings_tap_to_view_code"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    android:id="@+id/settings_about_version_root">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:text="@string/settings_about_version"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
+
+                    <TextView
+                        android:id="@+id/settings_about_version_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_medium"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:text="VERSION NUMBER"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
             </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

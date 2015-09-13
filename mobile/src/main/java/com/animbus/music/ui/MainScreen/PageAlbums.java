@@ -1,4 +1,4 @@
-package com.animbus.music.ui.MainScreen;
+package com.animbus.music.ui.mainScreen;
 
 
 import android.content.Context;
@@ -14,9 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.animbus.music.R;
-import com.animbus.music.data.DataManager;
+import com.animbus.music.media.MediaData;
 import com.animbus.music.data.adapter.AlbumGridAdapter;
-import com.animbus.music.data.objects.Album;
+import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.objects.Album;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ import java.util.List;
 public class PageAlbums extends Fragment  implements AlbumGridAdapter.AlbumArtGridClickListener{
     RecyclerView list;
     Context cxt;
-    DataManager dataManager = new DataManager(cxt);
+    MediaData dataManager = MediaData.get();
 
     public PageAlbums() {
         // Required empty public constructor
@@ -53,7 +54,7 @@ public class PageAlbums extends Fragment  implements AlbumGridAdapter.AlbumArtGr
         }
         super.onStart();
         list = (RecyclerView) getView().findViewById(R.id.page_albums_list);
-        AlbumGridAdapter adapter = new AlbumGridAdapter(cxt, dataManager.getAlbumGridData());
+        AlbumGridAdapter adapter = new AlbumGridAdapter(cxt, dataManager.getAlbums());
         adapter.setOnItemClickedListener(this);
         list.setAdapter(adapter);
         list.setItemAnimator(new DefaultItemAnimator());
@@ -67,11 +68,7 @@ public class PageAlbums extends Fragment  implements AlbumGridAdapter.AlbumArtGr
 
     @Override
     public void AlbumGridItemClicked(View view, int position, List<Album> data) {
-        Snackbar.make(getView(), "Removed for Renovation", Snackbar.LENGTH_LONG).setAction("ok", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        }).show();
+        Snackbar.make(getView(), "Playing album", Snackbar.LENGTH_LONG).show();
+        PlaybackManager.get().play(data.get(position).getSongs(), 0);
     }
 }

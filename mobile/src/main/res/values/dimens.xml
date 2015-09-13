@@ -22,6 +22,7 @@
     <dimen name="fab_padding">17dp</dimen>
     <dimen name="FAB_elevation">10dp</dimen>
     <dimen name="FAB_press_elevation">0dp</dimen>
+    <dimen name="fab_margin">0dp</dimen>
 
     Now Playing Toolbar
     <dimen name="nowplaying_toolbarSize">64dp</dimen>
@@ -61,4 +62,7 @@ Refer to App Widget Documentation for margin information
 http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="widget_margin">8dp</dimen>
+
+    <dimen name="choose_icon_height">116dp</dimen>
+    <dimen name="choose_icon_bottom_margin">76dp</dimen>
 </resources>

@@ -1,47 +1,49 @@
-package com.animbus.music.ui.MainScreen;
+package com.animbus.music.ui.mainScreen;
 
 import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.animbus.music.CustomViews.LockableViewPager;
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
-import com.animbus.music.ThemeManager;
-import com.animbus.music.data.DataManager;
-import com.animbus.music.media.Old.MediaController;
-import com.animbus.music.ui.Settings.Settings;
+import com.animbus.music.customImpls.LockableViewPager;
+import com.animbus.music.customImpls.ThemableActivity;
+import com.animbus.music.media.MediaData;
+import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.objects.Song;
+import com.animbus.music.ui.Search;
+import com.animbus.music.ui.settings.Settings;
+import com.animbus.music.ui.settings.chooseIcon.IconManager;
+import com.animbus.music.ui.setup.SetupActivity;
+import com.animbus.music.ui.theme.Theme;
+import com.animbus.music.ui.theme.ThemeManager;
 
 
-public class MainScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainScreen extends ThemableActivity implements NavigationView.OnNavigationItemSelectedListener {
     public View quickToolbar;
-    MediaController controller;
-    String AlbumName, AlbumArtist, currentScreenName;
+    String currentScreenName;
     int AlbumArt = R.drawable.album_art;
-    MediaController musicControl;
-    Configuration config;
-    DataManager dataManager;
+    MediaData dataManager;
     SettingsManager settings;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -52,60 +54,64 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
     TabLayout tabs;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        settings = new SettingsManager(this);
-        themeManager = new ThemeManager(this, ThemeManager.TYPE_NORMAL);
-
-        setTheme(themeManager.getCurrentTheme());
+    protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
-        findViewById(R.id.MainView).setBackgroundColor(themeManager.getCurrentBackgroundColor());
+    }
 
-        //This sets all of the variables
+    @Override
+    protected void sequence(Bundle savedInstanceState) {
+        super.sequence(savedInstanceState);
+        setUpNavdrawer();
+        showSetupIfNeeded();
+    }
+
+    @Override
+    protected void setVariables() {
+        settings = SettingsManager.get();
+        themeManager = ThemeManager.get();
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        musicControl = MediaController.getInstance();
-        dataManager = new DataManager(this);
         drawerContent = (NavigationView) findViewById(R.id.navigation);
-        quickToolbar = (View) findViewById(R.id.mylibrary_toolbar_fragment);
+        quickToolbar = findViewById(R.id.mylibrary_toolbar_fragment);
+        tabs = (TabLayout) findViewById(R.id.main_tab_layout);
+        pager = (LockableViewPager) findViewById(R.id.main_view_pager);
 
-        drawerContent.setNavigationItemSelectedListener(this);
-        musicControl = MediaController.getInstance();
-        musicControl.setContext(this);
-        musicControl.setQueue(dataManager.getSongListData());
-        musicControl.setRepeat(false);
+        BackupHub.get().settingsMyLib = this;
+    }
 
-        quickToolbar.setVisibility(View.GONE);
+    @Override
+    protected void setUpTheme(Theme theme) {
 
-        //Basic Stuff
+    }
+
+    @Override
+    protected void setUp() {
+       /* if (!PlaybackManager.get().isActive()){
+            quickToolbar.setVisibility(View.GONE);
+        }*/
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_exit_light);
+        } else {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
         }
 
-        updateSettings(this);
-        setUpNavdrawer(drawerLayout, toolbar);
-    }
-
-    public void end() {
-        finish();
-    }
-
-    private void updateSettings(Context cxt) {
         //Sets Dynamic Title
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
         } else {
-            toolbar.setTitle(cxt.getResources().getString(R.string.title_activity_main));
+            toolbar.setTitle(getResources().getString(R.string.title_activity_main));
         }
 
-        pager = (LockableViewPager) findViewById(R.id.main_view_pager);
         pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         pager.setOffscreenPageLimit(3);
 
-        tabs = (TabLayout) findViewById(R.id.main_tab_layout);
-        tabs.setupWithViewPager(pager);
+        if (settings.getBooleanSetting(SettingsManager.KEY_SCROLLABLE_TABS, true)) {
+            tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+        } else {
+            tabs.setTabMode(TabLayout.MODE_FIXED);
+        }
 
         if (!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)) {
             ViewCompat.setElevation(findViewById(R.id.main_app_bar), 0.0f);
@@ -113,43 +119,58 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
             tabs.setVisibility(View.GONE);
         }
 
+        if (!settings.getBooleanSetting(SettingsManager.KEY_USE_TAB_ICONS, false)) {
+            tabs.setupWithViewPager(pager);
+        } else {
+            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_albums));
+            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_songs));
+            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_playlists));
+            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_artists));
+        }
+
+        //Allows the tabs to sync to the view pager
+        tabs.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(pager));
+        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+
+
         //Sets Window description in Multitasking menu
+        IconManager iconM = IconManager.get().setContext(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (!settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-                Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_new_light);
-                setTaskDescription(new ActivityManager.TaskDescription(null, bm, cxt.getResources().getColor(R.color.primaryDark)));
+                Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+                setTaskDescription(new ActivityManager.TaskDescription(null, bm, getResources().getColor(R.color.primaryDark)));
                 bm.recycle();
             } else {
-                Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_new_dark);
-                setTaskDescription(new ActivityManager.TaskDescription(null, bm, cxt.getResources().getColor(R.color.primaryLight)));
+                Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+                setTaskDescription(new ActivityManager.TaskDescription(null, bm, getResources().getColor(R.color.primaryLight)));
                 bm.recycle();
             }
         }
+        if (!PlaybackManager.get().isActive()) {
+            quickToolbar.setVisibility(View.GONE);
+        }
     }
 
-    private void setUpNavdrawer(DrawerLayout drawerLayout, Toolbar toolbar) {
-        final ActionBarDrawerToggle mDrawerToggle;
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+    private void setUpNavdrawer() {
+        drawerContent.setNavigationItemSelectedListener(this);
+
+        final View header = View.inflate(this, R.layout.navigation_drawer_header, null);
+        PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
             @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
+            public void onSongChanged(Song song) {
+                TextView title = (TextView) header.findViewById(R.id.navdrawer_header_title);
+                TextView artist = (TextView) header.findViewById(R.id.navdrawer_header_artist);
+                ImageView art = (ImageView) header.findViewById(R.id.navdrawer_header_image);
+                title.setText(song.getSongTitle());
+                artist.setText(song.getSongArtist());
+                art.setImageBitmap(song.getAlbum().getAlbumArt());
             }
 
             @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                invalidateOptionsMenu();
-            }
-        };
-        drawerLayout.setDrawerListener(mDrawerToggle);
-        drawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mDrawerToggle.syncState();
+            public void onPlaybackStateChanged(PlaybackStateCompat state) {
+
             }
         });
-        View header = View.inflate(this, R.layout.navigation_drawer_header, null);
         drawerContent.addHeaderView(header);
         drawerContent.inflateMenu(R.menu.navigation_drawer_items);
 
@@ -177,7 +198,7 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
                             {}
                     },
                     new int[]{
-                            getResources().getColor(R.color.accent_material_light), //When selected
+                            getResources().getColor(R.color.primaryDark), //When selected
                             getResources().getColor(R.color.secondary_text_default_material_light)
                     }
             );
@@ -188,7 +209,7 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
                             {}
                     },
                     new int[]{
-                            getResources().getColor(R.color.accent_material_dark), //When selected
+                            getResources().getColor(R.color.primaryLight), //When selected
                             getResources().getColor(R.color.secondary_text_default_material_dark)
                     }
             );
@@ -196,6 +217,16 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
         drawerContent.setItemIconTintList(colorStateList);
         drawerContent.setItemTextColor(colorStateList);
 
+    }
+
+    private void showSetupIfNeeded() {
+        //TODO:Placeholder
+        boolean isDesigned = false;
+        boolean romAllows = true;
+        if (!isDesigned && romAllows && settings.getBooleanSetting(SettingsManager.KEY_FIRST_RUN, true)) {
+            startActivity(new Intent(this, SetupActivity.class));
+            settings.setBooleanSetting(SettingsManager.KEY_FIRST_RUN, false);
+        }
     }
 
     @Override
@@ -206,14 +237,19 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent();
-            intent.setClass(this, Settings.class);
-            startActivity(intent);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(this, Settings.class));
+                break;
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
+            case R.id.action_search:
+                startActivity(new Intent(this, Search.class));/*
+                new MediaNotification(this);
+                startActivity(new Intent(this, SetupActivity.class));*/
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -346,16 +382,4 @@ public class MainScreen extends AppCompatActivity implements NavigationView.OnNa
         }
 
     }
-    //End Section
-
-
-    //This section is for the helper methods
-
-    //End section
-
-
-    //This section is where you can open other screens (Now Playing, Albums Details, Playlist Details, etc.)
-    //You add the Bundle and Intent for the alternate activities
-
-    //End Section
 }
