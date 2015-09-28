@@ -2,9 +2,12 @@ package com.animbus.music.media;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
@@ -77,7 +80,7 @@ public class MediaData {
                 s.setSongDuration(songsCursor.getLong(durColumn));
                 mSongs.add(s);
             } while (songsCursor.moveToNext());
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
             mSongs = Collections.emptyList();
         }
@@ -109,7 +112,7 @@ public class MediaData {
                 a.setContext(context);
                 mAlbums.add(a);
             } while (albumsCursor.moveToNext());
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
             mAlbums = Collections.emptyList();
         }
@@ -133,9 +136,9 @@ public class MediaData {
                 p.setId(playlistsCursor.getLong(idColumn));
                 mPlaylists.add(p);
             } while (playlistsCursor.moveToNext());
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
-           mPlaylists = Collections.emptyList();
+            mPlaylists = Collections.emptyList();
         }
     }
 
@@ -148,7 +151,6 @@ public class MediaData {
      * So it basically links songs and albums.
      */
     private void buildDataMesh() {
-        int i = 0;
         if (!mSongs.isEmpty() && !mAlbums.isEmpty()) {
             for (Album a : mAlbums) {
                 for (Song s : mSongs) {
@@ -183,5 +185,45 @@ public class MediaData {
 
     public boolean isBuilt() {
         return mBuilt;
+    }
+
+    public Song findSongById(long id) {
+        Song s = null;
+        for (Song song : mSongs) {
+            if (song.getSongID() == id) {
+                s = song;
+                break;
+            }
+        }
+        return s;
+    }
+
+    public Album findAlbumById(long id) {
+        Album a = null;
+        for (Album album : mAlbums) {
+            if (album.getId() == id) {
+                a = album;
+                break;
+            }
+        }
+        return a;
+    }
+
+    private class AlbumListener implements Response.Listener<Bitmap>, Response.ErrorListener {
+        Album a;
+
+        public AlbumListener(Album a) {
+            this.a = a;
+        }
+
+        @Override
+        public void onResponse(Bitmap response) {
+            a.setAlbumArt(response);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            a.setAlbumArt(a.getDefaultArt());
+        }
     }
 }

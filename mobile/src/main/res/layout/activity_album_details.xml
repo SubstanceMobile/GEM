@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.animbus.music.ui.albumDetails.AlbumDetails"
+    android:id="@+id/album_details_root"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/album_details_app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/album_details_collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true">
+
+            <com.animbus.music.customImpls.SquareImageViewWidth_Based
+                android:id="@+id/album_details_album_art"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/album_art_alt_alt"
+                app:layout_collapseMode="parallax"
+                android:fitsSystemWindows="true" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/gradient_black_ontop"
+                app:layout_collapseMode="none"
+                android:fitsSystemWindows="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:fitsSystemWindows="true">
+
+                <com.animbus.music.customImpls.SquareImageViewWidth_Based
+                    android:id="@+id/album_details_square_spacer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ripple"
+                    android:clickable="true"
+                    android:fitsSystemWindows="true"/>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/album_details_info_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/albums_info_toolbar_size"
+                    app:layout_collapseMode="none"
+                    app:subtitle="Artist"
+                    app:title="Album"
+                    android:background="?attr/colorPrimary"
+                    android:fitsSystemWindows="true" >
+
+                    <FrameLayout
+                        android:layout_width="@dimen/listViewSizeBig"
+                        android:layout_height="@dimen/listViewSizeBig"
+                        android:padding="@dimen/margin_small"
+                        android:id="@+id/album_details_favorite_icon_root"
+                        android:layout_gravity="end"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_repeat_black_48dp"
+                            android:id="@+id/album_details_favorite_icon"
+                            android:background="?attr/ripple_circle"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/margin_medium"
+                            android:clickable="true" />
+                    </FrameLayout>
+
+                </android.support.v7.widget.Toolbar>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/album_details_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_collapseMode="pin" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/album_details_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:layout_anchor="@id/album_details_square_spacer"
+        app:layout_anchorGravity="bottom|right|end"
+        android:src="@drawable/ic_play_arrow_black_48dp"
+        app:layout_behavior="com.animbus.music.ui.albumDetails.CustomFabBehavior"  />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/album_details_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>

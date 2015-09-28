@@ -32,13 +32,14 @@
     <dimen name="nowplaying_albumartSize">56dp</dimen>
 
     AlbumsScreen
-    <dimen name="albums_info_toolbar_size">148dp</dimen>
-    <dimen name="now_playing_seekbar_size">16dp</dimen>
-    <dimen name="now_playing_seekbar_thub_size">1dp</dimen>
+    <dimen name="albums_info_toolbar_size">142dp</dimen>
+    <dimen name="now_playing_seekbar_size">24dp</dimen>
+    <dimen name="now_playing_seekbar_thub_size">2dp</dimen>
     <dimen name="albums_info_toolbar_size_alt">90dp</dimen>
     <dimen name="albums_main_toolbar_size">80dp</dimen>
     <dimen name="toolbar_size_inverted">-56dp</dimen>
     <dimen name="now_playing_icon_size">56dp</dimen>
+    <dimen name="now_playing_repeat_icon_size">24dp</dimen>
 
     Design Sizes
     <dimen name="margin_micro">0.5dp</dimen>
@@ -65,4 +66,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
 
     <dimen name="choose_icon_height">116dp</dimen>
     <dimen name="choose_icon_bottom_margin">76dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
 </resources>

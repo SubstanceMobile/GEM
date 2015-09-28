@@ -14,7 +14,6 @@ import com.animbus.music.media.objects.Song;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongListViewHolder> {
     LayoutInflater inflater;
@@ -39,13 +38,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
         Song current = data.get(position);
         holder.SongName.setText(current.getSongTitle());
         holder.SongArtist.setText(current.getSongArtist());
-        long millis = current.getSongDuration();
-        //hh:mm:ss
-        String dur = String.format("%02d:%02d:%02d",
-                TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-        holder.SongDuration.setText(dur);
+        holder.SongDuration.setText(current.getSongDurString());
         holder.SongArt.setImageBitmap(current.getAlbum().getAlbumArt());
     }
 

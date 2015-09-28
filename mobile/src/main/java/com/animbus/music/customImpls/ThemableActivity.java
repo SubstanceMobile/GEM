@@ -1,10 +1,6 @@
 package com.animbus.music.customImpls;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +8,7 @@ import android.view.View;
 
 import com.animbus.music.SettingsManager;
 import com.animbus.music.media.MediaData;
-import com.animbus.music.media.MediaService;
-import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 
@@ -32,30 +27,10 @@ public abstract class ThemableActivity extends AppCompatActivity implements Them
         if (MediaData.get().context == null){
             MediaData.get(this);
         }
-        if (PlaybackManager.get().mContext == null){
-            initService();
-        }
+        ServiceHelper.get(this).initService();
     }
 
-    MediaService mService;
-    public void initService(){
-        Intent i = new Intent(this, MediaService.class);
-        ServiceConnection conn = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                MediaService.MusicBinder binder = (MediaService.MusicBinder) service;
-                mService = binder.getService();
-                mService.setUp();
-            }
 
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                mService = null;
-            }
-        };
-        startService(i);
-        boolean bound = bindService(i, conn, BIND_AUTO_CREATE);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

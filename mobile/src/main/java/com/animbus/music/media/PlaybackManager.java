@@ -19,6 +19,7 @@ import static android.media.MediaPlayer.OnErrorListener;
 import static android.media.MediaPlayer.OnPreparedListener;
 import static android.media.MediaPlayer.OnSeekCompleteListener;
 import static android.support.v4.media.session.PlaybackStateCompat.STATE_FAST_FORWARDING;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_NONE;
 import static android.support.v4.media.session.PlaybackStateCompat.STATE_PAUSED;
 import static android.support.v4.media.session.PlaybackStateCompat.STATE_PLAYING;
 import static android.support.v4.media.session.PlaybackStateCompat.STATE_REWINDING;
@@ -190,6 +191,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
         if (processSongPos) {
             if (mMediaPlayer.getCurrentPosition() > MAX_DURATION_FOR_REPEAT) {
                 play(QueueManager.get().getCurrentQueueAsSong(), QueueManager.get().getCurrentSongPos());
+                mCurrentPosition = 0;
             } else {
                 play(QueueManager.get().getCurrentQueueAsSong(), QueueManager.get().updatePrevSongPos());
             }
@@ -211,7 +213,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
             // while paused, retain the MediaPlayer but give up audio focus
             relaxResources(false);
             giveUpAudioFocus();
-            mService.stopForeground(false);
+            mService.removeForeground(false);
         }
         mService.setState(STATE_PAUSED);
     }
@@ -242,7 +244,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
         // Relax all resources
         relaxResources(true);
         //Stop the service
-        mService.stopForeground(true);
+        mService.removeForeground(true);
         mService.stopService();
     }
 
@@ -252,15 +254,15 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
             // If we do not have a current media player, simply update the current position
             mCurrentPosition = position;
         } else {
-            if (mMediaPlayer.isPlaying()) {
-                if (getCurrentPosInSong() > position) {
-                    //If the old position is greater then the new one, then you are rewinding
-                    mService.setState(STATE_REWINDING);
-                } else {
-                    //If the old one is less then the new one, then you are fast forwarding
-                    mService.setState(STATE_FAST_FORWARDING);
-                }
+            if (getCurrentPosInSong() > position) {
+                //If the old position is greater then the new one, then you are rewinding
+                mService.setState(STATE_REWINDING);
+            } else {
+                //If the old one is less then the new one, then you are fast forwarding
+                mService.setState(STATE_FAST_FORWARDING);
             }
+            mCurrentPosition = position;
+            mMediaPlayer.seekTo(position);
         }
     }
 
@@ -332,9 +334,10 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
     @Override
     public void onCompletion(MediaPlayer player) {
         Log.d(TAG, "onCompletion from MediaPlayer");
-        // The media player finished playing the current song, so we go ahead
-        // and start the next.
-        play(QueueManager.get().getCurrentQueueAsSong(), QueueManager.get().updateNextSongPos());
+        if (!player.isLooping()) {
+            // The media player finished playing the current song, so we go ahead and start the next.
+            play(QueueManager.get().getCurrentQueueAsSong(), QueueManager.get().updateNextSongPos());
+        }
     }
 
     /**
@@ -363,6 +366,9 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
         return true; // true indicates we handled the error
     }
 
+    public MediaPlayer getMediaPlayer() {
+        return mMediaPlayer;
+    }
     ///////////////////////////////////////////////////////////////////////////
     // Change Listener
     ///////////////////////////////////////////////////////////////////////////
@@ -490,7 +496,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
     private void relaxResources(boolean releaseMediaPlayer) {
         Log.d(TAG, "RelaxResources. ReleaseMediaPlayer=" + releaseMediaPlayer);
 
-        mService.stopForeground(false);
+        mService.removeForeground(false);
 
         // stop and release the Media Player, if it's available
         if (releaseMediaPlayer && mMediaPlayer != null) {
@@ -524,6 +530,8 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
             return false;
         } else if (mService.getSession() == null) {
             return false;
+        } else if (mService.getState() == STATE_STOPPED || mService.getState() == STATE_NONE) {
+            return false;
         } else {
             return mService.getSession().isActive();
         }
@@ -531,6 +539,16 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
 
     public MediaService getService() {
         return  mService;
+    }
+
+    public boolean isLooping() {
+        return mMediaPlayer.isLooping();
+    }
+
+
+
+    public boolean isInitiated() {
+        return mService != null;
     }
 
 

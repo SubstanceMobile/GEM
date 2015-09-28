@@ -16,11 +16,14 @@
 
     Action/Toolbar
     <string name="action_settings">@string/title_activity_settings</string>
+    <string name="action_stop">Stop</string>
     <string name="action_search">Search</string>
     <string name="action_reset_icons">Reset Icons</string>
     <string name="action_test_icons">Enable All Icons (Testing Purposes)</string>
     <string name="action_place_shortcut">Add this icon to the homescreen</string>
     <string name="action_donate">Donate</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_unfavorite">Unfavorite</string>
 
     Navigation Drawer
     <string name="page_home">Home</string>
@@ -132,5 +135,6 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_ui_customiser">UiCustomiser</string>
+    <string name="title_activity_album_details">ALBUM_DETAILS</string>
 
 </resources>

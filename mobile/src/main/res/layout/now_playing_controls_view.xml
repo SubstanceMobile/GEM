@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/now_playing_seekbar_size"
+        android:layout_weight="100"
+        android:background="@color/primaryLight">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:00"
+            android:id="@+id/controls_current_pos"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/secondary_text_default_material_light" />
+
+        <SeekBar
+            android:layout_width="0dp"
+            android:layout_height="@dimen/now_playing_seekbar_size"
+            android:id="@+id/control_seek_bar"
+            android:progress="100"
+            android:layout_weight="10"
+            android:layout_gravity="center_vertical"
+            android:thumb="@drawable/slider_alternate_thumb" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9:99"
+            android:id="@+id/controls_total_pos"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/secondary_text_default_material_light" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/albums_info_toolbar_size">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10" />
+
+                <FrameLayout
+                    android:layout_width="@dimen/listViewSizeBig"
+                    android:layout_height="@dimen/listViewSizeBig"
+                    android:padding="@dimen/margin_small"
+                    android:id="@+id/frameLayout">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_skip_previous_black_48dp"
+                        android:id="@+id/controls_prev_button"
+                        android:background="?attr/ripple_circle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/margin_medium"
+                        android:clickable="true" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="@dimen/listViewSizeBig"
+                    android:layout_height="@dimen/listViewSizeBig"
+                    android:padding="@dimen/margin_small"
+                    android:id="@+id/controls_play_button_root">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_play_arrow_black_48dp"
+                        android:id="@+id/controls_play_button"
+                        android:background="?attr/ripple_circle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/margin_medium"
+                        android:clickable="true" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="@dimen/listViewSizeBig"
+                    android:layout_height="@dimen/listViewSizeBig"
+                    android:padding="@dimen/margin_small"
+                    android:id="@+id/controls_pause_button_root"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_pause_black_48dp"
+                        android:id="@+id/controls_pause_button"
+                        android:background="?attr/ripple_circle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/margin_medium"
+                        android:clickable="true" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="@dimen/listViewSizeBig"
+                    android:layout_height="@dimen/listViewSizeBig"
+                    android:padding="@dimen/margin_small"
+                    android:id="@+id/frameLayout3">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_skip_next_black_48dp"
+                        android:id="@+id/controls_next_button"
+                        android:background="?attr/ripple_circle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/margin_medium"
+                        android:clickable="true" />
+                </FrameLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100">
+
+                    <ImageView
+                        android:layout_width="@dimen/listviewIconSize"
+                        android:layout_height="@dimen/listviewIconSize"
+                        android:src="@drawable/ic_volume_none"
+                        android:id="@+id/controls_volume_icon_empty"
+                        android:background="?attr/ripple_circle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/margin_small" />
+
+                    <SeekBar
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/controls_volume_seekbar"
+                        android:progress="100"
+                        android:layout_weight="10"
+                        android:layout_gravity="center_vertical" />
+
+                    <ImageView
+                        android:layout_width="@dimen/listviewIconSize"
+                        android:layout_height="@dimen/listviewIconSize"
+                        android:src="@drawable/ic_volume_up"
+                        android:id="@+id/controls_volume_icon_full"
+                        android:background="?attr/ripple_circle"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/margin_small" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

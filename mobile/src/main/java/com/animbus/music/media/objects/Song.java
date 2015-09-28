@@ -2,20 +2,10 @@ package com.animbus.music.media.objects;
 
 
 import android.content.ContentUris;
-import android.media.MediaMetadata;
-import android.media.MediaMetadataRetriever;
-import android.media.browse.MediaBrowser;
-import android.media.session.MediaSession;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.media.MediaDescriptionCompat;
-import android.support.v4.media.MediaMetadataCompat;
-import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.MediaSessionCompat.QueueItem;
-
-import com.animbus.music.media.MediaNotification;
-
-import java.util.Queue;
 
 /**
  * Created by Adrian on 7/5/2015.
@@ -28,6 +18,7 @@ public class Song {
     boolean repeating;
     Album songAlbum;
     long albumID;
+    String songDurString = "";
 
     public Song() {
 
@@ -101,6 +92,33 @@ public class Song {
         return songAlbum;
     }
 
+    public String getSongDurString() {
+        if (!songDurString.equals("")) {
+            return songDurString;
+        } else {
+            songDurString = stringForTime(getSongDuration());
+            return songDurString;
+        }
+    }
+
+    private String stringForTime(long timeMs) {
+        int totalSeconds = (int) timeMs / 1000;
+
+        int seconds = totalSeconds % 60;
+        int minutes = (totalSeconds / 60) % 60;
+        int hours   = totalSeconds / 3600;
+
+        if (hours > 0) {
+            return String.format("%d:%02d:%02d", hours, minutes, seconds);
+        } else {
+            return  String.format("%02d:%02d", minutes, seconds);
+        }
+    }
+
+    public void setSongDurString(String songDurString) {
+        this.songDurString = songDurString;
+    }
+
     public QueueItem toQueueItem(){
         MediaDescriptionCompat description = new MediaDescriptionCompat.Builder()
                 .setTitle(getSongTitle())
@@ -118,13 +136,6 @@ public class Song {
         song.setSongArtist(String.valueOf(data.getDescription()));
         song.setSongID(Long.valueOf(data.getMediaId()));
         return song;
-    }
-
-    //TODO:Proper impl of this
-    public static Song getFromID(long id){
-        Song i =  new Song();
-        i.setSongID(id);
-        return i;
     }
 
     public long getAlbumID() {

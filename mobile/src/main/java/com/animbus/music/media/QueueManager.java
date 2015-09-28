@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Adrian on 7/22/2015.
  */
-public class QueueManager {
+public class QueueManager{
     private static final QueueManager instance = new QueueManager();
     List<Song> queue = Collections.emptyList();
     int currentSongPos;
@@ -41,8 +41,8 @@ public class QueueManager {
 
     public List<QueueItem> toQueueItemList(List<Song> songList) {
         List<QueueItem> itemList = Collections.emptyList();
-        for (int i = 0; i <= itemList.size(); i++) {
-            itemList.add(songList.get(i).toQueueItem());
+        for (Song s: songList) {
+            itemList.add(s.toQueueItem());
         }
         return itemList;
     }

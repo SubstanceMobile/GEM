@@ -8,7 +8,6 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,7 +31,9 @@ public class Album {
     public int BackgroundColor;
     public int TitleTextColor;
     public int SubtitleTextColor;
-
+    public int accentColor;
+    public int accentIconColor;
+    public int darkPrimary;
     public Context cxt;
 
     public Album(){}
@@ -73,12 +74,16 @@ public class Album {
         if (albumArt != null){
             return albumArt;
         } else {
-            defaultArt = true;
-            if (!SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)){
-                return ((BitmapDrawable) cxt.getResources().getDrawable(R.drawable.art_dark)).getBitmap();
-            } else {
-                return ((BitmapDrawable) cxt.getResources().getDrawable(R.drawable.art_light)).getBitmap();
-            }
+            return getDefaultArt();
+        }
+    }
+
+    public Bitmap getDefaultArt() {
+        defaultArt = true;
+        if (!SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)){
+            return ((BitmapDrawable) cxt.getResources().getDrawable(R.drawable.art_dark)).getBitmap();
+        } else {
+            return ((BitmapDrawable) cxt.getResources().getDrawable(R.drawable.art_light)).getBitmap();
         }
     }
 

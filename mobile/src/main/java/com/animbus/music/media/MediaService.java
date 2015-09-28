@@ -5,10 +5,8 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.drm.DrmStore;
 import android.media.AudioManager;
 import android.os.Binder;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -17,11 +15,6 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.Toast;
-
-import com.animbus.music.media.objects.Song;
-
-import java.util.List;
 
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PAUSE;
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PLAY;
@@ -34,6 +27,7 @@ import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_T
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_TO_QUEUE_ITEM;
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_STOP;
 import static android.support.v4.media.session.PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_BUFFERING;
 import static android.support.v4.media.session.PlaybackStateCompat.STATE_NONE;
 import static android.support.v4.media.session.PlaybackStateCompat.STATE_PAUSED;
 import static android.support.v4.media.session.PlaybackStateCompat.STATE_PLAYING;
@@ -59,9 +53,6 @@ public class MediaService extends Service {
     PendingIntent mButtonReceivedIntent;
     //The notification
     private MediaNotification mNotification;
-    // Indicates whether the service was started.
-    private boolean mServiceStarted;
-    private Bundle mSessionExtras;
     private PlaybackManager mPlayback;
 
     @Nullable
@@ -84,6 +75,11 @@ public class MediaService extends Service {
         startForeground(MediaNotification.NOTIFICATION_ID, mNotification.getNotification());
     }
 
+    public void removeForeground(boolean removeNotification){
+        stopForeground(removeNotification);
+        mNotification.removeOngoing();
+    }
+
     public void setUp(){
         mPlayback = PlaybackManager.from(this);
         mNotification = new MediaNotification(this);
@@ -103,9 +99,7 @@ public class MediaService extends Service {
                 MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
         mSession.setCallback(new MediaSessionCallback());
         setState(STATE_NONE);
-        mSession.setPlaybackState(mState);
         mSession.setMediaButtonReceiver(mButtonReceivedIntent);
-        mSession.setActive(true);
     }
 
     public void updateMetadata(MediaMetadataCompat metadata){
@@ -143,6 +137,8 @@ public class MediaService extends Service {
                                 ACTION_SEEK_TO)
                 .setState(state, PLAYBACK_POSITION_UNKNOWN, 1.0f, SystemClock.elapsedRealtime())
                 .build();
+        mSession.setPlaybackState(mState);
+        mSession.setActive(state != PlaybackStateCompat.STATE_NONE && state != PlaybackStateCompat.STATE_STOPPED);
         for (PlaybackManager.OnChangedListener l : mPlayback.listeners){
             l.onPlaybackStateChanged(mState);
         }
@@ -180,15 +176,14 @@ public class MediaService extends Service {
 
         @Override
         public void onSeekTo(long pos) {
-            Log.d(TAG, "onSeekTo" + pos);
             mPlayback.seekTo((int) pos);
-            Toast.makeText(MediaService.this, "SeekTo " + pos, Toast.LENGTH_SHORT).show();
+            setState(STATE_BUFFERING);
         }
 
         @Override
         public void onSkipToQueueItem(long id) {
             super.onSkipToQueueItem(id);
-            mPlayback.play(Song.getFromID(id));
+            mPlayback.play(MediaData.get().findSongById(id));
             setState(STATE_SKIPPING_TO_QUEUE_ITEM);
         }
 

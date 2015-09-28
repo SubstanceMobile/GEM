@@ -4,10 +4,12 @@
       <root url="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/3.1.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/3.1.0/res" />
       <root url="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/3.1.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.paolorotolo/appintro/3.1.0/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.paolorotolo/appintro/3.1.0/99cfd2c614bf832fb6775acbbd116c818ce11c37/appintro-3.1.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

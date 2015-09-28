@@ -6,62 +6,61 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.session.MediaController;
+import android.os.Build;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.NotificationCompat;
-import android.view.KeyEvent;
+import android.view.View;
+import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.mainScreen.MainScreen;
+import com.animbus.music.ui.nowPlaying.NowPlaying;
 
-import static android.support.v7.app.NotificationCompat.CATEGORY_TRANSPORT;
-import static android.support.v7.app.NotificationCompat.COLOR_DEFAULT;
-import static android.support.v7.app.NotificationCompat.MediaStyle;
-import static android.support.v7.app.NotificationCompat.PRIORITY_MAX;
-import static android.support.v7.app.NotificationCompat.VISIBILITY_PUBLIC;
+import static android.support.v4.app.NotificationCompat.CATEGORY_TRANSPORT;
+import static android.support.v4.app.NotificationCompat.PRIORITY_MAX;
+import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
 
 /**
  * Created by Adrian on 7/20/2015
  */
-public class MediaNotification {
+public class MediaNotification extends BroadcastReceiver {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //All of the Variables
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static final int NOTIFICATION_ID = 412;
 
-    public static final int UI_REQ_CODE = 126;
-    public static final int PAUSE_REQ_CODE = 127;
-    public static final int PLAY_REQ_CODE = 128;
-    public static final int PREV_REQ_CODE = 129;
-    public static final int NEXT_REQ_CODE = 130;
-    public static final int STOP_REQ_CODE = 131;
+    public static final int REQ_CODE = 100;
+
+    public static final String ACTION_PLAY = "music_PLAY";
+    public static final String ACTION_PAUSE = "music_PAUSE";
+    public static final String ACTION_NEXT = "music_NEXT";
+    public static final String ACTION_PREV = "music_PREV";
+    public static final String ACTION_STOP = "music_STOP";
+    public static final String ACTION_QUEUE = "music_QUEUE";
+    public static final String ACTION_EXIT_QUEUE = "music_EXIT_QUEUE";
 
     private final MediaService mService;
-    private MediaSessionCompat.Token mSessionToken;
-    private MediaControllerCompat mController;
-    private MediaControllerCompat.TransportControls mTransportControls;
-
-    private PlaybackStateCompat mPlaybackState;
-    private MediaMetadataCompat mMetadata;
-
-    private NotificationManagerCompat mNotificationManager;
-
-    private int mNotificationColor;
-
-    private boolean mStarted = false;
-
-    private NotificationCompat.Builder mBuilder;
-
     String stringPrev;
     String stringPlay;
     String stringPause;
     String stringsNext;
+    String stringQueue;
+    private MediaSessionCompat.Token mSessionToken;
+    private MediaControllerCompat mController;
+    private MediaControllerCompat.TransportControls mTransportControls;
+    private PlaybackStateCompat mPlaybackState;
+    private NotificationManagerCompat mNotificationManager;
+    private int mNotificationColor;
+
+    private NotificationCompat.Builder mBuilder;
+    private Notification mNotification;
+
+    private boolean mDisplayinQueue = false;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //The constructor
@@ -69,13 +68,14 @@ public class MediaNotification {
 
     public MediaNotification(MediaService service) {
         mService = service;
-        mNotificationColor = COLOR_DEFAULT;
+        mNotificationColor = mService.getResources().getColor(R.color.primaryGreyDark);
         mNotificationManager = NotificationManagerCompat.from(service);
 
         stringPrev = mService.getResources().getString(R.string.playback_prev);
         stringPlay = mService.getResources().getString(R.string.playback_play);
         stringPause = mService.getResources().getString(R.string.playback_pause);
         stringsNext = mService.getResources().getString(R.string.playback_next);
+        stringQueue = mService.getResources().getString(R.string.playback_queue);
 
         PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
             @Override
@@ -91,61 +91,127 @@ public class MediaNotification {
         });
     }
 
-    private void addPrevious(){
-        mBuilder.addAction(R.drawable.ic_skip_previous_white_48dp, stringPrev, PendingIntent.getBroadcast(mService, PREV_REQ_CODE,
-                new Intent(Intent.ACTION_MEDIA_BUTTON).putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS)), PendingIntent.FLAG_UPDATE_CURRENT));
+    private void addPrevious() {
+        mBuilder.addAction(R.drawable.ic_skip_previous_white_36dp, stringPrev, PendingIntent.getBroadcast(mService, REQ_CODE,
+                new Intent(ACTION_PREV), PendingIntent.FLAG_CANCEL_CURRENT));
     }
 
-    private void addPlayPause(){
-        if (PlaybackManager.get().isPlaying()){
-            mBuilder.addAction(R.drawable.ic_pause_white_48dp, stringPause, PendingIntent.getBroadcast(mService, PAUSE_REQ_CODE,
-                    new Intent(Intent.ACTION_MEDIA_BUTTON).putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE)), PendingIntent.FLAG_UPDATE_CURRENT));
+    private void addPlayPause() {
+        if (PlaybackManager.get().isPlaying()) {
+            mBuilder.addAction(R.drawable.ic_pause_white_36dp, stringPause, PendingIntent.getBroadcast(mService, REQ_CODE,
+                    new Intent(ACTION_PAUSE), PendingIntent.FLAG_CANCEL_CURRENT));
         } else {
-            mBuilder.addAction(R.drawable.ic_play_arrow_white_48dp, stringPlay, PendingIntent.getBroadcast(mService, PLAY_REQ_CODE,
-                    new Intent(Intent.ACTION_MEDIA_BUTTON).putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY)), PendingIntent.FLAG_UPDATE_CURRENT));
+            mBuilder.addAction(R.drawable.ic_play_arrow_white_36dp, stringPlay, PendingIntent.getBroadcast(mService, REQ_CODE,
+                    new Intent(ACTION_PLAY), PendingIntent.FLAG_CANCEL_CURRENT));
         }
     }
 
-    private void addNext(){
-        mBuilder.addAction(R.drawable.ic_skip_next_white_48dp, stringsNext, PendingIntent.getBroadcast(mService, NEXT_REQ_CODE,
-                new Intent(Intent.ACTION_MEDIA_BUTTON).putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT)), PendingIntent.FLAG_UPDATE_CURRENT));
+    private void addNext() {
+        mBuilder.addAction(R.drawable.ic_skip_next_white_36dp, stringsNext, PendingIntent.getBroadcast(mService, REQ_CODE,
+                new Intent(ACTION_NEXT), PendingIntent.FLAG_CANCEL_CURRENT));
     }
 
-    public void setUp(){
+    private void addQueue() {
+        mBuilder.addAction(R.drawable.ic_queue_music_white_24dp, stringsNext, PendingIntent.getBroadcast(mService, REQ_CODE,
+                new Intent(ACTION_QUEUE), PendingIntent.FLAG_CANCEL_CURRENT));
+    }
+
+    public void setUp() {
         Song song = PlaybackManager.get().getCurrentSong();
 
-            mBuilder = new NotificationCompat.Builder(mService);
+        mBuilder = new NotificationCompat.Builder(mService);
+        if (!mDisplayinQueue) {
             mBuilder
                     .setContentTitle(song.songTitle)
                     .setContentText(song.songArtist)
+                    .setSubText(song.getAlbum().getAlbumTitle())
                     .setColor(mNotificationColor)
-                    .setStyle(new MediaStyle().setShowActionsInCompactView(0,1,2))
+                    .setStyle(
+                            new NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2)
+                                    .setMediaSession(mService.getSession().getSessionToken()))
                     .setSmallIcon(R.mipmap.ic_notificstaion_srini)
                     .setLargeIcon(song.getAlbum().getAlbumArt())
                     .setCategory(CATEGORY_TRANSPORT)
                     .setVisibility(VISIBILITY_PUBLIC)
-                    .setDeleteIntent(PendingIntent.getBroadcast(mService, STOP_REQ_CODE,
-                            new Intent(Intent.ACTION_MEDIA_BUTTON).putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP)), PendingIntent.FLAG_UPDATE_CURRENT))
-                    //TODO:Fix Intent
-                    .setContentIntent(PendingIntent.getActivity(mService, UI_REQ_CODE,
-                            new Intent(mService, MainScreen.class), PendingIntent.FLAG_UPDATE_CURRENT))
+                    .setDeleteIntent(PendingIntent.getBroadcast(mService, REQ_CODE, new Intent(ACTION_STOP), PendingIntent.FLAG_CANCEL_CURRENT))
+                    .setContentIntent(PendingIntent.getActivity(mService, REQ_CODE,
+                            new Intent(mService, NowPlaying.class), PendingIntent.FLAG_CANCEL_CURRENT))
                     .setShowWhen(false)
                     .setPriority(PRIORITY_MAX);
             addPrevious();
             addPlayPause();
             addNext();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(ACTION_PLAY);
+            filter.addAction(ACTION_PAUSE);
+            filter.addAction(ACTION_NEXT);
+            filter.addAction(ACTION_PREV);
+            filter.addAction(ACTION_STOP);
+            filter.addAction(ACTION_QUEUE);
+            filter.addAction(ACTION_EXIT_QUEUE);
+            mService.registerReceiver(this, filter);
+        } else {
+            mService.sendBroadcast(new Intent(ACTION_EXIT_QUEUE));
+        }
+
+        mNotification = mBuilder.build();
+
+        if (!mDisplayinQueue) {
+            RemoteViews v = mBuilder.build().bigContentView;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                v.setViewVisibility(mService.getResources().getIdentifier("action_divider", "id", "android"), View.GONE);
+            } else {
+                v.setViewVisibility(android.support.v7.appcompat.R.id.action_divider, View.GONE);
+            }
+            mNotification.bigContentView = v;
+        }
     }
 
     public void update() {
         if (PlaybackManager.get().getCurrentSong() != null) {
             setUp();
             if (mPlaybackState.getState() != PlaybackStateCompat.STATE_STOPPED) {
-                mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+                mNotificationManager.notify(NOTIFICATION_ID, getNotification());
             }
         }
     }
 
-    public Notification getNotification(){
-        return mBuilder.build();
+    public Notification getNotification() {
+        return mNotification;
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        MediaControllerCompat.TransportControls tc = PlaybackManager.get().getService().getSession().getController().getTransportControls();
+        if (intent.getAction().equals(ACTION_PLAY)) {
+            tc.play();
+        } else if (intent.getAction().equals(ACTION_PAUSE)) {
+            tc.pause();
+        } else if (intent.getAction().equals(ACTION_NEXT)) {
+            tc.skipToNext();
+        } else if (intent.getAction().equals(ACTION_PREV)) {
+            tc.skipToPrevious();
+        } else if (intent.getAction().equals(ACTION_STOP)) {
+            tc.stop();
+        } else if (intent.getAction().equals(ACTION_QUEUE)) {
+            mDisplayinQueue = true;
+            update();
+            Toast.makeText(mService, "Enter Queue", Toast.LENGTH_SHORT).show();
+        } else if (intent.getAction().equals(ACTION_EXIT_QUEUE)) {
+            Toast.makeText(mService, "Exit Queue", Toast.LENGTH_SHORT).show();
+            mDisplayinQueue = false;
+            update();
+        }
+    }
+
+    public void removeOngoing() {
+        try {
+            setUp();
+            mBuilder.setOngoing(false);
+            mNotification = mBuilder.build();
+            update();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
