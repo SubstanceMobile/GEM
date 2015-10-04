@@ -265,10 +265,11 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     }
 
     public interface AlbumArtGridClickListener {
-        void AlbumGridItemClicked(View view, int position, List<Album> data);
+        void AlbumGridItemClicked(View view, Album album);
+        void AlbumGridItemLongClicked(View view, Album album);
     }
 
-    class AlbumGridViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
+    class AlbumGridViewHolder extends RecyclerView.ViewHolder implements OnClickListener, View.OnLongClickListener {
         protected Boolean animated = false;
         TextView AlbumName, AlbumArtist;
         ImageView AlbumArt;
@@ -283,13 +284,22 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
             AlbumGridItem = itemView.findViewById(R.id.AlbumGridItem);
             AlbumGridItemRoot = itemView.findViewById(R.id.AlbumGridItemRootView);
             AlbumGridItem.setOnClickListener(this);
+            AlbumGridItem.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (onItemClickedListener != null) {
-                onItemClickedListener.AlbumGridItemClicked(v, getAdapterPosition(), data);
+                onItemClickedListener.AlbumGridItemClicked(v, data.get(getAdapterPosition()));
             }
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            if (onItemClickedListener != null) {
+                onItemClickedListener.AlbumGridItemLongClicked(v, data.get(getAdapterPosition()));
+            }
+            return true;
         }
     }
 }

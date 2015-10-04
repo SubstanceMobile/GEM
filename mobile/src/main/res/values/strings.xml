@@ -107,6 +107,11 @@
     <string name="settings_unregister_popup_no">No</string>
     <string name="settings_tester_already_registered">You are already a tester</string>
 
+    <string name="internal_tester_warning_title">Warning</string>
+    <string name="internal_tester_warning">You are running internal testing software. It may be unfinished. Do not distribute.</string>
+    <string name="internal_tester_accept">Accept</string>
+    <string name="internal_tester_dont_show_again">Don\'t show again</string>
+
     Setup
     <string name="setup_intro_description">Welcome to GEM Player!</string>
     <string name="setup_promo_1_title">Customisable</string>
@@ -123,6 +128,7 @@
     <string name="playback_queue">Queue</string>
     <string name="playback_repeat">Repeat</string>
     <string name="playback_shuffle">Shuffle</string>
+    <string name="playing_album">Playing Album</string>
     
     Misc.
     <string name="appwidget_text">Why are you using the widget?</string>
