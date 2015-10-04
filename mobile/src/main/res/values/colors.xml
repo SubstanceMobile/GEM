@@ -10,6 +10,8 @@
     <color name="navdrawerAccentDark">#B6B6B6</color>
     <color name="ripple_dark">@color/ripple_material_dark</color>
     <color name="ripple_light">#47000000</color>
-    <color name="accent_dark">#ff4081</color>
-    <color name="accent_light">#f50057</color>
+    <color name="accent_pink_dark">#ff4081</color>
+    <color name="accent_pink_light">#f50057</color>
+    <color name="accent_blue_dark">#40c4ff</color>
+    <color name="accent_blue_light">#03a9f4</color>
 </resources>

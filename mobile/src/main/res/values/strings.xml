@@ -56,6 +56,10 @@
     <string name="settings_theme_variant_grey">Grey</string>
     <string name="settings_theme_variant_default">Default</string>
 
+    <string name="settings_theme_blue">Blue</string>
+    <string name="settings_theme_pink">Pink</string>
+    <string name="settings_theme_greyscale">Greyscale</string>
+
     <string name="settings_header_old">Old</string>
     <string name="settings_old_light_theme">Use Light Theme</string>
     <string name="settings_old_tabs">Use Tabs</string>

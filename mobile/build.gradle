@@ -25,6 +25,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
         }
         internal {
             debuggable false
@@ -34,9 +35,11 @@ android {
             renderscriptOptimLevel 3
             minifyEnabled true
             zipAlignEnabled true
+            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
         }
         debug {
             signingConfig signingConfigs.config
+            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
         }
     }
     productFlavors {

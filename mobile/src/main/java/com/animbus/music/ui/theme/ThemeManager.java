@@ -31,16 +31,7 @@ public class ThemeManager {
     }
 
     public int getBase() {
-        int base = SettingsManager.get().getIntSetting(SettingsManager.KEY_THEME_BASE, BASE_DARK);
-        if (base == BASE_DARK) {
-            return BASE_DARK;
-        } else if (base == BASE_LIGHT) {
-            return BASE_LIGHT;
-        } else if (base == BASE_GREY) {
-            return BASE_GREY;
-        } else {
-            return -1;
-        }
+        return SettingsManager.get().getIntSetting(SettingsManager.KEY_THEME_BASE, BASE_DARK);
     }
 
     public void setBase(int newBase) {

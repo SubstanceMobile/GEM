@@ -23,15 +23,24 @@
         <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
     </style>
 
-    <style name="AppTheme.Animbus" parent="Base.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primaryDark</item>
-        <item name="colorAccent">@color/accent_light</item>
-        <item name="primaryGreyColor">@color/primaryGreyLight</item>
-        <item name="primaryGreyColorAlt">@color/primaryGreyDark</item>
-        <item name="primaryAlternateColor">@color/primaryDark</item>
-        <item name="primaryAlternateTextColor">@color/primary_text_default_material_dark</item>
-        <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_dark</item>
+    <style name="AppTheme.Blue" parent="AppTheme">
+        <item name="colorAccent">@color/accent_blue_dark</item>
     </style>
+
+    <!--This is the light theme-->
+    <style name="AppTheme.Light.Blue" parent="AppTheme.Light">
+        <item name="colorAccent">@color/accent_blue_light</item>
+    </style>
+
+    <style name="AppTheme.Pink" parent="AppTheme">
+        <item name="colorAccent">@color/accent_pink_dark</item>
+    </style>
+
+    <style name="AppTheme.Light.Pink" parent="AppTheme.Light">
+        <item name="colorAccent">@color/accent_pink_dark</item>
+    </style>
+    .
+    +
 
     <style name="Base" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@color/primaryDark</item>
