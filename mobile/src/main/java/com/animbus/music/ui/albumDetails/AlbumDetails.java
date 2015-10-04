@@ -1,7 +1,11 @@
 package com.animbus.music.ui.albumDetails;
 
+import android.app.ActivityManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -24,7 +28,9 @@ import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
 import com.animbus.music.ui.settings.Settings;
+import com.animbus.music.ui.settings.chooseIcon.IconManager;
 import com.animbus.music.ui.theme.Theme;
+import com.animbus.music.ui.theme.ThemeManager;
 
 import java.util.List;
 
@@ -95,6 +101,14 @@ public class AlbumDetails extends ThemableActivity {
         mDetails.setSubtitleTextColor(mAlbum.SubtitleTextColor);
         mCollapsingToolbar.setContentScrimColor(mAlbum.BackgroundColor);
         mCollapsingToolbar.setStatusBarScrimColor(mAlbum.BackgroundColor);
+
+        //Sets Window description in Multitasking menu
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            IconManager iconM = IconManager.get().setContext(this);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.BackgroundColor));
+            bm.recycle();
+        }
     }
 
     private void configureUI() {

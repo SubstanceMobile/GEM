@@ -17,27 +17,10 @@ import com.animbus.music.ui.theme.ThemeManager;
  */
 public abstract class ThemableActivity extends AppCompatActivity implements ThemeManager.OnThemeChangedListener {
 
-    private void setContexts() {
-        if (SettingsManager.get().context == null) {
-            SettingsManager.get().setContext(this);
-        }
-        if (ThemeManager.get().cxt == null) {
-            ThemeManager.get().setContext(this);
-        }
-        if (MediaData.get().context == null){
-            MediaData.get(this);
-        }
-        ServiceHelper.get(this).initService();
-    }
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContexts();
-        if (!MediaData.get().isBuilt()){
-            MediaData.get().build();
-        }
         setBaseTheme(ThemeManager.get().getBase(), true);
         super.onCreate(savedInstanceState);
         sequence(savedInstanceState);

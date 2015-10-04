@@ -32,6 +32,12 @@ public class LaunchActivity extends ThemableActivity {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setContexts();
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected void setVariables() {
         toolbar = (Toolbar) findViewById(R.id.loading_toolbar);
         tabs = (TabLayout) findViewById(R.id.loading_tab_extention);
@@ -43,12 +49,6 @@ public class LaunchActivity extends ThemableActivity {
         boolean showTabs = SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_TABS, false);
         tabs.setVisibility(showTabs ? View.VISIBLE : View.GONE);
         if (!showTabs) ViewCompat.setElevation(appBar, 0.0f);
-        if (BackupHub.get().activated) {
-            SettingsManager.get().setContext(this);
-            ThemeManager.get().setContext(this);
-            MediaData.get(this);
-            BackupHub.get().activated = true;
-        }
         ServiceHelper.get(this).initService();
         if (!MediaData.get().isBuilt()){
             MediaData.get().build();
@@ -60,6 +60,15 @@ public class LaunchActivity extends ThemableActivity {
             });
         } else {
             complete();
+        }
+    }
+
+    private void setContexts() {
+        if (!BackupHub.get().activated) {
+            SettingsManager.get().setContext(this);
+            ThemeManager.get().setContext(this);
+            MediaData.get(this);
+            BackupHub.get().activated = true;
         }
     }
 
