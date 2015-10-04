@@ -115,6 +115,7 @@
     <string name="internal_tester_warning">You are running internal testing software. It may be unfinished. Do not distribute.</string>
     <string name="internal_tester_accept">Accept</string>
     <string name="internal_tester_dont_show_again">Don\'t show again</string>
+    <string name="internal_tester_error">An error occurred</string>
 
     Setup
     <string name="setup_intro_description">Welcome to GEM Player!</string>

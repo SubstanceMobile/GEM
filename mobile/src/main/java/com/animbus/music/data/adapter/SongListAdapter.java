@@ -1,6 +1,7 @@
 package com.animbus.music.data.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animbus.music.R;
+import com.animbus.music.databinding.SongList;
 import com.animbus.music.media.objects.Song;
 
 import java.util.Collections;
@@ -29,17 +31,13 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
 
     @Override
     public SongListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_songlist, parent, false);
-        return new SongListViewHolder(view);
+        SongList binding = SongList.inflate(LayoutInflater.from(context), parent, false);
+        return new SongListViewHolder(binding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(final SongListViewHolder holder, int position) {
-        Song current = data.get(position);
-        holder.SongName.setText(current.getSongTitle());
-        holder.SongArtist.setText(current.getSongArtist());
-        holder.SongDuration.setText(current.getSongDurString());
-        holder.SongArt.setImageBitmap(current.getAlbum().getAlbumArt());
+        holder.item.setSong(data.get(position));
     }
 
     @Override
@@ -56,15 +54,11 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
     }
 
     class SongListViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        TextView SongName, SongArtist, SongDuration;
-        ImageView SongArt;
+        SongList item;
 
         public SongListViewHolder(View itemView) {
             super(itemView);
-            SongName = (TextView) itemView.findViewById(R.id.songlist_song_title);
-            SongArtist = (TextView) itemView.findViewById(R.id.songlist_song_artist);
-            SongArt = (ImageView) itemView.findViewById(R.id.songlist_song_albumart);
-            SongDuration = (TextView) itemView.findViewById(R.id.songlist_song_duration);
+            item = DataBindingUtil.bind(itemView);
             itemView.setOnClickListener(this);
         }
 

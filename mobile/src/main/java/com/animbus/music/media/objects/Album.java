@@ -14,16 +14,16 @@ import java.util.List;
  * Created by Adrian on 7/5/2015.
  */
 public class Album {
-    List<Song> albumSongs = new ArrayList<>();
+    public List<Song> albumSongs = new ArrayList<>();
 
-    String albumTitle;
+    public String albumTitle;
 
-    String albumArtistName;
-    Artist albumArtist;
+    public String albumArtistName;
+    public Artist albumArtist;
 
-    Bitmap albumArt;
+    public Bitmap albumArt;
 
-    long id;
+    public long id;
 
     public boolean colorAnimated;
     public boolean animated;

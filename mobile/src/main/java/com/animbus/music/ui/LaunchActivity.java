@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
@@ -72,38 +73,56 @@ public class LaunchActivity extends ThemableActivity {
         }
     }
 
-    public void complete(){
+    public void complete() {
         final Intent i = new Intent(this, MainScreen.class);
         if (BackupHub.get().activated) i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         boolean internal = BuildConfig.BUILD_TYPE.equals("debug") || BuildConfig.BUILD_TYPE.equals("internal");
         if (internal && !SettingsManager.get().getBooleanSetting("doNotShowAgain_INTERNAL_TESTER", false)) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.internal_tester_warning_title)
-                    .setMessage(R.string.internal_tester_warning)
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.internal_tester_accept, null)
-                    .setNegativeButton(R.string.internal_tester_dont_show_again, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            SettingsManager.get().setBooleanSetting("doNotShowAgain_INTERNAL_TESTER", true);
-                        }
-                    })
-                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            if (BackupHub.get().activated) overridePendingTransition(-1, -1);
-                            startActivity(i);
-                            finish();
-                        }
-                    })
-                    .create().show();
+            try {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.internal_tester_warning_title)
+                        .setMessage(R.string.internal_tester_warning)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.internal_tester_accept, null)
+                        .setNegativeButton(R.string.internal_tester_dont_show_again, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SettingsManager.get().setBooleanSetting("doNotShowAgain_INTERNAL_TESTER", true);
+                            }
+                        })
+                        .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                showNextActivity();
+                            }
+                        })
+                        .create().show();
+            } catch (Exception e) {
+                Snackbar.make(findViewById(R.id.loading_root_view), R.string.internal_tester_error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        super.onDismissed(snackbar, event);
+                        Snackbar.make(findViewById(R.id.loading_root_view), R.string.internal_tester_error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
+                            @Override
+                            public void onDismissed(Snackbar snackbar, int event) {
+                                super.onDismissed(snackbar, event);
+                                showNextActivity();
+                            }
+                        }).show();
+                    }
+                }).show();
+            }
         } else {
+           showNextActivity();
+        }
+    }
+
+        private void showNextActivity(){
+            final Intent i = new Intent(this, MainScreen.class);
             if (BackupHub.get().activated) overridePendingTransition(-1, -1);
             startActivity(i);
             finish();
         }
-
-    }
 
     @Override
     protected void setUpTheme(Theme theme) {
