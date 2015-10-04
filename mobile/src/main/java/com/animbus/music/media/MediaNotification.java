@@ -12,8 +12,6 @@ import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.NotificationCompat;
-import android.view.View;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.animbus.music.R;
@@ -155,16 +153,6 @@ public class MediaNotification extends BroadcastReceiver {
         }
 
         mNotification = mBuilder.build();
-
-        if (!mDisplayinQueue) {
-            RemoteViews v = mBuilder.build().bigContentView;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                v.setViewVisibility(mService.getResources().getIdentifier("action_divider", "id", "android"), View.GONE);
-            } else {
-                v.setViewVisibility(android.support.v7.appcompat.R.id.action_divider, View.GONE);
-            }
-            mNotification.bigContentView = v;
-        }
     }
 
     public void update() {
@@ -205,13 +193,15 @@ public class MediaNotification extends BroadcastReceiver {
     }
 
     public void removeOngoing() {
-        try {
-            setUp();
-            mBuilder.setOngoing(false);
-            mNotification = mBuilder.build();
-            update();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            try {
+                setUp();
+                mBuilder.setOngoing(false);
+                mNotification = mBuilder.build();
+                update();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -3,16 +3,17 @@ package com.animbus.music.media;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.provider.MediaStore;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +25,9 @@ public class MediaData {
     private List<Album> mAlbums = new ArrayList<>();
     private List<Playlist> mPlaylists = new ArrayList<>();
     private List<Artist> mArtists = new ArrayList<>();
+
+    private int albumArtGeneratedPos = 0;
+    AlbumArtsGeneratedListener listener;
 
     private boolean mBuilt = false;
 
@@ -60,11 +64,11 @@ public class MediaData {
                     MediaStore.Audio.Media.TITLE);
 
             int titleColumn = songsCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Media.TITLE);
+                    (MediaStore.Audio.Media.TITLE);
             int idColumn = songsCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Media._ID);
+                    (MediaStore.Audio.Media._ID);
             int artistColumn = songsCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Media.ARTIST);
+                    (MediaStore.Audio.Media.ARTIST);
             int durColumn = songsCursor.getColumnIndex
                     (MediaStore.Audio.Media.DURATION);
             int albumIdColumn = songsCursor.getColumnIndex
@@ -94,23 +98,23 @@ public class MediaData {
                     MediaStore.Audio.Albums.ALBUM);
 
             int titleColumn = albumsCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Albums.ALBUM);
+                    (MediaStore.Audio.Albums.ALBUM);
             int idColumn = albumsCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Albums._ID);
+                    (MediaStore.Audio.Albums._ID);
             int artistColumn = albumsCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Albums.ARTIST);
+                    (MediaStore.Audio.Albums.ARTIST);
             int albumArtColumn = albumsCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Albums.ALBUM_ART);
+                    (MediaStore.Audio.Albums.ALBUM_ART);
 
             albumsCursor.moveToFirst();
             do {
-                Album a = new Album();
-                a.setAlbumTitle(albumsCursor.getString(titleColumn));
-                a.setAlbumArtistName(albumsCursor.getString(artistColumn));
-                a.setId(albumsCursor.getLong(idColumn));
-                a.setAlbumArt(BitmapFactory.decodeFile(albumsCursor.getString(albumArtColumn)));
-                a.setContext(context);
-                mAlbums.add(a);
+                Album album = new Album();
+                album.setAlbumTitle(albumsCursor.getString(titleColumn));
+                album.setAlbumArtistName(albumsCursor.getString(artistColumn));
+                album.setId(albumsCursor.getLong(idColumn));
+                Picasso.with(context).load(new File(albumsCursor.getString(albumArtColumn))).into(new AlbumListener(album));
+                album.setContext(context);
+                mAlbums.add(album);
             } while (albumsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
@@ -119,27 +123,7 @@ public class MediaData {
     }
 
     private void buildPlaylists() {
-        try {
-            Cursor playlistsCursor = context.getContentResolver().query(
-                    MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
-                    null, null, null,
-                    MediaStore.Audio.Playlists.NAME);
-            int titleColumn = playlistsCursor.getColumnIndex
-                    (MediaStore.Audio.Playlists.NAME);
-            int idColumn = playlistsCursor.getColumnIndex
-                    (MediaStore.Audio.Playlists._ID);
-
-            playlistsCursor.moveToFirst();
-            do {
-                Playlist p = new Playlist();
-                p.setPlaylistName(playlistsCursor.getString(titleColumn));
-                p.setId(playlistsCursor.getLong(idColumn));
-                mPlaylists.add(p);
-            } while (playlistsCursor.moveToNext());
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-            mPlaylists = Collections.emptyList();
-        }
+        //TODO:Add this
     }
 
     private void buildArtists() {
@@ -161,6 +145,10 @@ public class MediaData {
                 }
             }
         }
+    }
+
+    public void updateListener(){
+        if (albumArtGeneratedPos == mAlbums.size() -1 && listener != null) listener.albumArtsGenerated();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -209,7 +197,7 @@ public class MediaData {
         return a;
     }
 
-    private class AlbumListener implements Response.Listener<Bitmap>, Response.ErrorListener {
+    private class AlbumListener implements Target {
         Album a;
 
         public AlbumListener(Album a) {
@@ -217,13 +205,28 @@ public class MediaData {
         }
 
         @Override
-        public void onResponse(Bitmap response) {
-            a.setAlbumArt(response);
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            a.setAlbumArt(bitmap);
+            albumArtGeneratedPos = albumArtGeneratedPos + 1;
+            updateListener();
         }
 
         @Override
-        public void onErrorResponse(VolleyError error) {
+        public void onBitmapFailed(Drawable errorDrawable) {
             a.setAlbumArt(a.getDefaultArt());
         }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+        }
+    }
+
+    public interface AlbumArtsGeneratedListener {
+        void albumArtsGenerated();
+    }
+
+    public void setListener(AlbumArtsGeneratedListener listener) {
+        this.listener = listener;
     }
 }
