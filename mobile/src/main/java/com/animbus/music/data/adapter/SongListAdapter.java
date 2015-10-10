@@ -7,11 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.animbus.music.R;
-import com.animbus.music.databinding.SongList;
+import com.animbus.music.databinding.ItemSongList;
 import com.animbus.music.media.objects.Song;
 
 import java.util.Collections;
@@ -31,7 +28,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
 
     @Override
     public SongListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        SongList binding = SongList.inflate(LayoutInflater.from(context), parent, false);
+        ItemSongList binding = ItemSongList.inflate(LayoutInflater.from(context), parent, false);
         return new SongListViewHolder(binding.getRoot());
     }
 
@@ -54,7 +51,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
     }
 
     class SongListViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        SongList item;
+        ItemSongList item;
 
         public SongListViewHolder(View itemView) {
             super(itemView);

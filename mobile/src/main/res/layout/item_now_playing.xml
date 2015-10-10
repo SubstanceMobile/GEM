@@ -2,12 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <data class="ItemSongList">
-
-        <variable
-            name="song"
-            type="com.animbus.music.media.objects.Song" />
-
+    <data class="ItemNowPlayingList">
+        <variable name="song" type="com.animbus.music.media.objects.Song" />
+        <variable name="isFirst" type="boolean" />
+        <import type="android.view.View" />
     </data>
 
     <FrameLayout
@@ -21,12 +19,12 @@
             android:orientation="horizontal">
 
             <com.animbus.music.customImpls.SquareImageViewHeight_Based
-                android:id="@+id/songlist_song_albumart"
+                android:id="@+id/nowplaying_albumart"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_medium"
                 android:visibility="visible"
-                app:albumArt="@{song.getAlbum}" />
+                app:imageBitmap="@{song.getAlbum.albumArt}" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -53,15 +51,6 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/songlist_song_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/margin_medium"
-                android:text="@{song.getSongDurString}"
-                android:textColor="?attr/secondaryTextColor" />
-
             <FrameLayout
                 android:id="@+id/now_playing_favorite_icon_root"
                 android:layout_width="@dimen/listViewSizeBig"
@@ -84,7 +73,7 @@
                 android:layout_width="@dimen/listViewSizeBig"
                 android:layout_height="@dimen/listViewSizeBig"
                 android:padding="@dimen/margin_small"
-                android:visibility="gone">
+                android:visibility="@{isFirst ? View.VISIBLE : View.GONE}" >
 
                 <ImageView
                     android:id="@+id/now_playing_repeat_icon"

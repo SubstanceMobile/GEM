@@ -177,6 +177,11 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
         QueueManager.get().setCurrentSongPos(songPos);
     }
 
+    public void playQueueItem(int pos){
+        play(QueueManager.get().getCurrentQueueAsSong().get(pos));
+        QueueManager.get().setCurrentSongPos(pos);
+    }
+
     /**
      * Plays the next song in the queue
      */

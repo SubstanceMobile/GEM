@@ -71,8 +71,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
             @Override
             public void onNowPlayingItemClicker(View v, List<Song> data, int pos) {
                 if (pos != 0) {
-                    //Not using the (data,position) tag because that overrites the queue, and it would glitch badly.
-                    PlaybackManager.get().play(data.get(pos));
+                    PlaybackManager.get().playQueueItem(pos);
                 }
             }
         });
@@ -91,7 +90,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
 
     private void configureUI() {
         ImageView mImage = (ImageView) findViewById(R.id.now_playing_album_art);
-        mImage.setImageBitmap(mSong.getAlbum().getAlbumArt());
+        mSong.getAlbum().requestArt(mImage);
         configureUIColors();
     }
 

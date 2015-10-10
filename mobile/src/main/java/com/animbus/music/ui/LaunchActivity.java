@@ -50,25 +50,23 @@ public class LaunchActivity extends ThemableActivity {
         boolean showTabs = SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_TABS, false);
         tabs.setVisibility(showTabs ? View.VISIBLE : View.GONE);
         if (!showTabs) ViewCompat.setElevation(appBar, 0.0f);
-        ServiceHelper.get(this).initService();
-        if (!MediaData.get().isBuilt()){
-            MediaData.get().build();
-            MediaData.get().setListener(new MediaData.AlbumArtsGeneratedListener() {
-                @Override
-                public void albumArtsGenerated() {
-                    complete();
-                }
-            });
-        } else {
-            complete();
-        }
+        complete();
     }
 
     private void setContexts() {
         if (!BackupHub.get().activated) {
+            //Sets Contexts
             SettingsManager.get().setContext(this);
             ThemeManager.get().setContext(this);
+
+            //Loads Songs
             MediaData.get(this);
+            if (!MediaData.get().isBuilt()) MediaData.get().build();
+
+            //Starts Music Service
+            ServiceHelper.get(this).initService();
+
+            //Notifies app that it has activated
             BackupHub.get().activated = true;
         }
     }
@@ -118,10 +116,10 @@ public class LaunchActivity extends ThemableActivity {
     }
 
         private void showNextActivity(){
-            final Intent i = new Intent(this, MainScreen.class);
-            if (BackupHub.get().activated) overridePendingTransition(-1, -1);
+            final Intent i = new Intent(this, MainScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(i);
             finish();
+            if (BackupHub.get().activated) overridePendingTransition(0, 0);
         }
 
     @Override

@@ -1,11 +1,14 @@
 package com.animbus.music.customImpls;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.animbus.music.media.objects.Album;
+
 public class SquareImageViewHeight_Based extends ImageView {
-    public boolean isInEditMode (){
+    public boolean isInEditMode() {
         return true;
     }
 
@@ -27,6 +30,12 @@ public class SquareImageViewHeight_Based extends ImageView {
 
         int height = getMeasuredHeight();
         setMeasuredDimension(height, height);
+    }
+
+    public void albumArt(final Album album) {
+        if (album != null) {
+            album.requestArt(this);
+        }
     }
 
 }

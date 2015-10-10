@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.media.session.MediaControllerCompat;
@@ -15,6 +16,7 @@ import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.animbus.music.R;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
 
@@ -128,7 +130,6 @@ public class MediaNotification extends BroadcastReceiver {
                             new NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2)
                                     .setMediaSession(mService.getSession().getSessionToken()))
                     .setSmallIcon(R.mipmap.ic_notificstaion_srini)
-                    .setLargeIcon(song.getAlbum().getAlbumArt())
                     .setCategory(CATEGORY_TRANSPORT)
                     .setVisibility(VISIBILITY_PUBLIC)
                     .setDeleteIntent(PendingIntent.getBroadcast(mService, REQ_CODE, new Intent(ACTION_STOP), PendingIntent.FLAG_CANCEL_CURRENT))
@@ -136,6 +137,14 @@ public class MediaNotification extends BroadcastReceiver {
                             new Intent(mService, NowPlaying.class), PendingIntent.FLAG_CANCEL_CURRENT))
                     .setShowWhen(false)
                     .setPriority(PRIORITY_MAX);
+
+            song.getAlbum().requestArt(new Album.AlbumArtState() {
+                @Override
+                public void respond(Bitmap albumArt) {
+                    mBuilder.setLargeIcon(albumArt);
+                }
+            });
+
             addPrevious();
             addPlayPause();
             addNext();

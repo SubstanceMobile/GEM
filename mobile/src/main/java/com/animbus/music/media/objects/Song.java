@@ -11,7 +11,7 @@ import android.support.v4.media.session.MediaSessionCompat.QueueItem;
  * Created by Adrian on 7/5/2015.
  */
 public class Song {
-    public Integer songPosition;
+    public Integer trackNumber;
     public String songTitle, songArtist, songGenre;
     public long songID, songDuration;
     Uri songURI;
@@ -36,12 +36,12 @@ public class Song {
         this.songDuration = songDuration;
     }
 
-    public Integer getSongPosition() {
-        return songPosition;
+    public Integer getTrackNumber() {
+        return trackNumber;
     }
 
-    public void setSongPosition(Integer songPosition) {
-        this.songPosition = songPosition;
+    public void setTrackNumber(Integer trackNumber) {
+        this.trackNumber = trackNumber;
     }
 
     public String getSongArtist() {

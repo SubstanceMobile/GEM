@@ -32,11 +32,12 @@ import com.animbus.music.ui.settings.chooseIcon.IconManager;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AlbumDetails extends ThemableActivity {
-    static final int intNull = -1;
-    private static final int COLOR_DELAY_BASE = 550;
     Toolbar mToolbar;
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
@@ -76,7 +77,7 @@ public class AlbumDetails extends ThemableActivity {
         adapter.setOnItemClickedListener(new AlbumDetailsAdapter.AlbumDetailsClickListener() {
             @Override
             public void onAlbumDetailsItemClicked(View v, List<Song> data, int pos) {
-                PlaybackManager.get().play(data, pos);
+                PlaybackManager.get().play(new ArrayList<>(data), pos);
             }
         });
         mList.setItemAnimator(new DefaultItemAnimator());
@@ -87,7 +88,7 @@ public class AlbumDetails extends ThemableActivity {
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlaybackManager.get().play(mAlbum.getSongs(), 0);
+                PlaybackManager.get().play(new ArrayList<>(mAlbum.getSongs()), 0);
                 transitionNowPlaying();
             }
         });
@@ -113,7 +114,7 @@ public class AlbumDetails extends ThemableActivity {
 
     private void configureUI() {
         ImageView mImage = (ImageView) findViewById(R.id.album_details_album_art);
-        mImage.setImageBitmap(mAlbum.getAlbumArt());
+        mAlbum.requestArt(mImage);
         mDetails.setTitle(mAlbum.getAlbumTitle());
         mCollapsingToolbar.setTitle(mAlbum.getAlbumTitle());
         mDetails.setSubtitle(mAlbum.getAlbumArtistName());

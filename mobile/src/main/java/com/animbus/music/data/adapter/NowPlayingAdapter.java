@@ -1,6 +1,8 @@
 package com.animbus.music.data.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -15,13 +17,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animbus.music.R;
+import com.animbus.music.databinding.ItemNowPlayingList;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.QueueManager;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.theme.ThemeManager;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.NowPlayingAdapterViewHolder> implements PlaybackManager.OnChangedListener {
     LayoutInflater inflater;
@@ -40,33 +45,23 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
 
     @Override
     public NowPlayingAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_songlist, parent, false);
-        return new NowPlayingAdapterViewHolder(view);
+        return new NowPlayingAdapterViewHolder(ItemNowPlayingList.inflate(LayoutInflater.from(context), parent, false));
     }
 
     @Override
     public void onBindViewHolder(final NowPlayingAdapterViewHolder holder, final int position) {
-        final Song current = data.get(position);
-        holder.SongName.setText(current.getSongTitle());
-        holder.SongArtist.setText(current.getSongArtist());
         if (position == 0){
+            Song customSong = data.get(0);
+
+            holder.dataBinder.setSong(customSong);
+            holder.dataBinder.setIsFirst(true);
+
             InsetDrawable eqIcon = new InsetDrawable(context.getResources().getDrawable(R.drawable.ic_equalizer_black_48dp), context.getResources().getDimensionPixelSize(R.dimen.margin_medium));
-            DrawableCompat.setTint(eqIcon, current.getAlbum().accentColor);
-            holder.SongArt.setImageDrawable(eqIcon);
-            holder.SongDuration.setVisibility(View.GONE);
-            holder.RepeatButtonRoot.setVisibility(View.VISIBLE);
-            configureRepeatIcon(holder.RepeatButton, current);
-            holder.RepeatButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toggleRepeatIcon((ImageView) v, current);
-                }
-            });
+            DrawableCompat.setTint(eqIcon, customSong.getAlbum().accentColor);
+            holder.dataBinder.nowplayingAlbumart.setImageDrawable(eqIcon);
         } else {
-            holder.SongArt.setImageBitmap(current.getAlbum().getAlbumArt());
-            holder.SongDuration.setVisibility(View.VISIBLE);
-            holder.SongDuration.setText(current.getSongDurString());
-            holder.RepeatButtonRoot.setVisibility(View.GONE);
+            holder.dataBinder.setSong(data.get(position));
+            holder.dataBinder.setIsFirst(false);
         }
     }
 
@@ -125,19 +120,12 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
     }
 
     class NowPlayingAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        TextView SongName, SongArtist, SongDuration;
-        ImageView SongArt, RepeatButton;
-        FrameLayout RepeatButtonRoot;
+        ItemNowPlayingList dataBinder;
 
-        public NowPlayingAdapterViewHolder(View itemView) {
-            super(itemView);
-            SongName = (TextView) itemView.findViewById(R.id.songlist_song_title);
-            SongArtist = (TextView) itemView.findViewById(R.id.songlist_song_artist);
-            SongArt = (ImageView) itemView.findViewById(R.id.songlist_song_albumart);
-            SongDuration = (TextView) itemView.findViewById(R.id.songlist_song_duration);
-            RepeatButton = (ImageView) itemView.findViewById(R.id.now_playing_repeat_icon);
-            RepeatButtonRoot = (FrameLayout) itemView.findViewById(R.id.now_playing_repeat_icon_root);
-            itemView.setOnClickListener(this);
+        public NowPlayingAdapterViewHolder(ItemNowPlayingList dataBinder) {
+            super(dataBinder.getRoot());
+            this.dataBinder = dataBinder;
+            dataBinder.getRoot().setOnClickListener(this);
         }
 
         @Override

@@ -13,12 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
+import com.animbus.music.databinding.ItemAlbumGrid;
 import com.animbus.music.media.objects.Album;
+import com.animbus.music.ui.theme.ThemeManager;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,7 +46,6 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     List<Album> data = Collections.emptyList();
     Context context;
     AlbumArtGridClickListener onItemClickedListener;
-    SettingsManager settings;
 
     public AlbumGridAdapter(Context c, List<Album> data) {
         inflater = LayoutInflater.from(c);
@@ -55,23 +55,28 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
 
     @Override
     public AlbumGridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AlbumGridViewHolder(inflater.inflate(R.layout.item_album_grid, parent, false));
+        return new AlbumGridViewHolder(ItemAlbumGrid.inflate(inflater, parent, false));
     }
 
     @Override
     public void onBindViewHolder(final AlbumGridViewHolder holder, final int position) {
-        Album current = data.get(position);
-        settings = SettingsManager.get();
-        holder.AlbumName.setText(current.getAlbumTitle());
-        holder.AlbumArtist.setText(current.getAlbumArtistName());
-        holder.AlbumArt.setImageBitmap(current.getAlbumArt());
-        setColor(current.getAlbumArt(), holder, current, position);
-        animateCell(holder, position);
+        final Album current = data.get(position);
+        holder.item.setAlbum(current);
+        if (!current.artLoaded) {
+            holder.item.AlbumGridItemRootView.setAlpha(0.0f);
+            current.buildArt();
+        }
+        current.requestArt(new Album.AlbumArtState() {
+            @Override
+            public void respond(Bitmap albumArt) {
+                setColor(albumArt, holder, current, position);
+                animateCell(holder, position);
+            }
+        });
     }
 
-
     private void setColor(Bitmap image, final AlbumGridViewHolder holder, final Album current, final int pos) {
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
+        if (SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
             setDefaultColors(holder);
             if (image != null) {
                 if (!current.defaultArt) {
@@ -95,22 +100,22 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                                     current.TitleTextColor = vibrantSwatch.getTitleTextColor();
                                     current.SubtitleTextColor = vibrantSwatch.getBodyTextColor();
 
-                                    backgroundAnimator = ObjectAnimator.ofObject(holder.AlbumGridItemHeader, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
+                                    backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumArtGridItemInfoBar, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
                                             current.BackgroundColor);
                                     backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
                                     backgroundAnimator.start();
-                                    titleAnimator = ObjectAnimator.ofInt(holder.AlbumName, textColor, getDefaultTitleColor(), current.TitleTextColor);
+                                    titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtGridItemInfoTitle, textColor, getDefaultTitleColor(), current.TitleTextColor);
                                     titleAnimator.setEvaluator(new ArgbEvaluator());
                                     titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
                                     titleAnimator.start();
-                                    subtitleAnimator = ObjectAnimator.ofInt(holder.AlbumArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
+                                    subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtGridItemInfoArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
                                     subtitleAnimator.setEvaluator(new ArgbEvaluator());
                                     subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
                                     subtitleAnimator.start();
                                 } else {
-                                    holder.AlbumGridItemHeader.setBackgroundColor(current.BackgroundColor);
-                                    holder.AlbumName.setTextColor(current.TitleTextColor);
-                                    holder.AlbumArtist.setTextColor(current.SubtitleTextColor);
+                                    holder.item.AlbumArtGridItemInfoBar.setBackgroundColor(current.BackgroundColor);
+                                    holder.item.AlbumArtGridItemInfoTitle.setTextColor(current.TitleTextColor);
+                                    holder.item.AlbumArtGridItemInfoArtist.setTextColor(current.SubtitleTextColor);
                                 }
                             } else if (mutedSwatch != null) {
                                 if (!current.colorAnimated) {
@@ -119,22 +124,22 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                                     current.TitleTextColor = mutedSwatch.getTitleTextColor();
                                     current.SubtitleTextColor = mutedSwatch.getBodyTextColor();
 
-                                    backgroundAnimator = ObjectAnimator.ofObject(holder.AlbumGridItemHeader, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
+                                    backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumArtGridItemInfoBar, "backgroundColor", new ArgbEvaluator(), getDefaultBackColor(),
                                             current.BackgroundColor);
                                     backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
                                     backgroundAnimator.start();
-                                    titleAnimator = ObjectAnimator.ofInt(holder.AlbumName, textColor, getDefaultTitleColor(), current.TitleTextColor);
+                                    titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtGridItemInfoTitle, textColor, getDefaultTitleColor(), current.TitleTextColor);
                                     titleAnimator.setEvaluator(new ArgbEvaluator());
                                     titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
                                     titleAnimator.start();
-                                    subtitleAnimator = ObjectAnimator.ofInt(holder.AlbumArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
+                                    subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtGridItemInfoArtist, textColor, getDefaultSubTitleColor(), current.SubtitleTextColor);
                                     subtitleAnimator.setEvaluator(new ArgbEvaluator());
                                     subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
                                     subtitleAnimator.start();
                                 } else {
-                                    holder.AlbumGridItemHeader.setBackgroundColor(current.BackgroundColor);
-                                    holder.AlbumName.setTextColor(current.TitleTextColor);
-                                    holder.AlbumArtist.setTextColor(current.SubtitleTextColor);
+                                    holder.item.AlbumArtGridItemInfoBar.setBackgroundColor(current.BackgroundColor);
+                                    holder.item.AlbumArtGridItemInfoTitle.setTextColor(current.TitleTextColor);
+                                    holder.item.AlbumArtGridItemInfoArtist.setTextColor(current.SubtitleTextColor);
                                 }
                             } else {
                                 setDefaultColors(holder, current);
@@ -180,48 +185,30 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     }
 
     public int getDefaultBackColor() {
-        int color;
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = R.color.primaryGreyLight;
-        } else {
-            color = R.color.primaryGreyDark;
-        }
-        return context.getResources().getColor(color);
+        return context.getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primaryGreyLight : R.color.primaryGreyDark);
     }
 
     public int getDefaultTitleColor() {
-        int color;
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = R.color.primary_text_default_material_light;
-        } else {
-            color = R.color.primary_text_default_material_dark;
-        }
-        return context.getResources().getColor(color);
+        return context.getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_light : R.color.primary_text_default_material_dark);
     }
 
     public int getDefaultSubTitleColor() {
-        int color;
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = R.color.secondary_text_default_material_light;
-        } else {
-            color = R.color.secondary_text_default_material_dark;
-        }
-        return context.getResources().getColor(color);
+        return context.getResources().getColor(ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_light : R.color.secondary_text_default_material_dark);
     }
 
     private void setDefaultColors(AlbumGridViewHolder holder, Album a) {
-        holder.AlbumGridItemHeader.setBackgroundColor(getDefaultBackColor());
+        holder.item.AlbumArtGridItemInfoBar.setBackgroundColor(getDefaultBackColor());
         a.BackgroundColor = getDefaultBackColor();
-        holder.AlbumName.setTextColor(getDefaultTitleColor());
+        holder.item.AlbumArtGridItemInfoTitle.setTextColor(getDefaultTitleColor());
         a.TitleTextColor = getDefaultTitleColor();
-        holder.AlbumArtist.setTextColor(getDefaultSubTitleColor());
+        holder.item.AlbumArtGridItemInfoArtist.setTextColor(getDefaultSubTitleColor());
         a.SubtitleTextColor = getDefaultSubTitleColor();
     }
 
     private void setDefaultColors(AlbumGridViewHolder holder) {
-        holder.AlbumGridItemHeader.setBackgroundColor(getDefaultBackColor());
-        holder.AlbumName.setTextColor(getDefaultTitleColor());
-        holder.AlbumArtist.setTextColor(getDefaultSubTitleColor());
+        holder.item.AlbumArtGridItemInfoBar.setBackgroundColor(getDefaultBackColor());
+        holder.item.AlbumArtGridItemInfoTitle.setTextColor(getDefaultTitleColor());
+        holder.item.AlbumArtGridItemInfoArtist.setTextColor(getDefaultSubTitleColor());
     }
 
     private void animateCell(AlbumGridViewHolder holder, int pos) {
@@ -230,7 +217,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
             current.animated = true;
 
             int animateTill;
-            if (!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)) {
+            if (!SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_TABS, false)) {
                 animateTill = 5;
             } else {
                 Configuration configuration = context.getResources().getConfiguration();
@@ -242,16 +229,15 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
             }
 
             if (pos <= animateTill) {
-                holder.AlbumGridItemRoot.setAlpha(0.0f);
-                holder.AlbumGridItemRoot.setTranslationY(800.0f);
+                holder.item.AlbumGridItemRootView.setTranslationY(800.0f);
                 int delayPart = pos * 100;
-                holder.AlbumGridItemRoot.animate()
+                holder.item.AlbumGridItemRootView.animate()
                         .translationY(0.0f)
                         .alpha(1.0f)
                         .setDuration(GRID_ANIM_DUR)
                         .setStartDelay(GRID_ANIM_DELAY + delayPart)
                         .start();
-            }
+            } else holder.item.AlbumGridItemRootView.setAlpha(1.0f);
         }
     }
 
@@ -266,25 +252,18 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
 
     public interface AlbumArtGridClickListener {
         void AlbumGridItemClicked(View view, Album album);
+
         void AlbumGridItemLongClicked(View view, Album album);
     }
 
     class AlbumGridViewHolder extends RecyclerView.ViewHolder implements OnClickListener, View.OnLongClickListener {
-        protected Boolean animated = false;
-        TextView AlbumName, AlbumArtist;
-        ImageView AlbumArt;
-        View AlbumGridItem, AlbumGridItemHeader, AlbumGridItemRoot;
+        public ItemAlbumGrid item;
 
-        public AlbumGridViewHolder(View itemView) {
-            super(itemView);
-            AlbumName = (TextView) itemView.findViewById(R.id.AlbumArtGridItemInfoTitle);
-            AlbumArtist = (TextView) itemView.findViewById(R.id.AlbumArtGridItemInfoArtist);
-            AlbumArt = (ImageView) itemView.findViewById(R.id.AlbumArtGridItemAlbumArt);
-            AlbumGridItemHeader = itemView.findViewById(R.id.AlbumArtGridItemInfoBar);
-            AlbumGridItem = itemView.findViewById(R.id.AlbumGridItem);
-            AlbumGridItemRoot = itemView.findViewById(R.id.AlbumGridItemRootView);
-            AlbumGridItem.setOnClickListener(this);
-            AlbumGridItem.setOnLongClickListener(this);
+        public AlbumGridViewHolder(ItemAlbumGrid item) {
+            super(item.getRoot());
+            this.item = item;
+            item.getRoot().setOnClickListener(this);
+            item.getRoot().setOnLongClickListener(this);
         }
 
         @Override
@@ -298,8 +277,10 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
         public boolean onLongClick(View v) {
             if (onItemClickedListener != null) {
                 onItemClickedListener.AlbumGridItemLongClicked(v, data.get(getAdapterPosition()));
+                return true;
+            } else {
+                return false;
             }
-            return true;
         }
     }
 }
