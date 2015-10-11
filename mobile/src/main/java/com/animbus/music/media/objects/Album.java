@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
@@ -72,11 +73,11 @@ public class Album {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //This handles the Album Art
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////1                                                           //////////////////////////////////////////////////////////////////////////////////
 
     private void setAlbumArt(Bitmap albumArt) {
         this.albumArt = albumArt;
-        for (AlbumArtState listener :artStateListeners) listener.respond(albumArt);
+        for (AlbumArtState listener : artStateListeners) listener.respond(albumArt);
         defaultArt = false;
         artLoaded = true;
     }
@@ -96,28 +97,28 @@ public class Album {
     }
 
     public void buildArt() {
-        if (!artLoaded) {
-            try {
-                Picasso.with(getContext()).load(new File(getAlbumArtPath())).into(new Target() {
-                    @Override
-                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                        setAlbumArt(bitmap);
-                        artLoaded = true;
-                    }
+        try {
+            Picasso.with(getContext()).load(new File(getAlbumArtPath())).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    setAlbumArt(bitmap);
+                    artLoaded = true;
+                    Log.d("Album " + String.valueOf(getId()), "Art Built");
+                }
 
-                    @Override
-                    public void onBitmapFailed(Drawable errorDrawable) {
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
 
-                    }
+                }
 
-                    @Override
-                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
 
-                    }
-                });
-            } catch (NullPointerException e) {
-                setDefaultArt();
-            }
+                }
+            });
+        } catch (NullPointerException e) {
+            setDefaultArt();
+            Log.d("Album " + String.valueOf(getId()), "No Album Art");
         }
     }
 

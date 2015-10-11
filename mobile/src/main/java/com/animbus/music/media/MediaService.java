@@ -16,6 +16,8 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.animbus.music.media.objects.Song;
+
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PAUSE;
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PLAY;
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID;
@@ -39,7 +41,7 @@ import static android.support.v4.media.session.PlaybackStateCompat.STATE_STOPPED
 /**
  * WARNING: This class is extremely experimental. This file was created on 7/18/2015 by Adrian.
  */
-public class MediaService extends Service {
+public class MediaService extends Service implements PlaybackManager.OnChangedListener {
     private final static String TAG = "MediaService:";
     private final IBinder mBinder = new MusicBinder();
     //The media session
@@ -61,6 +63,16 @@ public class MediaService extends Service {
         return mBinder;
     }
 
+    @Override
+    public void onSongChanged(Song song) {
+        mSession.setMetadata(song.getMetaData());
+    }
+
+    @Override
+    public void onPlaybackStateChanged(PlaybackStateCompat state) {
+
+    }
+
     public class MusicBinder extends Binder {
         public MediaService getService(){
             return MediaService.this;
@@ -77,13 +89,13 @@ public class MediaService extends Service {
 
     public void removeForeground(boolean removeNotification){
         stopForeground(removeNotification);
-        mNotification.removeOngoing();
     }
 
     public void setUp(){
         mPlayback = PlaybackManager.from(this);
         mNotification = new MediaNotification(this);
         mPlayback.mNotification = mNotification;
+        mPlayback.registerListener(this);
 
         mButtonReceiver = new ComponentName(getPackageName(), MediaButtonReceiver.class.getName());
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);

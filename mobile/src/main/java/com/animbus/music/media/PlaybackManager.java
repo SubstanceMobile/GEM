@@ -531,15 +531,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
     }
 
     public boolean isActive() {
-        if (mService == null) {
-            return false;
-        } else if (mService.getSession() == null) {
-            return false;
-        } else if (mService.getState() == STATE_STOPPED || mService.getState() == STATE_NONE) {
-            return false;
-        } else {
-            return mService.getSession().isActive();
-        }
+        return mService != null && mService.getSession() != null && !(mService.getState() == STATE_STOPPED || mService.getState() == STATE_NONE) && mService.getSession().isActive();
     }
 
     public MediaService getService() {

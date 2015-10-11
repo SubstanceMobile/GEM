@@ -119,6 +119,8 @@ public class MediaNotification extends BroadcastReceiver {
     public void setUp() {
         Song song = PlaybackManager.get().getCurrentSong();
 
+        PendingIntent stopServiceIntent = PendingIntent.getBroadcast(mService, REQ_CODE, new Intent(ACTION_STOP), PendingIntent.FLAG_CANCEL_CURRENT);
+
         mBuilder = new NotificationCompat.Builder(mService);
         if (!mDisplayinQueue) {
             mBuilder
@@ -128,11 +130,11 @@ public class MediaNotification extends BroadcastReceiver {
                     .setColor(mNotificationColor)
                     .setStyle(
                             new NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2)
-                                    .setMediaSession(mService.getSession().getSessionToken()))
+                                    .setMediaSession(mService.getSession().getSessionToken()).setShowCancelButton(true).setCancelButtonIntent(stopServiceIntent))
                     .setSmallIcon(R.mipmap.ic_notificstaion_srini)
                     .setCategory(CATEGORY_TRANSPORT)
                     .setVisibility(VISIBILITY_PUBLIC)
-                    .setDeleteIntent(PendingIntent.getBroadcast(mService, REQ_CODE, new Intent(ACTION_STOP), PendingIntent.FLAG_CANCEL_CURRENT))
+                    .setDeleteIntent(stopServiceIntent)
                     .setContentIntent(PendingIntent.getActivity(mService, REQ_CODE,
                             new Intent(mService, NowPlaying.class), PendingIntent.FLAG_CANCEL_CURRENT))
                     .setShowWhen(false)
@@ -198,19 +200,6 @@ public class MediaNotification extends BroadcastReceiver {
             Toast.makeText(mService, "Exit Queue", Toast.LENGTH_SHORT).show();
             mDisplayinQueue = false;
             update();
-        }
-    }
-
-    public void removeOngoing() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
-            try {
-                setUp();
-                mBuilder.setOngoing(false);
-                mNotification = mBuilder.build();
-                update();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }

@@ -2,9 +2,11 @@ package com.animbus.music.media.objects;
 
 
 import android.content.ContentUris;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.media.MediaDescriptionCompat;
+import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat.QueueItem;
 
 /**
@@ -152,5 +154,20 @@ public class Song {
 
     public void setSongAlbum(Album songAlbum) {
         this.songAlbum = songAlbum;
+    }
+
+    public MediaMetadataCompat getMetaData(){
+        final MediaMetadataCompat.Builder builder = new MediaMetadataCompat.Builder();
+        builder.putText(MediaMetadataCompat.METADATA_KEY_TITLE, getSongTitle());
+        builder.putText(MediaMetadataCompat.METADATA_KEY_ARTIST, getSongArtist());
+        builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM, getAlbum().getAlbumTitle());
+        getAlbum().requestArt(new Album.AlbumArtState() {
+            @Override
+            public void respond(Bitmap albumArt) {
+                builder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, albumArt);
+            }
+        });
+        builder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, getSongDuration());
+        return builder.build();
     }
 }

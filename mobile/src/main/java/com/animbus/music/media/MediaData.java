@@ -3,6 +3,7 @@ package com.animbus.music.media;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
@@ -41,6 +42,8 @@ public class MediaData {
         buildSongs();
         buildPlaylists();
         buildArtists();
+
+        buildAlbumArtsCascade();
 
         buildDataMesh();
 
@@ -117,6 +120,11 @@ public class MediaData {
             e.printStackTrace();
             mAlbums = Collections.emptyList();
         }
+    }
+
+    public void buildAlbumArtsCascade() {
+        for (Album a : mAlbums) a.buildArt();
+        Log.d("Test", "Test");
     }
 
     private void buildPlaylists() {

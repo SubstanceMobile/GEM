@@ -165,6 +165,8 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
 
         initControllerView(mRoot);
 
+        mHandler.sendEmptyMessage(SHOW_PROGRESS);
+
         return mRoot;
     }
 
