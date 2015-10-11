@@ -134,7 +134,12 @@
     <string name="playback_repeat">Repeat</string>
     <string name="playback_shuffle">Shuffle</string>
     <string name="playing_album">Playing Album</string>
-    
+
+    <string name="permission_storage_explain_title">Storage Permission Required</string>
+    <string name="permission_storage_explain_message">The storage permission is required for GEM player to be able to read your media library</string>
+    <string name="permission_storage_required">Storage Permission Required</string>
+    <string name="permission_storage_required_settings">@string/title_activity_settings</string>
+
     Misc.
     <string name="appwidget_text">Why are you using the widget?</string>
     <string name="msg_coming_soon">Coming Soon</string>

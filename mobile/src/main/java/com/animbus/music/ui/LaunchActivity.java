@@ -1,8 +1,13 @@
 package com.animbus.music.ui;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -17,6 +22,7 @@ import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.ServiceHelper;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.mainScreen.BackupHub;
 import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.theme.Theme;
@@ -50,8 +56,53 @@ public class LaunchActivity extends ThemableActivity {
         boolean showTabs = SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_TABS, false);
         tabs.setVisibility(showTabs ? View.VISIBLE : View.GONE);
         if (!showTabs) ViewCompat.setElevation(appBar, 0.0f);
-        complete();
+        requestPermissions();
     }
+
+    public void requestPermissions() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                complete();
+            } else {
+                permissionRationale();
+                callPermissionRequest();
+            }
+        } else {
+            complete();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void permissionRationale() {
+            //Permission Denied
+            if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                new AlertDialog.Builder(this).setTitle(R.string.permission_storage_explain_title).setMessage(R.string.permission_storage_explain_message)
+                        .setPositiveButton(android.R.string.ok, null).setCancelable(false).setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        callPermissionRequest();
+                    }
+                }).create().show();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void callPermissionRequest() {
+        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 159);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 159) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) complete();
+            else {
+                permissionRationale();
+            }
+        }
+    }
+
 
     private void setContexts() {
         if (!BackupHub.get().activated) {
@@ -111,16 +162,16 @@ public class LaunchActivity extends ThemableActivity {
                 }).show();
             }
         } else {
-           showNextActivity();
+            showNextActivity();
         }
     }
 
-        private void showNextActivity(){
-            final Intent i = new Intent(this, MainScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(i);
-            finish();
-            if (BackupHub.get().activated) overridePendingTransition(0, 0);
-        }
+    private void showNextActivity() {
+        final Intent i = new Intent(this, MainScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(i);
+        finish();
+        if (BackupHub.get().activated) overridePendingTransition(0, 0);
+    }
 
     @Override
     protected void setUpTheme(Theme theme) {
