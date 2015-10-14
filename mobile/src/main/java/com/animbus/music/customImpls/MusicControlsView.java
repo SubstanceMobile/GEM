@@ -41,7 +41,7 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
                 if (!mDragging && PlaybackManager.get().isPlaying()) {
                     setProgress();
                     msg = obtainMessage(SHOW_PROGRESS);
-                    sendMessage(msg);
+                    sendMessageDelayed(msg, 0);
                 }
             }
         }

@@ -161,7 +161,7 @@ public class Song {
         builder.putText(MediaMetadataCompat.METADATA_KEY_TITLE, getSongTitle());
         builder.putText(MediaMetadataCompat.METADATA_KEY_ARTIST, getSongArtist());
         builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM, getAlbum().getAlbumTitle());
-        getAlbum().requestArt(new Album.AlbumArtState() {
+        getAlbum().requestArt(new Album.ArtRequest() {
             @Override
             public void respond(Bitmap albumArt) {
                 builder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, albumArt);

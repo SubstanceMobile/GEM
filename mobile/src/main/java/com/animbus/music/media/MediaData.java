@@ -43,8 +43,6 @@ public class MediaData {
         buildPlaylists();
         buildArtists();
 
-        buildAlbumArtsCascade();
-
         buildDataMesh();
 
         mBuilt = true;
@@ -106,25 +104,18 @@ public class MediaData {
             albumsCursor.moveToFirst();
             do {
                 Album album = new Album();
-
-                //Album Art
-                album.setContext(context);
-                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
-
                 album.setAlbumTitle(albumsCursor.getString(titleColumn));
                 album.setAlbumArtistName(albumsCursor.getString(artistColumn));
                 album.setId(albumsCursor.getLong(idColumn));
+                album.setContext(context);
+                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
+                album.prepareArt();
                 mAlbums.add(album);
             } while (albumsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
             mAlbums = Collections.emptyList();
         }
-    }
-
-    public void buildAlbumArtsCascade() {
-        for (Album a : mAlbums) a.buildArt();
-        Log.d("Test", "Test");
     }
 
     private void buildPlaylists() {

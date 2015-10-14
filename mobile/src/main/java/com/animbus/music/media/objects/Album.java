@@ -2,17 +2,14 @@ package com.animbus.music.media.objects;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.animbus.music.R;
-import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.shared.Constants;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +23,6 @@ public class Album {
 
     public String albumArtistName;
     public Artist albumArtist;
-
-    public Bitmap albumArt;
-    public String albumArtPath;
-    public boolean artLoaded = false;
-    public boolean defaultArt = false;
 
     public long id;
 
@@ -73,42 +65,43 @@ public class Album {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //This handles the Album Art
-    ////////////////////////////1                                                           //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void setAlbumArt(Bitmap albumArt) {
-        this.albumArt = albumArt;
-        for (AlbumArtState listener : artStateListeners) listener.respond(albumArt);
-        defaultArt = false;
-        artLoaded = true;
-    }
-
-    private Bitmap getAlbumArt() {
-        return albumArt;
-    }
-
-    private void setDefaultArt() {
-        Bitmap art = !ThemeManager.get().useLightTheme ? ((BitmapDrawable) cxt.getResources().getDrawable(R.drawable.art_dark)).getBitmap() : ((BitmapDrawable) cxt.getResources().getDrawable(R.drawable.art_light)).getBitmap();
-        setAlbumArt(art);
-        defaultArt = true;
-    }
+    public String albumArtPath;
+    public boolean defaultArt = false;
+    public boolean artLoaded = false;
+    public Bitmap albumArt;
+    public ArrayList<ArtRequest> artRequests = new ArrayList<>();
 
     public void setAlbumArtPath(String albumArtPath) {
-        this.albumArtPath = albumArtPath;
+        this.albumArtPath = "file://" + albumArtPath;
     }
 
-    public void buildArt() {
-        try {
-            Picasso.with(getContext()).load(new File(getAlbumArtPath())).into(new Target() {
+    public String getAlbumArtPath() {
+        return albumArtPath;
+    }
+
+    public void prepareArt() {
+        if (!artLoaded) {
+            Picasso.with(getContext()).load(getAlbumArtPath()).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    setAlbumArt(bitmap);
+                    defaultArt = false;
                     artLoaded = true;
-                    Log.d("Album " + String.valueOf(getId()), "Art Built");
+                    albumArt = bitmap;
+                    for (ArtRequest artRequest : artRequests) artRequest.respond(bitmap);
+                    artRequests.clear();
+                    Log.d("Album " + String.valueOf(getId()), "Art Loaded from " + getAlbumArtPath());
                 }
 
                 @Override
                 public void onBitmapFailed(Drawable errorDrawable) {
-
+                    defaultArt = true;
+                    artLoaded = true;
+                    albumArt = Constants.defaultArt(getContext());
+                    for (ArtRequest request  : artRequests) request.respond(Constants.defaultArt(getContext()));
+                    artRequests.clear();
+                    Log.d("Album " + String.valueOf(getId()), "Fetching Default Art");
                 }
 
                 @Override
@@ -116,14 +109,39 @@ public class Album {
 
                 }
             });
-        } catch (NullPointerException e) {
-            setDefaultArt();
-            Log.d("Album " + String.valueOf(getId()), "No Album Art");
         }
     }
 
-    public String getAlbumArtPath() {
-        return albumArtPath;
+    public void addListener(ArtRequest request) {
+        artRequests.add(request);
+    }
+
+    public interface ArtRequest {
+        void respond(Bitmap albumArt);
+    }
+
+    public void requestArt(ArtRequest request) {
+        if (artLoaded) request.respond(albumArt);
+        else {
+            addListener(request);
+            prepareArt();
+        }
+    }
+
+    public void requestArt(final ImageView imageView) {
+        if (artLoaded) {
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setImageBitmap(albumArt);
+        } else {
+            addListener(new ArtRequest() {
+                @Override
+                public void respond(Bitmap albumArt) {
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    imageView.setImageBitmap(albumArt);
+                }
+            });
+            prepareArt();
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,36 +192,7 @@ public class Album {
     //Misc. Methods
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Album Art Changed Listener
-    ///////////////////////////////////////////////////////////////////////////
-
-    ArrayList<AlbumArtState> artStateListeners = new ArrayList<>();
-
-    private void addStateListener(AlbumArtState listener) {
-        this.artStateListeners.add(listener);
-    }
-
-    public interface AlbumArtState {
-        void respond(Bitmap albumArt);
-    }
-
-    public void requestArt(AlbumArtState stateListener) {
-        if (artLoaded) stateListener.respond(getAlbumArt());
-        else {
-            addStateListener(stateListener);
-        }
-    }
-
-    public void requestArt(final ImageView imageView) {
-        requestArt(new AlbumArtState() {
-            @Override
-            public void respond(Bitmap albumArt) {
-                imageView.setImageBitmap(albumArt);
-            }
-        });
-    }
+    //Nothing Yet
 
 }
 

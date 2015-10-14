@@ -62,17 +62,11 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     public void onBindViewHolder(final AlbumGridViewHolder holder, final int position) {
         final Album current = data.get(position);
         holder.item.setAlbum(current);
-        if (!current.artLoaded) {
-            holder.item.AlbumGridItemRootView.setAlpha(0.0f);
-
-            //This is a second time but it loads this time... I love inconsistency
-            current.buildArt();
-        }
-        current.requestArt(new Album.AlbumArtState() {
+        current.requestArt(new Album.ArtRequest() {
             @Override
             public void respond(Bitmap albumArt) {
-                setColor(albumArt, holder, current, position);
                 animateCell(holder, position);
+                setColor(albumArt, holder, current, position);
             }
         });
     }

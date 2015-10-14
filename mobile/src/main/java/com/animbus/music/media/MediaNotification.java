@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -140,7 +139,7 @@ public class MediaNotification extends BroadcastReceiver {
                     .setShowWhen(false)
                     .setPriority(PRIORITY_MAX);
 
-            song.getAlbum().requestArt(new Album.AlbumArtState() {
+            song.getAlbum().requestArt(new Album.ArtRequest() {
                 @Override
                 public void respond(Bitmap albumArt) {
                     mBuilder.setLargeIcon(albumArt);
