@@ -77,7 +77,7 @@ public class AlbumDetails extends ThemableActivity {
         adapter.setOnItemClickedListener(new AlbumDetailsAdapter.AlbumDetailsClickListener() {
             @Override
             public void onAlbumDetailsItemClicked(View v, List<Song> data, int pos) {
-                PlaybackManager.get().play(new ArrayList<>(data), pos);
+                PlaybackManager.get().play(data, pos);
             }
         });
         mList.setItemAnimator(new DefaultItemAnimator());
@@ -88,7 +88,7 @@ public class AlbumDetails extends ThemableActivity {
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlaybackManager.get().play(new ArrayList<>(mAlbum.getSongs()), 0);
+                PlaybackManager.get().play(mAlbum.getSongs(), 0);
                 transitionNowPlaying();
             }
         });

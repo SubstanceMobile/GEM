@@ -125,7 +125,6 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     private void animateColors(Album a, AlbumGridViewHolder holder, int pos) {
         if (!a.colorAnimated) {
             Random colorDelayRandom = new Random();
-            int MAX = COLOR_DELAY_MAX * pos;
             int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
             ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
             backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumArtGridItemInfoBar, "backgroundColor", new ArgbEvaluator(), defaultColor(TYPE_BACK),

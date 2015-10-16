@@ -172,8 +172,9 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
      * A variaton of play that uses an item extracted from a list
      */
     public void play(List<Song> list, int songPos) {
-        play(list.get(songPos));
-        QueueManager.get().setQueue(list);
+        ArrayList<Song> data = new ArrayList<>(list);
+        play(data.get(songPos));
+        QueueManager.get().setQueue(data);
         QueueManager.get().setCurrentSongPos(songPos);
     }
 

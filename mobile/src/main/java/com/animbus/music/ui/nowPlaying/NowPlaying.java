@@ -70,7 +70,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
         adapter.setOnItemClickedListener(new NowPlayingAdapter.NowPlayingClickedListener() {
             @Override
             public void onNowPlayingItemClicker(View v, List<Song> data, int pos) {
-                if (pos != 0) {
+                if (pos != -1) {
                     PlaybackManager.get().playQueueItem(pos);
                 }
             }

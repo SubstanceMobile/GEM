@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.NowPlayingAdapterViewHolder> implements PlaybackManager.OnChangedListener {
+public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.NowPlayingAdapterViewHolder>{
     LayoutInflater inflater;
     List<Song> data = Collections.emptyList();
     Context context;
@@ -38,9 +38,17 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
         inflater = LayoutInflater.from(c);
         data = QueueManager.get().getCurrentQueueAsSong();
         this.context = c;
-        data.add(0, PlaybackManager.get().getCurrentSong());
-        update();
-        PlaybackManager.get().registerListener(this);
+        PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
+            @Override
+            public void onSongChanged(Song song) {
+                notifyItemChanged(0);
+            }
+
+            @Override
+            public void onPlaybackStateChanged(PlaybackStateCompat state) {
+
+            }
+        });
     }
 
     @Override
@@ -51,7 +59,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
     @Override
     public void onBindViewHolder(final NowPlayingAdapterViewHolder holder, final int position) {
         if (position == 0){
-            Song customSong = data.get(0);
+            Song customSong = PlaybackManager.get().getCurrentSong();
 
             holder.dataBinder.setSong(customSong);
             holder.dataBinder.setIsFirst(true);
@@ -59,9 +67,17 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             InsetDrawable eqIcon = new InsetDrawable(context.getResources().getDrawable(R.drawable.ic_equalizer_black_48dp), context.getResources().getDimensionPixelSize(R.dimen.margin_medium));
             DrawableCompat.setTint(eqIcon, customSong.getAlbum().accentColor);
             holder.dataBinder.nowplayingAlbumart.setImageDrawable(eqIcon);
+            configureRepeatIcon(holder.dataBinder.nowPlayingRepeatIcon, customSong);
+            holder.dataBinder.nowPlayingRepeatIcon.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toggleRepeatIcon((ImageView) v, PlaybackManager.get().getCurrentSong());
+                }
+            });
         } else {
-            holder.dataBinder.setSong(data.get(position));
+            holder.dataBinder.setSong(data.get(position - 1));
             holder.dataBinder.setIsFirst(false);
+            holder.dataBinder.nowplayingAlbumart.albumArt(holder.dataBinder.getSong().getAlbum());
         }
     }
 
@@ -93,30 +109,16 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data.size() + 1;
     }
 
     public void setOnItemClickedListener(NowPlayingClickedListener clickListener) {
         onItemClickedListener = clickListener;
     }
 
-    @Override
-    public void onSongChanged(Song song) {
-        update();
-    }
-
-    @Override
-    public void onPlaybackStateChanged(PlaybackStateCompat state) {
-
-    }
 
     public interface NowPlayingClickedListener {
         void onNowPlayingItemClicker(View v, List<Song> data, int pos);
-    }
-
-    public void update(){
-        data.set(0, PlaybackManager.get().getCurrentSong());
-        notifyItemChanged(0);
     }
 
     class NowPlayingAdapterViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
@@ -131,7 +133,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
         @Override
         public void onClick(View v) {
             if (onItemClickedListener != null) {
-                onItemClickedListener.onNowPlayingItemClicker(v, data, getAdapterPosition());
+                onItemClickedListener.onNowPlayingItemClicker(v, data, getAdapterPosition() - 1);
             }
         }
     }
