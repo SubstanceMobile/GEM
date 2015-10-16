@@ -84,7 +84,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
         mControlsRoot.setBackgroundColor(mSong.getAlbum().BackgroundColor);
         mCollapsingToolbar.setContentScrimColor(mSong.getAlbum().BackgroundColor);
         mCollapsingToolbar.setStatusBarScrimColor(mSong.getAlbum().BackgroundColor);
-        mControls.setUIColors(mSong.getAlbum().TitleTextColor, mSong.getAlbum().SubtitleTextColor, mSong.getAlbum().darkPrimary, mSong.getAlbum().darkPrimary);
+        mControls.setUIColors(mSong.getAlbum().TitleTextColor, mSong.getAlbum().SubtitleTextColor, mSong.getAlbum().SubtitleTextColor, mSong.getAlbum().BackgroundColor);
 
     }
 

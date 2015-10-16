@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.animbus.music.media.objects.Album;
+import com.animbus.music.shared.Constants;
 
 public class SquareImageViewWidth_Based extends ImageView {
     public boolean isInEditMode (){
@@ -33,6 +34,7 @@ public class SquareImageViewWidth_Based extends ImageView {
     }
 
     public void albumArt(final Album album) {
+        setImageBitmap(Constants.defaultArt(getContext()));
         if (album != null) {
             album.requestArt(this);
         }

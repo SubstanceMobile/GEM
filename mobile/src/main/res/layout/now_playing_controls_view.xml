@@ -159,7 +159,8 @@
                         android:id="@+id/controls_volume_icon_empty"
                         android:background="?attr/ripple_circle"
                         android:layout_gravity="center"
-                        android:padding="@dimen/margin_small" />
+                        android:padding="@dimen/margin_small"
+                        android:clickable="true" />
 
                     <SeekBar
                         android:layout_width="0dp"
@@ -176,7 +177,8 @@
                         android:id="@+id/controls_volume_icon_full"
                         android:background="?attr/ripple_circle"
                         android:layout_gravity="center"
-                        android:padding="@dimen/margin_small" />
+                        android:padding="@dimen/margin_small"
+                        android:clickable="true" />
 
                 </LinearLayout>
 
