@@ -67,7 +67,6 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
         holder.item.setAlbum(album);
         holder.item.AlbumArtGridItemAlbumArt.albumArt(album);
         setDefaultBackColors(holder);
-        setDefaultAccentColors(album);
         album.requestArt(new Album.ArtRequest() {
             @Override
             public void respond(Bitmap albumArt) {
@@ -96,10 +95,13 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                         Palette.from(albumArt).generate(new Palette.PaletteAsyncListener() {
                             @Override
                             public void onGenerated(Palette palette) {
-                                Palette.Swatch swatch = getMainSwatch(palette.getSwatches());
+                                Palette.Swatch swatch = getMainSwatch(palette.getSwatches())[0];
+                                Palette.Swatch accentSwatch = getMainSwatch(palette.getSwatches())[1];
                                 album.BackgroundColor = swatch.getRgb();
                                 album.TitleTextColor = swatch.getTitleTextColor();
                                 album.SubtitleTextColor = swatch.getBodyTextColor();
+                                album.accentColor = accentSwatch.getRgb();
+                                album.accentIconColor = accentSwatch.getBodyTextColor();
                                 animateColors(album, holder, pos);
                             }
                         });
@@ -109,7 +111,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
         }
     }
 
-    private Palette.Swatch getMainSwatch(List<Palette.Swatch> swatches) {
+    private Palette.Swatch[] getMainSwatch(List<Palette.Swatch> swatches) {
         ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(swatches);
         Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
             @Override
@@ -117,7 +119,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                 return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
             }
         });
-        return sortedSwatches.get(sortedSwatches.size() - 1);
+        return new Palette.Swatch[] {sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
     }
 
     private void animateColors(Album a, AlbumGridViewHolder holder, int pos) {

@@ -33,7 +33,6 @@ public class Album {
     public int SubtitleTextColor;
     public int accentColor;
     public int accentIconColor;
-    public int darkPrimary;
     public Context cxt;
 
     public Album() {

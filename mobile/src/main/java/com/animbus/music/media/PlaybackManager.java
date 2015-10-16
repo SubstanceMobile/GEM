@@ -177,7 +177,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
         QueueManager.get().setCurrentSongPos(songPos);
     }
 
-    public void playQueueItem(int pos){
+    public void playQueueItem(int pos) {
         play(QueueManager.get().getCurrentQueueAsSong().get(pos));
         QueueManager.get().setCurrentSongPos(pos);
     }
@@ -535,14 +535,12 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
     }
 
     public MediaService getService() {
-        return  mService;
+        return mService;
     }
 
     public boolean isLooping() {
         return mMediaPlayer.isLooping();
     }
-
-
 
     public boolean isInitiated() {
         return mService != null;
