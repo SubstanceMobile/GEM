@@ -194,10 +194,10 @@
             android:name=".ui.setup.SetupActivity"
             android:label="@string/app_name_actual" />
         <activity
-            android:name=".ui.Settings.Settings"
+            android:name=".ui.settings.Settings"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".ui.Settings.chooseIcon.ChooseIcon"
+            android:name=".ui.settings.chooseIcon.ChooseIcon"
             android:label="@string/title_activity_choose_icon" />
 
         <receiver android:name=".ui.MusicPlaybackWidget" >
@@ -213,7 +213,7 @@
         <service android:name=".media.MediaService" />
 
         <activity
-            android:name=".ui.Settings.AlbumColor"
+            android:name=".ui.settings.AlbumColor"
             android:label="@string/title_activity_album_color" />
         <activity
             android:name=".ui.Search"

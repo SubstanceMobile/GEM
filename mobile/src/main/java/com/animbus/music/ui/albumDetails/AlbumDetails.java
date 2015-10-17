@@ -30,8 +30,8 @@ import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
-import com.animbus.music.ui.Settings.Settings;
-import com.animbus.music.ui.Settings.chooseIcon.IconManager;
+import com.animbus.music.ui.settings.Settings;
+import com.animbus.music.ui.settings.chooseIcon.IconManager;
 import com.animbus.music.ui.theme.Theme;
 
 import java.util.List;
