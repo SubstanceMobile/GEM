@@ -1,25 +1,37 @@
-package com.animbus.music.ui.mainScreen;
+package com.animbus.music.ui.MainScreen;
 
+import android.animation.Animator;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,15 +40,22 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.LockableViewPager;
 import com.animbus.music.customImpls.ThemableActivity;
+import com.animbus.music.data.adapter.AlbumGridAdapter;
+import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.Search;
-import com.animbus.music.ui.settings.Settings;
-import com.animbus.music.ui.settings.chooseIcon.IconManager;
+import com.animbus.music.ui.albumDetails.AlbumDetails;
+import com.animbus.music.ui.nowPlaying.NowPlaying;
+import com.animbus.music.ui.Settings.Settings;
+import com.animbus.music.ui.Settings.chooseIcon.IconManager;
 import com.animbus.music.ui.setup.SetupActivity;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
+
+import java.util.List;
 
 
 public class MainScreen extends ThemableActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,7 +81,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     protected void sequence(Bundle savedInstanceState) {
         super.sequence(savedInstanceState);
         setUpNavdrawer();
-        showSetupIfNeeded();
+        /*showSetupIfNeeded();*/
     }
 
     @Override
@@ -104,7 +123,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             toolbar.setTitle(getResources().getString(R.string.title_activity_main));
         }
 
-        pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+        pager.setAdapter(new RecyclerPagerAdapter());
         pager.setOffscreenPageLimit(3);
 
         if (settings.getBooleanSetting(SettingsManager.KEY_SCROLLABLE_TABS, true)) {
@@ -132,38 +151,52 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         tabs.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(pager));
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
 
-
-        //Sets Window description in Multitasking menu
-        IconManager iconM = IconManager.get().setContext(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (!settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-                Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-                setTaskDescription(new ActivityManager.TaskDescription(null, bm, getResources().getColor(R.color.primaryDark)));
-                bm.recycle();
-            } else {
-                Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-                setTaskDescription(new ActivityManager.TaskDescription(null, bm, getResources().getColor(R.color.primaryLight)));
-                bm.recycle();
-            }
-        }
+        configureWindow();
         if (!PlaybackManager.get().isActive()) {
             quickToolbar.setVisibility(View.GONE);
         }
+    }
+
+    private void configureWindow() {
+        //Sets Window description in Multitasking menu
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            IconManager iconM = IconManager.get().setContext(this);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+            setTaskDescription(new ActivityManager.TaskDescription(currentScreenName, bm, ThemeManager.get().useLightTheme ? getResources().getColor(R.color.primaryLight) : getResources().getColor(R.color.primaryDark)));
+            bm.recycle();
+        }
+    }
+
+    public int getThemeAccentColor() {
+        final TypedValue value = new TypedValue();
+        getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+        return value.data;
     }
 
     private void setUpNavdrawer() {
         drawerContent.setNavigationItemSelectedListener(this);
 
         final View header = View.inflate(this, R.layout.navigation_drawer_header, null);
+
+        final TextView title = (TextView) header.findViewById(R.id.navdrawer_header_title);
+        final TextView artist = (TextView) header.findViewById(R.id.navdrawer_header_artist);
+        final ImageView art = (ImageView) header.findViewById(R.id.navdrawer_header_image);
+
+        try {
+            Song current = PlaybackManager.get().getCurrentSong();
+            title.setText(current.getSongTitle());
+            artist.setText(current.getSongArtist());
+            current.getAlbum().requestArt(art);
+        } catch (NullPointerException e) {
+            Log.d("Navdrawer Header", "Not playing music");
+        }
+
         PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
             @Override
             public void onSongChanged(Song song) {
-                TextView title = (TextView) header.findViewById(R.id.navdrawer_header_title);
-                TextView artist = (TextView) header.findViewById(R.id.navdrawer_header_artist);
-                ImageView art = (ImageView) header.findViewById(R.id.navdrawer_header_image);
                 title.setText(song.getSongTitle());
                 artist.setText(song.getSongArtist());
-                art.setImageBitmap(song.getAlbum().getAlbumArt());
+                song.getAlbum().requestArt(art);
             }
 
             @Override
@@ -171,6 +204,36 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
 
             }
         });
+
+        header.findViewById(R.id.navdrawer_header_clickable).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                header.findViewById(R.id.navdrawer_header_items_root).animate().alpha(0.0f).setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this, header.findViewById(R.id.navdrawer_header_image), "art");
+                        ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, NowPlaying.class), options.toBundle());
+                        header.findViewById(R.id.navdrawer_header_items_root).setAlpha(1.0f);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                }).start();
+            }
+        });
+
         drawerContent.addHeaderView(header);
         drawerContent.inflateMenu(R.menu.navigation_drawer_items);
 
@@ -191,29 +254,17 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             switchToPlaylists();
         }
         ColorStateList colorStateList;
-        if (themeManager.useLightTheme) {
-            colorStateList = new ColorStateList(
-                    new int[][]{
-                            {android.R.attr.state_checked}, //When selected
-                            {}
-                    },
-                    new int[]{
-                            getResources().getColor(R.color.primaryDark), //When selected
-                            getResources().getColor(R.color.secondary_text_default_material_light)
-                    }
-            );
-        } else {
-            colorStateList = new ColorStateList(
-                    new int[][]{
-                            {android.R.attr.state_checked}, //When selected
-                            {}
-                    },
-                    new int[]{
-                            getResources().getColor(R.color.primaryLight), //When selected
-                            getResources().getColor(R.color.secondary_text_default_material_dark)
-                    }
-            );
-        }
+        int secondaryColor = ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark);
+        colorStateList = new ColorStateList(
+                new int[][]{
+                        {android.R.attr.state_checked}, //When selected
+                        {}
+                },
+                new int[]{
+                        getThemeAccentColor(), //When selected
+                        secondaryColor
+                }
+        );
         drawerContent.setItemIconTintList(colorStateList);
         drawerContent.setItemTextColor(colorStateList);
 
@@ -286,6 +337,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         pager.setCurrentItem(0);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
+            configureWindow();
         }
         //Closes the Navdrawer
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -299,6 +351,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         pager.setCurrentItem(1);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
+            configureWindow();
         }
         //Closes the Navdrawer
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -313,6 +366,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         pager.setCurrentItem(2);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
+            configureWindow();
         }
         //Closes the Navdrawer
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -327,59 +381,117 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         pager.setCurrentItem(3);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
             toolbar.setTitle(currentScreenName);
+            configureWindow();
         }
         //Closes the Navdrawer
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawers();
     }
 
-    class MainPagerAdapter extends FragmentStatePagerAdapter {
-        int lockedPos;
-        boolean isLocked;
-
-
-        public MainPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        private Fragment getListItem(final int position) {
-            if (position == 0) {
-                return PageAlbums.setUp(MainScreen.this);
-            } else if (position == 1) {
-                return PageSongs.setUp(MainScreen.this, MainScreen.this);
-            } else if (position == 2) {
-                return PagePlaylists.setUp(MainScreen.this);
-            } else if (position == 3) {
-                return PageArtists.setUp(MainScreen.this);
-            } else {
-                return null;
-            }
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return getListItem(position);
-        }
+    class RecyclerPagerAdapter extends PagerAdapter implements AlbumGridAdapter.AlbumArtGridClickListener, SongListAdapter.SongListItemClickListener {
+        private String[] titles = new String[]{
+                getResources().getString(R.string.page_albums),
+                getResources().getString(R.string.page_songs),
+                getResources().getString(R.string.page_playlists),
+                getResources().getString(R.string.page_artists)
+        };
 
         @Override
         public int getCount() {
-            return 4;
+            return titles.length;
+        }
+
+        private void configureRecycler(RecyclerView recycler, int pos) {
+            switch (pos) {
+                case 0:
+                    configureAsAlbums(recycler);
+                    break;
+                case 1:
+                    configureAsSongs(recycler);
+                    break;
+                case 2:
+                    configureAsPlaylists(recycler);
+                    break;
+                case 3:
+                    configureAsArtists(recycler);
+                    break;
+            }
+        }
+
+        private void configureAsAlbums(RecyclerView list) {
+            AlbumGridAdapter adapter = new AlbumGridAdapter(MainScreen.this, MediaData.get().getAlbums());
+            adapter.setOnItemClickedListener(this);
+            list.setAdapter(adapter);
+            list.setItemAnimator(new DefaultItemAnimator());
+            Configuration config = MainScreen.this.getResources().getConfiguration();
+            if (config.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                list.setLayoutManager(new GridLayoutManager(MainScreen.this, 2, GridLayoutManager.VERTICAL, false));
+            } else if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                list.setLayoutManager(new GridLayoutManager(MainScreen.this, 3, GridLayoutManager.VERTICAL, false));
+            }
+        }
+
+        private void configureAsSongs(RecyclerView list) {
+            SongListAdapter adapter = new SongListAdapter(MainScreen.this, MediaData.get().getSongs());
+            adapter.setOnItemClickedListener(this);
+            list.setAdapter(adapter);
+            list.setItemAnimator(new DefaultItemAnimator());
+            list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
+        }
+
+        private void configureAsPlaylists(RecyclerView list) {
+            //TODO: Add this
+        }
+
+        private void configureAsArtists(RecyclerView list) {
+            //TODO: Add this
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            if (position == 0 || position == 1) {
+                RecyclerView list = new RecyclerView(MainScreen.this);
+                configureRecycler(list, position);
+                container.addView(list, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                return list;
+            } else {
+                TextView text = new TextView(MainScreen.this);
+                text.setSingleLine();
+                text.setText(titles[position]);
+                text.setGravity(Gravity.CENTER);
+                container.addView(text, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                return text;
+            }
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if (position == 0) {
-                return getResources().getString(R.string.page_albums);
-            } else if (position == 1) {
-                return getResources().getString(R.string.page_songs);
-            } else if (position == 2) {
-                return getResources().getString(R.string.page_playlists);
-            } else if (position == 3) {
-                return getResources().getString(R.string.page_artists);
-            } else {
-                return "";
-            }
+            return titles[position];
         }
 
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view.equals(object);
+        }
+
+        @Override
+        public void AlbumGridItemClicked(View view, Album album) {
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
+                    new Pair<View, String>(MainScreen.this.toolbar, "appbar"),
+                    new Pair<View, String>(view.findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
+                    new Pair<View, String>(view.findViewById(R.id.AlbumInfoToolbar), "info"));
+            ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, AlbumDetails.class).putExtra("album_id", album.getId()), options.toBundle());
+        }
+
+        @Override
+        public void AlbumGridItemLongClicked(View view, Album album) {
+            Snackbar.make(MainScreen.this.findViewById(R.id.MainView), R.string.playing_album, Snackbar.LENGTH_SHORT).show();
+            PlaybackManager.get().play(album.getSongs(), 0);
+        }
+
+        @Override
+        public void SongListItemClicked(int position, List<Song> data) {
+            PlaybackManager.get().play(data, position);
+        }
     }
 }

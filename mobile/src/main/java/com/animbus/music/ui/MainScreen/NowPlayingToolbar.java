@@ -1,4 +1,4 @@
-package com.animbus.music.ui.mainScreen;
+package com.animbus.music.ui.MainScreen;
 
 
 import android.app.Fragment;
@@ -79,7 +79,7 @@ public class NowPlayingToolbar extends Fragment implements PlaybackManager.OnCha
     public void onSongChanged(Song song) {
         title.setText(song.getSongTitle());
         artist.setText(song.getSongArtist());
-        art.setImageBitmap(song.getAlbum().getAlbumArt());
+        song.getAlbum().requestArt(art);
     }
 
     @Override

@@ -1,6 +1,4 @@
-package com.animbus.music.ui.mainScreen;
-
-import android.content.Context;
+package com.animbus.music.ui.MainScreen;
 
 /**
  * Created by Adrian on 7/15/2015.
@@ -15,11 +13,6 @@ public class BackupHub {
     private BackupHub() {
     }
 
-
-    public Context fragmentAlbumsCxt;
-    public Context fragmentSongsCxt;
-    public MainScreen fragmentSongsMyLib;
+    public boolean activated;
     public MainScreen settingsMyLib;
-    public Context fragmentPlaylistsCxt;
-    public Context fragmentArtistsCxt;
 }
