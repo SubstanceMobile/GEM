@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.SwitchCompat;
 
-import com.animbus.music.ui.settings.chooseIcon.IconManager;
+import com.animbus.music.ui.Settings.chooseIcon.IconManager;
 
 public class SettingsManager {
     private final static SettingsManager instance = new SettingsManager();

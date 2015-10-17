@@ -1,4 +1,4 @@
-package com.animbus.music.ui.settings.chooseIcon;
+package com.animbus.music.ui.Settings.chooseIcon;
 
 import android.content.ComponentName;
 import android.content.Context;

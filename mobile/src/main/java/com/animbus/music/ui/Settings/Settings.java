@@ -1,4 +1,4 @@
-package com.animbus.music.ui.settings;
+package com.animbus.music.ui.Settings;
 
 import android.app.ActivityManager;
 import android.app.PendingIntent;
@@ -34,10 +34,10 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.UiTweaker;
 import com.animbus.music.customImpls.ThemableActivity;
-import com.animbus.music.ui.mainScreen.BackupHub;
-import com.animbus.music.ui.mainScreen.MainScreen;
-import com.animbus.music.ui.settings.chooseIcon.ChooseIcon;
-import com.animbus.music.ui.settings.chooseIcon.IconManager;
+import com.animbus.music.ui.MainScreen.BackupHub;
+import com.animbus.music.ui.MainScreen.MainScreen;
+import com.animbus.music.ui.Settings.chooseIcon.ChooseIcon;
+import com.animbus.music.ui.Settings.chooseIcon.IconManager;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 

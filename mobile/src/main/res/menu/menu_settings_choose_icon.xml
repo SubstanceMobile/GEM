@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.animbus.music.ui.settings.chooseIcon.ChooseIcon">
+    tools:context="com.animbus.music.ui.Settings.chooseIcon.ChooseIcon">
     <item
         android:id="@+id/action_test_icons"
         android:orderInCategory="1"

@@ -9,13 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.SharedElementCallback;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v4.text.TextUtilsCompat;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.WindowCompat;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,10 +18,7 @@ import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,14 +30,10 @@ import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
-import com.animbus.music.ui.settings.Settings;
-import com.animbus.music.ui.settings.chooseIcon.IconManager;
+import com.animbus.music.ui.Settings.Settings;
+import com.animbus.music.ui.Settings.chooseIcon.IconManager;
 import com.animbus.music.ui.theme.Theme;
-import com.animbus.music.ui.theme.ThemeManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class AlbumDetails extends ThemableActivity {

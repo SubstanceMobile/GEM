@@ -1,10 +1,9 @@
-package com.animbus.music.ui.settings.chooseIcon;
+package com.animbus.music.ui.Settings.chooseIcon;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,17 +16,17 @@ import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.customImpls.ThemableActivity;
 
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.COLOR_BLACK;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.COLOR_BLUE;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.COLOR_COLORFUL;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.COLOR_GREEN;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.COLOR_ORANGE;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.COLOR_RED;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.COLOR_WHITE;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.DESIGNER_ALEX;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.DESIGNER_JAKA;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.DESIGNER_NGUYEN;
-import static com.animbus.music.ui.settings.chooseIcon.IconManager.DESIGNER_SRINI;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.COLOR_BLACK;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.COLOR_BLUE;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.COLOR_COLORFUL;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.COLOR_GREEN;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.COLOR_ORANGE;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.COLOR_RED;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.COLOR_WHITE;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.DESIGNER_ALEX;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.DESIGNER_JAKA;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.DESIGNER_NGUYEN;
+import static com.animbus.music.ui.Settings.chooseIcon.IconManager.DESIGNER_SRINI;
 
 public class ChooseIcon extends ThemableActivity {
     Toolbar toolbar;
