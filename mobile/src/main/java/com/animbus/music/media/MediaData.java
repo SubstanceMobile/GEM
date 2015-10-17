@@ -135,7 +135,7 @@ public class MediaData {
             for (Album a : mAlbums) {
                 for (Song s : mSongs) {
                     if (s.getAlbumID() == a.getId()) {
-                        a.getSongs().add(s);
+                        a.addSong(s);
                         s.setAlbum(a);
                     }
                 }

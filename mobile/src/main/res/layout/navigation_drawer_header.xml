@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/navdrawer_header_text_root_height"
         android:layout_gravity="bottom"
-        android:background="@drawable/gradient_block_onbottom">
+        android:background="@drawable/gradient_block_onbottom"
+        android:id="@+id/navdrawer_header_items_root">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,6 +52,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/ripple"
-        android:clickable="true" />
+        android:clickable="true"
+        android:id="@+id/navdrawer_header_clickable"
+        android:layout_gravity="right|bottom" />
 
 </FrameLayout>

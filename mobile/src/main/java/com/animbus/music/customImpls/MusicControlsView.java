@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.v7.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,7 +30,7 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
     private final Context mContext;
     AudioManager mAudioManager;
     private boolean mDragging;
-    private SeekBar mProgress, mVolume;
+    private AppCompatSeekBar mProgress, mVolume;
     private ImageView mPlayButton, mPauseButton, mNextButton, mPrevButton;
     private ImageView mVolumeNoneIcon, mVolumeFullIcon;
     private View mPlayButtonRoot, mPauseButtonRoot;
@@ -186,11 +187,11 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
         mPrevButton = (ImageView) v.findViewById(R.id.controls_prev_button);
         mPrevButton.setOnClickListener(mPrevListener);
 
-        mProgress = (SeekBar) v.findViewById(R.id.control_seek_bar);
+        mProgress = (AppCompatSeekBar) v.findViewById(R.id.control_seek_bar);
         mProgress.setOnSeekBarChangeListener(mSeekListener);
         mProgress.setProgressDrawable(null);
 
-        mVolume = (SeekBar) v.findViewById(R.id.controls_volume_seekbar);
+        mVolume = (AppCompatSeekBar) v.findViewById(R.id.controls_volume_seekbar);
         mVolume.setMax(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
         mVolume.setOnSeekBarChangeListener(mVolumeSeekListener);
 

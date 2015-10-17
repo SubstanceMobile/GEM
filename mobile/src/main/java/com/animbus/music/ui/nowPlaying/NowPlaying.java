@@ -40,7 +40,12 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_now_playing);
         PlaybackManager.get().registerListener(this);
+        configureTransition();
         mSong = PlaybackManager.get().getCurrentSong();
+    }
+
+    private void configureTransition(){
+        ViewCompat.setTransitionName(findViewById(R.id.now_playing_album_art), "art");
     }
 
     @Override

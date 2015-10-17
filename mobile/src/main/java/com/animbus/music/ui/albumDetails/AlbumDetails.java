@@ -9,14 +9,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.SharedElementCallback;
+import android.support.v4.graphics.ColorUtils;
+import android.support.v4.text.TextUtilsCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.WindowCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.animbus.music.R;
@@ -43,13 +55,22 @@ public class AlbumDetails extends ThemableActivity {
     RecyclerView mList;
     FloatingActionButton mFAB;
     Album mAlbum;
+    TextView mTitle, mArtist;
     Toolbar mDetails;
     boolean tempFavorite = false;
 
     @Override
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_album_details);
+        configureTransition();
         mAlbum = MediaData.get().findAlbumById(getIntent().getLongExtra("album_id", -1));
+    }
+
+    private void configureTransition(){
+        ViewCompat.setTransitionName(findViewById(R.id.album_details_album_art), "art");
+        ViewCompat.setTransitionName(findViewById(R.id.album_details_info_toolbar), "info");
+        ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar), "appbar");
+        findViewById(R.id.album_details_fab).setVisibility(View.GONE);
     }
 
     @Override
@@ -59,6 +80,7 @@ public class AlbumDetails extends ThemableActivity {
         mList = (RecyclerView) findViewById(R.id.album_details_recycler);
         mFAB = (FloatingActionButton) findViewById(R.id.album_details_fab);
         mDetails = (Toolbar) findViewById(R.id.album_details_info_toolbar);
+        Toolbar a;
     }
 
     @Override
@@ -69,6 +91,10 @@ public class AlbumDetails extends ThemableActivity {
         configureFab();
         configureRecyclerView();
         configureUI();
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setExitTransition(new Explode());
+        }
     }
 
     private void configureRecyclerView() {
@@ -92,6 +118,7 @@ public class AlbumDetails extends ThemableActivity {
                 transitionNowPlaying();
             }
         });
+        mFAB.show();
     }
 
     private void configureUIColors() {
@@ -132,7 +159,7 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void transitionNowPlaying() {
-        startActivity(new Intent(this, NowPlaying.class));
+        startActivity(new Intent(this, NowPlaying.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
     @Override

@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -48,6 +50,16 @@ public class Album {
 
     public List<Song> getSongs() {
         return albumSongs;
+    }
+
+    public void addSong(Song s) {
+        albumSongs.add(s);
+        Collections.sort(albumSongs, new Comparator<Song>() {
+            @Override
+            public int compare(Song lhs, Song rhs) {
+                return lhs.getTrackNumber().compareTo(rhs.getTrackNumber());
+            }
+        });
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -67,6 +67,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
         holder.item.setAlbum(album);
         holder.item.AlbumArtGridItemAlbumArt.albumArt(album);
         setDefaultBackColors(holder);
+        setDefaultAccentColors(album);
         album.requestArt(new Album.ArtRequest() {
             @Override
             public void respond(Bitmap albumArt) {
@@ -125,26 +126,27 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     private void animateColors(Album a, AlbumGridViewHolder holder, int pos) {
         if (!a.colorAnimated) {
             Random colorDelayRandom = new Random();
+            int MAX = COLOR_DELAY_MAX * pos;
             int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
             ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
-            backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumArtGridItemInfoBar, "backgroundColor", new ArgbEvaluator(), defaultColor(TYPE_BACK),
+            backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumInfoToolbar, "backgroundColor", new ArgbEvaluator(), defaultColor(TYPE_BACK),
                     a.BackgroundColor);
             backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
             backgroundAnimator.start();
-            titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtGridItemInfoTitle, textColor, defaultColor(TYPE_TITLE), a.TitleTextColor);
+            titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumTitle, textColor, defaultColor(TYPE_TITLE), a.TitleTextColor);
             titleAnimator.setEvaluator(new ArgbEvaluator());
             titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
             titleAnimator.start();
-            subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtGridItemInfoArtist, textColor, defaultColor(TYPE_SUBTITLE), a.SubtitleTextColor);
+            subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtist, textColor, defaultColor(TYPE_SUBTITLE), a.SubtitleTextColor);
             subtitleAnimator.setEvaluator(new ArgbEvaluator());
             subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
             subtitleAnimator.start();
 
             a.colorAnimated = true;
         } else {
-            holder.item.AlbumArtGridItemInfoBar.setBackgroundColor(a.BackgroundColor);
-            holder.item.AlbumArtGridItemInfoTitle.setTextColor(a.TitleTextColor);
-            holder.item.AlbumArtGridItemInfoArtist.setTextColor(a.SubtitleTextColor);
+            holder.item.AlbumInfoToolbar.setBackgroundColor(a.BackgroundColor);
+            holder.item.AlbumTitle.setTextColor(a.TitleTextColor);
+            holder.item.AlbumArtist.setTextColor(a.SubtitleTextColor);
         }
     }
 
@@ -170,9 +172,9 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     }
 
     private void setDefaultBackColors(AlbumGridViewHolder holder) {
-        holder.item.AlbumArtGridItemInfoBar.setBackgroundColor(defaultColor(TYPE_BACK));
-        holder.item.AlbumArtGridItemInfoTitle.setTextColor(defaultColor(TYPE_TITLE));
-        holder.item.AlbumArtGridItemInfoArtist.setTextColor(defaultColor(TYPE_SUBTITLE));
+        holder.item.AlbumInfoToolbar.setBackgroundColor(defaultColor(TYPE_BACK));
+        holder.item.AlbumTitle.setTextColor(defaultColor(TYPE_TITLE));
+        holder.item.AlbumArtist.setTextColor(defaultColor(TYPE_SUBTITLE));
     }
 
     private void setDefaultAccentColors(Album a) {

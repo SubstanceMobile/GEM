@@ -20,7 +20,7 @@
             android:layout_gravity="center_vertical"
             android:textColor="@color/secondary_text_default_material_light" />
 
-        <SeekBar
+        <android.support.v7.widget.AppCompatSeekBar
             android:layout_width="0dp"
             android:layout_height="@dimen/now_playing_seekbar_size"
             android:id="@+id/control_seek_bar"
@@ -162,7 +162,7 @@
                         android:padding="@dimen/margin_small"
                         android:clickable="true" />
 
-                    <SeekBar
+                    <android.support.v7.widget.AppCompatSeekBar
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/controls_volume_seekbar"
