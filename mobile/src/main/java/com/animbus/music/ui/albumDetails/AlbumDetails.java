@@ -14,13 +14,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.animbus.music.R;
 import com.animbus.music.customImpls.ThemableActivity;
@@ -43,7 +42,7 @@ public class AlbumDetails extends ThemableActivity {
     FloatingActionButton mFAB;
     Album mAlbum;
     TextView mTitle, mArtist;
-    Toolbar mDetails;
+    LinearLayout mDetailsRoot;
     boolean tempFavorite = false;
 
     @Override
@@ -57,7 +56,6 @@ public class AlbumDetails extends ThemableActivity {
         ViewCompat.setTransitionName(findViewById(R.id.album_details_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_info_toolbar), "info");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar), "appbar");
-        findViewById(R.id.album_details_fab).setVisibility(View.GONE);
     }
 
     @Override
@@ -66,8 +64,9 @@ public class AlbumDetails extends ThemableActivity {
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.album_details_collapsing_toolbar);
         mList = (RecyclerView) findViewById(R.id.album_details_recycler);
         mFAB = (FloatingActionButton) findViewById(R.id.album_details_fab);
-        mDetails = (Toolbar) findViewById(R.id.album_details_info_toolbar);
-        Toolbar a;
+        mDetailsRoot = (LinearLayout) findViewById(R.id.album_details_info_toolbar);
+        mTitle = (TextView) findViewById(R.id.album_details_info_toolbar_title);
+        mArtist = (TextView) findViewById(R.id.album_details_info_toolbar_artist);
     }
 
     @Override
@@ -78,10 +77,6 @@ public class AlbumDetails extends ThemableActivity {
         configureFab();
         configureRecyclerView();
         configureUI();
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setExitTransition(new Explode());
-        }
     }
 
     private void configureRecyclerView() {
@@ -105,15 +100,18 @@ public class AlbumDetails extends ThemableActivity {
                 transitionNowPlaying();
             }
         });
-        mFAB.show();
+        mFAB.setAlpha(0.0f);
+        mFAB.setScaleX(0.0f);
+        mFAB.setScaleY(0.0f);
+        mFAB.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(200).setStartDelay(500).start();
     }
 
     private void configureUIColors() {
         FabHelper.setFabBackground(mFAB, mAlbum.accentColor);
         FabHelper.setFabTintedIcon(mFAB, getResources().getDrawable(R.drawable.ic_play_arrow_black_48dp), mAlbum.accentIconColor);
-        mDetails.setBackgroundColor(mAlbum.BackgroundColor);
-        mDetails.setTitleTextColor(mAlbum.TitleTextColor);
-        mDetails.setSubtitleTextColor(mAlbum.SubtitleTextColor);
+        mDetailsRoot.setBackgroundColor(mAlbum.BackgroundColor);
+        mTitle.setTextColor(mAlbum.TitleTextColor);
+        mArtist.setTextColor(mAlbum.SubtitleTextColor);
         mCollapsingToolbar.setContentScrimColor(mAlbum.BackgroundColor);
         mCollapsingToolbar.setStatusBarScrimColor(mAlbum.BackgroundColor);
 
@@ -129,20 +127,10 @@ public class AlbumDetails extends ThemableActivity {
     private void configureUI() {
         ImageView mImage = (ImageView) findViewById(R.id.album_details_album_art);
         mAlbum.requestArt(mImage);
-        mDetails.setTitle(mAlbum.getAlbumTitle());
+        mTitle.setText(mAlbum.getAlbumTitle());
         mCollapsingToolbar.setTitle(mAlbum.getAlbumTitle());
-        mDetails.setSubtitle(mAlbum.getAlbumArtistName());
-        findViewById(R.id.album_details_favorite_icon).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onLikeClicked((ImageView) v);
-            }
-        });
+        mArtist.setText(mAlbum.getAlbumArtistName());
         configureUIColors();
-    }
-
-    private void onLikeClicked(ImageView v){
-        Toast.makeText(this, R.string.msg_coming_soon, Toast.LENGTH_SHORT).show();
     }
 
     private void transitionNowPlaying() {
@@ -164,12 +152,23 @@ public class AlbumDetails extends ThemableActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 break;
             case R.id.action_settings:
                 startActivity(new Intent(this, Settings.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        mFAB.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+            @Override
+            public void onHidden(FloatingActionButton fab) {
+                super.onHidden(fab);
+                AlbumDetails.super.onBackPressed();
+            }
+        });
     }
 }

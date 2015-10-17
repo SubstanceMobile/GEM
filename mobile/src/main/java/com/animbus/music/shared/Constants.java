@@ -3,6 +3,8 @@ package com.animbus.music.shared;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Property;
+import android.widget.TextView;
 
 import com.animbus.music.R;
 import com.animbus.music.ui.theme.ThemeManager;
@@ -17,6 +19,18 @@ public class Constants {
     }
 
     public Bitmap defaultArt;
+    public static final Property<TextView, Float> textSizeProp = new Property<TextView, Float>(Float.class, "textSize") {
+        @Override
+        public Float get(TextView object) {
+            return object.getTextSize();
+        }
+
+        @Override
+        public void set(TextView object, Float value) {
+            object.setTextSize(value);
+        }
+    };
+
 
     public static Bitmap defaultArt(Context c) {
         if (i.defaultArt != null) return i.defaultArt;

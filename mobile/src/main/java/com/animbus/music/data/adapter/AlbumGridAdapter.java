@@ -27,7 +27,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.AlbumGridViewHolder> {
+public class    AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.AlbumGridViewHolder> {
     private static final int GRID_ANIM_DELAY = 10;
     private static final int GRID_ANIM_DUR = 500;
     private static final int COLOR_DUR = 300;

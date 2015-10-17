@@ -68,7 +68,6 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- TODO: No Icon -->
         <activity-alias
             android:name=".activities.app.icon.srini.green"
             android:enabled="false"

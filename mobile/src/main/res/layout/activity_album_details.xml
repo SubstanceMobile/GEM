@@ -50,36 +50,53 @@
                     android:clickable="true"
                     android:fitsSystemWindows="true"/>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/album_details_info_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/albums_info_toolbar_size"
-                    app:layout_collapseMode="none"
-                    app:subtitle="Artist"
-                    app:title="Album"
-                    android:background="?attr/colorPrimary"
-                    android:fitsSystemWindows="true" >
+                    <LinearLayout
+                        android:id="@+id/album_details_info_toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/albums_info_toolbar_size"
+                        app:layout_collapseMode="none"
+                        android:background="?attr/colorPrimary"
+                        android:fitsSystemWindows="true"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
 
-                    <FrameLayout
-                        android:layout_width="@dimen/listViewSizeBig"
-                        android:layout_height="@dimen/listViewSizeBig"
-                        android:padding="@dimen/margin_small"
-                        android:id="@+id/album_details_favorite_icon_root"
-                        android:layout_gravity="end"
-                        android:visibility="gone">
-
-                        <ImageView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_repeat_black_48dp"
-                            android:id="@+id/album_details_favorite_icon"
-                            android:background="?attr/ripple_circle"
-                            android:layout_gravity="center"
-                            android:padding="@dimen/margin_medium"
-                            android:clickable="true" />
-                    </FrameLayout>
+                            android:orientation="vertical"
+                            android:padding="@dimen/margin_medium">
 
-                </android.support.v7.widget.Toolbar>
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="100" />
+
+                            <TextView
+                                android:id="@+id/album_details_info_toolbar_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:text="Album"
+                                android:textColor="@color/abc_primary_text_material_dark"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/album_details_info_toolbar_artist"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:text="Artist"
+                                android:textColor="@color/abc_secondary_text_material_dark"
+                                android:textSize="16sp" />
+
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="100" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
             </LinearLayout>
 

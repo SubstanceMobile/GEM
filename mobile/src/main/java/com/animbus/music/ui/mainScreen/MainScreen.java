@@ -479,7 +479,8 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
                     new Pair<View, String>(MainScreen.this.toolbar, "appbar"),
                     new Pair<View, String>(view.findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
-                    new Pair<View, String>(view.findViewById(R.id.AlbumInfoToolbar), "info"));
+                    new Pair<View, String>(view.findViewById(R.id.AlbumInfoToolbar), "info")
+            );
             ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, AlbumDetails.class).putExtra("album_id", album.getId()), options.toBundle());
         }
 

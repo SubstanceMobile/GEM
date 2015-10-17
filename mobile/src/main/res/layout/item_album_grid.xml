@@ -45,6 +45,11 @@
                         android:orientation="vertical"
                         android:padding="@dimen/margin_medium">
 
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="100" />
+
                         <TextView
                             android:id="@+id/AlbumTitle"
                             android:layout_width="match_parent"
@@ -62,6 +67,11 @@
                             android:text="@{album.getAlbumArtistName}"
                             android:textColor="@color/abc_secondary_text_material_dark"
                             android:textSize="12sp" />
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="100" />
 
                     </LinearLayout>
 
