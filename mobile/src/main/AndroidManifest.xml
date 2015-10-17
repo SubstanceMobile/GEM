@@ -14,7 +14,7 @@
         android:label="@string/app_name_actual"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.MainScreen.MainScreen"
+            android:name=".ui.mainScreen.MainScreen"
             android:label="@string/app_name" />
         <activity android:name=".ui.LaunchActivity"
             android:label="@string/app_name" />
@@ -218,10 +218,10 @@
         <activity
             android:name=".ui.Search"
             android:label="@string/title_activity_search"
-            android:parentActivityName=".ui.MainScreen.MainScreen" >
+            android:parentActivityName=".ui.mainScreen.MainScreen" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.animbus.music.ui.MainScreen.MainScreen" />
+                android:value="com.animbus.music.ui.mainScreen.MainScreen" />
         </activity>
         <activity
             android:name=".UiTweaker"

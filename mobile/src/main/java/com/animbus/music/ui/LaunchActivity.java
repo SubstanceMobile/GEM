@@ -22,8 +22,8 @@ import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.ServiceHelper;
-import com.animbus.music.ui.MainScreen.BackupHub;
-import com.animbus.music.ui.MainScreen.MainScreen;
+import com.animbus.music.ui.mainScreen.BackupHub;
+import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 
