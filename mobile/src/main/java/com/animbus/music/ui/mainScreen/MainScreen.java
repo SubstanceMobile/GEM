@@ -201,7 +201,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
      if (state.getState() == PlaybackStateCompat.STATE_STOPPED || state.getState() == PlaybackStateCompat.STATE_NONE) {
          if (quickToolbar.getVisibility() != View.GONE) {
              quickToolbar.setTranslationY(0f);
-             quickToolbar.animate().translationY(200f).setInterpolator(new FastOutSlowInInterpolator())
+             quickToolbar.animate().translationY(200f).setInterpolator(new FastOutSlowInInterpolator ())
                      .setListener(new Animator.AnimatorListener() {
                          @Override
                          public void onAnimationStart(Animator animation) {

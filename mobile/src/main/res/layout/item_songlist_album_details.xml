@@ -9,12 +9,22 @@
         android:orientation="horizontal"
         android:background="?attr/ripple">
 
+        <TextView
+            android:layout_width="@dimen/listViewSizeBig"
+            android:layout_height="@dimen/listViewSizeBig"
+            android:text="1"
+            android:id="@+id/albumList_song_order"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="?attr/secondaryTextColor"
+            android:textSize="20sp"
+            android:gravity="center" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:paddingStart="@dimen/margin_medium"
             android:layout_gravity="center_vertical">
 
             <TextView

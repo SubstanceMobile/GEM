@@ -37,6 +37,7 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
         Song current = data.get(position);
         holder.SongName.setText(current.getSongTitle());
         holder.SongDuration.setText(current.getSongDurString());
+        holder.SongPos.setText(current.getTrackNumber() != 0 ? String.valueOf(current.getTrackNumber()) : "-");
     }
 
     @Override
@@ -53,12 +54,13 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
     }
 
     class AlbumDetailsViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        TextView SongName, SongDuration;
+        TextView SongName, SongDuration, SongPos;
 
         public AlbumDetailsViewHolder(View itemView) {
             super(itemView);
             SongName = (TextView) itemView.findViewById(R.id.songlist_song_title);
             SongDuration = (TextView) itemView.findViewById(R.id.songlist_song_duration);
+            SongPos = (TextView) itemView.findViewById(R.id.albumList_song_order);
             itemView.setOnClickListener(this);
         }
 
