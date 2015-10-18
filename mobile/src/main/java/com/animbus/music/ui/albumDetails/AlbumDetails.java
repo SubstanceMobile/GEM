@@ -10,6 +10,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,7 +47,6 @@ public class AlbumDetails extends ThemableActivity {
     Album mAlbum;
     TextView mTitle, mArtist;
     LinearLayout mDetailsRoot;
-    boolean tempFavorite = false;
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class AlbumDetails extends ThemableActivity {
         ViewCompat.setTransitionName(findViewById(R.id.album_details_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_info_toolbar), "info");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar), "appbar");
-        ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar_text_protection), "appbar");
+        ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar_text_protection), "appbar_text_protextion");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_recycler), "list");
     }
 
@@ -137,7 +139,14 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void transitionNowPlaying() {
-        startActivity(new Intent(this, NowPlaying.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                new Pair<View, String>(findViewById(R.id.album_details_info_toolbar), "controls"),
+                new Pair<View, String>(findViewById(R.id.album_details_toolbar), "appbar"),
+                new Pair<View, String>(findViewById(R.id.album_details_toolbar_text_protection), "appbar_text_protection"),
+                new Pair<View, String>(findViewById(R.id.album_details_album_art), "art")
+
+        );
+        ActivityCompat.startActivity(this, new Intent(this, NowPlaying.class), options.toBundle());
     }
 
     @Override

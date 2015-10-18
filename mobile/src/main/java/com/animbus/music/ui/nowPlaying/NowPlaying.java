@@ -50,6 +50,8 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_recycler), "list");
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_controls_root), "controls");
+        ViewCompat.setTransitionName(findViewById(R.id.now_playing_toolbar), "appbar");
+        ViewCompat.setTransitionName(findViewById(R.id.now_playing_toolbar_text_protection), "appbar_text_protection");
     }
 
   @Override

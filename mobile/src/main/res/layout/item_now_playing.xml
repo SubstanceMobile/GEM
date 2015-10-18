@@ -71,24 +71,23 @@
                 android:layout_margin="@dimen/margin_medium"
                 android:visibility="visible"
                 android:src="@drawable/ic_equalizer_24dp"
-                android:id="@+id/now_playing_eq_icon" />
+                android:id="@+id/now_playing_eq_icon"
+                android:cropToPadding="true"
+                android:padding="@dimen/margin_small" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_small"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:maxLines="1"
-                    android:padding="@dimen/margin_tiny"
                     android:text="@{song.getSongTitle}"
                     android:textColor="?attr/primaryTextColor"
                     android:textSize="16sp"
@@ -103,7 +102,9 @@
                     android:text="@{song.songArtist}"
                     android:textColor="?attr/secondaryTextColor"
                     android:textSize="14sp"
-                    android:id="@+id/current_song_artist" />
+                    android:id="@+id/current_song_artist"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small" />
 
             </LinearLayout>
 

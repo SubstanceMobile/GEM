@@ -84,7 +84,6 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     @Override
     protected void sequence(Bundle savedInstanceState) {
         super.sequence(savedInstanceState);
-        setUpNavdrawer();
         /*showSetupIfNeeded();*/
     }
 
@@ -104,16 +103,16 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
 
     @Override
     protected void setUpTheme(Theme theme) {
-
+        Drawable menu = getResources().getDrawable(R.drawable.ic_menu_24dp);
+        DrawableCompat.setTint(menu, getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
+        getSupportActionBar().setHomeAsUpIndicator(menu);
+        setUpNavdrawer();
     }
 
     @Override
     protected void setUp() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Drawable menu = getResources().getDrawable(R.drawable.ic_menu_24dp);
-        DrawableCompat.setTint(menu, getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
-        getSupportActionBar().setHomeAsUpIndicator(menu);
 
         //Sets Dynamic Title
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
@@ -575,6 +574,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         public void AlbumGridItemClicked(View view, Album album) {
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
                     new Pair<View, String>(MainScreen.this.toolbar, "appbar"),
+                    new Pair<View, String>(MainScreen.this.toolbar, "appbar_text_protection"),
                     new Pair<View, String>(view.findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
                     new Pair<View, String>(MainScreen.this.findViewById(R.id.my_library_to_albumdetails_list_space), "list"),
                     new Pair<View, String>(view.findViewById(R.id.AlbumInfoToolbar), "info")
