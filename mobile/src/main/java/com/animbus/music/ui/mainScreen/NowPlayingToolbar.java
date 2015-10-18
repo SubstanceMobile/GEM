@@ -91,4 +91,12 @@ public class NowPlayingToolbar extends Fragment implements PlaybackManager.OnCha
             button.setImageResource(R.drawable.ic_pause_white_48dp);
         }
     }
+
+    public void show(){
+
+    }
+
+    public void hide(){
+
+    }
 }

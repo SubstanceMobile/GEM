@@ -1,32 +1,27 @@
 package com.animbus.music.data.adapter;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.animbus.music.R;
 import com.animbus.music.databinding.ItemNowPlayingList;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.QueueManager;
-import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.theme.ThemeManager;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.NowPlayingAdapterViewHolder>{
     LayoutInflater inflater;
@@ -128,6 +123,10 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             super(dataBinder.getRoot());
             this.dataBinder = dataBinder;
             dataBinder.getRoot().setOnClickListener(this);
+
+            ViewCompat.setTransitionName(dataBinder.songlistSongTitle, "title");
+            ViewCompat.setTransitionName(dataBinder.songlistSongArtist, "artist");
+            ViewCompat.setTransitionName(dataBinder.nowPlayingFavoriteIcon, "nowPlayingButton");
         }
 
         @Override

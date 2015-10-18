@@ -59,10 +59,8 @@ import java.util.List;
 
 
 public class MainScreen extends ThemableActivity implements NavigationView.OnNavigationItemSelectedListener {
-    public View quickToolbar;
+    View quickToolbar;
     String currentScreenName;
-    int AlbumArt = R.drawable.album_art;
-    MediaData dataManager;
     SettingsManager settings;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -91,7 +89,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerContent = (NavigationView) findViewById(R.id.navigation);
-        quickToolbar = findViewById(R.id.mylibrary_toolbar_fragment);
+        quickToolbar = findViewById(R.id.main_screen_now_playing_toolbar);
         tabs = (TabLayout) findViewById(R.id.main_tab_layout);
         pager = (LockableViewPager) findViewById(R.id.main_view_pager);
 
@@ -151,10 +149,43 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         tabs.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(pager));
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
 
+        configureNowPlayingBar();
         configureWindow();
+    }
+
+    private void configureNowPlayingBar() {
         if (!PlaybackManager.get().isActive()) {
             quickToolbar.setVisibility(View.GONE);
         }
+        PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
+            @Override
+            public void onSongChanged(Song song) {
+                song.getAlbum().requestArt((ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
+                TextView title = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_title),
+                        artist = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_artist);
+                title.setText(song.getSongTitle());
+                artist.setText(song.getSongArtist());
+            }
+
+            @Override
+            public void onPlaybackStateChanged(PlaybackStateCompat state) {
+
+            }
+        });
+        quickToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_playpause), "nowPlayingButton"),
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_artist), "artist"),
+                        new Pair<View, String>(v, "list")
+                );
+                ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, NowPlaying.class), options.toBundle());
+            }
+        });
     }
 
     private void configureWindow() {
@@ -479,6 +510,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
                     new Pair<View, String>(MainScreen.this.toolbar, "appbar"),
                     new Pair<View, String>(view.findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
+                    new Pair<View, String>(MainScreen.this.findViewById(R.id.my_library_to_albumdetails_list_space), "list"),
                     new Pair<View, String>(view.findViewById(R.id.AlbumInfoToolbar), "info")
             );
             ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, AlbumDetails.class).putExtra("album_id", album.getId()), options.toBundle());

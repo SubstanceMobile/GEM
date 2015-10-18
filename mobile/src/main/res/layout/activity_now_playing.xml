@@ -36,8 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@drawable/gradient_black_ontop"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="none" />
+                android:fitsSystemWindows="false"
+                app:layout_collapseMode="pin" />
 
             <LinearLayout
                 android:layout_width="match_parent"

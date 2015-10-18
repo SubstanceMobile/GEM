@@ -46,9 +46,11 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
 
     private void configureTransition(){
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_album_art), "art");
+        ViewCompat.setTransitionName(findViewById(R.id.now_playing_recycler), "list");
+        ViewCompat.setTransitionName(findViewById(R.id.now_playing_controls_root), "controls");
     }
 
-    @Override
+  @Override
     protected void setVariables() {
         mToolbar = (Toolbar) findViewById(R.id.now_playing_toolbar);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.now_playing_collapsing_toolbar);
@@ -118,7 +120,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 break;
             case R.id.action_stop:
                 PlaybackManager.get().stop();

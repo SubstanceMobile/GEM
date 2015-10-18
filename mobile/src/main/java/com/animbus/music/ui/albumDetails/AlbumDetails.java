@@ -1,5 +1,6 @@
 package com.animbus.music.ui.albumDetails;
 
+import android.animation.Animator;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -56,6 +57,8 @@ public class AlbumDetails extends ThemableActivity {
         ViewCompat.setTransitionName(findViewById(R.id.album_details_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_info_toolbar), "info");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar), "appbar");
+        ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar_text_protection), "appbar");
+        ViewCompat.setTransitionName(findViewById(R.id.album_details_recycler), "list");
     }
 
     @Override
@@ -163,12 +166,30 @@ public class AlbumDetails extends ThemableActivity {
 
     @Override
     public void onBackPressed() {
-        mFAB.hide(new FloatingActionButton.OnVisibilityChangedListener() {
+        mFAB.setAlpha(1.0f);
+        mFAB.setScaleX(1.0f);
+        mFAB.setScaleY(1.0f);
+        //Not using hide because that has a duration of 200
+        mFAB.animate().scaleX(0.0f).scaleY(0.0f).alpha(0.0f).setDuration(100).setListener(new Animator.AnimatorListener() {
             @Override
-            public void onHidden(FloatingActionButton fab) {
-                super.onHidden(fab);
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
                 AlbumDetails.super.onBackPressed();
             }
-        });
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        }).start();
     }
 }

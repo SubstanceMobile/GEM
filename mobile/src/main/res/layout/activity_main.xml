@@ -1,11 +1,10 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
-    android:fitsSystemWindows="false" >
+    android:fitsSystemWindows="false">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -28,15 +27,15 @@
                     android:id="@+id/main_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/abc_action_bar_default_height_material"
-                    app:title="@string/title_activity_main"
-                    app:theme="?attr/default_status_bar_theme" />
+                    app:theme="?attr/default_status_bar_theme"
+                    app:title="@string/title_activity_main" />
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/main_tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabMode="scrollable"
-                    app:tabGravity="fill" />
+                    app:tabGravity="fill"
+                    app:tabMode="scrollable" />
 
             </android.support.design.widget.AppBarLayout>
 
@@ -46,14 +45,99 @@
                 android:layout_height="0dp"
                 android:layout_weight="100" />
 
-            <fragment
-                android:id="@+id/mylibrary_toolbar_fragment"
-                android:name="com.animbus.music.ui.mainScreen.NowPlayingToolbar"
-                android:layout_width="wrap_content"
+            <Space
+                android:id="@+id/my_library_to_albumdetails_list_space"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_now_playing_toolbar" />
+                android:fitsSystemWindows="true" />
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/primaryAlternateColor"
+                android:visibility="visible"
+                android:id="@+id/main_screen_now_playing_toolbar"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/main_screen_now_playing_toolbar_controls_transition" />
+
+                <LinearLayout
+                    android:id="@+id/main_screen_now_playing_toolbar_root_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/nowplaying_toolbarSize"
+                    android:background="?attr/ripple_alt_color"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                        android:id="@+id/main_screen_now_playing_toolbar_art"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="start"
+                        android:src="@drawable/album_art" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding">
+
+                            <TextView
+                                android:id="@+id/main_screen_now_playing_toolbar_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:maxLines="1"
+                                android:padding="@dimen/margin_tiny"
+                                android:text="Song Title"
+                                android:textColor="?attr/primaryAlternateTextColor"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/main_screen_now_playing_toolbar_artist"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:maxLines="1"
+                                android:text="Song Artist"
+                                android:textColor="?attr/secondaryAlternateTextColor"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/main_screen_now_playing_toolbar_playpause"
+                            android:layout_width="@dimen/nowplaying_toolbar_iconSize"
+                            android:layout_height="@dimen/nowplaying_toolbar_iconSize"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/nowplaying_ripple_padding"
+                            android:background="?attr/ripple_circle_alt_color"
+                            android:clickable="true"
+                            android:cropToPadding="false"
+                            android:padding="@dimen/margin_medium"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_play_arrow_black_48dp"
+                            android:tint="?attr/secondaryAlternateTextColor" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 
     <!-- Navdrawer Layout -->
