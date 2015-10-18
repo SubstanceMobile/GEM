@@ -1,7 +1,6 @@
 package com.animbus.music.data.adapter;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +27,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
 
     @Override
     public SongListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemSongList binding = ItemSongList.inflate(LayoutInflater.from(context), parent, false);
-        return new SongListViewHolder(binding.getRoot());
+        return new SongListViewHolder(ItemSongList.inflate(inflater, parent, false));
     }
 
     @Override
@@ -53,9 +51,9 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
     class SongListViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
         ItemSongList item;
 
-        public SongListViewHolder(View itemView) {
-            super(itemView);
-            item = DataBindingUtil.bind(itemView);
+        public SongListViewHolder(ItemSongList binding) {
+            super(binding.root);
+            item = binding;
             itemView.setOnClickListener(this);
         }
 

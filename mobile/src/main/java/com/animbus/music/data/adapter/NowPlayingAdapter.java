@@ -59,7 +59,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             holder.dataBinder.setSong(customSong);
             holder.dataBinder.setIsFirst(true);
 
-            InsetDrawable eqIcon = new InsetDrawable(context.getResources().getDrawable(R.drawable.ic_equalizer_black_48dp), context.getResources().getDimensionPixelSize(R.dimen.margin_medium));
+            InsetDrawable eqIcon = new InsetDrawable(context.getResources().getDrawable(R.drawable.ic_equalizer_24dp), context.getResources().getDimensionPixelSize(R.dimen.margin_medium));
             DrawableCompat.setTint(eqIcon, customSong.getAlbum().accentColor);
             holder.dataBinder.nowplayingAlbumart.setImageDrawable(eqIcon);
             configureRepeatIcon(holder.dataBinder.nowPlayingRepeatIcon, customSong);
@@ -120,9 +120,9 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
         ItemNowPlayingList dataBinder;
 
         public NowPlayingAdapterViewHolder(ItemNowPlayingList dataBinder) {
-            super(dataBinder.getRoot());
+            super(dataBinder.root);
             this.dataBinder = dataBinder;
-            dataBinder.getRoot().setOnClickListener(this);
+            itemView.setOnClickListener(this);
 
             ViewCompat.setTransitionName(dataBinder.songlistSongTitle, "title");
             ViewCompat.setTransitionName(dataBinder.songlistSongArtist, "artist");

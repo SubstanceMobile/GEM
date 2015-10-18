@@ -12,7 +12,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/root">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,40 +62,6 @@
                 android:layout_margin="@dimen/margin_medium"
                 android:text="@{song.getSongDurString}"
                 android:textColor="?attr/secondaryTextColor" />
-
-            <FrameLayout
-                android:id="@+id/now_playing_favorite_icon_root"
-                android:layout_width="@dimen/listViewSizeBig"
-                android:layout_height="@dimen/listViewSizeBig"
-                android:padding="@dimen/margin_small"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/now_playing_favorite_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="?attr/ripple_circle"
-                    android:padding="@dimen/margin_medium"
-                    android:src="@drawable/ic_repeat_black_48dp" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/now_playing_repeat_icon_root"
-                android:layout_width="@dimen/listViewSizeBig"
-                android:layout_height="@dimen/listViewSizeBig"
-                android:padding="@dimen/margin_small"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/now_playing_repeat_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="?attr/ripple_circle"
-                    android:padding="@dimen/margin_medium"
-                    android:src="@drawable/ic_repeat_black_48dp" />
-            </FrameLayout>
 
         </LinearLayout>
 

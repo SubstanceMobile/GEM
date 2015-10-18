@@ -231,10 +231,10 @@ public class    AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.A
         public ItemAlbumGrid item;
 
         public AlbumGridViewHolder(ItemAlbumGrid item) {
-            super(item.getRoot());
+            super(item.AlbumGridItemRootView);
             this.item = item;
-            item.getRoot().setOnClickListener(this);
-            item.getRoot().setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override

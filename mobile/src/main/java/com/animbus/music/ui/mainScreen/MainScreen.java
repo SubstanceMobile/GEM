@@ -115,7 +115,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_exit_light);
         } else {
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
         }
 
         //Sets Dynamic Title
