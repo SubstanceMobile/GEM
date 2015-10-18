@@ -6,11 +6,11 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/navdrawer_album_icon"
-            android:icon="@drawable/ic_album_black_48dp"
+            android:icon="@drawable/ic_album_24dp"
             android:title="@string/page_albums" />
         <item
             android:id="@+id/navdrawer_songs"
-            android:icon="@drawable/ic_audiotrack_black_48dp"
+            android:icon="@drawable/ic_audiotrack_24dp"
             android:title="@string/page_songs" />
         <item
             android:id="@+id/navdrawer_playlists"
@@ -18,7 +18,7 @@
             android:title="@string/page_playlists" />
         <item
             android:id="@+id/navdrawer_artists"
-            android:icon="@drawable/ic_artist"
+            android:icon="@drawable/ic_artist_24dp"
             android:title="@string/page_artists" />
     </group>
 
@@ -27,7 +27,7 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/navdrawer_settings"
-            android:icon="@drawable/ic_settings_white_48dp"
+            android:icon="@drawable/ic_settings_24dp"
             android:title="@string/action_settings"/>
     </group>
 

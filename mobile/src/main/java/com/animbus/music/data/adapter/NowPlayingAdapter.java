@@ -2,7 +2,6 @@ package com.animbus.music.data.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.InsetDrawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.view.ViewCompat;
@@ -59,9 +58,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             holder.dataBinder.setSong(customSong);
             holder.dataBinder.setIsFirst(true);
 
-            InsetDrawable eqIcon = new InsetDrawable(context.getResources().getDrawable(R.drawable.ic_equalizer_24dp), context.getResources().getDimensionPixelSize(R.dimen.margin_medium));
-            DrawableCompat.setTint(eqIcon, customSong.getAlbum().accentColor);
-            holder.dataBinder.nowplayingAlbumart.setImageDrawable(eqIcon);
+            DrawableCompat.setTint(holder.dataBinder.nowPlayingEqIcon.getDrawable(), customSong.getAlbum().accentColor);
             configureRepeatIcon(holder.dataBinder.nowPlayingRepeatIcon, customSong);
             holder.dataBinder.nowPlayingRepeatIcon.setOnClickListener(new OnClickListener() {
                 @Override
@@ -124,8 +121,8 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             this.dataBinder = dataBinder;
             itemView.setOnClickListener(this);
 
-            ViewCompat.setTransitionName(dataBinder.songlistSongTitle, "title");
-            ViewCompat.setTransitionName(dataBinder.songlistSongArtist, "artist");
+            ViewCompat.setTransitionName(dataBinder.currentSongTitle, "title");
+            ViewCompat.setTransitionName(dataBinder.currentSongArtist, "artist");
             ViewCompat.setTransitionName(dataBinder.nowPlayingFavoriteIcon, "nowPlayingButton");
         }
 

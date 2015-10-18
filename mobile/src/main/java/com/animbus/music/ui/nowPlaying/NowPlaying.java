@@ -2,8 +2,10 @@ package com.animbus.music.ui.nowPlaying;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -63,7 +65,9 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     protected void setUp() {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_exit);
+        Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
+        DrawableCompat.setTint(menu, getResources().getColor(R.color.primaryLight));
+        getSupportActionBar().setHomeAsUpIndicator(menu);
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
         ViewCompat.setElevation(findViewById(R.id.now_playing_controls_root), 12f);
         configureRecyclerView();

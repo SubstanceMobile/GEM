@@ -2,21 +2,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class="ItemNowPlayingList">
-        <variable name="song" type="com.animbus.music.media.objects.Song" />
-        <variable name="isFirst" type="boolean" />
+
+        <variable
+            name="song"
+            type="com.animbus.music.media.objects.Song" />
+
+        <variable
+            name="isFirst"
+            type="boolean" />
+
         <import type="android.view.View" />
     </data>
 
     <FrameLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/root">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/listViewSizeBig"
             android:background="?attr/ripple"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="@{!isFirst ? View.VISIBLE : View.GONE}">
 
             <com.animbus.music.customImpls.SquareImageViewHeight_Based
                 android:id="@+id/nowplaying_albumart"
@@ -30,11 +38,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/margin_small">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/songlist_song_title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songTitle}"
@@ -42,12 +48,63 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/songlist_song_artist"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songArtist}"
                     android:textColor="?attr/secondaryTextColor"
                     android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/listViewSizeBig"
+            android:background="?attr/ripple"
+            android:orientation="horizontal"
+            android:visibility="@{isFirst ? View.VISIBLE : View.GONE}">
+
+            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_medium"
+                android:visibility="visible"
+                android:src="@drawable/ic_equalizer_24dp"
+                android:id="@+id/now_playing_eq_icon" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:padding="@dimen/margin_tiny"
+                    android:text="@{song.getSongTitle}"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16sp"
+                    android:id="@+id/current_song_title" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:text="@{song.songArtist}"
+                    android:textColor="?attr/secondaryTextColor"
+                    android:textSize="14sp"
+                    android:id="@+id/current_song_artist" />
+
             </LinearLayout>
 
             <FrameLayout
@@ -55,7 +112,8 @@
                 android:layout_width="@dimen/listViewSizeBig"
                 android:layout_height="@dimen/listViewSizeBig"
                 android:padding="@dimen/margin_small"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:background="?attr/colorPrimary">
 
                 <ImageView
                     android:id="@+id/now_playing_favorite_icon"
@@ -67,22 +125,13 @@
                     android:src="@drawable/ic_repeat_black_48dp" />
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/songlist_song_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="@dimen/margin_medium"
-                android:text="@{song.getSongDurString}"
-                android:textColor="?attr/secondaryTextColor"
-                android:visibility="@{!isFirst ? View.VISIBLE : View.GONE}" />
-
             <FrameLayout
                 android:id="@+id/now_playing_repeat_icon_root"
                 android:layout_width="@dimen/listViewSizeBig"
                 android:layout_height="@dimen/listViewSizeBig"
                 android:padding="@dimen/margin_small"
-                android:visibility="@{isFirst ? View.VISIBLE : View.GONE}" >
+                android:visibility="@{isFirst ? View.VISIBLE : View.GONE}"
+                android:background="?attr/colorPrimary">
 
                 <ImageView
                     android:id="@+id/now_playing_repeat_icon"

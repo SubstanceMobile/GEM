@@ -17,8 +17,7 @@
             android:id="@+id/nowplayingtoolbar_albumart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:src="@drawable/album_art"/>
+            android:layout_gravity="start" />
 
         <RelativeLayout
             android:layout_width="match_parent"

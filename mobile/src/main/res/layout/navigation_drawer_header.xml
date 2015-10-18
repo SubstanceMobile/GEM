@@ -7,8 +7,7 @@
         android:id="@+id/navdrawer_header_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/navdrawer_header_height"
-        android:scaleType="centerCrop"
-        android:src="@drawable/album_art" />
+        android:scaleType="centerCrop" />
 
     <FrameLayout
         android:layout_width="match_parent"

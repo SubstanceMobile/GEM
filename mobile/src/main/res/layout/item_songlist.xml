@@ -38,7 +38,6 @@
                 android:paddingStart="@dimen/margin_small">
 
                 <TextView
-                    android:id="@+id/songlist_song_title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songTitle}"
@@ -46,7 +45,6 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/songlist_song_artist"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songArtist}"
@@ -55,7 +53,6 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/songlist_song_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

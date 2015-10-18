@@ -2,8 +2,10 @@ package com.animbus.music.ui.settings.chooseIcon;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -53,14 +55,10 @@ public class ChooseIcon extends ThemableActivity {
     @Override
     protected void setUp() {
         setSupportActionBar(toolbar);
-        //More Themeing
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_exit_light);
-        } else {
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_exit);
-        }
-        selectIcon(iconOld);
+        Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
+        DrawableCompat.setTint(menu, getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
+        getSupportActionBar().setHomeAsUpIndicator(menu);
     }
 
     @Override

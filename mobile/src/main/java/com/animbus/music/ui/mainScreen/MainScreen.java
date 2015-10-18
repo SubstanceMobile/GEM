@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
@@ -107,16 +109,11 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
 
     @Override
     protected void setUp() {
-       /* if (!PlaybackManager.get().isActive()){
-            quickToolbar.setVisibility(View.GONE);
-        }*/
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_exit_light);
-        } else {
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
-        }
+        Drawable menu = getResources().getDrawable(R.drawable.ic_menu_24dp);
+        DrawableCompat.setTint(menu, getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
+        getSupportActionBar().setHomeAsUpIndicator(menu);
 
         //Sets Dynamic Title
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
@@ -182,7 +179,9 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             public void onClick(View v) {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
                         new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls")
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_artist), "artist")
                 );
                 ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, NowPlaying.class), options.toBundle());
             }

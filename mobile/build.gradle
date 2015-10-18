@@ -5,7 +5,7 @@ android {
     signingConfigs {
         config {
             keyAlias 'GEM'
-            keyPassword 'AnimbusDevGEM'
+            keyPassword 'AnimbusDev'
             storeFile file('C:/Users/Adrian/Desktop/Programming/ApkSigning.jks')
             storePassword 'AnimbusDev'
         }
