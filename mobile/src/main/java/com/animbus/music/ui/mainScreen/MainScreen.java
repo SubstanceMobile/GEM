@@ -14,11 +14,13 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +47,7 @@ import com.animbus.music.data.adapter.AlbumGridAdapter;
 import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.Search;
@@ -156,20 +160,21 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     private void configureNowPlayingBar() {
         if (!PlaybackManager.get().isActive()) {
             quickToolbar.setVisibility(View.GONE);
+        } else {
+            try {
+                setUpNowPlayingBarWithSong(PlaybackManager.get().getCurrentSong());
+                setUpNowPlayingBarWithState(ServiceHelper.get(this).getService().getStateObj());
+            } catch (Exception ignored) {}
         }
         PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
             @Override
             public void onSongChanged(Song song) {
-                song.getAlbum().requestArt((ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
-                TextView title = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_title),
-                        artist = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_artist);
-                title.setText(song.getSongTitle());
-                artist.setText(song.getSongArtist());
+                setUpNowPlayingBarWithSong(song);
             }
 
             @Override
             public void onPlaybackStateChanged(PlaybackStateCompat state) {
-
+                setUpNowPlayingBarWithState(state);
             }
         });
         quickToolbar.setOnClickListener(new View.OnClickListener() {
@@ -177,15 +182,77 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             public void onClick(View v) {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
                         new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_playpause), "nowPlayingButton"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_artist), "artist"),
-                        new Pair<View, String>(v, "list")
+                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls")
                 );
                 ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, NowPlaying.class), options.toBundle());
             }
         });
+    }
+
+    private void setUpNowPlayingBarWithSong(Song song) {
+        song.getAlbum().requestArt((ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
+        TextView title = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_title),
+                artist = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_artist);
+        title.setText(song.getSongTitle());
+        artist.setText(song.getSongArtist());
+    }
+
+    private void setUpNowPlayingBarWithState(PlaybackStateCompat state) {
+     if (state.getState() == PlaybackStateCompat.STATE_STOPPED || state.getState() == PlaybackStateCompat.STATE_NONE) {
+         if (quickToolbar.getVisibility() != View.GONE) {
+             quickToolbar.setTranslationY(0f);
+             quickToolbar.animate().translationY(200f).setInterpolator(new FastOutSlowInInterpolator())
+                     .setListener(new Animator.AnimatorListener() {
+                         @Override
+                         public void onAnimationStart(Animator animation) {
+
+                         }
+
+                         @Override
+                         public void onAnimationEnd(Animator animation) {
+                             quickToolbar.setVisibility(View.GONE);
+                         }
+
+                         @Override
+                         public void onAnimationCancel(Animator animation) {
+
+                         }
+
+                         @Override
+                         public void onAnimationRepeat(Animator animation) {
+
+                         }
+                     }).start();
+         }
+     } else {
+         if (quickToolbar.getVisibility() != View.VISIBLE) {
+             quickToolbar.setTranslationY(200f);
+             quickToolbar.setVisibility(View.VISIBLE);
+             quickToolbar.animate().translationY(0f).setInterpolator(new FastOutSlowInInterpolator()).start();
+         }
+         //For inconsistency sake
+         quickToolbar.setVisibility(View.VISIBLE);
+     }
+        final MediaControllerCompat.TransportControls controls = ServiceHelper.get(this).getService().getSession().getController().getTransportControls();
+        ImageButton button = (ImageButton) findViewById(R.id.main_screen_now_playing_toolbar_playpause);
+        boolean isPaused = state.getState() == PlaybackStateCompat.STATE_PAUSED;
+        if (isPaused) {
+            button.setImageResource(R.drawable.ic_play_arrow_white_48dp);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    controls.play();
+                }
+            });
+        } else {
+            button.setImageResource(R.drawable.ic_pause_white_48dp);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    controls.pause();
+                }
+            });
+        }
     }
 
     private void configureWindow() {
