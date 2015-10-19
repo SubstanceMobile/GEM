@@ -2,11 +2,11 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/album_details_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.animbus.music.ui.albumDetails.AlbumDetails"
-    android:id="@+id/album_details_root"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context="com.animbus.music.ui.albumDetails.AlbumDetails">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/album_details_app_bar_layout"
@@ -18,29 +18,29 @@
             android:id="@+id/album_details_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.animbus.music.customImpls.SquareImageViewWidth_Based
                 android:id="@+id/album_details_album_art"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_collapseMode="parallax"
-                android:fitsSystemWindows="true" />
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax" />
 
             <FrameLayout
+                android:id="@+id/album_details_toolbar_text_protection"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@drawable/gradient_black_ontop"
-                app:layout_collapseMode="pin"
                 android:fitsSystemWindows="false"
-                android:id="@+id/album_details_toolbar_text_protection" />
+                app:layout_collapseMode="pin" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:fitsSystemWindows="true">
+                android:fitsSystemWindows="true"
+                android:orientation="vertical">
 
                 <com.animbus.music.customImpls.SquareImageViewWidth_Based
                     android:id="@+id/album_details_square_spacer"
@@ -48,17 +48,21 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/ripple"
                     android:clickable="true"
-                    android:fitsSystemWindows="true"/>
+                    android:fitsSystemWindows="true" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/albums_info_toolbar_size">
 
                     <LinearLayout
                         android:id="@+id/album_details_info_toolbar"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/albums_info_toolbar_size"
-                        app:layout_collapseMode="none"
+                        android:layout_height="match_parent"
                         android:background="?attr/colorPrimary"
-                        android:fitsSystemWindows="true"
                         android:baselineAligned="false"
-                        android:orientation="horizontal">
+                        android:fitsSystemWindows="true"
+                        android:orientation="horizontal"
+                        app:layout_collapseMode="none">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -98,6 +102,12 @@
 
                     </LinearLayout>
 
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/album_details_transition_reveal_part"></FrameLayout>
+                </FrameLayout>
+
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar
@@ -112,17 +122,16 @@
     </android.support.design.widget.AppBarLayout>
 
 
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/album_details_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
+        android:src="@drawable/ic_play_arrow_black_48dp"
         app:layout_anchor="@id/album_details_square_spacer"
         app:layout_anchorGravity="bottom|right|end"
-        android:src="@drawable/ic_play_arrow_black_48dp"
-        app:layout_behavior="com.animbus.music.ui.albumDetails.CustomFabBehavior"  />
+        app:layout_behavior="com.animbus.music.ui.albumDetails.CustomFabBehavior" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/album_details_recycler"

@@ -20,9 +20,9 @@ import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.ThemableActivity;
+import com.animbus.music.data.VariablesSingleton;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.ServiceHelper;
-import com.animbus.music.ui.mainScreen.BackupHub;
 import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
@@ -104,7 +104,7 @@ public class LaunchActivity extends ThemableActivity {
 
 
     private void setContexts() {
-        if (!BackupHub.get().activated) {
+        if (!VariablesSingleton.get().activated) {
             //Sets Contexts
             SettingsManager.get().setContext(this);
             ThemeManager.get().setContext(this);
@@ -117,13 +117,13 @@ public class LaunchActivity extends ThemableActivity {
             ServiceHelper.get(this).initService();
 
             //Notifies app that it has activated
-            BackupHub.get().activated = true;
+            VariablesSingleton.get().activated = true;
         }
     }
 
     public void complete() {
         final Intent i = new Intent(this, MainScreen.class);
-        if (BackupHub.get().activated) i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        if (VariablesSingleton.get().activated) i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         boolean internal = BuildConfig.BUILD_TYPE.equals("debug") || BuildConfig.BUILD_TYPE.equals("internal");
         if (internal && !SettingsManager.get().getBooleanSetting("doNotShowAgain_INTERNAL_TESTER", false)) {
             try {
@@ -169,7 +169,7 @@ public class LaunchActivity extends ThemableActivity {
         final Intent i = new Intent(this, MainScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(i);
         finish();
-        if (BackupHub.get().activated) overridePendingTransition(0, 0);
+        if (VariablesSingleton.get().activated) overridePendingTransition(0, 0);
     }
 
     @Override

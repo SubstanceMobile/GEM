@@ -1,11 +1,13 @@
 package com.animbus.music.ui.albumDetails;
 
 import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -21,6 +23,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,7 +59,7 @@ public class AlbumDetails extends ThemableActivity {
         mAlbum = MediaData.get().findAlbumById(getIntent().getLongExtra("album_id", -1));
     }
 
-    private void configureTransition(){
+    private void configureTransition() {
         ViewCompat.setTransitionName(findViewById(R.id.album_details_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_info_toolbar), "info");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar), "appbar");
@@ -102,6 +106,8 @@ public class AlbumDetails extends ThemableActivity {
             @Override
             public void onClick(View v) {
                 PlaybackManager.get().play(mAlbum.getSongs(), 0);
+                mList.scrollToPosition(0);
+                mList.scrollTo(0, 0);
                 transitionNowPlaying();
             }
         });
@@ -139,14 +145,101 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void transitionNowPlaying() {
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                new Pair<View, String>(findViewById(R.id.album_details_info_toolbar), "controls"),
+        final ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                new Pair<View, String>(findViewById(R.id.album_details_transition_reveal_part), "controls"),
                 new Pair<View, String>(findViewById(R.id.album_details_toolbar), "appbar"),
                 new Pair<View, String>(findViewById(R.id.album_details_toolbar_text_protection), "appbar_text_protection"),
                 new Pair<View, String>(findViewById(R.id.album_details_album_art), "art")
 
         );
-        ActivityCompat.startActivity(this, new Intent(this, NowPlaying.class), options.toBundle());
+
+        final View overlay = findViewById(R.id.album_details_transition_reveal_part);
+
+        //Original values:
+        final float fabOriginalX = mFAB.getX();
+        final float fabOriginalY = mFAB.getY();
+        final float fabOriginalElev = ViewCompat.getElevation(mFAB);
+
+        //Processed positions:
+        float fabFinalX = (overlay.getWidth() / 2f) - (mFAB.getWidth() / 2f);
+        float fabFinalY = (mList.getTop() - (overlay.getHeight() / 2f)) - (mFAB.getHeight() / 2f);
+        float fabMiddleX = (mFAB.getX() + fabFinalX) / 2f;
+        float fabMiddleY = (mList.getTop() + (overlay.getHeight() / 2f)) - (mFAB.getHeight() * 2.5f);
+
+        Path path = new Path();
+        path.moveTo(fabOriginalX, fabOriginalY);
+        path.quadTo(fabMiddleX, fabMiddleY, fabFinalX, fabFinalY);
+        ValueAnimator curve = FabHelper.getAnimatorAlong(mFAB, path);
+        curve.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                //Circular reveal
+                overlay.setBackgroundColor(mAlbum.accentColor);
+                overlay.setAlpha(1f);
+                ViewCompat.setElevation(mFAB, 0f);
+                Animator reveal = ViewAnimationUtils.createCircularReveal(overlay, overlay.getWidth() / 2, overlay.getHeight() / 2, mFAB.getWidth() / 2, Math.max(overlay.getWidth() / 2, overlay.getHeight() / 2));
+                reveal.setDuration(300);
+
+                reveal.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        ActivityCompat.startActivity(AlbumDetails.this, new Intent(AlbumDetails.this, NowPlaying.class), options.toBundle());
+                        mFAB.setScaleX(1.0f);
+                        mFAB.setScaleY(1.0f);
+                        mFAB.setAlpha(1.0f);
+                        mFAB.setX(fabOriginalX);
+                        mFAB.setY(fabOriginalY);
+                        ViewCompat.setElevation(mFAB, fabOriginalElev);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+
+                //Fab Collapsing
+                mFAB.setScaleX(1.0f);
+                mFAB.setScaleY(1.0f);
+                mFAB.setAlpha(1.0f);
+                ViewPropertyAnimator fabCollapsing = mFAB.animate().alpha(0f).scaleX(0f).scaleY(0f).setDuration(200).setStartDelay(100);
+
+                fabCollapsing.start();
+                reveal.start();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        curve.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        findViewById(R.id.album_details_transition_reveal_part).animate().alpha(0f).start();
     }
 
     @Override

@@ -102,7 +102,8 @@ public class    AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.A
                                 album.TitleTextColor = swatch.getTitleTextColor();
                                 album.SubtitleTextColor = swatch.getBodyTextColor();
                                 album.accentColor = accentSwatch.getRgb();
-                                album.accentIconColor = accentSwatch.getBodyTextColor();
+                                album.accentIconColor = accentSwatch.getTitleTextColor();
+                                album.accentSecondaryIconColor = accentSwatch.getBodyTextColor();
                                 animateColors(album, holder, pos);
                             }
                         });

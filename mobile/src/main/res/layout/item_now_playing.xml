@@ -56,6 +56,15 @@
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/margin_medium"
+                android:text="@{song.getSongDurString}"
+                android:textColor="?attr/secondaryTextColor"
+                android:id="@+id/textView2" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -130,9 +139,7 @@
                 android:id="@+id/now_playing_repeat_icon_root"
                 android:layout_width="@dimen/listViewSizeBig"
                 android:layout_height="@dimen/listViewSizeBig"
-                android:padding="@dimen/margin_small"
-                android:visibility="@{isFirst ? View.VISIBLE : View.GONE}"
-                android:background="?attr/colorPrimary">
+                android:padding="@dimen/margin_small">
 
                 <ImageView
                     android:id="@+id/now_playing_repeat_icon"

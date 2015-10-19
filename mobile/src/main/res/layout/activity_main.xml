@@ -1,3 +1,4 @@
+<!--suppress AndroidDomInspection -->
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
@@ -53,7 +54,7 @@
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/listViewSizeBig"
                 android:background="?attr/primaryAlternateColor"
                 android:visibility="visible"
                 android:id="@+id/main_screen_now_playing_toolbar"
@@ -67,7 +68,7 @@
                 <LinearLayout
                     android:id="@+id/main_screen_now_playing_toolbar_root_view"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/nowplaying_toolbarSize"
+                    android:layout_height="match_parent"
                     android:background="?attr/ripple_alt_color"
                     android:gravity="start"
                     android:orientation="horizontal">
@@ -117,19 +118,24 @@
 
                         </LinearLayout>
 
-                        <ImageButton
-                            android:id="@+id/main_screen_now_playing_toolbar_playpause"
-                            android:layout_width="@dimen/nowplaying_toolbar_iconSize"
-                            android:layout_height="@dimen/nowplaying_toolbar_iconSize"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/nowplaying_ripple_padding"
-                            android:background="?attr/ripple_circle_alt_color"
-                            android:clickable="true"
-                            android:cropToPadding="false"
-                            android:padding="@dimen/margin_medium"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_play_arrow_black_48dp"
-                            android:tint="?attr/secondaryAlternateTextColor" />
+                        <FrameLayout
+                            android:id="@+id/frameLayout2"
+                            android:layout_width="@dimen/listViewSizeBig"
+                            android:layout_height="@dimen/listViewSizeBig"
+                            android:padding="@dimen/margin_small" >
+
+                            <ImageButton
+                                android:id="@+id/main_screen_now_playing_toolbar_playpause"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:background="?attr/ripple_circle"
+                                android:padding="16dp"
+                                android:src="@drawable/ic_play_arrow_black_48dp"
+                                android:tint="?attr/secondaryAlternateTextColor"
+                                android:cropToPadding="true"
+                                android:scaleType="fitXY" />
+                        </FrameLayout>
                     </LinearLayout>
 
                 </LinearLayout>

@@ -34,7 +34,7 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.UiTweaker;
 import com.animbus.music.customImpls.ThemableActivity;
-import com.animbus.music.ui.mainScreen.BackupHub;
+import com.animbus.music.data.VariablesSingleton;
 import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.settings.chooseIcon.ChooseIcon;
 import com.animbus.music.ui.settings.chooseIcon.IconManager;
@@ -225,7 +225,7 @@ public class Settings extends ThemableActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        MainScreen mainScreen = BackupHub.get().settingsMyLib;
+        MainScreen mainScreen = VariablesSingleton.get().settingsMyLib;
         if (mainScreen != null) {
             mainScreen.recreate();
         }

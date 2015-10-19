@@ -94,10 +94,13 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     }
 
     private void configureUIColors() {
-        mControlsRoot.setBackgroundColor(mSong.getAlbum().BackgroundColor);
-        mCollapsingToolbar.setContentScrimColor(mSong.getAlbum().BackgroundColor);
-        mCollapsingToolbar.setStatusBarScrimColor(mSong.getAlbum().BackgroundColor);
-        mControls.setUIColors(mSong.getAlbum().TitleTextColor, mSong.getAlbum().SubtitleTextColor, mSong.getAlbum().SubtitleTextColor, mSong.getAlbum().BackgroundColor);
+        mControlsRoot.setBackgroundColor(mSong.getAlbum().accentColor);
+        mCollapsingToolbar.setContentScrimColor(mSong.getAlbum().accentColor);
+        mCollapsingToolbar.setStatusBarScrimColor(mSong.getAlbum().accentColor);
+        mControls.setUIColors(mSong.getAlbum().accentIconColor,
+                mSong.getAlbum().accentSecondaryIconColor,
+                mSong.getAlbum().accentSecondaryIconColor,
+                mSong.getAlbum().BackgroundColor);
 
     }
 
@@ -152,5 +155,10 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return mControls.onKeyEvent(event) || super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

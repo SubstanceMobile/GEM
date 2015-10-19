@@ -45,6 +45,7 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.LockableViewPager;
 import com.animbus.music.customImpls.ThemableActivity;
+import com.animbus.music.data.VariablesSingleton;
 import com.animbus.music.data.adapter.AlbumGridAdapter;
 import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.media.MediaData;
@@ -98,7 +99,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         tabs = (TabLayout) findViewById(R.id.main_tab_layout);
         pager = (LockableViewPager) findViewById(R.id.main_view_pager);
 
-        BackupHub.get().settingsMyLib = this;
+        VariablesSingleton.get().settingsMyLib = this;
     }
 
     @Override
