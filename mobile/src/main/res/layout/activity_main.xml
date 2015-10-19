@@ -128,7 +128,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:background="?attr/ripple_circle"
+                                android:background="?attr/ripple_circle_alt_color"
                                 android:padding="20dp"
                                 android:src="@drawable/ic_play_arrow_black_48dp"
                                 android:tint="?attr/secondaryAlternateTextColor"

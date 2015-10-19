@@ -267,84 +267,81 @@ public class Settings extends ThemableActivity {
     public void showThemePicker(View v) {
         new AlertDialog.Builder(this).setTitle(getResources().getString(R.string.settings_theme_title_choose))
                 .setItems(new String[]{
-                        getResources().getString(R.string.settings_theme_default),
-                        getResources().getString(R.string.settings_theme_animbus),
-                        getResources().getString(R.string.settings_theme_custom)
+                        getResources().getString(R.string.settings_theme_blue),
+                        getResources().getString(R.string.settings_theme_pink),
+                        getResources().getString(R.string.settings_theme_greyscale)
                 }, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                //Default
-                                new AlertDialog.Builder(Settings.this).setTitle(getResources().getString(R.string.settings_theme_title_variant))
-                                        .setItems(new String[]{
-                                                getResources().getString(R.string.settings_theme_variant_dark),
-                                                getResources().getString(R.string.settings_theme_variant_light),
-                                                getResources().getString(R.string.settings_theme_variant_grey)
-                                        }, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                switch (which) {
-                                                    case 0:
-                                                        SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
-                                                        ThemeManager.get().setBase(ThemeManager.BASE_DARK);
-                                                        setBaseTheme(ThemeManager.BASE_DARK, false);
-                                                        Settings.this.recreate();
-                                                        break;
-                                                    case 1:
-                                                        SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
-                                                        ThemeManager.get().setBase(ThemeManager.BASE_LIGHT);
-                                                        setBaseTheme(ThemeManager.BASE_LIGHT, false);
-                                                        Settings.this.recreate();
-                                                        break;
-                                                    case 2:
-                                                        /*SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
-                                                        ThemeManager.get().setBase(ThemeManager.BASE_GREY);
-                                                        setBaseTheme(ThemeManager.BASE_GREY, false);
-                                                        Settings.this.recreate();*/
-                                                        showComingSoon(null);
-                                                        break;
-                                                }
-                                            }
-                                        }).create().show();
+                                new AlertDialog.Builder(Settings.this)
+                                        .setTitle(R.string.settings_theme_animbus).setItems(new String[]{
+                                        getResources().getString(R.string.settings_theme_variant_dark),
+                                        getResources().getString(R.string.settings_theme_variant_light)
+                                }, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which) {
+                                            case 0:
+                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
+                                                ThemeManager.get().setBase(R.style.AppTheme_Blue);
+                                                Settings.this.recreate();
+                                                break;
+                                            case 1:
+                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
+                                                ThemeManager.get().setBase(R.style.AppTheme_Light_Blue);
+                                                Settings.this.recreate();
+                                                break;
+                                        }
+                                    }
+                                }).show();
                                 break;
                             case 1:
-                               /* //Animbus
-                                new AlertDialog.Builder(Settings.this).setTitle(getResources().getString(R.string.settings_theme_title_variant))
-                                        .setItems(new String[]{
-                                                getResources().getString(R.string.settings_theme_variant_default),
-                                                getResources().getString(R.string.settings_theme_variant_dark),
-                                                getResources().getString(R.string.settings_theme_variant_light)
-                                        }, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                switch (which) {
-                                                    case 0:
-                                                        SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
-                                                        ThemeManager.get().setBase(R.style.AppTheme_Animbus);
-                                                        setBaseTheme(ThemeManager.BASE_DARK, false);
-                                                        Settings.this.recreate();
-                                                        break;
-                                                    case 1:
-                                                        ThemeManager.get().setBase(ThemeManager.BASE_GREY);
-                                                        SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
-                                                        setBaseTheme(ThemeManager.BASE_GREY, false);
-                                                        Settings.this.recreate();
-                                                        break;
-                                                    case 2:
-                                                        SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
-                                                        ThemeManager.get().setBase(ThemeManager.BASE_LIGHT);
-                                                        setBaseTheme(ThemeManager.BASE_LIGHT, false);
-                                                        Settings.this.recreate();
-                                                        break;
-                                                }
-                                            }
-                                        }).create().show();*/
-                                showComingSoon(null);
+                                new AlertDialog.Builder(Settings.this)
+                                        .setTitle(R.string.settings_theme_animbus).setItems(new String[]{
+                                        getResources().getString(R.string.settings_theme_variant_dark),
+                                        getResources().getString(R.string.settings_theme_variant_light)
+                                }, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which) {
+                                            case 0:
+                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
+                                                ThemeManager.get().setBase(R.style.AppTheme_Pink);
+                                                Settings.this.recreate();
+                                                break;
+                                            case 1:
+                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
+                                                ThemeManager.get().setBase(R.style.AppTheme_Light_Pink);
+                                                Settings.this.recreate();
+                                                break;
+                                        }
+                                    }
+                                }).show();
                                 break;
                             case 2:
-                                //Custom
-                                showComingSoon(null);
+                                new AlertDialog.Builder(Settings.this)
+                                        .setTitle(R.string.settings_theme_animbus).setItems(new String[]{
+                                        getResources().getString(R.string.settings_theme_variant_dark),
+                                        getResources().getString(R.string.settings_theme_variant_light)
+                                }, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        switch (which) {
+                                            case 0:
+                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
+                                                ThemeManager.get().setBase(R.style.AppTheme);
+                                                Settings.this.recreate();
+                                                break;
+                                            case 1:
+                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
+                                                ThemeManager.get().setBase(R.style.AppTheme_Light);
+                                                Settings.this.recreate();
+                                                break;
+                                        }
+                                    }
+                                }).show();
                                 break;
                         }
                     }
@@ -442,7 +439,7 @@ public class Settings extends ThemableActivity {
                     .setPositiveButton(R.string.settings_donate_terms_popup_pos, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://plus.google.com/+AdrianVovkDev/posts/AvBu27FmEwq")));
+                            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://plus.google.com/+AdrianVovkDev/posts/PUiDmRFzPLw")));
                         }
                     }).setNegativeButton(R.string.settings_donate_terms_popup_neg, null).create().show();
         }

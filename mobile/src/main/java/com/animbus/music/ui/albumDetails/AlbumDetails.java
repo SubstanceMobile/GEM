@@ -104,9 +104,6 @@ public class AlbumDetails extends ThemableActivity {
         mFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlaybackManager.get().play(mAlbum.getSongs(), 0);
-                mList.scrollToPosition(0);
-                mList.scrollTo(0, 0);
                 transitionNowPlaying();
             }
         });
@@ -195,6 +192,7 @@ public class AlbumDetails extends ThemableActivity {
                         mFAB.setY(fabOriginalY);
                         ViewCompat.setElevation(mFAB, fabOriginalElev);
                         ActivityCompat.startActivity(AlbumDetails.this, new Intent(AlbumDetails.this, NowPlaying.class), options.toBundle());
+                        PlaybackManager.get().play(mAlbum.getSongs(), 0);
                     }
 
                     @Override

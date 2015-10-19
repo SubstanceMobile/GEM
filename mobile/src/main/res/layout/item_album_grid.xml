@@ -33,8 +33,6 @@
                     android:id="@+id/AlbumInfoToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="68dp"
-                    android:background="@color/primaryGreyDark"
-                    android:baselineAligned="false"
                     android:orientation="horizontal">
 
                     <LinearLayout

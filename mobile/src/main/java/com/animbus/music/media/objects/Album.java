@@ -3,6 +3,7 @@ package com.animbus.music.media.objects;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -28,7 +29,7 @@ public class Album {
 
     public long id;
 
-    public boolean colorAnimated;
+    public boolean colorAnimated = false;
     public boolean animated;
     public int BackgroundColor;
     public int TitleTextColor;
@@ -36,6 +37,7 @@ public class Album {
     public int accentColor;
     public int accentIconColor;
     public int accentSecondaryIconColor;
+    boolean colorsLoaded;
     public Context cxt;
 
     public Album() {
@@ -87,6 +89,8 @@ public class Album {
 
     public void setAlbumArtPath(String albumArtPath) {
         this.albumArtPath = "file://" + albumArtPath;
+        loadColors();
+        prepareArt();
     }
 
     public String getAlbumArtPath() {
@@ -111,7 +115,8 @@ public class Album {
                     defaultArt = true;
                     artLoaded = true;
                     albumArt = Constants.defaultArt(getContext());
-                    for (ArtRequest request  : artRequests) request.respond(Constants.defaultArt(getContext()));
+                    for (ArtRequest request : artRequests)
+                        request.respond(Constants.defaultArt(getContext()));
                     artRequests.clear();
                     Log.d("Album " + String.valueOf(getId()), "Fetching Default Art");
                 }
@@ -150,9 +155,9 @@ public class Album {
                 public void respond(Bitmap albumArt) {
                     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     imageView.setImageBitmap(albumArt);
+                    prepareArt();
                 }
             });
-            prepareArt();
         }
     }
 
@@ -198,6 +203,66 @@ public class Album {
 
     public Context getContext() {
         return cxt;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Colors
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ArrayList<ColorsRequest> colorRequests = new ArrayList<>();
+
+    public interface ColorsRequest {
+        void respond();
+    }
+
+    public void requestColors(ColorsRequest request) {
+        if (colorsLoaded) request.respond();
+        else {
+            colorRequests.add(request);
+            loadColors();
+        }
+    }
+
+    private void loadColors() {
+        if (!colorsLoaded) {
+            //color extraction enabled
+            if (!defaultArt) {
+                //album art is compatible
+                requestArt(new Album.ArtRequest() {
+                    @Override
+                    public void respond(Bitmap albumArt) {
+                        Palette.from(albumArt).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                Palette.Swatch swatch = getMainSwatch(palette.getSwatches())[0];
+                                Palette.Swatch accentSwatch = getMainSwatch(palette.getSwatches())[1];
+                                BackgroundColor = swatch.getRgb();
+                                TitleTextColor = swatch.getTitleTextColor();
+                                SubtitleTextColor = swatch.getBodyTextColor();
+                                accentColor = accentSwatch.getRgb();
+                                accentIconColor = accentSwatch.getTitleTextColor();
+                                accentSecondaryIconColor = accentSwatch.getBodyTextColor();
+
+                                for (ColorsRequest request : colorRequests) request.respond();
+
+                                colorsLoaded = true;
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    }
+
+    private Palette.Swatch[] getMainSwatch(List<Palette.Swatch> swatches) {
+        ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(swatches);
+        Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
+            @Override
+            public int compare(Palette.Swatch a, Palette.Swatch b) {
+                return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
+            }
+        });
+        return new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
