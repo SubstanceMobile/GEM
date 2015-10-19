@@ -42,14 +42,18 @@
                     android:layout_height="wrap_content"
                     android:text="@{song.songTitle}"
                     android:textColor="?attr/primaryTextColor"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songArtist}"
                     android:textColor="?attr/secondaryTextColor"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:ellipsize="end"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <TextView

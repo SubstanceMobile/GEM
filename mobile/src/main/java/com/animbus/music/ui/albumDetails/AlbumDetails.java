@@ -193,13 +193,10 @@ public class AlbumDetails extends ThemableActivity {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        ActivityCompat.startActivity(AlbumDetails.this, new Intent(AlbumDetails.this, NowPlaying.class), options.toBundle());
-                        mFAB.setScaleX(1.0f);
-                        mFAB.setScaleY(1.0f);
-                        mFAB.setAlpha(1.0f);
                         mFAB.setX(fabOriginalX);
                         mFAB.setY(fabOriginalY);
                         ViewCompat.setElevation(mFAB, fabOriginalElev);
+                        ActivityCompat.startActivity(AlbumDetails.this, new Intent(AlbumDetails.this, NowPlaying.class), options.toBundle());
                     }
 
                     @Override
@@ -218,6 +215,27 @@ public class AlbumDetails extends ThemableActivity {
                 mFAB.setScaleY(1.0f);
                 mFAB.setAlpha(1.0f);
                 ViewPropertyAnimator fabCollapsing = mFAB.animate().alpha(0f).scaleX(0f).scaleY(0f).setDuration(200).setStartDelay(100);
+                fabCollapsing.setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mFAB.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
 
                 fabCollapsing.start();
                 reveal.start();
@@ -239,6 +257,7 @@ public class AlbumDetails extends ThemableActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mFAB.show();
         findViewById(R.id.album_details_transition_reveal_part).animate().alpha(0f).start();
     }
 

@@ -45,14 +45,18 @@
                     android:layout_height="wrap_content"
                     android:text="@{song.songTitle}"
                     android:textColor="?attr/primaryTextColor"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songArtist}"
                     android:textColor="?attr/secondaryTextColor"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
 
             </LinearLayout>
 
@@ -94,26 +98,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="@{song.getSongTitle}"
                     android:textColor="?attr/primaryTextColor"
                     android:textSize="16sp"
-                    android:id="@+id/current_song_title" />
+                    android:id="@+id/current_song_title"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="@{song.songArtist}"
                     android:textColor="?attr/secondaryTextColor"
                     android:textSize="14sp"
                     android:id="@+id/current_song_artist"
                     android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small" />
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:singleLine="true" />
 
             </LinearLayout>
 

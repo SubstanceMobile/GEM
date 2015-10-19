@@ -14,7 +14,6 @@
             android:layout_height="@dimen/listViewSizeBig"
             android:text="1"
             android:id="@+id/albumList_song_order"
-            android:maxLines="1"
             android:singleLine="true"
             android:textColor="?attr/secondaryTextColor"
             android:textSize="20sp"
@@ -33,7 +32,9 @@
                 android:layout_height="wrap_content"
                 android:text="SONG_NAME"
                 android:textColor="?attr/primaryTextColor"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:singleLine="true"
+                android:ellipsize="end" />
 
         </LinearLayout>
 
