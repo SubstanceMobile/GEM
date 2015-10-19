@@ -2,6 +2,7 @@ package com.animbus.music.data.adapter;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -134,9 +135,16 @@ public class    AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.A
                     a.BackgroundColor);
             backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
             backgroundAnimator.start();
+
             titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumTitle, textColor, defaultColor(TYPE_TITLE), a.TitleTextColor);
             titleAnimator.setEvaluator(new ArgbEvaluator());
             titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+            titleAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+
+                }
+            });
             titleAnimator.start();
             subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtist, textColor, defaultColor(TYPE_SUBTITLE), a.SubtitleTextColor);
             subtitleAnimator.setEvaluator(new ArgbEvaluator());

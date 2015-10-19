@@ -119,7 +119,6 @@
                         </LinearLayout>
 
                         <FrameLayout
-                            android:id="@+id/frameLayout2"
                             android:layout_width="@dimen/listViewSizeBig"
                             android:layout_height="@dimen/listViewSizeBig"
                             android:padding="@dimen/margin_small" >
@@ -130,7 +129,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:background="?attr/ripple_circle"
-                                android:padding="16dp"
+                                android:padding="20dp"
                                 android:src="@drawable/ic_play_arrow_black_48dp"
                                 android:tint="?attr/secondaryAlternateTextColor"
                                 android:cropToPadding="true"

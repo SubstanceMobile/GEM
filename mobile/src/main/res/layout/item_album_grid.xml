@@ -52,21 +52,19 @@
                             android:id="@+id/AlbumTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLines="1"
                             android:text="@{album.getAlbumTitle}"
                             android:textColor="@color/abc_primary_text_material_dark"
-                            android:textSize="16sp"
-                            android:singleLine="true"
-                            android:ellipsize="end" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/AlbumArtist"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLines="1"
                             android:text="@{album.getAlbumArtistName}"
                             android:textColor="@color/abc_secondary_text_material_dark"
-                            android:textSize="12sp"
-                            android:singleLine="true"
-                            android:ellipsize="end" />
+                            android:textSize="12sp" />
 
                         <Space
                             android:layout_width="wrap_content"

@@ -23,7 +23,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -182,8 +181,7 @@ public class AlbumDetails extends ThemableActivity {
                 overlay.setBackgroundColor(mAlbum.accentColor);
                 overlay.setAlpha(1f);
                 ViewCompat.setElevation(mFAB, 0f);
-                Animator reveal = ViewAnimationUtils.createCircularReveal(overlay, overlay.getWidth() / 2, overlay.getHeight() / 2, mFAB.getWidth() / 2, Math.max(overlay.getWidth() / 2, overlay.getHeight() / 2));
-                reveal.setDuration(300);
+                Animator reveal = FabHelper.getRevealAnim(mFAB, overlay);
 
                 reveal.addListener(new Animator.AnimatorListener() {
                     @Override
