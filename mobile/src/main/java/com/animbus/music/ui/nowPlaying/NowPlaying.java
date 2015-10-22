@@ -100,7 +100,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
         mControls.setUIColors(mSong.getAlbum().accentIconColor,
                 mSong.getAlbum().accentSecondaryIconColor,
                 mSong.getAlbum().accentSecondaryIconColor,
-                mSong.getAlbum().BackgroundColor);
+                mSong.getAlbum().backgroundColor);
 
     }
 

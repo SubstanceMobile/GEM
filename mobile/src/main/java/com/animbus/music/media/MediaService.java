@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.media.MediaMetadataCompat;
+import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
@@ -105,13 +106,19 @@ public class MediaService extends Service implements PlaybackManager.OnChangedLi
                 new Intent(Intent.ACTION_MEDIA_BUTTON),
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
-        mSession = new MediaSessionCompat(this, TAG, mButtonReceiver, mButtonReceivedIntent);
+        mSession = new MediaSessionCompat(this, TAG);
         mSession.setPlaybackToLocal(AudioManager.STREAM_MUSIC);
         mSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
                 MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
         mSession.setCallback(new MediaSessionCallback());
         setState(STATE_NONE);
         mSession.setMediaButtonReceiver(mButtonReceivedIntent);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        MediaButtonReceiver.handleIntent(mSession, intent);
+        return super.onStartCommand(intent, flags, startId);
     }
 
     public void updateMetadata(MediaMetadataCompat metadata){
@@ -222,34 +229,6 @@ public class MediaService extends Service implements PlaybackManager.OnChangedLi
                 if (mState.getState() == STATE_PLAYING) {
                     onPause();
                     handled = true;
-                }
-            } else if (Intent.ACTION_MEDIA_BUTTON.equals(mediaButtonEvent.getAction())) {
-                KeyEvent keyEvent = (KeyEvent) mediaButtonEvent.getExtras().get(Intent.EXTRA_KEY_EVENT);
-                switch (keyEvent.getKeyCode()) {
-                    case KeyEvent.KEYCODE_MEDIA_PLAY:
-                        onPlay();
-                        handled = true;
-                        break;
-                    case KeyEvent.KEYCODE_MEDIA_PAUSE:
-                        onPause();
-                        handled = true;
-                        break;
-                    case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
-                        onTogglePlay();
-                        handled = true;
-                        break;
-                    case KeyEvent.KEYCODE_MEDIA_NEXT:
-                        onSkipToNext();
-                        handled = true;
-                        break;
-                    case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
-                        onSkipToPrevious();
-                        handled = true;
-                        break;
-                    case KeyEvent.KEYCODE_MEDIA_STOP:
-                        onStop();
-                        handled = true;
-                        break;
                 }
             }
             return handled;

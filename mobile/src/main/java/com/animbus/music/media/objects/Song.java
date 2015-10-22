@@ -38,6 +38,10 @@ public class Song {
         this.songDuration = songDuration;
     }
 
+    public String getTrackNumberString() {
+        return trackNumber != 0 ? String.valueOf(trackNumber) : "-";
+    }
+
     public Integer getTrackNumber() {
         return trackNumber;
     }

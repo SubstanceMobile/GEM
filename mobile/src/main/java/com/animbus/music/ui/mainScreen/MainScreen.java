@@ -140,10 +140,25 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         if (!settings.getBooleanSetting(SettingsManager.KEY_USE_TAB_ICONS, false)) {
             tabs.setupWithViewPager(pager);
         } else {
-            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_albums));
-            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_songs));
-            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_playlists));
-            tabs.addTab(tabs.newTab().setIcon(R.drawable.ic_tab_artists));
+            ColorStateList state = new ColorStateList(new int[][]{
+                    {android.R.attr.state_selected}, //When selected
+                    {}
+            }, new int[] {
+                    getThemeAccentColor(),
+                    ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark)
+            });
+            Drawable albums = getResources().getDrawable(R.drawable.ic_album_24dp);
+            Drawable songs = getResources().getDrawable(R.drawable.ic_audiotrack_24dp);
+            Drawable playlists = getResources().getDrawable(R.drawable.ic_queue_music_black_24dp);
+            Drawable artists = getResources().getDrawable(R.drawable.ic_artist_24dp);
+            DrawableCompat.setTintList(albums, state);
+            DrawableCompat.setTintList(songs, state);
+            DrawableCompat.setTintList(playlists, state);
+            DrawableCompat.setTintList(artists, state);
+            tabs.addTab(tabs.newTab().setIcon(albums));
+            tabs.addTab(tabs.newTab().setIcon(songs));
+            tabs.addTab(tabs.newTab().setIcon(playlists));
+            tabs.addTab(tabs.newTab().setIcon(artists));
         }
 
         //Allows the tabs to sync to the view pager

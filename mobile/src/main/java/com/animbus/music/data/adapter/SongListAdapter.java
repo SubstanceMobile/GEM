@@ -33,6 +33,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongLi
     @Override
     public void onBindViewHolder(final SongListViewHolder holder, int position) {
         holder.item.setSong(data.get(position));
+        holder.item.executePendingBindings();
     }
 
     @Override

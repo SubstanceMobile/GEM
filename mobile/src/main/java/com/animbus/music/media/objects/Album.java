@@ -1,13 +1,19 @@
 package com.animbus.music.media.objects;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.animbus.music.shared.Constants;
+import com.animbus.music.R;
+import com.animbus.music.media.AlbumArtHelper;
+import com.animbus.music.ui.theme.ThemeManager;
+import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -31,9 +37,9 @@ public class Album {
 
     public boolean colorAnimated = false;
     public boolean animated;
-    public int BackgroundColor;
-    public int TitleTextColor;
-    public int SubtitleTextColor;
+    public int backgroundColor;
+    public int titleTextColor;
+    public int subtitleTextColor;
     public int accentColor;
     public int accentIconColor;
     public int accentSecondaryIconColor;
@@ -84,80 +90,133 @@ public class Album {
     public String albumArtPath;
     public boolean defaultArt = false;
     public boolean artLoaded = false;
-    public Bitmap albumArt;
-    public ArrayList<ArtRequest> artRequests = new ArrayList<>();
 
     public void setAlbumArtPath(String albumArtPath) {
-        this.albumArtPath = "file://" + albumArtPath;
-        loadColors();
-        prepareArt();
+        if (albumArtPath != null) {
+            this.albumArtPath = "file://" + albumArtPath;
+        } else {
+            this.albumArtPath = "default";
+        }
+
+        if (!AlbumArtHelper.isPicassoSet()) {
+            Picasso.Builder builder = new Picasso.Builder(getContext());
+            ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
+            builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 5));
+            builder.loggingEnabled(true);
+            AlbumArtHelper.setPicasso(builder.build());
+        }
+
+        AlbumArtHelper.getPicasso(this).into(new AlbumArtHelper.SimpleTarget() {
+
+            @Override
+            public void loadDefault() {
+                defaultArt = true;
+                artLoaded = true;
+
+                backgroundColor = getContext().getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primaryGreyLight : R.color.primaryGreyDark);
+                titleTextColor = getContext().getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_light : R.color.primary_text_default_material_dark);
+                subtitleTextColor = getContext().getResources().getColor(ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_light : R.color.secondary_text_default_material_dark);
+                accentColor = Color.WHITE;
+                accentIconColor = Color.BLACK;
+                accentSecondaryIconColor = Color.GRAY;
+
+                for (ColorsRequest request : colorRequests) request.respond();
+                colorRequests.clear();
+
+                colorsLoaded = true;
+            }
+
+            @Override
+            public void loadArt(Bitmap art, Picasso.LoadedFrom from) {
+                defaultArt = false;
+                artLoaded = true;
+
+                if (!colorsLoaded) {
+                    Palette.from(art).generate(new Palette.PaletteAsyncListener() {
+                        @Override
+                        public void onGenerated(Palette palette) {
+                            //Gets main swatches
+                            ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
+                            Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
+                                @Override
+                                public int compare(Palette.Swatch a, Palette.Swatch b) {
+                                    return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
+                                }
+                            });
+                            Palette.Swatch[] swatches =
+                                    new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
+
+                            //Color management
+                            Palette.Swatch swatch = swatches[0];
+                            Palette.Swatch accentSwatch = swatches[1];
+                            backgroundColor = swatch.getRgb();
+                            titleTextColor = swatch.getTitleTextColor();
+                            subtitleTextColor = swatch.getBodyTextColor();
+                            accentColor = accentSwatch.getRgb();
+                            accentIconColor = accentSwatch.getTitleTextColor();
+                            accentSecondaryIconColor = accentSwatch.getBodyTextColor();
+
+                            for (ColorsRequest request : colorRequests) request.respond();
+                            colorRequests.clear();
+
+                            colorsLoaded = true;
+                        }
+                    });
+                }
+            }
+        });
+
     }
 
     public String getAlbumArtPath() {
         return albumArtPath;
     }
 
-    public void prepareArt() {
-        if (!artLoaded) {
-            Picasso.with(getContext()).load(getAlbumArtPath()).into(new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    defaultArt = false;
-                    artLoaded = true;
-                    albumArt = bitmap;
-                    for (ArtRequest artRequest : artRequests) artRequest.respond(bitmap);
-                    artRequests.clear();
-                    Log.d("Album " + String.valueOf(getId()), "Art Loaded from " + getAlbumArtPath());
-                }
-
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
-                    defaultArt = true;
-                    artLoaded = true;
-                    albumArt = Constants.defaultArt(getContext());
-                    for (ArtRequest request : artRequests)
-                        request.respond(Constants.defaultArt(getContext()));
-                    artRequests.clear();
-                    Log.d("Album " + String.valueOf(getId()), "Fetching Default Art");
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                }
-            });
-        }
-    }
-
-    public void addListener(ArtRequest request) {
-        artRequests.add(request);
-    }
-
     public interface ArtRequest {
         void respond(Bitmap albumArt);
     }
 
-    public void requestArt(ArtRequest request) {
-        if (artLoaded) request.respond(albumArt);
-        else {
-            addListener(request);
-            prepareArt();
-        }
+    public void requestArt(final ArtRequest request) {
+        AlbumArtHelper.getPicasso(this).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                request.respond(bitmap);
+                Log.d("Album " + String.valueOf(getId()), "Art Location: " + getAlbumArtPath() + " Art from: " + from.name());
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+                request.respond(((BitmapDrawable) errorDrawable).getBitmap());
+                Log.d("Album " + String.valueOf(getId()), "Fetching Default Art");
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        });
     }
 
     public void requestArt(final ImageView imageView) {
-        if (artLoaded) {
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setImageBitmap(albumArt);
-        } else {
-            addListener(new ArtRequest() {
-                @Override
-                public void respond(Bitmap albumArt) {
-                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    imageView.setImageBitmap(albumArt);
-                    prepareArt();
-                }
-            });
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        AlbumArtHelper.getPicasso(this).into(imageView);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Colors
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ArrayList<ColorsRequest> colorRequests = new ArrayList<>();
+
+    public interface ColorsRequest {
+        void respond();
+
+    }
+
+    public void requestColors(ColorsRequest request) {
+        if (colorsLoaded) request.respond();
+        else {
+            colorRequests.add(request);
         }
     }
 
@@ -203,66 +262,6 @@ public class Album {
 
     public Context getContext() {
         return cxt;
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Colors
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    ArrayList<ColorsRequest> colorRequests = new ArrayList<>();
-
-    public interface ColorsRequest {
-        void respond();
-    }
-
-    public void requestColors(ColorsRequest request) {
-        if (colorsLoaded) request.respond();
-        else {
-            colorRequests.add(request);
-            loadColors();
-        }
-    }
-
-    private void loadColors() {
-        if (!colorsLoaded) {
-            //color extraction enabled
-            if (!defaultArt) {
-                //album art is compatible
-                requestArt(new Album.ArtRequest() {
-                    @Override
-                    public void respond(Bitmap albumArt) {
-                        Palette.from(albumArt).generate(new Palette.PaletteAsyncListener() {
-                            @Override
-                            public void onGenerated(Palette palette) {
-                                Palette.Swatch swatch = getMainSwatch(palette.getSwatches())[0];
-                                Palette.Swatch accentSwatch = getMainSwatch(palette.getSwatches())[1];
-                                BackgroundColor = swatch.getRgb();
-                                TitleTextColor = swatch.getTitleTextColor();
-                                SubtitleTextColor = swatch.getBodyTextColor();
-                                accentColor = accentSwatch.getRgb();
-                                accentIconColor = accentSwatch.getTitleTextColor();
-                                accentSecondaryIconColor = accentSwatch.getBodyTextColor();
-
-                                for (ColorsRequest request : colorRequests) request.respond();
-
-                                colorsLoaded = true;
-                            }
-                        });
-                    }
-                });
-            }
-        }
-    }
-
-    private Palette.Swatch[] getMainSwatch(List<Palette.Swatch> swatches) {
-        ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(swatches);
-        Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
-            @Override
-            public int compare(Palette.Swatch a, Palette.Swatch b) {
-                return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
-            }
-        });
-        return new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

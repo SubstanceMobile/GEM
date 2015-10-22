@@ -1,15 +1,13 @@
 package com.animbus.music.customImpls;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.animbus.music.media.objects.Album;
-import com.animbus.music.shared.Constants;
 
 public class SquareImageViewWidth_Based extends ImageView {
-    public boolean isInEditMode (){
+    public boolean isInEditMode() {
         return true;
     }
 
@@ -33,10 +31,7 @@ public class SquareImageViewWidth_Based extends ImageView {
         setMeasuredDimension(width, width);
     }
 
-    public void albumArt(final Album album) {
-        setImageBitmap(Constants.defaultArt(getContext()));
-        if (album != null) {
-            album.requestArt(this);
-        }
+    public void setAlbumArt(Album album) {
+        album.requestArt(this);
     }
 }

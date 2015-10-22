@@ -116,17 +116,17 @@ public class AlbumDetails extends ThemableActivity {
     private void configureUIColors() {
         FabHelper.setFabBackground(mFAB, mAlbum.accentColor);
         FabHelper.setFabTintedIcon(mFAB, getResources().getDrawable(R.drawable.ic_play_arrow_black_48dp), mAlbum.accentIconColor);
-        mDetailsRoot.setBackgroundColor(mAlbum.BackgroundColor);
-        mTitle.setTextColor(mAlbum.TitleTextColor);
-        mArtist.setTextColor(mAlbum.SubtitleTextColor);
-        mCollapsingToolbar.setContentScrimColor(mAlbum.BackgroundColor);
-        mCollapsingToolbar.setStatusBarScrimColor(mAlbum.BackgroundColor);
+        mDetailsRoot.setBackgroundColor(mAlbum.backgroundColor);
+        mTitle.setTextColor(mAlbum.titleTextColor);
+        mArtist.setTextColor(mAlbum.subtitleTextColor);
+        mCollapsingToolbar.setContentScrimColor(mAlbum.backgroundColor);
+        mCollapsingToolbar.setStatusBarScrimColor(mAlbum.backgroundColor);
 
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.BackgroundColor));
+            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.backgroundColor));
             bm.recycle();
         }
     }

@@ -6,6 +6,7 @@
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/AlbumGridItemRootView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -27,7 +28,8 @@
                 <com.animbus.music.customImpls.SquareImageViewWidth_Based
                     android:id="@+id/AlbumArtGridItemAlbumArt"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/none" />
+                    android:layout_height="0dp"
+                    app:albumArt="@{album}"/>
 
                 <LinearLayout
                     android:id="@+id/AlbumInfoToolbar"

@@ -6,9 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.animbus.music.R;
+import com.animbus.music.databinding.ItemAlbumDetailsList;
 import com.animbus.music.media.objects.Song;
 
 import java.util.Collections;
@@ -28,16 +27,13 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
 
     @Override
     public AlbumDetailsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_songlist_album_details, parent, false);
-        return new AlbumDetailsViewHolder(view);
+        return new AlbumDetailsViewHolder(ItemAlbumDetailsList.inflate(inflater, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final AlbumDetailsViewHolder holder, int position) {
-        Song current = data.get(position);
-        holder.SongName.setText(current.getSongTitle());
-        holder.SongDuration.setText(current.getSongDurString());
-        holder.SongPos.setText(current.getTrackNumber() != 0 ? String.valueOf(current.getTrackNumber()) : "-");
+    public void onBindViewHolder(AlbumDetailsViewHolder holder, int position) {
+        holder.item.setSong(data.get(position));
+        holder.item.executePendingBindings();
     }
 
     @Override
@@ -54,13 +50,11 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
     }
 
     class AlbumDetailsViewHolder extends RecyclerView.ViewHolder implements OnClickListener {
-        TextView SongName, SongDuration, SongPos;
+        ItemAlbumDetailsList item;
 
-        public AlbumDetailsViewHolder(View itemView) {
-            super(itemView);
-            SongName = (TextView) itemView.findViewById(R.id.songlist_song_title);
-            SongDuration = (TextView) itemView.findViewById(R.id.songlist_song_duration);
-            SongPos = (TextView) itemView.findViewById(R.id.albumList_song_order);
+        public AlbumDetailsViewHolder(ItemAlbumDetailsList binding) {
+            super(binding.getRoot());
+            item = binding;
             itemView.setOnClickListener(this);
         }
 

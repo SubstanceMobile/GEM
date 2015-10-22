@@ -32,10 +32,8 @@ public class SquareImageViewHeight_Based extends ImageView {
         setMeasuredDimension(height, height);
     }
 
-    public void albumArt(final Album album) {
-        if (album != null) {
-            album.requestArt(this);
-        }
+    public void setAlbumArt(final Album album) {
+        album.requestArt(this);
     }
 
 }
