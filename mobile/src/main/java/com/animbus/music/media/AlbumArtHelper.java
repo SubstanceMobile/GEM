@@ -1,16 +1,24 @@
 package com.animbus.music.media;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v7.graphics.Palette;
+import android.util.Log;
 
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Request;
 import com.squareup.picasso.RequestCreator;
+import com.squareup.picasso.RequestHandler;
 import com.squareup.picasso.Target;
 
-import java.util.Objects;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Adrian on 10/20/2015.
@@ -37,22 +45,49 @@ public class AlbumArtHelper {
 
     public static RequestCreator getPicasso(Album a) {
         if (!a.getAlbumArtPath().equals("default")) {
+            a.defaultArt = false;
+            a.colorsLoaded = false;
+            a.colorAnimated = false;
+
             return getPicasso().load(a.getAlbumArtPath()).error(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         } else {
-           return  getPicasso().load(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
+            a.backgroundColor = a.getContext().getResources().getColor(
+                    ThemeManager.get().useLightTheme ?
+                            R.color.primaryGreyLight : R.color.primaryGreyDark);
+            a.titleTextColor = a.getContext().getResources().getColor(
+                    ThemeManager.get().useLightTheme ?
+                            R.color.primary_text_default_material_light :
+                            R.color.primary_text_default_material_dark
+            );
+            a.subtitleTextColor = a.getContext().getResources().getColor(
+                    ThemeManager.get().useLightTheme ?
+                            R.color.secondary_text_default_material_light :
+                            R.color.secondary_text_default_material_dark
+            );
+            a.accentColor = Color.WHITE;
+            a.accentIconColor = Color.BLACK;
+            a.accentSecondaryIconColor = Color.GRAY;
+
+            a.defaultArt = true;
+            a.colorsLoaded = true;
+            a.colorAnimated = true;
+            return getPicasso().load(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         }
     }
 
-    public static abstract class SimpleTarget implements Target {
+    public static void loadColors(final Album a) {
+
+    }
+
+    public static abstract class ColorTarget implements Target {
 
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            loadArt(bitmap, from);
+            loadColors(bitmap);
         }
 
         @Override
         public void onBitmapFailed(Drawable errorDrawable) {
-            loadDefault();
         }
 
         @Override
@@ -60,14 +95,11 @@ public class AlbumArtHelper {
 
         }
 
-        public abstract void loadDefault();
-
-        public abstract void loadArt(Bitmap art, Picasso.LoadedFrom from);
+        public abstract void loadColors(Bitmap art);
     }
 
     public static boolean isPicassoSet() {
         return i.picasso != null;
     }
-
 
 }

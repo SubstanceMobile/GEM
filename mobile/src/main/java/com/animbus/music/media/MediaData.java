@@ -109,6 +109,7 @@ public class MediaData {
                 album.setId(albumsCursor.getLong(idColumn));
                 album.setContext(context);
                 album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
+                album.loadColor();
                 mAlbums.add(album);
             } while (albumsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {

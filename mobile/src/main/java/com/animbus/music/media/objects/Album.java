@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.widget.ImageView;
@@ -43,7 +44,7 @@ public class Album {
     public int accentColor;
     public int accentIconColor;
     public int accentSecondaryIconColor;
-    boolean colorsLoaded;
+    public boolean colorsLoaded;
     public Context cxt;
 
     public Album() {
@@ -101,71 +102,11 @@ public class Album {
         if (!AlbumArtHelper.isPicassoSet()) {
             Picasso.Builder builder = new Picasso.Builder(getContext());
             ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
-            builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 5));
-            builder.loggingEnabled(true);
+            builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 7));
+            builder.loggingEnabled(false);
+
             AlbumArtHelper.setPicasso(builder.build());
         }
-
-        AlbumArtHelper.getPicasso(this).into(new AlbumArtHelper.SimpleTarget() {
-
-            @Override
-            public void loadDefault() {
-                defaultArt = true;
-                artLoaded = true;
-
-                backgroundColor = getContext().getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primaryGreyLight : R.color.primaryGreyDark);
-                titleTextColor = getContext().getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_light : R.color.primary_text_default_material_dark);
-                subtitleTextColor = getContext().getResources().getColor(ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_light : R.color.secondary_text_default_material_dark);
-                accentColor = Color.WHITE;
-                accentIconColor = Color.BLACK;
-                accentSecondaryIconColor = Color.GRAY;
-
-                for (ColorsRequest request : colorRequests) request.respond();
-                colorRequests.clear();
-
-                colorsLoaded = true;
-            }
-
-            @Override
-            public void loadArt(Bitmap art, Picasso.LoadedFrom from) {
-                defaultArt = false;
-                artLoaded = true;
-
-                if (!colorsLoaded) {
-                    Palette.from(art).generate(new Palette.PaletteAsyncListener() {
-                        @Override
-                        public void onGenerated(Palette palette) {
-                            //Gets main swatches
-                            ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
-                            Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
-                                @Override
-                                public int compare(Palette.Swatch a, Palette.Swatch b) {
-                                    return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
-                                }
-                            });
-                            Palette.Swatch[] swatches =
-                                    new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
-
-                            //Color management
-                            Palette.Swatch swatch = swatches[0];
-                            Palette.Swatch accentSwatch = swatches[1];
-                            backgroundColor = swatch.getRgb();
-                            titleTextColor = swatch.getTitleTextColor();
-                            subtitleTextColor = swatch.getBodyTextColor();
-                            accentColor = accentSwatch.getRgb();
-                            accentIconColor = accentSwatch.getTitleTextColor();
-                            accentSecondaryIconColor = accentSwatch.getBodyTextColor();
-
-                            for (ColorsRequest request : colorRequests) request.respond();
-                            colorRequests.clear();
-
-                            colorsLoaded = true;
-                        }
-                    });
-                }
-            }
-        });
-
     }
 
     public String getAlbumArtPath() {
@@ -202,22 +143,73 @@ public class Album {
         AlbumArtHelper.getPicasso(this).into(imageView);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Colors
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void loadColor() {
+        AlbumArtHelper.getPicasso(this).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+                    @Override
+                    public void onGenerated(Palette palette) {
+                        //Gets main swatches
+                        ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
+                        Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
+                            @Override
+                            public int compare(Palette.Swatch a, Palette.Swatch b) {
+                                return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
+                            }
+                        });
+                        Palette.Swatch[] swatches =
+                                new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
 
-    ArrayList<ColorsRequest> colorRequests = new ArrayList<>();
+                        try {
+                            //Load colors
+                            backgroundColor = swatches[0].getRgb();
+                            titleTextColor = swatches[0].getTitleTextColor();
+                            subtitleTextColor = swatches[0].getBodyTextColor();
+                        } catch (NullPointerException e) {
+                            //Loads default colors
+                            backgroundColor = getContext().getResources().getColor(
+                                    ThemeManager.get().useLightTheme ?
+                                            R.color.primaryGreyLight :
+                                            R.color.primaryGreyDark
+                            );
+                            titleTextColor = getContext().getResources().getColor(
+                                    ThemeManager.get().useLightTheme ?
+                                            R.color.primary_text_default_material_light :
+                                            R.color.primary_text_default_material_dark
+                            );
+                            subtitleTextColor = getContext().getResources().getColor(
+                                    ThemeManager.get().useLightTheme ?
+                                            R.color.secondary_text_default_material_light :
+                                            R.color.secondary_text_default_material_dark
+                            );
+                        }
 
-    public interface ColorsRequest {
-        void respond();
+                        try {
+                            //Load colors
+                            accentColor = swatches[1].getRgb();
+                            accentIconColor = swatches[1].getTitleTextColor();
+                            accentSecondaryIconColor = swatches[1].getBodyTextColor();
+                        } catch (NullPointerException e) {
+                            //Loads default colors
+                            accentColor = Color.WHITE;
+                            accentIconColor = Color.BLACK;
+                            accentSecondaryIconColor = Color.GRAY;
+                        }
+                    }
+                });
+            }
 
-    }
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
 
-    public void requestColors(ColorsRequest request) {
-        if (colorsLoaded) request.respond();
-        else {
-            colorRequests.add(request);
-        }
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        });
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

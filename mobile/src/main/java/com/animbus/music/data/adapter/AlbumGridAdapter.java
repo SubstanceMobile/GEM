@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Property;
 import android.view.LayoutInflater;
@@ -90,40 +89,36 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
             } else holder.item.AlbumGridItemRootView.setAlpha(1.0f);
         }
 
-        if (!album.colorAnimated) setDefaultBackColors(holder);
-        album.requestColors(new Album.ColorsRequest() {
-            @Override
-            public void respond() {
-                if (!album.colorAnimated) {
-                    Random colorDelayRandom = new Random();
-                    int MAX = COLOR_DELAY_MAX * position;
-                    int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
-                    ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
-                    backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumInfoToolbar, "backgroundColor", new ArgbEvaluator(),
-                            defaultColor(TYPE_BACK), album.backgroundColor);
-                    backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                    backgroundAnimator.start();
+        if (!album.colorAnimated) {
+            setDefaultBackColors(holder);
 
-                    titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumTitle, textColor,
-                            defaultColor(TYPE_TITLE), album.titleTextColor);
-                    titleAnimator.setEvaluator(new ArgbEvaluator());
-                    titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                    titleAnimator.start();
+            Random colorDelayRandom = new Random();
+            int MAX = COLOR_DELAY_MAX * position;
+            int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
+            ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
+            backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumInfoToolbar, "backgroundColor", new ArgbEvaluator(),
+                    defaultColor(TYPE_BACK), album.backgroundColor);
+            backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+            backgroundAnimator.start();
 
-                    subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtist, textColor,
-                            defaultColor(TYPE_SUBTITLE), album.subtitleTextColor);
-                    subtitleAnimator.setEvaluator(new ArgbEvaluator());
-                    subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                    subtitleAnimator.start();
+            titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumTitle, textColor,
+                    defaultColor(TYPE_TITLE), album.titleTextColor);
+            titleAnimator.setEvaluator(new ArgbEvaluator());
+            titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+            titleAnimator.start();
 
-                    album.colorAnimated = true;
-                } else {
-                    holder.item.AlbumInfoToolbar.setBackgroundColor(album.backgroundColor);
-                    holder.item.AlbumTitle.setTextColor(album.titleTextColor);
-                    holder.item.AlbumArtist.setTextColor(album.subtitleTextColor);
-                }
-            }
-        });
+            subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtist, textColor,
+                    defaultColor(TYPE_SUBTITLE), album.subtitleTextColor);
+            subtitleAnimator.setEvaluator(new ArgbEvaluator());
+            subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+            subtitleAnimator.start();
+
+            album.colorAnimated = true;
+        } else {
+            holder.item.AlbumInfoToolbar.setBackgroundColor(album.backgroundColor);
+            holder.item.AlbumTitle.setTextColor(album.titleTextColor);
+            holder.item.AlbumArtist.setTextColor(album.subtitleTextColor);
+        }
     }
 
     private int defaultColor(int type) {
