@@ -36,14 +36,11 @@ public class AlbumArtHelper {
     public static RequestCreator getPicasso(Album a) {
         if (!a.getAlbumArtPath().equals("default")) {
             a.defaultArt = false;
-            a.colorsLoaded = false;
             a.colorAnimated = false;
 
             return getPicasso().load(a.getAlbumArtPath()).error(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         } else {
-            AlbumColorHelper.setDefaults(a);
             a.defaultArt = true;
-            a.colorsLoaded = true;
             a.colorAnimated = true;
             return getPicasso().load(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         }

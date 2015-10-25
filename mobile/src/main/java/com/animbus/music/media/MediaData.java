@@ -4,11 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
-import com.animbus.music.media.objects.album.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.objects.album.AlbumColorHelper;
+import com.animbus.music.media.objects.album.Album;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,6 +106,7 @@ public class MediaData {
 
                 album.setContext(context);
                 album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
+                album.prepareColors();
 
                 album.setAlbumTitle(albumsCursor.getString(titleColumn));
                 album.setAlbumArtistName(albumsCursor.getString(artistColumn));

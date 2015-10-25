@@ -114,19 +114,19 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void configureUIColors() {
-        FabHelper.setFabBackground(mFAB, mAlbum.accentColor);
-        FabHelper.setFabTintedIcon(mFAB, getResources().getDrawable(R.drawable.ic_play_arrow_black_48dp), mAlbum.accentIconColor);
-        mDetailsRoot.setBackgroundColor(mAlbum.backgroundColor);
-        mTitle.setTextColor(mAlbum.titleTextColor);
-        mArtist.setTextColor(mAlbum.subtitleTextColor);
-        mCollapsingToolbar.setContentScrimColor(mAlbum.backgroundColor);
-        mCollapsingToolbar.setStatusBarScrimColor(mAlbum.backgroundColor);
+        FabHelper.setFabBackground(mFAB, mAlbum.getAccentColor());
+        FabHelper.setFabTintedIcon(mFAB, getResources().getDrawable(R.drawable.ic_play_arrow_black_48dp), mAlbum.getAccentIconColor());
+        mDetailsRoot.setBackgroundColor(mAlbum.getBackgroundColor());
+        mTitle.setTextColor(mAlbum.getTitleTextColor());
+        mArtist.setTextColor(mAlbum.getSubtitleTextColor());
+        mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
+        mCollapsingToolbar.setStatusBarScrimColor(mAlbum.getBackgroundColor());
 
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.backgroundColor));
+            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.getBackgroundColor()));
             bm.recycle();
         }
     }
@@ -175,7 +175,7 @@ public class AlbumDetails extends ThemableActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Circular reveal
-                overlay.setBackgroundColor(mAlbum.accentColor);
+                overlay.setBackgroundColor(mAlbum.getAccentColor());
                 overlay.setAlpha(1f);
                 ViewCompat.setElevation(mFAB, 0f);
                 Animator reveal = FabHelper.getRevealAnim(mFAB, overlay);

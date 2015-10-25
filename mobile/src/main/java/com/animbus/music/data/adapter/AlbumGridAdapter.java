@@ -16,7 +16,6 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.databinding.ItemAlbumGrid;
 import com.animbus.music.media.objects.album.Album;
-import com.animbus.music.media.objects.album.AlbumColorHelper;
 import com.animbus.music.ui.theme.ThemeManager;
 
 import java.util.Collections;
@@ -30,6 +29,21 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
     List<Album> data = Collections.emptyList();
     Context context;
     AlbumArtGridClickListener onItemClickedListener;
+    private static final int COLOR_DUR = 300;
+    private static final int COLOR_DELAY_BASE = 550;
+    private static final int COLOR_DELAY_MAX = 750;
+    public static final int TYPE_BACK = 1, TYPE_TITLE = 2, TYPE_SUBTITLE = 3;
+    static final Property<TextView, Integer> textColor = new Property<TextView, Integer>(int.class, "textColor") {
+        @Override
+        public Integer get(TextView object) {
+            return object.getCurrentTextColor();
+        }
+
+        @Override
+        public void set(TextView object, Integer value) {
+            object.setTextColor(value);
+        }
+    };
 
     public AlbumGridAdapter(Context c, List<Album> data) {
         inflater = LayoutInflater.from(c);
@@ -73,22 +87,57 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                         .setStartDelay(GRID_ANIM_DELAY + delayPart)
                         .start();
             } else holder.item.AlbumGridItemRootView.setAlpha(1.0f);
-        }
 
-        if (!album.colorAnimated) setDefaultBackColors(holder);
-        AlbumColorHelper.into(album,
-                holder.item.AlbumInfoToolbar,
-                holder.item.AlbumTitle,
-                holder.item.AlbumArtist,
-                position,
-                context,
-                this);
+            if (!album.colorAnimated) {
+                setDefaultBackColors(holder);
+                Random colorDelayRandom = new Random();
+                int MAX = COLOR_DELAY_MAX * position;
+                int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
+                ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
+                backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumInfoToolbar, "backgroundColor", new ArgbEvaluator(),
+                        defaultColor(TYPE_BACK), album.getBackgroundColor());
+                backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                backgroundAnimator.start();
+
+                titleAnimator = ObjectAnimator.ofInt(holder.item.AlbumTitle, textColor,
+                        defaultColor(TYPE_TITLE), album.getTitleTextColor());
+                titleAnimator.setEvaluator(new ArgbEvaluator());
+                titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                titleAnimator.start();
+
+                subtitleAnimator = ObjectAnimator.ofInt(holder.item.AlbumArtist, textColor,
+                        defaultColor(TYPE_SUBTITLE), album.getSubtitleTextColor());
+                subtitleAnimator.setEvaluator(new ArgbEvaluator());
+                subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
+                subtitleAnimator.start();
+
+                album.colorAnimated = true;
+            } else {
+                holder.item.AlbumInfoToolbar.setBackgroundColor(album.getBackgroundColor());
+                holder.item.AlbumTitle.setTextColor(album.getTitleTextColor());
+                holder.item.AlbumArtist.setTextColor(album.getSubtitleTextColor());
+            }
+        }
     }
 
     private void setDefaultBackColors(AlbumGridViewHolder holder) {
-        holder.item.AlbumInfoToolbar.setBackgroundColor(AlbumColorHelper.defaultColor(AlbumColorHelper.TYPE_BACK, context));
-        holder.item.AlbumTitle.setTextColor(AlbumColorHelper.defaultColor(AlbumColorHelper.TYPE_TITLE, context));
-        holder.item.AlbumArtist.setTextColor(AlbumColorHelper.defaultColor(AlbumColorHelper.TYPE_SUBTITLE, context));
+        holder.item.AlbumInfoToolbar.setBackgroundColor(defaultColor(TYPE_BACK));
+        holder.item.AlbumTitle.setTextColor(defaultColor(TYPE_TITLE));
+        holder.item.AlbumArtist.setTextColor(defaultColor(TYPE_SUBTITLE));
+    }
+
+    private int defaultColor(int type) {
+        int color;
+        if (type == TYPE_BACK) {
+            color = context.getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primaryGreyLight : R.color.primaryGreyDark);
+        } else if (type == TYPE_TITLE) {
+            color = context.getResources().getColor(ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_light : R.color.primary_text_default_material_dark);
+        } else if (type == TYPE_SUBTITLE) {
+            color = context.getResources().getColor(ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_light : R.color.secondary_text_default_material_dark);
+        } else {
+            color = 0;
+        }
+        return color;
     }
 
     @Override

@@ -59,7 +59,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             holder.dataBinder.setIsFirst(true);
             holder.dataBinder.executePendingBindings();
 
-            DrawableCompat.setTint(holder.dataBinder.nowPlayingEqIcon.getDrawable(), customSong.getAlbum().backgroundColor);
+            DrawableCompat.setTint(holder.dataBinder.nowPlayingEqIcon.getDrawable(), customSong.getAlbum().getBackgroundColor());
             configureRepeatIcon(holder.dataBinder.nowPlayingRepeatIcon, customSong);
             holder.dataBinder.nowPlayingRepeatIcon.setOnClickListener(new OnClickListener() {
                 @Override
@@ -77,7 +77,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
     private void configureRepeatIcon(ImageView i, Song s){
         if (PlaybackManager.get().isLooping()){
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
-            DrawableCompat.setTint(repeatIcon, s.getAlbum().backgroundColor);
+            DrawableCompat.setTint(repeatIcon, s.getAlbum().getBackgroundColor());
             i.setImageDrawable(repeatIcon);
         } else {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
@@ -94,7 +94,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             PlaybackManager.get().setRepeat(false);
         } else {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
-            DrawableCompat.setTint(repeatIcon, s.getAlbum().backgroundColor);
+            DrawableCompat.setTint(repeatIcon, s.getAlbum().getBackgroundColor());
             i.setImageDrawable(repeatIcon);
             PlaybackManager.get().setRepeat(true);
         }

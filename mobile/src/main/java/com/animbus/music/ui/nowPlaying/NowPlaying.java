@@ -99,13 +99,13 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     }
 
     private void configureUIColors() {
-        mControlsRoot.setBackgroundColor(mSong.getAlbum().accentColor);
-        mCollapsingToolbar.setContentScrimColor(mSong.getAlbum().accentColor);
-        mCollapsingToolbar.setStatusBarScrimColor(mSong.getAlbum().accentColor);
-        mControls.setUIColors(mSong.getAlbum().accentIconColor,
-                mSong.getAlbum().accentSecondaryIconColor,
-                mSong.getAlbum().accentSecondaryIconColor,
-                mSong.getAlbum().backgroundColor);
+        mControlsRoot.setBackgroundColor(mSong.getAlbum().getAccentColor());
+        mCollapsingToolbar.setContentScrimColor(mSong.getAlbum().getAccentColor());
+        mCollapsingToolbar.setStatusBarScrimColor(mSong.getAlbum().getAccentColor());
+        mControls.setUIColors(mSong.getAlbum().getAccentIconColor(),
+                mSong.getAlbum().getAccentSecondaryIconColor(),
+                mSong.getAlbum().getAccentSecondaryIconColor(),
+                mSong.getAlbum().getBackgroundColor());
     }
 
     private void configureUI() {
@@ -117,7 +117,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-            setTaskDescription(new ActivityManager.TaskDescription(mSong.getSongTitle(), bm, mSong.getAlbum().accentColor));
+            setTaskDescription(new ActivityManager.TaskDescription(mSong.getSongTitle(), bm, mSong.getAlbum().getAccentColor()));
             bm.recycle();
         }
     }
