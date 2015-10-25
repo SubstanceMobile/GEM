@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.album.Album;
 
 public class SquareImageViewWidth_Based extends ImageView {
     public boolean isInEditMode() {

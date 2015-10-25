@@ -22,6 +22,7 @@ import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
 import com.animbus.music.media.MediaData;
+import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.theme.Theme;
@@ -35,8 +36,13 @@ public class LaunchActivity extends ThemableActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_launch);
+        if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+            //Playing from intent
+            PlaybackManager.get().play(
+                    MediaData.get().findSongById(
+                            Long.valueOf(getIntent().getData().getLastPathSegment().substring(6))));
+        }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContexts();
@@ -73,15 +79,15 @@ public class LaunchActivity extends ThemableActivity {
 
     @TargetApi(Build.VERSION_CODES.M)
     private void permissionRationale() {
-            //Permission Denied
-            if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                new AlertDialog.Builder(this).setTitle(R.string.permission_storage_explain_title).setMessage(R.string.permission_storage_explain_message)
-                        .setPositiveButton(android.R.string.ok, null).setCancelable(false).setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        callPermissionRequest();
-                    }
-                }).create().show();
+        //Permission Denied
+        if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            new AlertDialog.Builder(this).setTitle(R.string.permission_storage_explain_title).setMessage(R.string.permission_storage_explain_message)
+                    .setPositiveButton(android.R.string.ok, null).setCancelable(false).setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    callPermissionRequest();
+                }
+            }).create().show();
         }
     }
 

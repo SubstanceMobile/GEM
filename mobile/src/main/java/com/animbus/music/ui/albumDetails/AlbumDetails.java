@@ -33,7 +33,7 @@ import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.adapter.AlbumDetailsAdapter;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
-import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.album.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
 import com.animbus.music.ui.settings.Settings;

@@ -2,7 +2,7 @@
 <layout>
 
     <data class="ItemAlbumGrid">
-        <variable name="album" type="com.animbus.music.media.objects.Album" />
+        <variable name="album" type="com.animbus.music.media.objects.album.Album" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,4 +1,4 @@
-package com.animbus.music.media.objects;
+package com.animbus.music.media.objects.album;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -6,13 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
-import com.animbus.music.media.AlbumArtHelper;
+import com.animbus.music.media.objects.Artist;
+import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
@@ -141,75 +141,6 @@ public class Album {
     public void requestArt(final ImageView imageView) {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         AlbumArtHelper.getPicasso(this).into(imageView);
-    }
-
-    public void loadColor() {
-        AlbumArtHelper.getPicasso(this).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(Palette palette) {
-                        //Gets main swatches
-                        ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
-                        Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
-                            @Override
-                            public int compare(Palette.Swatch a, Palette.Swatch b) {
-                                return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
-                            }
-                        });
-                        Palette.Swatch[] swatches =
-                                new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
-
-                        try {
-                            //Load colors
-                            backgroundColor = swatches[0].getRgb();
-                            titleTextColor = swatches[0].getTitleTextColor();
-                            subtitleTextColor = swatches[0].getBodyTextColor();
-                        } catch (NullPointerException e) {
-                            //Loads default colors
-                            backgroundColor = getContext().getResources().getColor(
-                                    ThemeManager.get().useLightTheme ?
-                                            R.color.primaryGreyLight :
-                                            R.color.primaryGreyDark
-                            );
-                            titleTextColor = getContext().getResources().getColor(
-                                    ThemeManager.get().useLightTheme ?
-                                            R.color.primary_text_default_material_light :
-                                            R.color.primary_text_default_material_dark
-                            );
-                            subtitleTextColor = getContext().getResources().getColor(
-                                    ThemeManager.get().useLightTheme ?
-                                            R.color.secondary_text_default_material_light :
-                                            R.color.secondary_text_default_material_dark
-                            );
-                        }
-
-                        try {
-                            //Load colors
-                            accentColor = swatches[1].getRgb();
-                            accentIconColor = swatches[1].getTitleTextColor();
-                            accentSecondaryIconColor = swatches[1].getBodyTextColor();
-                        } catch (NullPointerException e) {
-                            //Loads default colors
-                            accentColor = Color.WHITE;
-                            accentIconColor = Color.BLACK;
-                            accentSecondaryIconColor = Color.GRAY;
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        });
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

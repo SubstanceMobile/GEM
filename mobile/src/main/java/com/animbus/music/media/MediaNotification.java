@@ -15,7 +15,7 @@ import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.animbus.music.R;
-import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.album.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
 

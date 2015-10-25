@@ -51,7 +51,7 @@ import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
-import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.album.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.Search;
 import com.animbus.music.ui.albumDetails.AlbumDetails;
@@ -61,6 +61,7 @@ import com.animbus.music.ui.settings.chooseIcon.IconManager;
 import com.animbus.music.ui.setup.SetupActivity;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 
 import java.util.List;
 
@@ -513,7 +514,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             return titles.length;
         }
 
-        private void configureRecycler(RecyclerView recycler, int pos) {
+        private void configureRecycler(RecyclerView recycler, RecyclerFastScroller scroller, int pos) {
             switch (pos) {
                 case 0:
                     configureAsAlbums(recycler);
@@ -528,6 +529,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
                     configureAsArtists(recycler);
                     break;
             }
+            scroller.setRecyclerView(recycler);
         }
 
         private void configureAsAlbums(RecyclerView list) {
@@ -562,10 +564,12 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             if (position == 0 || position == 1) {
-                RecyclerView list = new RecyclerView(MainScreen.this);
-                configureRecycler(list, position);
-                container.addView(list, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                return list;
+                View root = getLayoutInflater().inflate(R.layout.main_screen_page, container, false);
+                RecyclerView list = (RecyclerView) root.findViewById(R.id.main_screen_page_recycler);
+                RecyclerFastScroller scroller = (RecyclerFastScroller) root.findViewById(R.id.main_screen_page_scroller);
+                configureRecycler(list, scroller, position);
+                container.addView(root, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                return root;
             } else {
                 TextView text = new TextView(MainScreen.this);
                 text.setSingleLine();

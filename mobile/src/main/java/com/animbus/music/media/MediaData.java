@@ -3,12 +3,12 @@ package com.animbus.music.media;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.util.Log;
 
-import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.album.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.media.objects.album.AlbumColorHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -104,12 +104,13 @@ public class MediaData {
             albumsCursor.moveToFirst();
             do {
                 Album album = new Album();
+
+                album.setContext(context);
+                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
+
                 album.setAlbumTitle(albumsCursor.getString(titleColumn));
                 album.setAlbumArtistName(albumsCursor.getString(artistColumn));
                 album.setId(albumsCursor.getLong(idColumn));
-                album.setContext(context);
-                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
-                album.loadColor();
                 mAlbums.add(album);
             } while (albumsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {

@@ -50,4 +50,5 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile 'com.github.paolorotolo:appintro:3.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.plusCubed:recycler-fast-scroll:0.1.0'
 }

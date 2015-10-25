@@ -1,8 +1,12 @@
 package com.animbus.music.ui.nowPlaying;
 
+import android.app.ActivityManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -26,6 +30,7 @@ import com.animbus.music.data.adapter.NowPlayingAdapter;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.settings.Settings;
+import com.animbus.music.ui.settings.chooseIcon.IconManager;
 import com.animbus.music.ui.theme.Theme;
 
 import java.util.List;
@@ -46,7 +51,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
         mSong = PlaybackManager.get().getCurrentSong();
     }
 
-    private void configureTransition(){
+    private void configureTransition() {
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_recycler), "list");
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_controls_root), "controls");
@@ -54,7 +59,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_toolbar_text_protection), "appbar_text_protection");
     }
 
-  @Override
+    @Override
     protected void setVariables() {
         mToolbar = (Toolbar) findViewById(R.id.now_playing_toolbar);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.now_playing_collapsing_toolbar);
@@ -101,16 +106,23 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
                 mSong.getAlbum().accentSecondaryIconColor,
                 mSong.getAlbum().accentSecondaryIconColor,
                 mSong.getAlbum().backgroundColor);
-
     }
 
     private void configureUI() {
         ImageView mImage = (ImageView) findViewById(R.id.now_playing_album_art);
         mSong.getAlbum().requestArt(mImage);
         configureUIColors();
+
+        //Sets Window description in Multitasking menu
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            IconManager iconM = IconManager.get().setContext(this);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+            setTaskDescription(new ActivityManager.TaskDescription(mSong.getSongTitle(), bm, mSong.getAlbum().accentColor));
+            bm.recycle();
+        }
     }
 
-    private void configureControls(){
+    private void configureControls() {
         mControls.initView();
         mControls.setController(PlaybackManager.get().getService().getSession().getController());
     }
