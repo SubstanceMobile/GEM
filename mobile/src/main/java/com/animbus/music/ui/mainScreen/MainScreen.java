@@ -51,7 +51,7 @@ import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
-import com.animbus.music.media.objects.album.Album;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.Search;
 import com.animbus.music.ui.albumDetails.AlbumDetails;

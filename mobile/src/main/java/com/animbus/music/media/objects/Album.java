@@ -1,4 +1,4 @@
-package com.animbus.music.media.objects.album;
+package com.animbus.music.media.objects;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.widget.ImageView;
@@ -87,19 +88,15 @@ public class Album {
 
     public void setAlbumArtPath(String albumArtPath) {
         if (albumArtPath != null) {
+            defaultArt = false;
+            colorAnimated = false;
             this.albumArtPath = "file://" + albumArtPath;
         } else {
-            this.albumArtPath = "default";
+            defaultArt = true;
+            colorAnimated = true;
+            this.albumArtPath = "android.resource://com.animbus.music/" + (!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         }
-
-        if (!AlbumArtHelper.isPicassoSet()) {
-            Picasso.Builder builder = new Picasso.Builder(getContext());
-            ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
-            builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 7));
-            builder.loggingEnabled(false);
-
-            AlbumArtHelper.setPicasso(builder.build());
-        }
+        prepareColors();
     }
 
     public String getAlbumArtPath() {
@@ -111,7 +108,7 @@ public class Album {
     }
 
     public void requestArt(final ArtRequest request) {
-        AlbumArtHelper.getPicasso(this).into(new Target() {
+        Picasso.with(getContext()).load(getAlbumArtPath()).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 request.respond(bitmap);
@@ -133,7 +130,7 @@ public class Album {
 
     public void requestArt(final ImageView imageView) {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        AlbumArtHelper.getPicasso(this).into(imageView);
+        Picasso.with(getContext()).load(getAlbumArtPath()).into(imageView);
     }
 
     ///////////////////////////////////////////////////////////////////////////

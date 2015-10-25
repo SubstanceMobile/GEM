@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.databinding.ItemAlbumGrid;
-import com.animbus.music.media.objects.album.Album;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.theme.ThemeManager;
 
 import java.util.Collections;

@@ -2,6 +2,8 @@ package com.animbus.music.ui;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +29,8 @@ import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.squareup.picasso.LruCache;
+import com.squareup.picasso.Picasso;
 
 public class LaunchActivity extends ThemableActivity {
     Toolbar toolbar;
@@ -124,6 +128,17 @@ public class LaunchActivity extends ThemableActivity {
 
             //Notifies app that it has activated
             VariablesSingleton.get().activated = true;
+
+            try {
+                Picasso.Builder builder = new Picasso.Builder(this);
+                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 5));
+                builder.loggingEnabled(false);
+                builder.indicatorsEnabled(false);
+                Picasso.setSingletonInstance(builder.build());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

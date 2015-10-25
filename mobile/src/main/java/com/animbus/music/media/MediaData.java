@@ -7,7 +7,7 @@ import android.provider.MediaStore;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.objects.album.Album;
+import com.animbus.music.media.objects.Album;
 
 import java.util.ArrayList;
 import java.util.Collections;
