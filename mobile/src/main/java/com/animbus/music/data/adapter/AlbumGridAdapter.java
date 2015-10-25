@@ -88,6 +88,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                         .start();
             } else holder.item.AlbumGridItemRootView.setAlpha(1.0f);
 
+            album.prepareColors();
             if (!album.colorAnimated) {
                 setDefaultBackColors(holder);
                 Random colorDelayRandom = new Random();

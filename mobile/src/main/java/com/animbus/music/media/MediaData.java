@@ -104,13 +104,14 @@ public class MediaData {
             do {
                 Album album = new Album();
 
+                album.setId(albumsCursor.getLong(idColumn));
                 album.setContext(context);
-                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
-                album.prepareColors();
 
                 album.setAlbumTitle(albumsCursor.getString(titleColumn));
                 album.setAlbumArtistName(albumsCursor.getString(artistColumn));
-                album.setId(albumsCursor.getLong(idColumn));
+
+                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
+
                 mAlbums.add(album);
             } while (albumsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {

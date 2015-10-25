@@ -142,13 +142,15 @@ public class Album {
 
     public boolean colorAnimated = false;
 
-    private Palette.Swatch[] swatches;
+    private Palette.Swatch[] swatches = null;
 
     public void prepareColors() {
-        AlbumArtHelper.getPicasso(this).into(new Target() {
+        Log.d("Album ID:" + getId(), "Preparing Colors");
+        requestArt(new ArtRequest() {
             @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            public void respond(Bitmap albumArt) {
+                Log.d("Album ID:" + getId(), "Fetched Art for Color Extraction");
+                Palette.from(albumArt).generate(new Palette.PaletteAsyncListener() {
                     @Override
                     public void onGenerated(Palette palette) {
                         if (!defaultArt && SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
@@ -161,19 +163,12 @@ public class Album {
                                 }
                             });
                             swatches = new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
+                            Log.d("Album ID:" + getId(), "Prepared Colors");
+                        } else {
+                            Log.d("Album ID:" + getId(), "Extraction Disabled");
                         }
                     }
                 });
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
             }
         });
     }
@@ -181,7 +176,7 @@ public class Album {
     public int getBackgroundColor() {
         try {
             return swatches[0].getRgb();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return getContext().getResources().getColor(
                     ThemeManager.get().useLightTheme ?
                             R.color.primaryGreyLight :
@@ -193,7 +188,7 @@ public class Album {
     public int getTitleTextColor() {
         try {
             return swatches[0].getTitleTextColor();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return getContext().getResources().getColor(
                     ThemeManager.get().useLightTheme ?
                             R.color.primary_text_default_material_light :
@@ -205,7 +200,7 @@ public class Album {
     public int getSubtitleTextColor() {
         try {
             return swatches[0].getBodyTextColor();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return getContext().getResources().getColor(
                     ThemeManager.get().useLightTheme ?
                             R.color.secondary_text_default_material_light :
@@ -217,7 +212,7 @@ public class Album {
     public int getAccentColor() {
         try {
             return swatches[1].getRgb();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return Color.WHITE;
         }
     }
@@ -225,7 +220,7 @@ public class Album {
     public int getAccentIconColor() {
         try {
             return swatches[1].getTitleTextColor();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return Color.BLACK;
         }
     }
@@ -233,7 +228,7 @@ public class Album {
     public int getAccentSecondaryIconColor() {
         try {
             return swatches[1].getBodyTextColor();
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return Color.GRAY;
         }
     }
