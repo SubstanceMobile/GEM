@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -48,6 +49,9 @@ import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
 import com.animbus.music.data.adapter.AlbumGridAdapter;
 import com.animbus.music.data.adapter.SongListAdapter;
+import com.animbus.music.data.list.ListAdapter;
+import com.animbus.music.data.list.ListAdapter.AlbumListener;
+import com.animbus.music.data.list.ListAdapter.SongListener;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
@@ -62,7 +66,9 @@ import com.animbus.music.ui.setup.SetupActivity;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
+import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -144,7 +150,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             ColorStateList state = new ColorStateList(new int[][]{
                     {android.R.attr.state_selected}, //When selected
                     {}
-            }, new int[] {
+            }, new int[]{
                     getThemeAccentColor(),
                     ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark)
             });
@@ -177,7 +183,8 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             try {
                 setUpNowPlayingBarWithSong(PlaybackManager.get().getCurrentSong());
                 setUpNowPlayingBarWithState(ServiceHelper.get(this).getService().getStateObj());
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
         PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
             @Override
@@ -213,41 +220,41 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     }
 
     private void setUpNowPlayingBarWithState(PlaybackStateCompat state) {
-     if (state.getState() == PlaybackStateCompat.STATE_STOPPED || state.getState() == PlaybackStateCompat.STATE_NONE) {
-         if (quickToolbar.getVisibility() != View.GONE) {
-             quickToolbar.setTranslationY(0f);
-             quickToolbar.animate().translationY(200f).setInterpolator(new FastOutSlowInInterpolator ())
-                     .setListener(new Animator.AnimatorListener() {
-                         @Override
-                         public void onAnimationStart(Animator animation) {
+        if (state.getState() == PlaybackStateCompat.STATE_STOPPED || state.getState() == PlaybackStateCompat.STATE_NONE) {
+            if (quickToolbar.getVisibility() != View.GONE) {
+                quickToolbar.setTranslationY(0f);
+                quickToolbar.animate().translationY(200f).setInterpolator(new FastOutSlowInInterpolator())
+                        .setListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
 
-                         }
+                            }
 
-                         @Override
-                         public void onAnimationEnd(Animator animation) {
-                             quickToolbar.setVisibility(View.GONE);
-                         }
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                quickToolbar.setVisibility(View.GONE);
+                            }
 
-                         @Override
-                         public void onAnimationCancel(Animator animation) {
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
 
-                         }
+                            }
 
-                         @Override
-                         public void onAnimationRepeat(Animator animation) {
+                            @Override
+                            public void onAnimationRepeat(Animator animation) {
 
-                         }
-                     }).start();
-         }
-     } else {
-         if (quickToolbar.getVisibility() != View.VISIBLE) {
-             quickToolbar.setTranslationY(200f);
-             quickToolbar.setVisibility(View.VISIBLE);
-             quickToolbar.animate().translationY(0f).setInterpolator(new FastOutSlowInInterpolator()).start();
-         }
-         //For inconsistency sake
-         quickToolbar.setVisibility(View.VISIBLE);
-     }
+                            }
+                        }).start();
+            }
+        } else {
+            if (quickToolbar.getVisibility() != View.VISIBLE) {
+                quickToolbar.setTranslationY(200f);
+                quickToolbar.setVisibility(View.VISIBLE);
+                quickToolbar.animate().translationY(0f).setInterpolator(new FastOutSlowInInterpolator()).start();
+            }
+            //For inconsistency sake
+            quickToolbar.setVisibility(View.VISIBLE);
+        }
         final MediaControllerCompat.TransportControls controls = ServiceHelper.get(this).getService().getSession().getController().getTransportControls();
         ImageButton button = (ImageButton) findViewById(R.id.main_screen_now_playing_toolbar_playpause);
         boolean isPaused = state.getState() == PlaybackStateCompat.STATE_PAUSED;
@@ -501,7 +508,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         drawerLayout.closeDrawers();
     }
 
-    class RecyclerPagerAdapter extends PagerAdapter implements AlbumGridAdapter.AlbumArtGridClickListener, SongListAdapter.SongListItemClickListener {
+    class RecyclerPagerAdapter extends PagerAdapter implements AlbumGridAdapter.AlbumArtGridClickListener {
         private String[] titles = new String[]{
                 getResources().getString(R.string.page_albums),
                 getResources().getString(R.string.page_songs),
@@ -530,6 +537,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
                     break;
             }
             scroller.setRecyclerView(recycler);
+            scroller.setTouchTargetWidth(RecyclerFastScrollerUtils.convertDpToPx(MainScreen.this, 16));
         }
 
         private void configureAsAlbums(RecyclerView list) {
@@ -538,16 +546,25 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             list.setAdapter(adapter);
             list.setItemAnimator(new DefaultItemAnimator());
             Configuration config = MainScreen.this.getResources().getConfiguration();
-            if (config.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (config.orientation == Configuration.ORIENTATION_PORTRAIT)
                 list.setLayoutManager(new GridLayoutManager(MainScreen.this, 2, GridLayoutManager.VERTICAL, false));
-            } else if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            else
                 list.setLayoutManager(new GridLayoutManager(MainScreen.this, 3, GridLayoutManager.VERTICAL, false));
-            }
         }
 
         private void configureAsSongs(RecyclerView list) {
-            SongListAdapter adapter = new SongListAdapter(MainScreen.this, MediaData.get().getSongs());
-            adapter.setOnItemClickedListener(this);
+            ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_SONG, MediaData.get().getSongs(), MainScreen.this);
+            adapter.setListener(new SongListener() {
+                @Override
+                public void onClick(Song object, List<Song> data, int pos) {
+                    PlaybackManager.get().play(data, pos);
+                }
+
+                @Override
+                public boolean onLongClick(Song object, List<Song> data, int pos) {
+                    return false;
+                }
+            });
             list.setAdapter(adapter);
             list.setItemAnimator(new DefaultItemAnimator());
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
@@ -606,11 +623,6 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         public void AlbumGridItemLongClicked(View view, Album album) {
             Snackbar.make(MainScreen.this.findViewById(R.id.MainView), R.string.playing_album, Snackbar.LENGTH_SHORT).show();
             PlaybackManager.get().play(album.getSongs(), 0);
-        }
-
-        @Override
-        public void SongListItemClicked(int position, List<Song> data) {
-            PlaybackManager.get().play(data, position);
         }
     }
 }

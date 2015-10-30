@@ -54,7 +54,7 @@
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/listViewSizeBig"
+                android:layout_height="@dimen/nowplaying_toolbarSize"
                 android:background="?attr/primaryAlternateColor"
                 android:visibility="visible"
                 android:id="@+id/main_screen_now_playing_toolbar"
@@ -119,8 +119,8 @@
                         </LinearLayout>
 
                         <FrameLayout
-                            android:layout_width="@dimen/listViewSizeBig"
-                            android:layout_height="@dimen/listViewSizeBig"
+                            android:layout_width="@dimen/nowplaying_toolbarSize"
+                            android:layout_height="@dimen/nowplaying_toolbarSize"
                             android:padding="@dimen/margin_small" >
 
                             <ImageButton
@@ -129,7 +129,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:background="?attr/ripple_circle_alt_color"
-                                android:padding="20dp"
+                                android:padding="@dimen/margin_medium"
                                 android:src="@drawable/ic_play_arrow_black_48dp"
                                 android:tint="?attr/secondaryAlternateTextColor"
                                 android:cropToPadding="true"

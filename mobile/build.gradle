@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.animbus.music"
         targetSdkVersion 23
-        versionName '0.1.1'
+        versionName '0.2.0'
         versionCode 10
         signingConfig signingConfigs.config
         minSdkVersion 17
@@ -26,14 +26,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
             proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            minifyEnabled true
         }
         internal {
             signingConfig signingConfigs.config
             proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            minifyEnabled true
+            versionNameSuffix ' Internal'
         }
         debug {
             signingConfig signingConfigs.config
             proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            versionNameSuffix ' Debug'
         }
     }
     productFlavors {
@@ -50,5 +54,5 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile 'com.github.paolorotolo:appintro:3.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.plusCubed:recycler-fast-scroll:0.1.0'
+    compile 'com.github.plusCubed:recycler-fast-scroll:0.2.0'
 }

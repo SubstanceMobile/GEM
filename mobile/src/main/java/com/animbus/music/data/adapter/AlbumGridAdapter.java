@@ -88,11 +88,9 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
                         .start();
             } else holder.item.AlbumGridItemRootView.setAlpha(1.0f);
 
-            album.prepareColors();
+            if (!album.colorAnimated) setDefaultBackColors(holder);
             if (!album.colorAnimated) {
-                setDefaultBackColors(holder);
                 Random colorDelayRandom = new Random();
-                int MAX = COLOR_DELAY_MAX * position;
                 int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
                 ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
                 backgroundAnimator = ObjectAnimator.ofObject(holder.item.AlbumInfoToolbar, "backgroundColor", new ArgbEvaluator(),
@@ -160,7 +158,7 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
         public ItemAlbumGrid item;
 
         public AlbumGridViewHolder(ItemAlbumGrid item) {
-            super(item.AlbumGridItemRootView);
+            super(item.getRoot());
             this.item = item;
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

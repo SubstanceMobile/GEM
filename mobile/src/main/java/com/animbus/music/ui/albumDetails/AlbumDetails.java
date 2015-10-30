@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 import com.animbus.music.R;
 import com.animbus.music.customImpls.ThemableActivity;
-import com.animbus.music.data.adapter.AlbumDetailsAdapter;
+import com.animbus.music.data.list.ListAdapter;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Album;
@@ -88,12 +88,17 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void configureRecyclerView() {
-        AlbumDetailsAdapter adapter = new AlbumDetailsAdapter(this, mAlbum.getSongs());
+        ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this);
         mList.setAdapter(adapter);
-        adapter.setOnItemClickedListener(new AlbumDetailsAdapter.AlbumDetailsClickListener() {
+        adapter.setListener(new ListAdapter.SongListener() {
             @Override
-            public void onAlbumDetailsItemClicked(View v, List<Song> data, int pos) {
+            public void onClick(Song object, List<Song> data, int pos) {
                 PlaybackManager.get().play(data, pos);
+            }
+
+            @Override
+            public boolean onLongClick(Song object, List<Song> data, int pos) {
+                return false;
             }
         });
         mList.setItemAnimator(new DefaultItemAnimator());

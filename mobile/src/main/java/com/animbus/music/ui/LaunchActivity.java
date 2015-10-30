@@ -115,6 +115,18 @@ public class LaunchActivity extends ThemableActivity {
 
     private void setContexts() {
         if (!VariablesSingleton.get().activated) {
+
+            try {
+                Picasso.Builder builder = new Picasso.Builder(this);
+                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 5));
+                builder.loggingEnabled(false);
+                builder.indicatorsEnabled(false);
+                Picasso.setSingletonInstance(builder.build());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             //Sets Contexts
             SettingsManager.get().setContext(this);
             ThemeManager.get().setContext(this);
@@ -128,17 +140,6 @@ public class LaunchActivity extends ThemableActivity {
 
             //Notifies app that it has activated
             VariablesSingleton.get().activated = true;
-
-            try {
-                Picasso.Builder builder = new Picasso.Builder(this);
-                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 5));
-                builder.loggingEnabled(false);
-                builder.indicatorsEnabled(false);
-                Picasso.setSingletonInstance(builder.build());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
