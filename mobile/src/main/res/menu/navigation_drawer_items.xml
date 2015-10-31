@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--TODO:Use Resorce-->
     <group
         android:id="@+id/navdrawer_main_category"
         android:checkableBehavior="single">
@@ -23,12 +22,15 @@
     </group>
 
     <group
-        android:id="@+id/navdrawer_other_category"
-        android:checkableBehavior="none">
+        android:id="@+id/navdrawer_other_category" >
         <item
             android:id="@+id/navdrawer_settings"
             android:icon="@drawable/ic_settings_24dp"
             android:title="@string/action_settings"/>
+        <item
+            android:id="@+id/navdrawer_report_bug"
+            android:icon="@drawable/ic_bug_report_24dp"
+            android:title="@string/action_bug_report"/>
     </group>
 
 </menu>

@@ -2,7 +2,7 @@
 <layout>
 
     <data class="ItemAlbumGrid">
-        <variable name="album" type="com.animbus.music.media.objects.album.Album" />
+        <variable name="album" type="com.animbus.music.media.objects.Album" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_micro"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/AlbumArtGridItemLayoutContainer"

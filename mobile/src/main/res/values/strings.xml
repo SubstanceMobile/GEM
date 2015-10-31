@@ -24,6 +24,7 @@
     <string name="action_donate">Donate</string>
     <string name="action_favorite">Favorite</string>
     <string name="action_unfavorite">Unfavorite</string>
+    <string name="action_bug_report">Report a bug</string>
 
     Navigation Drawer
     <string name="page_home">Home</string>
@@ -74,8 +75,6 @@
     <string name="settings_tap_to_view_code">Tap to view the source code of this app</string>
     <string name="settings_about_version">Version</string>
     <string name="settings_about_version_build">Build</string>
-    <string name="settings_about_version_type_internal">Internal</string>
-    <string name="settings_about_version_type_debug">Debug</string>
 
     <string name="settings_choose_icon_srini">Srini Kumar</string>
     <string name="settings_choose_icon_alex">Alex Mueller</string>

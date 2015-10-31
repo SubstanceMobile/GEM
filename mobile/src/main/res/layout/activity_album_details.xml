@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed" >
 
             <com.animbus.music.customImpls.SquareImageViewWidth_Based
                 android:id="@+id/album_details_album_art"

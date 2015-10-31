@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.animbus.music"
         targetSdkVersion 23
-        versionName '0.1.1'
+        versionName '0.2.0'
         versionCode 10
         signingConfig signingConfigs.config
         minSdkVersion 17
@@ -26,14 +26,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
             proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            minifyEnabled true
         }
         internal {
             signingConfig signingConfigs.config
             proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            minifyEnabled true
+            versionNameSuffix ' Internal'
         }
         debug {
             signingConfig signingConfigs.config
             proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            versionNameSuffix ' Debug'
         }
     }
     productFlavors {
@@ -43,12 +47,19 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    //Support and material design
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:support-v4:23.1.0'
-    compile 'com.android.support:palette-v7:23.1.0'
     compile 'com.android.support:recyclerview-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
-    compile 'com.github.paolorotolo:appintro:3.1.0'
+    //Images and colors
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.plusCubed:recycler-fast-scroll:0.1.0'
+    compile 'com.android.support:palette-v7:23.1.0'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    //Extras
+    compile 'com.github.paolorotolo:gitty_reporter:1.2.2'
+    compile 'com.github.paolorotolo:appintro:3.1.0'
+    compile 'com.github.plusCubed:recycler-fast-scroll:0.2.0'
+    compile 'com.github.afollestad.material-dialogs:core:0.8.5.0'
+    compile 'com.github.afollestad.material-dialogs:commons:0.8.5.0'
 }

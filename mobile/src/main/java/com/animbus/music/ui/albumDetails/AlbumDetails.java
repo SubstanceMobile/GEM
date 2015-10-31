@@ -30,10 +30,10 @@ import android.widget.TextView;
 
 import com.animbus.music.R;
 import com.animbus.music.customImpls.ThemableActivity;
-import com.animbus.music.data.adapter.AlbumDetailsAdapter;
-import com.animbus.music.media.MediaData;
+import com.animbus.music.data.list.ListAdapter;
+import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackManager;
-import com.animbus.music.media.objects.album.Album;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
 import com.animbus.music.ui.settings.Settings;
@@ -55,7 +55,7 @@ public class AlbumDetails extends ThemableActivity {
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_album_details);
         configureTransition();
-        mAlbum = MediaData.get().findAlbumById(getIntent().getLongExtra("album_id", -1));
+        mAlbum = Library.get().findAlbumById(getIntent().getLongExtra("album_id", -1));
     }
 
     private void configureTransition() {
@@ -88,12 +88,17 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void configureRecyclerView() {
-        AlbumDetailsAdapter adapter = new AlbumDetailsAdapter(this, mAlbum.getSongs());
+        ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this);
         mList.setAdapter(adapter);
-        adapter.setOnItemClickedListener(new AlbumDetailsAdapter.AlbumDetailsClickListener() {
+        adapter.setListener(new ListAdapter.SongListener() {
             @Override
-            public void onAlbumDetailsItemClicked(View v, List<Song> data, int pos) {
+            public void onClick(Song object, List<Song> data, int pos) {
                 PlaybackManager.get().play(data, pos);
+            }
+
+            @Override
+            public boolean onLongClick(Song object, List<Song> data, int pos) {
+                return false;
             }
         });
         mList.setItemAnimator(new DefaultItemAnimator());
@@ -114,19 +119,19 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void configureUIColors() {
-        FabHelper.setFabBackground(mFAB, mAlbum.accentColor);
-        FabHelper.setFabTintedIcon(mFAB, getResources().getDrawable(R.drawable.ic_play_arrow_black_48dp), mAlbum.accentIconColor);
-        mDetailsRoot.setBackgroundColor(mAlbum.backgroundColor);
-        mTitle.setTextColor(mAlbum.titleTextColor);
-        mArtist.setTextColor(mAlbum.subtitleTextColor);
-        mCollapsingToolbar.setContentScrimColor(mAlbum.backgroundColor);
-        mCollapsingToolbar.setStatusBarScrimColor(mAlbum.backgroundColor);
+        FabHelper.setFabBackground(mFAB, mAlbum.getAccentColor());
+        FabHelper.setFabTintedIcon(mFAB, getResources().getDrawable(R.drawable.ic_play_arrow_black_48dp), mAlbum.getAccentIconColor());
+        mDetailsRoot.setBackgroundColor(mAlbum.getBackgroundColor());
+        mTitle.setTextColor(mAlbum.getTitleTextColor());
+        mArtist.setTextColor(mAlbum.getSubtitleTextColor());
+        mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
+        mCollapsingToolbar.setStatusBarScrimColor(mAlbum.getBackgroundColor());
 
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.backgroundColor));
+            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.getBackgroundColor()));
             bm.recycle();
         }
     }
@@ -175,7 +180,7 @@ public class AlbumDetails extends ThemableActivity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Circular reveal
-                overlay.setBackgroundColor(mAlbum.accentColor);
+                overlay.setBackgroundColor(mAlbum.getAccentColor());
                 overlay.setAlpha(1f);
                 ViewCompat.setElevation(mFAB, 0f);
                 Animator reveal = FabHelper.getRevealAnim(mFAB, overlay);

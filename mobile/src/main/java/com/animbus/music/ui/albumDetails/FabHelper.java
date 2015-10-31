@@ -2,6 +2,7 @@ package com.animbus.music.ui.albumDetails;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.res.ColorStateList;
 import android.graphics.Path;

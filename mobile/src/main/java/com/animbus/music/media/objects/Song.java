@@ -9,8 +9,6 @@ import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat.QueueItem;
 
-import com.animbus.music.media.objects.album.Album;
-
 /**
  * Created by Adrian on 7/5/2015.
  */

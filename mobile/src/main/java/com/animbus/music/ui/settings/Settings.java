@@ -108,17 +108,7 @@ public class Settings extends ThemableActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ViewCompat.setElevation(findViewById(R.id.settings_app_bar_layout), 0.0f);
-
-        //Version Number
-        String type;
-        if (BuildConfig.BUILD_TYPE.equals("internal")) {
-            type = getResources().getString(R.string.settings_about_version_type_internal);
-        } else if (BuildConfig.BUILD_TYPE.equals("debug")) {
-            type = getResources().getString(R.string.settings_about_version_type_debug);
-        } else {
-            type = "";
-        }
-        versionTextView.setText(BuildConfig.VERSION_NAME + " " + type);
+        versionTextView.setText(BuildConfig.VERSION_NAME);
 
 
         //Sets Window description in Multitasking menu

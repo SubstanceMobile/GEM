@@ -2,8 +2,6 @@ package com.animbus.music.media.objects;
 
 import android.graphics.Bitmap;
 
-import com.animbus.music.media.objects.album.Album;
-
 import java.util.List;
 
 /**

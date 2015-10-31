@@ -233,14 +233,6 @@ package="com.animbus.music" >
         android:name=".ui.settings.AlbumColor"
         android:label="@string/title_activity_album_color" />
     <activity
-        android:name=".ui.Search"
-        android:label="@string/title_activity_search"
-        android:parentActivityName=".ui.mainScreen.MainScreen" >
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.animbus.music.ui.mainScreen.MainScreen" />
-    </activity>
-    <activity
         android:name=".UiTweaker"
         android:label="@string/title_activity_ui_customiser" />
     <activity
@@ -252,6 +244,9 @@ package="com.animbus.music" >
         android:label="@string/title_activity_now_playing"
         android:theme="@style/AppTheme.Light"
         android:launchMode="singleTop" />
+
+    <activity android:name=".ui.IssueReportingActivity"
+        android:theme="@style/GittyReporter"/>
 
     <!-- Media button receiver -->
 

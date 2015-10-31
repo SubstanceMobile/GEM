@@ -15,7 +15,6 @@ import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
-import android.view.KeyEvent;
 
 import com.animbus.music.media.objects.Song;
 
@@ -202,7 +201,7 @@ public class MediaService extends Service implements PlaybackManager.OnChangedLi
         @Override
         public void onSkipToQueueItem(long id) {
             super.onSkipToQueueItem(id);
-            mPlayback.play(MediaData.get().findSongById(id));
+            mPlayback.play(Library.get().findSongById(id));
             setState(STATE_SKIPPING_TO_QUEUE_ITEM);
         }
 

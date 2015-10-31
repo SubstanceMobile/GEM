@@ -1,4 +1,4 @@
-package com.animbus.music.media.objects.album;
+package com.animbus.music.media.objects;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -6,11 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
+import com.animbus.music.SettingsManager;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.theme.ThemeManager;
@@ -36,15 +38,7 @@ public class Album {
 
     public long id;
 
-    public boolean colorAnimated = false;
     public boolean animated;
-    public int backgroundColor;
-    public int titleTextColor;
-    public int subtitleTextColor;
-    public int accentColor;
-    public int accentIconColor;
-    public int accentSecondaryIconColor;
-    public boolean colorsLoaded;
     public Context cxt;
 
     public Album() {
@@ -94,19 +88,15 @@ public class Album {
 
     public void setAlbumArtPath(String albumArtPath) {
         if (albumArtPath != null) {
+            defaultArt = false;
+            colorAnimated = false;
             this.albumArtPath = "file://" + albumArtPath;
         } else {
-            this.albumArtPath = "default";
+            defaultArt = true;
+            colorAnimated = true;
+            this.albumArtPath = "android.resource://com.animbus.music/" + (!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         }
-
-        if (!AlbumArtHelper.isPicassoSet()) {
-            Picasso.Builder builder = new Picasso.Builder(getContext());
-            ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
-            builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 7));
-            builder.loggingEnabled(false);
-
-            AlbumArtHelper.setPicasso(builder.build());
-        }
+        prepareColors();
     }
 
     public String getAlbumArtPath() {
@@ -118,7 +108,7 @@ public class Album {
     }
 
     public void requestArt(final ArtRequest request) {
-        AlbumArtHelper.getPicasso(this).into(new Target() {
+        Picasso.with(getContext()).load(getAlbumArtPath()).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 request.respond(bitmap);
@@ -140,7 +130,104 @@ public class Album {
 
     public void requestArt(final ImageView imageView) {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        AlbumArtHelper.getPicasso(this).into(imageView);
+        Picasso.with(getContext()).load(getAlbumArtPath()).into(imageView);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Colors
+    ///////////////////////////////////////////////////////////////////////////
+
+    public boolean colorAnimated = false;
+
+    private Palette.Swatch[] swatches = null;
+
+    public void prepareColors() {
+        Log.d("Album ID:" + getId(), "Preparing Colors");
+        requestArt(new ArtRequest() {
+            @Override
+            public void respond(Bitmap albumArt) {
+                Log.d("Album ID:" + getId(), "Fetched Art for Color Extraction");
+                Palette.from(albumArt).generate(new Palette.PaletteAsyncListener() {
+                    @Override
+                    public void onGenerated(Palette palette) {
+                        if (!defaultArt && SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
+                            //Gets main swatches
+                            ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
+                            Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
+                                @Override
+                                public int compare(Palette.Swatch a, Palette.Swatch b) {
+                                    return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
+                                }
+                            });
+                            swatches = new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
+                            Log.d("Album ID:" + getId(), "Prepared Colors");
+                        } else {
+                            Log.d("Album ID:" + getId(), "Extraction Disabled");
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    public int getBackgroundColor() {
+        try {
+            return swatches[0].getRgb();
+        } catch (NullPointerException e) {
+            return getContext().getResources().getColor(
+                    ThemeManager.get().useLightTheme ?
+                            R.color.primaryGreyLight :
+                            R.color.primaryGreyDark
+            );
+        }
+    }
+
+    public int getTitleTextColor() {
+        try {
+            return swatches[0].getTitleTextColor();
+        } catch (NullPointerException e) {
+            return getContext().getResources().getColor(
+                    ThemeManager.get().useLightTheme ?
+                            R.color.primary_text_default_material_light :
+                            R.color.primary_text_default_material_dark
+            );
+        }
+    }
+
+    public int getSubtitleTextColor() {
+        try {
+            return swatches[0].getBodyTextColor();
+        } catch (NullPointerException e) {
+            return getContext().getResources().getColor(
+                    ThemeManager.get().useLightTheme ?
+                            R.color.secondary_text_default_material_light :
+                            R.color.secondary_text_default_material_dark
+            );
+        }
+    }
+
+    public int getAccentColor() {
+        try {
+            return swatches[1].getRgb();
+        } catch (NullPointerException e) {
+            return Color.WHITE;
+        }
+    }
+
+    public int getAccentIconColor() {
+        try {
+            return swatches[1].getTitleTextColor();
+        } catch (NullPointerException e) {
+            return Color.BLACK;
+        }
+    }
+
+    public int getAccentSecondaryIconColor() {
+        try {
+            return swatches[1].getBodyTextColor();
+        } catch (NullPointerException e) {
+            return Color.GRAY;
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

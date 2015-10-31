@@ -4,18 +4,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
-import com.animbus.music.media.objects.album.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.objects.album.AlbumColorHelper;
+import com.animbus.music.media.objects.Album;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MediaData {
-    public static final MediaData instance = new MediaData();
+public class Library {
+    public static final Library instance = new Library();
     public Context context;
     private List<Song> mSongs = new ArrayList<>();
     private List<Album> mAlbums = new ArrayList<>();
@@ -24,16 +23,16 @@ public class MediaData {
 
     private boolean mBuilt = false;
 
-    private MediaData() {
+    private Library() {
 
     }
 
-    public static MediaData get(Context cxt) {
+    public static Library get(Context cxt) {
         instance.context = cxt;
         return instance;
     }
 
-    public static MediaData get() {
+    public static Library get() {
         return instance;
     }
 
@@ -105,12 +104,14 @@ public class MediaData {
             do {
                 Album album = new Album();
 
+                album.setId(albumsCursor.getLong(idColumn));
                 album.setContext(context);
-                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
 
                 album.setAlbumTitle(albumsCursor.getString(titleColumn));
                 album.setAlbumArtistName(albumsCursor.getString(artistColumn));
-                album.setId(albumsCursor.getLong(idColumn));
+
+                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
+
                 mAlbums.add(album);
             } while (albumsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {
@@ -148,12 +149,12 @@ public class MediaData {
     // Getters
     ///////////////////////////////////////////////////////////////////////////
 
-    public List<Song> getSongs() {
-        return mSongs;
+    public static List<Song> getSongs() {
+        return instance.mSongs;
     }
 
-    public List<Album> getAlbums() {
-        return mAlbums;
+    public static List<Album> getAlbums() {
+        return instance.mAlbums;
     }
 
     public List<Playlist> getPlaylists() {

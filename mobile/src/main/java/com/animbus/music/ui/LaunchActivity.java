@@ -2,6 +2,8 @@ package com.animbus.music.ui;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,12 +23,14 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
-import com.animbus.music.media.MediaData;
+import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.squareup.picasso.LruCache;
+import com.squareup.picasso.Picasso;
 
 public class LaunchActivity extends ThemableActivity {
     Toolbar toolbar;
@@ -39,7 +43,7 @@ public class LaunchActivity extends ThemableActivity {
         if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
             //Playing from intent
             PlaybackManager.get().play(
-                    MediaData.get().findSongById(
+                    Library.get().findSongById(
                             Long.valueOf(getIntent().getData().getLastPathSegment().substring(6))));
         }
     }
@@ -111,13 +115,25 @@ public class LaunchActivity extends ThemableActivity {
 
     private void setContexts() {
         if (!VariablesSingleton.get().activated) {
+
+            try {
+                Picasso.Builder builder = new Picasso.Builder(this);
+                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 5));
+                builder.loggingEnabled(false);
+                builder.indicatorsEnabled(false);
+                Picasso.setSingletonInstance(builder.build());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             //Sets Contexts
             SettingsManager.get().setContext(this);
             ThemeManager.get().setContext(this);
 
             //Loads Songs
-            MediaData.get(this);
-            if (!MediaData.get().isBuilt()) MediaData.get().build();
+            Library.get(this);
+            if (!Library.get().isBuilt()) Library.get().build();
 
             //Starts Music Service
             ServiceHelper.get(this).initService();
