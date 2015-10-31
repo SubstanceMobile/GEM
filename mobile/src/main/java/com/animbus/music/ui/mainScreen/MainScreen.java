@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -44,13 +43,12 @@ import android.widget.Toast;
 
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
+import com.animbus.music.customImpls.IssueReportingActivity;
 import com.animbus.music.customImpls.LockableViewPager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
 import com.animbus.music.data.adapter.AlbumGridAdapter;
-import com.animbus.music.data.adapter.SongListAdapter;
 import com.animbus.music.data.list.ListAdapter;
-import com.animbus.music.data.list.ListAdapter.AlbumListener;
 import com.animbus.music.data.list.ListAdapter.SongListener;
 import com.animbus.music.media.MediaData;
 import com.animbus.music.media.PlaybackManager;
@@ -68,7 +66,6 @@ import com.animbus.music.ui.theme.ThemeManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -442,6 +439,9 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
                 break;
             case R.id.navdrawer_settings:
                 startActivity(new Intent(this, Settings.class));
+                break;
+            case R.id.navdrawer_report_bug:
+                startActivity(new Intent(this, IssueReportingActivity.class));
                 break;
         }
         menuItem.setChecked(true);

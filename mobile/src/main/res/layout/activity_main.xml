@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/nowplaying_toolbarSize"
                 android:background="?attr/primaryAlternateColor"

@@ -24,6 +24,7 @@
     <string name="action_donate">Donate</string>
     <string name="action_favorite">Favorite</string>
     <string name="action_unfavorite">Unfavorite</string>
+    <string name="action_bug_report">Report a bug</string>
 
     Navigation Drawer
     <string name="page_home">Home</string>

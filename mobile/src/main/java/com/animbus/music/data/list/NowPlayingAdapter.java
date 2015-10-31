@@ -1,4 +1,4 @@
-package com.animbus.music.data.adapter;
+package com.animbus.music.data.list;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

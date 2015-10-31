@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 import com.animbus.music.R;
 import com.animbus.music.customImpls.MusicControlsView;
 import com.animbus.music.customImpls.ThemableActivity;
-import com.animbus.music.data.adapter.NowPlayingAdapter;
+import com.animbus.music.data.list.NowPlayingAdapter;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.settings.Settings;
