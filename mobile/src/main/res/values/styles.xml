@@ -89,7 +89,9 @@
         <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
     </style>
 
-    <style name="GittyReporter" parent="Theme.AppCompat.Light.NoActionBar"  />
+    <style name="GittyReporter" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorAccent">@color/accent_blue_dark</item>
+    </style>
 
 </resources>
 

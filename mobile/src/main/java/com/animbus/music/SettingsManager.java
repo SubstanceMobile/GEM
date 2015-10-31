@@ -30,7 +30,7 @@ public class SettingsManager {
             KEY_COLOR_COMPLIMENTARY = "com.animbus.music.COLOR_COMPLIMENTARY",
             KEY_COLOR_COMPLIMENTARY_GREY = "com.animbus.music.COLOR_COMPLIMENYARY_GREY",
             KEY_INTERNAL_TESTER_REGISTERED = "com.animbus.music.testing.internal.TESTER_REGESTERED",
-    KEY_ALBUM_COLOR_AT_ = "com.animbus.music.album.color.withId_";
+            KEY_ALBUM_COLOR_AT_ = "com.animbus.music.album.color.withId_";
     public static Integer TYPE_BOOLEAN = 0, TYPE_STRING = 1, TYPE_INTEGER = 2;
     public static Integer SCREEN_HOME = 0, SCREEN_ALBUMS = 1, SCREEN_SONGS = 2, SCREEN_ARTISTS = 3, SCREEN_PLAYLISTS = 4;
     public Context context;

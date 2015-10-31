@@ -55,8 +55,11 @@ dependencies {
     //Images and colors
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:palette-v7:23.1.0'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
     //Extras
     compile 'com.github.paolorotolo:gitty_reporter:1.2.2'
     compile 'com.github.paolorotolo:appintro:3.1.0'
     compile 'com.github.plusCubed:recycler-fast-scroll:0.2.0'
+    compile 'com.github.afollestad.material-dialogs:core:0.8.5.0'
+    compile 'com.github.afollestad.material-dialogs:commons:0.8.5.0'
 }

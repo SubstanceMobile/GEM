@@ -26,7 +26,7 @@ public class IssueReportingActivity extends GittyReporter {
         setRippleColor(getResources().getColor(R.color.accent_blue_dark));
         setFabColor1(getResources().getColor(R.color.accent_blue_dark), getResources().getColor(R.color.accent_blue_dark),
                 getResources().getColor(R.color.ripple_dark));
-        setFabColor2(getResources().getColor(R.color.accent_pink_dark), getResources().getColor(R.color.accent_pink_dark),
+        setFabColor2(getResources().getColor(R.color.accent_blue_dark), getResources().getColor(R.color.accent_blue_dark),
                 getResources().getColor(R.color.ripple_dark));
     }
 

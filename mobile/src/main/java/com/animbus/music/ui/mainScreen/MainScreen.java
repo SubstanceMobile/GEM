@@ -55,7 +55,6 @@ import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.Search;
 import com.animbus.music.ui.albumDetails.AlbumDetails;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
 import com.animbus.music.ui.settings.Settings;
@@ -413,9 +412,8 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.action_search:
-                startActivity(new Intent(this, Search.class));/*
-                new MediaNotification(this);
-                startActivity(new Intent(this, SetupActivity.class));*/
+                /*startActivity(new Intent(this, Search.class));*/
+                Snackbar.make(findViewById(R.id.MainView), R.string.msg_coming_soon, Snackbar.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -427,15 +425,19 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         switch (id) {
             case R.id.navdrawer_album_icon:
                 switchToAlbum();
+                menuItem.setChecked(true);
                 break;
             case R.id.navdrawer_songs:
                 switchToSongs();
+                menuItem.setChecked(true);
                 break;
             case R.id.navdrawer_playlists:
                 switchToPlaylists();
+                menuItem.setChecked(true);
                 break;
             case R.id.navdrawer_artists:
                 switchToArtists();
+                menuItem.setChecked(true);
                 break;
             case R.id.navdrawer_settings:
                 startActivity(new Intent(this, Settings.class));
@@ -444,7 +446,6 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
                 startActivity(new Intent(this, IssueReportingActivity.class));
                 break;
         }
-        menuItem.setChecked(true);
         return true;
     }
 
