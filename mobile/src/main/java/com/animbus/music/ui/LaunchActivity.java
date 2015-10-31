@@ -23,7 +23,7 @@ import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
-import com.animbus.music.media.MediaData;
+import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.ui.mainScreen.MainScreen;
@@ -43,7 +43,7 @@ public class LaunchActivity extends ThemableActivity {
         if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
             //Playing from intent
             PlaybackManager.get().play(
-                    MediaData.get().findSongById(
+                    Library.get().findSongById(
                             Long.valueOf(getIntent().getData().getLastPathSegment().substring(6))));
         }
     }
@@ -132,8 +132,8 @@ public class LaunchActivity extends ThemableActivity {
             ThemeManager.get().setContext(this);
 
             //Loads Songs
-            MediaData.get(this);
-            if (!MediaData.get().isBuilt()) MediaData.get().build();
+            Library.get(this);
+            if (!Library.get().isBuilt()) Library.get().build();
 
             //Starts Music Service
             ServiceHelper.get(this).initService();

@@ -31,7 +31,7 @@ import android.widget.TextView;
 import com.animbus.music.R;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.list.ListAdapter;
-import com.animbus.music.media.MediaData;
+import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
@@ -55,7 +55,7 @@ public class AlbumDetails extends ThemableActivity {
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_album_details);
         configureTransition();
-        mAlbum = MediaData.get().findAlbumById(getIntent().getLongExtra("album_id", -1));
+        mAlbum = Library.get().findAlbumById(getIntent().getLongExtra("album_id", -1));
     }
 
     private void configureTransition() {

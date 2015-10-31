@@ -14,4 +14,6 @@
     <color name="accent_pink_light">#f50057</color>
     <color name="accent_blue_dark">#40c4ff</color>
     <color name="accent_blue_light">#03a9f4</color>
+    <color name="colorPrimaryDark">#757575</color>
+    <color name="background_material_light">#fafafa</color>
 </resources>

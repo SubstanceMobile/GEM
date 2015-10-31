@@ -6,9 +6,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.animbus.music.SettingsManager;
-import com.animbus.music.media.MediaData;
-import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MediaData {
-    public static final MediaData instance = new MediaData();
+public class Library {
+    public static final Library instance = new Library();
     public Context context;
     private List<Song> mSongs = new ArrayList<>();
     private List<Album> mAlbums = new ArrayList<>();
@@ -23,16 +23,16 @@ public class MediaData {
 
     private boolean mBuilt = false;
 
-    private MediaData() {
+    private Library() {
 
     }
 
-    public static MediaData get(Context cxt) {
+    public static Library get(Context cxt) {
         instance.context = cxt;
         return instance;
     }
 
-    public static MediaData get() {
+    public static Library get() {
         return instance;
     }
 
@@ -149,12 +149,12 @@ public class MediaData {
     // Getters
     ///////////////////////////////////////////////////////////////////////////
 
-    public List<Song> getSongs() {
-        return mSongs;
+    public static List<Song> getSongs() {
+        return instance.mSongs;
     }
 
-    public List<Album> getAlbums() {
-        return mAlbums;
+    public static List<Album> getAlbums() {
+        return instance.mAlbums;
     }
 
     public List<Playlist> getPlaylists() {

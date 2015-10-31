@@ -10,6 +10,7 @@
         <item name="primaryAlternateColor">@color/primaryLight</item>
         <item name="primaryAlternateTextColor">@color/primary_text_default_material_light</item>
         <item name="secondaryAlternateTextColor">@color/secondary_text_default_material_light</item>
+        <item name="android:colorBackground">@color/background_material_light</item>
     </style>
 
     <!--This is the light theme-->
@@ -39,8 +40,6 @@
     <style name="AppTheme.Light.Pink" parent="AppTheme.Light">
         <item name="colorAccent">@color/accent_pink_dark</item>
     </style>
-    .
-    +
 
     <style name="Base" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@color/primaryDark</item>
@@ -74,19 +73,23 @@
         <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
     </style>
 
-    <style name="Base.DarkActionBar" parent="Base">
+    <style name="Base.Light.DarkActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/primaryLight</item>
+
+        <item name="primaryTextColor">@color/primary_text_default_material_light</item>
+        <item name="secondaryTextColor">@color/secondary_text_default_material_light</item>
+
+        <item name="themeRippleColor">@color/ripple_material_light</item>
+        <item name="themeRippleColorAlt">@color/ripple_material_dark</item>
+        <item name="ripple">@drawable/ripple_light</item>
+        <item name="ripple_alt_color">@drawable/ripple_dark</item>
+        <item name="ripple_circle">@drawable/ripple_circle_light</item>
+        <item name="ripple_circle_alt_color">@drawable/ripple_circle_dark</item>
+
         <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
     </style>
 
-    <style name="Base.Light.DarkActionBar" parent="Base.Light">
-        <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="GittyReporter" parent="Theme.AppCompat.Light.NoActionBar"  />
 
 </resources>
 

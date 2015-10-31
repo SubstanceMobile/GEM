@@ -43,14 +43,14 @@ import android.widget.Toast;
 
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
-import com.animbus.music.customImpls.IssueReportingActivity;
+import com.animbus.music.ui.IssueReportingActivity;
 import com.animbus.music.customImpls.LockableViewPager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
 import com.animbus.music.data.adapter.AlbumGridAdapter;
 import com.animbus.music.data.list.ListAdapter;
 import com.animbus.music.data.list.ListAdapter.SongListener;
-import com.animbus.music.media.MediaData;
+import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.media.objects.Album;
@@ -354,7 +354,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         drawerContent.addHeaderView(header);
         drawerContent.inflateMenu(R.menu.navigation_drawer_items);
 
-        //This sets up the RecyclerView to the default screen based on a setting.
+        //This sets up the RecyclerView to the default screen based on ` setting.
         Integer setting = settings.getIntegerSetting(SettingsManager.KEY_DEFAULT_SCREEN, SettingsManager.SCREEN_ALBUMS);
         navMenu = drawerContent.getMenu();
         if (setting == 0) {
@@ -541,7 +541,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         }
 
         private void configureAsAlbums(RecyclerView list) {
-            AlbumGridAdapter adapter = new AlbumGridAdapter(MainScreen.this, MediaData.get().getAlbums());
+            AlbumGridAdapter adapter = new AlbumGridAdapter(MainScreen.this, Library.getAlbums());
             adapter.setOnItemClickedListener(this);
             list.setAdapter(adapter);
             list.setItemAnimator(new DefaultItemAnimator());
@@ -553,7 +553,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         }
 
         private void configureAsSongs(RecyclerView list) {
-            ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_SONG, MediaData.get().getSongs(), MainScreen.this);
+            ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_SONG, Library.getSongs(), MainScreen.this);
             adapter.setListener(new SongListener() {
                 @Override
                 public void onClick(Song object, List<Song> data, int pos) {

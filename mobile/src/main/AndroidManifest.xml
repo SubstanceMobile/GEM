@@ -253,6 +253,9 @@ package="com.animbus.music" >
         android:theme="@style/AppTheme.Light"
         android:launchMode="singleTop" />
 
+    <activity android:name=".ui.IssueReportingActivity"
+        android:theme="@style/GittyReporter"/>
+
     <!-- Media button receiver -->
 
 
