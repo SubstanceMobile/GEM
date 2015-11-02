@@ -22,7 +22,7 @@
     <dimen name="fab_padding">17dp</dimen>
     <dimen name="FAB_elevation">10dp</dimen>
     <dimen name="FAB_press_elevation">0dp</dimen>
-    <dimen name="fab_margin">0dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
     Now Playing Toolbar
     <dimen name="nowplaying_toolbarSize">64dp</dimen>

@@ -55,7 +55,6 @@ public class Settings extends ThemableActivity {
             tabsIconsSwitch;
     SettingsManager manager;
     ThemeManager themeManager;
-    TextView versionTextView;
     int clickedAmount = 0;
 
     IInAppBillingService mService;
@@ -93,7 +92,6 @@ public class Settings extends ThemableActivity {
         manager = SettingsManager.get();
         themeManager = ThemeManager.get();
         toolbar = (Toolbar) findViewById(R.id.SettingsAppbar);
-        versionTextView = (TextView) findViewById(R.id.settings_about_version_value);
 
         pageNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
         myLibraryPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
@@ -108,7 +106,6 @@ public class Settings extends ThemableActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ViewCompat.setElevation(findViewById(R.id.settings_app_bar_layout), 0.0f);
-        versionTextView.setText(BuildConfig.VERSION_NAME);
 
 
         //Sets Window description in Multitasking menu
@@ -123,11 +120,6 @@ public class Settings extends ThemableActivity {
                 setTaskDescription(new ActivityManager.TaskDescription(null, bm, getResources().getColor(R.color.primaryLight)));
                 bm.recycle();
             }
-        }
-        if (manager.getBooleanSetting(SettingsManager.KEY_INTERNAL_TESTER_REGISTERED, false)) {
-            findViewById(R.id.settings_section_testers).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.settings_section_testers).setVisibility(View.GONE);
         }
     }
 
@@ -155,32 +147,6 @@ public class Settings extends ThemableActivity {
 
             }
         }
-        findViewById(R.id.settings_about_version_root).setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (manager.getBooleanSetting(SettingsManager.KEY_INTERNAL_TESTER_REGISTERED, false)) {
-
-                }
-                return true;
-            }
-        });
-        findViewById(R.id.settings_about_version_root).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (manager.getBooleanSetting(SettingsManager.KEY_INTERNAL_TESTER_REGISTERED, false)) {
-                    Toast.makeText(Settings.this, R.string.settings_tester_already_registered, Toast.LENGTH_SHORT).show();
-                } else if (clickedAmount < 4 && clickedAmount >= 0) {
-                    clickedAmount++;
-                } else if (clickedAmount == 4) {
-                    Toast.makeText(Settings.this, R.string.settings_tester_regester_confirmation, Toast.LENGTH_SHORT).show();
-                    manager.setBooleanSetting(SettingsManager.KEY_INTERNAL_TESTER_REGISTERED, true);
-                    clickedAmount = -500;
-                    Settings.this.recreate();
-                } else {
-                    Toast.makeText(Settings.this, "Logic Error" + String.valueOf(clickedAmount), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     @Override
@@ -241,9 +207,8 @@ public class Settings extends ThemableActivity {
         saveSettings();
     }
 
-    public void openSourceCode(View v) {
-        String url = "https://github.com/Substance-Project/GEM";
-        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
+    public void openAbout(View v){
+        startActivity(new Intent(this, About.class));
     }
 
     public void openIconSelector(View v) {

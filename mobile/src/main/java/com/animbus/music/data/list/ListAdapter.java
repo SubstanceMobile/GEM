@@ -22,6 +22,12 @@ import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.module.GlideModule;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -146,7 +152,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         }
     }
 
-    protected class AlbumsViewHolder extends SimpleViewHolder<ItemAlbumGrid, Album> {
+    protected class AlbumsViewHolder extends SimpleViewHolder<ItemAlbumGrid, Album> implements RequestListener<String, GlideDrawable> {
 
         public AlbumsViewHolder(ItemAlbumGrid binding) {
             super(binding);
@@ -155,7 +161,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         @Override
         public void configure(Album object) {
             binding.setAlbum(object);
+            Glide.with(context).load(object.getAlbumArtPath())
+                    .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
+                    .animate(android.R.anim.fade_in)
+                    .crossFade()
+                    .listener(this)
+                    .into(binding.AlbumArtGridItemAlbumArt);
+        }
 
+        @Override
+        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+            return false;
+        }
+
+        @Override
+        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+            
+            return false;
         }
     }
 

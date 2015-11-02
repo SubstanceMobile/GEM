@@ -44,7 +44,25 @@
     <string name="settings_ui_customizer_category_now_playing">Now Playing</string>
     <string name="settings_header_playback">Playback</string>
     <string name="settings_header_dev">Developer</string>
+    <string name="settings_header_general">General</string>
     <string name="settings_aww">AWW</string>
+
+
+    <string name="about_libraries_header">Libraries Used:</string>
+    <string name="about_thanks_header">With special thanks to:</string>
+    <string name="about_appcompat">Google Support Libraries</string>
+    <string name="about_palette">Palette</string>
+    <string name="about_glide">Glide</string>
+    <string name="about_gitty">Gitty Reporter</string>
+    <string name="about_appintro">AppIntro</string>
+    <string name="about_fast_scroll">Recycler Fast Scroll</string>
+    <string name="about_dialogs">Material Dialogs</string>
+    <string name="about_icon">Designed icons</string>
+    <string name="about_helped">Helped Development</string>
+    <string name="about_managed">Managed the Project</string>
+    <string name="about_Karim">Karim Abou Zeid</string>
+    <string name="about_Neel">Neel Raj</string>
+    <string name="about_Substance">Substance Open Source</string>
 
     <string name="settings_select_base_theme">Select Theme</string>
     <string name="settings_theme_title_choose">Pick a theme</string>
@@ -147,9 +165,68 @@
     Unsorted
     <string name="hello_world">Hello world!</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_ui_customiser">UiCustomiser</string>
     <string name="title_activity_album_details">ALBUM_DETAILS</string>
+    <string name="title_activity_about">About</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
 
 </resources>

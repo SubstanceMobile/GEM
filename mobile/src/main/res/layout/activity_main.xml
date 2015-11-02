@@ -9,6 +9,7 @@
     android:fitsSystemWindows="false"
     tools:context=".ui.mainScreen.MainScreen">
 
+    <!--Main layout-->
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -148,7 +149,6 @@
     </android.support.design.widget.CoordinatorLayout>
 
     <!-- Navdrawer Layout -->
-
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
         android:layout_width="wrap_content"

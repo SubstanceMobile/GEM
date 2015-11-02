@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/settings_header_tweak_ui">
+        <PreferenceScreen
+            android:title="@string/settings_ui_customizer_category_main_screen"
+            android:key="test"
+            android:persistent="false" >
+            <CheckBoxPreference app:title="test" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_header_general" >
+        <Preference android:title="@string/settings_old_choose_icon" android:summary="Select the icon you want to see on the home screen">
+            <intent android:targetClass="com.animbus.music.ui.settings.chooseIcon.ChooseIcon" android:targetPackage="com.animbus.music" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

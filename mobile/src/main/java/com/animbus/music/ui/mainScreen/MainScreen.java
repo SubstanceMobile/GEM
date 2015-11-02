@@ -43,7 +43,6 @@ import android.widget.Toast;
 
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
-import com.animbus.music.ui.IssueReportingActivity;
 import com.animbus.music.customImpls.LockableViewPager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
@@ -55,8 +54,10 @@ import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.ui.IssueReportingActivity;
 import com.animbus.music.ui.albumDetails.AlbumDetails;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
+import com.animbus.music.ui.settings.About;
 import com.animbus.music.ui.settings.Settings;
 import com.animbus.music.ui.settings.chooseIcon.IconManager;
 import com.animbus.music.ui.setup.SetupActivity;
@@ -417,6 +418,15 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

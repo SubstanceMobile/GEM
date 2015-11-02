@@ -56,6 +56,7 @@
         <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
 
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
     <style name="Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
@@ -74,6 +75,7 @@
         <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
 
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
     <style name="Base.Light.DarkActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -92,6 +94,7 @@
         <item name="default_status_bar_theme">@style/ThemeOverlay.AppCompat.ActionBar</item>
 
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
     <style name="GittyReporter" parent="Theme.AppCompat.Light.NoActionBar" >

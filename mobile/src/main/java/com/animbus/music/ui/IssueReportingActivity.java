@@ -16,10 +16,10 @@ public class IssueReportingActivity extends GittyReporter {
     @Override
     public void init(Bundle savedInstanceState) {
         setTargetRepository("Substance-Project", "GEM");
-        setGuestOAuth2Token("4d9ca9a59603630a7a7e09b1daf0480c265bd2ed");
+        setGuestOAuth2Token("25a24ffb3814a54657d21c3dd057af9f7c27ef5a");
         enableGuestGitHubLogin(true);
         enableUserGitHubLogin(true);
-        setExtraInfo("");
+        setExtraInfo(getExtraInfo());
 
         setBackgroundColor1(getResources().getColor(R.color.primaryGreyDark));
         setBackgroundColor2(getResources().getColor(R.color.primaryGreyDark));
@@ -33,7 +33,6 @@ public class IssueReportingActivity extends GittyReporter {
     public String getExtraInfo(){
         String s = "";
         s += "\n App Version: " + BuildConfig.VERSION_NAME;
-        s += "\n ";
         return s;
     }
 }

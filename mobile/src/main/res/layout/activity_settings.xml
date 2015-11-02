@@ -222,94 +222,25 @@
                     android:padding="@dimen/margin_medium"
                     android:text="@string/settings_old_page_names" />
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/settings_section_testers">
-
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:text="@string/settings_header_dev"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="?attr/secondaryTextColor" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_small"
-                    android:layout_marginStart="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:text="@string/settings_header_about"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="?attr/secondaryTextColor" />
-
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/ripple"
                     android:clickable="true"
-                    android:onClick="openSourceCode"
-                    android:orientation="vertical">
+                    android:onClick="openAbout"
+                    android:id="@+id/settings_about_button" >
 
                     <TextView
-                        android:id="@+id/textView16"
+                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:layout_marginTop="@dimen/margin_medium"
-                        android:text="@string/settings_source_code"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:text="@string/settings_header_about"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat" />
-
-                    <TextView
-                        android:id="@+id/textView17"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_medium"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:text="@string/settings_tap_to_view_code"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                        android:textColor="?attr/secondaryTextColor"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/ripple"
-                    android:clickable="true"
-                    android:orientation="vertical"
-                    android:id="@+id/settings_about_version_root">
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:layout_marginTop="@dimen/margin_medium"
-                        android:text="@string/settings_about_version"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat" />
-
-                    <TextView
-                        android:id="@+id/settings_about_version_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_medium"
-                        android:layout_marginStart="@dimen/margin_medium"
-                        android:text="VERSION NUMBER"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat"
-                        android:textColor="?attr/secondaryTextColor"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                </FrameLayout>
 
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
