@@ -22,7 +22,7 @@ import com.animbus.music.ui.theme.ThemeManager;
 import java.util.Collections;
 import java.util.List;
 
-public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.NowPlayingAdapterViewHolder>{
+public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.NowPlayingAdapterViewHolder> {
     LayoutInflater inflater;
     List<Song> data = Collections.emptyList();
     Context context;
@@ -52,7 +52,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
 
     @Override
     public void onBindViewHolder(final NowPlayingAdapterViewHolder holder, final int position) {
-        if (position == 0){
+        if (position == 0) {
             Song customSong = PlaybackManager.get().getCurrentSong();
 
             holder.dataBinder.setSong(customSong);
@@ -74,8 +74,8 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
         }
     }
 
-    private void configureRepeatIcon(ImageView i, Song s){
-        if (PlaybackManager.get().isLooping()){
+    private void configureRepeatIcon(ImageView i, Song s) {
+        if (PlaybackManager.get().isLooping()) {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
             DrawableCompat.setTint(repeatIcon, s.getAlbum().getBackgroundColor());
             i.setImageDrawable(repeatIcon);
@@ -86,8 +86,8 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
         }
     }
 
-    private void toggleRepeatIcon(ImageView i, Song s){
-        if (PlaybackManager.get().isLooping()){
+    private void toggleRepeatIcon(ImageView i, Song s) {
+        if (PlaybackManager.get().isLooping()) {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
             DrawableCompat.setTint(repeatIcon, ThemeManager.get().useLightTheme ? context.getResources().getColor(R.color.secondary_text_default_material_light) : context.getResources().getColor(R.color.secondary_text_default_material_dark));
             i.setImageDrawable(repeatIcon);

@@ -1,3 +1,4 @@
+/*
 package com.animbus.music.data.adapter;
 
 import android.animation.ArgbEvaluator;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
-import com.animbus.music.databinding.ItemAlbumGrid;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.theme.ThemeManager;
 
@@ -181,4 +181,4 @@ public class AlbumGridAdapter extends RecyclerView.Adapter<AlbumGridAdapter.Albu
             }
         }
     }
-}
+}*/

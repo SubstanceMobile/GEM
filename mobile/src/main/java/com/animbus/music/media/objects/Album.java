@@ -1,24 +1,17 @@
 package com.animbus.music.media.objects;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.v7.graphics.Palette;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
-import com.animbus.music.SettingsManager;
-import com.animbus.music.media.objects.Artist;
-import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.theme.ThemeManager;
-import com.squareup.picasso.LruCache;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -84,7 +77,6 @@ public class Album {
 
     public String albumArtPath;
     public boolean defaultArt = false;
-    public boolean artLoaded = false;
 
     public void setAlbumArtPath(String albumArtPath) {
         if (albumArtPath != null) {
@@ -105,30 +97,40 @@ public class Album {
         void respond(Bitmap albumArt);
     }
 
-    public void requestArt(final ArtRequest request) {
-        Picasso.with(getContext()).load(getAlbumArtPath()).into(new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                request.respond(bitmap);
-                Log.d("Album " + String.valueOf(getId()), "Art Location: " + getAlbumArtPath() + " Art from: " + from.name());
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-                request.respond(((BitmapDrawable) errorDrawable).getBitmap());
-                Log.d("Album " + String.valueOf(getId()), "Fetching Default Art");
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        });
+    public void requestArt(Context cxt, final ArtRequest request) {
+        Glide.with(cxt).load(getAlbumArtPath())
+                .asBitmap()
+                .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
+                .animate(android.R.anim.fade_in)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .centerCrop()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        request.respond(resource);
+                    }
+                });
     }
 
-    public void requestArt(final ImageView imageView) {
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Picasso.with(getContext()).load(getAlbumArtPath()).into(imageView);
+    public void requestArt(Context cxt, ImageView imageView) {
+        Glide.with(cxt).load(getAlbumArtPath())
+                .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
+                .animate(android.R.anim.fade_in)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .centerCrop()
+                .into(imageView);
+    }
+
+    public void requestArt(Context cxt, ImageView imageView, RequestListener<String, GlideDrawable> listener) {
+        Glide.with(cxt).load(getAlbumArtPath())
+                .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
+                .animate(android.R.anim.fade_in)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .centerCrop()
+                .listener(listener)
+                .into(imageView);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -157,7 +159,7 @@ public class Album {
     }
 
     public int getAccentIconColor() {
-    return accentColors[TITLE_COLOR];
+        return accentColors[TITLE_COLOR];
     }
 
     public int getAccentSecondaryIconColor() {

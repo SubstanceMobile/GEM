@@ -139,7 +139,7 @@ public class MediaNotification extends BroadcastReceiver {
                     .setShowWhen(false)
                     .setPriority(PRIORITY_MAX);
 
-            song.getAlbum().requestArt(new Album.ArtRequest() {
+            song.getAlbum().requestArt(mService, new Album.ArtRequest() {
                 @Override
                 public void respond(Bitmap albumArt) {
                     mBuilder.setLargeIcon(albumArt);

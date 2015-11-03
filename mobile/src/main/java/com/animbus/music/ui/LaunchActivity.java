@@ -2,11 +2,8 @@ package com.animbus.music.ui;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -21,6 +18,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
@@ -32,8 +31,6 @@ import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.ui.mainScreen.MainScreen;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
-import com.squareup.picasso.LruCache;
-import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -127,17 +124,6 @@ public class LaunchActivity extends ThemableActivity {
     private void setContexts() {
         if (!VariablesSingleton.get().activated) {
 
-            try {
-                Picasso.Builder builder = new Picasso.Builder(this);
-                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                builder.memoryCache(new LruCache(1024 * 1024 * am.getMemoryClass() / 5));
-                builder.loggingEnabled(false);
-                builder.indicatorsEnabled(false);
-                Picasso.setSingletonInstance(builder.build());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
             //Sets Contexts
             SettingsManager.get().setContext(this);
             ThemeManager.get().setContext(this);
@@ -219,30 +205,28 @@ public class LaunchActivity extends ThemableActivity {
                 String str;
                 while ((str = in.readLine()) != null) {
                     // str is one line of text; readLine() strips the newline character(s)
-                /* Get current Version Number */
-                    PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                    int curVersion = packageInfo.versionCode;
+                    int curVersion = BuildConfig.VERSION_CODE;
                     int newVersion = Integer.valueOf(str);
 
-                /* Is a higher version than the current already out? */
+                    /* Is a higher version than the current already out? */
                     if (newVersion > curVersion) {
-                        new AlertDialog.Builder(LaunchActivity.this)
-                                .setIcon(R.mipmap.ic_launcher_srini_black)       //You can also change according to the icon the user will set
-                                .setTitle("Update Available")
-                                .setMessage("An update for the latest version is available!\n\nOpen Update page and download?")
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                            /* User clicked OK so do some stuff */
-                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Substance-Project/GEM/releases/download/latest/latest.apk")));
+                        new MaterialDialog.Builder(LaunchActivity.this)
+                                .title(R.string.msg_update_available)
+                                .content(R.string.msg_update_content)
+                                .positiveText(android.R.string.yes)
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.animbus.music")));
                                     }
                                 })
-                                .setNegativeButton("No", null)
-                                .show();
+                                .negativeText(android.R.string.no)
+                                .build().show();
                     }
-
                 }
                 in.close();
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
     };

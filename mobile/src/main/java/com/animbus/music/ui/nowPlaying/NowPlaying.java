@@ -109,8 +109,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     }
 
     private void configureUI() {
-        ImageView mImage = (ImageView) findViewById(R.id.now_playing_album_art);
-        mSong.getAlbum().requestArt(mImage);
+        mSong.getAlbum().requestArt(this, (ImageView) findViewById(R.id.now_playing_album_art));
         configureUIColors();
 
         //Sets Window description in Multitasking menu

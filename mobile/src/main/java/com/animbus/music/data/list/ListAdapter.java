@@ -1,62 +1,55 @@
 package com.animbus.music.data.list;
 
-        import android.animation.ArgbEvaluator;
-        import android.animation.ObjectAnimator;
-        import android.app.Activity;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.databinding.ViewDataBinding;
-        import android.graphics.Bitmap;
-        import android.graphics.BitmapFactory;
-        import android.graphics.Canvas;
-        import android.graphics.Color;
-        import android.graphics.Rect;
-        import android.graphics.drawable.BitmapDrawable;
-        import android.graphics.drawable.Drawable;
-        import android.os.AsyncTask;
-        import android.support.annotation.IntDef;
-        import android.support.design.widget.Snackbar;
-        import android.support.v4.app.ActivityCompat;
-        import android.support.v4.app.ActivityOptionsCompat;
-        import android.support.v4.util.Pair;
-        import android.support.v7.graphics.Palette;
-        import android.support.v7.internal.widget.ViewUtils;
-        import android.support.v7.widget.RecyclerView;
-        import android.support.v7.widget.Toolbar;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.databinding.ViewDataBinding;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.support.annotation.IntDef;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v7.graphics.Palette;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-        import com.animbus.music.BR;
-        import com.animbus.music.R;
-        import com.animbus.music.SettingsManager;
-        import com.animbus.music.databinding.ItemAlbumDetailsList;
-        import com.animbus.music.databinding.ItemAlbumGrid;
-        import com.animbus.music.databinding.ItemSongList;
-        import com.animbus.music.media.PlaybackManager;
-        import com.animbus.music.media.objects.Album;
-        import com.animbus.music.media.objects.Song;
-        import com.animbus.music.ui.albumDetails.AlbumDetails;
-        import com.animbus.music.ui.theme.ThemeManager;
-        import com.bumptech.glide.Glide;
-        import com.bumptech.glide.load.engine.DiskCacheStrategy;
-        import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-        import com.bumptech.glide.request.RequestListener;
-        import com.bumptech.glide.request.animation.GlideAnimation;
-        import com.bumptech.glide.request.target.BitmapImageViewTarget;
-        import com.bumptech.glide.request.target.Target;
+import com.animbus.music.BR;
+import com.animbus.music.R;
+import com.animbus.music.SettingsManager;
+import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.Song;
+import com.animbus.music.ui.ItemAlbumDetailsList;
+import com.animbus.music.ui.ItemAlbumGrid;
+import com.animbus.music.ui.ItemSongList;
+import com.animbus.music.ui.albumDetails.AlbumDetails;
+import com.animbus.music.ui.theme.ThemeManager;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
-        import java.lang.annotation.Retention;
-        import java.lang.annotation.RetentionPolicy;
-        import java.util.ArrayList;
-        import java.util.Collections;
-        import java.util.Comparator;
-        import java.util.List;
-        import java.util.Random;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
-        import static com.animbus.music.media.objects.Album.FRAME_COLOR;
-        import static com.animbus.music.media.objects.Album.SUBTITLE_COLOR;
-        import static com.animbus.music.media.objects.Album.TITLE_COLOR;
+import static com.animbus.music.media.objects.Album.FRAME_COLOR;
+import static com.animbus.music.media.objects.Album.SUBTITLE_COLOR;
+import static com.animbus.music.media.objects.Album.TITLE_COLOR;
 
 /**
  * Created by Adrian on 10/28/2015.
@@ -140,8 +133,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         }
 
         public void update(TYPE object) {
-            configure(object);
             binding.setVariable(getVarId(), object);
+            configure(object);
         }
 
         private int getVarId() {
@@ -201,14 +194,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
         private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
-        private int
-                defaultBackground = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryGreyDark : R.color.primaryLight),
-                defaultTitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ?
-                        R.color.primary_text_default_material_dark :
-                        R.color.primary_text_default_material_light),
-                defaultSubtitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ?
-                        R.color.secondary_text_default_material_dark :
-                        R.color.secondary_text_default_material_light);
+        private int defaultBackground = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryGreyDark : R.color.primaryLight);
+        private int defaultTitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light);
+        private int defaultSubtitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
 
         public AlbumsViewHolder(ItemAlbumGrid binding) {
             super(binding);
@@ -219,14 +207,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         @Override
         public void configure(Album object) {
             resetPalette();
-            Glide.with(context).load(object.getAlbumArtPath())
-                    .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
-                    .animate(android.R.anim.fade_in)
-                    .listener(this)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
-                    .into(binding.AlbumArtGridItemAlbumArt);
+            binding.getAlbum().requestArt(context, binding.AlbumArtGridItemAlbumArt, this);
         }
 
         @Override
@@ -237,7 +218,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         @Override
         public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target,
                                        boolean isFromMemoryCache, boolean isFirstResource) {
-            if (isFromMemoryCache && binding.getAlbum().colorAnimated) {
+            if (isFromMemoryCache || binding.getAlbum().colorAnimated) {
                 updatePalette(resource);
             } else {
                 animatePalette(resource);
@@ -312,7 +293,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
             if (binding.getAlbum().mainColors == null) {
                 Bitmap art = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(art);
-                drawable.setBounds(0,0, canvas.getWidth(), canvas.getHeight());
+                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                 drawable.draw(canvas);
                 paletteTask = Palette.from(art).generate(this);
             }
@@ -338,7 +319,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
                 try {
                     swatches = new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
 
                 try {
                     back = swatches[0].getRgb();
@@ -371,8 +353,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
             }
 
-            binding.getAlbum().mainColors = new int[] {back, title, subtitle};
-            binding.getAlbum().accentColors = new int[] {accent, accentIcon, accentSubIcon};
+            binding.getAlbum().mainColors = new int[]{back, title, subtitle};
+            binding.getAlbum().accentColors = new int[]{accent, accentIcon, accentSubIcon};
 
             animatePalette(null);
         }

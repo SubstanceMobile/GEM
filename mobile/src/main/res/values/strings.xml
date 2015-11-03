@@ -229,4 +229,7 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
+    <string name="msg_update_available">Update Available</string>
+    <string name="msg_update_content">An update for the latest version is available! Open Update page and download?</string>
+
 </resources>

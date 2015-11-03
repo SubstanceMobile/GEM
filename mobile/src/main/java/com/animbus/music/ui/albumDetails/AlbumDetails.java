@@ -125,8 +125,7 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void configureUI() {
-        ImageView mImage = (ImageView) findViewById(R.id.album_details_album_art);
-        mAlbum.requestArt(mImage);
+        mAlbum.requestArt(this, (ImageView) findViewById(R.id.album_details_album_art));
         mTitle.setText(mAlbum.getAlbumTitle());
         mCollapsingToolbar.setTitle(mAlbum.getAlbumTitle());
         mArtist.setText(mAlbum.getAlbumArtistName());

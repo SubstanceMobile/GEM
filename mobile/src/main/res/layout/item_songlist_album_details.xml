@@ -1,6 +1,6 @@
 <layout>
 
-    <data class="ItemAlbumDetailsList">
+    <data class="com.animbus.music.ui.ItemAlbumDetailsList">
         <variable
             name="song" type="com.animbus.music.media.objects.Song" />
     </data>

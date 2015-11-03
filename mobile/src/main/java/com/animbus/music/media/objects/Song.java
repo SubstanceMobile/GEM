@@ -2,6 +2,7 @@ package com.animbus.music.media.objects;
 
 
 import android.content.ContentUris;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -160,12 +161,12 @@ public class Song {
         this.songAlbum = songAlbum;
     }
 
-    public MediaMetadataCompat getMetaData(){
+    public MediaMetadataCompat getMetaData(Context cxt){
         final MediaMetadataCompat.Builder builder = new MediaMetadataCompat.Builder();
         builder.putText(MediaMetadataCompat.METADATA_KEY_TITLE, getSongTitle());
         builder.putText(MediaMetadataCompat.METADATA_KEY_ARTIST, getSongArtist());
         builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM, getAlbum().getAlbumTitle());
-        getAlbum().requestArt(new Album.ArtRequest() {
+        getAlbum().requestArt(cxt, new Album.ArtRequest() {
             @Override
             public void respond(Bitmap albumArt) {
                 builder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, albumArt);
