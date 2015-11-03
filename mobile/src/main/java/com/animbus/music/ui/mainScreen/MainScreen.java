@@ -46,18 +46,13 @@ import com.animbus.music.SettingsManager;
 import com.animbus.music.customImpls.LockableViewPager;
 import com.animbus.music.customImpls.ThemableActivity;
 import com.animbus.music.data.VariablesSingleton;
-import com.animbus.music.data.adapter.AlbumGridAdapter;
 import com.animbus.music.data.list.ListAdapter;
-import com.animbus.music.data.list.ListAdapter.SongListener;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
-import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.IssueReportingActivity;
-import com.animbus.music.ui.albumDetails.AlbumDetails;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
-import com.animbus.music.ui.settings.About;
 import com.animbus.music.ui.settings.Settings;
 import com.animbus.music.ui.settings.chooseIcon.IconManager;
 import com.animbus.music.ui.setup.SetupActivity;
@@ -65,8 +60,6 @@ import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
-
-import java.util.List;
 
 
 public class MainScreen extends ThemableActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -519,7 +512,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         drawerLayout.closeDrawers();
     }
 
-    class RecyclerPagerAdapter extends PagerAdapter implements AlbumGridAdapter.AlbumArtGridClickListener {
+    class RecyclerPagerAdapter extends PagerAdapter {
         private String[] titles = new String[]{
                 getResources().getString(R.string.page_albums),
                 getResources().getString(R.string.page_songs),
@@ -552,31 +545,18 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         }
 
         private void configureAsAlbums(RecyclerView list) {
-            AlbumGridAdapter adapter = new AlbumGridAdapter(MainScreen.this, Library.getAlbums());
-            adapter.setOnItemClickedListener(this);
+            ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_ALBUM, Library.getAlbums(), MainScreen.this);
+            adapter.setTransitionToAlbumDetails(MainScreen.this, toolbar, findViewById(R.id.my_library_to_albumdetails_list_space));
             list.setAdapter(adapter);
             list.setItemAnimator(new DefaultItemAnimator());
-            Configuration config = MainScreen.this.getResources().getConfiguration();
-            if (config.orientation == Configuration.ORIENTATION_PORTRAIT)
+            if (MainScreen.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
                 list.setLayoutManager(new GridLayoutManager(MainScreen.this, 2, GridLayoutManager.VERTICAL, false));
             else
                 list.setLayoutManager(new GridLayoutManager(MainScreen.this, 3, GridLayoutManager.VERTICAL, false));
         }
 
         private void configureAsSongs(RecyclerView list) {
-            ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_SONG, Library.getSongs(), MainScreen.this);
-            adapter.setListener(new SongListener() {
-                @Override
-                public void onClick(Song object, List<Song> data, int pos) {
-                    PlaybackManager.get().play(data, pos);
-                }
-
-                @Override
-                public boolean onLongClick(Song object, List<Song> data, int pos) {
-                    return false;
-                }
-            });
-            list.setAdapter(adapter);
+            list.setAdapter(new ListAdapter(ListAdapter.TYPE_SONG, Library.getSongs(), MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
@@ -616,24 +596,6 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view.equals(object);
-        }
-
-        @Override
-        public void AlbumGridItemClicked(View view, Album album) {
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
-                    new Pair<View, String>(MainScreen.this.toolbar, "appbar"),
-                    new Pair<View, String>(MainScreen.this.toolbar, "appbar_text_protection"),
-                    new Pair<View, String>(view.findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
-                    new Pair<View, String>(MainScreen.this.findViewById(R.id.my_library_to_albumdetails_list_space), "list"),
-                    new Pair<View, String>(view.findViewById(R.id.AlbumInfoToolbar), "info")
-            );
-            ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, AlbumDetails.class).putExtra("album_id", album.getId()), options.toBundle());
-        }
-
-        @Override
-        public void AlbumGridItemLongClicked(View view, Album album) {
-            Snackbar.make(MainScreen.this.findViewById(R.id.MainView), R.string.playing_album, Snackbar.LENGTH_SHORT).show();
-            PlaybackManager.get().play(album.getSongs(), 0);
         }
     }
 }

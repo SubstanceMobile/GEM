@@ -88,19 +88,7 @@ public class AlbumDetails extends ThemableActivity {
     }
 
     private void configureRecyclerView() {
-        ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this);
-        mList.setAdapter(adapter);
-        adapter.setListener(new ListAdapter.SongListener() {
-            @Override
-            public void onClick(Song object, List<Song> data, int pos) {
-                PlaybackManager.get().play(data, pos);
-            }
-
-            @Override
-            public boolean onLongClick(Song object, List<Song> data, int pos) {
-                return false;
-            }
-        });
+        mList.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
         mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }

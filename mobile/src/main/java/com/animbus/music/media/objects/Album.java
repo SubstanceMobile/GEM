@@ -96,7 +96,6 @@ public class Album {
             colorAnimated = true;
             this.albumArtPath = "android.resource://com.animbus.music/" + (!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         }
-        prepareColors();
     }
 
     public String getAlbumArtPath() {
@@ -138,96 +137,32 @@ public class Album {
     ///////////////////////////////////////////////////////////////////////////
 
     public boolean colorAnimated = false;
-
-    private Palette.Swatch[] swatches = null;
-
-    public void prepareColors() {
-        Log.d("Album ID:" + getId(), "Preparing Colors");
-        requestArt(new ArtRequest() {
-            @Override
-            public void respond(Bitmap albumArt) {
-                Log.d("Album ID:" + getId(), "Fetched Art for Color Extraction");
-                Palette.from(albumArt).generate(new Palette.PaletteAsyncListener() {
-                    @Override
-                    public void onGenerated(Palette palette) {
-                        if (!defaultArt && SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
-                            //Gets main swatches
-                            ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
-                            Collections.sort(sortedSwatches, new Comparator<Palette.Swatch>() {
-                                @Override
-                                public int compare(Palette.Swatch a, Palette.Swatch b) {
-                                    return ((Integer) a.getPopulation()).compareTo(b.getPopulation());
-                                }
-                            });
-                            swatches = new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
-                            Log.d("Album ID:" + getId(), "Prepared Colors");
-                        } else {
-                            Log.d("Album ID:" + getId(), "Extraction Disabled");
-                        }
-                    }
-                });
-            }
-        });
-    }
+    public static final int FRAME_COLOR = 0, TITLE_COLOR = 1, SUBTITLE_COLOR = 2;
+    public int[] mainColors;
+    public int[] accentColors;
 
     public int getBackgroundColor() {
-        try {
-            return swatches[0].getRgb();
-        } catch (NullPointerException e) {
-            return getContext().getResources().getColor(
-                    ThemeManager.get().useLightTheme ?
-                            R.color.primaryGreyLight :
-                            R.color.primaryGreyDark
-            );
-        }
+        return mainColors[FRAME_COLOR];
     }
 
     public int getTitleTextColor() {
-        try {
-            return swatches[0].getTitleTextColor();
-        } catch (NullPointerException e) {
-            return getContext().getResources().getColor(
-                    ThemeManager.get().useLightTheme ?
-                            R.color.primary_text_default_material_light :
-                            R.color.primary_text_default_material_dark
-            );
-        }
+        return mainColors[TITLE_COLOR];
     }
 
     public int getSubtitleTextColor() {
-        try {
-            return swatches[0].getBodyTextColor();
-        } catch (NullPointerException e) {
-            return getContext().getResources().getColor(
-                    ThemeManager.get().useLightTheme ?
-                            R.color.secondary_text_default_material_light :
-                            R.color.secondary_text_default_material_dark
-            );
-        }
+        return mainColors[SUBTITLE_COLOR];
     }
 
     public int getAccentColor() {
-        try {
-            return swatches[1].getRgb();
-        } catch (NullPointerException e) {
-            return Color.WHITE;
-        }
+        return accentColors[FRAME_COLOR];
     }
 
     public int getAccentIconColor() {
-        try {
-            return swatches[1].getTitleTextColor();
-        } catch (NullPointerException e) {
-            return Color.BLACK;
-        }
+    return accentColors[TITLE_COLOR];
     }
 
     public int getAccentSecondaryIconColor() {
-        try {
-            return swatches[1].getBodyTextColor();
-        } catch (NullPointerException e) {
-            return Color.GRAY;
-        }
+        return accentColors[SUBTITLE_COLOR];
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

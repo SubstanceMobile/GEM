@@ -29,8 +29,7 @@
                 <com.animbus.music.customImpls.SquareImageViewWidth_Based
                     android:id="@+id/AlbumArtGridItemAlbumArt"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:albumArt="@{album}"/>
+                    android:layout_height="0dp" />
 
                 <LinearLayout
                     android:id="@+id/AlbumInfoToolbar"

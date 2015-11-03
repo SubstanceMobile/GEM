@@ -111,8 +111,8 @@
     <orderEntry type="library" exported="" name="gson-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="compiler-1.0-rc4" level="project" />
     <orderEntry type="library" exported="" name="palette-v7-23.1.0" level="project" />
-    <orderEntry type="library" exported="" name="org.eclipse.egit.github.core-2.1.5" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
+    <orderEntry type="library" exported="" name="org.eclipse.egit.github.core-2.1.5" level="project" />
     <orderEntry type="library" exported="" name="baseLibrary-1.0-rc4" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="preference-v7-23.1.0" level="project" />
