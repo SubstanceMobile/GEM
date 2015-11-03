@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
-import com.animbus.music.databinding.ItemNowPlayingList;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.QueueManager;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.ui.ItemNowPlayingList;
 import com.animbus.music.ui.theme.ThemeManager;
 
 import java.util.Collections;
