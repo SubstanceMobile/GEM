@@ -240,22 +240,17 @@ public class LaunchActivity extends ThemableActivity {
     /* This Runnable creates a Dialog and asks the user to open the Market/ Or basically for now, the github page */
     private Runnable showUpdate = new Runnable() {
         public void run() {
-            new android.app.AlertDialog.Builder(LaunchActivity.this)
+            new AlertDialog.Builder(LaunchActivity.this)
                     .setIcon(R.mipmap.ic_launcher_srini_black)       //You can also change according to the icon the user will set
                     .setTitle("Update Available")
                     .setMessage("An update for the latest version is available!\n\nOpen Update page and download?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             /* User clicked OK so do some stuff */
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Substance-Project/GEM/releases/download/latest/latest.apk"));
-                            startActivity(intent);
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Substance-Project/GEM/releases/download/latest/latest.apk")));
                         }
                     })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            /* User clicked Cancel */
-                        }
-                    })
+                    .setNegativeButton("No", null)
                     .show();
         }
     };
