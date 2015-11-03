@@ -6,9 +6,12 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
@@ -32,10 +35,17 @@ import com.animbus.music.ui.theme.ThemeManager;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+
+
+
 public class LaunchActivity extends ThemableActivity {
     Toolbar toolbar;
     TabLayout tabs;
     AppBarLayout appBar;
+    private Handler mHandler;
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -198,5 +208,57 @@ public class LaunchActivity extends ThemableActivity {
     protected void setUpTheme(Theme theme) {
 
     }
+
+    /* This Thread checks for Updates in the Background */
+    private Thread checkUpdate = new Thread() {
+        public void run() {
+            try {
+                URL updateURL = new URL("https://raw.githubusercontent.com/Substance-Project/GEM/master/Update.txt");
+                BufferedReader in = new BufferedReader(new InputStreamReader(updateURL.openStream()));
+                String str;
+                while ((str = in.readLine()) != null) {
+                    // str is one line of text; readLine() strips the newline character(s)
+                /* Get current Version Number */
+                    PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    int curVersion = packageInfo.versionCode;
+                    int newVersion = Integer.valueOf(str);
+
+                /* Is a higher version than the current already out? */
+                    if (newVersion > curVersion) {
+                    /* Post a Handler for the UI to pick up and open the Dialog */
+                        mHandler.post(showUpdate);
+                    }
+
+                }
+                in.close();
+            } catch (Exception e) {
+            }
+        }
+
+    };
+
+    /* This Runnable creates a Dialog and asks the user to open the Market/ Or basically for now, the github page */
+    private Runnable showUpdate = new Runnable() {
+        public void run() {
+            new android.app.AlertDialog.Builder(LaunchActivity.this)
+                    .setIcon(R.mipmap.ic_launcher_srini_black)       //You can also change according to the icon the user will set
+                    .setTitle("Update Available")
+                    .setMessage("An update for the latest version is available!\n\nOpen Update page and download?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            /* User clicked OK so do some stuff */
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Substance-Project/GEM/releases/download/latest/latest.apk"));
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            /* User clicked Cancel */
+                        }
+                    })
+                    .show();
+        }
+    };
+
 
 }
