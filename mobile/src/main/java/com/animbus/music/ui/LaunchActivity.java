@@ -40,7 +40,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 
-
 public class LaunchActivity extends ThemableActivity {
     Toolbar toolbar;
     TabLayout tabs;
@@ -57,6 +56,7 @@ public class LaunchActivity extends ThemableActivity {
                             Long.valueOf(getIntent().getData().getLastPathSegment().substring(6))));
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContexts();
@@ -76,6 +76,7 @@ public class LaunchActivity extends ThemableActivity {
         tabs.setVisibility(showTabs ? View.VISIBLE : View.GONE);
         if (!showTabs) ViewCompat.setElevation(appBar, 0.0f);
         requestPermissions();
+        checkUpdate.run();
     }
 
     public void requestPermissions() {
@@ -213,7 +214,7 @@ public class LaunchActivity extends ThemableActivity {
     private Thread checkUpdate = new Thread() {
         public void run() {
             try {
-                URL updateURL = new URL("https://raw.githubusercontent.com/Substance-Project/GEM/master/Update.txt");
+                URL updateURL = new URL("https://raw.githubusercontent.com/Substance-Project/GEM/indev/mobile/src/main/res/raw/update.txt");
                 BufferedReader in = new BufferedReader(new InputStreamReader(updateURL.openStream()));
                 String str;
                 while ((str = in.readLine()) != null) {
@@ -225,34 +226,25 @@ public class LaunchActivity extends ThemableActivity {
 
                 /* Is a higher version than the current already out? */
                     if (newVersion > curVersion) {
-                    /* Post a Handler for the UI to pick up and open the Dialog */
-                        mHandler.post(showUpdate);
+                        new AlertDialog.Builder(LaunchActivity.this)
+                                .setIcon(R.mipmap.ic_launcher_srini_black)       //You can also change according to the icon the user will set
+                                .setTitle("Update Available")
+                                .setMessage("An update for the latest version is available!\n\nOpen Update page and download?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                            /* User clicked OK so do some stuff */
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Substance-Project/GEM/releases/download/latest/latest.apk")));
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
                     }
 
                 }
                 in.close();
-            } catch (Exception e) {
-            }
+            } catch (Exception ignored) {}
         }
 
-    };
-
-    /* This Runnable creates a Dialog and asks the user to open the Market/ Or basically for now, the github page */
-    private Runnable showUpdate = new Runnable() {
-        public void run() {
-            new AlertDialog.Builder(LaunchActivity.this)
-                    .setIcon(R.mipmap.ic_launcher_srini_black)       //You can also change according to the icon the user will set
-                    .setTitle("Update Available")
-                    .setMessage("An update for the latest version is available!\n\nOpen Update page and download?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            /* User clicked OK so do some stuff */
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Substance-Project/GEM/releases/download/latest/latest.apk")));
-                        }
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
-        }
     };
 
 
