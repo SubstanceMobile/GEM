@@ -90,12 +90,11 @@ public class Album {
         if (albumArtPath != null) {
             defaultArt = false;
             colorAnimated = false;
-            this.albumArtPath = "file://" + albumArtPath;
         } else {
             defaultArt = true;
             colorAnimated = true;
-            this.albumArtPath = "android.resource://com.animbus.music/" + (!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light);
         }
+        this.albumArtPath = "file://" + albumArtPath;
     }
 
     public String getAlbumArtPath() {
