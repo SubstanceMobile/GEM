@@ -255,8 +255,7 @@
         <activity
             android:name=".ui.settings.About"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".ui.settings.Settings"
-            android:theme="@style/AppTheme">
+            android:parentActivityName=".ui.settings.Settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.animbus.music.ui.settings.Settings" />

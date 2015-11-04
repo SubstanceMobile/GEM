@@ -33,6 +33,7 @@
             android:padding="@dimen/margin_medium">
 
             <android.support.v7.widget.CardView
+                style="?attr/cardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -89,7 +90,8 @@
                             android:layout_height="match_parent"
                             android:layout_margin="@dimen/margin_medium"
                             android:padding="@dimen/margin_small"
-                            android:src="@drawable/ic_code_24dp" />
+                            android:src="@drawable/ic_code_24dp"
+                            android:id="@+id/about_code_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -111,7 +113,8 @@
                             android:layout_height="match_parent"
                             android:layout_margin="@dimen/margin_medium"
                             android:padding="@dimen/margin_small"
-                            android:src="@drawable/ic_info_24dp" />
+                            android:src="@drawable/ic_info_24dp"
+                            android:id="@+id/about_version_icon" />
 
                         <TextView
                             android:id="@+id/about_version_text_view"
@@ -136,6 +139,7 @@
                 android:textColor="?attr/secondaryTextColor" />
 
             <android.support.v7.widget.CardView
+                style="?attr/cardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -278,6 +282,7 @@
                 android:id="@+id/textView11" />
 
             <android.support.v7.widget.CardView
+                style="?attr/cardStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

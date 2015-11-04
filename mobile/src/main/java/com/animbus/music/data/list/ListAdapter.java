@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -191,6 +192,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         private static final int COLOR_DELAY_BASE = 550;
         private static final int COLOR_DELAY_MAX = 750;
 
+        private static final int GRID_ANIM_DELAY = 10;
+        private static final int GRID_ANIM_DUR = 500;
+
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
         private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
@@ -208,6 +212,37 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         public void configure(Album object) {
             resetPalette();
             binding.getAlbum().requestArt(context, binding.AlbumArtGridItemAlbumArt, this);
+            animate();
+
+        }
+
+        private void animate() {
+            if (!binding.getAlbum().animated) {
+                binding.getAlbum().animated = true;
+
+                int animateTill;
+                if (!SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_TABS, false)) {
+                    animateTill = 5;
+                } else {
+                    Configuration configuration = context.getResources().getConfiguration();
+                    if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        animateTill = 3;
+                    } else {
+                        animateTill = 2;
+                    }
+                }
+
+                if (getAdapterPosition() <= animateTill) {
+                    binding.AlbumGridItemRootView.setTranslationY(800.0f);
+                    int delayPart = getAdapterPosition() * 100;
+                    binding.AlbumGridItemRootView.animate()
+                            .translationY(0.0f)
+                            .alpha(1.0f)
+                            .setDuration(GRID_ANIM_DUR)
+                            .setStartDelay(GRID_ANIM_DELAY + delayPart)
+                            .start();
+                } else binding.AlbumGridItemRootView.setAlpha(1.0f);
+            }
         }
 
         @Override

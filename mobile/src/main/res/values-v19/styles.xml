@@ -41,6 +41,7 @@
     </style>
 
     <style name="Base" parent="Theme.AppCompat.NoActionBar">
+        <item name="cardStyle">@style/CardView.Dark</item>
         <item name="android:windowBackground">@color/primaryDark</item>
 
         <item name="primaryTextColor">@color/primary_text_default_material_dark</item>
@@ -60,6 +61,7 @@
     </style>
 
     <style name="Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="cardStyle">@style/CardView.Light</item>
         <item name="android:windowBackground">@color/primaryLight</item>
 
         <item name="primaryTextColor">@color/primary_text_default_material_light</item>
@@ -79,6 +81,7 @@
     </style>
 
     <style name="Base.Light.DarkActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="cardStyle">@style/CardView.Light</item>
         <item name="android:windowBackground">@color/primaryLight</item>
 
         <item name="primaryTextColor">@color/primary_text_default_material_light</item>

@@ -20,4 +20,5 @@
     <attr name="ripple_circle_alt_color" format="reference" />
 
     <attr name="default_status_bar_theme" format="reference" />
+    <attr name="cardStyle" format="reference" />
 </resources>

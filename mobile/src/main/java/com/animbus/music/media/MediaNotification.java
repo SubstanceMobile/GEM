@@ -85,7 +85,7 @@ public class MediaNotification extends BroadcastReceiver {
             @Override
             public void onPlaybackStateChanged(PlaybackStateCompat state) {
                 mPlaybackState = state;
-                update();
+                if (PlaybackManager.get().isActive()) update();
             }
         });
     }
