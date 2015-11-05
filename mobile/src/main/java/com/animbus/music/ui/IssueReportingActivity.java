@@ -16,7 +16,7 @@ public class IssueReportingActivity extends GittyReporter {
     @Override
     public void init(Bundle savedInstanceState) {
         setTargetRepository("Substance-Project", "GEM");
-        setGuestOAuth2Token("25a24ffb3814a54657d21c3dd057af9f7c27ef5a");
+        setGuestOAuth2Token("START4fd1b70e07912c26c60c06ffa220c7c5c417334b");
         enableGuestGitHubLogin(true);
         enableUserGitHubLogin(true);
         setExtraInfo(getExtraInfo());
