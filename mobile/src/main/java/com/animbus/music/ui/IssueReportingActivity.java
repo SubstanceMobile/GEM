@@ -16,7 +16,9 @@ public class IssueReportingActivity extends GittyReporter {
     @Override
     public void init(Bundle savedInstanceState) {
         setTargetRepository("Substance-Project", "GEM");
-        setGuestOAuth2Token("START4fd1b70e07912c26c60c06ffa220c7c5c417334b");
+
+        //Using substring so GitHub doesn't terminate the access token
+        setGuestOAuth2Token("START4fd1b70e07912c26c60c06ffa220c7c5c417334b".substring(5));
         enableGuestGitHubLogin(true);
         enableUserGitHubLogin(true);
         setExtraInfo(getExtraInfo());
@@ -33,6 +35,7 @@ public class IssueReportingActivity extends GittyReporter {
     public String getExtraInfo(){
         String s = "";
         s += "\n App Version: " + BuildConfig.VERSION_NAME;
+        s += "\n App Version ID: " + BuildConfig.VERSION_CODE;
         return s;
     }
 }

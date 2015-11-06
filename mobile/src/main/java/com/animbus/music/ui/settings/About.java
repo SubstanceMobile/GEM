@@ -36,7 +36,7 @@ public class About extends ThemableActivity {
     protected void setUp() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((TextView) findViewById(R.id.about_version_text_view)).setText(BuildConfig.VERSION_NAME);
+        ((TextView) findViewById(R.id.about_version_text_view)).setText(BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")");
         DrawableCompat.setTint(((ImageView) findViewById(R.id.about_code_icon)).getDrawable(), !ThemeManager.get().useLightTheme ? Color.WHITE : Color.BLACK);
         DrawableCompat.setTint(((ImageView) findViewById(R.id.about_version_icon)).getDrawable(), !ThemeManager.get().useLightTheme ? Color.WHITE : Color.BLACK);
         ((ImageView) findViewById(R.id.about_icon))

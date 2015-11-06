@@ -34,8 +34,6 @@ import com.animbus.music.ui.ItemAlbumGrid;
 import com.animbus.music.ui.ItemSongList;
 import com.animbus.music.ui.albumDetails.AlbumDetails;
 import com.animbus.music.ui.theme.ThemeManager;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -128,6 +126,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
     protected abstract class SimpleViewHolder<BINDING extends ViewDataBinding, TYPE> extends RecyclerView.ViewHolder {
         protected BINDING binding;
 
+        protected final int COLOR_DUR = 300;
+        protected final int COLOR_DELAY_BASE = 550;
+        protected final int COLOR_DELAY_MAX = 750;
+
+        protected final int LIST_ANIM_DELAY = 10;
+        protected final int LIST_ANIM_DUR = 500;
+
         protected SimpleViewHolder(BINDING binding) {
             super(binding.getRoot());
             this.binding = binding;
@@ -136,6 +141,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         public void update(TYPE object) {
             binding.setVariable(getVarId(), object);
             configure(object);
+            animate();
         }
 
         private int getVarId() {
@@ -159,6 +165,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
         protected abstract void configure(TYPE object);
 
+        protected void animate() {
+
+        }
+
     }
 
     protected class SongsViewHolder extends SimpleViewHolder<ItemSongList, Song> implements View.OnClickListener {
@@ -170,13 +180,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         @Override
         public void configure(Song object) {
             binding.getRoot().setOnClickListener(this);
-            Glide.with(context).load(object.getAlbum().getAlbumArtPath())
-                    .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
-                    .animate(android.R.anim.fade_in)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
-                    .into(binding.songlistSongAlbumart);
+            object.getAlbum().requestArt(context, binding.songlistSongAlbumart);
         }
 
         @Override
@@ -187,14 +191,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
     protected class AlbumsViewHolder extends SimpleViewHolder<ItemAlbumGrid, Album> implements RequestListener<String, GlideDrawable>,
             Palette.PaletteAsyncListener, View.OnClickListener, View.OnLongClickListener {
-
-        private static final int COLOR_DUR = 300;
-        private static final int COLOR_DELAY_BASE = 550;
-        private static final int COLOR_DELAY_MAX = 750;
-
-        private static final int GRID_ANIM_DELAY = 10;
-        private static final int GRID_ANIM_DUR = 500;
-
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
         private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
@@ -212,11 +208,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         public void configure(Album object) {
             resetPalette();
             binding.getAlbum().requestArt(context, binding.AlbumArtGridItemAlbumArt, this);
-            animate();
-
         }
 
-        private void animate() {
+        @Override
+        protected void animate() {
             if (!binding.getAlbum().animated) {
                 binding.getAlbum().animated = true;
 
@@ -234,12 +229,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
                 if (getAdapterPosition() <= animateTill) {
                     binding.AlbumGridItemRootView.setTranslationY(800.0f);
-                    int delayPart = getAdapterPosition() * 100;
                     binding.AlbumGridItemRootView.animate()
                             .translationY(0.0f)
                             .alpha(1.0f)
-                            .setDuration(GRID_ANIM_DUR)
-                            .setStartDelay(GRID_ANIM_DELAY + delayPart)
+                            .setDuration(LIST_ANIM_DUR)
+                            .setStartDelay(LIST_ANIM_DELAY + (getAdapterPosition() * 100))
                             .start();
                 } else binding.AlbumGridItemRootView.setAlpha(1.0f);
             }
