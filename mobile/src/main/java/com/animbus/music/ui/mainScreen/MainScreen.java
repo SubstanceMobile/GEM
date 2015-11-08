@@ -2,6 +2,9 @@ package com.animbus.music.ui.mainScreen;
 
 import android.animation.Animator;
 import android.app.ActivityManager;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -28,12 +31,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SearchEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -52,6 +57,7 @@ import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.ServiceHelper;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.IssueReportingActivity;
+import com.animbus.music.ui.search.SearchActivity;
 import com.animbus.music.ui.nowPlaying.NowPlaying;
 import com.animbus.music.ui.settings.Settings;
 import com.animbus.music.ui.settings.chooseIcon.IconManager;
@@ -406,8 +412,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.action_search:
-                /*startActivity(new Intent(this, Search.class));*/
-                Snackbar.make(findViewById(R.id.MainView), R.string.msg_coming_soon, Snackbar.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SearchActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -420,6 +425,12 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onSearchRequested() {
+        startActivity(new Intent(this, SearchActivity.class));
+        return true;
     }
 
     @Override
@@ -562,16 +573,26 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         }
 
         private void configureAsPlaylists(RecyclerView list) {
-            //TODO: Add this
+            list.setAdapter(new ListAdapter(ListAdapter.TYPE_PLAYLIST, Library.getPlaylists(), MainScreen.this));
+            list.setItemAnimator(new DefaultItemAnimator());
+            list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         private void configureAsArtists(RecyclerView list) {
-            //TODO: Add this
+            list.setAdapter(new ListAdapter(ListAdapter.TYPE_ARTIST, Library.getArtists(), MainScreen.this));
+            list.setItemAnimator(new DefaultItemAnimator());
+            list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
+        }
+
+        private void configureAsGenres(RecyclerView list) {
+            list.setAdapter(new ListAdapter(ListAdapter.TYPE_GENRE, Library.getGenres(), MainScreen.this));
+            list.setItemAnimator(new DefaultItemAnimator());
+            list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            if (position == 0 || position == 1) {
+            if (position == 0 || position == 1 || position == 2) {
                 View root = getLayoutInflater().inflate(R.layout.main_screen_page, container, false);
                 RecyclerView list = (RecyclerView) root.findViewById(R.id.main_screen_page_recycler);
                 RecyclerFastScroller scroller = (RecyclerFastScroller) root.findViewById(R.id.main_screen_page_scroller);

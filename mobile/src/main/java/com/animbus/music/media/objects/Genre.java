@@ -5,4 +5,32 @@ package com.animbus.music.media.objects;
  */
 public class Genre {
     //TODO:Unfinished
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Name
+    ///////////////////////////////////////////////////////////////////////////
+
+    String name;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // ID
+    ///////////////////////////////////////////////////////////////////////////
+
+    long id;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
 }

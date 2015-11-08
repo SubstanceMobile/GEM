@@ -1,13 +1,15 @@
 package com.animbus.music.media.objects;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Adrian on 7/5/2015.
  */
 public class Playlist {
-    List<Song> playlistSongs;
-    String playlistName;
+    List<Song> songs = new ArrayList<>();
+    String name;
     long id;
 
     public Playlist(){}
@@ -16,25 +18,24 @@ public class Playlist {
     //Manages the title of the playlist
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setPlaylistName(String playlistName) {
-        this.playlistName = playlistName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPlaylistName() {
-        return playlistName;
+    public String getName() {
+        return name;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //These are the songs in the
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    public void setPlaylistSongs(List<Song> playlistSongs) {
-        this.playlistSongs = playlistSongs;
+    public void setNoSongs() {
+        this.songs = Collections.EMPTY_LIST;
     }
 
-    public List<Song> getPlaylistSongs() {
-        return playlistSongs;
+    public List<Song> getSongs() {
+        return songs;
     }
 
     ///////////////////////////////////////////////////////////////////////////

@@ -3,8 +3,10 @@ package com.animbus.music.media;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 
 import com.animbus.music.media.objects.Artist;
+import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.media.objects.Album;
@@ -20,6 +22,7 @@ public class Library {
     private List<Album> mAlbums = new ArrayList<>();
     private List<Playlist> mPlaylists = new ArrayList<>();
     private List<Artist> mArtists = new ArrayList<>();
+    private List<Genre> mGenres = new ArrayList<>();
 
     private boolean mBuilt = false;
 
@@ -41,6 +44,7 @@ public class Library {
         buildSongs();
         buildPlaylists();
         buildArtists();
+        buildGenres();
 
         buildDataMesh();
 
@@ -53,7 +57,7 @@ public class Library {
             Cursor songsCursor = context.getContentResolver().query(
                     MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                     null, where, null,
-                    MediaStore.Audio.Media.TITLE);
+                    MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 
             int titleColumn = songsCursor.getColumnIndex
                     (MediaStore.Audio.Media.TITLE);
@@ -79,7 +83,6 @@ public class Library {
                 mSongs.add(s);
             } while (songsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
             mSongs = Collections.emptyList();
         }
     }
@@ -89,7 +92,7 @@ public class Library {
             Cursor albumsCursor = context.getContentResolver().query(
                     MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
                     null, null, null,
-                    MediaStore.Audio.Albums.ALBUM);
+                    MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
 
             int titleColumn = albumsCursor.getColumnIndex
                     (MediaStore.Audio.Albums.ALBUM);
@@ -115,17 +118,81 @@ public class Library {
                 mAlbums.add(album);
             } while (albumsCursor.moveToNext());
         } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
             mAlbums = Collections.emptyList();
         }
     }
 
     private void buildPlaylists() {
-        //TODO:Add this
+        try {
+            Cursor playlistsCursor = context.getContentResolver().query(
+                    MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
+                    null, null, null,
+                    MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
+
+            int titleColumn = playlistsCursor.getColumnIndex
+                    (MediaStore.Audio.Playlists.NAME);
+            int idColumn = playlistsCursor.getColumnIndex
+                    (MediaStore.Audio.Playlists._ID);
+
+            playlistsCursor.moveToFirst();
+            do {
+                Playlist playlist = new Playlist();
+
+                playlist.setName(playlistsCursor.getString(titleColumn));
+                playlist.setId(playlistsCursor.getLong(idColumn));
+
+                mPlaylists.add(playlist);
+            } while (playlistsCursor.moveToNext());
+        } catch (IndexOutOfBoundsException e) {
+            mPlaylists = Collections.emptyList();
+        }
+    }
+
+    private void loadSongsForPlaylist(Playlist playlist) {
+        try {
+            Cursor playlistSongsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", playlist.getId()),
+                    null, null, null,
+                    MediaStore.Audio.Playlists.Members.PLAY_ORDER);
+
+            int idColumn = playlistSongsCursor.getColumnIndex(MediaStore.Audio.Playlists.Members.AUDIO_ID);
+
+            playlistSongsCursor.moveToFirst();
+            do {
+                playlist.getSongs().add(findSongById(playlistSongsCursor.getLong(idColumn)));
+            } while (playlistSongsCursor.moveToNext());
+        } catch (IndexOutOfBoundsException e) {
+            playlist.setNoSongs();
+        }
     }
 
     private void buildArtists() {
         //TODO:Add this
+    }
+
+    private void buildGenres() {
+        try {
+            Cursor genresCursor = context.getContentResolver().query(
+                    MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI,
+                    null, null, null,
+                    MediaStore.Audio.Genres.DEFAULT_SORT_ORDER);
+
+            int titleColumn = genresCursor.getColumnIndex
+                    (MediaStore.Audio.Genres.NAME);
+            int idColumn = genresCursor.getColumnIndex
+                    (android.provider.MediaStore.Audio.Genres._ID);
+
+            genresCursor.moveToFirst();
+            do {
+                Genre genre = new Genre();
+
+                genre.setName(genresCursor.getString(titleColumn));
+                genre.setId(genresCursor.getLong(idColumn));
+
+                mGenres.add(genre);
+            } while (genresCursor.moveToNext());
+        } catch (IndexOutOfBoundsException e) {
+            mGenres = Collections.emptyList();
+        }
     }
 
     /**
@@ -143,6 +210,10 @@ public class Library {
                 }
             }
         }
+
+        if (!mPlaylists.isEmpty() && !mSongs.isEmpty()) {
+            for (Playlist p : mPlaylists) loadSongsForPlaylist(p);
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -157,37 +228,78 @@ public class Library {
         return instance.mAlbums;
     }
 
-    public List<Playlist> getPlaylists() {
-        return mPlaylists;
+    public static List<Playlist> getPlaylists() {
+        return instance.mPlaylists;
     }
 
-    public List<Artist> getArtists() {
-        return mArtists;
+    public static List<Artist> getArtists() {
+        return instance.mArtists;
+    }
+
+    public static List<Genre> getGenres() {
+        return instance.mGenres;
     }
 
     public boolean isBuilt() {
         return mBuilt;
     }
 
-    public Song findSongById(long id) {
-        Song s = null;
-        for (Song song : mSongs) {
-            if (song.getSongID() == id) {
-                s = song;
-                break;
-            }
-        }
-        return s;
+    public static Song findSongById(long id) {
+        for (Song song : instance.mSongs) if (song.getSongID() == id) return song;
+        return null;
     }
 
-    public Album findAlbumById(long id) {
-        Album a = null;
-        for (Album album : mAlbums) {
-            if (album.getId() == id) {
-                a = album;
-                break;
+    public static Album findAlbumById(long id) {
+        for (Album album : instance.mAlbums) if (album.getId() == id)  return album;
+        return null;
+    }
+
+    public static Playlist findPlaylistById(long id) {
+        for (Playlist playlist : instance.mPlaylists) if (playlist.getId() == id) return playlist;
+        return null;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Search
+    ///////////////////////////////////////////////////////////////////////////
+
+    public static List<Album> filterAlbums(String query) {
+        List<Album> results = new ArrayList<>();
+        for (Album a : getAlbums()) {
+            if (a.getAlbumTitle().toLowerCase().contains(query.toLowerCase())) {
+                if (!results.contains(a)) results.add(a);
+            }
+
+            if (a.getAlbumArtistName().toLowerCase().contains(query.toLowerCase())) {
+                if (!results.contains(a)) results.add(a);
             }
         }
-        return a;
+        return results;
     }
+
+    public static List<Song> filterSongs(String query) {
+        List<Song> results = new ArrayList<>();
+        for (Song s : getSongs()) {
+            if (s.getSongTitle().toLowerCase().contains(query.toLowerCase())) {
+                if (!results.contains(s)) results.add(s);
+            }
+
+            if (s.getSongArtist().toLowerCase().contains(query.toLowerCase())) {
+                if (!results.contains(s)) results.add(s);
+            }
+        }
+        return results;
+    }
+
+    public static List<Playlist> filterPlaylists(String query) {
+        List<Playlist> results = new ArrayList<>();
+        for (Playlist p : getPlaylists()) {
+            if (p.getName().toLowerCase().contains(query.toLowerCase())) {
+                if (!results.contains(p)) results.add(p);
+
+            }
+        }
+        return results;
+    }
+
 }

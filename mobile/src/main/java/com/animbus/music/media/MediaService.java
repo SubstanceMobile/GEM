@@ -201,7 +201,7 @@ public class MediaService extends Service implements PlaybackManager.OnChangedLi
         @Override
         public void onSkipToQueueItem(long id) {
             super.onSkipToQueueItem(id);
-            mPlayback.play(Library.get().findSongById(id));
+            mPlayback.play(Library.findSongById(id));
             setState(STATE_SKIPPING_TO_QUEUE_ITEM);
         }
 

@@ -49,7 +49,7 @@ public class LaunchActivity extends ThemableActivity {
         if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
             //Playing from intent
             PlaybackManager.get().play(
-                    Library.get().findSongById(
+                    Library.findSongById(
                             Long.valueOf(getIntent().getData().getLastPathSegment().substring(6))));
         }
     }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.search.SearchActivity"
+    android:id="@+id/root">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:theme="?attr/default_status_bar_theme"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+   <android.support.v4.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <LinearLayout
+               android:id="@+id/search_category_albums"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="@dimen/margin_small"
+                   android:layout_marginStart="@dimen/margin_medium"
+                   android:layout_marginTop="@dimen/margin_small"
+                   android:text="@string/page_albums"
+                   android:textAppearance="?android:attr/textAppearanceSmall"
+                   android:textColor="?attr/secondaryTextColor" />
+
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/search_albums_results"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent" />
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/search_category_songs"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="@dimen/margin_small"
+                   android:layout_marginStart="@dimen/margin_medium"
+                   android:layout_marginTop="@dimen/margin_small"
+                   android:text="@string/page_songs"
+                   android:textAppearance="?android:attr/textAppearanceSmall"
+                   android:textColor="?attr/secondaryTextColor" />
+
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/search_songs_results"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/search_category_playlists"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="@dimen/margin_small"
+                   android:layout_marginStart="@dimen/margin_medium"
+                   android:layout_marginTop="@dimen/margin_small"
+                   android:text="@string/page_playlists"
+                   android:textAppearance="?android:attr/textAppearanceSmall"
+                   android:textColor="?attr/secondaryTextColor" />
+
+               <android.support.v7.widget.RecyclerView
+                   android:id="@+id/search_playlists_results"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+   </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:text="@string/search_empty"
+        android:gravity="center"
+        android:id="@+id/search_empty_textview" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -22,9 +22,11 @@
     <string name="action_test_icons">Enable All Icons (Testing Purposes)</string>
     <string name="action_place_shortcut">Add this icon to the homescreen</string>
     <string name="action_donate">Donate</string>
-    <string name="action_favorite">Favorite</string>
-    <string name="action_unfavorite">Unfavorite</string>
     <string name="action_bug_report">Report a bug</string>
+
+    Search
+    <string name="search_empty">No Results</string>
+    <string name="search_hint">Search Library…</string>
 
     Navigation Drawer
     <string name="page_home">Home</string>
@@ -32,6 +34,7 @@
     <string name="page_songs">Songs</string>
     <string name="page_playlists">Playlists</string>
     <string name="page_artists">Artists</string>
+    <string name="page_genres">Genres</string>
 
     <string name="drawer_open">Open the App Drawer</string>
     <string name="drawer_close">Close the App Drawer</string>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_play_all"
+        android:icon="@drawable/ic_play_arrow_24dp"
+        android:title="@string/playback_play"
+        app:showAsAction="ifRoom"/>
+</menu>

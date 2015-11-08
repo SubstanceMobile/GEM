@@ -49,9 +49,6 @@ public class MediaNotification extends BroadcastReceiver {
     String stringPause;
     String stringsNext;
     String stringQueue;
-    private MediaSessionCompat.Token mSessionToken;
-    private MediaControllerCompat mController;
-    private MediaControllerCompat.TransportControls mTransportControls;
     private PlaybackStateCompat mPlaybackState;
     private NotificationManagerCompat mNotificationManager;
     private int mNotificationColor;

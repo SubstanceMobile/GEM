@@ -55,7 +55,7 @@ public class AlbumDetails extends ThemableActivity {
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_album_details);
         configureTransition();
-        mAlbum = Library.get().findAlbumById(getIntent().getLongExtra("album_id", -1));
+        mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
     }
 
     private void configureTransition() {

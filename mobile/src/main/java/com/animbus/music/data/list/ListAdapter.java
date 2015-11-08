@@ -22,16 +22,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.animbus.music.BR;
 import com.animbus.music.R;
 import com.animbus.music.SettingsManager;
 import com.animbus.music.media.PlaybackManager;
 import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.Genre;
+import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.ItemAlbumDetailsList;
 import com.animbus.music.ui.ItemAlbumGrid;
+import com.animbus.music.ui.ItemGenre;
+import com.animbus.music.ui.ItemPlaylist;
 import com.animbus.music.ui.ItemSongList;
+import com.animbus.music.ui.PlaylistDetails;
 import com.animbus.music.ui.albumDetails.AlbumDetails;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -53,7 +59,7 @@ import static com.animbus.music.media.objects.Album.TITLE_COLOR;
 /**
  * Created by Adrian on 10/28/2015.
  */
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
     public static final int TYPE_SONG = 0, TYPE_ALBUM = 1, TYPE_PLAYLIST = 2, TYPE_GENRE = 3, TYPE_ARTIST = 4;
     public static final int TYPE_ALBUM_DETAILS = -1;
     List data;
@@ -74,17 +80,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
     }
 
     @Override
-    public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BasicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (type == TYPE_SONG) {
             return new SongsViewHolder(ItemSongList.inflate(inflater, parent, false));
         } else if (type == TYPE_ALBUM) {
             return new AlbumsViewHolder(ItemAlbumGrid.inflate(inflater, parent, false));
         } else if (type == TYPE_PLAYLIST) {
-            return null;
+            return new PlaylistsViewHolder(ItemPlaylist.inflate(inflater, parent, false));
         } else if (type == TYPE_ARTIST) {
             return null;
         } else if (type == TYPE_GENRE) {
-            return null;
+            return new GenresViewHolder(ItemGenre.inflate(inflater, parent, false));
         } else if (type == TYPE_ALBUM_DETAILS) {
             return new AlbumDetailsViewHolder(ItemAlbumDetailsList.inflate(inflater, parent, false));
         } else {
@@ -93,19 +99,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
     }
 
     @Override
-    public void onBindViewHolder(SimpleViewHolder holder, int position) {
+    public void onBindViewHolder(BasicViewHolder holder, int position) {
         holder.update(data.get(position));
     }
 
     @Override
     public int getItemCount() {
         return data.size();
-    }
-
-    protected interface BaseListener<TYPE> {
-        void onClick(TYPE object, List<TYPE> data, int pos);
-
-        boolean onLongClick(TYPE object, List<TYPE> data, int pos);
     }
 
     Toolbar transitionAppBar;
@@ -123,7 +123,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
     // Holders
     ///////////////////////////////////////////////////////////////////////////
 
-    protected abstract class SimpleViewHolder<BINDING extends ViewDataBinding, TYPE> extends RecyclerView.ViewHolder {
+    protected abstract class BasicViewHolder<BINDING extends ViewDataBinding, TYPE> extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
         protected BINDING binding;
 
         protected final int COLOR_DUR = 300;
@@ -133,13 +134,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         protected final int LIST_ANIM_DELAY = 10;
         protected final int LIST_ANIM_DUR = 500;
 
-        protected SimpleViewHolder(BINDING binding) {
+        protected BasicViewHolder(BINDING binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
         public void update(TYPE object) {
             binding.setVariable(getVarId(), object);
+            binding.getRoot().setOnClickListener(this);
+            binding.getRoot().setOnLongClickListener(this);
             configure(object);
             animate();
         }
@@ -156,6 +159,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
                 case TYPE_ALBUM_DETAILS:
                     varId = BR.song;
                     break;
+                case TYPE_GENRE:
+                    varId = BR.genre;
+                    break;
+                case TYPE_PLAYLIST:
+                    varId = BR.playlist;
+                    break;
                 default:
                     varId = -1;
                     break;
@@ -169,9 +178,26 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
         }
 
+        @Override
+        public boolean onLongClick(View v) {
+            //Do nothing. Can be overridden if it is necessary to do anything on a long click
+            return false;
+        }
+
     }
 
-    protected class SongsViewHolder extends SimpleViewHolder<ItemSongList, Song> implements View.OnClickListener {
+    protected abstract class SimpleViewHolder<BINDING extends ViewDataBinding, TYPE> extends BasicViewHolder<BINDING, TYPE> {
+        protected SimpleViewHolder(BINDING binding) {
+            super(binding);
+        }
+
+        @Override
+        protected void configure(TYPE object) {
+            //Do nothing. The default impl should do everything automatically
+        }
+    }
+
+    protected class SongsViewHolder extends BasicViewHolder<ItemSongList, Song> {
 
         public SongsViewHolder(ItemSongList binding) {
             super(binding);
@@ -179,7 +205,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
 
         @Override
         public void configure(Song object) {
-            binding.getRoot().setOnClickListener(this);
             object.getAlbum().requestArt(context, binding.songlistSongAlbumart);
         }
 
@@ -189,8 +214,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         }
     }
 
-    protected class AlbumsViewHolder extends SimpleViewHolder<ItemAlbumGrid, Album> implements RequestListener<String, GlideDrawable>,
-            Palette.PaletteAsyncListener, View.OnClickListener, View.OnLongClickListener {
+    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbumGrid, Album> implements RequestListener<String, GlideDrawable>, Palette.PaletteAsyncListener {
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
         private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
@@ -413,20 +437,45 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SimpleViewHold
         }
     }
 
-    protected class AlbumDetailsViewHolder extends SimpleViewHolder<ItemAlbumDetailsList, Song> implements View.OnClickListener {
+    protected class AlbumDetailsViewHolder extends SimpleViewHolder<ItemAlbumDetailsList, Song> {
 
         protected AlbumDetailsViewHolder(ItemAlbumDetailsList binding) {
             super(binding);
         }
 
         @Override
-        protected void configure(Song object) {
+        public void onClick(View v) {
+            PlaybackManager.get().play(data, getAdapterPosition());
+        }
+    }
 
+    protected class PlaylistsViewHolder extends SimpleViewHolder<ItemPlaylist, Playlist> {
+
+        protected PlaylistsViewHolder(ItemPlaylist binding) {
+            super(binding);
         }
 
         @Override
         public void onClick(View v) {
-            PlaybackManager.get().play(data, getAdapterPosition());
+            context.startActivity(new Intent(context, PlaylistDetails.class).putExtra("playlist_id", binding.getPlaylist().getId()));
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            PlaybackManager.get().play(binding.getPlaylist().getSongs(), 0);
+            return true;
+        }
+    }
+
+    protected class GenresViewHolder extends SimpleViewHolder<ItemGenre, Genre> {
+
+        protected GenresViewHolder(ItemGenre binding) {
+            super(binding);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(v.getContext(), "Genre Clicked", Toast.LENGTH_SHORT).show();
         }
     }
 
