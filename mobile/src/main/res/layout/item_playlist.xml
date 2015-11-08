@@ -9,10 +9,11 @@
 
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="@dimen/listViewSizeBig"
-        android:background="?attr/ripple">
+        android:background="?attr/ripple"
+        android:orientation="horizontal" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,6 +21,6 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/margin_medium"
             android:text="@{playlist.getName}" />
-    </FrameLayout>
+    </LinearLayout>
 
 </layout>

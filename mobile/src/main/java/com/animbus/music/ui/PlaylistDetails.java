@@ -56,7 +56,8 @@ public class PlaylistDetails extends ThemableActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_playlist_details, menu);
-        return !mPlaylist.getSongs().isEmpty();
+        menu.findItem(R.id.action_play_all).setVisible(!mPlaylist.getSongs().isEmpty());
+        return true;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.animbus.music.media.objects;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
@@ -204,6 +205,14 @@ public class Album {
 
     public void setContext(Context cxt) {
         this.cxt = cxt;
+        mainColors = new int[] {
+                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryGreyDark : R.color.primaryLight),
+                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
+                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light)
+        };
+        accentColors = new int[] {
+                Color.BLACK, Color.WHITE, Color.GRAY
+        };
     }
 
     public Context getContext() {
