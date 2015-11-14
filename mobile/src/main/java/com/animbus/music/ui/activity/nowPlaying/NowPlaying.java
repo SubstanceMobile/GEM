@@ -27,7 +27,7 @@ import com.animbus.music.R;
 import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.list.NowPlayingAdapter;
-import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.activity.settings.chooseIcon.IconManager;

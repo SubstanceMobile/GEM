@@ -1,4 +1,4 @@
-package com.animbus.music.media;
+package com.animbus.music.media.stable;
 
 import android.content.Context;
 import android.media.AudioManager;

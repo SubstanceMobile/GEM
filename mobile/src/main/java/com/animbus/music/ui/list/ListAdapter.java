@@ -27,7 +27,7 @@ import android.widget.Toast;
 import com.animbus.music.BR;
 import com.animbus.music.R;
 import com.animbus.music.util.SettingsManager;
-import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;

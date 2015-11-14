@@ -1,4 +1,4 @@
-package com.animbus.music.media;
+package com.animbus.music.media.stable;
 
 import android.support.v4.media.session.MediaSessionCompat.QueueItem;
 import android.util.Log;

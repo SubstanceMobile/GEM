@@ -19,7 +19,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.animbus.music.R;
-import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Song;
 
 /**

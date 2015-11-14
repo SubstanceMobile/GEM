@@ -1,4 +1,4 @@
-package com.animbus.music.media;
+package com.animbus.music.media.stable;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -16,6 +16,7 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 
+import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Song;
 
 import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PAUSE;

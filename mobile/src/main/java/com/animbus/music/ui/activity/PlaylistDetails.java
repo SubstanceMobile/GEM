@@ -12,7 +12,7 @@ import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.media.Library;
-import com.animbus.music.media.PlaybackManager;
+import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.ui.activity.theme.Theme;
 

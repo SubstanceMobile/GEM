@@ -1,4 +1,4 @@
-package com.animbus.music.media;
+package com.animbus.music.media.stable;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.media.stable.MediaService;
+import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 
 import static android.support.v4.app.NotificationCompat.CATEGORY_TRANSPORT;
