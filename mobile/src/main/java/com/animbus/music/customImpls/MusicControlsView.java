@@ -1,6 +1,7 @@
 package com.animbus.music.customImpls;
 
 import android.content.Context;
+import android.drm.DrmStore;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Handler;
@@ -239,12 +240,14 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
         }
 
         int position = PlaybackManager.get().getCurrentPosInSong();
-        int duration = (int) PlaybackManager.get().getCurrentSong().getSongDuration();
+        int duration = 0;
+        if (PlaybackManager.get().getCurrentSong() != null)
+            duration = (int) PlaybackManager.get().getCurrentSong().getSongDuration();
 
-            if (mProgress != null) {
-                mProgress.setProgress(position);
-                mProgress.setMax(duration);
-            }
+        if (mProgress != null) {
+            mProgress.setProgress(position);
+            mProgress.setMax(duration);
+        }
 
         if (mEndTime != null)
             mEndTime.setText(PlaybackManager.get().getCurrentSong().getSongDurString());
@@ -289,10 +292,10 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
         updatePausePlay();
     }
 
-    public boolean onKeyEvent(KeyEvent event){
+    public boolean onKeyEvent(KeyEvent event) {
         int vol;
         boolean handled = false;
-        switch (event.getKeyCode()){
+        switch (event.getKeyCode()) {
             case KeyEvent.KEYCODE_VOLUME_UP:
                 vol = mVolume.getProgress() + 1;
                 if (vol > mVolume.getMax()) vol = mVolume.getMax();
