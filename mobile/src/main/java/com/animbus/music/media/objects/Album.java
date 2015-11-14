@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
-import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.ui.activity.theme.ThemeManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;

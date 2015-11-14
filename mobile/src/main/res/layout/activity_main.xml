@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="false"
-    tools:context=".ui.mainScreen.MainScreen">
+    tools:context=".ui.activity.mainScreen.MainScreen">
 
     <!--Main layout-->
     <android.support.design.widget.CoordinatorLayout
@@ -43,7 +43,7 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <com.animbus.music.customImpls.LockableViewPager
+            <com.animbus.music.ui.custom.view.LockableViewPager
                 android:id="@+id/main_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -77,7 +77,7 @@
                     android:gravity="start"
                     android:orientation="horizontal">
 
-                    <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                    <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                         android:id="@+id/main_screen_now_playing_toolbar_art"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"

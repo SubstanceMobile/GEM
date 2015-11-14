@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.animbus.music.ui.nowPlaying.NowPlaying">
+    tools:context=".ui.activity.nowPlaying.NowPlaying">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/now_playing_app_bar_layout"
@@ -24,7 +24,7 @@
             app:statusBarScrim="?attr/colorPrimary"
             app:title="@string/playback_queue">
 
-            <com.animbus.music.customImpls.SquareImageViewWidth_Based
+            <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
                 android:id="@+id/now_playing_album_art"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:fitsSystemWindows="true"
                 android:orientation="vertical">
 
-                <com.animbus.music.customImpls.SquareImageViewWidth_Based
+                <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
                     android:id="@+id/now_playing_square_spacer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                     android:orientation="vertical"
                     app:layout_collapseMode="none">
 
-                    <com.animbus.music.customImpls.MusicControlsView
+                    <com.animbus.music.ui.custom.view.MusicControlsView
                         android:id="@+id/now_playing_media_controller_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />

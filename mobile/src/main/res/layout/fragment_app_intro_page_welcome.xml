@@ -18,7 +18,7 @@
             android:layout_height="0dp"
             android:layout_weight="100" />
 
-        <com.animbus.music.customImpls.SquareImageViewWidth_Based
+        <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher_srini_white"

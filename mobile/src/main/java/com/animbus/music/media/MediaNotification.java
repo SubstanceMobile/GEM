@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.media.session.MediaControllerCompat;
-import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.nowPlaying.NowPlaying;
+import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 
 import static android.support.v4.app.NotificationCompat.CATEGORY_TRANSPORT;
 import static android.support.v4.app.NotificationCompat.PRIORITY_MAX;

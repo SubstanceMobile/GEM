@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.animbus.music.ui.albumDetails.AlbumDetails">
+    tools:context=".ui.activity.albumDetails.AlbumDetails">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/album_details_app_bar_layout"
@@ -21,7 +21,7 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed" >
 
-            <com.animbus.music.customImpls.SquareImageViewWidth_Based
+            <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
                 android:id="@+id/album_details_album_art"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 android:fitsSystemWindows="true"
                 android:orientation="vertical">
 
-                <com.animbus.music.customImpls.SquareImageViewWidth_Based
+                <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
                     android:id="@+id/album_details_square_spacer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
         android:src="@drawable/ic_play_arrow_black_48dp"
         app:layout_anchor="@id/album_details_square_spacer"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="com.animbus.music.ui.albumDetails.CustomFabBehavior" />
+        app:layout_behavior="com.animbus.music.ui.activity.albumDetails.CustomFabBehavior" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/album_details_recycler"

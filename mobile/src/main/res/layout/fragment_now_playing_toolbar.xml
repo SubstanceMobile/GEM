@@ -13,7 +13,7 @@
         android:gravity="start"
         android:orientation="horizontal">
 
-        <com.animbus.music.customImpls.SquareImageViewHeight_Based
+        <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
             android:id="@+id/nowplayingtoolbar_albumart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

@@ -4,7 +4,7 @@
     android:id="@+id/ui_tweaker_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UiTweaker">
+    tools:context=".ui.activity.settings.UiTweaker">
 
     <LinearLayout
         android:orientation="vertical"

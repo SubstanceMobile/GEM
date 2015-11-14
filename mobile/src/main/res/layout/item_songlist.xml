@@ -21,7 +21,7 @@
             android:background="?attr/ripple"
             android:orientation="horizontal">
 
-            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+            <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                 android:id="@+id/songlist_song_albumart"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

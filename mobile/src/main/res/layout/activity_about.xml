@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.animbus.music.ui.settings.About">
+    tools:context=".ui.activity.settings.About">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                            <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                                 android:id="@+id/about_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -85,7 +85,7 @@
                         android:onClick="openSourceCode"
                         android:orientation="horizontal">
 
-                        <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                        <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_margin="@dimen/margin_medium"
@@ -108,7 +108,7 @@
                         android:clickable="true"
                         android:orientation="horizontal">
 
-                        <com.animbus.music.customImpls.SquareImageViewHeight_Based
+                        <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_margin="@dimen/margin_medium"

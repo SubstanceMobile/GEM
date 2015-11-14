@@ -27,7 +27,7 @@
             android:orientation="horizontal"
             android:visibility="@{!isFirst ? View.VISIBLE : View.GONE}">
 
-            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+            <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                 android:id="@+id/nowplaying_albumart"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -79,7 +79,7 @@
             android:orientation="horizontal"
             android:visibility="@{isFirst ? View.VISIBLE : View.GONE}">
 
-            <com.animbus.music.customImpls.SquareImageViewHeight_Based
+            <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_medium"
