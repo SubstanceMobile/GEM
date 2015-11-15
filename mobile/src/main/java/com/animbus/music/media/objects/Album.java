@@ -142,6 +142,7 @@ public class Album {
     public static final int FRAME_COLOR = 0, TITLE_COLOR = 1, SUBTITLE_COLOR = 2;
     public int[] mainColors;
     public int[] accentColors;
+    public boolean colorsLoaded = false;
 
     public int getBackgroundColor() {
         return mainColors[FRAME_COLOR];

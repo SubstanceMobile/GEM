@@ -214,7 +214,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
     }
 
-    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbumGrid, Album> implements RequestListener<String, GlideDrawable>, Palette.PaletteAsyncListener {
+    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbumGrid, Album> implements RequestListener<String, GlideDrawable>,
+            Palette.PaletteAsyncListener {
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
         private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
@@ -292,8 +293,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
 
         private void updatePalette(GlideDrawable drawable) {
-            int[] colors = binding.getAlbum().mainColors;
-            if (colors != null) {
+            if (binding.getAlbum().colorsLoaded) {
+                int[] colors = binding.getAlbum().mainColors;
                 binding.AlbumInfoToolbar.setBackgroundColor(colors[FRAME_COLOR]);
                 binding.AlbumTitle.setTextColor(colors[TITLE_COLOR]);
                 binding.AlbumArtist.setTextColor(colors[SUBTITLE_COLOR]);
@@ -304,8 +305,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
 
         private void animatePalette(GlideDrawable drawable) {
-            int[] colors = binding.getAlbum().mainColors;
-            if (colors != null) {
+            if (binding.getAlbum().colorsLoaded) {
+                int[] colors = binding.getAlbum().mainColors;
                 Random colorDelayRandom = new Random();
                 int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
 
@@ -343,7 +344,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
 
         private void generatePalette(GlideDrawable drawable) {
-            if (binding.getAlbum().mainColors == null) {
+            if (!binding.getAlbum().colorsLoaded) {
                 Bitmap art = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(art);
                 drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -408,6 +409,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
             binding.getAlbum().mainColors = new int[]{back, title, subtitle};
             binding.getAlbum().accentColors = new int[]{accent, accentIcon, accentSubIcon};
+
+            binding.getAlbum().colorsLoaded = true;
 
             animatePalette(null);
         }
