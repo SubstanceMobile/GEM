@@ -53,7 +53,7 @@ import com.animbus.music.ui.activity.IssueReportingActivity;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
-import com.animbus.music.ui.activity.settings.chooseIcon.IconManager;
+import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.activity.setup.SetupActivity;
 import com.animbus.music.ui.activity.theme.Theme;
 import com.animbus.music.ui.activity.theme.ThemeManager;
@@ -99,7 +99,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     @Override
     protected void setUpTheme(Theme theme) {
         Drawable menu = getResources().getDrawable(R.drawable.ic_menu_24dp);
-        DrawableCompat.setTint(menu, getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
+        DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
         getSupportActionBar().setHomeAsUpIndicator(menu);
         setUpNavdrawer();
     }
@@ -360,9 +360,8 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         } else if (setting == 4) {
             switchToPlaylists();
         }
-        ColorStateList colorStateList;
         int secondaryColor = ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark);
-        colorStateList = new ColorStateList(
+        ColorStateList colorStateList = new ColorStateList(
                 new int[][]{
                         {android.R.attr.state_checked}, //When selected
                         {}

@@ -13,22 +13,23 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animbus.music.R;
+import com.animbus.music.util.IconManager;
 import com.animbus.music.util.SettingsManager;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.activity.theme.Theme;
 import com.animbus.music.ui.activity.theme.ThemeManager;
 
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.COLOR_BLACK;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.COLOR_BLUE;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.COLOR_COLORFUL;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.COLOR_GREEN;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.COLOR_ORANGE;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.COLOR_RED;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.COLOR_WHITE;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.DESIGNER_ALEX;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.DESIGNER_JAKA;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.DESIGNER_NGUYEN;
-import static com.animbus.music.ui.activity.settings.chooseIcon.IconManager.DESIGNER_SRINI;
+import static com.animbus.music.util.IconManager.COLOR_BLACK;
+import static com.animbus.music.util.IconManager.COLOR_BLUE;
+import static com.animbus.music.util.IconManager.COLOR_COLORFUL;
+import static com.animbus.music.util.IconManager.COLOR_GREEN;
+import static com.animbus.music.util.IconManager.COLOR_ORANGE;
+import static com.animbus.music.util.IconManager.COLOR_RED;
+import static com.animbus.music.util.IconManager.COLOR_WHITE;
+import static com.animbus.music.util.IconManager.DESIGNER_ALEX;
+import static com.animbus.music.util.IconManager.DESIGNER_JAKA;
+import static com.animbus.music.util.IconManager.DESIGNER_NGUYEN;
+import static com.animbus.music.util.IconManager.DESIGNER_SRINI;
 
 public class ChooseIcon extends ThemableActivity {
     Toolbar toolbar;
@@ -57,7 +58,7 @@ public class ChooseIcon extends ThemableActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
-        DrawableCompat.setTint(menu, getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
+        DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
         getSupportActionBar().setHomeAsUpIndicator(menu);
     }
 

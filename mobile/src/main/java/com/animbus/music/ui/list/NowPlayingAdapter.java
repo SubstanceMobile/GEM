@@ -59,7 +59,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
             holder.dataBinder.setIsFirst(true);
             holder.dataBinder.executePendingBindings();
 
-            DrawableCompat.setTint(holder.dataBinder.nowPlayingEqIcon.getDrawable(), customSong.getAlbum().getBackgroundColor());
+            DrawableCompat.setTint(DrawableCompat.wrap(holder.dataBinder.nowPlayingEqIcon.getDrawable()), customSong.getAlbum().getBackgroundColor());
             configureRepeatIcon(holder.dataBinder.nowPlayingRepeatIcon, customSong);
             holder.dataBinder.nowPlayingRepeatIcon.setOnClickListener(new OnClickListener() {
                 @Override
@@ -77,11 +77,11 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
     private void configureRepeatIcon(ImageView i, Song s) {
         if (PlaybackManager.get().isLooping()) {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
-            DrawableCompat.setTint(repeatIcon, s.getAlbum().getBackgroundColor());
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), s.getAlbum().getBackgroundColor());
             i.setImageDrawable(repeatIcon);
         } else {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
-            DrawableCompat.setTint(repeatIcon, ThemeManager.get().useLightTheme ? context.getResources().getColor(R.color.secondary_text_default_material_light) : context.getResources().getColor(R.color.secondary_text_default_material_dark));
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), ThemeManager.get().useLightTheme ? context.getResources().getColor(R.color.secondary_text_default_material_light) : context.getResources().getColor(R.color.secondary_text_default_material_dark));
             i.setImageDrawable(repeatIcon);
         }
     }
@@ -89,12 +89,12 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
     private void toggleRepeatIcon(ImageView i, Song s) {
         if (PlaybackManager.get().isLooping()) {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
-            DrawableCompat.setTint(repeatIcon, ThemeManager.get().useLightTheme ? context.getResources().getColor(R.color.secondary_text_default_material_light) : context.getResources().getColor(R.color.secondary_text_default_material_dark));
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), ThemeManager.get().useLightTheme ? context.getResources().getColor(R.color.secondary_text_default_material_light) : context.getResources().getColor(R.color.secondary_text_default_material_dark));
             i.setImageDrawable(repeatIcon);
             PlaybackManager.get().setRepeat(false);
         } else {
             Drawable repeatIcon = context.getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
-            DrawableCompat.setTint(repeatIcon, s.getAlbum().getBackgroundColor());
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), s.getAlbum().getBackgroundColor());
             i.setImageDrawable(repeatIcon);
             PlaybackManager.get().setRepeat(true);
         }

@@ -213,12 +213,12 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
         Drawable prevIcon = mContext.getResources().getDrawable(R.drawable.ic_skip_previous_black_48dp);
         Drawable volumeNone = mContext.getResources().getDrawable(R.drawable.ic_volume_none);
         Drawable volumeAll = mContext.getResources().getDrawable(R.drawable.ic_volume_up);
-        DrawableCompat.setTint(playIcon, iconColor);
-        DrawableCompat.setTint(pauseIcon, iconColor);
-        DrawableCompat.setTint(nextIcon, iconColor);
-        DrawableCompat.setTint(prevIcon, iconColor);
-        DrawableCompat.setTint(volumeNone, iconSecondaryColor);
-        DrawableCompat.setTint(volumeAll, iconSecondaryColor);
+        DrawableCompat.setTint(DrawableCompat.wrap(playIcon), iconColor);
+        DrawableCompat.setTint(DrawableCompat.wrap(pauseIcon), iconColor);
+        DrawableCompat.setTint(DrawableCompat.wrap(nextIcon), iconColor);
+        DrawableCompat.setTint(DrawableCompat.wrap(prevIcon), iconColor);
+        DrawableCompat.setTint(DrawableCompat.wrap(volumeNone), iconSecondaryColor);
+        DrawableCompat.setTint(DrawableCompat.wrap(volumeAll), iconSecondaryColor);
 
         mPlayButton.setImageDrawable(playIcon);
         mPauseButton.setImageDrawable(pauseIcon);

@@ -26,7 +26,7 @@ public class FabHelper {
     }
 
     public static void setFabTintedIcon(FloatingActionButton fab, Drawable icon, int color) {
-        DrawableCompat.setTint(icon, color);
+        DrawableCompat.setTint(DrawableCompat.wrap(icon), color);
         fab.setImageDrawable(icon);
     }
 

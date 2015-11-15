@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
-import com.animbus.music.ui.activity.settings.chooseIcon.IconManager;
+import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.activity.theme.Theme;
 import com.animbus.music.ui.activity.theme.ThemeManager;
 
@@ -35,13 +35,11 @@ public class About extends ThemableActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((TextView) findViewById(R.id.about_version_text_view)).setText(BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")");
-        DrawableCompat.setTint(((ImageView) findViewById(R.id.about_code_icon)).getDrawable(), !ThemeManager.get().useLightTheme ? Color.WHITE : Color.BLACK);
-        DrawableCompat.setTint(((ImageView) findViewById(R.id.about_version_icon)).getDrawable(), !ThemeManager.get().useLightTheme ? Color.WHITE : Color.BLACK);
+        DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_code_icon)).getDrawable()), !ThemeManager.get().useLightTheme ? Color.WHITE : Color.BLACK);
+        DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_version_icon)).getDrawable()), !ThemeManager.get().useLightTheme ? Color.WHITE : Color.BLACK);
         ((ImageView) findViewById(R.id.about_icon))
                 .setImageDrawable(getResources().getDrawable(IconManager.get().getDrawable(IconManager.get()
                         .getOverviewIcon(IconManager.get().getIcon()).getId())));
-        int theme = !ThemeManager.get().useLightTheme ? R.style.CardView_Dark : R.style.CardView_Light;
-
     }
 
     @Override

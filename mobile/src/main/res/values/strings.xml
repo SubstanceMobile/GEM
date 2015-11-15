@@ -235,4 +235,9 @@
     <string name="msg_update_available">Update Available</string>
     <string name="msg_update_content">An update for the latest version is available! Open Update page and download?</string>
 
+    <string name="msg_crashed">Unfortunately, GEM Player has stopped</string>
+    <string name="crashed_report">Report</string>
+    <string name="msg_crash_message">Enter a message to be send with the crash report</string>
+    <string name="crash_hint">Describe the crash</string>
+
 </resources>

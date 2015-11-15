@@ -36,7 +36,7 @@ import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
-import com.animbus.music.ui.activity.settings.chooseIcon.IconManager;
+import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.activity.theme.Theme;
 
 public class AlbumDetails extends ThemableActivity {

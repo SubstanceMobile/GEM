@@ -2,6 +2,8 @@ package com.animbus.music.ui.activity.settings.chooseIcon;
 
 import android.content.ComponentName;
 
+import com.animbus.music.util.IconManager;
+
 /**
  * Created by Adrian on 7/26/2015.
  */

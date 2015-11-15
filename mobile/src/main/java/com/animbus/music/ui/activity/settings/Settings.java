@@ -33,7 +33,7 @@ import com.animbus.music.R;
 import com.animbus.music.util.SettingsManager;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
-import com.animbus.music.ui.activity.settings.chooseIcon.IconManager;
+import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.activity.theme.Theme;
 import com.animbus.music.ui.activity.theme.ThemeManager;
 
