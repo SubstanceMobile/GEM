@@ -199,7 +199,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     }
 
     private void setUpNowPlayingBarWithSong(Song song) {
-        song.getAlbum().requestArt(this, (ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
+        song.getAlbum().requestArt((ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
         TextView title = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_title),
                 artist = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_artist);
         title.setText(song.getSongTitle());
@@ -293,7 +293,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             Song current = PlaybackManager.get().getCurrentSong();
             title.setText(current.getSongTitle());
             artist.setText(current.getSongArtist());
-            current.getAlbum().requestArt(this, art);
+            current.getAlbum().requestArt(art);
         } catch (NullPointerException e) {
             Log.d("Navdrawer Header", "Not playing music");
         }
@@ -303,7 +303,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             public void onSongChanged(Song song) {
                 title.setText(song.getSongTitle());
                 artist.setText(song.getSongArtist());
-                song.getAlbum().requestArt(MainScreen.this, art);
+                song.getAlbum().requestArt(art);
             }
 
             @Override

@@ -39,14 +39,16 @@ public class SettingsManager {
     }
 
     public static SettingsManager get() {
+        if (instance.context != null)
         return instance;
+        else return null;
     }
 
-    public SettingsManager setContext(Context cxt) {
-        context = cxt;
-        prefrences = cxt.getSharedPreferences("com.animbus.music", Context.MODE_PRIVATE);
-        prefrencesEditor = prefrences.edit();
-        return this;
+    public static SettingsManager setContext(Context cxt) {
+        instance.context = cxt;
+        instance.prefrences = cxt.getSharedPreferences("com.animbus.music", Context.MODE_PRIVATE);
+        instance.prefrencesEditor = instance.prefrences.edit();
+        return instance;
     }
 
     public void setDefaultSettings() {

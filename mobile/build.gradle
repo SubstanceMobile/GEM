@@ -16,8 +16,8 @@ android {
     defaultConfig {
         applicationId "com.animbus.music"
         targetSdkVersion 23
-        versionName '0.2.2'
-        versionCode 14
+        versionName '0.2.3'
+        versionCode 15
         signingConfig signingConfigs.config
         minSdkVersion 17
     }

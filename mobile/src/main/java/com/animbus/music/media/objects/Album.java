@@ -98,8 +98,8 @@ public class Album {
         void respond(Bitmap albumArt);
     }
 
-    public void requestArt(Context cxt, final ArtRequest request) {
-        Glide.with(cxt).load(getAlbumArtPath())
+    public void requestArt(final ArtRequest request) {
+        Glide.with(getContext().getApplicationContext()).load(getAlbumArtPath())
                 .asBitmap()
                 .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
                 .animate(android.R.anim.fade_in)
@@ -113,8 +113,8 @@ public class Album {
                 });
     }
 
-    public void requestArt(Context cxt, ImageView imageView) {
-        Glide.with(cxt).load(getAlbumArtPath())
+    public void requestArt(ImageView imageView) {
+        Glide.with(imageView.getContext()).load(getAlbumArtPath())
                 .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
                 .animate(android.R.anim.fade_in)
                 .crossFade()
@@ -123,8 +123,8 @@ public class Album {
                 .into(imageView);
     }
 
-    public void requestArt(Context cxt, ImageView imageView, RequestListener<String, GlideDrawable> listener) {
-        Glide.with(cxt).load(getAlbumArtPath())
+    public void requestArt(ImageView imageView, RequestListener<String, GlideDrawable> listener) {
+        Glide.with(imageView.getContext()).load(getAlbumArtPath())
                 .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
                 .animate(android.R.anim.fade_in)
                 .crossFade()

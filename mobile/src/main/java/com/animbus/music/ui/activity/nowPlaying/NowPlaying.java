@@ -22,18 +22,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.animbus.music.R;
-import com.animbus.music.ui.custom.view.MusicControlsView;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
-import com.animbus.music.ui.list.NowPlayingAdapter;
-import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.media.stable.PlaybackManager;
+import com.animbus.music.media.stable.QueueManager;
 import com.animbus.music.ui.activity.settings.Settings;
-import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.activity.theme.Theme;
-
-import java.util.List;
+import com.animbus.music.ui.activity.theme.ThemeManager;
+import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.view.MusicControlsView;
+import com.animbus.music.ui.list.ListAdapter;
+import com.animbus.music.util.IconManager;
 
 public class NowPlaying extends ThemableActivity implements PlaybackManager.OnChangedListener {
     Toolbar mToolbar;
@@ -83,16 +84,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     }
 
     private void configureRecyclerView() {
-        NowPlayingAdapter adapter = new NowPlayingAdapter(this);
-        mList.setAdapter(adapter);
-        adapter.setOnItemClickedListener(new NowPlayingAdapter.NowPlayingClickedListener() {
-            @Override
-            public void onNowPlayingItemClicker(View v, List<Song> data, int pos) {
-                if (pos != -1) {
-                    PlaybackManager.get().playQueueItem(pos);
-                }
-            }
-        });
+        mList.setAdapter(new ListAdapter(ListAdapter.TYPE_NOW_PLAYING, QueueManager.get().getCurrentQueueAsSong(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
         mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mList.setNestedScrollingEnabled(true);
@@ -106,11 +98,17 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
                 mSong.getAlbum().getAccentSecondaryIconColor(),
                 mSong.getAlbum().getAccentSecondaryIconColor(),
                 mSong.getAlbum().getBackgroundColor());
+        DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.now_playing_eq_icon)).getDrawable()), mSong.getAlbum().getBackgroundColor());
     }
 
     private void configureUI() {
-        mSong.getAlbum().requestArt(this, (ImageView) findViewById(R.id.now_playing_album_art));
+        mSong.getAlbum().requestArt((ImageView) findViewById(R.id.now_playing_album_art));
+
+        configureRepeatIcon(mSong);
         configureUIColors();
+
+        ((TextView) findViewById(R.id.current_song_title)).setText(mSong.getSongTitle());
+        ((TextView) findViewById(R.id.current_song_artist)).setText(mSong.getSongArtist());
 
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -161,6 +159,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
 
     @Override
     public void onPlaybackStateChanged(PlaybackStateCompat state) {
+
     }
 
     @Override
@@ -171,5 +170,42 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private void configureRepeatIcon(final Song s) {
+        ImageView i = (ImageView) findViewById(R.id.now_playing_repeat_icon);
+        if (PlaybackManager.get().isLooping()) {
+            Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), s.getAlbum().getBackgroundColor());
+            i.setImageDrawable(repeatIcon);
+        } else {
+            Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon),
+                    ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark));
+            i.setImageDrawable(repeatIcon);
+        }
+
+        i.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleRepeatIcon(s);
+            }
+        });
+    }
+
+    private void toggleRepeatIcon(Song s) {
+        ImageView i = (ImageView) findViewById(R.id.now_playing_repeat_icon);
+        if (PlaybackManager.get().isLooping()) {
+            Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon),
+                    ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark));
+            i.setImageDrawable(repeatIcon);
+            PlaybackManager.get().setRepeat(false);
+        } else {
+            Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), s.getAlbum().getBackgroundColor());
+            i.setImageDrawable(repeatIcon);
+            PlaybackManager.get().setRepeat(true);
+        }
     }
 }

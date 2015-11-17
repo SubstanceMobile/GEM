@@ -26,20 +26,21 @@ import android.widget.Toast;
 
 import com.animbus.music.BR;
 import com.animbus.music.R;
-import com.animbus.music.util.SettingsManager;
-import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.ui.ItemAlbumDetailsList;
 import com.animbus.music.ui.ItemAlbumGrid;
 import com.animbus.music.ui.ItemGenre;
+import com.animbus.music.ui.ItemNowPlaying;
 import com.animbus.music.ui.ItemPlaylist;
 import com.animbus.music.ui.ItemSongList;
 import com.animbus.music.ui.activity.PlaylistDetails;
 import com.animbus.music.ui.activity.albumDetails.AlbumDetails;
 import com.animbus.music.ui.activity.theme.ThemeManager;
+import com.animbus.music.util.SettingsManager;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -61,13 +62,13 @@ import static com.animbus.music.media.objects.Album.TITLE_COLOR;
  */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
     public static final int TYPE_SONG = 0, TYPE_ALBUM = 1, TYPE_PLAYLIST = 2, TYPE_GENRE = 3, TYPE_ARTIST = 4;
-    public static final int TYPE_ALBUM_DETAILS = -1;
+    public static final int TYPE_ALBUM_DETAILS = -1, TYPE_NOW_PLAYING = -2;
     List data;
     int type;
     LayoutInflater inflater;
     Context context;
 
-    @IntDef({TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_GENRE, TYPE_ARTIST, TYPE_ALBUM_DETAILS})
+    @IntDef({TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_GENRE, TYPE_ARTIST, TYPE_ALBUM_DETAILS, TYPE_NOW_PLAYING})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Type {
     }
@@ -93,6 +94,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             return new GenresViewHolder(ItemGenre.inflate(inflater, parent, false));
         } else if (type == TYPE_ALBUM_DETAILS) {
             return new AlbumDetailsViewHolder(ItemAlbumDetailsList.inflate(inflater, parent, false));
+        } else if (type == TYPE_NOW_PLAYING) {
+            return new NowPlayingViewHolder(ItemNowPlaying.inflate(inflater, parent, false));
         } else {
             return null;
         }
@@ -165,6 +168,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                 case TYPE_PLAYLIST:
                     varId = BR.playlist;
                     break;
+                case TYPE_NOW_PLAYING:
+                    varId = BR.song;
+                    break;
                 default:
                     varId = -1;
                     break;
@@ -205,7 +211,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public void configure(Song object) {
-            object.getAlbum().requestArt(context, binding.songlistSongAlbumart);
+            object.getAlbum().requestArt(binding.songlistSongAlbumart);
         }
 
         @Override
@@ -232,7 +238,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         @Override
         public void configure(Album object) {
             resetPalette();
-            binding.getAlbum().requestArt(context, binding.AlbumArtGridItemAlbumArt, this);
+            binding.getAlbum().requestArt(binding.AlbumArtGridItemAlbumArt, this);
         }
 
         @Override
@@ -482,5 +488,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
     }
 
+    protected class NowPlayingViewHolder extends BasicViewHolder<ItemNowPlaying, Song> {
+
+        protected NowPlayingViewHolder(ItemNowPlaying binding) {
+            super(binding);
+        }
+
+        @Override
+        protected void configure(Song object) {
+            binding.getSong().getAlbum().requestArt(binding.nowplayingAlbumart);
+        }
+
+        @Override
+        public void onClick(View v) {
+            PlaybackManager.get().playQueueItem(getAdapterPosition());
+        }
+    }
 }
 

@@ -66,6 +66,94 @@
                         android:layout_height="match_parent" />
                 </LinearLayout>
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/listViewSizeBig"
+                        android:background="?attr/ripple"
+                        android:orientation="horizontal"
+                        android:clickable="true">
+
+                        <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/margin_medium"
+                            android:visibility="visible"
+                            android:src="@drawable/ic_equalizer_24dp"
+                            android:id="@+id/now_playing_eq_icon"
+                            android:cropToPadding="true"
+                            android:padding="@dimen/margin_small" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:textColor="?attr/primaryTextColor"
+                                android:textSize="16sp"
+                                android:id="@+id/current_song_title"
+                                android:singleLine="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:textColor="?attr/secondaryTextColor"
+                                android:textSize="14sp"
+                                android:id="@+id/current_song_artist"
+                                android:layout_marginStart="@dimen/margin_small"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:singleLine="true" />
+
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/now_playing_favorite_icon_root"
+                            android:layout_width="@dimen/listViewSizeBig"
+                            android:layout_height="@dimen/listViewSizeBig"
+                            android:padding="@dimen/margin_small"
+                            android:visibility="gone"
+                            android:background="?attr/colorPrimary">
+
+                            <ImageView
+                                android:id="@+id/now_playing_favorite_icon"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:background="?attr/ripple_circle"
+                                android:padding="@dimen/margin_medium"
+                                android:src="@drawable/ic_repeat_black_48dp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/now_playing_repeat_icon_root"
+                            android:layout_width="@dimen/listViewSizeBig"
+                            android:layout_height="@dimen/listViewSizeBig"
+                            android:padding="@dimen/margin_small">
+
+                            <ImageView
+                                android:id="@+id/now_playing_repeat_icon"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:background="?attr/ripple_circle"
+                                android:padding="@dimen/margin_medium"
+                                android:src="@drawable/ic_repeat_black_48dp" />
+                        </FrameLayout>
+
+                    </LinearLayout>
+                </FrameLayout>
+
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar

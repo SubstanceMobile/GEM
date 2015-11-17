@@ -1,5 +1,6 @@
 package com.animbus.music.ui.custom.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout;
@@ -15,12 +16,18 @@ import com.animbus.music.ui.activity.theme.ThemeManager;
 public abstract class ThemableActivity extends AppCompatActivity implements ThemeManager.OnThemeChangedListener {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setBaseTheme(ThemeManager.get().getBase(), true);
         super.onCreate(savedInstanceState);
         sequence(savedInstanceState);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        sequence(null);
     }
 
     /**

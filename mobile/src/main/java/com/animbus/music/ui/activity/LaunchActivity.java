@@ -123,7 +123,7 @@ public class LaunchActivity extends ThemableActivity {
         if (!LoadedFuse.isActivated()) {
 
             //Sets Contexts
-            SettingsManager.get().setContext(this);
+            SettingsManager.setContext(this);
             ThemeManager.get().setContext(this);
 
             //Loads Songs
