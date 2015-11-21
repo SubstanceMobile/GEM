@@ -21,7 +21,7 @@ public class Options {
     private static final String TAG = "Options";
 
     //Keys
-    private static final String base = "org.substance.GEM";
+    private static final String base = "com.animbus.music";
     private static final String
             KEY_FIRST_RUN = ".FIRST_RUN",
             KEY_ICON = base + ".ICON",
