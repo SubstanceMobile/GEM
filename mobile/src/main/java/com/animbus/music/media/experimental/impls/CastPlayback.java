@@ -1,5 +1,6 @@
 package com.animbus.music.media.experimental.impls;
 
+import com.animbus.music.media.experimental.MediaService;
 import com.animbus.music.media.experimental.PlaybackBase;
 import com.animbus.music.media.objects.Song;
 
@@ -9,6 +10,11 @@ import java.util.List;
  * Created by Adrian on 11/14/2015.
  */
 public class CastPlayback implements PlaybackBase {
+
+    @Override
+    public void init(MediaService service) {
+
+    }
 
     @Override
     public void play(Song song) {
@@ -46,7 +52,7 @@ public class CastPlayback implements PlaybackBase {
     }
 
     @Override
-    public void shuffle(boolean shuffling) {
-
+    public boolean isPlaying() {
+        return false;
     }
 }
