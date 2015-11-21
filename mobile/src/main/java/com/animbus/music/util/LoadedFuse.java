@@ -1,21 +1,16 @@
 package com.animbus.music.util;
 
-/**
- * Created by Adrian on 7/15/2015.
- */
 public class LoadedFuse {
-    private static final LoadedFuse instance = new LoadedFuse();
-
     private LoadedFuse() {
     }
 
-    private boolean activated;
+    private static volatile boolean activated = false;
 
     public static boolean isActivated() {
-        return instance.activated;
+        return activated;
     }
 
     public static void trip() {
-        instance.activated = true;
+        activated = true;
     }
 }

@@ -1,4 +1,4 @@
-package com.animbus.music.ui.activity.theme;
+package com.animbus.music.ui.theme;
 
 import android.content.Context;
 

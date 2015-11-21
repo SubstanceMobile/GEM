@@ -7,8 +7,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.animbus.music.ui.activity.theme.Theme;
-import com.animbus.music.ui.activity.theme.ThemeManager;
+import com.animbus.music.ui.theme.Theme;
+import com.animbus.music.ui.theme.ThemeManager;
 
 /**
  * Created by Adrian on 8/5/2015.

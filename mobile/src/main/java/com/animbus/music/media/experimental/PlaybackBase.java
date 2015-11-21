@@ -8,6 +8,7 @@ import java.util.List;
  * Created by Adrian on 11/14/2015.
  */
 public interface PlaybackBase {
+    void init(MediaService service);
     void play(Song song);
     void play(List<Song> songs, int startPos);
     void resume();
@@ -15,5 +16,5 @@ public interface PlaybackBase {
     void next();
     void prev();
     void repeat(boolean repeating);
-    void shuffle(boolean shuffling);
+    boolean isPlaying();
 }

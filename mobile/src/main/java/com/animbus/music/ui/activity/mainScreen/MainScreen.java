@@ -55,8 +55,8 @@ import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.activity.setup.SetupActivity;
-import com.animbus.music.ui.activity.theme.Theme;
-import com.animbus.music.ui.activity.theme.ThemeManager;
+import com.animbus.music.ui.theme.Theme;
+import com.animbus.music.ui.theme.ThemeManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 

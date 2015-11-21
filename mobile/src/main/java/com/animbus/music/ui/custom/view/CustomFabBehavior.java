@@ -1,4 +1,4 @@
-package com.animbus.music.ui.activity.albumDetails;
+package com.animbus.music.ui.custom.view;
 
 import android.content.Context;
 import android.graphics.Rect;

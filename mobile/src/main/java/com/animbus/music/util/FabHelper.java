@@ -1,4 +1,4 @@
-package com.animbus.music.ui.activity.albumDetails;
+package com.animbus.music.util;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

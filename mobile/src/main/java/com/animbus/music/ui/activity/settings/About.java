@@ -14,8 +14,8 @@ import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.util.IconManager;
-import com.animbus.music.ui.activity.theme.Theme;
-import com.animbus.music.ui.activity.theme.ThemeManager;
+import com.animbus.music.ui.theme.Theme;
+import com.animbus.music.ui.theme.ThemeManager;
 
 public class About extends ThemableActivity {
     Toolbar toolbar;

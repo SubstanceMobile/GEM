@@ -39,7 +39,7 @@ import com.animbus.music.ui.ItemPlaylist;
 import com.animbus.music.ui.ItemSongList;
 import com.animbus.music.ui.activity.PlaylistDetails;
 import com.animbus.music.ui.activity.albumDetails.AlbumDetails;
-import com.animbus.music.ui.activity.theme.ThemeManager;
+import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.SettingsManager;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;

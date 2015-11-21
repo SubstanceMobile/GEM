@@ -14,7 +14,7 @@ import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Playlist;
-import com.animbus.music.ui.activity.theme.Theme;
+import com.animbus.music.ui.theme.Theme;
 
 public class PlaylistDetails extends ThemableActivity {
     Toolbar mToolbar;

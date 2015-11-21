@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
-import com.animbus.music.ui.activity.theme.Theme;
+import com.animbus.music.ui.theme.Theme;
 
 public class UiTweaker extends ThemableActivity {
     public static final int TYPE_GENERAL = 0,

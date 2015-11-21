@@ -36,8 +36,9 @@ import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
+import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
-import com.animbus.music.ui.activity.theme.Theme;
+import com.animbus.music.ui.theme.Theme;
 
 public class AlbumDetails extends ThemableActivity {
     Toolbar mToolbar;

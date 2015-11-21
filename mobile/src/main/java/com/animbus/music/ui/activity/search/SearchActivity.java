@@ -22,7 +22,7 @@ import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.activity.theme.Theme;
+import com.animbus.music.ui.theme.Theme;
 
 import java.util.List;
 

@@ -131,7 +131,7 @@
         android:src="@drawable/ic_play_arrow_black_48dp"
         app:layout_anchor="@id/album_details_square_spacer"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior="com.animbus.music.ui.activity.albumDetails.CustomFabBehavior" />
+        app:layout_behavior="com.animbus.music.ui.custom.view.CustomFabBehavior" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/album_details_recycler"

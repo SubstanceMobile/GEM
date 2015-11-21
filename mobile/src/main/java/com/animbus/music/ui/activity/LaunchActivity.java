@@ -26,8 +26,8 @@ import com.animbus.music.media.Library;
 import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.media.stable.ServiceHelper;
 import com.animbus.music.ui.activity.mainScreen.MainScreen;
-import com.animbus.music.ui.activity.theme.Theme;
-import com.animbus.music.ui.activity.theme.ThemeManager;
+import com.animbus.music.ui.theme.Theme;
+import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.LoadedFuse;
 import com.animbus.music.util.SettingsManager;
 

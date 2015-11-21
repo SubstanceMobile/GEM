@@ -1,4 +1,4 @@
-package com.animbus.music.ui.activity.theme;
+package com.animbus.music.ui.theme;
 
 /**
  * Created by Adrian on 8/5/2015.
