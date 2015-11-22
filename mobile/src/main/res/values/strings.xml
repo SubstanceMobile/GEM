@@ -154,6 +154,9 @@
     <string name="playback_repeat">Repeat</string>
     <string name="playback_shuffle">Shuffle</string>
     <string name="playing_album">Playing Album</string>
+    <string name="playback_error_unsupported">This media type is not supported</string>
+    <string name="playback_error_IO">Error playing file. Please try again</string>
+    <string name="playback_error_generic">Couldn\'t play this song</string>
 
     <string name="permission_storage_explain_title">Storage Permission Required</string>
     <string name="permission_storage_explain_message">The storage permission is required for GEM player to be able to read your media library</string>

@@ -21,6 +21,9 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
+import com.animbus.music.media.experimental.PlaybackImpls;
+import com.animbus.music.media.experimental.PlaybackRemote;
+import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.stable.PlaybackManager;
@@ -45,10 +48,12 @@ public class LaunchActivity extends ThemableActivity {
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_launch);
         if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
-            //Playing from intent
-            PlaybackManager.get().play(
-                    Library.findSongById(
-                            Long.valueOf(getIntent().getData().getLastPathSegment().substring(6))));
+            for (Song s : Library.getSongs()) {
+                if (s.getSongURI() == getIntent().getData()) {
+                    PlaybackManager.get().play(s);
+                    break;
+                }
+            }
         }
     }
 
@@ -132,6 +137,11 @@ public class LaunchActivity extends ThemableActivity {
 
             //Starts Music Service
             ServiceHelper.get(this).initService();
+
+            //Initiates the process of setting up all of the media objects to be triggered instantly
+            PlaybackRemote.setUp(this);
+            //Sets the default implementation of playback
+            PlaybackRemote.inject(PlaybackImpls.local);
 
             //Notifies app that it has activated
             LoadedFuse.trip();

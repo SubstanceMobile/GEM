@@ -1,5 +1,8 @@
 package com.animbus.music.media.experimental;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
@@ -14,62 +17,80 @@ import java.util.List;
  */
 public class PlaybackRemote {
     private static final String TAG = "PlaybackRemote";
-
-    private static PlaybackRemote instance = new PlaybackRemote();
-
-    public static PlaybackRemote get() {
-        return instance;
-    }
+    static volatile PlaybackBase IMPL;
+    private static volatile Context mContext;
+    private static volatile MediaService mService;
 
     private PlaybackRemote() {
+    }
+
+    public static void setUp(Context context) {
+        mContext = context;
+    }
+
+    public static void init(MediaService service) {
+        IMPL.init(service);
+        mService = service;
+    }
+
+    public static void inject(PlaybackBase impl) {
+        PlaybackRemote.IMPL = impl;
+    }
+
+    private static void startServiceIfNecessary() {
+        if (!IMPL.isInitialized())
+            mContext.startService(new Intent(mContext, MediaService.class));
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Here go all of the controls
     ///////////////////////////////////////////////////////////////////////////
 
-    public static void play(Song song) {
+    public static void play(Uri uri) {
+        startServiceIfNecessary();
+        IMPL.play(uri);
+    }
 
+    public static void play(Song song) {
+        startServiceIfNecessary();
+        IMPL.play(song);
     }
 
     public static void play(List<Song> songs, int startPos) {
-        play(songs.get(startPos));
+        startServiceIfNecessary();
+        IMPL.play(songs, startPos);
     }
 
     public static void resume() {
-
+        IMPL.resume();
     }
 
     public static void pause() {
-
+        IMPL.pause();
     }
 
     public static void next() {
-
+        IMPL.next();
     }
 
     public static void prev() {
-
+        IMPL.prev();
     }
 
     public static void toggleRepeat() {
-
+        IMPL.repeat(!IMPL.isRepeating());
     }
 
     public static void setRepeat(boolean repeating) {
-
+        IMPL.repeat(repeating);
     }
 
-    public static void toggleShuffle() {
-
-    }
-
-    public static void setShuffle() {
-
+    public static void seek(long time) {
+        IMPL.seek(time);
     }
 
     public static void stop() {
-
+        IMPL.stop();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -77,15 +98,15 @@ public class PlaybackRemote {
     ///////////////////////////////////////////////////////////////////////////
 
     public static MediaSessionCompat.Token getToken() {
-        return null;
+        return mService.mSession.getSessionToken();
     }
 
     public static PlaybackStateCompat getState() {
-        return null;
+        return mService.mState;
     }
 
     public static MediaSessionCompat getSession() {
-        return null;
+        return mService.mSession;
     }
 
     ///////////////////////////////////////////////////////////////////////////
