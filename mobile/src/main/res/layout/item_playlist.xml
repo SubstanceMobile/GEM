@@ -15,11 +15,19 @@
         android:background="?attr/ripple"
         android:orientation="horizontal" >
 
+        <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_playlist_24dp"
+            android:tint="?attr/secondaryTextColor"
+            android:layout_margin="@dimen/margin_medium"
+            android:padding="@dimen/margin_small"
+            android:id="@+id/icon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/margin_medium"
             android:text="@{playlist.getName}" />
     </LinearLayout>
 

@@ -21,8 +21,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
-import com.animbus.music.media.experimental.PlaybackImpls;
-import com.animbus.music.media.experimental.PlaybackRemote;
+import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.media.Library;
@@ -37,6 +36,8 @@ import com.animbus.music.util.SettingsManager;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+
+import static com.animbus.music.media.PlaybackRemote.LOCAL;
 
 
 public class LaunchActivity extends ThemableActivity {
@@ -140,8 +141,7 @@ public class LaunchActivity extends ThemableActivity {
 
             //Initiates the process of setting up all of the media objects to be triggered instantly
             PlaybackRemote.setUp(this);
-            //Sets the default implementation of playback
-            PlaybackRemote.inject(PlaybackImpls.local);
+            PlaybackRemote.inject(LOCAL);
 
             //Notifies app that it has activated
             LoadedFuse.trip();
