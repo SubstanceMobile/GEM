@@ -96,6 +96,7 @@ public class MediaService extends Service {
     ///////////////////////////////////////////////////////////////////////////
 
     static abstract class PlaybackBase extends MediaSessionCompat.Callback {
+        private static final String TAG = "PlaybackBase";
         public static final String ACTION_PLAY_FROM_LIST = "GEM_PLAY_FROM_LIST";
         public static final String ACTION_SET_REPEAT = "GEM_SET_REPEAT";
 
@@ -115,7 +116,17 @@ public class MediaService extends Service {
 
         abstract void next();
 
-        abstract void prev();
+        abstract void doPrev();
+
+        void prev() {
+            Log.d(TAG, "prev() called. Calling doPrev() = " + (getCurrentPosInSong() < PREV_RESTARTS_AFTER));
+            //Previous only plays the previous song up to 5 seconds into the song. Afterwards it just restarts the song.
+            if (getCurrentPosInSong() < PREV_RESTARTS_AFTER) {
+                doPrev();
+            } else {
+                restart();
+            }
+        }
 
         abstract void restart();
 
@@ -174,12 +185,7 @@ public class MediaService extends Service {
 
         @Override
         public void onSkipToPrevious() {
-            //Previous only plays the previous song up to 5 seconds into the song. Afterwards it just restarts the song.
-            if (getCurrentPosInSong() < PREV_RESTARTS_AFTER) {
-                prev();
-            } else {
-                restart();
-            }
+            prev();
         }
 
         @Override
@@ -219,6 +225,7 @@ public class MediaService extends Service {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction())) {
+                    Log.d(TAG, "AudioNoisy received. Pausing");
                     if (isPlaying()) pause();
                 }
             }
@@ -230,6 +237,7 @@ public class MediaService extends Service {
 
         @Override
         public void init(MediaService service) {
+            Log.d(TAG, "init() called");
             mService = service;
             mAudioManager = (AudioManager) service.getSystemService(Context.AUDIO_SERVICE);
         }
@@ -240,24 +248,26 @@ public class MediaService extends Service {
 
         @Override
         public void play(Uri uri) {
+            Log.d(TAG, "play(Uri) called. Uri = " + uri.toString());
             requestAudioFocus();
             mWasPlaying = true;
             mService.registerReceiver(mAudioNoisyReceiver, mNoisyFilter);
+            Log.d(TAG, "play(Uri): Noisy receiver registered");
             if (uri != mCurrentUri) {
+                Log.d(TAG, "play(Uri): Uri is different. Playing new song");
                 //Song is different
                 mCurrentUri = uri;
-
                 try {
                     createMediaPlayerIfNeeded();
                     mMediaPlayer.setDataSource(mService, uri);
                     mMediaPlayer.setAudioStreamType(STREAM_MUSIC);
                     mService.setState(STATE_PLAYING);
-
                     prepareAndNotifyService();
                 } catch (Exception e) {
-                    Log.e(TAG, "Exception when calling play(Uri)", e);
+                    Log.e(TAG, "play(Uri): Error", e);
                 }
             } else {
+                Log.d(TAG, "play(Uri): Uri is the same. Restarting this song");
                 //Same song, restart playback
                 seek(0);
 
@@ -268,6 +278,7 @@ public class MediaService extends Service {
 
         @Override
         public void play(Song song) {
+            Log.d(TAG, "play(Song) called. Song = " + song.getSongID());
             play(song.getSongURI());
             PlaybackRemote.updateSongListeners(song);
         }
@@ -275,6 +286,7 @@ public class MediaService extends Service {
         @Override
         public void play(List<Song> songs, int startPos) {
             ArrayList<Song> data = new ArrayList<>(songs);
+            Log.d(TAG, "play(List, int) called. Start Position = " + startPos);
             play(data.get(startPos));
             PlaybackRemote.setQueue(data);
             PlaybackRemote.setCurrentSongPos(startPos);
@@ -282,27 +294,32 @@ public class MediaService extends Service {
 
         @Override
         public void resume() {
+            Log.d(TAG, "resume() called");
             requestAudioFocus();
             mService.setState(STATE_PLAYING);
 
+            Log.d(TAG, "resume(): Starting Media Player");
             mMediaPlayer.start();
 
-            //If interrupted because of audio focus, when focus returns then media will resume playing
+            //If interrupted because of audio focus, when foc]us returns then media will resume playing
             mWasPlaying = true;
 
+            Log.d(TAG, "resume(): Registering Receiver");
             mService.registerReceiver(mAudioNoisyReceiver, mNoisyFilter);
-
         }
 
         @Override
         public void pause() {
+            Log.d(TAG, "pause() called. Calling pause(boolean)");
             pause(true);
         }
 
         private void pause(boolean overrideWasPlaying) {
+            Log.d(TAG, "pause(boolean) called. overrideWasPlaying = " + overrideWasPlaying);
             giveUpAudioFocus();
             mService.setState(STATE_PAUSED);
 
+            Log.d(TAG, "pause(boolean): Pausing Media Player");
             mMediaPlayer.pause();
 
             //If statement because if it is paused because of losing focus we still want to start playing again
@@ -311,47 +328,78 @@ public class MediaService extends Service {
                 mWasPlaying = false;
             }
 
+            Log.d(TAG, "pause(boolean): Unregistering Receiver");
             mService.unregisterReceiver(mAudioNoisyReceiver);
+
+            Log.d(TAG, "pause(boolean): Stopping the service from being foreground");
+            mService.stopForeground(false);
         }
 
         @Override
         public void next() {
             mService.setState(STATE_SKIPPING_TO_NEXT);
+
+            Log.d(TAG, "next() called. Calling play(queue, nextSongPos)");
             play(PlaybackRemote.getQueue(), PlaybackRemote.getNextSongPos());
         }
 
         @Override
-        public void prev() {
+        public void doPrev() {
             mService.setState(STATE_SKIPPING_TO_PREVIOUS);
+
+            Log.d(TAG, "doPrev() called. Calling play(queue, prevSongPos)");
             play(PlaybackRemote.getQueue(), PlaybackRemote.getPrevSongPos());
         }
 
         @Override
         void restart() {
+            Log.d(TAG, "restart() called");
+            Log.d(TAG, "restart(): Stopping Media Player");
             mMediaPlayer.stop();
-            mMediaPlayer.seekTo(0);
+            seek(0);
             prepareAndNotifyService();
+
+            Log.d(TAG, "restart(): Done");
         }
 
         @Override
         public void stop() {
+            Log.d(TAG, "stop() called");
             giveUpAudioFocus();
             mService.setState(STATE_STOPPED);
+            mService.stopForeground(true);
+
+            Log.d(TAG, "stop(): Unregistering Receiver");
             mService.unregisterReceiver(mAudioNoisyReceiver);
+
+            Log.d(TAG, "stop(): Stopping player");
             mMediaPlayer.stop();
+
+            Log.d(TAG, "stop(): Resetting player");
             mMediaPlayer.reset();
+
+            Log.d(TAG, "stop(): Releasing Player");
             mMediaPlayer.release();
+
+            Log.d(TAG, "stop(): Making Player null");
             mMediaPlayer = null;
+
+            Log.d(TAG, "stop(): Killing Service");
+            mService.stopSelf();
         }
 
         @Override
         public void repeat(boolean repeating) {
+            Log.d(TAG, "repeat(boolean) called. repeating = " + repeating);
             mMediaPlayer.setLooping(repeating);
         }
 
         @Override
         public void seek(long time) {
+            Log.d(TAG, "seek(long) called. time = " + time);
             mService.setState(getCurrentPosInSong() != time ? (getCurrentPosInSong() < time ? STATE_FAST_FORWARDING : STATE_REWINDING) : STATE_BUFFERING);
+
+            Log.d(TAG, "seek(long): seeking MediaPlayer");
             mMediaPlayer.seekTo((int) time);
         }
 
@@ -360,16 +408,21 @@ public class MediaService extends Service {
         ///////////////////////////////////////////////////////////////////////////
 
         private void createMediaPlayerIfNeeded() {
+            Log.d(TAG, "createMediaPlayerIfNeeded() called. Needed = " + (mMediaPlayer == null));
             if (mMediaPlayer == null) {
+                Log.d(TAG, "createMediaPlayerIfNeeded(): Creating Media Player");
                 mMediaPlayer = new MediaPlayer();
 
+                Log.d(TAG, "createMediaPlayerIfNeeded(): Configuring wakelock");
                 mMediaPlayer.setWakeMode(mService, PowerManager.PARTIAL_WAKE_LOCK);
 
+                Log.d(TAG, "createMediaPlayerIfNeeded(): Setting listeners");
                 mMediaPlayer.setOnCompletionListener(this);
                 mMediaPlayer.setOnErrorListener(this);
                 mMediaPlayer.setOnPreparedListener(this);
             } else {
                 //Reset it
+                Log.d(TAG, "createMediaPlayerIfNeeded(): Resetting Media Player");
                 mMediaPlayer.reset();
             }
         }
@@ -399,6 +452,7 @@ public class MediaService extends Service {
         }
 
         void prepareAndNotifyService() {
+            Log.d(TAG, "prepareAndNotifyService() called");
             mService.setState(STATE_BUFFERING);
             mMediaPlayer.prepareAsync();
         }
@@ -409,13 +463,19 @@ public class MediaService extends Service {
 
         private void requestAudioFocus() {
             if (!mHasAudioFocus) {
+                Log.d(TAG, "requestAudioFocus() called. Requesting");
                 mHasAudioFocus = (mAudioManager.requestAudioFocus(this, STREAM_MUSIC, AUDIOFOCUS_GAIN) == AUDIOFOCUS_REQUEST_GRANTED);
+            } else {
+                Log.d(TAG, "requestAudioFocus() called. Already has audio focus");
             }
         }
 
         private void giveUpAudioFocus() {
             if (mHasAudioFocus) {
+                Log.d(TAG, "giveUpAudioFocus() called. Giving Up");
                 mHasAudioFocus = !(mAudioManager.abandonAudioFocus(this) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
+            } else {
+                Log.d(TAG, "giveUpAudioFocus() called. Doesn't have audio focus anyways");
             }
         }
 
@@ -442,10 +502,12 @@ public class MediaService extends Service {
         }
 
         public void duck() {
+            Log.d(TAG, "duck() called");
             mMediaPlayer.setVolume(0.2f, 0.2f);
         }
 
         public void unDuck() {
+            Log.d(TAG, "unDuck() called");
             mMediaPlayer.setVolume(1.0f, 1.0f);
         }
 
@@ -477,7 +539,10 @@ public class MediaService extends Service {
 
         @Override
         public void onPrepared(MediaPlayer mp) {
+            Log.d(TAG, "onPrepared() called");
+
             //Media player is prepared so we should start it
+            Log.d(TAG, "onPrepared(): Starting Media Player");
             mp.start();
 
             //Make the service foreground
@@ -485,7 +550,7 @@ public class MediaService extends Service {
         }
     }
 
-    public static class MediaNotification implements PlaybackRemote.StateChangedListener {
+    public static class MediaNotification {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //All of the Variables
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -505,7 +570,8 @@ public class MediaService extends Service {
         static final BroadcastReceiver mCommandsReciever = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                switch (intent.getAction()) {
+                String s = intent.getAction();
+                switch (s) {
                     case ACTION_PLAY:
                         mService.IMPL.resume();
                         break;
@@ -516,12 +582,12 @@ public class MediaService extends Service {
                         mService.IMPL.next();
                         break;
                     case ACTION_PREV:
-                        //Using the alternate thing because it checks for time. Just look at the code in this method.
-                        mService.IMPL.onSkipToPrevious();
+                        mService.IMPL.prev();
                         break;
                     case ACTION_STOP:
                         mService.IMPL.stop();
                         mService.unregisterReceiver(this);
+                        break;
                 }
             }
         };
@@ -532,6 +598,12 @@ public class MediaService extends Service {
 
         static void init(MediaService service) {
             mService = service;
+            PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
+                @Override
+                public void onStateChanged(PlaybackStateCompat newState) {
+                    update();
+                }
+            });
         }
 
         static void setUp() {
@@ -596,11 +668,6 @@ public class MediaService extends Service {
         static Notification getNotification() {
             return mBuilder.build();
         }
-
-        @Override
-        public void onStateChanged(PlaybackStateCompat newState) {
-            update();
-        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -630,6 +697,7 @@ public class MediaService extends Service {
     }
 
     void setState(int state) {
+        Log.d(TAG, "setState(int) called. Building new state");
         //This sets up the state
         PlaybackStateCompat.Builder mBuilder = new PlaybackStateCompat.Builder(mState);
         mBuilder.setActions(
@@ -639,19 +707,24 @@ public class MediaService extends Service {
         mState = mBuilder.build();
 
         //Updates things with the new state
+        Log.d(TAG, "setState(int): Updating Session with new state");
         mSession.setPlaybackState(mState);
         PlaybackRemote.updateStateListeners(mState);
 
         //This tells the session weather or not it should be considered active
-        mSession.setActive(state != STATE_NONE && state != STATE_STOPPED && IMPL.isInitialized());
+        boolean isActive = state != STATE_NONE && state != STATE_STOPPED && IMPL.isInitialized();
+        Log.d(TAG, "setState(int): Setting the session's active state to " + isActive);
+        mSession.setActive(isActive);
     }
 
     void setAsForeground() {
+        Log.d(TAG, "setAsForeground() called");
         startForeground(FOREGROUND_ID, MediaNotification.getNotification());
     }
 
     @Override
     public void onDestroy() {
+        Log.d(TAG, "onDestroy() called");
         mSession.release();
     }
 
