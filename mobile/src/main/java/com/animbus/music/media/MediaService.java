@@ -104,11 +104,11 @@ public class MediaService extends Service {
 
         abstract void init(MediaService service);
 
+        abstract void play(Uri uri, boolean notifyPlaybackRemote);
+
         abstract void play(Song song);
 
         abstract void play(List<Song> songs, int startPos);
-
-        abstract void play(Uri uri);
 
         abstract void resume();
 
@@ -155,7 +155,7 @@ public class MediaService extends Service {
 
         @Override
         public void onPlayFromUri(Uri uri, Bundle extras) {
-            play(uri);
+            play(uri, true);
         }
 
         @Override
@@ -247,7 +247,7 @@ public class MediaService extends Service {
         ///////////////////////////////////////////////////////////////////////////
 
         @Override
-        public void play(Uri uri) {
+        public void play(Uri uri, boolean notifyPlaybackRemote) {
             Log.d(TAG, "play(Uri) called. Uri = " + uri.toString());
             requestAudioFocus();
             mWasPlaying = true;
@@ -266,6 +266,9 @@ public class MediaService extends Service {
                 } catch (Exception e) {
                     Log.e(TAG, "play(Uri): Error", e);
                 }
+
+                //Basically gives a song filled with dummy content
+                if (notifyPlaybackRemote) PlaybackRemote.updateSongListeners(uri);
             } else {
                 Log.d(TAG, "play(Uri): Uri is the same. Restarting this song");
                 //Same song, restart playback
@@ -279,7 +282,7 @@ public class MediaService extends Service {
         @Override
         public void play(Song song) {
             Log.d(TAG, "play(Song) called. Song = " + song.getSongID());
-            play(song.getSongURI());
+            play(song.getSongURI(), false);
             PlaybackRemote.updateSongListeners(song);
         }
 

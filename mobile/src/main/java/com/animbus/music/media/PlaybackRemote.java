@@ -8,6 +8,8 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 
+import com.animbus.music.R;
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
 
 import java.util.ArrayList;
@@ -205,6 +207,23 @@ public class PlaybackRemote {
 
     protected static void updateSongListeners(Song newSong) {
         for (SongChangedListener l : songListeners) l.onSongChanged(newSong);
+    }
+
+    protected static void updateSongListeners(Uri uri) {
+        //Builds the song
+        Song s = new Song();
+        Album a = new Album();
+        s.setSongTitle(mContext.getString(R.string.title_uri));
+        s.setSongArtist(mContext.getString(R.string.artist_uri));
+        a.setContext(mContext);
+        s.setAlbum(a);
+        updateSongListeners(s);
+
+        //Sets the queue to this one song
+        List<Song> newQueue = new ArrayList<>();
+        newQueue.add(s);
+        setQueue(newQueue);
+        setCurrentSongPos(0);
     }
 
     protected static void updateStateListeners(PlaybackStateCompat newState) {
