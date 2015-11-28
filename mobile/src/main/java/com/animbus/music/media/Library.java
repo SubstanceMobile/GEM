@@ -13,6 +13,7 @@ import com.animbus.music.media.objects.Album;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Library {
@@ -138,11 +139,21 @@ public class Library {
             do {
                 Playlist playlist = new Playlist();
 
-                playlist.setName(playlistsCursor.getString(titleColumn));
+                String name = playlistsCursor.getString(titleColumn);
+                playlist.setName(name);
+                playlist.setType(TextUtils.equals(name.toLowerCase(), "favorites") ? 0 : 1);
                 playlist.setId(playlistsCursor.getLong(idColumn));
 
                 mPlaylists.add(playlist);
             } while (playlistsCursor.moveToNext());
+
+            Collections.sort(mPlaylists, new Comparator<Playlist>() {
+                @Override
+                public int compare(Playlist lhs, Playlist rhs) {
+                    return ((Integer) lhs.getType()).compareTo(rhs.getType());
+                }
+            });
+
         } catch (IndexOutOfBoundsException e) {
             mPlaylists = Collections.emptyList();
         }

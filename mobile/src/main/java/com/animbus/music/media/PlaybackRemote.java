@@ -203,6 +203,7 @@ public class PlaybackRemote {
     public static void registerStateListener(StateChangedListener listener) {
         if (!stateListeners.contains(listener)) stateListeners.add(listener);
         else Log.d(TAG, "This listener is already registered");
+
     }
 
     protected static void updateSongListeners(Song newSong) {

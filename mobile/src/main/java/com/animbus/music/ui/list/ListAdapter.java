@@ -16,13 +16,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.graphics.Palette;
-import android.support.v7.graphics.drawable.DrawableUtils;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +45,6 @@ import com.animbus.music.util.SettingsManager;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-
-import org.w3c.dom.Text;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -472,7 +467,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         protected void configure(Playlist object) {
-            if (TextUtils.equals(object.getName().toLowerCase(), "favorites")) {
+            if (object.getType() == 0) {
                 binding.icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_24dp));
             }
         }

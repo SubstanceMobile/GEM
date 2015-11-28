@@ -11,6 +11,7 @@ public class Playlist {
     List<Song> songs = new ArrayList<>();
     String name;
     long id;
+    int type;
 
     public Playlist(){}
 
@@ -48,5 +49,17 @@ public class Playlist {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Order
+    ///////////////////////////////////////////////////////////////////////////
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
     }
 }
