@@ -2,14 +2,16 @@ package com.animbus.music.media;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.objects.Album;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,30 +19,23 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Library {
-    public static final Library instance = new Library();
-    public Context context;
-    private List<Song> mSongs = new ArrayList<>();
-    private List<Album> mAlbums = new ArrayList<>();
-    private List<Playlist> mPlaylists = new ArrayList<>();
-    private List<Artist> mArtists = new ArrayList<>();
-    private List<Genre> mGenres = new ArrayList<>();
+    public static volatile Context context;
+    private static volatile boolean mBuilt = false;
 
-    private boolean mBuilt = false;
+    private static volatile List<Song> mSongs = new ArrayList<>();
+    private static volatile List<Album> mAlbums = new ArrayList<>();
+    private static volatile List<Playlist> mPlaylists = new ArrayList<>();
+    private static volatile List<Artist> mArtists = new ArrayList<>();
+    private static volatile List<Genre> mGenres = new ArrayList<>();
 
     private Library() {
-
     }
 
-    public static Library get(Context cxt) {
-        instance.context = cxt;
-        return instance;
+    public static void setContext(Context cxt) {
+        context = cxt;
     }
 
-    public static Library get() {
-        return instance;
-    }
-
-    public void build() {
+    public static void build() {
         buildAlbums();
         buildSongs();
         buildPlaylists();
@@ -52,7 +47,7 @@ public class Library {
         mBuilt = true;
     }
 
-    private void buildSongs() {
+    private static void buildSongs() {
         try {
             final String where = MediaStore.Audio.Media.IS_MUSIC + "=1";
             Cursor songsCursor = context.getContentResolver().query(
@@ -83,12 +78,13 @@ public class Library {
                 s.setTrackNumber(songsCursor.getInt(trackNumber));
                 mSongs.add(s);
             } while (songsCursor.moveToNext());
+            songsCursor.close();
         } catch (IndexOutOfBoundsException e) {
             mSongs = Collections.emptyList();
         }
     }
 
-    private void buildAlbums() {
+    private static void buildAlbums() {
         try {
             Cursor albumsCursor = context.getContentResolver().query(
                     MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
@@ -118,12 +114,13 @@ public class Library {
 
                 mAlbums.add(album);
             } while (albumsCursor.moveToNext());
+            albumsCursor.close();
         } catch (IndexOutOfBoundsException e) {
             mAlbums = Collections.emptyList();
         }
     }
 
-    private void buildPlaylists() {
+    private static void buildPlaylists() {
         try {
             Cursor playlistsCursor = context.getContentResolver().query(
                     MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
@@ -146,20 +143,19 @@ public class Library {
 
                 mPlaylists.add(playlist);
             } while (playlistsCursor.moveToNext());
-
             Collections.sort(mPlaylists, new Comparator<Playlist>() {
                 @Override
                 public int compare(Playlist lhs, Playlist rhs) {
                     return ((Integer) lhs.getType()).compareTo(rhs.getType());
                 }
             });
-
+            playlistsCursor.close();
         } catch (IndexOutOfBoundsException e) {
             mPlaylists = Collections.emptyList();
         }
     }
 
-    private void loadSongsForPlaylist(Playlist playlist) {
+    private static void loadSongsForPlaylist(Playlist playlist) {
         try {
             Cursor playlistSongsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", playlist.getId()),
                     null, null, null,
@@ -176,11 +172,11 @@ public class Library {
         }
     }
 
-    private void buildArtists() {
+    private static void buildArtists() {
         //TODO:Add this
     }
 
-    private void buildGenres() {
+    private static void buildGenres() {
         try {
             Cursor genresCursor = context.getContentResolver().query(
                     MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI,
@@ -201,6 +197,7 @@ public class Library {
 
                 mGenres.add(genre);
             } while (genresCursor.moveToNext());
+            genresCursor.close();
         } catch (IndexOutOfBoundsException e) {
             mGenres = Collections.emptyList();
         }
@@ -208,9 +205,9 @@ public class Library {
 
     /**
      * This takes the individual lists and combines objects.
-     * So it basically links songs and albums.
+     * So it basically links songs and albums, songs and playlists, albums and artists (which ends up linking songs and artists), etc, etc.
      */
-    private void buildDataMesh() {
+    private static void buildDataMesh() {
         if (!mSongs.isEmpty() && !mAlbums.isEmpty()) {
             for (Album a : mAlbums) {
                 for (Song s : mSongs) {
@@ -232,41 +229,61 @@ public class Library {
     ///////////////////////////////////////////////////////////////////////////
 
     public static List<Song> getSongs() {
-        return instance.mSongs;
+        return mSongs;
     }
 
     public static List<Album> getAlbums() {
-        return instance.mAlbums;
+        return mAlbums;
     }
 
     public static List<Playlist> getPlaylists() {
-        return instance.mPlaylists;
+        return mPlaylists;
     }
 
     public static List<Artist> getArtists() {
-        return instance.mArtists;
+        return mArtists;
     }
 
     public static List<Genre> getGenres() {
-        return instance.mGenres;
+        return mGenres;
     }
 
-    public boolean isBuilt() {
+    public static boolean isBuilt() {
         return mBuilt;
     }
 
+    @Nullable
     public static Song findSongById(long id) {
-        for (Song song : instance.mSongs) if (song.getSongID() == id) return song;
+        for (Song song : getSongs()) if (song.getSongID() == id) return song;
         return null;
     }
 
+    @Nullable
+    public static Song findSongByUri(Uri uri) {
+        for (Song song : getSongs()) if (song.getSongURI() == uri) return song;
+        return null;
+    }
+
+    @Nullable
     public static Album findAlbumById(long id) {
-        for (Album album : instance.mAlbums) if (album.getId() == id)  return album;
+        for (Album album : getAlbums()) if (album.getId() == id) return album;
         return null;
     }
 
+    @Nullable
     public static Playlist findPlaylistById(long id) {
-        for (Playlist playlist : instance.mPlaylists) if (playlist.getId() == id) return playlist;
+        for (Playlist playlist : getPlaylists()) if (playlist.getId() == id) return playlist;
+        return null;
+    }
+
+    @Nullable
+    public static Artist findArtistById(long id) {
+        return null;
+    }
+
+    @Nullable
+    public static Genre findGenreById(long id) {
+        for (Genre genre : getGenres()) if (genre.getId() == id) return genre;
         return null;
     }
 
@@ -307,7 +324,6 @@ public class Library {
         for (Playlist p : getPlaylists()) {
             if (p.getName().toLowerCase().contains(query.toLowerCase())) {
                 if (!results.contains(p)) results.add(p);
-
             }
         }
         return results;

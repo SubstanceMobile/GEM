@@ -25,15 +25,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.animbus.music.R;
+import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.media.stable.PlaybackManager;
-import com.animbus.music.media.stable.QueueManager;
 import com.animbus.music.ui.activity.settings.Settings;
-import com.animbus.music.ui.theme.Theme;
-import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.list.ListAdapter;
+import com.animbus.music.ui.theme.Theme;
+import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.IconManager;
 
 public class NowPlaying extends ThemableActivity implements PlaybackManager.OnChangedListener {
@@ -87,7 +87,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     }
 
     private void configureRecyclerView() {
-        mList.setAdapter(new ListAdapter(ListAdapter.TYPE_NOW_PLAYING, QueueManager.get().getCurrentQueueAsSong(), this));
+        mList.setAdapter(new ListAdapter(ListAdapter.TYPE_NOW_PLAYING, PlaybackRemote.getQueue(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
         mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mList.setNestedScrollingEnabled(true);

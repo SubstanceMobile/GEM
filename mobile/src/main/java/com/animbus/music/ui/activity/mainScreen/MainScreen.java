@@ -15,7 +15,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
@@ -41,22 +40,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.animbus.music.R;
-import com.animbus.music.util.SettingsManager;
-import com.animbus.music.ui.custom.view.LockableViewPager;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
-import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.media.Library;
-import com.animbus.music.media.stable.PlaybackManager;
-import com.animbus.music.media.stable.ServiceHelper;
+import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.ui.activity.IssueReportingActivity;
-import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
+import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.settings.Settings;
-import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.activity.setup.SetupActivity;
+import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.view.LockableViewPager;
+import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.util.IconManager;
+import com.animbus.music.util.SettingsManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 
@@ -169,7 +168,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         } else {
             try {
                 setUpNowPlayingBarWithSong(PlaybackManager.get().getCurrentSong());
-                setUpNowPlayingBarWithState(ServiceHelper.get(this).getService().getStateObj());
+                setUpNowPlayingBarWithState(PlaybackRemote.getState());
             } catch (Exception ignored) {
             }
         }
@@ -242,7 +241,6 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             //For inconsistency sake
             quickToolbar.setVisibility(View.VISIBLE);
         }
-        final MediaControllerCompat.TransportControls controls = ServiceHelper.get(this).getService().getSession().getController().getTransportControls();
         ImageButton button = (ImageButton) findViewById(R.id.main_screen_now_playing_toolbar_playpause);
         boolean isPaused = state.getState() == PlaybackStateCompat.STATE_PAUSED;
         if (isPaused) {
@@ -250,7 +248,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    controls.play();
+                    PlaybackRemote.resume();
                 }
             });
         } else {
@@ -258,7 +256,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    controls.pause();
+                    PlaybackRemote.pause();
                 }
             });
         }

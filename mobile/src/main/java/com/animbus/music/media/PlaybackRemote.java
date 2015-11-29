@@ -211,14 +211,17 @@ public class PlaybackRemote {
     }
 
     protected static void updateSongListeners(Uri uri) {
-        //Builds the song
-        Song s = new Song();
-        Album a = new Album();
-        s.setSongTitle(mContext.getString(R.string.title_uri));
-        s.setSongArtist(mContext.getString(R.string.artist_uri));
-        a.setContext(mContext);
-        s.setAlbum(a);
-        updateSongListeners(s);
+        Song s = Library.findSongByUri(uri);
+        if (s == null) {
+            //Builds the song
+            s = new Song();
+            Album a = new Album();
+            s.setSongTitle(mContext.getString(R.string.title_uri));
+            s.setSongArtist(mContext.getString(R.string.artist_uri));
+            a.setContext(mContext);
+            s.setAlbum(a);
+            updateSongListeners(s);
+        }
 
         //Sets the queue to this one song
         List<Song> newQueue = new ArrayList<>();

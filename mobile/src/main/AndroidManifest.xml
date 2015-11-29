@@ -217,12 +217,6 @@
                 android:resource="@xml/music_playback_widget_info" />
         </receiver>
 
-        <service android:name=".media.stable.MediaService">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-            </intent-filter>
-        </service>
-
         <service android:name=".media.MediaService">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />

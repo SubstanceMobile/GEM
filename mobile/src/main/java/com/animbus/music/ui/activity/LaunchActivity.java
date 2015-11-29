@@ -21,13 +21,12 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
+import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
-import com.animbus.music.media.Library;
 import com.animbus.music.media.stable.PlaybackManager;
-import com.animbus.music.media.stable.ServiceHelper;
 import com.animbus.music.ui.activity.mainScreen.MainScreen;
+import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.LoadedFuse;
@@ -133,11 +132,8 @@ public class LaunchActivity extends ThemableActivity {
             ThemeManager.get().setContext(this);
 
             //Loads Songs
-            Library.get(this);
-            if (!Library.get().isBuilt()) Library.get().build();
-
-            //Starts Music Service
-            ServiceHelper.get(this).initService();
+            Library.setContext(this);
+            if (!Library.isBuilt()) Library.build();
 
             //Initiates the process of setting up all of the media objects to be triggered instantly
             PlaybackRemote.setUp(this);
