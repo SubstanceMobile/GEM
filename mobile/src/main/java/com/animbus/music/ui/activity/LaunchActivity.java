@@ -23,8 +23,6 @@ import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
-import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.ui.activity.mainScreen.MainScreen;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.theme.Theme;
@@ -47,14 +45,8 @@ public class LaunchActivity extends ThemableActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_launch);
-        if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
-            for (Song s : Library.getSongs()) {
-                if (s.getSongURI() == getIntent().getData()) {
-                    PlaybackManager.get().play(s);
-                    break;
-                }
-            }
-        }
+        if (getIntent().getAction().equals(Intent.ACTION_VIEW))
+            PlaybackRemote.play(getIntent().getData(), true);
     }
 
     @Override

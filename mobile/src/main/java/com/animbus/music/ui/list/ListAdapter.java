@@ -27,11 +27,11 @@ import android.widget.Toast;
 
 import com.animbus.music.BR;
 import com.animbus.music.R;
+import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.ui.ItemAlbumDetailsList;
 import com.animbus.music.ui.ItemAlbumGrid;
 import com.animbus.music.ui.ItemGenre;
@@ -217,7 +217,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public void onClick(View v) {
-            PlaybackManager.get().play(data, getAdapterPosition());
+            PlaybackRemote.play(data, getAdapterPosition());
         }
     }
 
@@ -442,7 +442,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         @Override
         public boolean onLongClick(View v) {
             Snackbar.make(v, R.string.playing_album, Snackbar.LENGTH_SHORT).show();
-            PlaybackManager.get().play(binding.getAlbum().getSongs(), 0);
+            PlaybackRemote.play(binding.getAlbum().getSongs(), 0);
             return true;
         }
     }
@@ -455,7 +455,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public void onClick(View v) {
-            PlaybackManager.get().play(data, getAdapterPosition());
+            PlaybackRemote.play(data, getAdapterPosition());
         }
     }
 
@@ -479,8 +479,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public boolean onLongClick(View v) {
-            PlaybackManager.get().play(binding.getPlaylist().getSongs(), 0);
-            return true;
+            try {
+                PlaybackRemote.play(binding.getPlaylist().getSongs(), 0);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
         }
     }
 
@@ -509,7 +513,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public void onClick(View v) {
-            PlaybackManager.get().playQueueItem(getAdapterPosition());
+            PlaybackRemote.playQueueItem(getAdapterPosition());
         }
     }
 }

@@ -33,6 +33,7 @@ public class PlaybackRemote {
     static volatile int tempListStartPos;
     static volatile boolean tempRepeating;
     static volatile PlaybackBase tempIMPL;
+    static volatile boolean tempNotifyListener;
 
     public static final PlaybackBase LOCAL = new LocalPlayback();
 
@@ -69,7 +70,7 @@ public class PlaybackRemote {
     // Here go all of the controls
     ///////////////////////////////////////////////////////////////////////////
 
-    public static void play(Uri uri) {
+    public static void play(Uri uri, boolean updateListenersWithUri) {
         startServiceIfNecessary();
         remote.playFromUri(uri, null);
     }
@@ -84,6 +85,11 @@ public class PlaybackRemote {
         remote.sendCustomAction(PlaybackBase.ACTION_PLAY_FROM_LIST, null);
         tempSongList = songs;
         tempListStartPos = startPos;
+    }
+
+    public static void playQueueItem(int pos) {
+        play(getQueue().get(pos));
+        setCurrentSongPos(pos);
     }
 
     public static void resume() {
@@ -144,6 +150,10 @@ public class PlaybackRemote {
         return mCurrentSongPos;
     }
 
+    public static Song getCurrentSong() {
+        return getQueue().get(getCurrentSongPos());
+    }
+
     public static int getNextSongPos() {
         int pos;
         pos = mCurrentSongPos + 1;
@@ -180,6 +190,10 @@ public class PlaybackRemote {
         return mService.mSession;
     }
 
+    public static boolean isActive() {
+        return mService.mSession.isActive();
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Listener
     ///////////////////////////////////////////////////////////////////////////
@@ -187,11 +201,11 @@ public class PlaybackRemote {
     static ArrayList<SongChangedListener> songListeners = new ArrayList<>();
     static ArrayList<StateChangedListener> stateListeners = new ArrayList<>();
 
-    interface SongChangedListener {
+    public interface SongChangedListener {
         void onSongChanged(Song newSong);
     }
 
-    interface StateChangedListener {
+    public interface StateChangedListener {
         void onStateChanged(PlaybackStateCompat newState);
     }
 

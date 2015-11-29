@@ -9,11 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.animbus.music.R;
+import com.animbus.music.media.Library;
+import com.animbus.music.media.PlaybackRemote;
+import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.media.Library;
-import com.animbus.music.media.stable.PlaybackManager;
-import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.ui.theme.Theme;
 
 public class PlaylistDetails extends ThemableActivity {
@@ -61,12 +61,12 @@ public class PlaylistDetails extends ThemableActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId())  {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 supportFinishAfterTransition();
                 return true;
             case R.id.action_play_all:
-                PlaybackManager.get().play(mPlaylist.getSongs(), 0);
+                PlaybackRemote.play(mPlaylist.getSongs(), 0);
                 return true;
         }
         return false;

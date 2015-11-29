@@ -43,7 +43,6 @@ import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.ui.activity.IssueReportingActivity;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.search.SearchActivity;
@@ -163,26 +162,30 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     }
 
     private void configureNowPlayingBar() {
-        if (!PlaybackManager.get().isActive()) {
+        if (!PlaybackRemote.isActive()) {
             quickToolbar.setVisibility(View.GONE);
         } else {
             try {
-                setUpNowPlayingBarWithSong(PlaybackManager.get().getCurrentSong());
+                setUpNowPlayingBarWithSong(PlaybackRemote.getCurrentSong());
                 setUpNowPlayingBarWithState(PlaybackRemote.getState());
             } catch (Exception ignored) {
             }
         }
-        PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
-            @Override
-            public void onSongChanged(Song song) {
-                setUpNowPlayingBarWithSong(song);
-            }
 
+        PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
             @Override
-            public void onPlaybackStateChanged(PlaybackStateCompat state) {
-                setUpNowPlayingBarWithState(state);
+            public void onSongChanged(Song newSong) {
+                setUpNowPlayingBarWithSong(newSong);
             }
         });
+
+        PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
+            @Override
+            public void onStateChanged(PlaybackStateCompat newState) {
+                setUpNowPlayingBarWithState(newState);
+            }
+        });
+
         quickToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -288,7 +291,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         final ImageView art = (ImageView) header.findViewById(R.id.navdrawer_header_image);
 
         try {
-            Song current = PlaybackManager.get().getCurrentSong();
+            Song current = PlaybackRemote.getCurrentSong();
             title.setText(current.getSongTitle());
             artist.setText(current.getSongArtist());
             current.getAlbum().requestArt(art);
@@ -296,17 +299,12 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
             Log.d("Navdrawer Header", "Not playing music");
         }
 
-        PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
+        PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
             @Override
-            public void onSongChanged(Song song) {
-                title.setText(song.getSongTitle());
-                artist.setText(song.getSongArtist());
-                song.getAlbum().requestArt(art);
-            }
-
-            @Override
-            public void onPlaybackStateChanged(PlaybackStateCompat state) {
-
+            public void onSongChanged(Song newSong) {
+                title.setText(newSong.getSongTitle());
+                artist.setText(newSong.getSongArtist());
+                newSong.getAlbum().requestArt(art);
             }
         });
 

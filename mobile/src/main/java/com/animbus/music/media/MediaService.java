@@ -155,7 +155,7 @@ public class MediaService extends Service {
 
         @Override
         public void onPlayFromUri(Uri uri, Bundle extras) {
-            play(uri, true);
+            play(uri, PlaybackRemote.tempNotifyListener);
         }
 
         @Override

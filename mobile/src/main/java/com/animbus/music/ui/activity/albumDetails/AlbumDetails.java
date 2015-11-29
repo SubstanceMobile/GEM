@@ -29,16 +29,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.animbus.music.R;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
-import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.media.Library;
-import com.animbus.music.media.stable.PlaybackManager;
+import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
+import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.list.ListAdapter;
+import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
-import com.animbus.music.ui.theme.Theme;
 
 public class AlbumDetails extends ThemableActivity {
     Toolbar mToolbar;
@@ -182,7 +182,7 @@ public class AlbumDetails extends ThemableActivity {
                         mFAB.setY(fabOriginalY);
                         ViewCompat.setElevation(mFAB, fabOriginalElev);
                         ActivityCompat.startActivity(AlbumDetails.this, new Intent(AlbumDetails.this, NowPlaying.class), options.toBundle());
-                        PlaybackManager.get().play(mAlbum.getSongs(), 0);
+                        PlaybackRemote.play(mAlbum.getSongs(), 0);
                     }
 
                     @Override
