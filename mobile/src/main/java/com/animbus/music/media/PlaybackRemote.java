@@ -117,6 +117,10 @@ public class PlaybackRemote {
         tempRepeating = repeating;
     }
 
+    public static boolean isRepeating() {
+        return mService.IMPL.isRepeating();
+    }
+
     public static void seek(long time) {
         remote.seekTo(time);
     }
@@ -192,6 +196,14 @@ public class PlaybackRemote {
 
     public static boolean isActive() {
         return mService.mSession.isActive();
+    }
+
+    public static boolean isPlaying() {
+        return mService.IMPL.isPlaying();
+    }
+
+    public static int getCurrentPosInSong() {
+        return mService.IMPL.getCurrentPosInSong();
     }
 
     ///////////////////////////////////////////////////////////////////////////

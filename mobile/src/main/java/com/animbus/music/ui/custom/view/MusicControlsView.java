@@ -19,13 +19,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.animbus.music.R;
-import com.animbus.music.media.stable.PlaybackManager;
-import com.animbus.music.media.objects.Song;
+import com.animbus.music.media.PlaybackRemote;
 
 /**
  * Created by Adrian on 9/24/2015.
  */
-public class MusicControlsView extends FrameLayout implements PlaybackManager.OnChangedListener {
+public class MusicControlsView extends FrameLayout implements PlaybackRemote.StateChangedListener {
     private static final int SHOW_PROGRESS = 2;
     private final Context mContext;
     AudioManager mAudioManager;
@@ -39,7 +38,7 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == SHOW_PROGRESS) {
-                if (!mDragging && PlaybackManager.get().isPlaying()) {
+                if (!mDragging && PlaybackRemote.isPlaying()) {
                     setProgress();
                     msg = obtainMessage(SHOW_PROGRESS);
                     sendMessageDelayed(msg, 0);
@@ -202,7 +201,7 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
         mCurrentTime = (TextView) v.findViewById(R.id.controls_current_pos);
 
         setProgress();
-        PlaybackManager.get().registerListener(this);
+        PlaybackRemote.registerStateListener(this);
         updatePausePlay();
     }
 
@@ -238,10 +237,10 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
             return 0;
         }
 
-        int position = PlaybackManager.get().getCurrentPosInSong();
+        int position = PlaybackRemote.getCurrentPosInSong();
         int duration = 0;
-        if (PlaybackManager.get().getCurrentSong() != null)
-            duration = (int) PlaybackManager.get().getCurrentSong().getSongDuration();
+        if (PlaybackRemote.getCurrentSong() != null)
+            duration = (int) PlaybackRemote.getCurrentSong().getSongDuration();
 
         if (mProgress != null) {
             mProgress.setProgress(position);
@@ -249,7 +248,7 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
         }
 
         if (mEndTime != null)
-            mEndTime.setText(PlaybackManager.get().getCurrentSong().getSongDurString());
+            mEndTime.setText(PlaybackRemote.getCurrentSong().getSongDurString());
         if (mCurrentTime != null)
             mCurrentTime.setText(stringForTime(position));
 
@@ -257,7 +256,7 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
     }
 
     private void updatePausePlay() {
-        if (PlaybackManager.get().isPlaying()) {
+        if (PlaybackRemote.isPlaying()) {
             mPlayButtonRoot.setVisibility(View.GONE);
             mPauseButtonRoot.setVisibility(View.VISIBLE);
         } else {
@@ -281,12 +280,7 @@ public class MusicControlsView extends FrameLayout implements PlaybackManager.On
     }
 
     @Override
-    public void onSongChanged(Song song) {
-
-    }
-
-    @Override
-    public void onPlaybackStateChanged(PlaybackStateCompat state) {
+    public void onStateChanged(PlaybackStateCompat newState) {
         mHandler.sendEmptyMessage(SHOW_PROGRESS);
         updatePausePlay();
     }

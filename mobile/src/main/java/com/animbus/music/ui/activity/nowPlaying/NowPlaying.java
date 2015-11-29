@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +26,6 @@ import android.widget.TextView;
 import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.stable.PlaybackManager;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemableActivity;
 import com.animbus.music.ui.custom.view.MusicControlsView;
@@ -36,7 +34,7 @@ import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.IconManager;
 
-public class NowPlaying extends ThemableActivity implements PlaybackManager.OnChangedListener {
+public class NowPlaying extends ThemableActivity implements PlaybackRemote.SongChangedListener {
     Toolbar mToolbar;
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
@@ -47,9 +45,9 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     @Override
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_now_playing);
-        PlaybackManager.get().registerListener(this);
+        PlaybackRemote.registerSongListener(this);
         configureTransition();
-        mSong = PlaybackManager.get().getCurrentSong();
+        mSong = PlaybackRemote.getCurrentSong();
     }
 
     private void configureTransition() {
@@ -124,7 +122,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
 
     private void configureControls() {
         mControls.initView();
-        mControls.setController(PlaybackManager.get().getService().getSession().getController());
+        mControls.setController(PlaybackRemote.getSession().getController());
     }
 
     @Override
@@ -144,7 +142,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
                 onBackPressed();
                 break;
             case R.id.action_stop:
-                PlaybackManager.get().stop();
+                PlaybackRemote.stop();
                 finish();
                 break;
             case R.id.action_settings:
@@ -155,14 +153,9 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
     }
 
     @Override
-    public void onSongChanged(Song song) {
-        mSong = song;
+    public void onSongChanged(Song newSong) {
+        mSong = newSong;
         configureUI();
-    }
-
-    @Override
-    public void onPlaybackStateChanged(PlaybackStateCompat state) {
-
     }
 
     @Override
@@ -177,7 +170,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
 
     private void configureRepeatIcon(final Song s) {
         ImageView i = (ImageView) findViewById(R.id.now_playing_repeat_icon);
-        if (PlaybackManager.get().isLooping()) {
+        if (PlaybackRemote.isRepeating()) {
             Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
             DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), s.getAlbum().getBackgroundColor());
             i.setImageDrawable(repeatIcon);
@@ -198,17 +191,17 @@ public class NowPlaying extends ThemableActivity implements PlaybackManager.OnCh
 
     private void toggleRepeatIcon(Song s) {
         ImageView i = (ImageView) findViewById(R.id.now_playing_repeat_icon);
-        if (PlaybackManager.get().isLooping()) {
+        if (PlaybackRemote.isRepeating()) {
             Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
             DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon),
                     ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark));
             i.setImageDrawable(repeatIcon);
-            PlaybackManager.get().setRepeat(false);
+            PlaybackRemote.setRepeat(false);
         } else {
             Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_one_black_48dp);
             DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), s.getAlbum().getBackgroundColor());
             i.setImageDrawable(repeatIcon);
-            PlaybackManager.get().setRepeat(true);
+            PlaybackRemote.setRepeat(true);
         }
     }
 }
