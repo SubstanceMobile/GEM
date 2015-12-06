@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.animbus.music.R;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 
 /**
  * Created by Adrian on 8/5/2015.
  */
-public abstract class ThemableActivity extends AppCompatActivity implements ThemeManager.OnThemeChangedListener {
-
+public abstract class ThemeActivity extends AppCompatActivity implements ThemeManager.OnThemeChangedListener {
+    protected Toolbar mToolbar;
+    protected AppBarLayout mAppBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,15 @@ public abstract class ThemableActivity extends AppCompatActivity implements Them
      * Everything before triggering will happen before, everythibg after will happen after. The default sequence is:
      * <code>init(savedInstanceState)</code>,
      * <code>setVariables()</code>,
+     * <code>setSupportActionBar()</code>,
      * <code>setUp()</code>,
      * <code>setUpTheme()</code>
      */
     protected void sequence(Bundle savedInstanceState) {
         init(savedInstanceState);
         setVariables();
+        setInternalVariables();
+        setSupportActionBar(mToolbar);
         setUp();
         setUpTheme(ThemeManager.get().getTheme());
     }
@@ -49,6 +55,11 @@ public abstract class ThemableActivity extends AppCompatActivity implements Them
     protected abstract void init(Bundle savedInstanceState);
 
     protected abstract void setVariables();
+
+    private void setInternalVariables() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mAppBar = (AppBarLayout) findViewById(R.id.appbar);
+    }
 
     protected abstract void setUp();
 

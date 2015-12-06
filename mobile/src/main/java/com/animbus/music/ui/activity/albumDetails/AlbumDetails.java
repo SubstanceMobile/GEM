@@ -34,14 +34,13 @@ import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
-public class AlbumDetails extends ThemableActivity {
-    Toolbar mToolbar;
+public class AlbumDetails extends ThemeActivity {
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     FloatingActionButton mFAB;
@@ -59,15 +58,14 @@ public class AlbumDetails extends ThemableActivity {
     private void configureTransition() {
         ViewCompat.setTransitionName(findViewById(R.id.album_details_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_info_toolbar), "info");
-        ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar), "appbar");
+        ViewCompat.setTransitionName(findViewById(R.id.toolbar), "appbar");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar_text_protection), "appbar_text_protextion");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_recycler), "list");
     }
 
     @Override
     protected void setVariables() {
-        mToolbar = (Toolbar) findViewById(R.id.album_details_toolbar);
-        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.album_details_collapsing_toolbar);
+        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         mList = (RecyclerView) findViewById(R.id.album_details_recycler);
         mFAB = (FloatingActionButton) findViewById(R.id.album_details_fab);
         mDetailsRoot = (LinearLayout) findViewById(R.id.album_details_info_toolbar);
@@ -77,7 +75,6 @@ public class AlbumDetails extends ThemableActivity {
 
     @Override
     protected void setUp() {
-        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
         configureFab();
@@ -133,7 +130,7 @@ public class AlbumDetails extends ThemableActivity {
     private void transitionNowPlaying() {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                 new Pair<View, String>(findViewById(R.id.album_details_transition_reveal_part), "controls"),
-                new Pair<View, String>(findViewById(R.id.album_details_toolbar), "appbar"),
+                new Pair<View, String>(findViewById(R.id.toolbar), "appbar"),
                 new Pair<View, String>(findViewById(R.id.album_details_toolbar_text_protection), "appbar_text_protection"),
                 new Pair<View, String>(findViewById(R.id.album_details_album_art), "art")
 

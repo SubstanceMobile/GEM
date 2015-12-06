@@ -15,7 +15,7 @@ import com.google.repacked.apache.commons.lang3.exception.ExceptionUtils;
 /**
  * Created by Adrian on 11/14/2015.
  */
-public class CustomApplication extends Application implements Thread.UncaughtExceptionHandler {
+public class CrashReportApplication extends Application implements Thread.UncaughtExceptionHandler {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,7 +35,7 @@ public class CustomApplication extends Application implements Thread.UncaughtExc
                 .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
-                        new MaterialDialog.Builder(CustomApplication.this)
+                        new MaterialDialog.Builder(CrashReportApplication.this)
                                 .content(R.string.msg_crash_message)
                                 .input(R.string.crash_hint, 0, true, new MaterialDialog.InputCallback() {
                                     @Override
@@ -59,7 +59,7 @@ public class CustomApplication extends Application implements Thread.UncaughtExc
 
     private void sendReport(@Nullable String message, @NonNull String stackTrace, @Nullable String type) {
         String msg = !TextUtils.isEmpty(message) ? message : "No Message Provided";
-        startActivity(new Intent(CustomApplication.this, IssueReportingActivity.class)
+        startActivity(new Intent(CrashReportApplication.this, IssueReportingActivity.class)
                 .putExtra("error", stackTrace)
                 .putExtra("msg", msg)
                 .putExtra("type", type));

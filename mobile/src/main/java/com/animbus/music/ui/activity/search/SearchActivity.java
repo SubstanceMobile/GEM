@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animbus.music.R;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Album;
@@ -26,8 +26,7 @@ import com.animbus.music.ui.theme.Theme;
 
 import java.util.List;
 
-public class SearchActivity extends ThemableActivity {
-    Toolbar mToolbar;
+public class SearchActivity extends ThemeActivity {
     SearchView mSearchView;
 
     @Override
@@ -37,12 +36,11 @@ public class SearchActivity extends ThemableActivity {
 
     @Override
     protected void setVariables() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
     }
 
     @Override
     protected void setUp() {
-        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Search

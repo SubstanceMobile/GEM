@@ -5,21 +5,18 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
-import com.animbus.music.util.IconManager;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.util.IconManager;
 
-public class About extends ThemableActivity {
-    Toolbar toolbar;
-
+public class About extends ThemeActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_about);
@@ -27,12 +24,11 @@ public class About extends ThemableActivity {
 
     @Override
     protected void setVariables() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
     }
 
     @Override
     protected void setUp() {
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((TextView) findViewById(R.id.about_version_text_view)).setText(BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")");
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_code_icon)).getDrawable()), !ThemeManager.get().useLightTheme ? Color.WHITE : Color.BLACK);

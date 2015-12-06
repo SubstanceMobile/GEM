@@ -61,7 +61,7 @@ public class PlaybackRemote {
         if (mService != null) mService.inject(impl); else tempIMPL = impl;
     }
 
-    private static void startServiceIfNecessary() {
+    public static void startServiceIfNecessary() {
         if (mService == null)
             mContext.startService(new Intent(ACTION_START).setClass(mContext, MediaService.class));
     }
@@ -127,6 +127,10 @@ public class PlaybackRemote {
 
     public static void stop() {
         remote.stop();
+        killService();
+    }
+
+    public static void killService() {
         mService.stopSelf();
     }
 
@@ -155,7 +159,8 @@ public class PlaybackRemote {
     }
 
     public static Song getCurrentSong() {
-        return getQueue().get(getCurrentSongPos());
+        if (!getQueue().isEmpty()) return getQueue().get(getCurrentSongPos());
+        return null;
     }
 
     public static int getNextSongPos() {
@@ -195,7 +200,7 @@ public class PlaybackRemote {
     }
 
     public static boolean isActive() {
-        return mService.mSession.isActive();
+        return mService != null && mService.mSession.isActive();
     }
 
     public static boolean isPlaying() {

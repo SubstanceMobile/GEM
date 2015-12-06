@@ -82,7 +82,8 @@ public class MediaService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId)
+    {
         if (ACTION_START.equals(intent.getAction())) {
             setUp();
         } else if (ACTION_MEDIA_BUTTON.equals(intent.getAction())) {

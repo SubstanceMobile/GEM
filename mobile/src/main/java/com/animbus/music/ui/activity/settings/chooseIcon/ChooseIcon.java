@@ -15,7 +15,7 @@ import android.view.View;
 import com.animbus.music.R;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.SettingsManager;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 
@@ -31,8 +31,7 @@ import static com.animbus.music.util.IconManager.DESIGNER_JAKA;
 import static com.animbus.music.util.IconManager.DESIGNER_NGUYEN;
 import static com.animbus.music.util.IconManager.DESIGNER_SRINI;
 
-public class ChooseIcon extends ThemableActivity {
-    Toolbar toolbar;
+public class ChooseIcon extends ThemeActivity {
     SettingsManager settings;
     ThemeManager themeManager;
     Icon icon, iconOld;
@@ -48,14 +47,12 @@ public class ChooseIcon extends ThemableActivity {
         settings = SettingsManager.get();
         IconManager.get().setContext(this);
         themeManager = ThemeManager.get();
-        toolbar = (Toolbar) findViewById(R.id.choose_icon_appbar);
         iconOld = IconManager.get().getIcon();
         icon = iconOld;
     }
 
     @Override
     protected void setUp() {
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
         DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));

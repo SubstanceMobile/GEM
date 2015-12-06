@@ -12,12 +12,11 @@ import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Playlist;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.ui.theme.Theme;
 
-public class PlaylistDetails extends ThemableActivity {
-    Toolbar mToolbar;
+public class PlaylistDetails extends ThemeActivity {
     Playlist mPlaylist;
     RecyclerView mRecycler;
 
@@ -28,7 +27,6 @@ public class PlaylistDetails extends ThemableActivity {
 
     @Override
     protected void setVariables() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mPlaylist = Library.findPlaylistById(getIntent().getLongExtra("playlist_id", -1));
         mRecycler = (RecyclerView) findViewById(R.id.playlist_details_recycler);
     }
@@ -36,7 +34,6 @@ public class PlaylistDetails extends ThemableActivity {
     @Override
     protected void setUp() {
         mToolbar.setTitle(mPlaylist.getName());
-        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         configureRecycler();
     }

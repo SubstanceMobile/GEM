@@ -16,14 +16,14 @@
             android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:elevation="0dp">
+                android:layout_height="wrap_content">
 
                 <android.support.v7.widget.Toolbar
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/abc_action_bar_default_height_material"
-                    android:id="@+id/choose_icon_appbar"
+                    android:id="@+id/toolbar"
                     app:title="Choose Icon"/>
 
             </android.support.design.widget.AppBarLayout>

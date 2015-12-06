@@ -24,7 +24,7 @@ import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.ui.activity.mainScreen.MainScreen;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.LoadedFuse;
@@ -37,10 +37,8 @@ import java.net.URL;
 import static com.animbus.music.media.PlaybackRemote.LOCAL;
 
 
-public class LaunchActivity extends ThemableActivity {
-    Toolbar toolbar;
+public class LaunchActivity extends ThemeActivity {
     TabLayout tabs;
-    AppBarLayout appBar;
 
     @Override
     protected void init(Bundle savedInstanceState) {
@@ -57,16 +55,14 @@ public class LaunchActivity extends ThemableActivity {
 
     @Override
     protected void setVariables() {
-        toolbar = (Toolbar) findViewById(R.id.loading_toolbar);
         tabs = (TabLayout) findViewById(R.id.loading_tab_extention);
-        appBar = (AppBarLayout) findViewById(R.id.loading_app_bar);
     }
 
     @Override
     protected void setUp() {
         boolean showTabs = SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_TABS, false);
         tabs.setVisibility(showTabs ? View.VISIBLE : View.GONE);
-        if (!showTabs) ViewCompat.setElevation(appBar, 0.0f);
+        if (!showTabs) ViewCompat.setElevation(mAppBar, 0.0f);
         requestPermissions();
         checkUpdate.run();
     }
@@ -130,6 +126,8 @@ public class LaunchActivity extends ThemableActivity {
             //Initiates the process of setting up all of the media objects to be triggered instantly
             PlaybackRemote.setUp(this);
             PlaybackRemote.inject(LOCAL);
+
+
 
             //Notifies app that it has activated
             LoadedFuse.trip();

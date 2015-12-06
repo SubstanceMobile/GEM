@@ -11,10 +11,10 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/loading_app_bar">
+        android:id="@+id/appbar">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/loading_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"

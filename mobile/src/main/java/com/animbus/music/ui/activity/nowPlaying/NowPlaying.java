@@ -27,15 +27,14 @@ import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.activity.settings.Settings;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.IconManager;
 
-public class NowPlaying extends ThemableActivity implements PlaybackRemote.SongChangedListener {
-    Toolbar mToolbar;
+public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChangedListener {
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     Song mSong;
@@ -54,7 +53,7 @@ public class NowPlaying extends ThemableActivity implements PlaybackRemote.SongC
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_recycler), "list");
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_controls_root), "controls");
-        ViewCompat.setTransitionName(findViewById(R.id.now_playing_toolbar), "appbar");
+        ViewCompat.setTransitionName(findViewById(R.id.toolbar), "appbar");
         ViewCompat.setTransitionName(findViewById(R.id.now_playing_toolbar_text_protection), "appbar_text_protection");
 
         ViewCompat.setTransitionName(findViewById(R.id.current_song_title), "title");
@@ -63,7 +62,6 @@ public class NowPlaying extends ThemableActivity implements PlaybackRemote.SongC
 
     @Override
     protected void setVariables() {
-        mToolbar = (Toolbar) findViewById(R.id.now_playing_toolbar);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.now_playing_collapsing_toolbar);
         mList = (RecyclerView) findViewById(R.id.now_playing_recycler);
         mControlsRoot = (LinearLayout) findViewById(R.id.now_playing_controls_root);
@@ -72,7 +70,6 @@ public class NowPlaying extends ThemableActivity implements PlaybackRemote.SongC
 
     @Override
     protected void setUp() {
-        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
         DrawableCompat.setTint(menu, getResources().getColor(R.color.primaryLight));

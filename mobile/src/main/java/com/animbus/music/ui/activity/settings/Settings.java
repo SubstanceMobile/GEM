@@ -31,7 +31,7 @@ import com.android.vending.billing.IInAppBillingService;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.util.SettingsManager;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.ui.theme.Theme;
@@ -40,9 +40,7 @@ import com.animbus.music.ui.theme.ThemeManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Settings extends ThemableActivity {
-    private static final boolean GOOGLE_PLAY = true, PAYPAL = false;
-    Toolbar toolbar;
+public class Settings extends ThemeActivity {
     SwitchCompat
             pageNamesSwitch,
             myLibraryPaletteSwitch,
@@ -87,7 +85,6 @@ public class Settings extends ThemableActivity {
     protected void setVariables() {
         manager = SettingsManager.get();
         themeManager = ThemeManager.get();
-        toolbar = (Toolbar) findViewById(R.id.SettingsAppbar);
 
         pageNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
         myLibraryPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
@@ -98,10 +95,8 @@ public class Settings extends ThemableActivity {
 
     @Override
     protected void setUp() {
-        //Setting Toolbar as actionbar
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ViewCompat.setElevation(findViewById(R.id.settings_app_bar_layout), 0.0f);
+        ViewCompat.setElevation(findViewById(R.id.appbar), 0.0f);
 
 
         //Sets Window description in Multitasking menu
@@ -293,24 +288,6 @@ public class Settings extends ThemableActivity {
 
     public void showUiTweaker(View v) {
         showComingSoon(null);
-        /*switch (v.getId()) {
-            case R.id.settings_ui_tweaker_general:
-                showUiTweaker(UiTweaker.TYPE_GENERAL);
-                break;
-            case R.id.settings_ui_tweaker_home:
-                showUiTweaker(UiTweaker.TYPE_HOME);
-                break;
-            case R.id.settings_ui_tweaker_albums:
-                showUiTweaker(UiTweaker.TYPE_ALBUMS);
-                break;
-            case R.id.settings_ui_tweaker_now_playing:
-                showUiTweaker(UiTweaker.TYPE_NOWPLAYING);
-                break;
-        }*/
-    }
-
-    public void showUiTweaker(int type) {
-        startActivity(new Intent(this, UiTweaker.class).putExtra("ui_type", type));
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

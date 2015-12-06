@@ -23,12 +23,12 @@
             android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
-                android:id="@+id/main_app_bar"
+                android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/main_toolbar"
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/abc_action_bar_default_height_material"
                     app:theme="?attr/default_status_bar_theme"

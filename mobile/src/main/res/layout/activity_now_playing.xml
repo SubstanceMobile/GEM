@@ -9,7 +9,7 @@
     tools:context=".ui.activity.nowPlaying.NowPlaying">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/now_playing_app_bar_layout"
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
@@ -157,7 +157,7 @@
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/now_playing_toolbar"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

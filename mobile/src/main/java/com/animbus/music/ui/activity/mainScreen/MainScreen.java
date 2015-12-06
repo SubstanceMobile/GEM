@@ -48,7 +48,7 @@ import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.activity.setup.SetupActivity;
-import com.animbus.music.ui.custom.activity.ThemableActivity;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.LockableViewPager;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.ui.theme.Theme;
@@ -59,11 +59,10 @@ import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 
 
-public class MainScreen extends ThemableActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainScreen extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener {
     View quickToolbar;
     String currentScreenName;
     SettingsManager settings;
-    Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView drawerContent;
     ThemeManager themeManager;
@@ -86,7 +85,6 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
     protected void setVariables() {
         settings = SettingsManager.get();
         themeManager = ThemeManager.get();
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerContent = (NavigationView) findViewById(R.id.navigation);
         quickToolbar = findViewById(R.id.main_screen_now_playing_toolbar);
@@ -104,14 +102,13 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
 
     @Override
     protected void setUp() {
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Sets Dynamic Title
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
-            toolbar.setTitle(currentScreenName);
+            mToolbar.setTitle(currentScreenName);
         } else {
-            toolbar.setTitle(getResources().getString(R.string.title_activity_main));
+            mToolbar.setTitle(getResources().getString(R.string.title_activity_main));
         }
 
         pager.setAdapter(new RecyclerPagerAdapter());
@@ -124,7 +121,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         }
 
         if (!settings.getBooleanSetting(SettingsManager.KEY_USE_TABS, false)) {
-            ViewCompat.setElevation(findViewById(R.id.main_app_bar), 0.0f);
+            ViewCompat.setElevation(mToolbar, 0.0f);
             pager.lock();
             tabs.setVisibility(View.GONE);
         }
@@ -457,7 +454,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         tabs.getTabAt(0).select();
         pager.setCurrentItem(0);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
-            toolbar.setTitle(currentScreenName);
+            mToolbar.setTitle(currentScreenName);
             configureWindow();
         }
         //Closes the Navdrawer
@@ -471,7 +468,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         tabs.getTabAt(1).select();
         pager.setCurrentItem(1);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
-            toolbar.setTitle(currentScreenName);
+            mToolbar.setTitle(currentScreenName);
             configureWindow();
         }
         //Closes the Navdrawer
@@ -486,7 +483,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         tabs.getTabAt(2).select();
         pager.setCurrentItem(2);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
-            toolbar.setTitle(currentScreenName);
+            mToolbar.setTitle(currentScreenName);
             configureWindow();
         }
         //Closes the Navdrawer
@@ -501,7 +498,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
         tabs.getTabAt(3).select();
         pager.setCurrentItem(3);
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
-            toolbar.setTitle(currentScreenName);
+            mToolbar.setTitle(currentScreenName);
             configureWindow();
         }
         //Closes the Navdrawer
@@ -543,7 +540,7 @@ public class MainScreen extends ThemableActivity implements NavigationView.OnNav
 
         private void configureAsAlbums(RecyclerView list) {
             ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_ALBUM, Library.getAlbums(), MainScreen.this);
-            adapter.setTransitionToAlbumDetails(MainScreen.this, toolbar, findViewById(R.id.my_library_to_albumdetails_list_space));
+            adapter.setTransitionToAlbumDetails(MainScreen.this, mToolbar, findViewById(R.id.my_library_to_albumdetails_list_space));
             list.setAdapter(adapter);
             list.setItemAnimator(new DefaultItemAnimator());
             if (MainScreen.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)

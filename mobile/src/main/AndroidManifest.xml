@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_srini_black"
         android:label="@string/app_name_actual"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".ui.activity.mainScreen.MainScreen"
             android:exported="true"
@@ -228,9 +228,6 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".ui.activity.settings.UiTweaker"
-            android:label="@string/title_activity_ui_customiser" />
         <activity
             android:name=".ui.activity.albumDetails.AlbumDetails"
             android:label="@string/title_activity_album_details"
