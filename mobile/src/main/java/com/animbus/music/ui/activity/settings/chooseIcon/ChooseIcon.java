@@ -2,8 +2,11 @@ package com.animbus.music.ui.activity.settings.chooseIcon;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animbus.music.R;
+import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.SettingsManager;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
@@ -54,6 +58,17 @@ public class ChooseIcon extends ThemeActivity {
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
         DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
         getSupportActionBar().setHomeAsUpIndicator(menu);
+    }
+
+    @Override
+    protected void setUpTheme() {
+        super.setUpTheme();
+        FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.save_fab);
+        mFab.setBackgroundTintList(ColorStateList.valueOf(getAccentColor()));
+        Drawable icon = DrawableCompat.wrap(mFab.getDrawable());
+        DrawableCompat.setTint(icon, !ColorUtil.isLightColor(getAccentColor()) ?
+                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_dark) :
+                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_light));
     }
 
     @Override

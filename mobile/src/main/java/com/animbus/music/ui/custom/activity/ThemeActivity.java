@@ -3,6 +3,8 @@ package com.animbus.music.ui.custom.activity;
 import android.app.ActivityManager;
 import android.app.VoiceInteractor;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -16,6 +18,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
@@ -27,6 +30,8 @@ import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.Options;
+
+import java.security.PublicKey;
 
 /**
  * Created by Adrian on 8/5/2015.
@@ -153,6 +158,21 @@ public abstract class ThemeActivity extends AppCompatActivity {
         final TypedValue value = new TypedValue();
         getTheme().resolveAttribute(resId, value, true);
         return value.data;
+    }
+
+    public float resolveFloatAttr(@AttrRes int resId) {
+        final TypedValue value = new TypedValue();
+        getTheme().resolveAttribute(resId, value, true);
+        return value.getFloat();
+    }
+
+    public ColorStateList resolveColorStateListAttr(@AttrRes int resId) {
+        TypedArray a = obtainStyledAttributes(null, new int[] {resId});
+        try {
+            return a.getColorStateList(0);
+        } finally {
+            a.recycle();
+        }
     }
 
 }

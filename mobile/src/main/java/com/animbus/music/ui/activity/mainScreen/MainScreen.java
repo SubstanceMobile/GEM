@@ -408,14 +408,15 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                     configureAsAlbums(recycler);
                     break;
                 case 2:
-                    configureAsPlaylists(recycler);
+                    configureAsArtists(recycler);
                     break;
                 case 3:
-                    configureAsArtists(recycler);
+                    configureAsPlaylists(recycler);
                     break;
             }
             scroller.setRecyclerView(recycler);
             scroller.setTouchTargetWidth(RecyclerFastScrollerUtils.convertDpToPx(MainScreen.this, 16));
+            scroller.setHandlePressedColor(getAccentColor());
         }
 
         private void configureAsSongs(RecyclerView list) {
@@ -470,6 +471,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 container.addView(text, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 return text;
             }
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return titles[position];
         }
 
         @Override

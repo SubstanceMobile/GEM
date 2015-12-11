@@ -67,6 +67,14 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Reset Primary"
+                        android:layout_weight="1"
+                        android:onClick="resetPrimaryColor"
+                        android:id="@+id/button" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="Accent"
                         android:layout_weight="1"
                         android:nestedScrollingEnabled="false"

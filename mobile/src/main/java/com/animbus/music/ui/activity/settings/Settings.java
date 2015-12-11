@@ -1,6 +1,5 @@
 package com.animbus.music.ui.activity.settings;
 
-import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,16 +7,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,21 +33,24 @@ import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.android.vending.billing.IInAppBillingService;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
+import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
+import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
-import com.animbus.music.ui.custom.activity.ThemeActivity;
-import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
-import com.animbus.music.util.IconManager;
-import com.animbus.music.ui.theme.ThemeManager;
-import com.google.repacked.apache.commons.lang3.text.translate.NumericEntityUnescaper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Settings extends ThemeActivity implements ColorChooserDialog.ColorCallback {
     SwitchCompat
             pageNamesSwitch,
-            myLibraryPaletteSwitch,
+            paletteSwitch,
             tabsSwitch,
             scrollableTabsSwitch,
             tabsIconsSwitch;
@@ -90,7 +94,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         themeManager = ThemeManager.get();
 
         pageNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
-        myLibraryPaletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
+        paletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
         tabsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tabs_switch);
         scrollableTabsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tab_scrollable_switch);
         tabsIconsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tabs_icons);
@@ -104,7 +108,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
 
     private void loadSettings() {
         pageNamesSwitch.setChecked(Options.usingCategoryNames());
-        myLibraryPaletteSwitch.setChecked(Options.usingPalette());
+        paletteSwitch.setChecked(Options.usingPalette());
         tabsSwitch.setChecked(Options.usingTabs());
         scrollableTabsSwitch.setChecked(Options.usingScrollableTabs());
         tabsIconsSwitch.setChecked(Options.usingIconTabs());
@@ -154,7 +158,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
 
     private void saveSettings() {
         Options.setUseCategoryNames(pageNamesSwitch.isChecked());
-        Options.setUsePalette(myLibraryPaletteSwitch.isChecked());
+        Options.setUsePalette(paletteSwitch.isChecked());
         Options.setUseTabs(tabsSwitch.isChecked());
         Options.setUseScrollableTabs(scrollableTabsSwitch.isChecked());
         Options.setUseIconTabs(tabsIconsSwitch.isChecked());
@@ -170,7 +174,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         saveSettings();
     }
 
-    public void openAbout(View v){
+    public void openAbout(View v) {
         startActivity(new Intent(this, About.class));
     }
 
@@ -275,6 +279,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         new ColorChooserDialog.Builder(this, R.string.title_color_chooser_primary)
                 .accentMode(false)
                 .preselect(getPrimaryColor())
+                .allowUserColorInputAlpha(false)
                 .show();
     }
 
@@ -282,7 +287,51 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         new ColorChooserDialog.Builder(this, R.string.title_color_chooser_accent)
                 .accentMode(true)
                 .preselect(getAccentColor())
+                .allowUserColorInputAlpha(false)
                 .show();
+    }
+
+    public void resetPrimaryColor(View v) {
+        Options.setPrimaryColor(ContextCompat.getColor(this, !Options.isLightTheme() ? R.color.primaryDark : R.color.primaryLight));
+    }
+
+    @Override
+    protected void setUpTheme() {
+        super.setUpTheme();
+        int colorForeground = resolveColorAttr(android.R.attr.colorForeground);
+        ColorStateList thumbStateListNoAccent = resolveColorStateListAttr(android.support.v7.appcompat.R.attr.colorSwitchThumbNormal);
+        ColorStateList trackStateList = new ColorStateList(new int[][]{
+                {-android.R.attr.state_enabled},
+                {android.R.attr.state_checked},
+                {}
+        }, new int[]{
+                ColorUtils.setAlphaComponent(colorForeground, Math.round(Color.alpha(colorForeground) * 0.1f)),
+                ColorUtils.setAlphaComponent(getAccentColor(), Math.round(Color.alpha(getAccentColor()) * 0.3f)),
+                ColorUtils.setAlphaComponent(colorForeground, Math.round(Color.alpha(colorForeground) * 0.3f))
+        }), thumbStateList = new ColorStateList(new int[][]{
+                {-android.R.attr.state_enabled},
+                {android.R.attr.state_checked},
+                {}
+        }, new int[]{
+                thumbStateListNoAccent.getColorForState(new int[]{-android.R.attr.state_enabled}, 0),
+                getAccentColor(),
+                thumbStateListNoAccent.getDefaultColor()
+        });
+
+        DrawableCompat.setTintList(DrawableCompat.wrap(pageNamesSwitch.getThumbDrawable()), thumbStateList);
+        DrawableCompat.setTintList(DrawableCompat.wrap(pageNamesSwitch.getTrackDrawable()), trackStateList);
+
+        DrawableCompat.setTintList(DrawableCompat.wrap(paletteSwitch.getThumbDrawable()), thumbStateList);
+        DrawableCompat.setTintList(DrawableCompat.wrap(paletteSwitch.getTrackDrawable()), trackStateList);
+
+        DrawableCompat.setTintList(DrawableCompat.wrap(tabsSwitch.getThumbDrawable()), thumbStateList);
+        DrawableCompat.setTintList(DrawableCompat.wrap(tabsSwitch.getTrackDrawable()), trackStateList);
+
+        DrawableCompat.setTintList(DrawableCompat.wrap(scrollableTabsSwitch.getThumbDrawable()), thumbStateList);
+        DrawableCompat.setTintList(DrawableCompat.wrap(scrollableTabsSwitch.getTrackDrawable()), trackStateList);
+
+        DrawableCompat.setTintList(DrawableCompat.wrap(tabsIconsSwitch.getThumbDrawable()), thumbStateList);
+        DrawableCompat.setTintList(DrawableCompat.wrap(tabsIconsSwitch.getTrackDrawable()), trackStateList);
     }
 
     @Override
@@ -292,6 +341,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         } else {
             Options.setAccentColor(i);
         }
+        recreate();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
