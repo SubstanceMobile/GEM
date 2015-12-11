@@ -7,14 +7,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +28,6 @@ import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.IconManager;
 
@@ -42,7 +39,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     MusicControlsView mControls;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_now_playing);
         PlaybackRemote.registerSongListener(this);
         configureTransition();
@@ -120,10 +117,6 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     private void configureControls() {
         mControls.initView();
         mControls.setController(PlaybackRemote.getSession().getController());
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
     }
 
     @Override

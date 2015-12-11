@@ -4,21 +4,24 @@
         android:id="@+id/navdrawer_main_category"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/navdrawer_album_icon"
-            android:icon="@drawable/ic_album_24dp"
-            android:title="@string/page_albums" />
-        <item
             android:id="@+id/navdrawer_songs"
             android:icon="@drawable/ic_audiotrack_24dp"
             android:title="@string/page_songs" />
+
         <item
-            android:id="@+id/navdrawer_playlists"
-            android:icon="@drawable/ic_queue_music_black_48dp"
-            android:title="@string/page_playlists" />
+            android:id="@+id/navdrawer_album_icon"
+            android:icon="@drawable/ic_album_24dp"
+            android:title="@string/page_albums" />
+
         <item
             android:id="@+id/navdrawer_artists"
             android:icon="@drawable/ic_artist_24dp"
             android:title="@string/page_artists" />
+
+        <item
+            android:id="@+id/navdrawer_playlists"
+            android:icon="@drawable/ic_queue_music_black_48dp"
+            android:title="@string/page_playlists" />
     </group>
 
     <group

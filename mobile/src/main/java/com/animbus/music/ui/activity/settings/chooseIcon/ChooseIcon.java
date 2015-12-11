@@ -4,10 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +14,6 @@ import com.animbus.music.R;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.SettingsManager;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
-import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 
 import static com.animbus.music.util.IconManager.COLOR_BLACK;
@@ -38,7 +35,7 @@ public class ChooseIcon extends ThemeActivity {
     Intent shortcutClickedIntent, addShortcutIntent, removeShortcutIntent;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_settings_choose_icon);
     }
 
@@ -57,11 +54,6 @@ public class ChooseIcon extends ThemeActivity {
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
         DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
         getSupportActionBar().setHomeAsUpIndicator(menu);
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
-
     }
 
     @Override

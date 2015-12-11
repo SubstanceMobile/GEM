@@ -15,32 +15,35 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.android.vending.billing.IInAppBillingService;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
+import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
 import com.animbus.music.util.IconManager;
-import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.google.repacked.apache.commons.lang3.text.translate.NumericEntityUnescaper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Settings extends ThemeActivity {
+public class Settings extends ThemeActivity implements ColorChooserDialog.ColorCallback {
     SwitchCompat
             pageNamesSwitch,
             myLibraryPaletteSwitch,
@@ -70,14 +73,14 @@ public class Settings extends ThemeActivity {
 
 
     @Override
-    protected void sequence(Bundle savedInstanceState) {
-        super.sequence(savedInstanceState);
+    protected void sequence() {
+        super.sequence();
         setUpVersionNumberClicks();
         loadSettings();
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_settings);
     }
 
@@ -97,34 +100,14 @@ public class Settings extends ThemeActivity {
     protected void setUp() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ViewCompat.setElevation(findViewById(R.id.appbar), 0.0f);
-
-
-        //Sets Window description in Multitasking menu
-        IconManager iconM = IconManager.get().setContext(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (!manager.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-                Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-                setTaskDescription(new ActivityManager.TaskDescription(null, bm, getResources().getColor(R.color.primaryDark)));
-                bm.recycle();
-            } else {
-                Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
-                setTaskDescription(new ActivityManager.TaskDescription(null, bm, getResources().getColor(R.color.primaryLight)));
-                bm.recycle();
-            }
-        }
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
-
     }
 
     private void loadSettings() {
-        pageNamesSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false));
-        myLibraryPaletteSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true));
-        tabsSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_TABS, false));
-        scrollableTabsSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_SCROLLABLE_TABS, true));
-        tabsIconsSwitch.setChecked(manager.getBooleanSetting(SettingsManager.KEY_USE_TAB_ICONS, false));
+        pageNamesSwitch.setChecked(Options.usingCategoryNames());
+        myLibraryPaletteSwitch.setChecked(Options.usingPalette());
+        tabsSwitch.setChecked(Options.usingTabs());
+        scrollableTabsSwitch.setChecked(Options.usingScrollableTabs());
+        tabsIconsSwitch.setChecked(Options.usingIconTabs());
         settingChanged(null);
     }
 
@@ -170,13 +153,11 @@ public class Settings extends ThemeActivity {
     }
 
     private void saveSettings() {
-        manager.setBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, pageNamesSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, myLibraryPaletteSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_NOW_PLAYING_PEEK, false);
-        manager.setBooleanSetting(SettingsManager.KEY_USE_NEW_NOW_PLAYING, false);
-        manager.setBooleanSetting(SettingsManager.KEY_USE_TABS, tabsSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_SCROLLABLE_TABS, scrollableTabsSwitch.isChecked());
-        manager.setBooleanSetting(SettingsManager.KEY_USE_TAB_ICONS, tabsIconsSwitch.isChecked());
+        Options.setUseCategoryNames(pageNamesSwitch.isChecked());
+        Options.setUsePalette(myLibraryPaletteSwitch.isChecked());
+        Options.setUseTabs(tabsSwitch.isChecked());
+        Options.setUseScrollableTabs(scrollableTabsSwitch.isChecked());
+        Options.setUseIconTabs(tabsIconsSwitch.isChecked());
     }
 
     public void settingChanged(View v) {
@@ -288,6 +269,29 @@ public class Settings extends ThemeActivity {
 
     public void showUiTweaker(View v) {
         showComingSoon(null);
+    }
+
+    public void showPrimaryColorDialog(View v) {
+        new ColorChooserDialog.Builder(this, R.string.title_color_chooser_primary)
+                .accentMode(false)
+                .preselect(getPrimaryColor())
+                .show();
+    }
+
+    public void showAccentColorDialog(View v) {
+        new ColorChooserDialog.Builder(this, R.string.title_color_chooser_accent)
+                .accentMode(true)
+                .preselect(getAccentColor())
+                .show();
+    }
+
+    @Override
+    public void onColorSelection(@NonNull ColorChooserDialog colorChooserDialog, @ColorInt int i) {
+        if (!colorChooserDialog.isAccentMode()) {
+            Options.setPrimaryColor(i);
+        } else {
+            Options.setAccentColor(i);
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

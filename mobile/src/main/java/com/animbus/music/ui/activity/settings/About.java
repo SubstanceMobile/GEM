@@ -3,7 +3,6 @@ package com.animbus.music.ui.activity.settings;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,13 +11,12 @@ import android.widget.TextView;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
-import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.IconManager;
 
 public class About extends ThemeActivity {
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_about);
     }
 
@@ -36,11 +34,6 @@ public class About extends ThemeActivity {
         ((ImageView) findViewById(R.id.about_icon))
                 .setImageDrawable(getResources().getDrawable(IconManager.get().getDrawable(IconManager.get()
                         .getOverviewIcon(IconManager.get().getIcon()).getId())));
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
-
     }
 
     private void startUrl(String url) {

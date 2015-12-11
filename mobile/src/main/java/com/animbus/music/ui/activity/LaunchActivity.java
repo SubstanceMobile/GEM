@@ -9,12 +9,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -25,9 +23,9 @@ import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.ui.activity.mainScreen.MainScreen;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
-import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.LoadedFuse;
+import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
 
 import java.io.BufferedReader;
@@ -41,7 +39,7 @@ public class LaunchActivity extends ThemeActivity {
     TabLayout tabs;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_launch);
         if (getIntent().getAction().equals(Intent.ACTION_VIEW))
             PlaybackRemote.play(getIntent().getData(), true);
@@ -119,6 +117,8 @@ public class LaunchActivity extends ThemeActivity {
             SettingsManager.setContext(this);
             ThemeManager.get().setContext(this);
 
+            Options.init(this);
+
             //Loads Songs
             Library.setContext(this);
             if (!Library.isBuilt()) Library.build();
@@ -183,11 +183,6 @@ public class LaunchActivity extends ThemeActivity {
         startActivity(i);
         finish();
         overridePendingTransition(0, 0);
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
-
     }
 
     /* This Thread checks for Updates in the Background */

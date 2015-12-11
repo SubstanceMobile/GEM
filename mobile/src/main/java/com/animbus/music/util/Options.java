@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.ColorInt;
+import android.support.annotation.StyleRes;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
@@ -23,15 +25,19 @@ public class Options {
     //Keys
     private static final String base = "com.animbus.music";
     private static final String
-            KEY_FIRST_RUN = ".FIRST_RUN",
+            KEY_FIRST_RUN = base + ".FIRST_RUN",
             KEY_ICON = base + ".ICON",
-            KEY_LIGHT_THEME = base + ".theme.IS_LIGHT",
-            KEY_BASE_THEME = base + ".theme.BASE",
             KEY_USE_TABS = base + ".ui.tabs.ENABLED",
             KEY_TABS_ICONS = base + ".ui.tabs.ICONS",
             KEY_TABS_SCROLLABLE = base + "ui.tabs.SCROLLABLE",
             KEY_CATEGORY_NAMES = base + "ui.CATEGORY_NAMES",
             KEY_PALETTE = base + "ui.PALETTE";
+
+    private static final String
+            KEY_BASE_THEME = base + ".theme.BASE",
+            KEY_LIGHT_THEME = base + ".theme.IS_LIGHT",
+            KEY_THEME_PRIMARY = base + ".theme.colors.PRIMARY",
+            KEY_THEME_ACCENT = base + ".theme.colors.ACCENT";
 
     private Options(Context context) {
 
@@ -109,18 +115,6 @@ public class Options {
         if (!isFirstRun()) prefs.edit().putBoolean(KEY_FIRST_RUN, false).apply();
     }
 
-    /////////////////
-    // Light Theme //
-    /////////////////
-
-    public static void setLightTheme(boolean lightTheme) {
-        set(KEY_LIGHT_THEME, lightTheme);
-    }
-
-    public static boolean usingLightTheme() {
-        return getBool(KEY_LIGHT_THEME);
-    }
-
     //////////
     // Icon //
     //////////
@@ -133,16 +127,43 @@ public class Options {
         return getInt(KEY_ICON);
     }
 
-    ////////////////
-    // Base Theme //
-    ////////////////
+    ///////////
+    // Theme //
+    ///////////
 
+    public static void setBaseTheme(@StyleRes int baseTheme) {
+        set(KEY_BASE_THEME, baseTheme);
+    }
+
+    @StyleRes
     public static int getBaseTheme() {
         return getInt(KEY_BASE_THEME);
     }
 
-    public static void setBaseTheme(int baseTheme) {
-        set(KEY_BASE_THEME, baseTheme);
+    public static void setLightTheme(boolean lightTheme) {
+        set(KEY_LIGHT_THEME, lightTheme);
+    }
+
+    public static boolean isLightTheme() {
+        return getBool(KEY_LIGHT_THEME);
+    }
+
+    public static void setPrimaryColor(@ColorInt int color) {
+        set(KEY_THEME_PRIMARY, color);
+    }
+
+    @ColorInt
+    public static int getPrimaryColor() {
+        return getInt(KEY_THEME_PRIMARY);
+    }
+
+    public static void setAccentColor(@ColorInt int color) {
+        set(KEY_THEME_ACCENT, color);
+    }
+
+    @ColorInt
+    public static int getAccentColor() {
+        return getInt(KEY_THEME_ACCENT);
     }
 
     //////////////

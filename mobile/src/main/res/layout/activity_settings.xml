@@ -43,6 +43,38 @@
                 android:verticalScrollbarPosition="defaultPosition">
 
                 <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="Theme Colors"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/secondaryTextColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Primary"
+                        android:layout_weight="1"
+                        android:onClick="showPrimaryColorDialog" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Accent"
+                        android:layout_weight="1"
+                        android:nestedScrollingEnabled="false"
+                        android:onClick="showAccentColorDialog" />
+
+                </LinearLayout>
+
+                <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

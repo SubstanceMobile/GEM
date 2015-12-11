@@ -1,10 +1,8 @@
 package com.animbus.music.ui.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,14 +12,13 @@ import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.ui.theme.Theme;
 
 public class PlaylistDetails extends ThemeActivity {
     Playlist mPlaylist;
     RecyclerView mRecycler;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_playlist_details);
     }
 
@@ -42,11 +39,6 @@ public class PlaylistDetails extends ThemeActivity {
         mRecycler.setAdapter(new ListAdapter(ListAdapter.TYPE_SONG, mPlaylist.getSongs(), this));
         mRecycler.setItemAnimator(new DefaultItemAnimator());
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
-
     }
 
     @Override

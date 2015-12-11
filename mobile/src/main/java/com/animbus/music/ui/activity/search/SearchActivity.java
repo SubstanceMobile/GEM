@@ -3,13 +3,11 @@ package com.animbus.music.ui.activity.search;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +20,6 @@ import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.theme.Theme;
 
 import java.util.List;
 
@@ -30,7 +27,7 @@ public class SearchActivity extends ThemeActivity {
     SearchView mSearchView;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_search);
     }
 
@@ -45,11 +42,6 @@ public class SearchActivity extends ThemeActivity {
 
         //Search
         handleIntent(getIntent());
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
-
     }
 
     @Override

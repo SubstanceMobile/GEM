@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -19,7 +18,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +34,6 @@ import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.ui.theme.Theme;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
@@ -49,7 +46,7 @@ public class AlbumDetails extends ThemeActivity {
     LinearLayout mDetailsRoot;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void init() {
         setContentView(R.layout.activity_album_details);
         configureTransition();
         mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
@@ -242,11 +239,6 @@ public class AlbumDetails extends ThemeActivity {
         super.onResume();
         mFAB.show();
         findViewById(R.id.album_details_transition_reveal_part).animate().alpha(0f).start();
-    }
-
-    @Override
-    protected void setUpTheme(Theme theme) {
-
     }
 
     @Override

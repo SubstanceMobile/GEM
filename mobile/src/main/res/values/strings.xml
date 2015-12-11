@@ -246,4 +246,6 @@
     <string name="msg_crash_message">Enter a message to be send with the crash report</string>
     <string name="crash_hint">Describe the crash</string>
 
+    <string name="title_color_chooser_primary">Primary Color</string>
+    <string name="title_color_chooser_accent">Accent Color</string>
 </resources>
