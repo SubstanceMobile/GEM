@@ -1,33 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.animbus.music">
 
+    <!--To be able to hold the partial wake lock for playback when the screen is off-->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!--Used to read the media library-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!--Used for donations-->
     <uses-permission android:name="com.android.vending.BILLING" />
 
-    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_srini_black"
         android:label="@string/app_name_actual"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name=".ui.activity.mainScreen.MainScreen"
-            android:exported="true"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".ui.activity.LaunchActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+        android:theme="@style/AppTheme.Faithful" >
 
-                <category android:name="android.intent.category.APP_MUSIC" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="audio/*" />
-            </intent-filter>
-        </activity>
-
+        <!--Icons-->
         <activity-alias
             android:name=".activities.app.icon.srini.black"
             android:enabled="true"
@@ -197,16 +186,42 @@
             </intent-filter>
         </activity-alias>
 
+        <!--Splash Screen Activity-->
+        <activity
+            android:name=".ui.activity.LaunchActivity"
+            android:label="@string/app_name_actual">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MUSIC_PLAYER" />
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="audio/*" />
+            </intent-filter>
+        </activity>
+
+        <!--Activity used to request permissions-->
         <activity
             android:name=".ui.activity.setup.SetupActivity"
             android:label="@string/app_name_actual" />
+
+        <!--Home activity in GEM-->
+        <activity
+            android:name=".ui.activity.mainScreen.MainScreen"
+            android:exported="true"
+            android:label="@string/app_name" />
+
+        <!--Settings Screen-->
         <activity
             android:name=".ui.activity.settings.Settings"
             android:label="@string/title_activity_settings" />
+
+        <!--Choose Icon screen-->
         <activity
             android:name=".ui.activity.settings.chooseIcon.ChooseIcon"
             android:label="@string/title_activity_choose_icon" />
 
+        <!--Widget-->
         <receiver android:name=".ui.MusicPlaybackWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -217,30 +232,35 @@
                 android:resource="@xml/music_playback_widget_info" />
         </receiver>
 
+        <!--Playback Service-->
         <service android:name=".media.MediaService">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </service>
+
+        <!--The media button receiver that handles media button intents-->
         <receiver android:name="android.support.v4.media.session.MediaButtonReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
 
+        <!--Shown when you tap an album in the home activity-->
         <activity
             android:name=".ui.activity.albumDetails.AlbumDetails"
-            android:label="@string/title_activity_album_details"
-            android:theme="@style/AppTheme.Light" />
+            android:label="@string/title_activity_album_details" />
+
+        <!--The now playing screen-->
         <activity
             android:name=".ui.activity.nowPlaying.NowPlaying"
             android:label="@string/title_activity_now_playing"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.Light" />
+            android:launchMode="singleTop" />
+
+        <!--Used to report issues to GitHub-->
         <activity android:name=".ui.activity.IssueReportingActivity"/>
 
-        <!-- Media button receiver -->
-
+        <!--About Screen-->
         <activity
             android:name=".ui.activity.settings.About"
             android:label="@string/title_activity_about"
@@ -250,12 +270,12 @@
                 android:value=".ui.activity.settings.Settings" />
         </activity>
 
+        <!--Search Screen-->
         <activity
             android:name=".ui.activity.search.SearchActivity"
             android:label="@string/title_activity_search"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.activity.mainScreen.MainScreen"
-            android:theme="@style/AppTheme">
+            android:parentActivityName=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -267,6 +287,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.mainScreen.MainScreen" />
         </activity>
+
+        <!--Opens when you click on a playlist in the home activity-->
         <activity android:name=".ui.activity.PlaylistDetails"/>
     </application>
 

@@ -10,41 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5486cfd0-91f4-4794-87d3-640a866e8c01" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_appindexing_8_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_basement_8_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mobile/src/main/res/values-v19/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mobile/src/main/res/values-v21/styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/attrs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/colors.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mobile/src/main/res/raw/update.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/build.gradle" afterPath="$PROJECT_DIR$/mobile/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/mobile.iml" afterPath="$PROJECT_DIR$/mobile/mobile.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Album.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Album.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/IssueReportingActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/IssueReportingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/ChooseIcon.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/ChooseIcon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/theme/ThemeManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/theme/ThemeManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/slider_alternate_thumb.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/slider_alternate_thumb.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_now_playing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_playlist.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_playlist.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/now_playing_controls_view.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/now_playing_controls_view.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/xml/search_config.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/xml/search_config.xml" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,12 +42,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="values.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="values.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/values.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.8492177">
-              <caret line="91" column="73" selection-start-line="91" selection-start-column="73" selection-end-line="91" selection-end-column="73" />
+            <state vertical-scroll-proportion="-1.7297298">
+              <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.19515477">
+              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+              <folding>
+                <element signature="e#645#670#0" expanded="true" />
+                <element signature="e#752#1262#0" expanded="false" />
+                <element signature="e#948#966#0" expanded="true" />
+                <element signature="e#1271#1782#0" expanded="false" />
+                <element signature="e#1468#1486#0" expanded="true" />
+                <element signature="e#1791#2298#0" expanded="false" />
+                <element signature="e#1984#2002#0" expanded="true" />
+                <element signature="e#2307#2818#0" expanded="false" />
+                <element signature="e#2504#2522#0" expanded="true" />
+                <element signature="e#2827#3338#0" expanded="false" />
+                <element signature="e#3024#3042#0" expanded="true" />
+                <element signature="e#3347#3856#0" expanded="false" />
+                <element signature="e#3542#3560#0" expanded="true" />
+                <element signature="e#3865#4374#0" expanded="false" />
+                <element signature="e#4060#4078#0" expanded="true" />
+                <element signature="e#4383#4892#0" expanded="false" />
+                <element signature="e#4578#4596#0" expanded="true" />
+                <element signature="e#4901#5410#0" expanded="false" />
+                <element signature="e#5096#5114#0" expanded="true" />
+                <element signature="e#5419#5927#0" expanded="false" />
+                <element signature="e#5613#5631#0" expanded="true" />
+                <element signature="e#5936#6445#0" expanded="false" />
+                <element signature="e#6131#6149#0" expanded="true" />
+                <element signature="e#6454#6969#0" expanded="false" />
+                <element signature="e#6655#6673#0" expanded="true" />
+                <element signature="e#6978#7491#0" expanded="false" />
+                <element signature="e#7177#7195#0" expanded="true" />
+                <element signature="e#7500#8009#0" expanded="false" />
+                <element signature="e#7695#7713#0" expanded="true" />
+                <element signature="e#8057#8604#0" expanded="false" />
+                <element signature="e#8148#8173#0" expanded="true" />
+                <element signature="e#8187#8584#0" expanded="false" />
+                <element signature="e#8666#8790#0" expanded="false" />
+                <element signature="e#8762#8787#0" expanded="true" />
+                <element signature="e#8836#8991#0" expanded="false" />
+                <element signature="e#8970#8988#0" expanded="true" />
+                <element signature="e#9032#9162#0" expanded="false" />
+                <element signature="e#9126#9159#0" expanded="true" />
+                <element signature="e#9206#9352#0" expanded="false" />
+                <element signature="e#9313#9349#0" expanded="true" />
+                <element signature="e#9384#9746#0" expanded="false" />
+                <element signature="e#9788#9985#0" expanded="false" />
+                <element signature="e#10070#10302#0" expanded="false" />
+                <element signature="e#10376#10519#0" expanded="false" />
+                <element signature="e#10478#10516#0" expanded="true" />
+                <element signature="e#10567#10747#0" expanded="false" />
+                <element signature="e#10665#10701#0" expanded="true" />
+                <element signature="e#10904#11270#0" expanded="false" />
+                <element signature="e#10995#11025#0" expanded="true" />
+                <element signature="e#11309#11997#0" expanded="false" />
+                <element signature="e#11407#11438#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1828,7 +1860,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Users\Adrian\StudioProjects\GEM" value="4343270678730" />
+        <entry key="C:\Users\Adrian\StudioProjects\GEM" value="4343329291214" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2258,6 +2290,7 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/IssueReportingActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/xml/search_config.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
       </list>
     </option>
@@ -2326,24 +2359,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="xml" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3254,12 +3269,18 @@
       <option name="project" value="LOCAL" />
       <updated>1449876024261</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Built base themes">
+      <created>1449940503411</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1449940503411</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883435" sideWeight="0.49785176" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32309583" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -3277,7 +3298,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="true" show_stripe_button="true" weight="0.37055016" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.37055016" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32955772" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -3310,7 +3331,8 @@
     <MESSAGE value="Started cleaning out project and preparing for theme engine" />
     <MESSAGE value="A ton of progress" />
     <MESSAGE value="Even More Progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="Even More Progress" />
+    <MESSAGE value="Built base themes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Built base themes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3319,29 +3341,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/menu/navigation_drawer_items.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37281293">
-          <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
-          <folding>
-            <element signature="e#352#372#0" expanded="true" />
-            <element signature="e#519#540#0" expanded="true" />
-            <element signature="e#685#707#0" expanded="true" />
-            <element signature="e#865#889#0" expanded="true" />
-            <element signature="e#1114#1139#0" expanded="true" />
-            <element signature="e#1289#1316#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.472973">
-          <caret line="249" column="67" selection-start-line="249" selection-start-column="67" selection-end-line="249" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.1.1/appcompat-v7-23.1.1-sources.jar!/android/support/v7/widget/TintTypedArray.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6138996">
@@ -3517,6 +3516,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1196" column="16" selection-start-line="1196" selection-start-column="16" selection-end-line="1196" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3872,19 +3872,95 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/xml/music_playback_widget_info.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20188425">
+          <caret line="6" column="66" selection-start-line="6" selection-start-column="66" selection-end-line="6" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/xml/search_config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.033647377">
+          <caret line="1" column="70" selection-start-line="1" selection-start-column="70" selection-end-line="1" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/xml/prefs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53835803">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/values.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.8492177">
-          <caret line="91" column="73" selection-start-line="91" selection-start-column="73" selection-end-line="91" selection-end-column="73" />
+        <state vertical-scroll-proportion="-1.7297298">
+          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36069986">
-          <caret line="259" column="20" selection-start-line="259" selection-start-column="20" selection-end-line="259" selection-end-column="20" />
-          <folding />
+        <state vertical-scroll-proportion="0.19515477">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding>
+            <element signature="e#645#670#0" expanded="true" />
+            <element signature="e#752#1262#0" expanded="false" />
+            <element signature="e#948#966#0" expanded="true" />
+            <element signature="e#1271#1782#0" expanded="false" />
+            <element signature="e#1468#1486#0" expanded="true" />
+            <element signature="e#1791#2298#0" expanded="false" />
+            <element signature="e#1984#2002#0" expanded="true" />
+            <element signature="e#2307#2818#0" expanded="false" />
+            <element signature="e#2504#2522#0" expanded="true" />
+            <element signature="e#2827#3338#0" expanded="false" />
+            <element signature="e#3024#3042#0" expanded="true" />
+            <element signature="e#3347#3856#0" expanded="false" />
+            <element signature="e#3542#3560#0" expanded="true" />
+            <element signature="e#3865#4374#0" expanded="false" />
+            <element signature="e#4060#4078#0" expanded="true" />
+            <element signature="e#4383#4892#0" expanded="false" />
+            <element signature="e#4578#4596#0" expanded="true" />
+            <element signature="e#4901#5410#0" expanded="false" />
+            <element signature="e#5096#5114#0" expanded="true" />
+            <element signature="e#5419#5927#0" expanded="false" />
+            <element signature="e#5613#5631#0" expanded="true" />
+            <element signature="e#5936#6445#0" expanded="false" />
+            <element signature="e#6131#6149#0" expanded="true" />
+            <element signature="e#6454#6969#0" expanded="false" />
+            <element signature="e#6655#6673#0" expanded="true" />
+            <element signature="e#6978#7491#0" expanded="false" />
+            <element signature="e#7177#7195#0" expanded="true" />
+            <element signature="e#7500#8009#0" expanded="false" />
+            <element signature="e#7695#7713#0" expanded="true" />
+            <element signature="e#8057#8604#0" expanded="false" />
+            <element signature="e#8148#8173#0" expanded="true" />
+            <element signature="e#8187#8584#0" expanded="false" />
+            <element signature="e#8666#8790#0" expanded="false" />
+            <element signature="e#8762#8787#0" expanded="true" />
+            <element signature="e#8836#8991#0" expanded="false" />
+            <element signature="e#8970#8988#0" expanded="true" />
+            <element signature="e#9032#9162#0" expanded="false" />
+            <element signature="e#9126#9159#0" expanded="true" />
+            <element signature="e#9206#9352#0" expanded="false" />
+            <element signature="e#9313#9349#0" expanded="true" />
+            <element signature="e#9384#9746#0" expanded="false" />
+            <element signature="e#9788#9985#0" expanded="false" />
+            <element signature="e#10070#10302#0" expanded="false" />
+            <element signature="e#10376#10519#0" expanded="false" />
+            <element signature="e#10478#10516#0" expanded="true" />
+            <element signature="e#10567#10747#0" expanded="false" />
+            <element signature="e#10665#10701#0" expanded="true" />
+            <element signature="e#10904#11270#0" expanded="false" />
+            <element signature="e#10995#11025#0" expanded="true" />
+            <element signature="e#11309#11997#0" expanded="false" />
+            <element signature="e#11407#11438#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
