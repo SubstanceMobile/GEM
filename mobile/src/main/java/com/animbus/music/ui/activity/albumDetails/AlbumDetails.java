@@ -13,6 +13,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -34,6 +35,7 @@ import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
+import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
@@ -79,6 +81,12 @@ public class AlbumDetails extends ThemeActivity {
         configureUI();
     }
 
+    @Override
+    protected void setUpTheme() {
+        super.setUpTheme();
+        setStatusBarColor(ColorUtil.getDarkerColor(mAlbum.getBackgroundColor()));
+    }
+
     private void configureRecyclerView() {
         mList.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
@@ -105,7 +113,9 @@ public class AlbumDetails extends ThemeActivity {
         mTitle.setTextColor(mAlbum.getTitleTextColor());
         mArtist.setTextColor(mAlbum.getSubtitleTextColor());
         mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
-        mCollapsingToolbar.setStatusBarScrimColor(mAlbum.getBackgroundColor());
+
+        findViewById(R.id.album_details_square_spacer)
+                .setBackground(ContextCompat.getDrawable(this, !ColorUtil.isLightColor(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
 
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

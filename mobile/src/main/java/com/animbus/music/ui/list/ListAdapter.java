@@ -226,7 +226,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
         private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
-        private int defaultBackground = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryGreyDark : R.color.primaryLight);
+        private int defaultBackground = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.greyDark : R.color.faithfulPrimaryLight);
         private int defaultTitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light);
         private int defaultSubtitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
 

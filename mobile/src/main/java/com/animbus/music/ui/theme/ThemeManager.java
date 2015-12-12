@@ -49,12 +49,12 @@ public class ThemeManager {
     public void update() {
         useLightTheme = settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
         base = settings.getIntSetting(SettingsManager.KEY_THEME_BASE, BASE_DARK);
-        colorPrimary = settings.getIntSetting(SettingsManager.KEY_COLOR_PRIMARY, R.color.primaryDark);
+        colorPrimary = settings.getIntSetting(SettingsManager.KEY_COLOR_PRIMARY, R.color.faithfulPrimaryDark);
         colorAccent = settings.getIntSetting(SettingsManager.KEY_COLOR_ACCENT, R.color.accent_material_dark);
-        colorGrey = settings.getIntSetting(SettingsManager.KEY_COLOR_GREY, R.color.primaryGreyDark);
-        colorComplimentary = settings.getIntSetting(SettingsManager.KEY_COLOR_COMPLIMENTARY, R.color.primaryLight);
-        colorComplimentaryGrey = settings.getIntSetting(SettingsManager.KEY_COLOR_COMPLIMENTARY_GREY, R.color.primaryGreyLight);
-        colorBackground = settings.getIntSetting(SettingsManager.KEY_COLOR_BACKGROUND, R.color.primaryDark);
+        colorGrey = settings.getIntSetting(SettingsManager.KEY_COLOR_GREY, R.color.greyDark);
+        colorComplimentary = settings.getIntSetting(SettingsManager.KEY_COLOR_COMPLIMENTARY, R.color.faithfulPrimaryLight);
+        colorComplimentaryGrey = settings.getIntSetting(SettingsManager.KEY_COLOR_COMPLIMENTARY_GREY, R.color.greyLight);
+        colorBackground = settings.getIntSetting(SettingsManager.KEY_COLOR_BACKGROUND, R.color.faithfulPrimaryDark);
     }
 
     public int getNavdrawerColor() {
@@ -70,9 +70,9 @@ public class ThemeManager {
     public int getCurrentGreyColorResource() {
         int color;
         if (useLightTheme) {
-            color = R.color.primaryGreyLight;
+            color = R.color.greyLight;
         } else {
-            color = R.color.primaryGreyDark;
+            color = R.color.greyDark;
         }
         return color;
     }

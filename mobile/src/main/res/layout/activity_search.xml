@@ -46,7 +46,7 @@
                    android:layout_marginTop="@dimen/margin_small"
                    android:text="@string/page_albums"
                    android:textAppearance="?android:attr/textAppearanceSmall"
-                   android:textColor="?attr/secondaryTextColor" />
+                   android:textColor="?android:attr/textColorSecondary" />
 
                <android.support.v7.widget.RecyclerView
                    android:id="@+id/search_albums_results"
@@ -69,7 +69,7 @@
                    android:layout_marginTop="@dimen/margin_small"
                    android:text="@string/page_songs"
                    android:textAppearance="?android:attr/textAppearanceSmall"
-                   android:textColor="?attr/secondaryTextColor" />
+                   android:textColor="?android:attr/textColorSecondary" />
 
                <android.support.v7.widget.RecyclerView
                    android:id="@+id/search_songs_results"
@@ -92,7 +92,7 @@
                    android:layout_marginTop="@dimen/margin_small"
                    android:text="@string/page_playlists"
                    android:textAppearance="?android:attr/textAppearanceSmall"
-                   android:textColor="?attr/secondaryTextColor" />
+                   android:textColor="?android:attr/textColorSecondary" />
 
                <android.support.v7.widget.RecyclerView
                    android:id="@+id/search_playlists_results"

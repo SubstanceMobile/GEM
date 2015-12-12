@@ -74,7 +74,7 @@
                                 android:layout_marginTop="@dimen/margin_small"
                                 android:text="@string/app_name_actual"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="?attr/secondaryTextColor" />
+                                android:textColor="?android:attr/textColorSecondary" />
                         </FrameLayout>
                     </LinearLayout>
 
@@ -137,7 +137,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:text="@string/about_libraries_header"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/secondaryTextColor" />
+                android:textColor="?android:attr/textColorSecondary" />
 
             <android.support.v7.widget.CardView
                 style="?attr/cardStyle"
@@ -163,7 +163,7 @@
                             android:layout_gravity="center"
                             android:text="@string/about_appcompat"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor" />
+                            android:textColor="?android:attr/textColorSecondary" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -180,7 +180,7 @@
                             android:layout_gravity="center"
                             android:text="@string/about_palette"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor" />
+                            android:textColor="?android:attr/textColorSecondary" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -197,7 +197,7 @@
                             android:layout_gravity="center"
                             android:text="@string/about_glide"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor" />
+                            android:textColor="?android:attr/textColorSecondary" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -214,7 +214,7 @@
                             android:layout_gravity="center"
                             android:text="@string/about_gitty"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor" />
+                            android:textColor="?android:attr/textColorSecondary" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -231,7 +231,7 @@
                             android:layout_gravity="center"
                             android:text="@string/about_appintro"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor" />
+                            android:textColor="?android:attr/textColorSecondary" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -248,7 +248,7 @@
                             android:layout_gravity="center"
                             android:text="@string/about_fast_scroll"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor" />
+                            android:textColor="?android:attr/textColorSecondary" />
                     </FrameLayout>
 
                     <FrameLayout
@@ -265,7 +265,7 @@
                             android:layout_gravity="center"
                             android:text="@string/about_dialogs"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor" />
+                            android:textColor="?android:attr/textColorSecondary" />
                     </FrameLayout>
 
                 </LinearLayout>
@@ -279,7 +279,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:text="@string/about_thanks_header"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/secondaryTextColor"
+                android:textColor="?android:attr/textColorSecondary"
                 android:id="@+id/textView11" />
 
             <android.support.v7.widget.CardView
@@ -305,7 +305,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/settings_choose_icon_srini"
                             android:layout_gravity="center_horizontal" />
 
@@ -313,7 +313,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_icon"
                             android:layout_gravity="center_horizontal" />
 
@@ -332,7 +332,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/settings_choose_icon_alex"
                             android:layout_gravity="center_horizontal" />
 
@@ -340,7 +340,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_icon"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
@@ -358,7 +358,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/settings_choose_icon_jaka"
                             android:layout_gravity="center_horizontal" />
 
@@ -366,7 +366,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_icon"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
@@ -384,7 +384,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/settings_choose_icon_nguyen"
                             android:layout_gravity="center_horizontal" />
 
@@ -392,7 +392,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_icon"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
@@ -410,7 +410,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_Karim"
                             android:layout_gravity="center_horizontal" />
 
@@ -418,7 +418,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_helped"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
@@ -436,7 +436,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_Neel"
                             android:layout_gravity="center_horizontal" />
 
@@ -444,7 +444,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_helped"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
@@ -462,7 +462,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_Substance"
                             android:layout_gravity="center_horizontal" />
 
@@ -470,7 +470,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?attr/secondaryTextColor"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_managed"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>

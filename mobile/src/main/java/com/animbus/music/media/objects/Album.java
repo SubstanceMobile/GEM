@@ -207,7 +207,7 @@ public class Album {
     public void setContext(Context cxt) {
         this.cxt = cxt;
         mainColors = new int[] {
-                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryGreyDark : R.color.primaryLight),
+                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.greyDark : R.color.faithfulPrimaryLight),
                 cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
                 cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light)
         };

@@ -1,37 +1,29 @@
 package com.animbus.music.ui.custom.activity;
 
 import android.app.ActivityManager;
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
-import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.animbus.music.R;
-import com.animbus.music.ui.theme.Theme;
-import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.Options;
-
-import java.security.PublicKey;
 
 /**
  * Created by Adrian on 8/5/2015.
@@ -40,6 +32,8 @@ public abstract class ThemeActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected AppBarLayout mAppBar;
     protected CoordinatorLayout mRoot;
+
+    private int primary, accent, baseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +47,14 @@ public abstract class ThemeActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         setIntent(intent);
         sequence();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Recreate if the theme changed
+        if (primary != Options.getPrimaryColor() || accent != Options.getAccentColor() || baseId != Options.getBaseTheme())
+            recreate();
     }
 
     /**
@@ -87,20 +89,27 @@ public abstract class ThemeActivity extends AppCompatActivity {
     protected abstract void setUp();
 
     protected void setUpTheme() {
+        primary = Options.getPrimaryColor();
+        accent = Options.getAccentColor();
+        baseId = Options.getBaseTheme();
+
         themeAppBar();
-        themeStatusBar();
+        setStatusBarColor(getPrimaryDarkColor());
         themeNavBar();
         configureTaskDescription(getPrimaryColor(), null);
     }
 
-    private void themeStatusBar() {
+    protected void setStatusBarColor(int color) {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(getPrimaryDarkColor());
-        }
-
-        if (Build.VERSION.SDK_INT == 19) getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().setStatusBarColor(color);
+            if (Build.VERSION.SDK_INT >= 23 && ColorUtil.isLightColor(getPrimaryDarkColor()))
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            else
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS);
+        } else if (Build.VERSION.SDK_INT == 19)
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     private void themeNavBar() {
@@ -167,12 +176,11 @@ public abstract class ThemeActivity extends AppCompatActivity {
     }
 
     public ColorStateList resolveColorStateListAttr(@AttrRes int resId) {
-        TypedArray a = obtainStyledAttributes(null, new int[] {resId});
+        TypedArray a = obtainStyledAttributes(null, new int[]{resId});
         try {
             return a.getColorStateList(0);
         } finally {
             a.recycle();
         }
     }
-
 }

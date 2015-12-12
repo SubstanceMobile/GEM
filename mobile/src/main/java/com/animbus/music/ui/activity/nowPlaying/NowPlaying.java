@@ -29,6 +29,7 @@ import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
 
 public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChangedListener {
@@ -69,13 +70,19 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     protected void setUp() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
-        DrawableCompat.setTint(menu, getResources().getColor(R.color.primaryLight));
+        DrawableCompat.setTint(menu, getResources().getColor(R.color.faithfulPrimaryLight));
         getSupportActionBar().setHomeAsUpIndicator(menu);
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
         ViewCompat.setElevation(findViewById(R.id.now_playing_controls_root), 12f);
         configureRecyclerView();
         configureControls();
         configureUI();
+    }
+
+    @Override
+    protected void setUpTheme() {
+        super.setUpTheme();
+        setStatusBarColor(ColorUtil.getDarkerColor(mSong.getAlbum().getBackgroundColor()));
     }
 
     private void configureRecyclerView() {

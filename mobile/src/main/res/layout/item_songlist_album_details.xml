@@ -22,7 +22,7 @@
                 android:text="@{song.getTrackNumberString}"
                 android:id="@+id/albumList_song_order"
                 android:singleLine="true"
-                android:textColor="?attr/secondaryTextColor"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="20sp"
                 android:gravity="center" />
 
@@ -38,7 +38,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.getSongTitle}"
-                    android:textColor="?attr/primaryTextColor"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp"
                     android:singleLine="true"
                     android:ellipsize="end" />
@@ -51,7 +51,7 @@
                 android:text="@{song.getSongDurString}"
                 android:id="@+id/songlist_song_duration"
                 android:layout_gravity="center_vertical"
-                android:textColor="?attr/secondaryTextColor"
+                android:textColor="?android:attr/textColorSecondary"
                 android:layout_margin="@dimen/margin_medium" />
         </LinearLayout>
 

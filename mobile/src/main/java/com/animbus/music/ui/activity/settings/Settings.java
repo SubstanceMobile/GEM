@@ -42,11 +42,6 @@ import com.animbus.music.util.SettingsManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class Settings extends ThemeActivity implements ColorChooserDialog.ColorCallback {
     SwitchCompat
             pageNamesSwitch,
@@ -292,7 +287,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     }
 
     public void resetPrimaryColor(View v) {
-        Options.setPrimaryColor(ContextCompat.getColor(this, !Options.isLightTheme() ? R.color.primaryDark : R.color.primaryLight));
+        Options.setPrimaryColor(ContextCompat.getColor(this, !Options.isLightTheme() ? R.color.faithfulPrimaryDark : R.color.faithfulPrimaryLight));
     }
 
     @Override

@@ -237,9 +237,7 @@
             android:label="@string/title_activity_now_playing"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.Light" />
-        <activity
-            android:name=".ui.activity.IssueReportingActivity"
-            android:theme="@style/GittyReporter" />
+        <activity android:name=".ui.activity.IssueReportingActivity"/>
 
         <!-- Media button receiver -->
 

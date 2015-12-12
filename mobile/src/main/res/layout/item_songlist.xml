@@ -40,7 +40,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songTitle}"
-                    android:textColor="?attr/primaryTextColor"
+                    android:textColor="?android:attr/textColorPrimary"
                     android:textSize="16sp"
                     android:ellipsize="end"
                     android:singleLine="true" />
@@ -49,7 +49,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@{song.songArtist}"
-                    android:textColor="?attr/secondaryTextColor"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:textSize="14sp"
                     android:ellipsize="end"
                     android:singleLine="true" />
@@ -61,7 +61,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/margin_medium"
                 android:text="@{song.getSongDurString}"
-                android:textColor="?attr/secondaryTextColor" />
+                android:textColor="?android:attr/textColorSecondary" />
 
         </LinearLayout>
 

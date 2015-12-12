@@ -3,7 +3,7 @@
     <item>
     <shape
         android:shape="rectangle">
-        <solid android:color="@color/primaryDark"/>
+        <solid android:color="@color/faithfulPrimaryDark"/>
         <size android:width="@dimen/now_playing_seekbar_thub_size" android:height="@dimen/now_playing_seekbar_size"/>
     </shape>
     </item>

@@ -2,8 +2,6 @@ package com.animbus.music.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
 import android.widget.EditText;
 
 import com.animbus.music.BuildConfig;
@@ -24,12 +22,13 @@ public class IssueReportingActivity extends GittyReporter {
         enableUserGitHubLogin(true);
         setExtraInfo(getExtraInfo(getIntent().getStringExtra("error")));
         configureMessage(getIntent().getStringExtra("msg"), getIntent().getStringExtra("type"));
-        setBackgroundColor1(getResources().getColor(R.color.primaryGreyDark));
-        setBackgroundColor2(getResources().getColor(R.color.primaryGreyDark));
-        setRippleColor(getResources().getColor(R.color.accent_blue_dark));
-        setFabColor1(getResources().getColor(R.color.accent_blue_dark), getResources().getColor(R.color.accent_blue_dark),
+
+        setBackgroundColor1(getResources().getColor(R.color.greyDark));
+        setBackgroundColor2(getResources().getColor(R.color.greyDark));
+        setRippleColor(getResources().getColor(R.color.issue_report_blue));
+        setFabColor1(getResources().getColor(R.color.issue_report_blue), getResources().getColor(R.color.issue_report_blue),
                 getResources().getColor(R.color.ripple_dark));
-        setFabColor2(getResources().getColor(R.color.accent_blue_dark), getResources().getColor(R.color.accent_blue_dark),
+        setFabColor2(getResources().getColor(R.color.issue_report_blue), getResources().getColor(R.color.issue_report_blue),
                 getResources().getColor(R.color.ripple_dark));
     }
 
@@ -49,10 +48,7 @@ public class IssueReportingActivity extends GittyReporter {
             EditText bugDescriptionEditText = (EditText) findViewById(com.github.paolorotolo.gitty_reporter.R.id.gittyreporter_bug_description);
             bugTitleEditText.setText("Crash Report: " + crashType);
             bugDescriptionEditText.setText(message);
-
-            findViewById(com.github.paolorotolo.gitty_reporter.R.id.gittyreporter_loginFrame).setVisibility(View.VISIBLE);
-            findViewById(com.github.paolorotolo.gitty_reporter.R.id.gittyreporter_fab_next).setVisibility(View.INVISIBLE);
-            findViewById(com.github.paolorotolo.gitty_reporter.R.id.gittyreporter_fab_send).setVisibility(View.VISIBLE);
+            findViewById(com.github.paolorotolo.gitty_reporter.R.id.gittyreporter_fab_next).performClick();
         }
     }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
-    android:fitsSystemWindows="false"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.mainScreen.MainScreen">
 
     <!--Main layout-->
@@ -31,7 +31,6 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/abc_action_bar_default_height_material"
-                    app:theme="?attr/default_status_bar_theme"
                     app:title="@string/title_activity_main" />
 
                 <android.support.design.widget.TabLayout
@@ -56,11 +55,10 @@
                 android:fitsSystemWindows="true" />
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/nowplaying_toolbarSize"
-                android:background="?attr/primaryAlternateColor"
                 android:visibility="visible"
+                android:background="?attr/now_playing_toolbar_color"
                 android:id="@+id/main_screen_now_playing_toolbar"
                 android:orientation="vertical">
 
@@ -106,7 +104,7 @@
                                 android:maxLines="1"
                                 android:padding="@dimen/margin_tiny"
                                 android:text="Song Title"
-                                android:textColor="?attr/primaryAlternateTextColor"
+                                android:textColor="?android:attr/textColorPrimaryInverse"
                                 android:textSize="16sp" />
 
                             <TextView
@@ -117,7 +115,7 @@
                                 android:marqueeRepeatLimit="marquee_forever"
                                 android:maxLines="1"
                                 android:text="Song Artist"
-                                android:textColor="?attr/secondaryAlternateTextColor"
+                                android:textColor="?android:attr/textColorSecondaryInverse"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
@@ -135,7 +133,7 @@
                                 android:background="?attr/ripple_circle_alt_color"
                                 android:padding="@dimen/margin_medium"
                                 android:src="@drawable/ic_play_arrow_black_48dp"
-                                android:tint="?attr/secondaryAlternateTextColor"
+                                android:tint="?android:attr/textColorSecondaryInverse"
                                 android:cropToPadding="true"
                                 android:scaleType="fitXY" />
                         </FrameLayout>

@@ -56,7 +56,7 @@ public class ChooseIcon extends ThemeActivity {
     protected void setUp() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
-        DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primaryLight : R.color.primaryDark));
+        DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.faithfulPrimaryLight : R.color.faithfulPrimaryDark));
         getSupportActionBar().setHomeAsUpIndicator(menu);
     }
 
@@ -132,9 +132,9 @@ public class ChooseIcon extends ThemeActivity {
 
         int color;
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = getResources().getColor(R.color.primaryGreyLight);
+            color = getResources().getColor(R.color.greyLight);
         } else {
-            color = getResources().getColor(R.color.primaryGreyDark);
+            color = getResources().getColor(R.color.greyDark);
         }
         v.setBackgroundColor(color);
 
@@ -144,9 +144,9 @@ public class ChooseIcon extends ThemeActivity {
     public void selectIcon(View v, Icon icon) {
         int color;
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = getResources().getColor(R.color.primaryGreyLight);
+            color = getResources().getColor(R.color.greyLight);
         } else {
-            color = getResources().getColor(R.color.primaryGreyDark);
+            color = getResources().getColor(R.color.greyDark);
         }
         v.setBackgroundColor(color);
 
@@ -156,9 +156,9 @@ public class ChooseIcon extends ThemeActivity {
     public void deselectAll() {
         int color;
         if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = getResources().getColor(R.color.primaryLight);
+            color = getResources().getColor(R.color.faithfulPrimaryLight);
         } else {
-            color = getResources().getColor(R.color.primaryDark);
+            color = getResources().getColor(R.color.faithfulPrimaryDark);
         }
         findViewById(R.id.settings_choose_icon_srini_black).setBackgroundColor(color);
         findViewById(R.id.settings_choose_icon_srini_white).setBackgroundColor(color);

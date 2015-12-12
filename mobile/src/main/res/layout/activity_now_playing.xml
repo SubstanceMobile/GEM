@@ -28,7 +28,7 @@
                 android:id="@+id/now_playing_album_art"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
+                android:fitsSystemWindows="false"
                 app:layout_collapseMode="parallax" />
 
             <FrameLayout
@@ -99,7 +99,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
-                                android:textColor="?attr/primaryTextColor"
+                                android:textColor="?android:attr/textColorPrimary"
                                 android:textSize="16sp"
                                 android:id="@+id/current_song_title"
                                 android:singleLine="true" />
@@ -108,7 +108,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
-                                android:textColor="?attr/secondaryTextColor"
+                                android:textColor="?android:attr/textColorSecondary"
                                 android:textSize="14sp"
                                 android:id="@+id/current_song_artist"
                                 android:layout_marginStart="@dimen/margin_small"
