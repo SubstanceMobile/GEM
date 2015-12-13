@@ -14,11 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animbus.music.R;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
+import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
-import com.animbus.music.ui.custom.activity.ThemeActivity;
-import com.animbus.music.ui.theme.ThemeManager;
 
 import static com.animbus.music.util.IconManager.COLOR_BLACK;
 import static com.animbus.music.util.IconManager.COLOR_BLUE;
@@ -34,7 +34,6 @@ import static com.animbus.music.util.IconManager.DESIGNER_SRINI;
 
 public class ChooseIcon extends ThemeActivity {
     SettingsManager settings;
-    ThemeManager themeManager;
     Icon icon, iconOld;
     Intent shortcutClickedIntent, addShortcutIntent, removeShortcutIntent;
 
@@ -47,7 +46,6 @@ public class ChooseIcon extends ThemeActivity {
     protected void setVariables() {
         settings = SettingsManager.get();
         IconManager.get().setContext(this);
-        themeManager = ThemeManager.get();
         iconOld = IconManager.get().getIcon();
         icon = iconOld;
     }
@@ -56,7 +54,7 @@ public class ChooseIcon extends ThemeActivity {
     protected void setUp() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
-        DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.faithfulPrimaryLight : R.color.faithfulPrimaryDark));
+        DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!Options.isLightTheme() ? R.color.faithfulPrimaryLight : R.color.faithfulPrimaryDark));
         getSupportActionBar().setHomeAsUpIndicator(menu);
     }
 
@@ -187,9 +185,10 @@ public class ChooseIcon extends ThemeActivity {
 
     /**
      * Its a wrapper so I can use it in an onClick attribute.
+     *
      * @param v useless to me...
      */
-    public void save(View v){
+    public void save(View v) {
         save();
     }
 

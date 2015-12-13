@@ -18,7 +18,7 @@
 
         <!--Splash Screen Activity-->
         <activity
-            android:name=".ui.activity.LaunchActivity"
+            android:name=".ui.activity.splash.LaunchActivity"
             android:label="@string/app_name_actual">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -36,7 +36,7 @@
             android:enabled="true"
             android:icon="@mipmap/ic_launcher_srini_black"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +48,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_white"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +60,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_red"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,7 +72,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_slate"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -84,7 +84,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_green"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -96,7 +96,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_blue"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -108,7 +108,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_alex_black"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -120,7 +120,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_alex_white"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -132,7 +132,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_alex_color"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -144,7 +144,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_jaka_dark"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -156,7 +156,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_jaka_light"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -168,7 +168,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_nguyen_orange"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -180,7 +180,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_nguyen_green"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -192,7 +192,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_nguyen_red"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.LaunchActivity">
+            android:targetActivity=".ui.activity.splash.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -258,7 +258,7 @@
             android:launchMode="singleTop" />
 
         <!--Used to report issues to GitHub-->
-        <activity android:name=".ui.activity.IssueReportingActivity"/>
+        <activity android:name=".ui.activity.issue.IssueReportingActivity"/>
 
         <!--About Screen-->
         <activity
@@ -289,7 +289,7 @@
         </activity>
 
         <!--Opens when you click on a playlist in the home activity-->
-        <activity android:name=".ui.activity.PlaylistDetails"/>
+        <activity android:name=".ui.activity.playlistDetails.PlaylistDetails"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.animbus.music.ui.activity;
+package com.animbus.music.ui.activity.playlistDetails;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;

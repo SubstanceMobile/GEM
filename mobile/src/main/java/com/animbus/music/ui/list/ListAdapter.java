@@ -38,9 +38,9 @@ import com.animbus.music.ui.ItemGenre;
 import com.animbus.music.ui.ItemNowPlaying;
 import com.animbus.music.ui.ItemPlaylist;
 import com.animbus.music.ui.ItemSongList;
-import com.animbus.music.ui.activity.PlaylistDetails;
+import com.animbus.music.ui.activity.playlistDetails.PlaylistDetails;
 import com.animbus.music.ui.activity.albumDetails.AlbumDetails;
-import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -226,9 +226,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
         private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
-        private int defaultBackground = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.greyDark : R.color.faithfulPrimaryLight);
-        private int defaultTitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light);
-        private int defaultSubtitle = context.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
+        private int defaultBackground = context.getResources().getColor(!Options.isLightTheme() ? R.color.greyDark : R.color.greyLight);
+        private int defaultTitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light);
+        private int defaultSubtitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
 
         public AlbumsViewHolder(ItemAlbumGrid binding) {
             super(binding);

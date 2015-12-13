@@ -6,13 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.ColorInt;
-import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
 import com.animbus.music.R;
-import com.animbus.music.ui.activity.LaunchActivity;
+import com.animbus.music.ui.activity.splash.LaunchActivity;
 import com.animbus.music.ui.activity.settings.chooseIcon.Icon;
 
 /**
@@ -54,10 +53,10 @@ public class Options {
      */
     public static void setDefaults() {
         prefs.edit()
-                .putBoolean(KEY_FIRST_RUN, false)
+                .putBoolean(KEY_FIRST_RUN, true)
                 .putInt(KEY_ICON, new Icon(IconManager.DESIGNER_SRINI, IconManager.COLOR_BLACK).getId())
                 .putBoolean(KEY_LIGHT_THEME, false)
-                .putInt(KEY_BASE_THEME, R.style.Base_Faithful)
+                .putInt(KEY_BASE_THEME, 1)
                 .putInt(KEY_THEME_PRIMARY, R.color.background_faithful)
                 .putInt(KEY_THEME_ACCENT, ContextCompat.getColor(context, R.color.default_accent))
                 .putBoolean(KEY_USE_TABS, false)
@@ -111,11 +110,11 @@ public class Options {
     ///////////////
 
     public static boolean isFirstRun() {
-        return getBool(KEY_FIRST_RUN);
+        return prefs.getBoolean(KEY_FIRST_RUN, true);
     }
 
     public static void tripFirstRunIfNeeded() {
-        if (!isFirstRun()) prefs.edit().putBoolean(KEY_FIRST_RUN, false).apply();
+        if (isFirstRun()) prefs.edit().putBoolean(KEY_FIRST_RUN, false).apply();
     }
 
     //////////

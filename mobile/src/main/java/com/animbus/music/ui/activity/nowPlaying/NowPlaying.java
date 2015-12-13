@@ -28,7 +28,6 @@ import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
 
@@ -173,8 +172,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
             i.setImageDrawable(repeatIcon);
         } else {
             Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
-            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon),
-                    ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark));
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), getSecondaryTextColor());
             i.setImageDrawable(repeatIcon);
         }
 
@@ -190,8 +188,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
         ImageView i = (ImageView) findViewById(R.id.now_playing_repeat_icon);
         if (PlaybackRemote.isRepeating()) {
             Drawable repeatIcon = getResources().getDrawable(R.drawable.ic_repeat_black_48dp);
-            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon),
-                    ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark));
+            DrawableCompat.setTint(DrawableCompat.wrap(repeatIcon), getSecondaryTextColor());
             i.setImageDrawable(repeatIcon);
             PlaybackRemote.setRepeat(false);
         } else {

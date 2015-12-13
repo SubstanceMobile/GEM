@@ -116,8 +116,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             else
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS);
-        } else if (Build.VERSION.SDK_INT == 19)
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        } else if (Build.VERSION.SDK_INT == 19) getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
     private void themeNavBar() {
@@ -186,8 +185,22 @@ public abstract class ThemeActivity extends AppCompatActivity {
     }
 
     @ColorInt
+    public int getPrimaryTextColor(@ColorInt int color) {
+        return ColorUtil.isLightColor(color) ?
+                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_light) :
+                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_dark);
+    }
+
+    @ColorInt
     public int getSecondaryTextColor() {
         return Options.isLightTheme() ?
+                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_light) :
+                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_dark);
+    }
+
+    @ColorInt
+    public int getSecondaryTextColor(@ColorInt int color) {
+        return ColorUtil.isLightColor(color) ?
                 ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_light) :
                 ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_dark);
     }

@@ -11,12 +11,12 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,7 +36,7 @@ import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.activity.IssueReportingActivity;
+import com.animbus.music.ui.activity.issue.IssueReportingActivity;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.settings.Settings;
@@ -80,7 +80,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Drawable menu = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_menu_24dp));
-        DrawableCompat.setTint(menu, getPrimaryTextColor());
+        DrawableCompat.setTint(menu, getPrimaryTextColor(getPrimaryColor()));
         getSupportActionBar().setHomeAsUpIndicator(menu);
         setUpNavdrawer();
         setUpTabs();
@@ -92,10 +92,10 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     }
 
     @Override
-    protected void setUpTheme() {
-        super.setUpTheme();
+    protected void setStatusBarColor(int color) {
+        super.setStatusBarColor(color);
         if (Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(Color.TRANSPARENT);
-        mDrawerLayout.setStatusBarBackgroundColor(getPrimaryDarkColor());
+        mDrawerLayout.setStatusBarBackgroundColor(color);
     }
 
     private void configureNowPlayingBar() {
@@ -237,8 +237,8 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 {android.R.attr.state_selected}, //When selected
                 {}
         }, new int[]{
-                getPrimaryTextColor(),
-                getSecondaryTextColor()
+                getPrimaryTextColor(getPrimaryColor()),
+                getSecondaryTextColor(getPrimaryColor())
         });
 
         if (!Options.usingIconTabs()) {
@@ -272,7 +272,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         mTabs.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mPager));
         mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabs));
 
-        mTabs.setSelectedTabIndicatorColor(getPrimaryTextColor());
+        mTabs.setSelectedTabIndicatorColor(getPrimaryTextColor(getPrimaryColor()));
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.support.v4.media.session.MediaControllerCompat.TransportControls;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
@@ -34,6 +35,9 @@ public class PlaybackRemote {
     static volatile boolean tempRepeating;
     static volatile PlaybackBase tempIMPL;
     static volatile boolean tempNotifyListener;
+    static volatile Song tempSong;
+    static volatile Uri tempUri;
+    static volatile int tempCommand = -1;
 
     public static final PlaybackBase LOCAL = new LocalPlayback();
 
@@ -55,36 +59,57 @@ public class PlaybackRemote {
             service.inject(tempIMPL);
             tempIMPL = null;
         }
+
+
+        if (tempCommand == 0) {
+            play(tempUri);
+        } else if (tempCommand == 1) {
+            play(tempSong);
+        } else if (tempCommand == 2) {
+            play(tempSongList, tempListStartPos);
+        }
+        tempUri = null;
+        tempSong = null;
+        tempSongList = null;
+        tempListStartPos = -1;
+        tempCommand = -1;
     }
 
     public static void inject(PlaybackBase impl) {
         if (mService != null) mService.inject(impl); else tempIMPL = impl;
     }
 
-    public static void startServiceIfNecessary() {
+    public static boolean startServiceIfNecessary() {
         if (mService == null)
             mContext.startService(new Intent(ACTION_START).setClass(mContext, MediaService.class));
+        return mService == null;
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Here go all of the controls
     ///////////////////////////////////////////////////////////////////////////
 
-    public static void play(Uri uri, boolean updateListenersWithUri) {
-        startServiceIfNecessary();
-        remote.playFromUri(uri, null);
+    public static void play(Uri uri) {
+        /*if (!startServiceIfNecessary()) remote.playFromUri(uri, null); else {
+            tempCommand = 0;
+            tempUri = uri;
+        }*/
+        Toast.makeText(mContext, uri.toString(), Toast.LENGTH_SHORT).show();
     }
 
     public static void play(Song song) {
-        startServiceIfNecessary();
-        remote.playFromMediaId(String.valueOf(song.getSongID()), null);
+        /*if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getSongID()), null); else {
+            tempCommand = 1;
+            tempSong = song;
+        }*/
+        Toast.makeText(mContext, song.getSongTitle(), Toast.LENGTH_SHORT).show();
     }
 
     public static void play(List<Song> songs, int startPos) {
-        startServiceIfNecessary();
-        remote.sendCustomAction(PlaybackBase.ACTION_PLAY_FROM_LIST, null);
-        tempSongList = songs;
+        /*tempSongList = songs;
         tempListStartPos = startPos;
+        if (!startServiceIfNecessary()) remote.sendCustomAction(PlaybackBase.ACTION_PLAY_FROM_LIST, null); else tempCommand = 2;*/
+        Toast.makeText(mContext, songs.get(startPos).getSongTitle(), Toast.LENGTH_SHORT).show();
     }
 
     public static void playQueueItem(int pos) {

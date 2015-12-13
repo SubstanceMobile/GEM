@@ -1,4 +1,4 @@
-package com.animbus.music.ui.activity;
+package com.animbus.music.ui.activity.issue;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

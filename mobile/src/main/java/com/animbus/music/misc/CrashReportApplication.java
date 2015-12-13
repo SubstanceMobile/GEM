@@ -9,7 +9,7 @@ import android.text.TextUtils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.R;
-import com.animbus.music.ui.activity.IssueReportingActivity;
+import com.animbus.music.ui.activity.issue.IssueReportingActivity;
 import com.google.repacked.apache.commons.lang3.exception.ExceptionUtils;
 
 /**

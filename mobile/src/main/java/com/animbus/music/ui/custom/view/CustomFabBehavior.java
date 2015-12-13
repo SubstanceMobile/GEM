@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import java.util.List;
 
 /**
- * Created by Adrian on 9/19/2015.
+ * Used by Album Details
  */
 public class CustomFabBehavior extends FloatingActionButton.Behavior {
     private Rect mTmpRect;

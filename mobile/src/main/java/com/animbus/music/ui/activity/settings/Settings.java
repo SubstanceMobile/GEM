@@ -35,7 +35,6 @@ import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
-import com.animbus.music.ui.theme.ThemeManager;
 import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
 
@@ -50,7 +49,6 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
             scrollableTabsSwitch,
             tabsIconsSwitch;
     SettingsManager manager;
-    ThemeManager themeManager;
     int clickedAmount = 0;
 
     IInAppBillingService mService;
@@ -86,7 +84,6 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     @Override
     protected void setVariables() {
         manager = SettingsManager.get();
-        themeManager = ThemeManager.get();
 
         pageNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
         paletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);

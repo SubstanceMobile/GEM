@@ -125,12 +125,6 @@
     <string name="settings_unregister_popup_no">No</string>
     <string name="settings_tester_already_registered">You are already a tester</string>
 
-    <string name="internal_tester_warning_title">Warning</string>
-    <string name="internal_tester_warning">You are running internal testing software. It may be unfinished. Do not distribute.</string>
-    <string name="internal_tester_accept">Accept</string>
-    <string name="internal_tester_dont_show_again">Don\'t show again</string>
-    <string name="internal_tester_error">An error occurred</string>
-
     Setup
     <string name="setup_intro_description">Welcome to GEM Player!</string>
     <string name="setup_promo_1_title">Customisable</string>
@@ -152,10 +146,17 @@
     <string name="playback_error_IO">Error playing file. Please try again</string>
     <string name="playback_error_generic">Couldn\'t play this song</string>
 
-    <string name="permission_storage_explain_title">Storage Permission Required</string>
-    <string name="permission_storage_explain_message">The storage permission is required for GEM player to be able to read your media library</string>
-    <string name="permission_storage_required">Storage Permission Required</string>
-    <string name="permission_storage_required_settings">@string/title_activity_settings</string>
+    <string name="setup_intro">Welcome to GEM Player. Please keep in mind that this is beta software and may have a few issues.</string>
+    <string name="permission_storage_explain_title">Storage</string>
+    <string name="permission_storage_explain_message">The storage permission is required for GEM Player to be able to read your media library</string>
+    <string name="setup_thanks">Thank You</string>
+    <string name="enjoy">Enjoy the app!</string>
+
+    <string name="internal_tester_warning_title">Warning</string>
+    <string name="internal_tester_warning">You are running internal testing software. It may be unfinished. Do not distribute.</string>
+    <string name="internal_tester_accept">Accept</string>
+    <string name="internal_tester_dont_show_again">Don\'t show again</string>
+    <string name="internal_tester_error">An error occurred</string>
 
     Misc.
     <string name="appwidget_text">Why are you using the widget?</string>

@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
-import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.util.Options;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -101,7 +101,7 @@ public class Album {
     public void requestArt(final ArtRequest request) {
         Glide.with(getContext().getApplicationContext()).load(getAlbumArtPath())
                 .asBitmap()
-                .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
+                .placeholder(!Options.isLightTheme() ? R.drawable.art_dark : R.drawable.art_light)
                 .animate(android.R.anim.fade_in)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .centerCrop()
@@ -115,7 +115,7 @@ public class Album {
 
     public void requestArt(ImageView imageView) {
         Glide.with(imageView.getContext()).load(getAlbumArtPath())
-                .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
+                .placeholder(!Options.isLightTheme() ? R.drawable.art_dark : R.drawable.art_light)
                 .animate(android.R.anim.fade_in)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -125,7 +125,7 @@ public class Album {
 
     public void requestArt(ImageView imageView, RequestListener<String, GlideDrawable> listener) {
         Glide.with(imageView.getContext()).load(getAlbumArtPath())
-                .placeholder(!ThemeManager.get().useLightTheme ? R.drawable.art_dark : R.drawable.art_light)
+                .placeholder(!Options.isLightTheme() ? R.drawable.art_dark : R.drawable.art_light)
                 .animate(android.R.anim.fade_in)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -206,12 +206,12 @@ public class Album {
 
     public void setContext(Context cxt) {
         this.cxt = cxt;
-        mainColors = new int[] {
-                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.greyDark : R.color.faithfulPrimaryLight),
-                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
-                cxt.getResources().getColor(!ThemeManager.get().useLightTheme ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light)
+        mainColors = new int[]{
+                cxt.getResources().getColor(!Options.isLightTheme() ? R.color.greyDark : R.color.greyLight),
+                cxt.getResources().getColor(!Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
+                cxt.getResources().getColor(!Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light)
         };
-        accentColors = new int[] {
+        accentColors = new int[]{
                 Color.BLACK, Color.WHITE, Color.GRAY
         };
     }

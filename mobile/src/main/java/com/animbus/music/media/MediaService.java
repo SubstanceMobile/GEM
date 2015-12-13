@@ -50,6 +50,7 @@ package com.animbus.music.media;
         import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_TO_NEXT;
         import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS;
         import static android.support.v4.media.session.PlaybackStateCompat.ACTION_STOP;
+        import static android.support.v4.media.session.PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN;
         import static android.support.v4.media.session.PlaybackStateCompat.STATE_BUFFERING;
         import static android.support.v4.media.session.PlaybackStateCompat.STATE_FAST_FORWARDING;
         import static android.support.v4.media.session.PlaybackStateCompat.STATE_NONE;
@@ -605,7 +606,7 @@ public class MediaService extends Service {
             PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
                 @Override
                 public void onStateChanged(PlaybackStateCompat newState) {
-                    update();
+                    if (newState.getState() != STATE_NONE && newState.getState() != STATE_STOPPED) update();
                 }
             });
         }
@@ -683,7 +684,8 @@ public class MediaService extends Service {
     }
 
     void setUp() {
-        PlaybackRemote.init(this);
+        if (IMPL == null) inject(PlaybackRemote.LOCAL);
+
         IMPL.init(this);
         MediaNotification.init(this);
 
@@ -692,6 +694,8 @@ public class MediaService extends Service {
         mSession.setPlaybackToLocal(AudioManager.STREAM_MUSIC);
         mSession.setFlags(FLAG_HANDLES_MEDIA_BUTTONS | FLAG_HANDLES_TRANSPORT_CONTROLS);
         setState(STATE_NONE);
+
+        PlaybackRemote.init(this);
         PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
             @Override
             public void onSongChanged(Song newSong) {
@@ -703,11 +707,17 @@ public class MediaService extends Service {
     void setState(int state) {
         Log.d(TAG, "setState(int) called. Building new state");
         //This sets up the state
-        PlaybackStateCompat.Builder mBuilder = new PlaybackStateCompat.Builder(mState);
+        PlaybackStateCompat.Builder mBuilder = new PlaybackStateCompat.Builder();
         mBuilder.setActions(
                 ACTION_PLAY | ACTION_PAUSE | ACTION_SKIP_TO_NEXT | ACTION_SKIP_TO_PREVIOUS | ACTION_STOP |
                         ACTION_SEEK_TO | ACTION_PLAY_FROM_MEDIA_ID);
-        mBuilder.setState(state, IMPL.getCurrentPosInSong(), 1.0f);
+        long pos;
+        try {
+            pos = IMPL.getCurrentPosInSong();
+        } catch (Exception e) {
+            pos = PLAYBACK_POSITION_UNKNOWN;
+        }
+        mBuilder.setState(state, pos, 1.0f);
         mState = mBuilder.build();
 
         //Updates things with the new state
