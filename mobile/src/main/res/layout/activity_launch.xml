@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".ui.activity.LaunchActivity"
-    android:id="@+id/loading_root_view">
+    android:id="@+id/root">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:theme="?attr/actionBarTheme"
+            app:popupTheme="?attr/actionBarPopupTheme"/>
 
         <android.support.design.widget.TabLayout
             android:layout_width="match_parent"

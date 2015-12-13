@@ -16,10 +16,8 @@ import android.os.RemoteException;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
@@ -29,6 +27,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.android.vending.billing.IInAppBillingService;
 import com.animbus.music.BuildConfig;
@@ -98,7 +98,6 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     @Override
     protected void setUp() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ViewCompat.setElevation(findViewById(R.id.appbar), 0.0f);
     }
 
     private void loadSettings() {
@@ -178,92 +177,23 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     }
 
     public void showComingSoon(View v) {
-        Snackbar.make(findViewById(R.id.settings_root_view), getResources().getString(R.string.msg_coming_soon), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.root), getResources().getString(R.string.msg_coming_soon), Snackbar.LENGTH_LONG).show();
     }
 
     public void showThemePicker(View v) {
-        new AlertDialog.Builder(this).setTitle(getResources().getString(R.string.settings_theme_title_choose))
-                .setItems(new String[]{
-                        getResources().getString(R.string.settings_theme_blue),
-                        getResources().getString(R.string.settings_theme_pink),
-                        getResources().getString(R.string.settings_theme_greyscale)
-                }, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                new AlertDialog.Builder(Settings.this)
-                                        .setTitle(R.string.settings_theme_animbus).setItems(new String[]{
-                                        getResources().getString(R.string.settings_theme_variant_dark),
-                                        getResources().getString(R.string.settings_theme_variant_light)
-                                }, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switch (which) {
-                                            case 0:
-                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
-                                                ThemeManager.get().setBase(R.style.AppTheme_Blue);
-                                                Settings.this.recreate();
-                                                break;
-                                            case 1:
-                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
-                                                ThemeManager.get().setBase(R.style.AppTheme_Light_Blue);
-                                                Settings.this.recreate();
-                                                break;
-                                        }
-                                    }
-                                }).show();
-                                break;
-                            case 1:
-                                new AlertDialog.Builder(Settings.this)
-                                        .setTitle(R.string.settings_theme_animbus).setItems(new String[]{
-                                        getResources().getString(R.string.settings_theme_variant_dark),
-                                        getResources().getString(R.string.settings_theme_variant_light)
-                                }, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switch (which) {
-                                            case 0:
-                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
-                                                ThemeManager.get().setBase(R.style.AppTheme_Pink);
-                                                Settings.this.recreate();
-                                                break;
-                                            case 1:
-                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
-                                                ThemeManager.get().setBase(R.style.AppTheme_Light_Pink);
-                                                Settings.this.recreate();
-                                                break;
-                                        }
-                                    }
-                                }).show();
-                                break;
-                            case 2:
-                                new AlertDialog.Builder(Settings.this)
-                                        .setTitle(R.string.settings_theme_animbus).setItems(new String[]{
-                                        getResources().getString(R.string.settings_theme_variant_dark),
-                                        getResources().getString(R.string.settings_theme_variant_light)
-                                }, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switch (which) {
-                                            case 0:
-                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
-                                                ThemeManager.get().setBase(R.style.AppTheme);
-                                                Settings.this.recreate();
-                                                break;
-                                            case 1:
-                                                SettingsManager.get().setBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, true);
-                                                ThemeManager.get().setBase(R.style.AppTheme_Light);
-                                                Settings.this.recreate();
-                                                break;
-                                        }
-                                    }
-                                }).show();
-                                break;
-                        }
-                    }
-                })
-                .create().show();
+        new MaterialDialog.Builder(this).title(R.string.settings_theme_title_choose)
+                .items(R.array.settings_theme_items_choose).itemsCallback(new MaterialDialog.ListCallback() {
+            @Override
+            public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                Options.setBaseTheme(i);
+                Options.setLightTheme(i == 2);
+            }
+        }).theme(!Options.isLightTheme() ? Theme.DARK : Theme.LIGHT).dismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Settings.this.recreate();
+            }
+        }).show();
     }
 
     public void showUiTweaker(View v) {
@@ -287,7 +217,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     }
 
     public void resetPrimaryColor(View v) {
-        Options.setPrimaryColor(ContextCompat.getColor(this, !Options.isLightTheme() ? R.color.faithfulPrimaryDark : R.color.faithfulPrimaryLight));
+        Options.setPrimaryColor(resolveColorAttr(android.R.attr.colorBackground));
     }
 
     @Override

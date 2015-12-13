@@ -6,16 +6,22 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,7 +43,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(Options.getBaseTheme());
+        setTheme(getBaseTheme());
         super.onCreate(savedInstanceState);
         sequence();
     }
@@ -96,6 +102,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
         themeAppBar();
         setStatusBarColor(getPrimaryDarkColor());
         themeNavBar();
+        themeBackground();
         configureTaskDescription(getPrimaryColor(), null);
     }
 
@@ -118,6 +125,11 @@ public abstract class ThemeActivity extends AppCompatActivity {
 
     protected void themeAppBar() {
         mAppBar.setBackgroundColor(getPrimaryColor());
+        if (getPrimaryColor() == resolveColorAttr(android.R.attr.colorBackground)) ViewCompat.setElevation(mAppBar, 0.0f);
+    }
+
+    private void themeBackground() {
+        mRoot.setBackgroundColor(resolveColorAttr(android.R.attr.windowBackground));
     }
 
     public void configureTaskDescription(@ColorInt int color, String title) {
@@ -126,6 +138,22 @@ public abstract class ThemeActivity extends AppCompatActivity {
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
             setTaskDescription(new ActivityManager.TaskDescription(title, bm, color));
             bm.recycle();
+        }
+    }
+
+    private int getBaseTheme() {
+        switch (Options.getBaseTheme()) {
+            case 0:
+                //Dark
+                return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base : R.style.Base_LightActionBar);
+            case 1:
+                //Extra Dark
+                return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base_Faithful : R.style.Base_Faithful_LightActionBar);
+            case 2:
+                //Light
+                return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base_Light_DarkActionBar : R.style.Base_Light);
+            default:
+                return -1;
         }
     }
 

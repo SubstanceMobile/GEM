@@ -67,20 +67,14 @@
     <string name="about_Neel">Neel Raj</string>
     <string name="about_Substance">Substance Open Source</string>
 
-    <string name="settings_select_base_theme">Select Theme</string>
-    <string name="settings_theme_title_choose">Pick a theme</string>
-    <string name="settings_theme_title_variant">Pick a variant</string>
-    <string name="settings_theme_animbus">Animbus</string>
-    <string name="settings_theme_default">Default</string>
-    <string name="settings_theme_custom">Custom</string>
-    <string name="settings_theme_variant_light">Light</string>
-    <string name="settings_theme_variant_dark">Dark</string>
-    <string name="settings_theme_variant_grey">Grey</string>
-    <string name="settings_theme_variant_default">Default</string>
 
-    <string name="settings_theme_blue">Blue</string>
-    <string name="settings_theme_pink">Pink</string>
-    <string name="settings_theme_greyscale">Greyscale</string>
+    <string name="settings_select_base_theme">General Theme</string>
+    <string name="settings_theme_title_choose">Base Theme</string>
+    <string-array name="settings_theme_items_choose">
+        <item>Dark</item>
+        <item>Extra Dark</item>
+        <item>Light</item>
+    </string-array>
 
     <string name="settings_header_old">Old</string>
     <string name="settings_old_light_theme">Use Light Theme</string>

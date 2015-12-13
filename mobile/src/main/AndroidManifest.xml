@@ -16,6 +16,20 @@
         android:label="@string/app_name_actual"
         android:theme="@style/AppTheme.Faithful" >
 
+        <!--Splash Screen Activity-->
+        <activity
+            android:name=".ui.activity.LaunchActivity"
+            android:label="@string/app_name_actual">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MUSIC_PLAYER" />
+                <category android:name="android.intent.category.APP_MUSIC" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="audio/*" />
+            </intent-filter>
+        </activity>
+
         <!--Icons-->
         <activity-alias
             android:name=".activities.app.icon.srini.black"
@@ -185,20 +199,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-
-        <!--Splash Screen Activity-->
-        <activity
-            android:name=".ui.activity.LaunchActivity"
-            android:label="@string/app_name_actual">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.MUSIC_PLAYER" />
-                <category android:name="android.intent.category.APP_MUSIC" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="audio/*" />
-            </intent-filter>
-        </activity>
 
         <!--Activity used to request permissions-->
         <activity

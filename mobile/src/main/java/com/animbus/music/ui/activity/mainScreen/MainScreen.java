@@ -28,7 +28,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,7 +43,7 @@ import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.LockableViewPager;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.ui.theme.ThemeManager;
+import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
@@ -81,7 +80,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Drawable menu = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_menu_24dp));
-        DrawableCompat.setTint(menu, getPrimaryTextColor());
+        DrawableCompat.setTint(menu, getSecondaryTextColor());
         getSupportActionBar().setHomeAsUpIndicator(menu);
         setUpNavdrawer();
         setUpTabs();
@@ -206,7 +205,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     private void setUpNavdrawer() {
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.inflateMenu(R.menu.navigation_drawer_items);
-        int secondaryColor = ThemeManager.get().useLightTheme ? getResources().getColor(R.color.secondary_text_default_material_light) : getResources().getColor(R.color.secondary_text_default_material_dark);
         ColorStateList colorStateList = new ColorStateList(
                 new int[][]{
                         {android.R.attr.state_checked}, //When selected
@@ -214,7 +212,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 },
                 new int[]{
                         getAccentColor(), //When selected
-                        secondaryColor
+                        getSecondaryTextColor()
                 }
         );
         mNavigationView.setItemIconTintList(colorStateList);
@@ -469,11 +467,18 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             if (position != 2) {
-                View root = getLayoutInflater().inflate(R.layout.main_screen_page, container, false);
+                View root = getLayoutInflater().inflate(R.layout.blank_page, container, false);
                 RecyclerView list = (RecyclerView) root.findViewById(R.id.main_screen_page_recycler);
                 RecyclerFastScroller scroller = (RecyclerFastScroller) root.findViewById(R.id.main_screen_page_scroller);
                 configureRecycler(list, scroller, position);
                 container.addView(root, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                        ColorUtil.setEdgeGlowColor(recyclerView, getPrimaryColor());
+                    }
+                });
                 return root;
             } else {
                 TextView text = new TextView(MainScreen.this);

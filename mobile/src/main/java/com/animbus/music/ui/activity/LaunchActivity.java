@@ -159,11 +159,11 @@ public class LaunchActivity extends ThemeActivity {
                         })
                         .create().show();
             } catch (Exception e) {
-                Snackbar.make(findViewById(R.id.loading_root_view), R.string.internal_tester_error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
+                Snackbar.make(mRoot, R.string.internal_tester_error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
                     @Override
                     public void onDismissed(Snackbar snackbar, int event) {
                         super.onDismissed(snackbar, event);
-                        Snackbar.make(findViewById(R.id.loading_root_view), R.string.internal_tester_error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
+                        Snackbar.make(mRoot, R.string.internal_tester_error, Snackbar.LENGTH_SHORT).setCallback(new Snackbar.Callback() {
                             @Override
                             public void onDismissed(Snackbar snackbar, int event) {
                                 super.onDismissed(snackbar, event);

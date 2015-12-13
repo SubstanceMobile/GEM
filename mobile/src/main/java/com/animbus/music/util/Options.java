@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.ColorInt;
 import android.support.annotation.StyleRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
@@ -56,7 +57,9 @@ public class Options {
                 .putBoolean(KEY_FIRST_RUN, false)
                 .putInt(KEY_ICON, new Icon(IconManager.DESIGNER_SRINI, IconManager.COLOR_BLACK).getId())
                 .putBoolean(KEY_LIGHT_THEME, false)
-                .putInt(KEY_BASE_THEME, R.style.AppTheme_Blue)
+                .putInt(KEY_BASE_THEME, R.style.Base_Faithful)
+                .putInt(KEY_THEME_PRIMARY, R.color.background_faithful)
+                .putInt(KEY_THEME_ACCENT, ContextCompat.getColor(context, R.color.default_accent))
                 .putBoolean(KEY_USE_TABS, false)
                 .putBoolean(KEY_TABS_ICONS, false)
                 .putBoolean(KEY_TABS_SCROLLABLE, false)
