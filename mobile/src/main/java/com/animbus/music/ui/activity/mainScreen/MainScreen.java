@@ -80,7 +80,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Drawable menu = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_menu_24dp));
-        DrawableCompat.setTint(menu, getSecondaryTextColor());
+        DrawableCompat.setTint(menu, getPrimaryTextColor());
         getSupportActionBar().setHomeAsUpIndicator(menu);
         setUpNavdrawer();
         setUpTabs();
@@ -228,7 +228,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         mTabs.setTabMode(Options.usingScrollableTabs() ? TabLayout.MODE_SCROLLABLE : TabLayout.MODE_FIXED);
 
         if (!Options.usingTabs()) {
-            ViewCompat.setElevation(mToolbar, 0.0f);
             mPager.lock();
             mTabs.setVisibility(View.GONE);
         }
@@ -274,6 +273,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabs));
 
         mTabs.setSelectedTabIndicatorColor(getPrimaryTextColor());
+    }
+
+    @Override
+    protected boolean shouldKeepAppBarShadow() {
+        return mTabs.getVisibility() == View.VISIBLE;
     }
 
     @Override

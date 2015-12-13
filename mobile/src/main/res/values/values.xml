@@ -72,6 +72,7 @@
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="cardStyle">@style/CardView.Light</item>
+        <item name="android:windowBackground">@color/background_light</item>
         <item name="ripple">@drawable/ripple_light</item>
         <item name="ripple_alt_color">@drawable/ripple_dark</item>
         <item name="ripple_circle">@drawable/ripple_circle_light</item>

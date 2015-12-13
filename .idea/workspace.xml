@@ -10,39 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5486cfd0-91f4-4794-87d3-640a866e8c01" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/main_screen_page.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/blank_page.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/music_playback_widget.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/widget.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/navigation_drawer_header.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/drawer_header.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/MusicPlaybackWidget.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/MusicPlaybackWidget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/IssueReportingActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/IssueReportingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/LaunchActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/LaunchActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/ColorUtil.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/ColorUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_light.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_launch.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_launch.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/xml/music_playback_widget_info.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/xml/music_playback_widget_info.xml" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2233,22 +2208,22 @@
         <option value="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/ColorUtil.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" />
         <option value="$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v21/values-v21.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_launch.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/LaunchActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
       </list>
     </option>
   </component>
@@ -3308,7 +3283,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449941932478</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Theme engine is done. Time to fix a few bugs and continue on to other things">
+      <created>1449967834251</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1449967834251</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3375,7 +3356,8 @@
     <MESSAGE value="Even More Progress" />
     <MESSAGE value="Built base themes" />
     <MESSAGE value="Cleaned up manifest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up manifest" />
+    <MESSAGE value="Theme engine is done. Time to fix a few bugs and continue on to other things" />
+    <option name="LAST_COMMIT_MESSAGE" value="Theme engine is done. Time to fix a few bugs and continue on to other things" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3701,17 +3683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="169" column="5" selection-start-line="169" selection-start-column="5" selection-end-line="169" selection-end-column="5" />
-          <folding>
-            <element signature="e#5250#5251#0" expanded="true" />
-            <element signature="e#5297#5298#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -3728,21 +3699,10 @@
         <state vertical-scroll-proportion="0.33333334">
           <caret line="165" column="43" selection-start-line="165" selection-start-column="43" selection-end-line="165" selection-end-column="43" />
           <folding>
-            <element signature="e#6392#6422#0" expanded="true" />
-            <element signature="e#6459#6782#0" expanded="true" />
-            <element signature="e#6781#6782#0" expanded="true" />
+            <element signature="e#6392#6422#0" expanded="false" />
+            <element signature="e#6459#6782#0" expanded="false" />
+            <element signature="e#6781#6782#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3888888">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3753,17 +3713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14184397">
           <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.2083335">
-          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
           <folding />
         </state>
       </provider>
@@ -3786,14 +3735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28368795">
           <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/values.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3783784">
-          <caret line="54" column="58" selection-start-line="54" selection-start-column="58" selection-end-line="54" selection-end-column="58" />
           <folding />
         </state>
       </provider>
@@ -3842,24 +3783,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml">
+    <entry file="android-dummy://C:/Users/Adrian/StudioProjects/GEM//Theme Editor">
+      <provider selected="true" editor-type-id="themeEditor">
+        <state theme-name="Base" module-name="mobile" proportion="0.5" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/ColorUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14479639">
-          <caret line="1230" column="51" selection-start-line="1230" selection-start-column="51" selection-end-line="1230" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.1956242">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3011583">
+          <caret line="139" column="4" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="4" />
+          <folding>
+            <element signature="e#4607#4608#0" expanded="true" />
+            <element signature="e#4652#4653#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7092199">
+          <caret line="20" column="55" selection-start-line="20" selection-start-column="55" selection-end-line="20" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5673759">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1956242">
-          <caret line="470" column="101" selection-start-line="470" selection-start-column="101" selection-end-line="470" selection-end-column="101" />
+        <state vertical-scroll-proportion="0.101673104">
+          <caret line="211" column="18" selection-start-line="211" selection-start-column="18" selection-end-line="211" selection-end-column="18" />
           <folding>
             <element signature="method#setVariables#0;class#MainScreen#0" expanded="false" />
             <element signature="method#configureNowPlayingBar#0;class#MainScreen#0" expanded="false" />
             <element signature="method#setUpNowPlayingBarWithSong#0;class#MainScreen#0" expanded="false" />
             <element signature="method#setUpNowPlayingBarWithState#0;class#MainScreen#0" expanded="false" />
             <element signature="method#setUpTabs#0;class#MainScreen#0" expanded="false" />
+            <element signature="e#11838#11839#0" expanded="true" />
+            <element signature="e#11898#11899#0" expanded="true" />
             <element signature="method#onCreateOptionsMenu#0;class#MainScreen#0" expanded="false" />
             <element signature="method#onOptionsItemSelected#0;class#MainScreen#0" expanded="false" />
             <element signature="method#onBackPressed#0;class#MainScreen#0" expanded="false" />
@@ -3875,43 +3856,45 @@
             <element signature="method#configureAsArtists#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
             <element signature="method#configureAsPlaylists#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
             <element signature="method#configureAsGenres#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="e#20393#20757#0" expanded="true" />
-            <element signature="e#20756#20757#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="android-dummy://C:/Users/Adrian/StudioProjects/GEM//Theme Editor">
-      <provider selected="true" editor-type-id="themeEditor">
-        <state theme-name="Base" module-name="mobile" proportion="0.5" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/ColorUtil.java">
+    <entry file="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values/values.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1956242">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+        <state vertical-scroll-proportion="1.3891402">
+          <caret line="550" column="17" selection-start-line="550" selection-start-column="17" selection-end-line="550" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1029601">
-          <caret line="104" column="26" selection-start-line="104" selection-start-column="26" selection-end-line="104" selection-end-column="26" />
+        <state vertical-scroll-proportion="1.2020591">
+          <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
           <folding>
             <element signature="method#sequence#0;class#ThemeActivity#0" expanded="false" />
             <element signature="method#setInternalVariables#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#setStatusBarColor#0;class#ThemeActivity#0" expanded="false" />
             <element signature="method#themeNavBar#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#themeAppBar#0;class#ThemeActivity#0" expanded="false" />
+            <element signature="e#4588#4589#0" expanded="true" />
+            <element signature="e#4616#4617#0" expanded="true" />
+            <element signature="method#themeBackground#0;class#ThemeActivity#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/values.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2219061">
+          <caret line="66" column="68" selection-start-line="66" selection-start-column="68" selection-end-line="66" selection-end-column="68" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
-          <caret line="219" column="79" selection-start-line="219" selection-start-column="79" selection-end-line="219" selection-end-column="79" />
+          <caret line="220" column="19" selection-start-line="220" selection-start-column="19" selection-end-line="220" selection-end-column="19" />
           <folding>
             <element signature="method#loadSettings#0;class#Settings#0" expanded="false" />
             <element signature="method#setUpVersionNumberClicks#0;class#Settings#0" expanded="false" />

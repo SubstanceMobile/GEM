@@ -134,11 +134,10 @@ public class Options {
     // Theme //
     ///////////
 
-    public static void setBaseTheme(@StyleRes int baseTheme) {
+    public static void setBaseTheme(int baseTheme) {
         set(KEY_BASE_THEME, baseTheme);
     }
 
-    @StyleRes
     public static int getBaseTheme() {
         return getInt(KEY_BASE_THEME);
     }

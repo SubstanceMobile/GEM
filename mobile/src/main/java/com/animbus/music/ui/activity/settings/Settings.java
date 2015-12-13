@@ -218,6 +218,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
 
     public void resetPrimaryColor(View v) {
         Options.setPrimaryColor(resolveColorAttr(android.R.attr.colorBackground));
+        recreate();
     }
 
     @Override

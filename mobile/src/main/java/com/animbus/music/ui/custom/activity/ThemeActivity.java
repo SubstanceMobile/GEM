@@ -20,6 +20,7 @@ import android.support.v4.graphics.ColorUtils;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,7 +112,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().setStatusBarColor(color);
-            if (Build.VERSION.SDK_INT >= 23 && ColorUtil.isLightColor(getPrimaryDarkColor()))
+            if (Build.VERSION.SDK_INT >= 23 && ColorUtil.isLightColor(color))
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             else
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS);
@@ -125,7 +126,11 @@ public abstract class ThemeActivity extends AppCompatActivity {
 
     protected void themeAppBar() {
         mAppBar.setBackgroundColor(getPrimaryColor());
-        if (getPrimaryColor() == resolveColorAttr(android.R.attr.colorBackground)) ViewCompat.setElevation(mAppBar, 0.0f);
+        if (getPrimaryColor() == resolveColorAttr(android.R.attr.colorBackground) && !shouldKeepAppBarShadow()) ViewCompat.setElevation(mAppBar, 0.0f);
+    }
+
+    protected boolean shouldKeepAppBarShadow() {
+        return false;
     }
 
     private void themeBackground() {
@@ -144,13 +149,10 @@ public abstract class ThemeActivity extends AppCompatActivity {
     private int getBaseTheme() {
         switch (Options.getBaseTheme()) {
             case 0:
-                //Dark
                 return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base : R.style.Base_LightActionBar);
             case 1:
-                //Extra Dark
                 return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base_Faithful : R.style.Base_Faithful_LightActionBar);
             case 2:
-                //Light
                 return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base_Light_DarkActionBar : R.style.Base_Light);
             default:
                 return -1;
