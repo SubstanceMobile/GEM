@@ -1,6 +1,6 @@
 # GEM Player
 
-[![Status](https://api.travis-ci.org/Substance-Project/GEM.svg)](https://api.travis-ci.org/Substance-Project/GEM)
+[![Status](https://api.travis-ci.org/Substance-Project/GEM.svg)](https://travis-ci.org/Substance-Project/GEM)
 [![Stable Version](https://img.shields.io/badge/stable-0.2.3-orange.svg)](https://github.com/Substance-Project/GEM/releases)
 [![WIP Version](https://img.shields.io/badge/wip-0.3.0-yellow.svg)](https://github.com/Substance-Project/GEM/releases)
 
