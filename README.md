@@ -1,6 +1,7 @@
 # GEM Player
 
 [![Status](https://api.travis-ci.org/Substance-Project/GEM.svg)](https://api.travis-ci.org/Substance-Project/GEM)
+[![Current Stable Version](https://img.shields.io/github/issues/Substance-Project/latest_stable-0.2.3-orange)](https://github.com/Substance-Project/GEM/releases)
 
 ###A Fully Open Source Music Player for Android.
 GEM is a part of the Substance Open Source suite of apps & promises to be nimble, functional, and customizable.
