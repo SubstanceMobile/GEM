@@ -1,4 +1,4 @@
-# GEM Player
+# GEM Player (Beta)
 
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/Substance-Project/GEM/blob/indev/LICENSE.md)
 [![Stable Version](https://img.shields.io/badge/stable-0.2.3-orange.svg)](https://github.com/Substance-Project/GEM/releases)
