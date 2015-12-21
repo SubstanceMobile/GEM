@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="commons-0.8.5.3">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/commons/0.8.5.3/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/commons/0.8.5.3/res" />
+      <root url="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/commons/0.8.5.3/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.afollestad.material-dialogs/commons/0.8.5.3/1f3e9e0adaf08a28170d5df9bd984c145639fe23/commons-0.8.5.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

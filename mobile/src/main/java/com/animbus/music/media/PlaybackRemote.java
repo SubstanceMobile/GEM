@@ -90,26 +90,23 @@ public class PlaybackRemote {
     ///////////////////////////////////////////////////////////////////////////
 
     public static void play(Uri uri) {
-        /*if (!startServiceIfNecessary()) remote.playFromUri(uri, null); else {
+        if (!startServiceIfNecessary()) remote.playFromUri(uri, null); else {
             tempCommand = 0;
             tempUri = uri;
-        }*/
-        Toast.makeText(mContext, uri.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static void play(Song song) {
-        /*if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getSongID()), null); else {
+        if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getSongID()), null); else {
             tempCommand = 1;
             tempSong = song;
-        }*/
-        Toast.makeText(mContext, song.getSongTitle(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static void play(List<Song> songs, int startPos) {
-        /*tempSongList = songs;
+        tempSongList = songs;
         tempListStartPos = startPos;
-        if (!startServiceIfNecessary()) remote.sendCustomAction(PlaybackBase.ACTION_PLAY_FROM_LIST, null); else tempCommand = 2;*/
-        Toast.makeText(mContext, songs.get(startPos).getSongTitle(), Toast.LENGTH_SHORT).show();
+        if (!startServiceIfNecessary()) remote.sendCustomAction(PlaybackBase.ACTION_PLAY_FROM_LIST, null); else tempCommand = 2;
     }
 
     public static void playQueueItem(int pos) {

@@ -6,12 +6,12 @@
     <ImageView
         android:id="@+id/navdrawer_header_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/navdrawer_header_height"
+        android:layout_height="@dimen/drawer_header_height"
         android:scaleType="centerCrop" />
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/navdrawer_header_text_root_height"
+        android:layout_height="@dimen/drawer_header_text_root_height"
         android:layout_gravity="bottom"
         android:background="@drawable/gradient_block_onbottom"
         android:id="@+id/navdrawer_header_items_root">

@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'GEM'
             keyPassword 'AnimbusDev'
-            storeFile file('C:/Users/Adrian/Desktop/Programming/ApkSigning.jks')
+            storeFile file('C:/Users/Adrian/Documents/Developer/ApkSigning.jks')
             storePassword 'AnimbusDev'
         }
     }
@@ -57,7 +57,8 @@ dependencies {
     compile 'com.github.paolorotolo:gitty_reporter:1.2.2'
     compile 'com.github.paolorotolo:appintro:3.3.0'
     compile 'com.github.plusCubed:recycler-fast-scroll:0.2.1'
-    compile 'com.github.afollestad.material-dialogs:core:0.8.5.2'
-    compile 'com.github.afollestad.material-dialogs:commons:0.8.5.2'
+    compile 'com.github.afollestad.material-dialogs:core:0.8.5.3'
+    compile 'com.github.afollestad.material-dialogs:commons:0.8.5.3'
     compile 'com.android.support:preference-v7:23.1.1'
+    compile 'com.github.afollestad:app-theme-engine:0.2.1'
 }

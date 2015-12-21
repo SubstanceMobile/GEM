@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Space
+        android:id="@+id/my_library_to_albumdetails_list_space"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/currently_playing_toolbar_height"
+        android:visibility="visible"
+        android:background="?attr/now_playing_toolbar_color"
+        android:id="@+id/main_screen_now_playing_toolbar"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_screen_now_playing_toolbar_controls_transition" />
+
+        <LinearLayout
+            android:id="@+id/main_screen_now_playing_toolbar_root_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/ripple_alt_color"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
+                android:id="@+id/main_screen_now_playing_toolbar_art"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_medium">
+
+                    <TextView
+                        android:id="@+id/main_screen_now_playing_toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_small"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:maxLines="1"
+                        android:padding="@dimen/margin_tiny"
+                        android:text="Song Title"
+                        android:textColor="?android:attr/textColorPrimaryInverse"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/main_screen_now_playing_toolbar_artist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:maxLines="1"
+                        android:text="Song Artist"
+                        android:textColor="?android:attr/textColorSecondaryInverse"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="@dimen/currently_playing_toolbar_height"
+                    android:layout_height="@dimen/currently_playing_toolbar_height"
+                    android:padding="@dimen/margin_small" >
+
+                    <ImageButton
+                        android:id="@+id/main_screen_now_playing_toolbar_playpause"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="?attr/ripple_circle_alt_color"
+                        android:padding="@dimen/margin_medium"
+                        android:src="@drawable/ic_play_arrow_black_48dp"
+                        android:tint="?android:attr/textColorSecondaryInverse"
+                        android:cropToPadding="true"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

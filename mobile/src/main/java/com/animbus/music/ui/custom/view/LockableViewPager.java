@@ -9,7 +9,7 @@ import android.view.MotionEvent;
  * Created by Adrian on 7/18/2015.
  */
 public class LockableViewPager extends ViewPager {
-    Boolean locked = false;
+    private boolean locked = false;
 
     public LockableViewPager(Context context) {
         super(context);
@@ -21,20 +21,12 @@ public class LockableViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (!this.locked) {
-            return super.onInterceptTouchEvent(ev);
-        } else {
-            return false;
-        }
+        return !this.locked && super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if (!this.locked) {
-            return super.onTouchEvent(ev);
-        } else {
-            return false;
-        }
+        return !this.locked && super.onTouchEvent(ev);
     }
 
     public void lock() {
@@ -44,5 +36,4 @@ public class LockableViewPager extends ViewPager {
     public void unlock() {
         locked = false;
     }
-
 }

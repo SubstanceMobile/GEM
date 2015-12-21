@@ -100,7 +100,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     private void configureNowPlayingBar() {
         if (!PlaybackRemote.isActive()) {
-            quickToolbar.setVisibility(View.GONE);
+            /*quickToolbar.setVisibility(View.GONE);*/
         } else {
             try {
                 setUpNowPlayingBarWithSong(PlaybackRemote.getCurrentSong());
@@ -476,13 +476,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 RecyclerFastScroller scroller = (RecyclerFastScroller) root.findViewById(R.id.main_screen_page_scroller);
                 configureRecycler(list, scroller, position);
                 container.addView(root, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                list.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                        super.onScrollStateChanged(recyclerView, newState);
-                        ColorUtil.setEdgeGlowColor(recyclerView, getPrimaryColor());
-                    }
-                });
                 return root;
             } else {
                 TextView text = new TextView(MainScreen.this);
