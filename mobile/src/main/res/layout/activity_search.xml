@@ -22,88 +22,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-   <android.support.v4.widget.NestedScrollView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:orientation="vertical">
-
-           <LinearLayout
-               android:id="@+id/search_category_albums"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical">
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginBottom="@dimen/margin_small"
-                   android:layout_marginStart="@dimen/margin_medium"
-                   android:layout_marginTop="@dimen/margin_small"
-                   android:text="@string/page_albums"
-                   android:textAppearance="?android:attr/textAppearanceSmall"
-                   android:textColor="?android:attr/textColorSecondary" />
-
-               <android.support.v7.widget.RecyclerView
-                   android:id="@+id/search_albums_results"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent" />
-
-           </LinearLayout>
-
-           <LinearLayout
-               android:id="@+id/search_category_songs"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical">
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginBottom="@dimen/margin_small"
-                   android:layout_marginStart="@dimen/margin_medium"
-                   android:layout_marginTop="@dimen/margin_small"
-                   android:text="@string/page_songs"
-                   android:textAppearance="?android:attr/textAppearanceSmall"
-                   android:textColor="?android:attr/textColorSecondary" />
-
-               <android.support.v7.widget.RecyclerView
-                   android:id="@+id/search_songs_results"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content" />
-
-           </LinearLayout>
-
-           <LinearLayout
-               android:id="@+id/search_category_playlists"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical">
-
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginBottom="@dimen/margin_small"
-                   android:layout_marginStart="@dimen/margin_medium"
-                   android:layout_marginTop="@dimen/margin_small"
-                   android:text="@string/page_playlists"
-                   android:textAppearance="?android:attr/textAppearanceSmall"
-                   android:textColor="?android:attr/textColorSecondary" />
-
-               <android.support.v7.widget.RecyclerView
-                   android:id="@+id/search_playlists_results"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content" />
-
-           </LinearLayout>
-
-       </LinearLayout>
-
-   </android.support.v4.widget.NestedScrollView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <TextView
         android:layout_width="match_parent"

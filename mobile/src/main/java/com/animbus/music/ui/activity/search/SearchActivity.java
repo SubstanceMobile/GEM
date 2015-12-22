@@ -14,12 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.animbus.music.R;
+import com.animbus.music.media.Library;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.media.Library;
-import com.animbus.music.media.objects.Album;
-import com.animbus.music.media.objects.Playlist;
-import com.animbus.music.media.objects.Song;
+import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 
 import java.util.List;
 
@@ -112,43 +110,26 @@ public class SearchActivity extends ThemeActivity {
     }
 
     private void search(String query) {
-
-        //Resets
-        findViewById(R.id.search_empty_textview).setVisibility(View.GONE);
-        findViewById(R.id.search_category_albums).setVisibility(View.GONE);
-        findViewById(R.id.search_category_songs).setVisibility(View.GONE);
-        findViewById(R.id.search_category_playlists).setVisibility(View.GONE);
-
         //Stops if the query is empty
-        if (TextUtils.isEmpty(query)) return;
-
-        //Fetches results
-        List<Album> albums = Library.filterAlbums(query);
-        List<Song> songs = Library.filterSongs(query);
-        List<Playlist> playlists = Library.filterPlaylists(query);
-
-        //Displays the no results page
-        if (albums.isEmpty() && songs.isEmpty() && playlists.isEmpty()) {
-            findViewById(R.id.search_empty_textview).setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(query)) {
+            findViewById(R.id.search_empty_textview).setVisibility(View.GONE);
+            findViewById(R.id.recycler).setVisibility(View.GONE);
             return;
         }
+        //Fetches results
+        List<SearchResult> results = Library.search(query);
 
-        //Sets the sections that have results to be visible and configures them
-        if (!albums.isEmpty()) {
-            findViewById(R.id.search_category_albums).setVisibility(View.VISIBLE);
+        //Resets
+        findViewById(R.id.search_empty_textview).setVisibility(!results.isEmpty() ? View.GONE : View.VISIBLE);
+        findViewById(R.id.recycler).setVisibility(results.isEmpty() ? View.GONE : View.VISIBLE);
+        if (results.isEmpty()) return;
 
-            RecyclerView albumsRecycler = (RecyclerView) findViewById(R.id.search_albums_results);
-            albumsRecycler.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM, albums, this));
-            albumsRecycler.setItemAnimator(new DefaultItemAnimator());
-            albumsRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
-        }
-        if (!songs.isEmpty()) {
-            findViewById(R.id.search_category_songs).setVisibility(View.VISIBLE);
-        }
-        if (!playlists.isEmpty()) {
-            findViewById(R.id.search_category_playlists).setVisibility(View.VISIBLE);
-        }
+        ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_SEARCH, results, this);
+        adapter.setTransitionToAlbumDetails(this);
+        RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
+        recycler.setAdapter(adapter);
+        recycler.setItemAnimator(new DefaultItemAnimator());
+        recycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private String getSuggestion(int position) {

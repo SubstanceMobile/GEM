@@ -243,4 +243,7 @@
 
     <string name="title_color_chooser_primary">Primary Color</string>
     <string name="title_color_chooser_accent">Accent Color</string>
+
+    <string name="blank_song">%d Song</string>
+    <string name="blank_songs">%d Songs</string>
 </resources>

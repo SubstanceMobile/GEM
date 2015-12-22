@@ -11,7 +11,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
@@ -43,7 +42,6 @@ import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.LockableViewPager;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
@@ -441,7 +439,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
         private void configureAsAlbums(RecyclerView list) {
             ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_ALBUM, Library.getAlbums(), MainScreen.this);
-            adapter.setTransitionToAlbumDetails(MainScreen.this, mToolbar, findViewById(R.id.my_library_to_albumdetails_list_space));
+            adapter.setTransitionToAlbumDetails(MainScreen.this);
             list.setAdapter(adapter);
             list.setItemAnimator(new DefaultItemAnimator());
             if (MainScreen.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)

@@ -36,9 +36,9 @@ import com.animbus.music.util.Options;
  * Created by Adrian on 8/5/2015.
  */
 public abstract class ThemeActivity extends AppCompatActivity {
-    protected Toolbar mToolbar;
-    protected AppBarLayout mAppBar;
-    protected CoordinatorLayout mRoot;
+    public Toolbar mToolbar;
+    public AppBarLayout mAppBar;
+    public CoordinatorLayout mRoot;
 
     private int primary, accent, baseId;
 

@@ -17,7 +17,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -37,9 +40,12 @@ import com.animbus.music.ui.ItemAlbumGrid;
 import com.animbus.music.ui.ItemGenre;
 import com.animbus.music.ui.ItemNowPlaying;
 import com.animbus.music.ui.ItemPlaylist;
+import com.animbus.music.ui.ItemSearch;
 import com.animbus.music.ui.ItemSongList;
-import com.animbus.music.ui.activity.playlistDetails.PlaylistDetails;
 import com.animbus.music.ui.activity.albumDetails.AlbumDetails;
+import com.animbus.music.ui.activity.playlistDetails.PlaylistDetails;
+import com.animbus.music.ui.activity.search.SearchResult;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
 import com.animbus.music.util.SettingsManager;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -62,14 +68,14 @@ import static com.animbus.music.media.objects.Album.TITLE_COLOR;
  * Created by Adrian on 10/28/2015.
  */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
-    public static final int TYPE_SONG = 0, TYPE_ALBUM = 1, TYPE_PLAYLIST = 2, TYPE_GENRE = 3, TYPE_ARTIST = 4;
+    public static final int TYPE_SONG = 0, TYPE_ALBUM = 1, TYPE_PLAYLIST = 2, TYPE_GENRE = 3, TYPE_ARTIST = 4, TYPE_SEARCH = 5;
     public static final int TYPE_ALBUM_DETAILS = -1, TYPE_NOW_PLAYING = -2;
     List data;
     int type;
     LayoutInflater inflater;
     Context context;
 
-    @IntDef({TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_GENRE, TYPE_ARTIST, TYPE_ALBUM_DETAILS, TYPE_NOW_PLAYING})
+    @IntDef({TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_GENRE, TYPE_ARTIST, TYPE_ALBUM_DETAILS, TYPE_NOW_PLAYING, TYPE_SEARCH})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Type {
     }
@@ -83,22 +89,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
     @Override
     public BasicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (type == TYPE_SONG) {
-            return new SongsViewHolder(ItemSongList.inflate(inflater, parent, false));
-        } else if (type == TYPE_ALBUM) {
-            return new AlbumsViewHolder(ItemAlbumGrid.inflate(inflater, parent, false));
-        } else if (type == TYPE_PLAYLIST) {
-            return new PlaylistsViewHolder(ItemPlaylist.inflate(inflater, parent, false));
-        } else if (type == TYPE_ARTIST) {
-            return null;
-        } else if (type == TYPE_GENRE) {
-            return new GenresViewHolder(ItemGenre.inflate(inflater, parent, false));
-        } else if (type == TYPE_ALBUM_DETAILS) {
-            return new AlbumDetailsViewHolder(ItemAlbumDetailsList.inflate(inflater, parent, false));
-        } else if (type == TYPE_NOW_PLAYING) {
-            return new NowPlayingViewHolder(ItemNowPlaying.inflate(inflater, parent, false));
-        } else {
-            return null;
+        switch (type) {
+            case TYPE_SONG:
+                return new SongsViewHolder(ItemSongList.inflate(inflater, parent, false));
+            case TYPE_ALBUM:
+                return new AlbumsViewHolder(ItemAlbumGrid.inflate(inflater, parent, false));
+            case TYPE_PLAYLIST:
+                return new PlaylistsViewHolder(ItemPlaylist.inflate(inflater, parent, false));
+            case TYPE_ARTIST:
+                return null;
+            case TYPE_GENRE:
+                return new GenresViewHolder(ItemGenre.inflate(inflater, parent, false));
+            case TYPE_ALBUM_DETAILS:
+                return new AlbumDetailsViewHolder(ItemAlbumDetailsList.inflate(inflater, parent, false));
+            case TYPE_NOW_PLAYING:
+                return new NowPlayingViewHolder(ItemNowPlaying.inflate(inflater, parent, false));
+            case TYPE_SEARCH:
+                return new SearchViewHolder(ItemSearch.inflate(inflater, parent, false));
+            default:
+                return null;
         }
     }
 
@@ -113,13 +122,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
     }
 
     Toolbar transitionAppBar;
-    View listOrigin;
-    Activity transitionActivity;
+    ThemeActivity transitionActivity;
 
-    public void setTransitionToAlbumDetails(Activity activity, Toolbar toolbar, View listOrigin) {
+    public void setTransitionToAlbumDetails(ThemeActivity activity) {
         this.transitionActivity = activity;
-        this.transitionAppBar = toolbar;
-        this.listOrigin = listOrigin;
+        this.transitionAppBar = activity.mToolbar;
     }
 
 
@@ -171,6 +178,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                     break;
                 case TYPE_NOW_PLAYING:
                     varId = BR.song;
+                    break;
+                case TYPE_SEARCH:
+                    varId = BR.result;
                     break;
                 default:
                     varId = -1;
@@ -429,7 +439,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                         new Pair<View, String>(transitionAppBar, "appbar"),
                         new Pair<View, String>(transitionAppBar, "appbar_text_protection"),
                         new Pair<View, String>(binding.getRoot().findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
-                        new Pair<View, String>(listOrigin, "list"),
                         new Pair<View, String>(binding.getRoot().findViewById(R.id.AlbumInfoToolbar), "info")
                 );
                 ActivityCompat.startActivity(transitionActivity, new Intent(context, AlbumDetails.class)
@@ -514,6 +523,42 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         @Override
         public void onClick(View v) {
             PlaybackRemote.playQueueItem(getAdapterPosition());
+        }
+    }
+
+    protected class SearchViewHolder extends BasicViewHolder<ItemSearch, SearchResult> {
+
+        protected SearchViewHolder(ItemSearch binding) {
+            super(binding);
+        }
+
+        @Override
+        protected void configure(SearchResult object) {
+            binding.getRoot().setClickable(false);
+            @Type int type = -999;
+            if (object.results.get(0) instanceof Album) type = TYPE_ALBUM;
+            else if (object.results.get(0) instanceof Song) type = TYPE_SONG;
+            else if (object.results.get(0) instanceof Playlist) type = TYPE_PLAYLIST;
+            ListAdapter adapter = new ListAdapter(type, object.results, context);
+            adapter.setTransitionToAlbumDetails(transitionActivity);
+            binding.recycler.setAdapter(adapter);
+            if (type != TYPE_ALBUM) {
+                binding.recycler.setLayoutManager(new CustomLinearLayoutManager(context));
+                binding.recycler.setLayoutFrozen(true);
+                binding.recycler.setHasFixedSize(false);
+            } else {
+                binding.recycler.setLayoutManager(new CustomLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+                int margin = (int) context.getResources().getDimension(R.dimen.margin_medium);
+                binding.recycler.setClipToPadding(false);
+                binding.recycler.setPaddingRelative(margin, 0, margin, 0);
+            }
+            binding.recycler.setItemAnimator(new DefaultItemAnimator());
+            binding.recycler.requestLayout();
+        }
+
+        @Override
+        public void onClick(View v) {
+            //Do nothing
         }
     }
 }

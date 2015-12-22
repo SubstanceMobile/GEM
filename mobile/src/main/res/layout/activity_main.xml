@@ -47,7 +47,8 @@
                     android:layout_weight="100" />
 
             <include layout="@layout/current_song_toolbar"
-                android:maxWidth="288dp"/>
+                android:maxWidth="288dp"
+                android:visibility="gone" />
         </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>

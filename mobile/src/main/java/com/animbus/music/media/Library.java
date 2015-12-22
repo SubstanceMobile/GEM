@@ -7,11 +7,13 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.ui.activity.search.SearchResult;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -291,7 +293,7 @@ public class Library {
     // Search
     ///////////////////////////////////////////////////////////////////////////
 
-    public static List<Album> filterAlbums(String query) {
+    public static SearchResult filterAlbums(String query) {
         List<Album> results = new ArrayList<>();
         for (Album a : getAlbums()) {
             if (a.getAlbumTitle().toLowerCase().contains(query.toLowerCase())) {
@@ -302,10 +304,10 @@ public class Library {
                 if (!results.contains(a)) results.add(a);
             }
         }
-        return results;
+        return new SearchResult(context.getString(R.string.page_albums), results);
     }
 
-    public static List<Song> filterSongs(String query) {
+    public static SearchResult filterSongs(String query) {
         List<Song> results = new ArrayList<>();
         for (Song s : getSongs()) {
             if (s.getSongTitle().toLowerCase().contains(query.toLowerCase())) {
@@ -316,17 +318,25 @@ public class Library {
                 if (!results.contains(s)) results.add(s);
             }
         }
-        return results;
+        return new SearchResult(context.getString(R.string.page_songs), results);
     }
 
-    public static List<Playlist> filterPlaylists(String query) {
+    public static SearchResult filterPlaylists(String query) {
         List<Playlist> results = new ArrayList<>();
         for (Playlist p : getPlaylists()) {
             if (p.getName().toLowerCase().contains(query.toLowerCase())) {
                 if (!results.contains(p)) results.add(p);
             }
         }
-        return results;
+        return new SearchResult(context.getString(R.string.page_playlists), results);
+    }
+
+    public static List<SearchResult> search(String query) {
+        List<SearchResult> output = new ArrayList<>();
+        filterAlbums(query).addIfNotEmpty(output);
+        filterSongs(query).addIfNotEmpty(output);
+        filterPlaylists(query).addIfNotEmpty(output);
+        return Collections.unmodifiableList(output);
     }
 
 }
