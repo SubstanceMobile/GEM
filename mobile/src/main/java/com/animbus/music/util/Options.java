@@ -35,12 +35,9 @@ public class Options {
             KEY_PALETTE = base + "ui.PALETTE";
 
     private static final String
-            KEY_BASE_THEME = base + ".theme.BASE",
-            KEY_LIGHT_THEME = base + ".theme.IS_LIGHT",
-            KEY_THEME_PRIMARY = base + ".theme.colors.PRIMARY",
-            KEY_THEME_ACCENT = base + ".theme.colors.ACCENT";
+            KEY_LIGHT_THEME = base + ".theme.IS_LIGHT";
 
-    private Options(Context context) {
+    private Options() {
 
     }
 
@@ -57,9 +54,6 @@ public class Options {
                 .putBoolean(KEY_FIRST_RUN, true)
                 .putInt(KEY_ICON, new Icon(IconManager.DESIGNER_SRINI, IconManager.COLOR_BLACK).getId())
                 .putBoolean(KEY_LIGHT_THEME, false)
-                .putInt(KEY_BASE_THEME, 1)
-                .putInt(KEY_THEME_PRIMARY, R.color.background_faithful)
-                .putInt(KEY_THEME_ACCENT, ContextCompat.getColor(context, R.color.default_accent))
                 .putBoolean(KEY_USE_TABS, false)
                 .putBoolean(KEY_TABS_ICONS, false)
                 .putBoolean(KEY_TABS_SCROLLABLE, false)
@@ -130,17 +124,9 @@ public class Options {
         return getInt(KEY_ICON);
     }
 
-    ///////////
-    // Theme //
-    ///////////
-
-    public static void setBaseTheme(int baseTheme) {
-        set(KEY_BASE_THEME, baseTheme);
-    }
-
-    public static int getBaseTheme() {
-        return getInt(KEY_BASE_THEME);
-    }
+    /////////////////
+    // Light Theme //
+    /////////////////
 
     public static void setLightTheme(boolean lightTheme) {
         set(KEY_LIGHT_THEME, lightTheme);
@@ -148,24 +134,6 @@ public class Options {
 
     public static boolean isLightTheme() {
         return getBool(KEY_LIGHT_THEME);
-    }
-
-    public static void setPrimaryColor(@ColorInt int color) {
-        set(KEY_THEME_PRIMARY, color);
-    }
-
-    @ColorInt
-    public static int getPrimaryColor() {
-        return getInt(KEY_THEME_PRIMARY);
-    }
-
-    public static void setAccentColor(@ColorInt int color) {
-        set(KEY_THEME_ACCENT, color);
-    }
-
-    @ColorInt
-    public static int getAccentColor() {
-        return getInt(KEY_THEME_ACCENT);
     }
 
     //////////////

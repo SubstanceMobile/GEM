@@ -17,13 +17,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.appthemeengine.ATE;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.android.vending.billing.IInAppBillingService;
 import com.animbus.music.R;
@@ -72,6 +70,9 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         switch (id) {
             case R.id.action_donate:
                 showDonation();
+                return true;
+            case R.id.action_reset:
+                Options.resetPrefs();
                 return true;
         }
         return super.processMenuItem(id);
@@ -134,7 +135,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
                 .items(R.array.settings_theme_items_choose).itemsCallback(new MaterialDialog.ListCallback() {
             @Override
             public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
-                Options.setBaseTheme(i);
+                ATE.config(Settings.this, getATEKey()).activityTheme(getStyleFromPos(i)).apply(Settings.this);
                 Options.setLightTheme(i == 2);
             }
         })
@@ -145,6 +146,18 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
                         Settings.this.recreate();
                     }
                 }).show();
+    }
+
+    private int getStyleFromPos(int pos) {
+        switch (pos) {
+            case 0:
+                return R.style.AppTheme;
+            case 1:
+                return R.style.AppTheme_Faithful;
+            case 2:
+                return R.style.AppTheme_Light;
+        }
+        return 0;
     }
 
     public void showPrimaryColorDialog(View v) {
@@ -164,16 +177,16 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     }
 
     public void resetPrimaryColor(View v) {
-        Options.setPrimaryColor(resolveColorAttr(android.R.attr.colorBackground));
+        ATE.config(this, getATEKey()).accentColor(resolveColorAttr(android.R.attr.colorBackground)).apply(this);
         invalidate();
     }
 
     @Override
     public void onColorSelection(@NonNull ColorChooserDialog colorChooserDialog, @ColorInt int i) {
         if (!colorChooserDialog.isAccentMode()) {
-            Options.setPrimaryColor(i);
+            ATE.config(this, getATEKey()).primaryColor(i).apply(this);
         } else {
-            Options.setAccentColor(i);
+            ATE.config(this, getATEKey()).accentColor(i).apply(this);
         }
         invalidate();
     }

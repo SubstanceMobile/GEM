@@ -23,6 +23,7 @@
     <string name="action_place_shortcut">Add this icon to the homescreen</string>
     <string name="action_donate">Donate</string>
     <string name="action_bug_report">Report a bug</string>
+    <string name="action_reset">Reset</string>
 
     Search
     <string name="search_empty">No Results</string>
