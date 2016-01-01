@@ -3,8 +3,6 @@ package com.animbus.music.ui.activity.mainScreen;
 import android.animation.Animator;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -45,12 +43,12 @@ import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 
 
 public class MainScreen extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout mDrawerLayout;
+    TabLayout mTabs;
+    LockableViewPager mPager;
+    NavigationView mNavigationView;
     View quickToolbar;
     String mScreenName;
-    DrawerLayout mDrawerLayout;
-    NavigationView mNavigationView;
-    LockableViewPager mPager;
-    TabLayout mTabs;
 
     @Override
     protected void init() {
@@ -75,13 +73,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         goToDefaultPage();
         mToolbar.setTitle(Options.usingCategoryNames() ? mScreenName : getResources().getString(R.string.title_activity_main));
         configureNowPlayingBar();
-    }
-
-    @Override
-    protected void setStatusBarColor(int color) {
-        super.setStatusBarColor(color);
-        if (Build.VERSION.SDK_INT >= 21) getWindow().setStatusBarColor(Color.TRANSPARENT);
-        mDrawerLayout.setStatusBarBackgroundColor(color);
     }
 
     private void configureNowPlayingBar() {
@@ -259,7 +250,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     @Override
     protected boolean shouldKeepAppBarShadow() {
-        return mTabs.getVisibility() == View.VISIBLE;
+        return Options.usingTabs();
     }
 
     @Override

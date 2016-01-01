@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.appthemeengine.Config;
+import com.afollestad.appthemeengine.customizers.ATEStatusBarCustomizer;
 import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
@@ -31,7 +33,7 @@ import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.util.IconManager;
 
-public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChangedListener {
+public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChangedListener, ATEStatusBarCustomizer {
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     Song mSong;
@@ -79,9 +81,13 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     }
 
     @Override
-    protected void setUpTheme() {
-        super.setUpTheme();
-        setStatusBarColor(Util.darkenColor(mSong.getAlbum().getBackgroundColor()));
+    public int getStatusBarColor() {
+        return Util.darkenColor(mSong.getAlbum().getBackgroundColor());
+    }
+
+    @Override
+    public int getLightStatusBarMode() {
+        return Config.lightStatusBarMode(this, getATEKey());
     }
 
     private void configureRecyclerView() {

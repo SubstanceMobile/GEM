@@ -36,11 +36,8 @@ public abstract class ThemeActivity extends ATEActivity {
     public AppBarLayout mAppBar;
     public CoordinatorLayout mRoot;
 
-    private int primary, accent, baseId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(getBaseTheme());
         super.onCreate(savedInstanceState);
         sequence();
     }
@@ -52,17 +49,14 @@ public abstract class ThemeActivity extends ATEActivity {
         sequence();
     }
 
-    protected void invalidate() {
-        ATE.apply(this, getATEKey());
-    }
-
     /**
      * call this when adding code to the sequence of default methods. The default sequence can be triggered by
-     * <code>super.sequence(savedInstanceState)</code>.
+     * <code>super.sequence()</code>.
      * Everything before triggering will happen before, everything after will happen after. The default sequence is:
-     * <code>init(savedInstanceState)</code>,
+     * <code>init()</code>,
      * <code>setVariables()</code>,
-     * <code>setSupportActionBar()</code>,
+     * <code>setInternalVariables()</code>,
+     * <code>setSupportActionBar(mToolbar)</code>,
      * <code>setUp()</code>,
      * <code>setUpTheme()</code>
      */
@@ -88,36 +82,11 @@ public abstract class ThemeActivity extends ATEActivity {
     protected abstract void setUp();
 
     protected void setUpTheme() {
-        primary = Options.getPrimaryColor();
-        accent = Options.getAccentColor();
-        baseId = Options.getBaseTheme();
-
-        themeAppBar();
-        setStatusBarColor(getPrimaryDarkColor());
-        themeNavBar();
-        themeBackground();
-        configureTaskDescription(getPrimaryColor(), null);
-    }
-
-    protected void setStatusBarColor(int color) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(color);
-            if (Build.VERSION.SDK_INT >= 23 && Util.isColorLight(color))
-                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            else
-                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS);
-        } else if (Build.VERSION.SDK_INT == 19) getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-    }
-
-    private void themeNavBar() {
-        //Do nothing for now
-    }
-
-    protected void themeAppBar() {
-        mAppBar.setBackgroundColor(getPrimaryColor());
+        //Removes shadow if the color matches background
         if (getPrimaryColor() == resolveColorAttr(android.R.attr.colorBackground) && !shouldKeepAppBarShadow()) ViewCompat.setElevation(mAppBar, 0.0f);
+
+        //Changes background color of the root view
+        themeBackground();
     }
 
     protected boolean shouldKeepAppBarShadow() {
@@ -128,6 +97,9 @@ public abstract class ThemeActivity extends ATEActivity {
         mRoot.setBackgroundColor(resolveColorAttr(android.R.attr.windowBackground));
     }
 
+    protected void invalidate() {
+        ATE.apply(this, getATEKey());
+    }
 
     @Override
     public void setTitle(CharSequence title) {
@@ -144,57 +116,8 @@ public abstract class ThemeActivity extends ATEActivity {
         }
     }
 
-    private int getBaseTheme() {
-        switch (Options.getBaseTheme()) {
-            case 0:
-                return (!Util.isColorLight(getPrimaryColor()) ? R.style.Base : R.style.Base_LightActionBar);
-            case 1:
-                return (!Util.isColorLight(getPrimaryColor()) ? R.style.Base_Faithful : R.style.Base_Faithful_LightActionBar);
-            case 2:
-                return (!Util.isColorLight(getPrimaryColor()) ? R.style.Base_Light_DarkActionBar : R.style.Base_Light);
-            default:
-                return -1;
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                supportFinishAfterTransition();
-                return true;
-            default:
-                return processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
-        }
-    }
-
-    protected boolean processMenuItem(int id) {
-        return false;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        boolean inflate = (getOptionsMenu() != 0);
-        if (inflate) {
-            getMenuInflater().inflate(getOptionsMenu(), menu);
-            return super.onCreateOptionsMenu(menu);
-        }
-        return false;
-    }
-
-    @MenuRes
-    protected int getOptionsMenu() {
-        return 0;
-    }
-
-    @Override
-    public boolean onSearchRequested() {
-        startActivity(new Intent(this, SearchActivity.class));
-        return true;
-    }
-
     ///////////////////////////////////////////////////////////////////////////
-    // Getters
+    // Color Getters
     ///////////////////////////////////////////////////////////////////////////
 
     @ColorInt
@@ -227,5 +150,49 @@ public abstract class ThemeActivity extends ATEActivity {
         final TypedValue value = new TypedValue();
         getTheme().resolveAttribute(resId, value, true);
         return value.data;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Simplifies Menus
+    ///////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
+            default:
+                return processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
+        }
+    }
+
+    protected boolean processMenuItem(int id) {
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean inflate = (getOptionsMenu() != 0);
+        if (inflate) {
+            getMenuInflater().inflate(getOptionsMenu(), menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        return false;
+    }
+
+    @MenuRes
+    protected int getOptionsMenu() {
+        return 0;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Makes sure "Search" button works on any screen
+    ///////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public boolean onSearchRequested() {
+        startActivity(new Intent(this, SearchActivity.class));
+        return true;
     }
 }

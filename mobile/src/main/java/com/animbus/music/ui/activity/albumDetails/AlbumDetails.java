@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.appthemeengine.Config;
+import com.afollestad.appthemeengine.customizers.ATEStatusBarCustomizer;
 import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
@@ -39,7 +41,7 @@ import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
-public class AlbumDetails extends ThemeActivity {
+public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer {
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     FloatingActionButton mFAB;
@@ -51,7 +53,6 @@ public class AlbumDetails extends ThemeActivity {
     protected void init() {
         setContentView(R.layout.activity_album_details);
         configureTransition();
-        mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
     }
 
     private void configureTransition() {
@@ -64,6 +65,7 @@ public class AlbumDetails extends ThemeActivity {
 
     @Override
     protected void setVariables() {
+        mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         mList = (RecyclerView) findViewById(R.id.album_details_recycler);
         mFAB = (FloatingActionButton) findViewById(R.id.album_details_fab);
@@ -82,9 +84,13 @@ public class AlbumDetails extends ThemeActivity {
     }
 
     @Override
-    protected void setUpTheme() {
-        super.setUpTheme();
-        setStatusBarColor(Util.darkenColor(mAlbum.getBackgroundColor()));
+    public int getStatusBarColor() {
+        return Util.darkenColor(mAlbum.getBackgroundColor());
+    }
+
+    @Override
+    public int getLightStatusBarMode() {
+        return Config.lightStatusBarMode(this, getATEKey());
     }
 
     private void configureRecyclerView() {
