@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.view.View;
 
+import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.settings.chooseIcon.Icon;
 
@@ -17,7 +18,6 @@ public class IconManager {
     public static final int COLOR_BLACK_SIMPLE = 8, COLOR_WHITE_SIMPLE = 9;
     private static IconManager ourInstance = new IconManager();
     Context cxt;
-    SettingsManager settings;
 
     int ICON_TRUE, ICON_FALSE;
 
@@ -32,21 +32,15 @@ public class IconManager {
 
     public IconManager setContext(Context context) {
         this.cxt = context;
-        settings = SettingsManager.get();
         return this;
     }
 
-    public void setIcon(int designer, int color) {
-        Icon icon = new Icon(designer, color);
-        settings.setIntSetting(SettingsManager.KEY_ICON, icon.getId());
-    }
-
     public Icon getIcon() {
-        return getIcon(settings.getIntSetting(SettingsManager.KEY_ICON, new Icon(DESIGNER_SRINI, COLOR_BLACK).getId()));
+        return getIcon(Options.getSavedIconID());
     }
 
     public void setIcon(Icon icon) {
-        settings.setIntSetting(SettingsManager.KEY_ICON, icon.getId());
+        Options.setSavedIconID(icon.getId());
     }
 
     public Icon getIcon(int id) {
@@ -83,9 +77,9 @@ public class IconManager {
         }
     }
 
-    public Icon getOverviewIcon(Icon icon){
+    public Icon getOverviewIcon(Icon icon, int color){
         int id = icon.getId();
-        boolean useLight = settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false);
+        boolean useLight = Util.isColorLight(color);
         if (id == getID(DESIGNER_SRINI, COLOR_BLACK)) {
             if (useLight){
                 return new Icon(DESIGNER_SRINI, COLOR_BLACK);

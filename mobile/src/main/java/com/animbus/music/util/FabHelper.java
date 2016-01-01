@@ -30,10 +30,6 @@ public class FabHelper {
         fab.setImageDrawable(icon);
     }
 
-    public static void setRippleColor(FloatingActionButton fab, int color) {
-        fab.setRippleColor(color);
-    }
-
     public static ValueAnimator getAnimatorAlong(final FloatingActionButton fab, Path path) {
         if (Build.VERSION.SDK_INT >= 21) {
             ObjectAnimator animator = ObjectAnimator.ofFloat(fab, View.X, View.Y, path);

@@ -3,22 +3,21 @@ package com.animbus.music.ui.activity.settings.chooseIcon;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
-import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.Options;
-import com.animbus.music.util.SettingsManager;
 
 import static com.animbus.music.util.IconManager.COLOR_BLACK;
 import static com.animbus.music.util.IconManager.COLOR_BLUE;
@@ -33,9 +32,7 @@ import static com.animbus.music.util.IconManager.DESIGNER_NGUYEN;
 import static com.animbus.music.util.IconManager.DESIGNER_SRINI;
 
 public class ChooseIcon extends ThemeActivity {
-    SettingsManager settings;
     Icon icon, iconOld;
-    Intent shortcutClickedIntent, addShortcutIntent, removeShortcutIntent;
 
     @Override
     protected void init() {
@@ -44,7 +41,6 @@ public class ChooseIcon extends ThemeActivity {
 
     @Override
     protected void setVariables() {
-        settings = SettingsManager.get();
         IconManager.get().setContext(this);
         iconOld = IconManager.get().getIcon();
         icon = iconOld;
@@ -63,10 +59,7 @@ public class ChooseIcon extends ThemeActivity {
         super.setUpTheme();
         FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.save_fab);
         mFab.setBackgroundTintList(ColorStateList.valueOf(getAccentColor()));
-        Drawable icon = DrawableCompat.wrap(mFab.getDrawable());
-        DrawableCompat.setTint(icon, !ColorUtil.isLightColor(getAccentColor()) ?
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_dark) :
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_light));
+        DrawableCompat.setTint(DrawableCompat.wrap(mFab.getDrawable()), !Util.isColorLight(getAccentColor()) ? Color.WHITE : Color.BLACK);
     }
 
     @Override
@@ -127,58 +120,37 @@ public class ChooseIcon extends ThemeActivity {
 
     public void selectIcon(View v) {
         deselectAll();
-
-        int color;
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = getResources().getColor(R.color.greyLight);
-        } else {
-            color = getResources().getColor(R.color.greyDark);
-        }
-        v.setBackgroundColor(color);
-
+        v.setBackgroundColor(getSecondaryTextColor());
         icon = IconManager.get().getIcon(v);
     }
 
     public void selectIcon(View v, Icon icon) {
-        int color;
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = getResources().getColor(R.color.greyLight);
-        } else {
-            color = getResources().getColor(R.color.greyDark);
-        }
-        v.setBackgroundColor(color);
-
+        v.setBackgroundColor(getSecondaryTextColor());
         this.icon = icon;
     }
 
     public void deselectAll() {
-        int color;
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_LIGHT_THEME, false)) {
-            color = getResources().getColor(R.color.faithfulPrimaryLight);
-        } else {
-            color = getResources().getColor(R.color.faithfulPrimaryDark);
-        }
-        findViewById(R.id.settings_choose_icon_srini_black).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_srini_white).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_srini_red).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_strini_slate).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_srini_green).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_srini_blue).setBackgroundColor(color);
+        findViewById(R.id.settings_choose_icon_srini_black).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_srini_white).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_srini_red).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_strini_slate).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_srini_green).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_srini_blue).setBackgroundColor(Color.TRANSPARENT);
 
-        findViewById(R.id.settings_choose_icon_alex_black).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_alex_white).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_alex_color).setBackgroundColor(color);
+        findViewById(R.id.settings_choose_icon_alex_black).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_alex_white).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_alex_color).setBackgroundColor(Color.TRANSPARENT);
 
-        findViewById(R.id.settings_choose_icon_jaka_black).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_jaka_white).setBackgroundColor(color);
+        findViewById(R.id.settings_choose_icon_jaka_black).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_jaka_white).setBackgroundColor(Color.TRANSPARENT);
 
-        findViewById(R.id.settings_choose_icon_nguyen_orange).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_nguyen_green).setBackgroundColor(color);
-        findViewById(R.id.settings_choose_icon_nguyen_red).setBackgroundColor(color);
+        findViewById(R.id.settings_choose_icon_nguyen_orange).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_nguyen_green).setBackgroundColor(Color.TRANSPARENT);
+        findViewById(R.id.settings_choose_icon_nguyen_red).setBackgroundColor(Color.TRANSPARENT);
     }
 
     public void save() {
-        settings.setIntSetting(SettingsManager.KEY_ICON, icon.getId());
+        Options.setSavedIconID(icon.getId());
         iconOld = icon;
         IconManager.get().switchTo(icon);
     }

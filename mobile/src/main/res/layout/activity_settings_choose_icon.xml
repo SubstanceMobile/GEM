@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/abc_action_bar_default_height_material"
                     android:id="@+id/toolbar"
-                    app:title="Choose Icon"/>
+                    app:title="@string/title_activity_choose_icon"/>
 
             </android.support.design.widget.AppBarLayout>
 

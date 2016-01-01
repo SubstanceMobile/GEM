@@ -2,40 +2,36 @@ package com.animbus.music.ui.custom.activity;
 
 import android.app.ActivityManager;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.ImageFormat;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
+import android.support.annotation.MenuRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
+import com.afollestad.appthemeengine.ATE;
+import com.afollestad.appthemeengine.ATEActivity;
+import com.afollestad.appthemeengine.Config;
+import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
-import com.animbus.music.util.ColorUtil;
+import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.Options;
 
 /**
  * Created by Adrian on 8/5/2015.
  */
-public abstract class ThemeActivity extends AppCompatActivity {
+public abstract class ThemeActivity extends ATEActivity {
     public Toolbar mToolbar;
     public AppBarLayout mAppBar;
     public CoordinatorLayout mRoot;
@@ -56,12 +52,8 @@ public abstract class ThemeActivity extends AppCompatActivity {
         sequence();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //Recreate if the theme changed
-        if (primary != Options.getPrimaryColor() || accent != Options.getAccentColor() || baseId != Options.getBaseTheme())
-            recreate();
+    protected void invalidate() {
+        ATE.apply(this, getATEKey());
     }
 
     /**
@@ -112,7 +104,7 @@ public abstract class ThemeActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().setStatusBarColor(color);
-            if (Build.VERSION.SDK_INT >= 23 && ColorUtil.isLightColor(color))
+            if (Build.VERSION.SDK_INT >= 23 && Util.isColorLight(color))
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             else
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_LAYOUT_FLAGS);
@@ -136,10 +128,17 @@ public abstract class ThemeActivity extends AppCompatActivity {
         mRoot.setBackgroundColor(resolveColorAttr(android.R.attr.windowBackground));
     }
 
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        invalidate();
+    }
+
     public void configureTaskDescription(@ColorInt int color, String title) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), getPrimaryColor()).getId()));
             setTaskDescription(new ActivityManager.TaskDescription(title, bm, color));
             bm.recycle();
         }
@@ -148,14 +147,50 @@ public abstract class ThemeActivity extends AppCompatActivity {
     private int getBaseTheme() {
         switch (Options.getBaseTheme()) {
             case 0:
-                return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base : R.style.Base_LightActionBar);
+                return (!Util.isColorLight(getPrimaryColor()) ? R.style.Base : R.style.Base_LightActionBar);
             case 1:
-                return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base_Faithful : R.style.Base_Faithful_LightActionBar);
+                return (!Util.isColorLight(getPrimaryColor()) ? R.style.Base_Faithful : R.style.Base_Faithful_LightActionBar);
             case 2:
-                return (!ColorUtil.isLightColor(getPrimaryColor()) ? R.style.Base_Light_DarkActionBar : R.style.Base_Light);
+                return (!Util.isColorLight(getPrimaryColor()) ? R.style.Base_Light_DarkActionBar : R.style.Base_Light);
             default:
                 return -1;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                supportFinishAfterTransition();
+                return true;
+            default:
+                return processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
+        }
+    }
+
+    protected boolean processMenuItem(int id) {
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        boolean inflate = (getOptionsMenu() != 0);
+        if (inflate) {
+            getMenuInflater().inflate(getOptionsMenu(), menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        return false;
+    }
+
+    @MenuRes
+    protected int getOptionsMenu() {
+        return 0;
+    }
+
+    @Override
+    public boolean onSearchRequested() {
+        startActivity(new Intent(this, SearchActivity.class));
+        return true;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -164,45 +199,27 @@ public abstract class ThemeActivity extends AppCompatActivity {
 
     @ColorInt
     public int getPrimaryColor() {
-        return Options.getPrimaryColor();
+        return Config.primaryColor(this, getATEKey());
     }
 
     @ColorInt
     public int getPrimaryDarkColor() {
-        return ColorUtil.getDarkerColor(getPrimaryColor());
+        return Config.primaryColorDark(this, getATEKey());
     }
 
     @ColorInt
     public int getAccentColor() {
-        return Options.getAccentColor();
+        return Config.accentColor(this, getATEKey());
     }
 
     @ColorInt
     public int getPrimaryTextColor() {
-        return Options.isLightTheme() ?
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_light) :
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_dark);
-    }
-
-    @ColorInt
-    public int getPrimaryTextColor(@ColorInt int color) {
-        return ColorUtil.isLightColor(color) ?
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_light) :
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_primary_text_material_dark);
+        return Config.textColorPrimary(this, getATEKey());
     }
 
     @ColorInt
     public int getSecondaryTextColor() {
-        return Options.isLightTheme() ?
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_light) :
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_dark);
-    }
-
-    @ColorInt
-    public int getSecondaryTextColor(@ColorInt int color) {
-        return ColorUtil.isLightColor(color) ?
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_light) :
-                ContextCompat.getColor(this, android.support.v7.appcompat.R.color.abc_secondary_text_material_dark);
+        return Config.textColorSecondary(this, getATEKey());
     }
 
     @ColorInt
@@ -210,20 +227,5 @@ public abstract class ThemeActivity extends AppCompatActivity {
         final TypedValue value = new TypedValue();
         getTheme().resolveAttribute(resId, value, true);
         return value.data;
-    }
-
-    public float resolveFloatAttr(@AttrRes int resId) {
-        final TypedValue value = new TypedValue();
-        getTheme().resolveAttribute(resId, value, true);
-        return value.getFloat();
-    }
-
-    public ColorStateList resolveColorStateListAttr(@AttrRes int resId) {
-        TypedArray a = obtainStyledAttributes(null, new int[]{resId});
-        try {
-            return a.getColorStateList(0);
-        } finally {
-            a.recycle();
-        }
     }
 }

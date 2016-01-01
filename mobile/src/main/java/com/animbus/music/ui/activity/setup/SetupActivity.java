@@ -4,12 +4,11 @@ import android.Manifest;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 
+import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
-import com.animbus.music.util.ColorUtil;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -24,7 +23,7 @@ public class SetupActivity extends AppIntro2 {
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().setStatusBarColor(ColorUtil.getDarkerColor(background));
+            getWindow().setStatusBarColor(Util.darkenColor(background));
         } else if (Build.VERSION.SDK_INT == 19) getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
 

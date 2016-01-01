@@ -2,7 +2,6 @@ package com.animbus.music.ui.list;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -17,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,7 +45,6 @@ import com.animbus.music.ui.activity.playlistDetails.PlaylistDetails;
 import com.animbus.music.ui.activity.search.SearchResult;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
-import com.animbus.music.util.SettingsManager;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -258,7 +255,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                 binding.getAlbum().animated = true;
 
                 int animateTill;
-                if (!SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_TABS, false)) {
+                if (!Options.usingTabs()) {
                     animateTill = 5;
                 } else {
                     Configuration configuration = context.getResources().getConfiguration();
@@ -375,7 +372,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             int back = defaultBackground, title = defaultTitle, subtitle = defaultSubtitle;
             int accent = Color.BLACK, accentIcon = Color.WHITE, accentSubIcon = Color.GRAY;
 
-            if (!binding.getAlbum().defaultArt && SettingsManager.get().getBooleanSetting(SettingsManager.KEY_USE_PALETTE_IN_GRID, true)) {
+            if (!binding.getAlbum().defaultArt && Options.usingPalette()) {
 
                 //Gets main swatches
                 ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
@@ -483,6 +480,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public void onClick(View v) {
+
             context.startActivity(new Intent(context, PlaylistDetails.class).putExtra("playlist_id", binding.getPlaylist().getId()));
         }
 

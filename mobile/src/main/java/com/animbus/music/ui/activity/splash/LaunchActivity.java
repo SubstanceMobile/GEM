@@ -16,7 +16,6 @@ import com.animbus.music.ui.activity.setup.SetupActivity;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.LoadedFuse;
 import com.animbus.music.util.Options;
-import com.animbus.music.util.SettingsManager;
 
 import static com.animbus.music.media.PlaybackRemote.LOCAL;
 
@@ -54,6 +53,10 @@ public class LaunchActivity extends ThemeActivity {
         return Options.usingTabs();
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Management for the setup activity
+    ///////////////////////////////////////////////////////////////////////////
+
     public void requestPermissions() {
         if (Build.VERSION.SDK_INT >= 23 && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
             startActivityForResult(new Intent(this, SetupActivity.class), SETUP_REQ_CODE);
@@ -65,12 +68,8 @@ public class LaunchActivity extends ThemeActivity {
         if (requestCode == SETUP_REQ_CODE) recreate();
     }
 
-
     private void setContexts() {
         if (!LoadedFuse.isActivated()) {
-            //Sets Contexts
-            SettingsManager.setContext(this);
-
             Options.init(this);
             Library.setContext(this);
 

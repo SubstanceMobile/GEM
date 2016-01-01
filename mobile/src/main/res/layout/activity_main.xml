@@ -16,7 +16,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <android.support.design.widget.AppBarLayout
                 android:id="@+id/appbar"
@@ -29,24 +30,28 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/abc_action_bar_default_height_material"
-                    app:title="@string/title_activity_main" />
+                    app:title="@string/title_activity_main"
+                    app:navigationIcon="@drawable/ic_menu_24dp" />
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/main_tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabGravity="fill"
+                    android:paddingStart="@dimen/tab_scrollable_padding"
+                    android:clipToPadding="false"
+                    app:tabGravity="center"
                     app:tabMode="scrollable" />
 
             </android.support.design.widget.AppBarLayout>
 
             <com.animbus.music.ui.custom.view.LockableViewPager
-                    android:id="@+id/main_view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="100" />
+                android:id="@+id/main_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="100" />
 
-            <include layout="@layout/current_song_toolbar"
+            <include
+                layout="@layout/current_song_toolbar"
                 android:maxWidth="288dp"
                 android:visibility="gone" />
         </LinearLayout>

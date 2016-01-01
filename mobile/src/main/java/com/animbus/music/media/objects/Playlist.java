@@ -1,5 +1,7 @@
 package com.animbus.music.media.objects;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
  * Created by Adrian on 7/5/2015.
  */
 public class Playlist {
+    Context cxt;
     List<Song> songs = new ArrayList<>();
     String name;
     long id;
@@ -37,6 +40,22 @@ public class Playlist {
 
     public List<Song> getSongs() {
         return songs;
+    }
+
+    public void addSong(Song s) {
+
+    }
+
+    public void removeSong(Song s) {
+
+    }
+
+    public void addAll(List<Song> songs) {
+        for (Song s : songs) addSong(s);
+    }
+
+    public void removeAll(List<Song> songs) {
+        for (Song s : songs) removeSong(s);
     }
 
     ///////////////////////////////////////////////////////////////////////////

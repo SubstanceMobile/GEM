@@ -227,7 +227,8 @@
         <!--Choose Icon screen-->
         <activity
             android:name=".ui.activity.settings.chooseIcon.ChooseIcon"
-            android:label="@string/title_activity_choose_icon" />
+            android:label="@string/title_activity_choose_icon"
+            android:parentActivityName=".ui.activity.settings.Settings"/>
 
         <!--Widget-->
         <receiver android:name=".ui.MusicPlaybackWidget">
@@ -254,7 +255,7 @@
             </intent-filter>
         </receiver>
 
-        <!--Shown when you tap an album in the home activity-->
+        <!--Shown when you tap an album anywhere in the app-->
         <activity
             android:name=".ui.activity.albumDetails.AlbumDetails"
             android:label="@string/title_activity_album_details" />
@@ -266,34 +267,25 @@
             android:launchMode="singleTop" />
 
         <!--Used to report issues to GitHub-->
-        <activity android:name=".ui.activity.issue.IssueReportingActivity"/>
+        <activity android:name=".ui.activity.issue.IssueReportingActivity" android:theme="@style/Theme.AppCompat.Light"/>
 
         <!--About Screen-->
         <activity
             android:name=".ui.activity.settings.About"
             android:label="@string/title_activity_about"
-            android:parentActivityName=".ui.activity.settings.Settings">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.settings.Settings" />
-        </activity>
+            android:parentActivityName=".ui.activity.settings.Settings" />
 
         <!--Search Screen-->
         <activity
             android:name=".ui.activity.search.SearchActivity"
             android:label="@string/title_activity_search"
-            android:launchMode="singleTop"
-            android:parentActivityName=".ui.activity.mainScreen.MainScreen">
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/search_config" />
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.mainScreen.MainScreen" />
         </activity>
 
         <!--Opens when you click on a playlist in the home activity-->

@@ -7,17 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
@@ -31,50 +26,16 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.android.vending.billing.IInAppBillingService;
-import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
-import com.animbus.music.util.SettingsManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//TODO: Switch to more supported settings fragments
 public class Settings extends ThemeActivity implements ColorChooserDialog.ColorCallback {
-    SwitchCompat
-            pageNamesSwitch,
-            paletteSwitch,
-            tabsSwitch,
-            scrollableTabsSwitch,
-            tabsIconsSwitch;
-    SettingsManager manager;
-    int clickedAmount = 0;
-
-    IInAppBillingService mService;
-    ServiceConnection mPlayConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mService = IInAppBillingService.Stub.asInterface(service);
-            Log.d("Donations", "CONNECTED");
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            mService = null;
-            Log.d("Donations", "DISCONNECTED");
-        }
-    };
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    @Override
-    protected void sequence() {
-        super.sequence();
-        setUpVersionNumberClicks();
-        loadSettings();
-    }
 
     @Override
     protected void init() {
@@ -83,8 +44,9 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
 
     @Override
     protected void setVariables() {
-        manager = SettingsManager.get();
+        //Everything is done either in ThemeActivity or ATE
 
+        //Temp
         pageNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
         paletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
         tabsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tabs_switch);
@@ -94,7 +56,50 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
 
     @Override
     protected void setUp() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Everything is done either in ThemeActivity or ATE
+
+        //Temp
+        loadSettings();
+    }
+
+    @Override
+    protected int getOptionsMenu() {
+        return R.menu.menu_settings;
+    }
+
+    @Override
+    protected boolean processMenuItem(int id) {
+        switch (id) {
+            case R.id.action_donate:
+                showDonation();
+                return true;
+        }
+        return super.processMenuItem(id);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mService != null) unbindService(mPlayConnection);
+        super.onDestroy();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Settings
+    ///////////////////////////////////////////////////////////////////////////
+
+    SwitchCompat
+            pageNamesSwitch,
+            paletteSwitch,
+            tabsSwitch,
+            scrollableTabsSwitch,
+            tabsIconsSwitch;
+
+    private void saveSettings() {
+        Options.setUseCategoryNames(pageNamesSwitch.isChecked());
+        Options.setUsePalette(paletteSwitch.isChecked());
+        Options.setUseTabs(tabsSwitch.isChecked());
+        Options.setUseScrollableTabs(scrollableTabsSwitch.isChecked());
+        Options.setUseIconTabs(tabsIconsSwitch.isChecked());
     }
 
     private void loadSettings() {
@@ -106,63 +111,14 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         settingChanged(null);
     }
 
-    private void setUpVersionNumberClicks() {
-        if (BuildConfig.BUILD_TYPE == "internal" || BuildConfig.BUILD_TYPE == "debug") {
-            try {
-                if (manager.getIntSetting(SettingsManager.KEY_INTERNAL_TESTER_REGISTERED, -500) == -500) {
-                    manager.setBooleanSetting(SettingsManager.KEY_INTERNAL_TESTER_REGISTERED, true);
-                }
-            } catch (ClassCastException ignored) {
-
-            }
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_settings, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_donate:
-                showDonation();
-                break;
-            case android.R.id.home:
-                onBackPressed();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mService != null) {
-            unbindService(mPlayConnection);
-        }
-        saveSettings();
-    }
-
-    private void saveSettings() {
-        Options.setUseCategoryNames(pageNamesSwitch.isChecked());
-        Options.setUsePalette(paletteSwitch.isChecked());
-        Options.setUseTabs(tabsSwitch.isChecked());
-        Options.setUseScrollableTabs(scrollableTabsSwitch.isChecked());
-        Options.setUseIconTabs(tabsIconsSwitch.isChecked());
-    }
-
     public void settingChanged(View v) {
         //This is where you add dependancies
-        manager.switchDependancy(tabsSwitch, true, pageNamesSwitch, false);
-        manager.switchDependancy(tabsSwitch, false, tabsIconsSwitch, false);
-        manager.doubleSwitchDependancy(tabsSwitch, tabsIconsSwitch, scrollableTabsSwitch, false, true, false);
+        Options.switchDependency(tabsSwitch, true, pageNamesSwitch, false);
+        Options.switchDependency(tabsSwitch, false, tabsIconsSwitch, false);
+        Options.doubleSwitchDependency(tabsSwitch, tabsIconsSwitch, scrollableTabsSwitch, false, true, false);
 
         //Saves the settings
-        saveSettings();
+        if (v != null) saveSettings();
     }
 
     public void openAbout(View v) {
@@ -173,10 +129,6 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         startActivity(new Intent(this, ChooseIcon.class));
     }
 
-    public void showComingSoon(View v) {
-        Snackbar.make(findViewById(R.id.root), getResources().getString(R.string.msg_coming_soon), Snackbar.LENGTH_LONG).show();
-    }
-
     public void showThemePicker(View v) {
         new MaterialDialog.Builder(this).title(R.string.settings_theme_title_choose)
                 .items(R.array.settings_theme_items_choose).itemsCallback(new MaterialDialog.ListCallback() {
@@ -185,16 +137,14 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
                 Options.setBaseTheme(i);
                 Options.setLightTheme(i == 2);
             }
-        }).theme(!Options.isLightTheme() ? Theme.DARK : Theme.LIGHT).dismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                Settings.this.recreate();
-            }
-        }).show();
-    }
-
-    public void showUiTweaker(View v) {
-        showComingSoon(null);
+        })
+                /*.theme(!Options.isLightTheme() ? Theme.DARK : Theme.LIGHT)*/
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        Settings.this.recreate();
+                    }
+                }).show();
     }
 
     public void showPrimaryColorDialog(View v) {
@@ -215,46 +165,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
 
     public void resetPrimaryColor(View v) {
         Options.setPrimaryColor(resolveColorAttr(android.R.attr.colorBackground));
-        recreate();
-    }
-
-    @Override
-    protected void setUpTheme() {
-        super.setUpTheme();
-        int colorForeground = resolveColorAttr(android.R.attr.colorForeground);
-        ColorStateList thumbStateListNoAccent = resolveColorStateListAttr(android.support.v7.appcompat.R.attr.colorSwitchThumbNormal);
-        ColorStateList trackStateList = new ColorStateList(new int[][]{
-                {-android.R.attr.state_enabled},
-                {android.R.attr.state_checked},
-                {}
-        }, new int[]{
-                ColorUtils.setAlphaComponent(colorForeground, Math.round(Color.alpha(colorForeground) * 0.1f)),
-                ColorUtils.setAlphaComponent(getAccentColor(), Math.round(Color.alpha(getAccentColor()) * 0.3f)),
-                ColorUtils.setAlphaComponent(colorForeground, Math.round(Color.alpha(colorForeground) * 0.3f))
-        }), thumbStateList = new ColorStateList(new int[][]{
-                {-android.R.attr.state_enabled},
-                {android.R.attr.state_checked},
-                {}
-        }, new int[]{
-                thumbStateListNoAccent.getColorForState(new int[]{-android.R.attr.state_enabled}, 0),
-                getAccentColor(),
-                thumbStateListNoAccent.getDefaultColor()
-        });
-
-        DrawableCompat.setTintList(DrawableCompat.wrap(pageNamesSwitch.getThumbDrawable()), thumbStateList);
-        DrawableCompat.setTintList(DrawableCompat.wrap(pageNamesSwitch.getTrackDrawable()), trackStateList);
-
-        DrawableCompat.setTintList(DrawableCompat.wrap(paletteSwitch.getThumbDrawable()), thumbStateList);
-        DrawableCompat.setTintList(DrawableCompat.wrap(paletteSwitch.getTrackDrawable()), trackStateList);
-
-        DrawableCompat.setTintList(DrawableCompat.wrap(tabsSwitch.getThumbDrawable()), thumbStateList);
-        DrawableCompat.setTintList(DrawableCompat.wrap(tabsSwitch.getTrackDrawable()), trackStateList);
-
-        DrawableCompat.setTintList(DrawableCompat.wrap(scrollableTabsSwitch.getThumbDrawable()), thumbStateList);
-        DrawableCompat.setTintList(DrawableCompat.wrap(scrollableTabsSwitch.getTrackDrawable()), trackStateList);
-
-        DrawableCompat.setTintList(DrawableCompat.wrap(tabsIconsSwitch.getThumbDrawable()), thumbStateList);
-        DrawableCompat.setTintList(DrawableCompat.wrap(tabsIconsSwitch.getTrackDrawable()), trackStateList);
+        invalidate();
     }
 
     @Override
@@ -264,10 +175,27 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         } else {
             Options.setAccentColor(i);
         }
-        recreate();
+        invalidate();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    // Donations
+    ///////////////////////////////////////////////////////////////////////////
+
+    IInAppBillingService mService;
+    ServiceConnection mPlayConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mService = IInAppBillingService.Stub.asInterface(service);
+            Log.d("Donations", "CONNECTED");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mService = null;
+            Log.d("Donations", "DISCONNECTED");
+        }
+    };
 
     public void showDonation() {
         new AlertDialog.Builder(this).setTitle(getResources().getString(R.string.settings_donate_disambiguation_title))
@@ -345,9 +273,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 3672) {
-            int responseCode = data.getIntExtra("RESPONSE_CODE", 0);
             String purchaseData = data.getStringExtra("INAPP_PURCHASE_DATA");
-            String dataSignature = data.getStringExtra("INAPP_DATA_SIGNATURE");
             if (resultCode == AppCompatActivity.RESULT_OK) {
                 try {
                     JSONObject jo = new JSONObject(purchaseData);
@@ -381,9 +307,6 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         } catch (IntentSender.SendIntentException e) {
             e.printStackTrace();
             Toast.makeText(this, "ERROR INTENT", Toast.LENGTH_SHORT).show();
-        }
-        if (buyIntentBundle == null) {
-            Toast.makeText(this, "ERROR NULL", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -35,7 +36,6 @@ import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
@@ -84,7 +84,7 @@ public class AlbumDetails extends ThemeActivity {
     @Override
     protected void setUpTheme() {
         super.setUpTheme();
-        setStatusBarColor(ColorUtil.getDarkerColor(mAlbum.getBackgroundColor()));
+        setStatusBarColor(Util.darkenColor(mAlbum.getBackgroundColor()));
     }
 
     private void configureRecyclerView() {
@@ -115,12 +115,12 @@ public class AlbumDetails extends ThemeActivity {
         mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
 
         findViewById(R.id.album_details_square_spacer)
-                .setBackground(ContextCompat.getDrawable(this, !ColorUtil.isLightColor(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
+                .setBackground(ContextCompat.getDrawable(this, !Util.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
 
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), mAlbum.getBackgroundColor()).getId()));
             setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.getBackgroundColor()));
             bm.recycle();
         }

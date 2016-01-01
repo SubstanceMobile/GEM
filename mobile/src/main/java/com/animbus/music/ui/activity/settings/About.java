@@ -32,8 +32,7 @@ public class About extends ThemeActivity {
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_code_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_version_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
         ((ImageView) findViewById(R.id.about_icon))
-                .setImageDrawable(getResources().getDrawable(IconManager.get().getDrawable(IconManager.get()
-                        .getOverviewIcon(IconManager.get().getIcon()).getId())));
+                .setImageDrawable(getResources().getDrawable(IconManager.get().getOverviewIcon(IconManager.get().getIcon(), getPrimaryColor()).getId()));
     }
 
     private void startUrl(String url) {

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.PreferenceManager;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 
 import com.animbus.music.R;
@@ -229,6 +230,40 @@ public class Options {
 
     public static boolean usingPalette() {
         return getBool(KEY_PALETTE);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Switch Dependencies
+    // TODO: Temporary
+    ///////////////////////////////////////////////////////////////////////////
+
+    /**
+     * This updates a dependency between two {@link SwitchCompat}s
+     *
+     * @param parentSwitch    The switch to get values from
+     * @param disableOn       What value the parent switch has to be on to disable the dependant switch. In other words: "Disable dependantSwitch on VALUE"
+     * @param dependantSwitch The switch to where the values are set to
+     * @param setValue        What value to set when disabled. In other words: "When disabled, dependentSwitch's value will be VALUE"
+     */
+    public static void switchDependency(SwitchCompat parentSwitch, Boolean disableOn, SwitchCompat dependantSwitch, Boolean setValue) {
+        dependantSwitch.setEnabled(!disableOn && parentSwitch.isChecked());
+        if (!dependantSwitch.isEnabled()) dependantSwitch.setChecked(setValue);
+    }
+
+    /**
+     * This updates a dependency between two {@link SwitchCompat}s
+     *
+     * @param switch1         A switch to get values from.
+     * @param switch2         A switch to get values from.
+     * @param dependantSwitch The switch to where the values are set to
+     * @param disableOn1      What value switch1 has to be on to disable the dependant switch. In other words: "Disable dependantSwitch on VALUE1")
+     * @param disableOn2      What value switch2 has to be on to disable the dependant switch. In other words: "Disable dependantSwitch on VALUE2")
+     * @param setTo           What value to set when disabled. In other words: "When disabled, dependentSwitch's value will be VALUE"
+     */
+    public static void doubleSwitchDependency(SwitchCompat switch1, SwitchCompat switch2, SwitchCompat dependantSwitch,
+                                       boolean disableOn1, boolean disableOn2, boolean setTo) {
+        dependantSwitch.setEnabled((!disableOn1 && switch1.isChecked()) && (!disableOn2 && switch2.isChecked()));
+        if (!dependantSwitch.isEnabled()) dependantSwitch.setChecked(setTo);
     }
 
 }

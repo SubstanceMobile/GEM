@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
@@ -28,7 +29,6 @@ import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.MusicControlsView;
 import com.animbus.music.ui.list.ListAdapter;
-import com.animbus.music.util.ColorUtil;
 import com.animbus.music.util.IconManager;
 
 public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChangedListener {
@@ -81,7 +81,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     @Override
     protected void setUpTheme() {
         super.setUpTheme();
-        setStatusBarColor(ColorUtil.getDarkerColor(mSong.getAlbum().getBackgroundColor()));
+        setStatusBarColor(Util.darkenColor(mSong.getAlbum().getBackgroundColor()));
     }
 
     private void configureRecyclerView() {
@@ -114,7 +114,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon()).getId()));
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), mSong.getAlbum().getAccentColor()).getId()));
             setTaskDescription(new ActivityManager.TaskDescription(mSong.getSongTitle(), bm, mSong.getAlbum().getAccentColor()));
             bm.recycle();
         }

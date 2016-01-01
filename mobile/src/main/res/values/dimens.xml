@@ -41,6 +41,8 @@
     <dimen name="choose_icon_height">116dp</dimen>
     <dimen name="choose_icon_bottom_margin">76dp</dimen>
 
+    <dimen name="tab_scrollable_padding">60dp</dimen>
+
     Widget
     <dimen name="widget_margin">8dp</dimen>
 </resources>

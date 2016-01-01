@@ -2,16 +2,13 @@ package com.animbus.music.ui.activity.mainScreen;
 
 import android.animation.Animator;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
@@ -23,7 +20,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -43,7 +40,6 @@ import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.LockableViewPager;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.util.Options;
-import com.animbus.music.util.SettingsManager;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 
@@ -51,10 +47,8 @@ import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 public class MainScreen extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener {
     View quickToolbar;
     String mScreenName;
-    SettingsManager settings;
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
-    Menu mNavMenu;
     LockableViewPager mPager;
     TabLayout mTabs;
 
@@ -65,7 +59,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     @Override
     protected void setVariables() {
-        settings = SettingsManager.get();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.navigation);
         quickToolbar = findViewById(R.id.main_screen_now_playing_toolbar);
@@ -75,11 +68,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     @Override
     protected void setUp() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Drawable menu = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_menu_24dp));
-        DrawableCompat.setTint(menu, getPrimaryTextColor(getPrimaryColor()));
-        getSupportActionBar().setHomeAsUpIndicator(menu);
         setUpNavdrawer();
         setUpTabs();
         mPager.setAdapter(new RecyclerPagerAdapter());
@@ -203,19 +191,26 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     private void setUpNavdrawer() {
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.inflateMenu(R.menu.navigation_drawer_items);
-        ColorStateList colorStateList = new ColorStateList(
-                new int[][]{
-                        {android.R.attr.state_checked}, //When selected
-                        {}
-                },
-                new int[]{
-                        getAccentColor(), //When selected
-                        getSecondaryTextColor()
+
+
+        PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
+            @Override
+            public void onStateChanged(PlaybackStateCompat newState) {
+                if (PlaybackRemote.isActive())
+                    mNavigationView.inflateHeaderView(R.layout.drawer_header);
+                else mNavigationView.removeHeaderView(mNavigationView.getHeaderView(0));
+            }
+        });
+
+        PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
+            @Override
+            public void onSongChanged(Song newSong) {
+                View header = mNavigationView.getHeaderView(0);
+                if (header != null) {
+                    //TODO: Configure drawer header here
                 }
-        );
-        mNavigationView.setItemIconTintList(colorStateList);
-        mNavigationView.setItemTextColor(colorStateList);
-        mNavMenu = mNavigationView.getMenu();
+            }
+        });
     }
 
     private void goToDefaultPage() {
@@ -223,44 +218,30 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     }
 
     private void setUpTabs() {
-        mTabs.setTabMode(Options.usingScrollableTabs() ? TabLayout.MODE_SCROLLABLE : TabLayout.MODE_FIXED);
-
+        //Skips everything if tabs are not being used
         if (!Options.usingTabs()) {
             mPager.lock();
             mTabs.setVisibility(View.GONE);
+            return;
         }
 
-        TabLayout.Tab songsTab, albumsTab, playlistsTab, artistsTab;
-        ColorStateList tabColors = new ColorStateList(new int[][]{
-                {android.R.attr.state_selected}, //When selected
-                {}
-        }, new int[]{
-                getPrimaryTextColor(getPrimaryColor()),
-                getSecondaryTextColor(getPrimaryColor())
-        });
+        //Makes tabs scrollable or fixed based on setting
+        mTabs.setTabMode(Options.usingScrollableTabs() ? TabLayout.MODE_SCROLLABLE : TabLayout.MODE_FIXED);
+        if (!Options.usingScrollableTabs()) mTabs.setPadding(0, 0, 0, 0);
 
+        //Configures and adds tabs
+        TabLayout.Tab songsTab, albumsTab, playlistsTab, artistsTab;
         if (!Options.usingIconTabs()) {
             songsTab = mTabs.newTab().setText(R.string.page_songs);
             albumsTab = mTabs.newTab().setText(R.string.page_albums);
             artistsTab = mTabs.newTab().setText(R.string.page_artists);
             playlistsTab = mTabs.newTab().setText(R.string.page_playlists);
         } else {
-            Drawable songs = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_audiotrack_24dp));
-            Drawable albums = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_album_24dp));
-            Drawable artists = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_artist_24dp));
-            Drawable playlists = DrawableCompat.wrap(getResources().getDrawable(R.drawable.ic_queue_music_black_24dp));
-
-            DrawableCompat.setTintList(songs, tabColors);
-            DrawableCompat.setTintList(albums, tabColors);
-            DrawableCompat.setTintList(artists, tabColors);
-            DrawableCompat.setTintList(playlists, tabColors);
-
-            songsTab = mTabs.newTab().setIcon(songs);
-            albumsTab = mTabs.newTab().setIcon(albums);
-            artistsTab = mTabs.newTab().setIcon(artists);
-            playlistsTab = mTabs.newTab().setIcon(playlists);
+            songsTab = mTabs.newTab().setIcon(R.drawable.ic_audiotrack_24dp);
+            albumsTab = mTabs.newTab().setIcon(R.drawable.ic_album_24dp);
+            artistsTab = mTabs.newTab().setIcon(R.drawable.ic_artist_24dp);
+            playlistsTab = mTabs.newTab().setIcon(R.drawable.ic_queue_music_black_24dp);
         }
-
         mTabs.addTab(songsTab);
         mTabs.addTab(albumsTab);
         mTabs.addTab(artistsTab);
@@ -269,8 +250,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         //Allows the tabs to sync to the view pager
         mTabs.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mPager));
         mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabs));
+    }
 
-        mTabs.setSelectedTabIndicatorColor(getPrimaryTextColor(getPrimaryColor()));
+    private void selectTab(int pos) {
+        TabLayout.Tab tab = mTabs.getTabAt(pos);
+        if (tab != null) tab.select();
     }
 
     @Override
@@ -279,46 +263,35 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected int getOptionsMenu() {
+        return R.menu.menu_main;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    protected boolean processMenuItem(int id) {
+        switch (id) {
             case R.id.action_settings:
                 startActivity(new Intent(this, Settings.class));
-                break;
+                return true;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
-                break;
+                return true;
             case R.id.action_search:
                 startActivity(new Intent(this, SearchActivity.class));
-                break;
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        return super.processMenuItem(id);
     }
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawers();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onSearchRequested() {
-        startActivity(new Intent(this, SearchActivity.class));
-        return true;
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) mDrawerLayout.closeDrawers();
+        else super.onBackPressed();
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        int id = menuItem.getItemId();
-        switch (id) {
+        switch (menuItem.getItemId()) {
             case R.id.navdrawer_songs:
                 switchToSongs();
                 break;
@@ -341,15 +314,12 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         return true;
     }
 
-    //This section is where you select which view to see. Only views with back arrows should be set as separate activities.
-    //Add code to this section as necessary (For example:If you need to update the list of songs in 'switchToSongs' you can add updateSongList(), or if you add a extra view add it to all sections
-
     public void switchToSongs() {
         mScreenName = getResources().getString(R.string.page_songs);
-        mNavMenu.findItem(R.id.navdrawer_songs).setChecked(true);
-        mTabs.getTabAt(0).select();
+        mNavigationView.setCheckedItem(R.id.navdrawer_songs);
+        selectTab(0);
         mPager.setCurrentItem(0);
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
+        if (Options.usingCategoryNames()) {
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }
@@ -359,10 +329,10 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     public void switchToAlbum() {
         mScreenName = getResources().getString(R.string.page_albums);
-        mNavMenu.findItem(R.id.navdrawer_album_icon).setChecked(true);
-        mTabs.getTabAt(1).select();
+        mNavigationView.setCheckedItem(R.id.navdrawer_album_icon);
+        selectTab(1);
         mPager.setCurrentItem(1);
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
+        if (Options.usingCategoryNames()) {
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }
@@ -373,10 +343,10 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     public void switchToArtists() {
         //Sets the current screen
         mScreenName = getResources().getString(R.string.page_artists);
-        mNavMenu.findItem(R.id.navdrawer_artists).setChecked(true);
-        mTabs.getTabAt(2).select();
+        mNavigationView.getMenu().findItem(R.id.navdrawer_artists).setChecked(true);
+        selectTab(2);
         mPager.setCurrentItem(2);
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
+        if (Options.usingCategoryNames()) {
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }
@@ -387,13 +357,14 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     public void switchToPlaylists() {
         //Sets the current screen
         mScreenName = getResources().getString(R.string.page_playlists);
-        mNavMenu.findItem(R.id.navdrawer_playlists).setChecked(true);
-        mTabs.getTabAt(3).select();
+        mNavigationView.getMenu().findItem(R.id.navdrawer_playlists).setChecked(true);
+        selectTab(3);
         mPager.setCurrentItem(3);
-        if (settings.getBooleanSetting(SettingsManager.KEY_USE_CATEGORY_NAMES_ON_MAIN_SCREEN, false)) {
+        if (Options.usingCategoryNames()) {
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }
+
         //Closes the Navdrawer
         mDrawerLayout.closeDrawers();
     }
@@ -460,12 +431,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
-        private void configureAsGenres(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.TYPE_GENRE, Library.getGenres(), MainScreen.this));
-            list.setItemAnimator(new DefaultItemAnimator());
-            list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
-        }
-
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             if (position != 2) {
@@ -474,6 +439,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 RecyclerFastScroller scroller = (RecyclerFastScroller) root.findViewById(R.id.main_screen_page_scroller);
                 configureRecycler(list, scroller, position);
                 container.addView(root, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                ATE.apply(root, getATEKey());
                 return root;
             } else {
                 TextView text = new TextView(MainScreen.this);
