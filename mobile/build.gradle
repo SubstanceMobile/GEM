@@ -60,6 +60,6 @@ dependencies {
     compile 'com.github.afollestad.material-dialogs:core:0.8.5.3'
     compile 'com.github.afollestad.material-dialogs:commons:0.8.5.3'
     compile 'com.android.support:preference-v7:23.1.1'
-    compile 'com.github.afollestad:app-theme-engine:0.5.1'
+    compile 'com.github.afollestad:app-theme-engine:0.6.0'
     compile 'com.github.afollestad:sectioned-recyclerview:0.1.0'
 }

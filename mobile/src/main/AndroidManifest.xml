@@ -267,7 +267,7 @@
             android:launchMode="singleTop" />
 
         <!--Used to report issues to GitHub-->
-        <activity android:name=".ui.activity.issue.IssueReportingActivity" android:theme="@style/Theme.AppCompat.Light"/>
+        <activity android:name=".ui.activity.issue.IssueReportingActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <!--About Screen-->
         <activity

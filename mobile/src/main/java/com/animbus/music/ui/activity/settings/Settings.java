@@ -7,32 +7,34 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.appthemeengine.ATE;
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.appthemeengine.Config;
+import com.afollestad.appthemeengine.prefs.ATEColorPreference;
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.android.vending.billing.IInAppBillingService;
 import com.animbus.music.R;
-import com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//TODO: Switch to more supported settings fragments
 public class Settings extends ThemeActivity implements ColorChooserDialog.ColorCallback {
 
     @Override
@@ -43,21 +45,11 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     @Override
     protected void setVariables() {
         //Everything is done either in ThemeActivity or ATE
-
-        //Temp
-        pageNamesSwitch = (SwitchCompat) findViewById(R.id.settings_old_page_names_switch);
-        paletteSwitch = (SwitchCompat) findViewById(R.id.settings_old_palette_switch);
-        tabsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tabs_switch);
-        scrollableTabsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tab_scrollable_switch);
-        tabsIconsSwitch = (SwitchCompat) findViewById(R.id.settings_old_tabs_icons);
     }
 
     @Override
     protected void setUp() {
-        //Everything is done either in ThemeActivity or ATE
-
-        //Temp
-        loadSettings();
+        getFragmentManager().beginTransaction().replace(R.id.prefs, new PrefsFragment()).commit();
     }
 
     @Override
@@ -68,11 +60,9 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     @Override
     protected boolean processMenuItem(int id) {
         switch (id) {
-            case R.id.action_donate:
-                showDonation();
-                return true;
             case R.id.action_reset:
-                Options.resetPrefs();
+                Snackbar.make(mRoot, R.string.msg_coming_soon, Snackbar.LENGTH_SHORT).show();
+                /*Options.resetPrefs();*/
                 return true;
         }
         return super.processMenuItem(id);
@@ -88,107 +78,107 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     // Settings
     ///////////////////////////////////////////////////////////////////////////
 
-    SwitchCompat
-            pageNamesSwitch,
-            paletteSwitch,
-            tabsSwitch,
-            scrollableTabsSwitch,
-            tabsIconsSwitch;
-
-    private void saveSettings() {
-        Options.setUseCategoryNames(pageNamesSwitch.isChecked());
-        Options.setUsePalette(paletteSwitch.isChecked());
-        Options.setUseTabs(tabsSwitch.isChecked());
-        Options.setUseScrollableTabs(scrollableTabsSwitch.isChecked());
-        Options.setUseIconTabs(tabsIconsSwitch.isChecked());
-    }
-
-    private void loadSettings() {
-        pageNamesSwitch.setChecked(Options.usingCategoryNames());
-        paletteSwitch.setChecked(Options.usingPalette());
-        tabsSwitch.setChecked(Options.usingTabs());
-        scrollableTabsSwitch.setChecked(Options.usingScrollableTabs());
-        tabsIconsSwitch.setChecked(Options.usingIconTabs());
-        settingChanged(null);
-    }
-
-    public void settingChanged(View v) {
-        //This is where you add dependancies
-        Options.switchDependency(tabsSwitch, true, pageNamesSwitch, false);
-        Options.switchDependency(tabsSwitch, false, tabsIconsSwitch, false);
-        Options.doubleSwitchDependency(tabsSwitch, tabsIconsSwitch, scrollableTabsSwitch, false, true, false);
-
-        //Saves the settings
-        if (v != null) saveSettings();
-    }
-
-    public void openAbout(View v) {
-        startActivity(new Intent(this, About.class));
-    }
-
-    public void openIconSelector(View v) {
-        startActivity(new Intent(this, ChooseIcon.class));
-    }
-
-    public void showThemePicker(View v) {
-        new MaterialDialog.Builder(this).title(R.string.settings_theme_title_choose)
-                .items(R.array.settings_theme_items_choose).itemsCallback(new MaterialDialog.ListCallback() {
-            @Override
-            public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
-                ATE.config(Settings.this, getATEKey()).activityTheme(getStyleFromPos(i)).apply(Settings.this);
-                Options.setLightTheme(i == 2);
-            }
-        })
-                /*.theme(!Options.isLightTheme() ? Theme.DARK : Theme.LIGHT)*/
-                .dismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        Settings.this.recreate();
-                    }
-                }).show();
-    }
-
-    private int getStyleFromPos(int pos) {
-        switch (pos) {
-            case 0:
-                return R.style.AppTheme;
-            case 1:
-                return R.style.AppTheme_Faithful;
-            case 2:
-                return R.style.AppTheme_Light;
-        }
-        return 0;
-    }
-
-    public void showPrimaryColorDialog(View v) {
-        new ColorChooserDialog.Builder(this, R.string.title_color_chooser_primary)
-                .accentMode(false)
-                .preselect(getPrimaryColor())
-                .allowUserColorInputAlpha(false)
-                .show();
-    }
-
-    public void showAccentColorDialog(View v) {
-        new ColorChooserDialog.Builder(this, R.string.title_color_chooser_accent)
-                .accentMode(true)
-                .preselect(getAccentColor())
-                .allowUserColorInputAlpha(false)
-                .show();
-    }
-
-    public void resetPrimaryColor(View v) {
-        ATE.config(this, getATEKey()).accentColor(resolveColorAttr(android.R.attr.colorBackground)).apply(this);
-        invalidate();
-    }
-
     @Override
     public void onColorSelection(@NonNull ColorChooserDialog colorChooserDialog, @ColorInt int i) {
-        if (!colorChooserDialog.isAccentMode()) {
+        if (!colorChooserDialog.isAccentMode())
             ATE.config(this, getATEKey()).primaryColor(i).apply(this);
-        } else {
+        else
             ATE.config(this, getATEKey()).accentColor(i).apply(this);
+        ((PrefsFragment) getFragmentManager().findFragmentById(R.id.prefs)).configure();
+        recreate();
+    }
+
+    public static class PrefsFragment extends PreferenceFragment {
+
+        public PrefsFragment() {
+
         }
-        invalidate();
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preferences);
+        }
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            configure();
+        }
+
+        public void configure() {
+            findPreference("base_theme").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    ATE.config(getActivity(), ((Settings) getActivity()).getATEKey())
+                            .activityTheme(getStyleFromPos(Integer.parseInt((String) newValue))).commit();
+                    Options.setLightTheme(Integer.parseInt((String) newValue) == 2);
+                    getActivity().recreate();
+                    return true;
+                }
+            });
+
+            final ATEColorPreference primaryColor = (ATEColorPreference) findPreference("primary");
+            final int primary = Config.primaryColor(getActivity(), ((Settings) getActivity()).getATEKey());
+            primaryColor.setColor(primary, Color.BLACK);
+            primaryColor.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new ColorChooserDialog.Builder((Settings) getActivity(), R.string.settings_primary)
+                            .accentMode(false)
+                            .preselect(primary)
+                            .allowUserColorInputAlpha(false)
+                            .show();
+                    return true;
+                }
+            });
+
+            ATEColorPreference accentColor = (ATEColorPreference) findPreference("accent");
+            final int accent = Config.accentColor(getActivity(), ((Settings) getActivity()).getATEKey());
+            accentColor.setColor(accent, Color.BLACK);
+            accentColor.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    new ColorChooserDialog.Builder((Settings) getActivity(), R.string.settings_accent)
+                            .accentMode(true)
+                            .preselect(accent)
+                            .allowUserColorInputAlpha(false)
+                            .show();
+                    return true;
+                }
+            });
+
+            findPreference("reset_primary").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    ATE.config(getActivity(), ((Settings) getActivity()).getATEKey())
+                            .primaryColor(((Settings) getActivity()).resolveColorAttr(android.R.attr.colorBackground))
+                            .commit();
+                    getActivity().recreate();
+                    return true;
+                }
+            });
+
+            findPreference("donate").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    ((Settings) getActivity()).showDonation();
+                    return true;
+                }
+            });
+        }
+
+        private int getStyleFromPos(int pos) {
+            switch (pos) {
+                case 0:
+                    return R.style.AppTheme_Dark;
+                case 1:
+                    return R.style.AppTheme_Faithful;
+                case 2:
+                    return R.style.AppTheme_Light;
+            }
+            return 0;
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////

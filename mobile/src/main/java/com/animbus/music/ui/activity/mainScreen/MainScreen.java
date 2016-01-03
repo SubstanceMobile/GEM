@@ -1,6 +1,7 @@
 package com.animbus.music.ui.activity.mainScreen;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -243,9 +244,12 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabs));
     }
 
+    @SuppressWarnings("ConstantConditions")
     private void selectTab(int pos) {
-        TabLayout.Tab tab = mTabs.getTabAt(pos);
-        if (tab != null) tab.select();
+        try {
+            mTabs.getTabAt(pos).select();
+        } catch (NullPointerException | IndexOutOfBoundsException ignored) {}
+
     }
 
     @Override
@@ -272,6 +276,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 return true;
         }
         return super.processMenuItem(id);
+    }
+
+    @Override
+    protected boolean overrideUpBehavior() {
+        return true;
     }
 
     @Override

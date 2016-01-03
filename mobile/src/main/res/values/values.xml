@@ -23,12 +23,9 @@
 
 
     <!--Styles-->
-    <style name="AppTheme" parent="Base" />
-    <style name="AppTheme.LightActionBar" parent="Base.LightActionBar" />
+    <style name="AppTheme.Dark" parent="Base" />
     <style name="AppTheme.Faithful" parent="Base.Faithful" />
-    <style name="AppTheme.Faithful.LightActionBar" parent="Base.Faithful.LightActionBar" />
     <style name="AppTheme.Light" parent="Base.Light" />
-    <style name="AppTheme.Light.DarkActionBar" parent="Base.Light.DarkActionBar" />
 
     <!--Base Styles-->
     <style name="Base" parent="Theme.AppCompat.NoActionBar">

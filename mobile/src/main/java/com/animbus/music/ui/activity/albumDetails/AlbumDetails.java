@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -29,6 +31,8 @@ import android.widget.TextView;
 
 import com.afollestad.appthemeengine.Config;
 import com.afollestad.appthemeengine.customizers.ATEStatusBarCustomizer;
+import com.afollestad.appthemeengine.customizers.ATETaskDescriptionCustomizer;
+import com.afollestad.appthemeengine.customizers.ATEToolbarCustomizer;
 import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
@@ -41,13 +45,19 @@ import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
-public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer {
+public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer, ATEToolbarCustomizer, ATETaskDescriptionCustomizer {
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     FloatingActionButton mFAB;
     Album mAlbum;
     TextView mTitle, mArtist;
     LinearLayout mDetailsRoot;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected void init() {
@@ -59,24 +69,22 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         ViewCompat.setTransitionName(findViewById(R.id.album_details_album_art), "art");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_info_toolbar), "info");
         ViewCompat.setTransitionName(findViewById(R.id.toolbar), "appbar");
-        ViewCompat.setTransitionName(findViewById(R.id.album_details_toolbar_text_protection), "appbar_text_protextion");
         ViewCompat.setTransitionName(findViewById(R.id.album_details_recycler), "list");
     }
 
     @Override
     protected void setVariables() {
-        mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         mList = (RecyclerView) findViewById(R.id.album_details_recycler);
         mFAB = (FloatingActionButton) findViewById(R.id.album_details_fab);
         mDetailsRoot = (LinearLayout) findViewById(R.id.album_details_info_toolbar);
         mTitle = (TextView) findViewById(R.id.album_details_info_toolbar_title);
         mArtist = (TextView) findViewById(R.id.album_details_info_toolbar_artist);
+        setTitle(mAlbum.getAlbumTitle());
     }
 
     @Override
     protected void setUp() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
         configureFab();
         configureRecyclerView();
@@ -90,7 +98,28 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
 
     @Override
     public int getLightStatusBarMode() {
-        return Config.lightStatusBarMode(this, getATEKey());
+        return Util.isColorLight(mAlbum.getBackgroundColor()) ? Config.LIGHT_STATUS_BAR_ON : Config.LIGHT_STATUS_BAR_OFF;
+    }
+
+    @Override
+    public int getToolbarColor() {
+        return mAlbum.getBackgroundColor();
+    }
+
+    @Override
+    public int getLightToolbarMode() {
+        return Util.isColorLight(mAlbum.getBackgroundColor()) ? Config.LIGHT_TOOLBAR_ON : Config.LIGHT_TOOLBAR_OFF;
+    }
+
+    @Override
+    public int getTaskDescriptionColor() {
+        return mAlbum.getBackgroundColor();
+    }
+
+    @Nullable
+    @Override
+    public Bitmap getTaskDescriptionIcon() {
+        return null;
     }
 
     private void configureRecyclerView() {
@@ -118,18 +147,9 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         mDetailsRoot.setBackgroundColor(mAlbum.getBackgroundColor());
         mTitle.setTextColor(mAlbum.getTitleTextColor());
         mArtist.setTextColor(mAlbum.getSubtitleTextColor());
-        mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
 
-        findViewById(R.id.album_details_square_spacer)
+        findViewById(R.id.ripple)
                 .setBackground(ContextCompat.getDrawable(this, !Util.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
-
-        //Sets Window description in Multitasking menu
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            IconManager iconM = IconManager.get().setContext(this);
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), mAlbum.getBackgroundColor()).getId()));
-            setTaskDescription(new ActivityManager.TaskDescription(mAlbum.getAlbumTitle(), bm, mAlbum.getBackgroundColor()));
-            bm.recycle();
-        }
     }
 
     private void configureUI() {
@@ -144,7 +164,6 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                 new Pair<View, String>(findViewById(R.id.album_details_transition_reveal_part), "controls"),
                 new Pair<View, String>(findViewById(R.id.toolbar), "appbar"),
-                new Pair<View, String>(findViewById(R.id.album_details_toolbar_text_protection), "appbar_text_protection"),
                 new Pair<View, String>(findViewById(R.id.album_details_album_art), "art")
 
         );

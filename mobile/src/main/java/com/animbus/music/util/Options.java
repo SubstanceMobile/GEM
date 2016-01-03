@@ -5,15 +5,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
+import android.os.SystemClock;
 import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 
-import com.animbus.music.R;
-import com.animbus.music.ui.activity.splash.LaunchActivity;
 import com.animbus.music.ui.activity.settings.chooseIcon.Icon;
+import com.animbus.music.ui.activity.splash.LaunchActivity;
 
 /**
  * Created by Adrian on 11/20/2015
@@ -28,14 +25,12 @@ public class Options {
     private static final String
             KEY_FIRST_RUN = base + ".FIRST_RUN",
             KEY_ICON = base + ".ICON",
-            KEY_USE_TABS = base + ".ui.tabs.ENABLED",
-            KEY_TABS_ICONS = base + ".ui.tabs.ICONS",
-            KEY_TABS_SCROLLABLE = base + "ui.tabs.SCROLLABLE",
-            KEY_CATEGORY_NAMES = base + "ui.CATEGORY_NAMES",
-            KEY_PALETTE = base + "ui.PALETTE";
-
-    private static final String
+            KEY_TABS_MODE = "tab_mode",
+            KEY_CATEGORY_NAMES = "screen_name",
+            KEY_PALETTE = "use_palette",
             KEY_LIGHT_THEME = base + ".theme.IS_LIGHT";
+
+    private static volatile long updatedAt;
 
     private Options() {
 
@@ -44,6 +39,16 @@ public class Options {
     public static void init(Context context) {
         Options.context = context;
         Options.prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                updatedAt = System.currentTimeMillis();
+            }
+        });
+    }
+
+    public static boolean shouldRecreate(long updateTime) {
+        return updatedAt > updateTime;
     }
 
     /**
@@ -54,9 +59,6 @@ public class Options {
                 .putBoolean(KEY_FIRST_RUN, true)
                 .putInt(KEY_ICON, new Icon(IconManager.DESIGNER_SRINI, IconManager.COLOR_BLACK).getId())
                 .putBoolean(KEY_LIGHT_THEME, false)
-                .putBoolean(KEY_USE_TABS, false)
-                .putBoolean(KEY_TABS_ICONS, false)
-                .putBoolean(KEY_TABS_SCROLLABLE, false)
                 .putBoolean(KEY_CATEGORY_NAMES, false)
                 .putBoolean(KEY_PALETTE, true)
                 .apply();
@@ -88,12 +90,20 @@ public class Options {
         prefs.edit().putInt(key, value).apply();
     }
 
+    public static void set(String key, String value) {
+        prefs.edit().putString(key, value).apply();
+    }
+
     public static boolean getBool(String key) {
         return prefs.getBoolean(key, false);
     }
 
     public static int getInt(String key) {
         return prefs.getInt(key, 0);
+    }
+
+    public static String getString(String key) {
+        return prefs.getString(key, "");
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -136,44 +146,37 @@ public class Options {
         return getBool(KEY_LIGHT_THEME);
     }
 
-    //////////////
-    // Use Tabs //
-    //////////////
+    //////////
+    // Tabs //
+    //////////
 
-    public static void setUseTabs(boolean useTabs) {
-        set(KEY_USE_TABS, useTabs);
+    public static void setTabMode(String mode) {
+        set(KEY_TABS_MODE, mode);
     }
 
     public static boolean usingTabs() {
-        return getBool(KEY_USE_TABS);
-    }
-
-
-    ///////////////////
-    // Use Icon Tabs //
-    ///////////////////
-
-    public static void setUseIconTabs(boolean useIconTabs) {
-        set(KEY_TABS_ICONS, useIconTabs);
+        try {
+            return Integer.parseInt(getString(KEY_TABS_MODE)) != 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static boolean usingIconTabs() {
-        return getBool(KEY_TABS_ICONS);
-    }
-
-
-    /////////////////////
-    // Scrollable Tabs //
-    /////////////////////
-
-    public static void setUseScrollableTabs(boolean useScrollableTabs) {
-        set(KEY_TABS_SCROLLABLE, useScrollableTabs);
+        try {
+            return Integer.parseInt(getString(KEY_TABS_MODE)) == 2;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static boolean usingScrollableTabs() {
-        return getBool(KEY_TABS_SCROLLABLE);
+        try {
+            return Integer.parseInt(getString(KEY_TABS_MODE)) == 3;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
-
 
     ////////////////////
     // Category Names //
@@ -198,40 +201,6 @@ public class Options {
 
     public static boolean usingPalette() {
         return getBool(KEY_PALETTE);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Switch Dependencies
-    // TODO: Temporary
-    ///////////////////////////////////////////////////////////////////////////
-
-    /**
-     * This updates a dependency between two {@link SwitchCompat}s
-     *
-     * @param parentSwitch    The switch to get values from
-     * @param disableOn       What value the parent switch has to be on to disable the dependant switch. In other words: "Disable dependantSwitch on VALUE"
-     * @param dependantSwitch The switch to where the values are set to
-     * @param setValue        What value to set when disabled. In other words: "When disabled, dependentSwitch's value will be VALUE"
-     */
-    public static void switchDependency(SwitchCompat parentSwitch, Boolean disableOn, SwitchCompat dependantSwitch, Boolean setValue) {
-        dependantSwitch.setEnabled(!disableOn && parentSwitch.isChecked());
-        if (!dependantSwitch.isEnabled()) dependantSwitch.setChecked(setValue);
-    }
-
-    /**
-     * This updates a dependency between two {@link SwitchCompat}s
-     *
-     * @param switch1         A switch to get values from.
-     * @param switch2         A switch to get values from.
-     * @param dependantSwitch The switch to where the values are set to
-     * @param disableOn1      What value switch1 has to be on to disable the dependant switch. In other words: "Disable dependantSwitch on VALUE1")
-     * @param disableOn2      What value switch2 has to be on to disable the dependant switch. In other words: "Disable dependantSwitch on VALUE2")
-     * @param setTo           What value to set when disabled. In other words: "When disabled, dependentSwitch's value will be VALUE"
-     */
-    public static void doubleSwitchDependency(SwitchCompat switch1, SwitchCompat switch2, SwitchCompat dependantSwitch,
-                                       boolean disableOn1, boolean disableOn2, boolean setTo) {
-        dependantSwitch.setEnabled((!disableOn1 && switch1.isChecked()) && (!disableOn2 && switch2.isChecked()));
-        if (!dependantSwitch.isEnabled()) dependantSwitch.setChecked(setTo);
     }
 
 }

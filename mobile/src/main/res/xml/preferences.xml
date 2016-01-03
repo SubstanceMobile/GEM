@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_header_general">
+        <com.afollestad.appthemeengine.prefs.ATECheckBoxPreference
+            android:defaultValue="true"
+            android:key="use_palette"
+            android:persistent="true"
+            android:summary="@string/settings_palette_summary"
+            android:title="@string/settings_palette" />
+        <Preference
+            android:summary="@string/settings_choose_icon_summary"
+            android:title="@string/settings_choose_icon">
+            <intent
+                android:targetClass="com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon"
+                android:targetPackage="com.animbus.music" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_header_theme">
+        <com.afollestad.appthemeengine.prefs.ATEListPreference
+            android:entries="@array/settings_theme_items"
+            android:entryValues="@array/settings_theme_values"
+            android:key="base_theme"
+            android:persistent="true"
+            android:summary="%s"
+            android:title="@string/settings_select_base_theme" />
+        <com.afollestad.appthemeengine.prefs.ATEColorPreference
+            android:key="primary"
+            android:persistent="false"
+            android:summary="@string/settings_primary_summary"
+            android:title="@string/settings_primary" />
+        <com.afollestad.appthemeengine.prefs.ATEColorPreference
+            android:key="accent"
+            android:persistent="false"
+            android:summary="@string/settings_accent_summary"
+            android:title="@string/settings_accent" />
+        <Preference
+            android:key="reset_primary"
+            android:title="@string/settings_reset_primary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_header_main_screen">
+        <com.animbus.music.ui.activity.settings.DependencyListPreference
+            android:defaultValue="0"
+            android:entries="@array/settings_tab_mode_choices"
+            android:entryValues="@array/settings_tab_mode_values"
+            android:key="tab_mode"
+            android:persistent="true"
+            android:summary="%s"
+            android:title="@string/settings_tab_mode" />
+        <com.afollestad.appthemeengine.prefs.ATECheckBoxPreference
+            android:dependency="tab_mode"
+            android:key="screen_name"
+            android:persistent="true"
+            android:summary="@string/settings_page_names_summary"
+            android:title="@string/settings_page_names" />
+        <com.afollestad.appthemeengine.prefs.ATECheckBoxPreference
+            android:key="big_grid_space"
+            android:persistent="true"
+            android:summary="@string/settings_bigger_space_summary"
+            android:title="@string/settings_bigger_space" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_header_other">
+        <Preference android:title="@string/action_donate"
+            android:key="donate" />
+        <Preference android:title="@string/settings_header_about">
+            <intent
+                android:targetClass="com.animbus.music.ui.activity.settings.About"
+                android:targetPackage="com.animbus.music" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

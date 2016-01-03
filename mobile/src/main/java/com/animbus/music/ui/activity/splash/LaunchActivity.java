@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 
+import com.afollestad.appthemeengine.ATE;
+import com.afollestad.appthemeengine.Config;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -77,8 +79,23 @@ public class LaunchActivity extends ThemeActivity {
             PlaybackRemote.setUp(this);
             PlaybackRemote.inject(LOCAL);
 
+            //Sets up theme engine
+            configThemeIfNeeded();
+
             //Notifies app that it has activated
             LoadedFuse.trip();
+        }
+    }
+
+    private void configThemeIfNeeded() {
+        if (ATE.config(this, getATEKey()).isConfigured()) {
+            ATE.config(this, getATEKey())
+                    .activityTheme(R.style.AppTheme_Faithful)
+                    .coloredActionBar(true)
+                    .autoGeneratePrimaryDark(true)
+                    .coloredStatusBar(true)
+                    .lightStatusBarMode(Config.LIGHT_STATUS_BAR_AUTO)
+                    .lightToolbarMode(Config.LIGHT_TOOLBAR_AUTO);
         }
     }
 

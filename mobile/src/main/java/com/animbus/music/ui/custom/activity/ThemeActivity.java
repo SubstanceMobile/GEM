@@ -16,13 +16,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.ATEActivity;
 import com.afollestad.appthemeengine.Config;
-import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.util.IconManager;
@@ -36,10 +33,19 @@ public abstract class ThemeActivity extends ATEActivity {
     public AppBarLayout mAppBar;
     public CoordinatorLayout mRoot;
 
+    private long updateTime = -1L;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        updateTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         sequence();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        applySettings();
     }
 
     @Override
@@ -83,7 +89,8 @@ public abstract class ThemeActivity extends ATEActivity {
 
     protected void setUpTheme() {
         //Removes shadow if the color matches background
-        if (getPrimaryColor() == resolveColorAttr(android.R.attr.colorBackground) && !shouldKeepAppBarShadow()) ViewCompat.setElevation(mAppBar, 0.0f);
+        if (getPrimaryColor() == resolveColorAttr(android.R.attr.colorBackground) && !shouldKeepAppBarShadow())
+            ViewCompat.setElevation(mAppBar, 0.0f);
 
         //Changes background color of the root view
         themeBackground();
@@ -160,11 +167,17 @@ public abstract class ThemeActivity extends ATEActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                supportFinishAfterTransition();
-                return true;
+                if (!overrideUpBehavior()) {
+                    supportFinishAfterTransition();
+                    return true;
+                }
             default:
                 return processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
         }
+    }
+
+    protected boolean overrideUpBehavior() {
+        return false;
     }
 
     protected boolean processMenuItem(int id) {
@@ -195,4 +208,14 @@ public abstract class ThemeActivity extends ATEActivity {
         startActivity(new Intent(this, SearchActivity.class));
         return true;
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Recreates the activity if necessary
+    ///////////////////////////////////////////////////////////////////////////
+
+    private void applySettings() {
+        long oldUpdateTime = updateTime;
+        if (Options.shouldRecreate(oldUpdateTime)) recreate();
+    }
+
 }
