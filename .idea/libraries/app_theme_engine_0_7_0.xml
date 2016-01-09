@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="app-theme-engine-0.7.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/0.7.0/res" />
+      <root url="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/0.7.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

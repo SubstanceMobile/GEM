@@ -14,6 +14,12 @@ import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
 
 public class About extends ThemeActivity {
+
+    private static final String SOURCE = "https://github.com/Substance-Project/GEM";
+
+    //DO NOT edit this variable. If you do, you will be reported
+    private static final String BASE_SOURCE = "https://github.com/Substance-Project/GEM";
+
     @Override
     protected void init() {
         setContentView(R.layout.activity_about);
@@ -29,11 +35,13 @@ public class About extends ThemeActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((TextView) findViewById(R.id.about_version_text_view)).setText(BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")");
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_code_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
+        DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_code_og_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_version_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
         ((ImageView) findViewById(R.id.about_icon)).setImageResource(
                 Options.isLightTheme() ?
                         R.mipmap.ic_launcher_srini_black :
                         R.mipmap.ic_launcher_srini_white);
+        findViewById(R.id.origional_source_item).setVisibility(!SOURCE.equals(BASE_SOURCE) ? View.VISIBLE : View.GONE);
     }
 
     private void startUrl(String url) {
@@ -41,11 +49,16 @@ public class About extends ThemeActivity {
     }
 
     ///////////////////////////////////////////////////////////////////////////
+
     // Libraries
     ///////////////////////////////////////////////////////////////////////////
 
     public void openSourceCode(View v) {
-        startUrl("https://github.com/Substance-Project/GEM");
+        startUrl(SOURCE);
+    }
+
+    public void openBaseSource(View v) {
+        startUrl(BASE_SOURCE);
     }
 
     public void openAppCompat(View v) {

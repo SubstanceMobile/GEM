@@ -108,6 +108,7 @@
 
     <string name="settings_header_about">About</string>
     <string name="settings_source_code">Source Code</string>
+    <string name="settings_source_base_code">Original Code</string>
 
     Choose Icon
     <string name="settings_choose_icon_srini">Srini Kumar</string>

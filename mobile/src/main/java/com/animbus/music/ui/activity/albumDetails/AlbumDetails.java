@@ -21,6 +21,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,12 +103,12 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     }
 
     @Override
-    public int getToolbarColor() {
+    public int getToolbarColor(@Nullable Toolbar toolbar) {
         return mAlbum.getBackgroundColor();
     }
 
     @Override
-    public int getLightToolbarMode() {
+    public int getLightToolbarMode(@Nullable Toolbar toolbar) {
         return Util.isColorLight(mAlbum.getBackgroundColor()) ? Config.LIGHT_TOOLBAR_ON : Config.LIGHT_TOOLBAR_OFF;
     }
 
@@ -277,26 +278,22 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_album_details, menu);
-        return true;
+    protected int getOptionsMenu() {
+        return R.menu.menu_album_details;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
+    protected boolean processMenuItem(int id) {
+        switch (id) {
             case R.id.action_settings:
                 startActivity(new Intent(this, Settings.class));
-                break;
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        return super.processMenuItem(id);
     }
 
     @Override
-    public void onBackPressed() {
+    public void supportFinishAfterTransition() {
         mFAB.setAlpha(1.0f);
         mFAB.setScaleX(1.0f);
         mFAB.setScaleY(1.0f);
@@ -309,7 +306,7 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                AlbumDetails.super.onBackPressed();
+                AlbumDetails.super.supportFinishAfterTransition();
             }
 
             @Override

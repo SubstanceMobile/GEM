@@ -11,15 +11,14 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appbar"
-        android:theme="?attr/actionBarTheme"
-        app:popupTheme="?attr/actionBarPopupTheme">
+        android:id="@+id/appbar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
+            app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     </android.support.design.widget.AppBarLayout>
 

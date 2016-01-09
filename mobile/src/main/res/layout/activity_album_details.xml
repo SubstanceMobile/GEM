@@ -5,26 +5,22 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".ui.activity.albumDetails.AlbumDetails">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed" >
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
                 android:orientation="vertical">
 
                 <FrameLayout
@@ -35,16 +31,13 @@
                         android:id="@+id/album_details_album_art"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fitsSystemWindows="false"
-                        app:layout_collapseMode="parallax"
-                        android:foreground="?ripple"
-                        android:clickable="true" />
+                        app:layout_collapseMode="parallax" />
 
                     <FrameLayout
+                        android:id="@+id/ripple"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:clickable="true"
-                        android:id="@+id/ripple" />
+                        android:clickable="true" />
 
                 </FrameLayout>
 
@@ -58,7 +51,6 @@
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary"
                         android:baselineAligned="false"
-                        android:fitsSystemWindows="true"
                         android:orientation="horizontal"
                         app:layout_collapseMode="none">
 
@@ -101,9 +93,9 @@
                     </LinearLayout>
 
                     <FrameLayout
+                        android:id="@+id/album_details_transition_reveal_part"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/album_details_transition_reveal_part" />
+                        android:layout_height="match_parent" />
                 </FrameLayout>
 
             </LinearLayout>
@@ -113,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
+                app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
