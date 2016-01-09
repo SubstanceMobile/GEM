@@ -1,7 +1,6 @@
 # GEM Player (Beta)
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-GEM%20Player-brightgreen.svg?style=flat)](http://android-arsenal.com/details/3/2679)
-[![Status](https://api.travis-ci.org/Substance-Project/GEM.svg)](https://travis-ci.org/Substance-Project/GEM)
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/Substance-Project/GEM/blob/indev/LICENSE.md)
 [![Stable Version](https://img.shields.io/badge/stable-0.2.3-orange.svg)](https://github.com/Substance-Project/GEM/releases)
 [![WIP Version](https://img.shields.io/badge/wip-0.3.0-yellow.svg)](https://github.com/Substance-Project/GEM/releases)
