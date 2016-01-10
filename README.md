@@ -9,7 +9,10 @@ GEM is a part of the Substance Open Source suite of apps & promises to be nimble
 It is largely inspired by the music player demoed at Google I/O 2014.
 
 ####Screenshots:
-![GEM's album view](http://substanceproject.net/images/gem/gem_album_view_small.png)
+![GEM's album screen](http://i.imgur.com/1fisjkem.png)
+![GEM's album view](http://i.imgur.com/kjY1HEOm.png)
+![GEM's now playing](http://i.imgur.com/0HXcw7f.png)
+![GEM's settings](http://i.imgur.com/EwglQahm.png)
 ---
 
 ####Links:
