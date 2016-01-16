@@ -23,23 +23,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <FrameLayout
+                <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
+                    android:id="@+id/album_details_album_art"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
-                        android:id="@+id/album_details_album_art"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_collapseMode="parallax" />
-
-                    <FrameLayout
-                        android:id="@+id/ripple"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clickable="true" />
-
-                </FrameLayout>
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:foreground="?ripple"
+                    app:layout_collapseMode="parallax"
+                    tools:src="@drawable/art_dark"/>
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -70,8 +61,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="1"
-                                android:text="Album"
-                                android:textColor="@color/abc_primary_text_material_dark"
+                                tools:text="Album"
+                                tools:textColor="@color/abc_primary_text_material_dark"
                                 android:textSize="20sp" />
 
                             <TextView
@@ -79,8 +70,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="1"
-                                android:text="Artist"
-                                android:textColor="@color/abc_secondary_text_material_dark"
+                                tools:text="Artist"
+                                tools:textColor="@color/abc_secondary_text_material_dark"
                                 android:textSize="16sp" />
 
                             <Space

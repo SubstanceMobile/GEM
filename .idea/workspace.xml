@@ -25,19 +25,20 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5486cfd0-91f4-4794-87d3-640a866e8c01" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Checkbox.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/app_theme_engine_0_6_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/app_theme_engine_0_7_0.xml" />
+    <list default="true" id="5486cfd0-91f4-4794-87d3-640a866e8c01" name="Default" comment="Many updates">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/app_theme_engine_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/app_theme_engine_0_7_7.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/build.gradle" afterPath="$PROJECT_DIR$/mobile/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/mobile.iml" afterPath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/splash/LaunchActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/splash/LaunchActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/xml/preferences.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/xml/preferences.xml" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,24 +66,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="ListAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="342" column="29" selection-start-line="342" selection-start-column="16" selection-end-line="342" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ThemeActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+              <caret line="165" column="49" selection-start-line="165" selection-start-column="49" selection-end-line="165" selection-end-column="49" />
               <folding>
-                <element signature="method#onNewIntent#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="docComment;method#sequence#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#sequence#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#setInternalVariables#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#setUpTheme#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#themeBackground#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#setTitle#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#configureTaskDescription#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#resolveColorAttr#0;class#ThemeActivity#0" expanded="false" />
                 <element signature="method#onOptionsItemSelected#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#ThemeActivity#0" expanded="false" />
-                <element signature="method#onSearchRequested#0;class#ThemeActivity#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -92,30 +94,8 @@
         <entry file="file://$PROJECT_DIR$/mobile/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
+              <caret line="62" column="58" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlbumDetails.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="277" column="5" selection-start-line="277" selection-start-column="5" selection-end-line="277" selection-end-column="5" />
-              <folding>
-                <element signature="method#init#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="method#configureTransition#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="method#setVariables#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="method#setUp#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="method#getLightStatusBarMode#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="method#getLightToolbarMode#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="e#4631#4632#0" expanded="true" />
-                <element signature="e#4658#4659#0" expanded="true" />
-                <element signature="method#transitionNowPlaying#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="method#processMenuItem#0;class#AlbumDetails#0" expanded="false" />
-                <element signature="method#supportFinishAfterTransition#0;class#AlbumDetails#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -123,13 +103,9 @@
       <file leaf-file-name="About.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72156864">
+            <state vertical-scroll-proportion="0.03217503">
               <caret line="43" column="117" selection-start-line="43" selection-start-column="117" selection-end-line="43" selection-end-column="117" />
               <folding>
-                <element signature="e#2355#2356#0" expanded="true" />
-                <element signature="e#2387#2388#0" expanded="true" />
-                <element signature="e#2429#2430#0" expanded="true" />
-                <element signature="e#2466#2467#0" expanded="true" />
                 <element signature="method#openAppCompat#0;class#About#0" expanded="false" />
                 <element signature="method#openPalette#0;class#About#0" expanded="false" />
               </folding>
@@ -139,123 +115,12 @@
       </file>
       <file leaf-file-name="activity_about.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.264706">
-              <caret line="126" column="35" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
-              <folding>
-                <element signature="e#1083#1123#0" expanded="true" />
-                <element signature="e#1316#1338#0" expanded="true" />
-                <element signature="e#2089#2111#0" expanded="true" />
-                <element signature="e#3231#3252#0" expanded="true" />
-                <element signature="e#3298#3323#0" expanded="true" />
-                <element signature="e#3719#3743#0" expanded="true" />
-                <element signature="e#4232#4254#0" expanded="true" />
-                <element signature="e#4299#4320#0" expanded="true" />
-                <element signature="e#4725#4755#0" expanded="true" />
-                <element signature="e#4937#4961#0" expanded="true" />
-                <element signature="e#5514#5536#0" expanded="true" />
-                <element signature="e#5581#5602#0" expanded="true" />
-                <element signature="e#6235#6259#0" expanded="true" />
-                <element signature="e#6691#6713#0" expanded="true" />
-                <element signature="e#6758#6779#0" expanded="true" />
-                <element signature="e#7563#7584#0" expanded="true" />
-                <element signature="e#7626#7647#0" expanded="true" />
-                <element signature="e#7677#7709#0" expanded="true" />
-                <element signature="e#8606#8628#0" expanded="true" />
-                <element signature="e#8895#8920#0" expanded="true" />
-                <element signature="e#9483#9505#0" expanded="true" />
-                <element signature="e#9772#9795#0" expanded="true" />
-                <element signature="e#10356#10378#0" expanded="true" />
-                <element signature="e#10645#10666#0" expanded="true" />
-                <element signature="e#11227#11249#0" expanded="true" />
-                <element signature="e#11516#11537#0" expanded="true" />
-                <element signature="e#12101#12123#0" expanded="true" />
-                <element signature="e#12390#12414#0" expanded="true" />
-                <element signature="e#12980#13002#0" expanded="true" />
-                <element signature="e#13269#13296#0" expanded="true" />
-                <element signature="e#13859#13881#0" expanded="true" />
-                <element signature="e#14148#14171#0" expanded="true" />
-                <element signature="e#14634#14655#0" expanded="true" />
-                <element signature="e#14697#14718#0" expanded="true" />
-                <element signature="e#14748#14777#0" expanded="true" />
-                <element signature="e#15612#15634#0" expanded="true" />
-                <element signature="e#16168#16204#0" expanded="true" />
-                <element signature="e#16652#16672#0" expanded="true" />
-                <element signature="e#17035#17057#0" expanded="true" />
-                <element signature="e#17590#17625#0" expanded="true" />
-                <element signature="e#18073#18093#0" expanded="true" />
-                <element signature="e#18455#18477#0" expanded="true" />
-                <element signature="e#19010#19045#0" expanded="true" />
-                <element signature="e#19493#19513#0" expanded="true" />
-                <element signature="e#19875#19897#0" expanded="true" />
-                <element signature="e#20432#20469#0" expanded="true" />
-                <element signature="e#20917#20937#0" expanded="true" />
-                <element signature="e#21299#21321#0" expanded="true" />
-                <element signature="e#21855#21876#0" expanded="true" />
-                <element signature="e#22324#22346#0" expanded="true" />
-                <element signature="e#22708#22730#0" expanded="true" />
-                <element signature="e#23263#23283#0" expanded="true" />
-                <element signature="e#23731#23753#0" expanded="true" />
-                <element signature="e#24115#24137#0" expanded="true" />
-                <element signature="e#24676#24701#0" expanded="true" />
-                <element signature="e#25149#25172#0" expanded="true" />
-                <element signature="e#25626#25646#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
+          <provider editor-type-id="android-designer">
             <state />
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="58" selection-start-line="99" selection-start-column="58" selection-end-line="99" selection-end-column="58" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1426#1427#0" expanded="false" />
-                <element signature="e#1484#1485#0" expanded="false" />
-                <element signature="method#setVariables#0;class#Settings#0" expanded="false" />
-                <element signature="method#setUp#0;class#Settings#0" expanded="false" />
-                <element signature="e#1802#1803#0" expanded="false" />
-                <element signature="e#1845#1846#0" expanded="false" />
-                <element signature="method#onDestroy#0;class#Settings#0" expanded="false" />
-                <element signature="method#onColorSelection#0;class#Settings#0" expanded="false" />
-                <element signature="class#7280:7699" expanded="false" />
-                <element signature="method#onServiceConnected#0;class#7280:7699" expanded="false" />
-                <element signature="method#onServiceDisconnected#0;class#7280:7699" expanded="false" />
-                <element signature="method#showDonation#0;class#Settings#0" expanded="false" />
-                <element signature="method#induceDonatePrices#0;class#Settings#0" expanded="false" />
-                <element signature="method#donate#0;class#Settings#0" expanded="false" />
-                <element signature="method#onActivityResult#0;class#Settings#0" expanded="false" />
-                <element signature="method#sendPlayBroadcast#0;class#Settings#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.783784">
-              <caret line="110" column="67" selection-start-line="110" selection-start-column="67" selection-end-line="110" selection-end-column="67" />
-              <folding>
-                <element signature="e#3052#3199#0" expanded="false" />
-                <element signature="e#3204#3336#0" expanded="false" />
-                <element signature="e#3750#3945#0" expanded="false" />
-                <element signature="e#3950#4108#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menu_settings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/res/menu/menu_settings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+            <state vertical-scroll-proportion="-0.3472222">
+              <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -892,9 +757,9 @@
                 <option name="name" value="prepareComAndroidSupportSupportV42311Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.github.afollestad:app-theme-engine:0.7.0" />
+                <option name="description" value="Prepare com.github.afollestad:app-theme-engine:0.7.7" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGithubAfollestadAppThemeEngine070Library" />
+                <option name="name" value="prepareComGithubAfollestadAppThemeEngine077Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.afollestad.material-dialogs:commons:0.8.5.3" />
@@ -1723,9 +1588,9 @@
                 <option name="name" value="prepareComAndroidSupportSupportV42311Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.github.afollestad:app-theme-engine:0.7.0" />
+                <option name="description" value="Prepare com.github.afollestad:app-theme-engine:0.7.7" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/mobile" />
-                <option name="name" value="prepareComGithubAfollestadAppThemeEngine070Library" />
+                <option name="name" value="prepareComGithubAfollestadAppThemeEngine077Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.afollestad.material-dialogs:commons:0.8.5.3" />
@@ -2008,7 +1873,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4346575898972" />
+        <entry key="$PROJECT_DIR$" value="4347186614007" />
         <entry key="C:\Users\Adrian\StudioProjects\GEM" value="4343880195404" />
       </map>
     </option>
@@ -2252,7 +2117,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.afollestad.material-dialogs/core/0.8.5.3/281dbccd880ec7f330b32514a7eebdb0744a6d67/core-0.8.5.3.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.afollestad.material-dialogs/commons/0.8.5.3/879d7b1a588720b932fd89b561f1108f583c5a2a/commons-0.8.5.3.aar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/preference-v7/23.1.1/preference-v7-23.1.1.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.afollestad/app-theme-engine/0.7.0/75ca237e4354db5a34d4f9a1de0468bbe2e61295/app-theme-engine-0.7.0.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.afollestad/app-theme-engine/0.7.7/c944e165548c03da0e9b6c2ee8e0b635b37cdc4a/app-theme-engine-0.7.7.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.afollestad/sectioned-recyclerview/0.1.0/b376c442ba25863125f2242b8011b4eaae7d3549/sectioned-recyclerview-0.1.0.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.databinding/baseLibrary/1.0-rc3/dda966552be274fa341c817e2b1588faf8e1b2/baseLibrary-1.0-rc3.jar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar" />
@@ -2422,7 +2287,6 @@
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/IconManager.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/SettingsManager.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/FabHelper.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/setup/SetupActivity.java" />
@@ -2430,28 +2294,29 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/ChooseIcon.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_launch.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/PrefsFragment.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/CustomATEListPreference.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/splash/LaunchActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/xml/prefs.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/menu/menu_settings.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
-        <option value="$PROJECT_DIR$/mobile/build.gradle" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/xml/preferences.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Checkbox.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" />
+        <option value="$PROJECT_DIR$/mobile/build.gradle" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/splash/LaunchActivity.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
       </list>
     </option>
   </component>
@@ -2464,8 +2329,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-11" />
-    <option name="width" value="1934" />
-    <option name="height" value="1030" />
+    <option name="y" value="-11" />
+    <option name="width" value="1942" />
+    <option name="height" value="1042" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -2492,104 +2358,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Problems" />
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appcompat-v7-23.1.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appcompat-v7-23.1.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="appcompat-v7-23.1.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2625,64 +2393,6 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xml" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mipmap" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2700,20 +2410,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2796,36 +2492,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="custom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="music" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="custom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="activity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -2846,145 +2512,109 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="music" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="splash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="music" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="music" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="music" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chooseIcon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="music" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GEM" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appcompat-v7-23.1.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appcompat-v7-23.1.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appcompat-v7-23.1.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3346,7 +2976,13 @@
       <option name="project" value="LOCAL" />
       <updated>1451863799147</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Many updates">
+      <created>1452350337612</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1452350337612</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3359,19 +2995,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="0" width="1934" height="1030" extended-state="0" />
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280098" sideWeight="0.49785176" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32309583" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278302" sideWeight="0.49785176" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3231132" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32923833" sideWeight="0.5021482" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32917705" sideWeight="0.5021482" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="true" show_stripe_button="true" weight="0.7880299" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.7886978" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32678133" sideWeight="0.49785176" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32668328" sideWeight="0.49785176" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3280098" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883435" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973032" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -3379,10 +3015,9 @@
       <window_info id="Gradle Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3667389" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973032" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32955772" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3394,6 +3029,7 @@
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="89" y="89" width="1742" height="902" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.37322274" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -3422,7 +3058,8 @@
     <MESSAGE value="Removed most of old theme engine" />
     <MESSAGE value="Removing Options from old TE in favor of ATE settings" />
     <MESSAGE value="Preference Optimizations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Preference Optimizations" />
+    <MESSAGE value="Many updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Many updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3431,25 +3068,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.1.1/appcompat-v7-23.1.1-sources.jar!/android/support/v7/app/AppCompatActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="97" column="16" selection-start-line="97" selection-start-column="16" selection-end-line="97" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78014183">
-          <caret line="164" column="76" selection-start-line="164" selection-start-column="76" selection-end-line="164" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7092199">
@@ -3465,7 +3083,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.605263">
           <caret line="108" column="810" selection-start-line="108" selection-start-column="796" selection-end-line="108" selection-end-column="810" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3484,22 +3101,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.68725866">
           <caret line="33" column="27" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17245817">
-          <caret line="46" column="37" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="37" />
-          <folding>
-            <element signature="class#BasicViewHolder#0;class#ListAdapter#0" expanded="false" />
-            <element signature="class#SimpleViewHolder#0;class#ListAdapter#0" expanded="false" />
-            <element signature="class#SongsViewHolder#0;class#ListAdapter#0" expanded="false" />
-            <element signature="class#AlbumDetailsViewHolder#0;class#ListAdapter#0" expanded="false" />
-            <element signature="class#GenresViewHolder#0;class#ListAdapter#0" expanded="false" />
-            <element signature="class#NowPlayingViewHolder#0;class#ListAdapter#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3507,14 +3108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3217503">
           <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/FabHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6383526">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3536,10 +3129,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35392535">
           <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
-          <folding>
-            <element signature="e#3745#3746#0" expanded="false" />
-            <element signature="e#3812#3813#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3580,7 +3169,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7948718">
           <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3608,62 +3196,6 @@
         <state vertical-scroll-proportion="0.5047106">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.735294">
-          <caret line="228" column="26" selection-start-line="228" selection-start-column="26" selection-end-line="228" selection-end-column="26" />
-          <folding>
-            <element signature="e#142#348#0" expanded="false" />
-            <element signature="e#981#1535#0" expanded="false" />
-            <element signature="e#1118#1515#0" expanded="false" />
-            <element signature="e#1566#2083#0" expanded="false" />
-            <element signature="e#1866#2057#0" expanded="false" />
-            <element signature="e#2092#2610#0" expanded="false" />
-            <element signature="e#2393#2584#0" expanded="false" />
-            <element signature="e#2619#3133#0" expanded="false" />
-            <element signature="e#2916#3107#0" expanded="false" />
-            <element signature="e#3142#3660#0" expanded="false" />
-            <element signature="e#3443#3634#0" expanded="false" />
-            <element signature="e#3669#4187#0" expanded="false" />
-            <element signature="e#3970#4161#0" expanded="false" />
-            <element signature="e#4196#4712#0" expanded="false" />
-            <element signature="e#4495#4686#0" expanded="false" />
-            <element signature="e#4721#5237#0" expanded="false" />
-            <element signature="e#5020#5211#0" expanded="false" />
-            <element signature="e#5246#5762#0" expanded="false" />
-            <element signature="e#5545#5736#0" expanded="false" />
-            <element signature="e#5771#6287#0" expanded="false" />
-            <element signature="e#6070#6261#0" expanded="false" />
-            <element signature="e#6296#6811#0" expanded="false" />
-            <element signature="e#6594#6785#0" expanded="false" />
-            <element signature="e#6820#7336#0" expanded="false" />
-            <element signature="e#7119#7310#0" expanded="false" />
-            <element signature="e#7345#7867#0" expanded="false" />
-            <element signature="e#7650#7841#0" expanded="false" />
-            <element signature="e#7876#8396#0" expanded="false" />
-            <element signature="e#8179#8370#0" expanded="false" />
-            <element signature="e#8405#8921#0" expanded="false" />
-            <element signature="e#8704#8895#0" expanded="false" />
-            <element signature="e#8983#9107#0" expanded="false" />
-            <element signature="e#9153#9308#0" expanded="false" />
-            <element signature="e#9349#9479#0" expanded="false" />
-            <element signature="e#9772#10134#0" expanded="false" />
-            <element signature="e#9834#9962#0" expanded="false" />
-            <element signature="e#9976#10114#0" expanded="false" />
-            <element signature="e#10176#10373#0" expanded="false" />
-            <element signature="e#10233#10354#0" expanded="false" />
-            <element signature="e#10458#10690#0" expanded="false" />
-            <element signature="e#10549#10670#0" expanded="false" />
-            <element signature="e#10763#10906#0" expanded="false" />
-            <element signature="e#10954#11134#0" expanded="false" />
-            <element signature="e#11354#11550#0" expanded="false" />
-            <element signature="e#11589#12044#0" expanded="false" />
-            <element signature="e#11775#11890#0" expanded="false" />
-            <element signature="e#11903#12024#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3698,10 +3230,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="208" column="18" selection-start-line="208" selection-start-column="18" selection-end-line="208" selection-end-column="18" />
-          <folding>
-            <element signature="e#7012#7013#0" expanded="false" />
-            <element signature="e#7042#7043#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3719,106 +3247,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="166" column="65" selection-start-line="166" selection-start-column="65" selection-end-line="166" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3071#3072#0" expanded="false" />
-            <element signature="e#3126#3127#0" expanded="false" />
-            <element signature="e#3182#3183#0" expanded="false" />
-            <element signature="e#3240#3241#0" expanded="false" />
-            <element signature="e#3289#3290#0" expanded="false" />
-            <element signature="e#3340#3341#0" expanded="false" />
-            <element signature="e#3384#3385#0" expanded="false" />
-            <element signature="e#3427#3428#0" expanded="false" />
-            <element signature="e#3477#3478#0" expanded="false" />
-            <element signature="e#3524#3525#0" expanded="false" />
-            <element signature="e#3815#3816#0" expanded="false" />
-            <element signature="e#3875#3876#0" expanded="false" />
-            <element signature="e#4106#4107#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4181#4182#0" expanded="false" />
-            <element signature="e#4220#4221#0" expanded="false" />
-            <element signature="e#4347#4348#0" expanded="false" />
-            <element signature="e#4395#4396#0" expanded="false" />
-            <element signature="e#4439#4440#0" expanded="false" />
-            <element signature="e#4486#4487#0" expanded="false" />
-            <element signature="e#4582#4583#0" expanded="false" />
-            <element signature="e#4622#4623#0" expanded="false" />
-            <element signature="e#5518#5519#0" expanded="false" />
-            <element signature="e#5568#5569#0" expanded="false" />
-            <element signature="e#5696#5697#0" expanded="false" />
-            <element signature="e#5740#5741#0" expanded="false" />
-            <element signature="e#5784#5785#0" expanded="false" />
-            <element signature="e#5827#5828#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/splash/LaunchActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/0.6.0/jars/classes.jar!/com/afollestad/appthemeengine/ATEActivity.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.725">
           <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="17450" column="16" selection-start-line="17450" selection-start-column="16" selection-end-line="17450" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="252" column="5" selection-start-line="252" selection-start-column="5" selection-end-line="252" selection-end-column="5" />
-          <folding>
-            <element signature="e#11479#11480#0" expanded="false" />
-            <element signature="e#11506#11507#0" expanded="false" />
-            <element signature="class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureRecycler#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureAsSongs#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureAsAlbums#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureAsArtists#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureAsPlaylists#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="58" selection-start-line="99" selection-start-column="58" selection-end-line="99" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1426#1427#0" expanded="false" />
-            <element signature="e#1484#1485#0" expanded="false" />
-            <element signature="method#setVariables#0;class#Settings#0" expanded="false" />
-            <element signature="method#setUp#0;class#Settings#0" expanded="false" />
-            <element signature="e#1802#1803#0" expanded="false" />
-            <element signature="e#1845#1846#0" expanded="false" />
-            <element signature="method#onDestroy#0;class#Settings#0" expanded="false" />
-            <element signature="method#onColorSelection#0;class#Settings#0" expanded="false" />
-            <element signature="class#7280:7699" expanded="false" />
-            <element signature="method#onServiceConnected#0;class#7280:7699" expanded="false" />
-            <element signature="method#onServiceDisconnected#0;class#7280:7699" expanded="false" />
-            <element signature="method#showDonation#0;class#Settings#0" expanded="false" />
-            <element signature="method#induceDonatePrices#0;class#Settings#0" expanded="false" />
-            <element signature="method#donate#0;class#Settings#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#Settings#0" expanded="false" />
-            <element signature="method#sendPlayBroadcast#0;class#Settings#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3834,7 +3266,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20325203">
           <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3842,7 +3273,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2570694">
           <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3850,7 +3280,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3858,7 +3287,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="20" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3866,10 +3294,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.681818">
           <caret line="287" column="38" selection-start-line="287" selection-start-column="12" selection-end-line="287" selection-end-column="38" />
-          <folding>
-            <element signature="e#61065#61066#0" expanded="true" />
-            <element signature="e#61105#61106#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3877,17 +3301,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.375">
           <caret line="18" column="61" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3895,19 +3308,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.66352624">
           <caret line="64" column="62" selection-start-line="64" selection-start-column="62" selection-end-line="64" selection-end-column="62" />
-          <folding>
-            <element signature="e#238#531#0" expanded="false" />
-            <element signature="e#540#878#0" expanded="false" />
-            <element signature="e#1063#1412#0" expanded="false" />
-            <element signature="e#1421#1668#0" expanded="false" />
-            <element signature="e#1677#1921#0" expanded="false" />
-            <element signature="e#1930#2043#0" expanded="false" />
-            <element signature="e#2234#2627#0" expanded="false" />
-            <element signature="e#2636#2937#0" expanded="false" />
-            <element signature="e#2946#3212#0" expanded="false" />
-            <element signature="e#3397#3482#0" expanded="false" />
-            <element signature="e#3491#3735#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3915,32 +3315,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.93564993">
           <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#434#435#0" expanded="true" />
-            <element signature="e#471#472#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
-          <folding>
-            <element signature="method#onNewIntent#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="docComment;method#sequence#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#sequence#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#setInternalVariables#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#setUpTheme#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#themeBackground#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#setTitle#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#configureTaskDescription#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#resolveColorAttr#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#ThemeActivity#0" expanded="false" />
-            <element signature="method#onSearchRequested#0;class#ThemeActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3955,44 +3329,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5319149">
-          <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
-          <folding>
-            <element signature="e#1064#1809#0" expanded="false" />
-            <element signature="e#1827#4557#0" expanded="false" />
-            <element signature="e#1994#4289#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="277" column="5" selection-start-line="277" selection-start-column="5" selection-end-line="277" selection-end-column="5" />
-          <folding>
-            <element signature="method#init#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="method#configureTransition#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="method#setVariables#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="method#setUp#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="method#getLightStatusBarMode#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="method#getLightToolbarMode#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="e#4631#4632#0" expanded="true" />
-            <element signature="e#4658#4659#0" expanded="true" />
-            <element signature="method#transitionNowPlaying#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="method#processMenuItem#0;class#AlbumDetails#0" expanded="false" />
-            <element signature="method#supportFinishAfterTransition#0;class#AlbumDetails#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.783784">
+        <state vertical-scroll-proportion="0.0">
           <caret line="110" column="67" selection-start-line="110" selection-start-column="67" selection-end-line="110" selection-end-column="67" />
           <folding>
             <element signature="e#3052#3199#0" expanded="false" />
@@ -4008,84 +3347,223 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.264706">
-          <caret line="126" column="35" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Album.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="151" column="28" selection-start-line="151" selection-start-column="28" selection-end-line="151" selection-end-column="28" />
           <folding>
-            <element signature="e#1083#1123#0" expanded="true" />
-            <element signature="e#1316#1338#0" expanded="true" />
-            <element signature="e#2089#2111#0" expanded="true" />
-            <element signature="e#3231#3252#0" expanded="true" />
-            <element signature="e#3298#3323#0" expanded="true" />
-            <element signature="e#3719#3743#0" expanded="true" />
-            <element signature="e#4232#4254#0" expanded="true" />
-            <element signature="e#4299#4320#0" expanded="true" />
-            <element signature="e#4725#4755#0" expanded="true" />
-            <element signature="e#4937#4961#0" expanded="true" />
-            <element signature="e#5514#5536#0" expanded="true" />
-            <element signature="e#5581#5602#0" expanded="true" />
-            <element signature="e#6235#6259#0" expanded="true" />
-            <element signature="e#6691#6713#0" expanded="true" />
-            <element signature="e#6758#6779#0" expanded="true" />
-            <element signature="e#7563#7584#0" expanded="true" />
-            <element signature="e#7626#7647#0" expanded="true" />
-            <element signature="e#7677#7709#0" expanded="true" />
-            <element signature="e#8606#8628#0" expanded="true" />
-            <element signature="e#8895#8920#0" expanded="true" />
-            <element signature="e#9483#9505#0" expanded="true" />
-            <element signature="e#9772#9795#0" expanded="true" />
-            <element signature="e#10356#10378#0" expanded="true" />
-            <element signature="e#10645#10666#0" expanded="true" />
-            <element signature="e#11227#11249#0" expanded="true" />
-            <element signature="e#11516#11537#0" expanded="true" />
-            <element signature="e#12101#12123#0" expanded="true" />
-            <element signature="e#12390#12414#0" expanded="true" />
-            <element signature="e#12980#13002#0" expanded="true" />
-            <element signature="e#13269#13296#0" expanded="true" />
-            <element signature="e#13859#13881#0" expanded="true" />
-            <element signature="e#14148#14171#0" expanded="true" />
-            <element signature="e#14634#14655#0" expanded="true" />
-            <element signature="e#14697#14718#0" expanded="true" />
-            <element signature="e#14748#14777#0" expanded="true" />
-            <element signature="e#15612#15634#0" expanded="true" />
-            <element signature="e#16168#16204#0" expanded="true" />
-            <element signature="e#16652#16672#0" expanded="true" />
-            <element signature="e#17035#17057#0" expanded="true" />
-            <element signature="e#17590#17625#0" expanded="true" />
-            <element signature="e#18073#18093#0" expanded="true" />
-            <element signature="e#18455#18477#0" expanded="true" />
-            <element signature="e#19010#19045#0" expanded="true" />
-            <element signature="e#19493#19513#0" expanded="true" />
-            <element signature="e#19875#19897#0" expanded="true" />
-            <element signature="e#20432#20469#0" expanded="true" />
-            <element signature="e#20917#20937#0" expanded="true" />
-            <element signature="e#21299#21321#0" expanded="true" />
-            <element signature="e#21855#21876#0" expanded="true" />
-            <element signature="e#22324#22346#0" expanded="true" />
-            <element signature="e#22708#22730#0" expanded="true" />
-            <element signature="e#23263#23283#0" expanded="true" />
-            <element signature="e#23731#23753#0" expanded="true" />
-            <element signature="e#24115#24137#0" expanded="true" />
-            <element signature="e#24676#24701#0" expanded="true" />
-            <element signature="e#25149#25172#0" expanded="true" />
-            <element signature="e#25626#25646#0" expanded="true" />
+            <element signature="e#5140#5141#0" expanded="false" />
+            <element signature="e#5186#5187#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="58" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3472222">
+          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="17450" column="16" selection-start-line="17450" selection-start-column="16" selection-end-line="17450" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.64607465">
+          <caret line="293" column="5" selection-start-line="293" selection-start-column="5" selection-end-line="293" selection-end-column="5" />
+          <folding>
+            <element signature="method#onCreate#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#init#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#configureTransition#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#setVariables#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#getLightStatusBarMode#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#transitionNowPlaying#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="class#7668:10347" expanded="false" />
+            <element signature="method#onResume#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="class#10552:11022" expanded="false" />
+            <element signature="e#10764#10765#0" expanded="true" />
+            <element signature="e#10807#10808#0" expanded="true" />
+            <element signature="method#supportFinishAfterTransition#0;class#AlbumDetails#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.117647">
+          <caret line="88" column="28" selection-start-line="88" selection-start-column="28" selection-end-line="88" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62290865">
+          <caret line="274" column="41" selection-start-line="274" selection-start-column="41" selection-end-line="274" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47106326">
+          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+          <folding>
+            <element signature="e#142#348#0" expanded="false" />
+            <element signature="e#863#12346#0" expanded="false" />
+            <element signature="e#1112#1666#0" expanded="false" />
+            <element signature="e#1249#1646#0" expanded="false" />
+            <element signature="e#1697#2214#0" expanded="false" />
+            <element signature="e#1997#2188#0" expanded="false" />
+            <element signature="e#2223#2741#0" expanded="false" />
+            <element signature="e#2524#2715#0" expanded="false" />
+            <element signature="e#2750#3264#0" expanded="false" />
+            <element signature="e#3047#3238#0" expanded="false" />
+            <element signature="e#3273#3791#0" expanded="false" />
+            <element signature="e#3574#3765#0" expanded="false" />
+            <element signature="e#3800#4318#0" expanded="false" />
+            <element signature="e#4101#4292#0" expanded="false" />
+            <element signature="e#4327#4843#0" expanded="false" />
+            <element signature="e#4626#4817#0" expanded="false" />
+            <element signature="e#4852#5368#0" expanded="false" />
+            <element signature="e#5151#5342#0" expanded="false" />
+            <element signature="e#5377#5893#0" expanded="false" />
+            <element signature="e#5676#5867#0" expanded="false" />
+            <element signature="e#5902#6418#0" expanded="false" />
+            <element signature="e#6201#6392#0" expanded="false" />
+            <element signature="e#6427#6942#0" expanded="false" />
+            <element signature="e#6725#6916#0" expanded="false" />
+            <element signature="e#6951#7467#0" expanded="false" />
+            <element signature="e#7250#7441#0" expanded="false" />
+            <element signature="e#7476#7998#0" expanded="false" />
+            <element signature="e#7781#7972#0" expanded="false" />
+            <element signature="e#8007#8527#0" expanded="false" />
+            <element signature="e#8310#8501#0" expanded="false" />
+            <element signature="e#8536#9052#0" expanded="false" />
+            <element signature="e#8835#9026#0" expanded="false" />
+            <element signature="e#9114#9238#0" expanded="false" />
+            <element signature="e#9284#9439#0" expanded="false" />
+            <element signature="e#9480#9610#0" expanded="false" />
+            <element signature="e#9903#10265#0" expanded="false" />
+            <element signature="e#9965#10093#0" expanded="false" />
+            <element signature="e#10107#10245#0" expanded="false" />
+            <element signature="e#10307#10504#0" expanded="false" />
+            <element signature="e#10364#10485#0" expanded="false" />
+            <element signature="e#10589#10821#0" expanded="false" />
+            <element signature="e#10680#10801#0" expanded="false" />
+            <element signature="e#10894#11037#0" expanded="false" />
+            <element signature="e#11085#11265#0" expanded="false" />
+            <element signature="e#11485#11681#0" expanded="false" />
+            <element signature="e#11720#12175#0" expanded="false" />
+            <element signature="e#11906#12021#0" expanded="false" />
+            <element signature="e#12034#12155#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/FabHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22522523">
+          <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="342" column="29" selection-start-line="342" selection-start-column="16" selection-end-line="342" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/splash/LaunchActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38610038">
+          <caret line="54" column="48" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
+          <folding>
+            <element signature="e#1323#1324#0" expanded="true" />
+            <element signature="e#1398#1399#0" expanded="true" />
+            <element signature="e#1660#1661#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="49" selection-start-line="165" selection-start-column="49" selection-end-line="165" selection-end-column="49" />
+          <folding>
+            <element signature="method#onOptionsItemSelected#0;class#ThemeActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7078507">
+          <caret line="64" column="45" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/0.7.7/jars/classes.jar!/com/afollestad/appthemeengine/Config.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36635005">
+          <caret line="366" column="151" selection-start-line="366" selection-start-column="122" selection-end-line="366" selection-end-column="151" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7078507">
+          <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
+          <folding>
+            <element signature="method#setVariables#0;class#Settings#0" expanded="false" />
+            <element signature="method#setUp#0;class#Settings#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#Settings#0" expanded="false" />
+            <element signature="method#onColorSelection#0;class#Settings#0" expanded="false" />
+            <element signature="class#7182:7601" expanded="false" />
+            <element signature="method#onServiceConnected#0;class#7182:7601" expanded="false" />
+            <element signature="method#onServiceDisconnected#0;class#7182:7601" expanded="false" />
+            <element signature="method#showDonation#0;class#Settings#0" expanded="false" />
+            <element signature="method#induceDonatePrices#0;class#Settings#0" expanded="false" />
+            <element signature="method#donate#0;class#Settings#0" expanded="false" />
+            <element signature="method#onActivityResult#0;class#Settings#0" expanded="false" />
+            <element signature="method#sendPlayBroadcast#0;class#Settings#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72156864">
+        <state vertical-scroll-proportion="0.03217503">
           <caret line="43" column="117" selection-start-line="43" selection-start-column="117" selection-end-line="43" selection-end-column="117" />
           <folding>
-            <element signature="e#2355#2356#0" expanded="true" />
-            <element signature="e#2387#2388#0" expanded="true" />
-            <element signature="e#2429#2430#0" expanded="true" />
-            <element signature="e#2466#2467#0" expanded="true" />
             <element signature="method#openAppCompat#0;class#About#0" expanded="false" />
             <element signature="method#openPalette#0;class#About#0" expanded="false" />
           </folding>

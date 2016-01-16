@@ -265,9 +265,6 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     @Override
     protected boolean processMenuItem(int id) {
         switch (id) {
-            case R.id.action_settings:
-                startActivity(new Intent(this, Settings.class));
-                return true;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;

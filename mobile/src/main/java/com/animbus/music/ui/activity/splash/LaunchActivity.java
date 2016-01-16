@@ -29,6 +29,7 @@ public class LaunchActivity extends ThemeActivity {
     @Override
     protected void init() {
         setContentView(R.layout.activity_launch);
+
         if (getIntent().getAction().equals(Intent.ACTION_VIEW))
             PlaybackRemote.play(getIntent().getData());
     }
@@ -91,6 +92,7 @@ public class LaunchActivity extends ThemeActivity {
         if (ATE.config(this, getATEKey()).isConfigured()) {
             ATE.config(this, getATEKey())
                     .activityTheme(R.style.AppTheme_Faithful)
+
                     .coloredActionBar(true)
                     .autoGeneratePrimaryDark(true)
                     .coloredStatusBar(true)

@@ -61,8 +61,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     protected boolean processMenuItem(int id) {
         switch (id) {
             case R.id.action_reset:
-                Snackbar.make(mRoot, R.string.msg_coming_soon, Snackbar.LENGTH_SHORT).show();
-                /*Options.resetPrefs();*/
+                Options.resetPrefs();
                 return true;
         }
         return super.processMenuItem(id);

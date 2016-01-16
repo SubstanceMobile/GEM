@@ -1,5 +1,6 @@
 package com.animbus.music.ui.custom.activity;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,6 +23,7 @@ import com.afollestad.appthemeengine.ATEActivity;
 import com.afollestad.appthemeengine.Config;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.search.SearchActivity;
+import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.Options;
 
@@ -171,6 +173,10 @@ public abstract class ThemeActivity extends ATEActivity {
                     supportFinishAfterTransition();
                     return true;
                 }
+                return  processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
+            case R.id.action_settings:
+                startActivity(new Intent(this, Settings.class));
+                return true;
             default:
                 return processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
         }

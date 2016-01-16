@@ -395,12 +395,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                 } catch (Exception ignored) {
                 }
                 try {
-                    title = swatches[0].getTitleTextColor();
+                    title = swatches[0].getBodyTextColor();
                 } catch (Exception ignored) {
                 }
 
                 try {
-                    subtitle = swatches[0].getBodyTextColor();
+                    subtitle = swatches[0].getTitleTextColor();
                 } catch (Exception ignored) {
                 }
 
@@ -410,12 +410,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                 }
 
                 try {
-                    accentIcon = swatches[1].getTitleTextColor();
+                    accentIcon = swatches[1].getBodyTextColor();
                 } catch (Exception ignored) {
                 }
 
                 try {
-                    accentSubIcon = swatches[1].getBodyTextColor();
+                    accentSubIcon = swatches[1].getTitleTextColor();
                 } catch (Exception ignored) {
                 }
 

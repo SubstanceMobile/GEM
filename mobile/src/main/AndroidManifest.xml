@@ -18,6 +18,9 @@
     <!--Used for donations-->
     <uses-permission android:name="com.android.vending.BILLING" />
 
+    <!--Used for restarting GEM when resetting it-->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_srini_black"

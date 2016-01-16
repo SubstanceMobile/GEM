@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Path;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.appthemeengine.Config;
+import com.afollestad.appthemeengine.customizers.ATECollapsingTbCustomizer;
 import com.afollestad.appthemeengine.customizers.ATEStatusBarCustomizer;
 import com.afollestad.appthemeengine.customizers.ATETaskDescriptionCustomizer;
 import com.afollestad.appthemeengine.customizers.ATEToolbarCustomizer;
@@ -46,7 +48,7 @@ import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
-public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer, ATEToolbarCustomizer, ATETaskDescriptionCustomizer {
+public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer, ATETaskDescriptionCustomizer, ATECollapsingTbCustomizer {
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     FloatingActionButton mFAB;
@@ -86,10 +88,39 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
 
     @Override
     protected void setUp() {
+        //Sets up data
+        mAlbum.requestArt((ImageView) findViewById(R.id.album_details_album_art));
+        mTitle.setText(mAlbum.getAlbumTitle());
+        mCollapsingToolbar.setTitle(mAlbum.getAlbumTitle());
+        mArtist.setText(mAlbum.getAlbumArtistName());
+
+        //Configures the recycler
+        mList.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this));
+        mList.setItemAnimator(new DefaultItemAnimator());
+        mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        //Configures FAB
+        mFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transitionNowPlaying();
+            }
+        });
+        mFAB.setAlpha(0.0f);
+        mFAB.setScaleX(0.0f);
+        mFAB.setScaleY(0.0f);
+        mFAB.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(200).setStartDelay(500).start();
+
+        //Colors
+        FabHelper.setFabBackground(mFAB, mAlbum.getAccentColor());
+        FabHelper.setFabTintedIcon(mFAB, ContextCompat.getDrawable(this, R.drawable.ic_play_arrow_black_48dp), mAlbum.getAccentIconColor());
+        mDetailsRoot.setBackgroundColor(mAlbum.getBackgroundColor());
+        mTitle.setTextColor(mAlbum.getTitleTextColor());
+        mArtist.setTextColor(mAlbum.getSubtitleTextColor());
+        mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
-        configureFab();
-        configureRecyclerView();
-        configureUI();
+        mCollapsingToolbar.setCollapsedTitleTextColor(mAlbum.getTitleTextColor());
+        findViewById(R.id.album_details_album_art).setForeground(ContextCompat.getDrawable(this, !Util.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
     }
 
     @Override
@@ -99,17 +130,17 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
 
     @Override
     public int getLightStatusBarMode() {
-        return Util.isColorLight(mAlbum.getBackgroundColor()) ? Config.LIGHT_STATUS_BAR_ON : Config.LIGHT_STATUS_BAR_OFF;
+        return !Util.isColorLight(mAlbum.getTitleTextColor()) ? Config.LIGHT_STATUS_BAR_ON : Config.LIGHT_STATUS_BAR_OFF;
     }
 
     @Override
-    public int getToolbarColor(@Nullable Toolbar toolbar) {
-        return mAlbum.getBackgroundColor();
+    public int getCollapsedTintColor() {
+        return mAlbum.getTitleTextColor();
     }
 
     @Override
-    public int getLightToolbarMode(@Nullable Toolbar toolbar) {
-        return Util.isColorLight(mAlbum.getBackgroundColor()) ? Config.LIGHT_TOOLBAR_ON : Config.LIGHT_TOOLBAR_OFF;
+    public int getExpandedTintColor() {
+        return mAlbum.getTitleTextColor();
     }
 
     @Override
@@ -123,50 +154,11 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         return null;
     }
 
-    private void configureRecyclerView() {
-        mList.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this));
-        mList.setItemAnimator(new DefaultItemAnimator());
-        mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-    }
-
-    private void configureFab() {
-        mFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                transitionNowPlaying();
-            }
-        });
-        mFAB.setAlpha(0.0f);
-        mFAB.setScaleX(0.0f);
-        mFAB.setScaleY(0.0f);
-        mFAB.animate().scaleX(1.0f).scaleY(1.0f).alpha(1.0f).setDuration(200).setStartDelay(500).start();
-    }
-
-    private void configureUIColors() {
-        FabHelper.setFabBackground(mFAB, mAlbum.getAccentColor());
-        FabHelper.setFabTintedIcon(mFAB, getResources().getDrawable(R.drawable.ic_play_arrow_black_48dp), mAlbum.getAccentIconColor());
-        mDetailsRoot.setBackgroundColor(mAlbum.getBackgroundColor());
-        mTitle.setTextColor(mAlbum.getTitleTextColor());
-        mArtist.setTextColor(mAlbum.getSubtitleTextColor());
-
-        findViewById(R.id.ripple)
-                .setBackground(ContextCompat.getDrawable(this, !Util.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
-    }
-
-    private void configureUI() {
-        mAlbum.requestArt((ImageView) findViewById(R.id.album_details_album_art));
-        mTitle.setText(mAlbum.getAlbumTitle());
-        mCollapsingToolbar.setTitle(mAlbum.getAlbumTitle());
-        mArtist.setText(mAlbum.getAlbumArtistName());
-        configureUIColors();
-    }
-
     private void transitionNowPlaying() {
         final ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                 new Pair<View, String>(findViewById(R.id.album_details_transition_reveal_part), "controls"),
                 new Pair<View, String>(findViewById(R.id.toolbar), "appbar"),
                 new Pair<View, String>(findViewById(R.id.album_details_album_art), "art")
-
         );
 
         final View overlay = findViewById(R.id.album_details_transition_reveal_part);
@@ -273,23 +265,32 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     @Override
     protected void onResume() {
         super.onResume();
-        mFAB.show();
-        findViewById(R.id.album_details_transition_reveal_part).animate().alpha(0f).start();
+        findViewById(R.id.album_details_transition_reveal_part).animate().alpha(0f).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mFAB.show();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 
     @Override
     protected int getOptionsMenu() {
         return R.menu.menu_album_details;
-    }
-
-    @Override
-    protected boolean processMenuItem(int id) {
-        switch (id) {
-            case R.id.action_settings:
-                startActivity(new Intent(this, Settings.class));
-                return true;
-        }
-        return super.processMenuItem(id);
     }
 
     @Override

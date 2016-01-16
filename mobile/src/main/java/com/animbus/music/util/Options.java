@@ -5,12 +5,17 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Process;
 import android.os.SystemClock;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
+import com.afollestad.appthemeengine.ATE;
+import com.afollestad.appthemeengine.Config;
 import com.animbus.music.ui.activity.settings.chooseIcon.Icon;
 import com.animbus.music.ui.activity.splash.LaunchActivity;
+
+import static android.content.Intent.ACTION_MAIN;
 
 /**
  * Created by Adrian on 11/20/2015
@@ -51,31 +56,13 @@ public class Options {
         return updatedAt > updateTime;
     }
 
-    /**
-     * Sets all of the settings as defaults
-     */
-    public static void setDefaults() {
-        prefs.edit()
-                .putBoolean(KEY_FIRST_RUN, true)
-                .putInt(KEY_ICON, new Icon(IconManager.DESIGNER_SRINI, IconManager.COLOR_BLACK).getId())
-                .putBoolean(KEY_LIGHT_THEME, false)
-                .putBoolean(KEY_CATEGORY_NAMES, false)
-                .putBoolean(KEY_PALETTE, true)
-                .apply();
-        Log.d(TAG, "Defaults Set");
-    }
-
-    /**
-     * Same as {@link #setDefaults()} but it restarts GEM
-     */
     public static void resetPrefs() {
-        //Settings Values
-        setDefaults();
-
-        //Restarting GEM
-        PendingIntent mGEMIntent = PendingIntent.getActivity(context, 2138535432, new Intent(context, LaunchActivity.class), PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent mGEMIntent = PendingIntent.getActivity(context, 2138535432,
+                new Intent(context, LaunchActivity.class).setAction(ACTION_MAIN), PendingIntent.FLAG_CANCEL_CURRENT);
         ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).set(AlarmManager.RTC, System.currentTimeMillis() + 100, mGEMIntent);
-        System.exit(0);
+        Options.prefs.edit().clear().commit();
+        context.getSharedPreferences("[[afollestad_theme-engine]]", 0).edit().clear().commit();
+        Process.killProcess(Process.myPid());
     }
 
     ///////////////////////////////////////////////////////////////////////////
