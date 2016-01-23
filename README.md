@@ -13,4 +13,4 @@ It is largely inspired by the music player demoed at Google I/O 2014.
 ---
 
 ####Links:
-[Explination of Substance](https://github.com/Substance-Project/GEM/wiki/Substance-Open-Source), [Substance Site](http://substanceproject.net)
+[Explanation of Substance](https://github.com/Substance-Project/GEM/wiki/Substance-Open-Source), [Substance Site](https://substanceproject.net)
