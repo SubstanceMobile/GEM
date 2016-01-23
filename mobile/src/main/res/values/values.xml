@@ -37,7 +37,6 @@
         <item name="ripple_alt_color">@drawable/ripple_light</item>
         <item name="ripple_circle">@drawable/ripple_circle_dark</item>
         <item name="ripple_circle_alt_color">@drawable/ripple_circle_light</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="now_playing_toolbar_color">@color/background_light</item>
     </style>
 
@@ -55,7 +54,6 @@
         <item name="ripple_alt_color">@drawable/ripple_light</item>
         <item name="ripple_circle">@drawable/ripple_circle_dark</item>
         <item name="ripple_circle_alt_color">@drawable/ripple_circle_light</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="now_playing_toolbar_color">@color/background_light</item>
         <item name="android:colorBackground">@color/background_faithful</item>
     </style>
@@ -74,7 +72,6 @@
         <item name="ripple_alt_color">@drawable/ripple_dark</item>
         <item name="ripple_circle">@drawable/ripple_circle_light</item>
         <item name="ripple_circle_alt_color">@drawable/ripple_circle_dark</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="now_playing_toolbar_color">@color/background_faithful</item>
     </style>
 

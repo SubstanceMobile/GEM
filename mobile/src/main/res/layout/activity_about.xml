@@ -146,7 +146,31 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="VERSION" />
+                            tools:text="VERSION" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/listViewSizeBig"
+                        android:background="?attr/ripple"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:onClick="openPlayStore">
+
+                        <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/margin_medium"
+                            android:padding="@dimen/margin_small"
+                            android:src="@drawable/ic_shop_black_24dp"
+                            android:id="@+id/about_play_icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/about_visit_play" />
 
                     </LinearLayout>
 
@@ -161,7 +185,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:text="@string/about_libraries_header"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:tag="text_secondary" />
 
             <android.support.v7.widget.CardView
                 style="?attr/cardStyle"
@@ -304,7 +328,8 @@
                 android:text="@string/about_thanks_header"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="?android:attr/textColorSecondary"
-                android:id="@+id/textView11" />
+                android:id="@+id/textView11"
+                android:tag="text_secondary" />
 
             <android.support.v7.widget.CardView
                 style="?attr/cardStyle"

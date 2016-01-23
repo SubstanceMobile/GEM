@@ -1,5 +1,6 @@
 package com.animbus.music.ui.activity.settings;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -30,13 +31,14 @@ public class About extends ThemeActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void setUp() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((TextView) findViewById(R.id.about_version_text_view)).setText(BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE + ")");
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_code_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_code_og_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
         DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_version_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
+        DrawableCompat.setTint(DrawableCompat.wrap(((ImageView) findViewById(R.id.about_play_icon)).getDrawable()), !Options.isLightTheme() ? Color.WHITE : Color.BLACK);
         ((ImageView) findViewById(R.id.about_icon)).setImageResource(
                 Options.isLightTheme() ?
                         R.mipmap.ic_launcher_srini_black :
@@ -49,8 +51,7 @@ public class About extends ThemeActivity {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-
-    // Libraries
+    // Top Card
     ///////////////////////////////////////////////////////////////////////////
 
     public void openSourceCode(View v) {
@@ -60,6 +61,14 @@ public class About extends ThemeActivity {
     public void openBaseSource(View v) {
         startUrl(BASE_SOURCE);
     }
+
+    public void openPlayStore(View v) {
+        startUrl("https://play.google.com/store/apps/dev?id=4871620813352984682");
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Libraries
+    ///////////////////////////////////////////////////////////////////////////
 
     public void openAppCompat(View v) {
         startUrl("https://developer.android.com/tools/support-library/index.html");
@@ -118,7 +127,7 @@ public class About extends ThemeActivity {
     }
 
     public void openSubstance(View v) {
-        startUrl("http://substanceproject.net/");
+        startUrl("https://substanceproject.net/");
     }
 
 }

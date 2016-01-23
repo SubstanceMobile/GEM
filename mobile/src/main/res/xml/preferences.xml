@@ -37,6 +37,7 @@
             android:title="@string/settings_accent" />
         <Preference
             android:key="reset_primary"
+            android:summary="@string/settings_reset_primary_summary"
             android:title="@string/settings_reset_primary" />
     </com.afollestad.appthemeengine.prefs.ATEPreferenceCategory>
 

@@ -24,8 +24,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.Toast;
 
+import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.BR;
 import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
@@ -247,6 +249,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         public void configure(Album object) {
             resetPalette();
             binding.getAlbum().requestArt(binding.AlbumArtGridItemAlbumArt, this);
+            if (Options.usingBiggerSpaceInAlbumList()) {
+                LayoutParams params = new LayoutParams(binding.getRoot().getLayoutParams());
+                int margin = Math.round(context.getResources().getDimension(R.dimen.margin_pico));
+                params.setMargins(margin, margin, margin, margin);
+                binding.getRoot().setLayoutParams(params);
+            }
         }
 
         @Override
@@ -552,6 +560,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             }
             binding.recycler.setItemAnimator(new DefaultItemAnimator());
             binding.recycler.requestLayout();
+            ATE.apply(context, binding.getRoot(), null);
         }
 
         @Override

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -26,6 +28,8 @@ import android.widget.Toast;
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.Config;
 import com.afollestad.appthemeengine.prefs.ATEColorPreference;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.android.vending.billing.IInAppBillingService;
 import com.animbus.music.R;
@@ -82,12 +86,13 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         if (!colorChooserDialog.isAccentMode())
             ATE.config(this, getATEKey()).primaryColor(i).apply(this);
         else
-            ATE.config(this, getATEKey()).accentColor(i).apply(this);
+            ATE.config(this, getATEKey()).accentColor(i).navigationViewSelectedIcon(i)
+                    .navigationViewSelectedText(i).apply(this);
         ((PrefsFragment) getFragmentManager().findFragmentById(R.id.prefs)).configure();
         recreate();
     }
 
-    public static class PrefsFragment extends PreferenceFragment {
+    public static class PrefsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
         public PrefsFragment() {
 
@@ -97,12 +102,19 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+            PreferenceManager.getDefaultSharedPreferences(getActivity()).registerOnSharedPreferenceChangeListener(this);
         }
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             configure();
+        }
+
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            //Uses ATE because I am lazy to implement it myself...
+            Config.markChanged(getActivity(), null);
         }
 
         public void configure() {
@@ -200,74 +212,74 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
     };
 
     public void showDonation() {
-        new AlertDialog.Builder(this).setTitle(getResources().getString(R.string.settings_donate_disambiguation_title))
-                .setItems(new String[]{getResources().getString(R.string.settings_donate_disambiguation_play),
-                        getResources().getString(R.string.settings_donate_disambiguation_paypal)}, new DialogInterface.OnClickListener() {
+        new MaterialDialog.Builder(this)
+                .title(R.string.settings_donate_disambiguation_title)
+                .items(getResources().getString(R.string.settings_donate_disambiguation_play),
+                        getResources().getString(R.string.settings_donate_disambiguation_paypal))
+                .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
                         switch (which) {
                             case 0:
-                                Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND").setPackage("com.android.vending");
+                                /*Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND").setPackage("com.android.vending");
                                 Boolean isConnected = bindService(serviceIntent, mPlayConnection, Context.BIND_AUTO_CREATE);
                                 Log.d("Donations", String.valueOf(isConnected));
-                                induceDonatePrices(true);
+                                induceDonatePrices(true);*/
+                                Snackbar.make(mRoot, R.string.msg_coming_soon, Snackbar.LENGTH_SHORT).show();
                                 break;
                             case 1:
                                 donate(0, false);
                                 break;
                         }
                     }
-                }).create().show();
+                }).show();
     }
 
     private void induceDonatePrices(final Boolean useGooglePlay) {
-        DialogInterface.OnClickListener listener;
-        listener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int amount = 0;
-                switch (which) {
-                    case 0:
-                        amount = 1;
-                        break;
-                    case 1:
-                        amount = 5;
-                        break;
-                    case 2:
-                        amount = 10;
-                        break;
-                    case 3:
-                        amount = 25;
-                        break;
-                    case 4:
-                        amount = 50;
-                        break;
-                }
-                donate(amount, useGooglePlay);
-            }
-        };
-        new AlertDialog.Builder(this).setTitle(getResources().getString(R.string.settings_donate_price_title))
-                .setItems(new String[]{
-                        getResources().getString(R.string.settings_donate_price_1),
+        new MaterialDialog.Builder(this).title(R.string.settings_donate_price_title)
+                .items(getResources().getString(R.string.settings_donate_price_1),
                         getResources().getString(R.string.settings_donate_price_5),
                         getResources().getString(R.string.settings_donate_price_10),
                         getResources().getString(R.string.settings_donate_price_25),
-                        getResources().getString(R.string.settings_donate_price_50)
-                }, listener).create().show();
+                        getResources().getString(R.string.settings_donate_price_50))
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        int amount = 0;
+                        switch (which) {
+                            case 0:
+                                amount = 1;
+                                break;
+                            case 1:
+                                amount = 5;
+                                break;
+                            case 2:
+                                amount = 10;
+                                break;
+                            case 3:
+                                amount = 25;
+                                break;
+                            case 4:
+                                amount = 50;
+                                break;
+                        }
+                        donate(amount, useGooglePlay);
+                    }
+                }).show();
     }
 
     public void donate(int amount, boolean useGooglePlay) {
         if (useGooglePlay) {
             sendPlayBroadcast(amount);
         } else {
-            new AlertDialog.Builder(Settings.this).setTitle(R.string.settings_donate_terms_popup_title)
-                    .setMessage(R.string.settings_donate_terms_popup_message)
-                    .setPositiveButton(R.string.settings_donate_terms_popup_pos, new DialogInterface.OnClickListener() {
+            new MaterialDialog.Builder(this).title(R.string.settings_donate_terms_popup_title)
+                    .content(R.string.settings_donate_terms_popup_message)
+                    .positiveText(android.R.string.yes).negativeText(android.R.string.no).onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://plus.google.com/+AdrianVovkDev/posts/PUiDmRFzPLw")));
                         }
-                    }).setNegativeButton(R.string.settings_donate_terms_popup_neg, null).create().show();
+                    }).show();
         }
     }
 

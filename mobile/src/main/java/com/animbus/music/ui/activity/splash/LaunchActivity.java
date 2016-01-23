@@ -89,15 +89,20 @@ public class LaunchActivity extends ThemeActivity {
     }
 
     private void configThemeIfNeeded() {
-        if (ATE.config(this, getATEKey()).isConfigured()) {
+        if (!ATE.config(this, getATEKey()).isConfigured()) {
             ATE.config(this, getATEKey())
                     .activityTheme(R.style.AppTheme_Faithful)
-
+                    .primaryColorRes(R.color.faithfulPrimaryDark)
+                    .accentColorRes(R.color.default_accent)
+                    .navigationViewSelectedIconRes(R.color.default_accent)
+                    .navigationViewSelectedTextRes(R.color.default_accent)
                     .coloredActionBar(true)
                     .autoGeneratePrimaryDark(true)
                     .coloredStatusBar(true)
                     .lightStatusBarMode(Config.LIGHT_STATUS_BAR_AUTO)
-                    .lightToolbarMode(Config.LIGHT_TOOLBAR_AUTO);
+                    .lightToolbarMode(Config.LIGHT_TOOLBAR_AUTO)
+                    .usingMaterialDialogs(true)
+                    .commit();
         }
     }
 

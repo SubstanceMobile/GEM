@@ -13,6 +13,8 @@
     <string name="title_activity_quick_peek">Quick Peek</string>
     <string name="title_activity_album_color">Change Color</string>
     <string name="title_activity_search">Search</string>
+    <string name="title_activity_album_details">ALBUM_DETAILS</string>
+    <string name="title_activity_about">About</string>
 
     Action/Toolbar
     <string name="action_settings">@string/title_activity_settings</string>
@@ -35,12 +37,12 @@
     <string name="page_songs">Songs</string>
     <string name="page_playlists">Playlists</string>
     <string name="page_artists">Artists</string>
-    <string name="page_genres">Genres</string>
 
     <string name="drawer_open">Open the App Drawer</string>
     <string name="drawer_close">Close the App Drawer</string>
 
-    Settings
+    About
+    <string name="about_visit_play">Visit us on Google Play</string>
     <string name="about_libraries_header">Libraries Used:</string>
     <string name="about_thanks_header">With special thanks to:</string>
     <string name="about_appcompat">Google Support Libraries</string>
@@ -55,7 +57,7 @@
     <string name="about_managed">Managed the Project</string>
     <string name="about_Karim">Karim Abou Zeid</string>
     <string name="about_Neel">Neel Raj</string>
-    <string name="about_Substance">Substance Open Source</string>
+    <string name="about_Substance">Substance Project</string>
 
     Settings
     <string name="settings_header_general">General</string>
@@ -74,11 +76,13 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
     <string name="settings_primary">Primary Color</string>
     <string name="settings_primary_summary">The main color in the app</string>
     <string name="settings_accent">Accent Color</string>
-    <string name="settings_accent_summary">The color used by many UI elements</string>
+    <string name="settings_accent_summary">The color that compliments the primary color</string>
     <string name="settings_reset_primary">Reset Primary Color</string>
+    <string name="settings_reset_primary_summary">Sets the primary color to be transparent</string>
 
     <string name="settings_tab_mode">Tab Mode</string>
     <string-array name="settings_tab_mode_choices">
@@ -95,7 +99,7 @@
     </string-array>
 
     <string name="settings_page_names">Dynamic page names</string>
-    <string name="settings_page_names_summary">Uses name of the currently showing page instead of \"Main\"</string>
+    <string name="settings_page_names_summary">Uses name of the currently showing page instead of \"Music\"</string>
     
     <string name="settings_bigger_space">Bigger Space in list</string>
     <string name="settings_bigger_space_summary">Increases the space between the albums</string>
@@ -113,8 +117,8 @@
     Choose Icon
     <string name="settings_choose_icon_srini">Srini Kumar</string>
     <string name="settings_choose_icon_alex">Alex Mueller</string>
-<string name="settings_choose_icon_jaka">Jaka Mušič</string>
-<string name="settings_choose_icon_nguyen">A. H. Nguyen</string>
+    <string name="settings_choose_icon_jaka">Jaka Mušič</string>
+    <string name="settings_choose_icon_nguyen">A. H. Nguyen</string>
 
     <string name="settings_choose_icon_save_title">Save Changes?</string>
     <string name="settings_choose_icon_save_message">You modified the icon without saving. Would you like to save?</string>
@@ -134,24 +138,15 @@
     <string name="settings_donate_terms_popup_title">PayPal donations have moved.</string>
     <string name="settings_donate_terms_popup_message">Google\'s terms state that I do not have a right to add PayPal donations to this app if I want it to stay on the Play Store.
     You will be redirected to the Google+ Community for this app to donate. Continue?</string>
-    <string name="settings_donate_terms_popup_pos">Yes</string>
-    <string name="settings_donate_terms_popup_neg">No</string>
-
-    <string name="settings_tester_regester_confirmation">You are now a tester</string>
-    <string name="settings_tester_unregister_confirm">You are no longer a tester</string>
-    <string name="settings_tester_unregister_popup_title">Are you sure?</string>
-    <string name="settings_tester_unregister_popup_message">Are you sure you want to stop being a tester?</string>
-    <string name="settings_unregister_popup_yes">Yes</string>
-    <string name="settings_unregister_popup_no">No</string>
-    <string name="settings_tester_already_registered">You are already a tester</string>
 
     Setup
-    <string name="setup_intro_description">Welcome to GEM Player!</string>
-    <string name="setup_promo_1_title">Customisable</string>
-    <string name="setup_promo_1_desc">With the UI Customizer, you can make GEM look the way <b>you</b> want</string>
-    <string name="setup_promo_2_title">Powerful</string>
-    <string name="setup_promo_2_desc">GEM is a powerful but lightweight music player</string>
-    <string name="setup_end_message">Enjoy!</string>
+    <string name="setup_intro">Welcome to GEM Player. Please keep in mind that this is beta software and may have a few issues.</string>
+    <string name="permission_storage_explain_title">Storage</string>
+    <string name="permission_storage_explain_message">The storage permission is required for GEM Player to be able to read your media library</string>
+    <string name="setup_thanks">Thank You</string>
+    <string name="enjoy">Enjoy the app!</string>
+    <string name="internal_tester_warning_title">Warning</string>
+    <string name="internal_tester_warning">You are running internal testing software. It may be unfinished. Do not distribute.</string>
 
     Playback
     <string name="playback_play">Play</string>
@@ -166,101 +161,10 @@
     <string name="playback_error_IO">Error playing file. Please try again</string>
     <string name="playback_error_generic">Couldn\'t play this song</string>
 
-    <string name="setup_intro">Welcome to GEM Player. Please keep in mind that this is beta software and may have a few issues.</string>
-    <string name="permission_storage_explain_title">Storage</string>
-    <string name="permission_storage_explain_message">The storage permission is required for GEM Player to be able to read your media library</string>
-    <string name="setup_thanks">Thank You</string>
-    <string name="enjoy">Enjoy the app!</string>
-
-    <string name="internal_tester_warning_title">Warning</string>
-    <string name="internal_tester_warning">You are running internal testing software. It may be unfinished. Do not distribute.</string>
-    <string name="internal_tester_accept">Accept</string>
-    <string name="internal_tester_dont_show_again">Don\'t show again</string>
-    <string name="internal_tester_error">An error occurred</string>
-
     Misc.
     <string name="appwidget_text">Why are you using the widget?</string>
     <string name="msg_coming_soon">Coming Soon</string>
     <string name="msg_temp_removed">Removed for renovation</string>
-
     <string name="title_uri">Unknown</string>
     <string name="artist_uri">Unknown</string>
-
-    Unsorted
-    <string name="hello_world">Hello world!</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_ui_customiser">UiCustomiser</string>
-    <string name="title_activity_album_details">ALBUM_DETAILS</string>
-    <string name="title_activity_about">About</string>
-
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
-
-    <string name="msg_update_available">Update Available</string>
-    <string name="msg_update_content">An update for the latest version is available! Open Update page and download?</string>
-
-    <string name="msg_crashed">Unfortunately, GEM Player has stopped</string>
-    <string name="crashed_report">Report</string>
-    <string name="msg_crash_message">Enter a message to be send with the crash report</string>
-    <string name="crash_hint">Describe the crash</string>
-
-    <string name="blank_song">%d Song</string>
-    <string name="blank_songs">%d Songs</string>
 </resources>

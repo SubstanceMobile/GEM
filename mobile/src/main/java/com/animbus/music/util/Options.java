@@ -6,13 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Process;
-import android.os.SystemClock;
-import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
+import android.preference.PreferenceManager;
 
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.Config;
-import com.animbus.music.ui.activity.settings.chooseIcon.Icon;
 import com.animbus.music.ui.activity.splash.LaunchActivity;
 
 import static android.content.Intent.ACTION_MAIN;
@@ -33,6 +30,7 @@ public class Options {
             KEY_TABS_MODE = "tab_mode",
             KEY_CATEGORY_NAMES = "screen_name",
             KEY_PALETTE = "use_palette",
+            KEY_BIG_GRID_SPACE = "big_grid_space",
             KEY_LIGHT_THEME = base + ".theme.IS_LIGHT";
 
     private static volatile long updatedAt;
@@ -41,15 +39,9 @@ public class Options {
 
     }
 
-    public static void init(Context context) {
+    public static void init(final Context context) {
         Options.context = context;
         Options.prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                updatedAt = System.currentTimeMillis();
-            }
-        });
     }
 
     public static boolean shouldRecreate(long updateTime) {
@@ -182,12 +174,20 @@ public class Options {
     // Use Palette //
     /////////////////
 
-    public static void setUsePalette(boolean usePalette) {
+    /*public static void setUsePalette(boolean usePalette) {
         set(KEY_PALETTE, usePalette);
-    }
+    }*/
 
     public static boolean usingPalette() {
         return getBool(KEY_PALETTE);
+    }
+
+    ///////////////////////
+    // Bigger List Space //
+    ///////////////////////
+
+    public static boolean usingBiggerSpaceInAlbumList() {
+        return getBool(KEY_BIG_GRID_SPACE);
     }
 
 }

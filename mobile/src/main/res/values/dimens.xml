@@ -25,6 +25,7 @@
 
     Design Sizes
     <dimen name="margin_micro">0.5dp</dimen>
+    <dimen name="margin_pico">2dp</dimen>
     <dimen name="margin_tiny">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
