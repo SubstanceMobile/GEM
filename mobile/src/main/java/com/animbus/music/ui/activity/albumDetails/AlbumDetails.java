@@ -120,7 +120,7 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
         mCollapsingToolbar.setCollapsedTitleTextColor(mAlbum.getTitleTextColor());
-        findViewById(R.id.album_details_album_art).setForeground(ContextCompat.getDrawable(this, !Util.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
+        findViewById(R.id.album_details_album_art).setBackground(ContextCompat.getDrawable(this, !Util.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
     }
 
     @Override

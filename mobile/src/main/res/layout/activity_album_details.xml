@@ -23,14 +23,23 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
-                    android:id="@+id/album_details_album_art"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:foreground="?ripple"
-                    app:layout_collapseMode="parallax"
-                    tools:src="@drawable/art_dark"/>
+                    app:layout_collapseMode="parallax">
+
+                    <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
+                        android:id="@+id/album_details_album_art"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:src="@drawable/art_dark"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"/>
+
+                </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"

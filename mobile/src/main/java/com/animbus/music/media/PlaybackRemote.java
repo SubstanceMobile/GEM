@@ -2,6 +2,7 @@ package com.animbus.music.media;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Path;
 import android.net.Uri;
 import android.support.v4.media.session.MediaControllerCompat.TransportControls;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -12,6 +13,10 @@ import android.widget.Toast;
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.media.stable.PlaybackManager;
+import com.animbus.music.media.stable.QueueManager;
+import com.animbus.music.media.stable.ServiceHelper;
+import com.animbus.music.util.Options;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +55,7 @@ public class PlaybackRemote {
     // can be used because it is set when init is called, when the service starts.
     public static void setUp(Context context) {
         mContext = context;
+        ServiceHelper.get(context).initService();
     }
 
     public static void init(MediaService service) {
@@ -90,6 +96,10 @@ public class PlaybackRemote {
     ///////////////////////////////////////////////////////////////////////////
 
     public static void play(Uri uri) {
+        if (Options.useStableService()) {
+            Toast.makeText(mContext, R.string.msg_coming_soon, Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (!startServiceIfNecessary()) remote.playFromUri(uri, null); else {
             tempCommand = 0;
             tempUri = uri;
@@ -97,6 +107,10 @@ public class PlaybackRemote {
     }
 
     public static void play(Song song) {
+        if (Options.useStableService()) {
+            PlaybackManager.get().play(song);
+            return;
+        }
         if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getSongID()), null); else {
             tempCommand = 1;
             tempSong = song;
@@ -104,50 +118,93 @@ public class PlaybackRemote {
     }
 
     public static void play(List<Song> songs, int startPos) {
+        if (Options.useStableService()) {
+            PlaybackManager.get().play(songs, startPos);
+            return;
+        }
         tempSongList = songs;
         tempListStartPos = startPos;
         if (!startServiceIfNecessary()) remote.sendCustomAction(PlaybackBase.ACTION_PLAY_FROM_LIST, null); else tempCommand = 2;
     }
 
     public static void playQueueItem(int pos) {
+        if (Options.useStableService()) {
+            PlaybackManager.get().playQueueItem(pos);
+            return;
+        }
         play(getQueue().get(pos));
         setCurrentSongPos(pos);
     }
 
     public static void resume() {
+        if (Options.useStableService()) {
+            PlaybackManager.get().resume();
+            return;
+        }
         remote.play();
     }
 
     public static void pause() {
+        if (Options.useStableService()) {
+            PlaybackManager.get().pause();
+            return;
+        }
         remote.pause();
     }
 
     public static void next() {
+        if (Options.useStableService()) {
+            PlaybackManager.get().playNext();
+            return;
+        }
         remote.skipToNext();
     }
 
     public static void prev() {
+        if (Options.useStableService()) {
+            PlaybackManager.get().playPrev(true);
+            return;
+        }
         remote.skipToPrevious();
     }
 
     public static void toggleRepeat() {
+        if (Options.useStableService()) {
+            PlaybackManager.get().setRepeat(!PlaybackManager.get().isLooping());
+            return;
+        }
         setRepeat(!mService.IMPL.isRepeating());
     }
 
     public static void setRepeat(boolean repeating) {
+        if (Options.useStableService()) {
+            PlaybackManager.get().setRepeat(repeating);
+            return;
+        }
         remote.sendCustomAction(PlaybackBase.ACTION_SET_REPEAT, null);
         tempRepeating = repeating;
     }
 
     public static boolean isRepeating() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().isLooping();
+        }
         return mService.IMPL.isRepeating();
     }
 
     public static void seek(long time) {
+        if (Options.useStableService()) {
+            PlaybackManager.get().seekTo((int)time);
+            return;
+        }
         remote.seekTo(time);
     }
 
     public static void stop() {
+        if (Options.useStableService()) {
+            PlaybackManager.get().stop();
+            return;
+        }
         remote.stop();
         killService();
     }
@@ -161,31 +218,56 @@ public class PlaybackRemote {
     ///////////////////////////////////////////////////////////////////////////
 
     public static List<Song> getQueue() {
+        if (Options.useStableService()) {
+            return QueueManager.get().getCurrentQueueAsSong();
+        }
         return mQueue;
     }
 
     public static void setQueue(List<Song> queue) {
+        if (Options.useStableService()) {
+            QueueManager.get().setQueueAsSongList(queue);
+            return;
+        }
         mQueue = queue;
     }
 
     public static void addToQueue(Song s) {
+        if (Options.useStableService()) {
+            QueueManager.get().addToQueue(s);
+            return;
+        }
         mQueue.add(s);
     }
 
     public static void setCurrentSongPos(int currentSongPos) {
+        if (Options.useStableService()) {
+            QueueManager.get().setCurrentSongPos(currentSongPos);
+            return;
+        }
         mCurrentSongPos = currentSongPos;
     }
 
     public static int getCurrentSongPos() {
+        if (Options.useStableService()) {
+            return QueueManager.get().getCurrentSongPos();
+        }
         return mCurrentSongPos;
     }
 
     public static Song getCurrentSong() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().getCurrentSong();
+        }
         if (!getQueue().isEmpty()) return getQueue().get(getCurrentSongPos());
         return null;
     }
 
     public static int getNextSongPos() {
+        if (Options.useStableService()) {
+            return QueueManager.get().updateNextSongPos();
+        }
+
         int pos;
         pos = mCurrentSongPos + 1;
         if (pos > (mQueue.size() - 1)) {
@@ -196,6 +278,10 @@ public class PlaybackRemote {
     }
 
     public static int getPrevSongPos() {
+        if (Options.useStableService()) {
+            return QueueManager.get().updatePrevSongPos();
+        }
+
         int pos;
         pos = mCurrentSongPos - 1;
         if (pos == 0) {
@@ -210,35 +296,73 @@ public class PlaybackRemote {
     ///////////////////////////////////////////////////////////////////////////
 
     public static MediaSessionCompat.Token getToken() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().getService().getSession().getSessionToken();
+        }
+
         return mService.mSession.getSessionToken();
     }
 
     public static PlaybackStateCompat getState() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().getService().getStateObj();
+        }
+
         return mService.mState;
     }
 
     public static MediaSessionCompat getSession() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().getService().getSession();
+        }
+
         return mService.mSession;
     }
 
     public static boolean isActive() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().isActive();
+        }
+
         return mService != null && mService.mSession.isActive();
     }
 
     public static boolean isPlaying() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().isPlaying();
+        }
+
         return mService.IMPL.isPlaying();
     }
 
     public static int getCurrentPosInSong() {
+        if (Options.useStableService()) {
+            return PlaybackManager.get().getCurrentPosInSong();
+        }
+
         return mService.IMPL.getCurrentPosInSong();
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
     // Listener
     ///////////////////////////////////////////////////////////////////////////
 
     static ArrayList<SongChangedListener> songListeners = new ArrayList<>();
     static ArrayList<StateChangedListener> stateListeners = new ArrayList<>();
+
+    static {
+        PlaybackManager.get().registerListener(new PlaybackManager.OnChangedListener() {
+            @Override
+            public void onSongChanged(Song song) {
+                updateSongListeners(song);
+            }
+
+            @Override
+            public void onPlaybackStateChanged(PlaybackStateCompat state) {
+                updateStateListeners(state);
+            }
+        });
+    }
 
     public interface SongChangedListener {
         void onSongChanged(Song newSong);
@@ -264,6 +388,11 @@ public class PlaybackRemote {
     }
 
     protected static void updateSongListeners(Uri uri) {
+        if (Options.useStableService()) {
+            Toast.makeText(mContext, R.string.msg_coming_soon, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Song s = Library.findSongByUri(uri);
         if (s == null) {
             //Builds the song

@@ -52,7 +52,6 @@
         android:layout_height="match_parent"
         android:background="?attr/ripple"
         android:clickable="true"
-        android:id="@+id/navdrawer_header_clickable"
-        android:layout_gravity="right|bottom" />
+        android:id="@+id/navdrawer_header_clickable" />
 
 </FrameLayout>

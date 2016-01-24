@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.appthemeengine.ATE;
+import com.afollestad.appthemeengine.util.Util;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -183,26 +185,40 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     private void setUpNavdrawer() {
         mNavigationView.setNavigationItemSelectedListener(this);
         mNavigationView.inflateMenu(R.menu.navigation_drawer_items);
-
-
         PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
             @Override
             public void onStateChanged(PlaybackStateCompat newState) {
-                if (PlaybackRemote.isActive())
-                    mNavigationView.inflateHeaderView(R.layout.drawer_header);
-                else mNavigationView.removeHeaderView(mNavigationView.getHeaderView(0));
+                updateDrawerHeaderVisibility();
             }
         });
 
         PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
             @Override
             public void onSongChanged(Song newSong) {
-                View header = mNavigationView.getHeaderView(0);
-                if (header != null) {
-                    //TODO: Configure drawer header here
-                }
+                setUpDrawerHeader(newSong);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDrawerHeaderVisibility();
+        setUpDrawerHeader(PlaybackRemote.getCurrentSong());
+    }
+
+    private void updateDrawerHeaderVisibility(){
+        if (PlaybackRemote.isActive() && mNavigationView.getHeaderCount() == 0)
+            mNavigationView.inflateHeaderView(R.layout.drawer_header);
+        else mNavigationView.removeHeaderView(mNavigationView.getHeaderView(0));
+    }
+
+    private void setUpDrawerHeader(Song s) {
+        View header = mNavigationView.getHeaderView(0);
+        if (header != null && s != null) {
+            s.getAlbum().requestArt((ImageView) header.findViewById(R.id.navdrawer_header_image));
+            header.findViewById(R.id.navdrawer_header_clickable).setBackground(ContextCompat.getDrawable(this, !Util.isColorLight(s.getAlbum().getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
+        }
     }
 
     private void goToDefaultPage() {
