@@ -1,9 +1,9 @@
 <resources>
-    App Name
+    <!-- App Name -->
     <string name="app_name">Music</string>
     <string name="app_name_actual">GEM Player</string>
 
-    Activities
+    <!-- Activities -->
     <string name="title_activity_albums">Album</string>
     <string name="title_activity_main">Music</string>
     <string name="title_activity_main_goog_experience">My Library</string>
@@ -13,11 +13,11 @@
     <string name="title_activity_quick_peek">Quick Peek</string>
     <string name="title_activity_album_color">Change Color</string>
     <string name="title_activity_search">Search</string>
-    <string name="title_activity_album_details">ALBUM_DETAILS</string>
+    <string name="title_activity_album_details" translatable="false">ALBUM_DETAILS</string>
     <string name="title_activity_about">About</string>
 
-    Action/Toolbar
-    <string name="action_settings">@string/title_activity_settings</string>
+    <!-- Action/Toolbar -->
+    <string name="action_settings" translatable="false">@string/title_activity_settings</string>
     <string name="action_stop">Stop</string>
     <string name="action_search">Search</string>
     <string name="action_reset_icons">Reset Icons</string>
@@ -27,11 +27,11 @@
     <string name="action_bug_report">Report a bug</string>
     <string name="action_reset">Reset</string>
 
-    Search
+    <!-- Search -->
     <string name="search_empty">No Results</string>
     <string name="search_hint">Search Library…</string>
 
-    Navigation Drawer
+    <!-- Navigation Drawer -->
     <string name="page_home">Home</string>
     <string name="page_albums">Albums</string>
     <string name="page_songs">Songs</string>
@@ -41,25 +41,25 @@
     <string name="drawer_open">Open the App Drawer</string>
     <string name="drawer_close">Close the App Drawer</string>
 
-    About
+    <!-- About -->
     <string name="about_visit_play">Visit us on Google Play</string>
     <string name="about_libraries_header">Libraries Used:</string>
     <string name="about_thanks_header">With special thanks to:</string>
-    <string name="about_appcompat">Google Support Libraries</string>
-    <string name="about_palette">Palette</string>
-    <string name="about_glide">Glide</string>
-    <string name="about_gitty">Gitty Reporter</string>
-    <string name="about_appintro">AppIntro</string>
-    <string name="about_fast_scroll">Recycler Fast Scroll</string>
-    <string name="about_dialogs">Material Dialogs</string>
+    <string name="about_appcompat" translatable="false">Google Support Libraries</string>
+    <string name="about_palette" translatable="false">Palette</string>
+    <string name="about_glide" translatable="false">Glide</string>
+    <string name="about_gitty" translatable="false">Gitty Reporter</string>
+    <string name="about_appintro" translatable="false">AppIntro</string>
+    <string name="about_fast_scroll" translatable="false">Recycler Fast Scroll</string>
+    <string name="about_dialogs" translatable="false">Material Dialogs</string>
     <string name="about_icon">Designed icons</string>
     <string name="about_helped">Helped Development</string>
     <string name="about_managed">Managed the Project</string>
-    <string name="about_Karim">Karim Abou Zeid</string>
-    <string name="about_Neel">Neel Raj</string>
-    <string name="about_Substance">Substance Project</string>
+    <string name="about_Karim" translatable="false">Karim Abou Zeid</string>
+    <string name="about_Neel" translatable="false">Neel Raj</string>
+    <string name="about_Substance" translatable="false">Substance Project</string>
 
-    Settings
+    <!-- Settings -->
     <string name="settings_header_general">General</string>
     <string name="settings_header_theme">Theme</string>
     <string name="settings_header_main_screen">Main Screen</string>
@@ -71,7 +71,7 @@
         <item>Extra Dark</item>
         <item>Light</item>
     </string-array>
-    <string-array name="settings_theme_values">
+    <string-array name="settings_theme_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -91,7 +91,7 @@
         <item>Icon Tabs</item>
         <item>Scrolling Tabs</item>
     </string-array>
-    <string-array name="settings_tab_mode_values">
+    <string-array name="settings_tab_mode_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -114,11 +114,11 @@
     <string name="settings_source_code">Source Code</string>
     <string name="settings_source_base_code">Original Code</string>
 
-    Choose Icon
-    <string name="settings_choose_icon_srini">Srini Kumar</string>
-    <string name="settings_choose_icon_alex">Alex Mueller</string>
-    <string name="settings_choose_icon_jaka">Jaka Mušič</string>
-    <string name="settings_choose_icon_nguyen">A. H. Nguyen</string>
+    <!-- Choose Icon -->
+    <string name="settings_choose_icon_srini" translatable="false">Srini Kumar</string>
+    <string name="settings_choose_icon_alex" translatable="false">Alex Mueller</string>
+    <string name="settings_choose_icon_jaka" translatable="false">Jaka Mušič</string>
+    <string name="settings_choose_icon_nguyen" translatable="false">A. H. Nguyen</string>
 
     <string name="settings_choose_icon_save_title">Save Changes?</string>
     <string name="settings_choose_icon_save_message">You modified the icon without saving. Would you like to save?</string>
@@ -127,8 +127,8 @@
     <string name="settings_choose_icon_save_neutral">Cancel</string>
 
     <string name="settings_donate_disambiguation_title">Donate Using</string>
-    <string name="settings_donate_disambiguation_play">Google Play</string>
-    <string name="settings_donate_disambiguation_paypal">PayPal</string>
+    <string name="settings_donate_disambiguation_play" translatable="false">Google Play</string>
+    <string name="settings_donate_disambiguation_paypal" translatable="false">PayPal</string>
     <string name="settings_donate_price_title">Select Amount</string>
     <string name="settings_donate_price_1">$1.00</string>
     <string name="settings_donate_price_5">$5.00</string>
@@ -136,10 +136,9 @@
     <string name="settings_donate_price_25">$25.00</string>
     <string name="settings_donate_price_50">$50.00</string>
     <string name="settings_donate_terms_popup_title">PayPal donations have moved.</string>
-    <string name="settings_donate_terms_popup_message">Google\'s terms state that I do not have a right to add PayPal donations to this app if I want it to stay on the Play Store.
-    You will be redirected to the Google+ Community for this app to donate. Continue?</string>
+    <string name="settings_donate_terms_popup_message">Google\'s terms state that I do not have a right to add PayPal donations to this app if I want it to stay on the Play Store.\nYou will be redirected to the Google+ Community for this app to donate. Continue?</string>
 
-    Setup
+    <!-- Setup -->
     <string name="setup_intro">Welcome to GEM Player. Please keep in mind that this is beta software and may have a few issues.</string>
     <string name="permission_storage_explain_title">Storage</string>
     <string name="permission_storage_explain_message">The storage permission is required for GEM Player to be able to read your media library</string>
@@ -148,7 +147,7 @@
     <string name="internal_tester_warning_title">Warning</string>
     <string name="internal_tester_warning">You are running internal testing software. It may be unfinished. Do not distribute.</string>
 
-    Playback
+    <!-- Playback -->
     <string name="playback_play">Play</string>
     <string name="playback_pause">Pause</string>
     <string name="playback_next">Next</string>
@@ -161,7 +160,7 @@
     <string name="playback_error_IO">Error playing file. Please try again</string>
     <string name="playback_error_generic">Couldn\'t play this song</string>
 
-    Misc.
+    <!-- Misc. -->
     <string name="appwidget_text">Why are you using the widget?</string>
     <string name="msg_coming_soon">Coming Soon</string>
     <string name="msg_temp_removed">Removed for renovation</string>
