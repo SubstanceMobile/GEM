@@ -1,0 +1,138 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Music</string>
+    <string name="app_name_actual">Lecteur GEM</string>
+
+    <!-- Activities -->
+    <string name="title_activity_albums">Album</string>
+    <string name="title_activity_main">Musique</string>
+    <string name="title_activity_main_goog_experience">Ma bibliothèque musicale</string>
+    <string name="title_activity_now_playing">Lecture en cours</string>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="title_activity_choose_icon">Choisir l\'icône</string>
+    <string name="title_activity_quick_peek">Aperçu rapide</string>
+    <string name="title_activity_album_color">Changer la couleur</string>
+    <string name="title_activity_search">Chercher</string>
+    <string name="title_activity_about">À propos</string>
+
+    <!-- Action/Toolbar -->
+    <string name="action_stop">Arrêt</string>
+    <string name="action_search">Chercher</string>
+    <string name="action_reset_icons">Réinitialiser les icônes</string>
+    <string name="action_test_icons">Activer tous les icônes (En test)</string>
+    <string name="action_place_shortcut">Ajouter cet icône à l\'écran d\'accueil</string>
+    <string name="action_donate">Faire un don</string>
+    <string name="action_bug_report">Signaler un bogue</string>
+    <string name="action_reset">Réinitialiser</string>
+
+    <!-- Search -->
+    <string name="search_empty">Aucun résultat</string>
+    <string name="search_hint">Recherche de bibliothèque musicale…</string>
+
+    <!-- Navigation Drawer -->
+    <string name="page_home">Accueil</string>
+    <string name="page_albums">Albums</string>
+    <string name="page_songs">Titres</string>
+    <string name="page_playlists">Listes de lecture</string>
+    <string name="page_artists">Artistes</string>
+
+    <string name="drawer_open">Ouvrir le tiroir</string>
+    <string name="drawer_close">Fermer le tiroir</string>
+
+    <!-- About -->
+    <string name="about_visit_play">Voir sur le Google Play Store</string>
+    <string name="about_libraries_header">Bibliothèques utilisées :</string>
+    <string name="about_thanks_header">Remerciements à :</string>
+    <string name="about_icon">Conception d\'icônes</string>
+    <string name="about_helped">Aide au développement</string>
+    <string name="about_managed">Gestion du projet</string>
+
+    <!-- Settings -->
+    <string name="settings_header_general">Général</string>
+    <string name="settings_header_theme">Thème</string>
+    <string name="settings_header_main_screen">Écran principal</string>
+    <string name="settings_header_other">Autre</string>
+
+    <string name="settings_select_base_theme">Thème général</string>
+    <string-array name="settings_theme_items">
+        <item>Foncé</item>
+        <item>Très foncé</item>
+        <item>Clair</item>
+    </string-array>
+
+    <string name="settings_primary">Couleur principale</string>
+    <string name="settings_primary_summary">Couleur principale de l\'application</string>
+    <string name="settings_accent">Couleur secondaire</string>
+    <string name="settings_accent_summary">Couleur complétant la couleur principale</string>
+    <string name="settings_reset_primary">Réinitialiser la couleur principale</string>
+    <string name="settings_reset_primary_summary">Définir la couleur primaire comme transparente</string>
+
+    <string name="settings_tab_mode">Mode onglet</string>
+    <string-array name="settings_tab_mode_choices">
+        <item>Aucun</item>
+        <item>Onglets standards</item>
+        <item>Onglets icônes</item>
+        <item>Onglets de défilement</item>
+    </string-array>
+
+    <string name="settings_page_names">Noms dynamiques de page</string>
+    <string name="settings_page_names_summary">Utiliser le nom de la page actuelle plutôt que \"Music\"</string>
+    
+    <string name="settings_bigger_space">Espace élargi dans la liste</string>
+    <string name="settings_bigger_space_summary">Augmente l\'espace entre les albums</string>
+
+    <string name="settings_palette">Utiliser \"Palette\"</string>
+    <string name="settings_palette_summary">Utiliser les couleurs de la pochette de l\'album</string>
+
+    <string name="settings_choose_icon">Choisir une icône</string>
+    <string name="settings_choose_icon_summary">Définir l\'icône à afficher sur votre écran d\'accueil</string>
+
+    <string name="settings_header_about">À propos</string>
+    <string name="settings_source_code">Code source</string>
+    <string name="settings_source_base_code">Code original</string>
+
+    <string name="settings_choose_icon_save_title">Sauvegarder les modifications ?</string>
+    <string name="settings_choose_icon_save_message">Vous avez modifié l\'icône sans enregistrer. Voulez-vous enregistrer ?</string>
+    <string name="settings_choose_icon_save_positive">Oui</string>
+    <string name="settings_choose_icon_save_negative">Non</string>
+    <string name="settings_choose_icon_save_neutral">Annuler</string>
+
+    <string name="settings_donate_disambiguation_title">Faire un don via</string>
+    <string name="settings_donate_price_title">Choisir le montant</string>
+    <string name="settings_donate_price_1">1 $</string>
+    <string name="settings_donate_price_5">5 $</string>
+    <string name="settings_donate_price_10">10 $</string>
+    <string name="settings_donate_price_25">25 $</string>
+    <string name="settings_donate_price_50">50 $</string>
+    <string name="settings_donate_terms_popup_title">Les dons via PayPal ont évolué</string>
+    <string name="settings_donate_terms_popup_message">Le règlement de Google n\'autorise pas les dons via PayPal pour les applications présentes sur le Play Store.\nVous allez être redirigé vers la Communauté Google+ de cette application pour pouvoir faire votre don. Continuer ?</string>
+
+    <!-- Setup -->
+    <string name="setup_intro">Bienvenue sur le lecteur GEM. Veuillez garder à l\'esprit qu\'il s\'agit d\'une application en cours de développement et qu\'elle peut contenir des bogues.</string>
+    <string name="permission_storage_explain_title">Stockage</string>
+    <string name="permission_storage_explain_message">L\'autorisation de stockage est nécessaire au lecteur GEM pour pouvoir accéder à votre bibliothèque multimédia</string>
+    <string name="setup_thanks">Merci</string>
+    <string name="enjoy">Appréciez l\'application !</string>
+    <string name="internal_tester_warning_title">Avertissement</string>
+    <string name="internal_tester_warning">Vous utilisez une application en cours de développement. Ne la distribuez pas.</string>
+
+    <!-- Playback -->
+    <string name="playback_play">Lire</string>
+    <string name="playback_pause">Pause</string>
+    <string name="playback_next">Suivant</string>
+    <string name="playback_prev">Précédent</string>
+    <string name="playback_queue">File d\'attente</string>
+    <string name="playback_repeat">Répéter</string>
+    <string name="playback_shuffle">Aléatoire</string>
+    <string name="playing_album">Lire l\'album</string>
+    <string name="playback_error_unsupported">Ce type de média n\'est pas pris en charge</string>
+    <string name="playback_error_IO">Erreur lors de la lecture du fichier. Veuillez réessayer</string>
+    <string name="playback_error_generic">Impossible de lire ce titre musical</string>
+
+    <!-- Misc. -->
+    <string name="appwidget_text">Pourquoi utilisez-vous le widget ?</string>
+    <string name="msg_coming_soon">Prochainement</string>
+    <string name="msg_temp_removed">Supprimé pour rénovation</string>
+    <string name="title_uri">Inconnu</string>
+    <string name="artist_uri">Inconnu</string>
+</resources>
