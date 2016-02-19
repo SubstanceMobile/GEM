@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.afollestad.appthemeengine.util.Util;
+import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.IconManager;
@@ -59,7 +59,7 @@ public class ChooseIcon extends ThemeActivity {
         super.setUpTheme();
         FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.save_fab);
         mFab.setBackgroundTintList(ColorStateList.valueOf(getAccentColor()));
-        DrawableCompat.setTint(DrawableCompat.wrap(mFab.getDrawable()), !Util.isColorLight(getAccentColor()) ? Color.WHITE : Color.BLACK);
+        DrawableCompat.setTint(DrawableCompat.wrap(mFab.getDrawable()), !ATEUtil.isColorLight(getAccentColor()) ? Color.WHITE : Color.BLACK);
     }
 
     @Override

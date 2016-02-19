@@ -560,7 +560,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             }
             binding.recycler.setItemAnimator(new DefaultItemAnimator());
             binding.recycler.requestLayout();
-            ATE.apply(context, binding.getRoot(), null);
+            ATE.themeView(context, binding.getRoot(), null);
         }
 
         @Override

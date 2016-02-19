@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.appthemeengine.ATE;
-import com.afollestad.appthemeengine.util.Util;
+import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -217,7 +217,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         View header = mNavigationView.getHeaderView(0);
         if (header != null && s != null) {
             s.getAlbum().requestArt((ImageView) header.findViewById(R.id.navdrawer_header_image));
-            header.findViewById(R.id.navdrawer_header_clickable).setBackground(ContextCompat.getDrawable(this, !Util.isColorLight(s.getAlbum().getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
+            header.findViewById(R.id.navdrawer_header_clickable).setBackground(ContextCompat.getDrawable(this, !ATEUtil.isColorLight(s.getAlbum().getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
         }
     }
 
@@ -452,7 +452,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 RecyclerFastScroller scroller = (RecyclerFastScroller) root.findViewById(R.id.main_screen_page_scroller);
                 configureRecycler(list, scroller, position);
                 container.addView(root, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                ATE.apply(root, getATEKey());
+                ATE.themeView(root, getATEKey());
                 return root;
             } else {
                 TextView text = new TextView(MainScreen.this);

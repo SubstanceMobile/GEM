@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.view.View;
 
-import com.afollestad.appthemeengine.util.Util;
+import com.afollestad.appthemeengine.ATE;
+import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.settings.chooseIcon.Icon;
 
@@ -79,7 +80,7 @@ public class IconManager {
 
     public Icon getOverviewIcon(Icon icon, int color){
         int id = icon.getId();
-        boolean useLight = Util.isColorLight(color);
+        boolean useLight = ATEUtil.isColorLight(color);
         if (id == getID(DESIGNER_SRINI, COLOR_BLACK)) {
             if (useLight){
                 return new Icon(DESIGNER_SRINI, COLOR_BLACK);

@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.afollestad.appthemeengine.Config;
 import com.afollestad.appthemeengine.customizers.ATEStatusBarCustomizer;
-import com.afollestad.appthemeengine.util.Util;
+import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Song;
@@ -82,7 +82,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
 
     @Override
     public int getStatusBarColor() {
-        return Util.darkenColor(mSong.getAlbum().getBackgroundColor());
+        return ATEUtil.darkenColor(mSong.getAlbum().getBackgroundColor());
     }
 
     @Override

@@ -59,6 +59,6 @@ dependencies {
     compile 'com.github.plusCubed:recycler-fast-scroll:0.2.1'
     compile 'com.github.afollestad.material-dialogs:core:0.8.5.3'
     compile 'com.github.afollestad.material-dialogs:commons:0.8.5.3'
-    compile 'com.github.afollestad:app-theme-engine:0.7.7'
+    compile 'com.github.afollestad:app-theme-engine:1.0.0'
     compile 'com.github.afollestad:sectioned-recyclerview:0.1.0'
 }

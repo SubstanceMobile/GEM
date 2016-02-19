@@ -39,7 +39,6 @@ public abstract class ThemeActivity extends ATEActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        updateTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         sequence();
     }

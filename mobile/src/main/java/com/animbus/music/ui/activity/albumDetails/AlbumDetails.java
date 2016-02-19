@@ -31,12 +31,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.Config;
 import com.afollestad.appthemeengine.customizers.ATECollapsingTbCustomizer;
 import com.afollestad.appthemeengine.customizers.ATEStatusBarCustomizer;
 import com.afollestad.appthemeengine.customizers.ATETaskDescriptionCustomizer;
 import com.afollestad.appthemeengine.customizers.ATEToolbarCustomizer;
-import com.afollestad.appthemeengine.util.Util;
+import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -48,7 +49,7 @@ import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
-public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer, ATETaskDescriptionCustomizer, ATECollapsingTbCustomizer {
+public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer, ATETaskDescriptionCustomizer, ATECollapsingTbCustomizer, ATEToolbarCustomizer {
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     FloatingActionButton mFAB;
@@ -120,17 +121,17 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
         mCollapsingToolbar.setCollapsedTitleTextColor(mAlbum.getTitleTextColor());
-        findViewById(R.id.album_details_album_art).setBackground(ContextCompat.getDrawable(this, !Util.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
+        findViewById(R.id.album_details_album_art).setBackground(ContextCompat.getDrawable(this, !ATEUtil.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
     }
 
     @Override
     public int getStatusBarColor() {
-        return Util.darkenColor(mAlbum.getBackgroundColor());
+        return ATEUtil.darkenColor(mAlbum.getBackgroundColor());
     }
 
     @Override
     public int getLightStatusBarMode() {
-        return !Util.isColorLight(mAlbum.getTitleTextColor()) ? Config.LIGHT_STATUS_BAR_ON : Config.LIGHT_STATUS_BAR_OFF;
+        return !ATEUtil.isColorLight(mAlbum.getTitleTextColor()) ? Config.LIGHT_STATUS_BAR_ON : Config.LIGHT_STATUS_BAR_OFF;
     }
 
     @Override
@@ -141,6 +142,16 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     @Override
     public int getExpandedTintColor() {
         return mAlbum.getTitleTextColor();
+    }
+
+    @Override
+    public int getLightToolbarMode(@Nullable Toolbar toolbar) {
+        return ATE.USE_DEFAULT;
+    }
+
+    @Override
+    public int getToolbarColor(@Nullable Toolbar toolbar) {
+        return mAlbum.getBackgroundColor();
     }
 
     @Override

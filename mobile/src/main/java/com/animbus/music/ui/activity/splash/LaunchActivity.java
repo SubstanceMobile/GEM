@@ -101,7 +101,6 @@ public class LaunchActivity extends ThemeActivity {
                     .coloredStatusBar(true)
                     .lightStatusBarMode(Config.LIGHT_STATUS_BAR_AUTO)
                     .lightToolbarMode(Config.LIGHT_TOOLBAR_AUTO)
-                    .usingMaterialDialogs(true)
                     .commit();
         }
     }
