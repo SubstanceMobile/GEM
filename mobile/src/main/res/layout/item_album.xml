@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
-    <data class="ItemAlbumGrid">
-
-        <variable
-            name="album"
-            type="com.animbus.music.media.objects.Album" />
-
-        <variable
-            name="asdasdasd"
-            type="com.animbus.music.media.objects.Album" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="album" type="com.animbus.music.media.objects.Album" />
     </data>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:id="@+id/AlbumGridItemRootView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="@{album.getAlbumTitle}"
+                    android:text="@{album.getAlbumTitle, default=TITLE}"
                     android:textSize="16sp" />
 
                 <TextView
@@ -54,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="@{album.getAlbumArtistName}"
+                    android:text="@{album.getAlbumArtistName, default=ARTIST}"
                     android:textSize="12sp" />
 
                 <Space

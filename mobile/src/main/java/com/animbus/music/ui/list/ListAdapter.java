@@ -30,13 +30,13 @@ import android.widget.Toast;
 import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.BR;
 import com.animbus.music.R;
-import com.animbus.music.databinding.ItemAlbumGrid;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.ItemAlbumDetailsList;
+import com.animbus.music.databinding.ItemAlbumBinding;
 import com.animbus.music.ui.ItemGenre;
 import com.animbus.music.ui.ItemNowPlaying;
 import com.animbus.music.ui.ItemPlaylist;
@@ -89,7 +89,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             case TYPE_SONG:
                 return new SongsViewHolder(ItemSongList.inflate(inflater, parent, false));
             case TYPE_ALBUM:
-                return new AlbumsViewHolder(ItemAlbumGrid.inflate(inflater, parent, false));
+                return new AlbumsViewHolder(ItemAlbumBinding.inflate(inflater, parent, false));
             case TYPE_PLAYLIST:
                 return new PlaylistsViewHolder(ItemPlaylist.inflate(inflater, parent, false));
             case TYPE_ARTIST:
@@ -227,7 +227,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
     }
 
-    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbumGrid, Album> implements RequestListener<String, GlideDrawable>,
+    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbumBinding, Album> implements RequestListener<String, GlideDrawable>,
             Palette.PaletteAsyncListener {
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
@@ -236,7 +236,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         private int defaultTitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light);
         private int defaultSubtitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
 
-        public AlbumsViewHolder(ItemAlbumGrid binding) {
+        public AlbumsViewHolder(ItemAlbumBinding binding) {
             super(binding);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -245,7 +245,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         @Override
         public void configure(Album object) {
             resetPalette();
-            binding.setAsdasdasd(object);
             binding.getAlbum().requestArt(binding.AlbumArtGridItemAlbumArt, this);
             if (Options.usingBiggerSpaceInAlbumList()) {
                 LayoutParams params = new LayoutParams(binding.getRoot().getLayoutParams());

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.android.databinding'
 
 android {
     signingConfigs {
@@ -9,6 +8,10 @@ android {
             storeFile file('C:/Users/Adrian/Documents/Developer/ApkSigning.jks')
             storePassword 'AnimbusDev'
         }
+    }
+
+    dataBinding {
+        enabled = true
     }
 
     compileSdkVersion 23
@@ -60,5 +63,4 @@ dependencies {
     compile 'com.github.afollestad.material-dialogs:core:0.8.5.3'
     compile 'com.github.afollestad.material-dialogs:commons:0.8.5.3'
     compile 'com.github.afollestad:app-theme-engine:1.0.0'
-    compile 'com.github.afollestad:sectioned-recyclerview:0.1.0'
 }

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="compilerCommon-2.0.0-beta5">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/databinding/compilerCommon/2.0.0-beta5/compilerCommon-2.0.0-beta5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/databinding/compilerCommon/2.0.0-beta5/compilerCommon-2.0.0-beta5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
