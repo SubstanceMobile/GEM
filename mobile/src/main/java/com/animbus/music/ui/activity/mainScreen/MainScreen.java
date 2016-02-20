@@ -410,7 +410,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                     configureAsPlaylists(recycler);
                     break;
             }
-            scroller.setRecyclerView(recycler);
+            scroller.attachRecyclerView(recycler);
             scroller.setTouchTargetWidth(RecyclerFastScrollerUtils.convertDpToPx(MainScreen.this, 16));
             scroller.setHandlePressedColor(getAccentColor());
         }
@@ -439,9 +439,9 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsPlaylists(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.TYPE_PLAYLIST, Library.getPlaylists(), MainScreen.this));
+            /*list.setAdapter(new ListAdapter(ListAdapter.TYPE_PLAYLIST, Library.getPlaylists(), MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
-            list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
+            list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));*/
         }
 
         @Override

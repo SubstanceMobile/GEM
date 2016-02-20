@@ -1,6 +1,5 @@
 package com.animbus.music.ui.custom.activity;
 
-import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,28 +24,16 @@ import com.animbus.music.R;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.util.IconManager;
-import com.animbus.music.util.Options;
 
-/**
- * Created by Adrian on 8/5/2015.
- */
 public abstract class ThemeActivity extends ATEActivity {
     public Toolbar mToolbar;
     public AppBarLayout mAppBar;
     public CoordinatorLayout mRoot;
 
-    private long updateTime = -1L;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sequence();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        applySettings();
     }
 
     @Override
@@ -104,15 +91,10 @@ public abstract class ThemeActivity extends ATEActivity {
     private void themeBackground() {
         mRoot.setBackgroundColor(resolveColorAttr(android.R.attr.windowBackground));
     }
-
-    protected void invalidate() {
-        ATE.apply(this, getATEKey());
-    }
-
     @Override
     public void setTitle(CharSequence title) {
         super.setTitle(title);
-        invalidate();
+        recreate();
     }
 
     public void configureTaskDescription(@ColorInt int color, String title) {
@@ -172,7 +154,7 @@ public abstract class ThemeActivity extends ATEActivity {
                     supportFinishAfterTransition();
                     return true;
                 }
-                return  processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
+                return processMenuItem(item.getItemId()) || super.onOptionsItemSelected(item);
             case R.id.action_settings:
                 startActivity(new Intent(this, Settings.class));
                 return true;
@@ -212,15 +194,6 @@ public abstract class ThemeActivity extends ATEActivity {
     public boolean onSearchRequested() {
         startActivity(new Intent(this, SearchActivity.class));
         return true;
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Recreates the activity if necessary
-    ///////////////////////////////////////////////////////////////////////////
-
-    private void applySettings() {
-        long oldUpdateTime = updateTime;
-        if (Options.shouldRecreate(oldUpdateTime)) recreate();
     }
 
 }

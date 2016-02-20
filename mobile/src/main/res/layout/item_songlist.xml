@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
     <data class="com.animbus.music.ui.ItemSongList">
-
-        <variable
-            name="song"
-            type="com.animbus.music.media.objects.Song" />
-
+        <variable name="song" type="com.animbus.music.media.objects.Song" />
     </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/listViewSizeBig"
             android:background="?attr/ripple"
+            android:tag="ate_ignore"
             android:orientation="horizontal">
 
             <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
@@ -34,6 +28,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:orientation="vertical"
+                android:tag="ate_ignore"
                 android:paddingStart="@dimen/margin_small">
 
                 <TextView
@@ -62,8 +57,6 @@
                 android:layout_margin="@dimen/margin_medium"
                 android:text="@{song.getSongDurString}"
                 android:textColor="?android:attr/textColorSecondary" />
-
         </LinearLayout>
-
     </FrameLayout>
 </layout>

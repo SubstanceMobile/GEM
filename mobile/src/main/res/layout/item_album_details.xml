@@ -14,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/listViewSizeBig"
             android:orientation="horizontal"
-            android:background="?attr/ripple">
+            android:background="?attr/ripple"
+            android:tag="ate_ignore">
 
             <TextView
                 android:layout_width="@dimen/listViewSizeBig"
@@ -31,7 +32,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:tag="ate_ignore">
 
                 <TextView
                     android:id="@+id/songlist_song_title"

@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.databinding.DataBindingComponent;
+import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -27,8 +29,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.Toast;
 
-import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.BR;
+import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
@@ -36,8 +38,7 @@ import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.ItemAlbumDetailsList;
-import com.animbus.music.databinding.ItemAlbumBinding;
-import com.animbus.music.ui.ItemGenre;
+import com.animbus.music.ui.ItemAlbum;
 import com.animbus.music.ui.ItemNowPlaying;
 import com.animbus.music.ui.ItemPlaylist;
 import com.animbus.music.ui.ItemSearch;
@@ -89,19 +90,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             case TYPE_SONG:
                 return new SongsViewHolder(ItemSongList.inflate(inflater, parent, false));
             case TYPE_ALBUM:
-                return new AlbumsViewHolder(ItemAlbumBinding.inflate(inflater, parent, false));
+                return new AlbumsViewHolder(ItemAlbum.inflate(inflater, parent, false));
             case TYPE_PLAYLIST:
                 return new PlaylistsViewHolder(ItemPlaylist.inflate(inflater, parent, false));
             case TYPE_ARTIST:
                 return null;
-            case TYPE_GENRE:
-                return new GenresViewHolder(ItemGenre.inflate(inflater, parent, false));
             case TYPE_ALBUM_DETAILS:
                 return new AlbumDetailsViewHolder(ItemAlbumDetailsList.inflate(inflater, parent, false));
             case TYPE_NOW_PLAYING:
                 return new NowPlayingViewHolder(ItemNowPlaying.inflate(inflater, parent, false));
             case TYPE_SEARCH:
-                return new SearchViewHolder(ItemSearch.inflate(inflater, parent, false));
+            return new SearchViewHolder(ItemSearch.inflate(inflater, parent, false));
             default:
                 return null;
         }
@@ -166,9 +165,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                 case TYPE_ALBUM_DETAILS:
                     varId = BR.song;
                     break;
-                case TYPE_GENRE:
-                    varId = BR.genre;
-                    break;
                 case TYPE_PLAYLIST:
                     varId = BR.playlist;
                     break;
@@ -227,7 +223,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
     }
 
-    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbumBinding, Album> implements RequestListener<String, GlideDrawable>,
+    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbum, Album> implements RequestListener<String, GlideDrawable>,
             Palette.PaletteAsyncListener {
 
         private AsyncTask<Bitmap, Void, Palette> paletteTask;
@@ -236,7 +232,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         private int defaultTitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light);
         private int defaultSubtitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
 
-        public AlbumsViewHolder(ItemAlbumBinding binding) {
+        public AlbumsViewHolder(ItemAlbum binding) {
             super(binding);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -497,18 +493,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             } catch (Exception e) {
                 return false;
             }
-        }
-    }
-
-    protected class GenresViewHolder extends SimpleViewHolder<ItemGenre, Genre> {
-
-        protected GenresViewHolder(ItemGenre binding) {
-            super(binding);
-        }
-
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), "Genre Clicked", Toast.LENGTH_SHORT).show();
         }
     }
 

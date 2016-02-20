@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
+    <data class="com.animbus.music.ui.ItemAlbum">
         <variable name="album" type="com.animbus.music.media.objects.Album" />
     </data>
     <FrameLayout
@@ -25,12 +25,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 android:orientation="vertical"
+                android:tag="ate_ignore"
                 android:padding="@dimen/margin_medium">
 
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="100" />
+
+                <Space
+                    android:id="@+id/temp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
 
                 <TextView
                     android:id="@+id/AlbumTitle"
@@ -45,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:tag="ate_ignore"
                     android:text="@{album.getAlbumArtistName, default=ARTIST}"
                     android:textSize="12sp" />
 
