@@ -30,13 +30,13 @@ import android.widget.Toast;
 import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.BR;
 import com.animbus.music.R;
+import com.animbus.music.databinding.ItemAlbumGrid;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.ItemAlbumDetailsList;
-import com.animbus.music.ui.ItemAlbumGrid;
 import com.animbus.music.ui.ItemGenre;
 import com.animbus.music.ui.ItemNowPlaying;
 import com.animbus.music.ui.ItemPlaylist;
@@ -63,9 +63,6 @@ import static com.animbus.music.media.objects.Album.FRAME_COLOR;
 import static com.animbus.music.media.objects.Album.SUBTITLE_COLOR;
 import static com.animbus.music.media.objects.Album.TITLE_COLOR;
 
-/**
- * Created by Adrian on 10/28/2015.
- */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
     public static final int TYPE_SONG = 0, TYPE_ALBUM = 1, TYPE_PLAYLIST = 2, TYPE_GENRE = 3, TYPE_ARTIST = 4, TYPE_SEARCH = 5;
     public static final int TYPE_ALBUM_DETAILS = -1, TYPE_NOW_PLAYING = -2;
@@ -248,6 +245,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         @Override
         public void configure(Album object) {
             resetPalette();
+            binding.setAsdasdasd(object);
             binding.getAlbum().requestArt(binding.AlbumArtGridItemAlbumArt, this);
             if (Options.usingBiggerSpaceInAlbumList()) {
                 LayoutParams params = new LayoutParams(binding.getRoot().getLayoutParams());

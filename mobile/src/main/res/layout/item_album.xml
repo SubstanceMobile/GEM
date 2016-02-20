@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data class="ItemAlbumGrid">
+
+        <variable
+            name="album"
+            type="com.animbus.music.media.objects.Album" />
+
+        <variable
+            name="asdasdasd"
+            type="com.animbus.music.media.objects.Album" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/AlbumGridItemRootView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/AlbumArtGridItemLayoutContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_micro"
+            android:orientation="vertical">
+
+            <com.animbus.music.ui.custom.view.SquareImageViewWidth_Based
+                android:id="@+id/AlbumArtGridItemAlbumArt"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:id="@+id/AlbumInfoToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_medium">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="100" />
+
+                <TextView
+                    android:id="@+id/AlbumTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@{album.getAlbumTitle}"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/AlbumArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@{album.getAlbumArtistName}"
+                    android:textSize="12sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="100" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/AlbumGridItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/ripple" />
+    </FrameLayout>
+</layout>
