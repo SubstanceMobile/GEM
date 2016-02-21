@@ -3,9 +3,14 @@ package com.animbus.music.media.objects;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
+import com.afollestad.async.Action;
 import com.animbus.music.R;
+import com.animbus.music.media.Library;
 import com.animbus.music.util.Options;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -58,6 +63,32 @@ public class Album {
                 return lhs.getTrackNumber().compareTo(rhs.getTrackNumber());
             }
         });
+    }
+
+    public void generateSongs() {
+        new Action<List<Song>>() {
+            @NonNull
+            @Override
+            public String id() {
+                return "album_" + String.valueOf(getId());
+            }
+
+            @Nullable
+            @Override
+            protected List<Song> run() throws InterruptedException {
+                return null;
+            }
+
+            protected void updateUi(Song s) {
+                Library.mHandler.sendMessage(Message.obtain(Library.mHandler, Library.ALBUM_SONG_LOADED, (int) getId(), 0, s));
+            }
+
+            @Override
+            protected void done(@Nullable List<Song> result) {
+                super.done(result);
+                setSongs(result);
+            }
+        }.execute();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

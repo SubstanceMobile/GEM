@@ -1,6 +1,13 @@
 package com.animbus.music.media.objects;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.afollestad.async.Action;
+import com.animbus.music.media.Library;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,8 +41,8 @@ public class Playlist {
     //These are the songs in the
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setNoSongs() {
-        this.songs = Collections.EMPTY_LIST;
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 
     public List<Song> getSongs() {
@@ -43,11 +50,11 @@ public class Playlist {
     }
 
     public void addSong(Song s) {
-
+        getSongs().add(s);
     }
 
     public void removeSong(Song s) {
-
+        getSongs().remove(s);
     }
 
     public void addAll(List<Song> songs) {
@@ -56,6 +63,43 @@ public class Playlist {
 
     public void removeAll(List<Song> songs) {
         for (Song s : songs) removeSong(s);
+    }
+
+    public void generateSongs(final Context context) {
+        new Action<List<Song>>(){
+            @NonNull
+            @Override
+            public String id() {
+                return "playlist_" + String.valueOf(getId());
+            }
+
+            @Nullable
+            @Override
+            protected List<Song> run() throws InterruptedException {
+                List<Song> generated = new ArrayList<>();
+                try {
+                    Cursor playlistSongsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", getId()),
+                            null, null, null,
+                            MediaStore.Audio.Playlists.Members.PLAY_ORDER);
+
+                    int idColumn = playlistSongsCursor.getColumnIndex(MediaStore.Audio.Playlists.Members.AUDIO_ID);
+
+                    playlistSongsCursor.moveToFirst();
+                    do {
+                        generated.add(Library.findSongById(playlistSongsCursor.getLong(idColumn)));
+                    } while (playlistSongsCursor.moveToNext());
+                } catch (IndexOutOfBoundsException e) {
+                    generated = Collections.emptyList();
+                }
+                return generated;
+            }
+
+            @Override
+            protected void done(@Nullable List<Song> result) {
+                super.done(result);
+                setSongs(result);
+            }
+        }.execute();
     }
 
     ///////////////////////////////////////////////////////////////////////////

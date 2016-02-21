@@ -107,7 +107,7 @@ public class LaunchActivity extends ThemeActivity {
 
     public void complete() {
         //Loads Songs
-        if (!Library.isBuilt()) Library.build();
+        if (!Library.isBuilt()) Library.buildAsync();
 
         Intent i = new Intent(this, MainScreen.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(i);
