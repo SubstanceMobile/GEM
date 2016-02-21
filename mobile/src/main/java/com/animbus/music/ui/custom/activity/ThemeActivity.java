@@ -91,11 +91,6 @@ public abstract class ThemeActivity extends ATEActivity {
     private void themeBackground() {
         mRoot.setBackgroundColor(resolveColorAttr(android.R.attr.windowBackground));
     }
-    @Override
-    public void setTitle(CharSequence title) {
-        super.setTitle(title);
-        recreate();
-    }
 
     public void configureTaskDescription(@ColorInt int color, String title) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

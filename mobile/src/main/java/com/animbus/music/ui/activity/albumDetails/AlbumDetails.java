@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -56,13 +57,13 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     FloatingActionButton mFAB;
-    Album mAlbum;
-    TextView mTitle, mArtist;
     LinearLayout mDetailsRoot;
+    Album mAlbum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
+        setTitle(mAlbum.getAlbumTitle());
         super.onCreate(savedInstanceState);
     }
 
@@ -86,18 +87,13 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         mList = (RecyclerView) findViewById(R.id.album_details_recycler);
         mFAB = (FloatingActionButton) findViewById(R.id.album_details_fab);
         mDetailsRoot = (LinearLayout) findViewById(R.id.album_details_info_toolbar);
-        mTitle = (TextView) findViewById(R.id.album_details_info_toolbar_title);
-        mArtist = (TextView) findViewById(R.id.album_details_info_toolbar_artist);
-        setTitle(mAlbum.getAlbumTitle());
     }
 
     @Override
     protected void setUp() {
         //Sets up data
         mAlbum.requestArt((ImageView) findViewById(R.id.album_details_album_art));
-        mTitle.setText(mAlbum.getAlbumTitle());
         mCollapsingToolbar.setTitle(mAlbum.getAlbumTitle());
-        mArtist.setText(mAlbum.getAlbumArtistName());
 
         //Configures the recycler
         mList.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this));
@@ -119,9 +115,6 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         //Colors
         FabHelper.setFabBackground(mFAB, mAlbum.getAccentColor());
         FabHelper.setFabTintedIcon(mFAB, ContextCompat.getDrawable(this, R.drawable.ic_play_arrow_black_48dp), mAlbum.getAccentIconColor());
-        mDetailsRoot.setBackgroundColor(mAlbum.getBackgroundColor());
-        mTitle.setTextColor(mAlbum.getTitleTextColor());
-        mArtist.setTextColor(mAlbum.getSubtitleTextColor());
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
         findViewById(R.id.album_details_album_art).setBackground(ContextCompat.getDrawable(this, !ATEUtil.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
     }
@@ -138,12 +131,12 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
 
     @Override
     public int getCollapsedTintColor() {
-        return mAlbum.getTitleTextColor();
+        return !ATEUtil.isColorLight(mAlbum.getTitleTextColor()) ? Color.BLACK : Color.WHITE;
     }
 
     @Override
     public int getExpandedTintColor() {
-        return mAlbum.getTitleTextColor();
+        return !ATEUtil.isColorLight(mAlbum.getTitleTextColor()) ? Color.BLACK : Color.WHITE;
     }
 
     @Override

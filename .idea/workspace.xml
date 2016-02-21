@@ -10,15 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/async_0_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/async_0_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_0_8_5_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_0_8_5_4.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/mobile.iml" afterPath="$PROJECT_DIR$/mobile/mobile.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_playlist.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_playlist.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_search.xml" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,34 +54,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="activity_album_details.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5579897">
-              <caret line="69" column="71" selection-start-line="69" selection-start-column="71" selection-end-line="69" selection-end-column="71" />
-              <folding>
-                <element signature="e#1812#1845#0" expanded="true" />
-                <element signature="e#2749#2771#0" expanded="true" />
-                <element signature="e#2806#3015#0" expanded="false" />
-                <element signature="e#4206#4415#0" expanded="false" />
-                <element signature="e#4527#4754#0" expanded="false" />
-                <element signature="e#4840#5173#0" expanded="false" />
-                <element signature="e#5857#6122#0" expanded="false" />
-                <element signature="e#6079#6119#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlbumDetails.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AlbumDetails.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="121" column="40" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="67" />
-              <folding />
+            <state vertical-scroll-proportion="0.14740565">
+              <caret line="126" column="13" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+              <folding>
+                <element signature="method#onCreate#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="method#init#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="method#configureTransition#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="method#setVariables#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="method#setUp#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="method#getLightStatusBarMode#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="method#getCollapsedTintColor#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="method#getExpandedTintColor#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="e#6254#6263#0" expanded="false" />
+                <element signature="method#transitionNowPlaying#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="class#7683:10362" expanded="false" />
+                <element signature="method#onAnimationStart#0;class#7683:10362" expanded="false" />
+                <element signature="method#onAnimationEnd#0;class#7683:10362" expanded="false" />
+                <element signature="class#8203:9127" expanded="false" />
+                <element signature="method#onAnimationStart#0;class#8203:9127" expanded="false" />
+                <element signature="method#onAnimationEnd#0;class#8203:9127" expanded="false" />
+                <element signature="method#onAnimationCancel#0;class#8203:9127" expanded="false" />
+                <element signature="method#onAnimationRepeat#0;class#8203:9127" expanded="false" />
+                <element signature="class#9460:10060" expanded="false" />
+                <element signature="method#onAnimationStart#0;class#9460:10060" expanded="false" />
+                <element signature="method#onAnimationEnd#0;class#9460:10060" expanded="false" />
+                <element signature="method#onAnimationCancel#0;class#9460:10060" expanded="false" />
+                <element signature="method#onAnimationRepeat#0;class#9460:10060" expanded="false" />
+                <element signature="method#onAnimationCancel#0;class#7683:10362" expanded="false" />
+                <element signature="method#onAnimationRepeat#0;class#7683:10362" expanded="false" />
+                <element signature="method#onResume#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="class#10567:11037" expanded="false" />
+                <element signature="method#onAnimationStart#0;class#10567:11037" expanded="false" />
+                <element signature="method#onAnimationCancel#0;class#10567:11037" expanded="false" />
+                <element signature="method#onAnimationRepeat#0;class#10567:11037" expanded="false" />
+                <element signature="method#supportFinishAfterTransition#0;class#AlbumDetails#0" expanded="false" />
+                <element signature="class#11453:11961" expanded="false" />
+                <element signature="method#onAnimationStart#0;class#11453:11961" expanded="false" />
+                <element signature="method#onAnimationEnd#0;class#11453:11961" expanded="false" />
+                <element signature="method#onAnimationCancel#0;class#11453:11961" expanded="false" />
+                <element signature="method#onAnimationRepeat#0;class#11453:11961" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2249,7 +2259,6 @@
       <list>
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/item_album.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/item_album_details.xml" />
@@ -2259,8 +2268,9 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/item_playlist.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/item_search.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
       </list>
     </option>
   </component>
@@ -2767,7 +2777,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455992983980</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed DataBinding issues. AlbumsDetails is broken">
+      <created>1456023300185</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1456023300185</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2781,7 +2797,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5021482" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4259887" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.49785176" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3278496" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
@@ -2823,7 +2839,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Mostly fixed issue with data binding" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mostly fixed issue with data binding" />
+    <MESSAGE value="Fixed DataBinding issues. AlbumsDetails is broken" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed DataBinding issues. AlbumsDetails is broken" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2954,13 +2971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24570024">
           <caret line="25" column="53" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12971698">
-          <caret line="92" column="5" selection-start-line="92" selection-start-column="5" selection-end-line="92" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -3258,32 +3268,76 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="121" column="40" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5579897">
-          <caret line="69" column="71" selection-start-line="69" selection-start-column="71" selection-end-line="69" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.75128865">
+          <caret line="85" column="51" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
           <folding>
             <element signature="e#1812#1845#0" expanded="true" />
             <element signature="e#2749#2771#0" expanded="true" />
             <element signature="e#2806#3015#0" expanded="false" />
-            <element signature="e#4206#4415#0" expanded="false" />
-            <element signature="e#4527#4754#0" expanded="false" />
-            <element signature="e#4840#5173#0" expanded="false" />
-            <element signature="e#5857#6122#0" expanded="false" />
-            <element signature="e#6079#6119#0" expanded="true" />
+            <element signature="e#4676#4903#0" expanded="false" />
+            <element signature="e#4989#5322#0" expanded="false" />
+            <element signature="e#6006#6271#0" expanded="false" />
+            <element signature="e#6228#6268#0" expanded="true" />
           </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.557783">
+          <caret line="92" column="5" selection-start-line="92" selection-start-column="5" selection-end-line="92" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14740565">
+          <caret line="126" column="13" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+          <folding>
+            <element signature="method#onCreate#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#init#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#configureTransition#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#setVariables#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#setUp#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#getLightStatusBarMode#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#getCollapsedTintColor#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="method#getExpandedTintColor#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="e#6254#6263#0" expanded="false" />
+            <element signature="method#transitionNowPlaying#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="class#7683:10362" expanded="false" />
+            <element signature="method#onAnimationStart#0;class#7683:10362" expanded="false" />
+            <element signature="method#onAnimationEnd#0;class#7683:10362" expanded="false" />
+            <element signature="class#8203:9127" expanded="false" />
+            <element signature="method#onAnimationStart#0;class#8203:9127" expanded="false" />
+            <element signature="method#onAnimationEnd#0;class#8203:9127" expanded="false" />
+            <element signature="method#onAnimationCancel#0;class#8203:9127" expanded="false" />
+            <element signature="method#onAnimationRepeat#0;class#8203:9127" expanded="false" />
+            <element signature="class#9460:10060" expanded="false" />
+            <element signature="method#onAnimationStart#0;class#9460:10060" expanded="false" />
+            <element signature="method#onAnimationEnd#0;class#9460:10060" expanded="false" />
+            <element signature="method#onAnimationCancel#0;class#9460:10060" expanded="false" />
+            <element signature="method#onAnimationRepeat#0;class#9460:10060" expanded="false" />
+            <element signature="method#onAnimationCancel#0;class#7683:10362" expanded="false" />
+            <element signature="method#onAnimationRepeat#0;class#7683:10362" expanded="false" />
+            <element signature="method#onResume#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="class#10567:11037" expanded="false" />
+            <element signature="method#onAnimationStart#0;class#10567:11037" expanded="false" />
+            <element signature="method#onAnimationCancel#0;class#10567:11037" expanded="false" />
+            <element signature="method#onAnimationRepeat#0;class#10567:11037" expanded="false" />
+            <element signature="method#supportFinishAfterTransition#0;class#AlbumDetails#0" expanded="false" />
+            <element signature="class#11453:11961" expanded="false" />
+            <element signature="method#onAnimationStart#0;class#11453:11961" expanded="false" />
+            <element signature="method#onAnimationEnd#0;class#11453:11961" expanded="false" />
+            <element signature="method#onAnimationCancel#0;class#11453:11961" expanded="false" />
+            <element signature="method#onAnimationRepeat#0;class#11453:11961" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

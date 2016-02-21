@@ -71,8 +71,9 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:textSize="20sp"
-                                    tools:text="@{album.getAlbumTitle, default=Title}"
-                                    tools:textColor="@color/abc_primary_text_material_dark" />
+                                    android:text="@{album.getAlbumTitle, default=Title}"
+                                    android:textColor="@{album.getTitleTextColor}"
+                                    tools:textColor="?android:textColorPrimary" />
 
                                 <TextView
                                     android:id="@+id/album_details_info_toolbar_artist"
@@ -80,8 +81,9 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:textSize="16sp"
-                                    tools:text="@{album.getAlbumArtistName, default=Artist}"
-                                    tools:textColor="@color/abc_secondary_text_material_dark" />
+                                    android:text="@{album.getAlbumArtistName, default=Artist}"
+                                    android:textColor="@{album.getSubtitleTextColor}"
+                                    tools:textColor="?android:textColorSecondary" />
 
                                 <Space
                                     android:layout_width="wrap_content"
