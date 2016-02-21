@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -39,6 +40,7 @@ import com.afollestad.appthemeengine.customizers.ATETaskDescriptionCustomizer;
 import com.afollestad.appthemeengine.customizers.ATEToolbarCustomizer;
 import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.R;
+import com.animbus.music.databinding.ActivityAlbumDetails;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
@@ -50,6 +52,7 @@ import com.animbus.music.util.FabHelper;
 import com.animbus.music.util.IconManager;
 
 public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer, ATETaskDescriptionCustomizer, ATECollapsingTbCustomizer, ATEToolbarCustomizer {
+    ActivityAlbumDetails binding;
     CollapsingToolbarLayout mCollapsingToolbar;
     RecyclerView mList;
     FloatingActionButton mFAB;
@@ -65,7 +68,8 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
 
     @Override
     protected void init() {
-        setContentView(R.layout.activity_album_details);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_album_details);
+        binding.setAlbum(mAlbum);
         configureTransition();
     }
 
@@ -118,9 +122,7 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         mDetailsRoot.setBackgroundColor(mAlbum.getBackgroundColor());
         mTitle.setTextColor(mAlbum.getTitleTextColor());
         mArtist.setTextColor(mAlbum.getSubtitleTextColor());
-        mCollapsingToolbar.setContentScrimColor(mAlbum.getBackgroundColor());
         mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
-        mCollapsingToolbar.setCollapsedTitleTextColor(mAlbum.getTitleTextColor());
         findViewById(R.id.album_details_album_art).setBackground(ContextCompat.getDrawable(this, !ATEUtil.isColorLight(mAlbum.getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
     }
 

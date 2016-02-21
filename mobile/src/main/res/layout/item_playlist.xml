@@ -7,8 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/listViewSizeBig"
         android:background="?attr/ripple"
-        android:orientation="horizontal"
-        android:tag="ate_ignore" >
+        android:orientation="horizontal">
 
         <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
             android:layout_width="wrap_content"
@@ -19,11 +18,20 @@
             android:padding="@dimen/margin_small"
             android:id="@+id/icon" />
 
-        <TextView
+        <!--This frame layout is just there to fix an issue with DataBinding-->
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:tint="?android:attr/textColorPrimary"
-            android:text="@{playlist.getName}" />
+            android:tag="ate_ignore" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                android:text="@{playlist.getName, default=Name}" />
+
+        </FrameLayout>
+
     </LinearLayout>
 </layout>
