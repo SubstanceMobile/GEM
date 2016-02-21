@@ -1,12 +1,12 @@
 package com.animbus.music.ui.list;
 
+import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.databinding.DataBindingComponent;
-import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,6 +18,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.support.v4.view.ViewPropertyAnimatorUpdateListener;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,14 +30,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
-import android.widget.Toast;
 
 import com.animbus.music.BR;
 import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.R;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
-import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.ItemAlbumDetailsList;
@@ -48,6 +49,7 @@ import com.animbus.music.ui.activity.playlistDetails.PlaylistDetails;
 import com.animbus.music.ui.activity.search.SearchResult;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
+import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -119,9 +121,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
     Toolbar transitionAppBar;
     ThemeActivity transitionActivity;
 
-    public void setTransitionToAlbumDetails(ThemeActivity activity) {
+    public ListAdapter withTransitionActivity(ThemeActivity activity) {
         this.transitionActivity = activity;
         this.transitionAppBar = activity.mToolbar;
+        return this;
     }
 
 
@@ -432,6 +435,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public void onClick(View v) {
+            Intent intent = new Intent(context, AlbumDetails.class).putExtra("album_id", binding.getAlbum().getId());
             try {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(transitionActivity,
                         new Pair<View, String>(transitionAppBar, "appbar"),
@@ -439,10 +443,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                         new Pair<View, String>(binding.getRoot().findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
                         new Pair<View, String>(binding.getRoot().findViewById(R.id.AlbumInfoToolbar), "info")
                 );
-                ActivityCompat.startActivity(transitionActivity, new Intent(context, AlbumDetails.class)
-                        .putExtra("album_id", binding.getAlbum().getId()), options.toBundle());
+                ActivityCompat.startActivity(transitionActivity, intent, options.toBundle());
             } catch (Exception e) {
-                e.printStackTrace();
+                context.startActivity(intent);
             }
         }
 
@@ -481,8 +484,46 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
         @Override
         public void onClick(View v) {
+            //TODO: Fix this
+            ValueAnimator anim = ObjectAnimator.ofFloat(0f, 16f).setDuration(500);
+            anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    ViewCompat.setElevation(itemView, (float) animation.getAnimatedValue());
+                }
+            });
+            anim.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
 
-            context.startActivity(new Intent(context, PlaylistDetails.class).putExtra("playlist_id", binding.getPlaylist().getId()));
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    transition();
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            anim.start();
+        }
+
+        private void transition(){
+            Intent intent = new Intent(context, PlaylistDetails.class).putExtra("playlist_id", binding.getPlaylist().getId());
+            try {
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(transitionActivity, itemView, "window");
+                ActivityCompat.startActivity(transitionActivity, intent, options.toBundle());
+            } catch (Exception e) {
+                context.startActivity(intent);
+            }
         }
 
         @Override
@@ -527,7 +568,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             else if (object.results.get(0) instanceof Song) type = TYPE_SONG;
             else if (object.results.get(0) instanceof Playlist) type = TYPE_PLAYLIST;
             ListAdapter adapter = new ListAdapter(type, object.results, context);
-            adapter.setTransitionToAlbumDetails(transitionActivity);
+            adapter.withTransitionActivity(transitionActivity);
             binding.recycler.setAdapter(adapter);
             if (type != TYPE_ALBUM) {
                 binding.recycler.setLayoutManager(new CustomLinearLayoutManager(context));

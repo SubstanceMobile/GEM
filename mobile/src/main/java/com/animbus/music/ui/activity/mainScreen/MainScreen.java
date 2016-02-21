@@ -1,7 +1,6 @@
 package com.animbus.music.ui.activity.mainScreen;
 
 import android.animation.Animator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -422,9 +421,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsAlbums(RecyclerView list) {
-            ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_ALBUM, Library.getAlbums(), MainScreen.this);
-            adapter.setTransitionToAlbumDetails(MainScreen.this);
-            list.setAdapter(adapter);
+            list.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM, Library.getAlbums(), MainScreen.this).withTransitionActivity(MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
             if (MainScreen.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
                 list.setLayoutManager(new GridLayoutManager(MainScreen.this, 2, GridLayoutManager.VERTICAL, false));
@@ -439,7 +436,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsPlaylists(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.TYPE_PLAYLIST, Library.getPlaylists(), MainScreen.this));
+            list.setAdapter(new ListAdapter(ListAdapter.TYPE_PLAYLIST, Library.getPlaylists(), MainScreen.this).withTransitionActivity(MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
@@ -457,7 +454,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
             } else {
                 TextView text = new TextView(MainScreen.this);
                 text.setSingleLine();
-                text.setText(titles[position]);
+                text.setText(R.string.msg_coming_soon);
                 text.setGravity(Gravity.CENTER);
                 container.addView(text, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 return text;

@@ -1,10 +1,16 @@
 package com.animbus.music.ui.activity.playlistDetails;
 
+import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.ChangeBounds;
+import android.transition.Explode;
+import android.transition.Fade;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
@@ -26,13 +32,16 @@ public class PlaylistDetails extends ThemeActivity {
     protected void setVariables() {
         mPlaylist = Library.findPlaylistById(getIntent().getLongExtra("playlist_id", -1));
         mRecycler = (RecyclerView) findViewById(R.id.playlist_details_recycler);
+        setTitle(mPlaylist.getName());
     }
 
     @Override
     protected void setUp() {
-        mToolbar.setTitle(mPlaylist.getName());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         configureRecycler();
+
+        //For the transition animation
+        ViewCompat.setTransitionName(mRoot, "window");
     }
 
     private void configureRecycler() {

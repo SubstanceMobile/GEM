@@ -17,7 +17,6 @@ import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
-import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 
 import java.util.List;
 
@@ -125,7 +124,7 @@ public class SearchActivity extends ThemeActivity {
         if (results.isEmpty()) return;
 
         ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_SEARCH, results, this);
-        adapter.setTransitionToAlbumDetails(this);
+        adapter.withTransitionActivity(this);
         RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setAdapter(adapter);
         recycler.setItemAnimator(new DefaultItemAnimator());
