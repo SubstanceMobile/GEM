@@ -2,17 +2,12 @@ package com.animbus.music.ui.activity.albumDetails;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,13 +20,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.Config;
@@ -46,11 +38,9 @@ import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
-import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
 import com.animbus.music.util.FabHelper;
-import com.animbus.music.util.IconManager;
 
 public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomizer, ATETaskDescriptionCustomizer, ATECollapsingTbCustomizer, ATEToolbarCustomizer {
     ActivityAlbumDetails binding;
