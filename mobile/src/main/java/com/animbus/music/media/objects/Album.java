@@ -1,14 +1,16 @@
 package com.animbus.music.media.objects;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
-import com.afollestad.async.Action;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.util.Options;
@@ -65,30 +67,35 @@ public class Album {
         });
     }
 
-    public void generateSongs() {
-        new Action<List<Song>>() {
-            @NonNull
+    public void generateSongs(Context context) {
+        new AsyncTask<Object, Void, List<Song>>() {
             @Override
-            public String id() {
-                return "album_" + String.valueOf(getId());
+            protected List<Song> doInBackground(Object... params) {
+                List<Song> generated = new ArrayList<>();
+                try {
+                    Cursor albumSongsCursor = ((Context) params[1]).getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", (long) params[2]),
+                            null, MediaStore.Audio.Media.ALBUM_ID + "?=", new String[]{String.valueOf((long) params[2])}, MediaStore.Audio.Playlists.Members.PLAY_ORDER);
+
+                    assert albumSongsCursor != null : "Cursor is null";
+                    int idColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+
+                    albumSongsCursor.moveToFirst();
+                    do {
+                        generated.add(Library.findSongById(albumSongsCursor.getLong(idColumn)));
+                    } while (albumSongsCursor.moveToNext());
+                    albumSongsCursor.close();
+                } catch (IndexOutOfBoundsException e) {
+                    generated = Collections.emptyList();
+                }
+                return generated;
             }
 
-            @Nullable
             @Override
-            protected List<Song> run() throws InterruptedException {
-                return null;
+            protected void onPostExecute(List<Song> songs) {
+                super.onPostExecute(songs);
+                setSongs(songs);
             }
-
-            protected void updateUi(Song s) {
-                Library.mHandler.sendMessage(Message.obtain(Library.mHandler, Library.ALBUM_SONG_LOADED, (int) getId(), 0, s));
-            }
-
-            @Override
-            protected void done(@Nullable List<Song> result) {
-                super.done(result);
-                setSongs(result);
-            }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, getId());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

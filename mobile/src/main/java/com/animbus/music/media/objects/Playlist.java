@@ -2,16 +2,15 @@ package com.animbus.music.media.objects;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.afollestad.async.Action;
 import com.animbus.music.media.Library;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Adrian on 7/5/2015.
@@ -23,7 +22,8 @@ public class Playlist {
     long id;
     int type;
 
-    public Playlist(){}
+    public Playlist() {
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Manages the title of the playlist
@@ -65,29 +65,23 @@ public class Playlist {
         for (Song s : songs) removeSong(s);
     }
 
-    public void generateSongs(final Context context) {
-        new Action<List<Song>>(){
-            @NonNull
+    public void generateSongs(Context context) {
+        new AsyncTask<Object, Void, List<Song>>() {
             @Override
-            public String id() {
-                return "playlist_" + String.valueOf(getId());
-            }
-
-            @Nullable
-            @Override
-            protected List<Song> run() throws InterruptedException {
+            protected List<Song> doInBackground(Object... params) {
                 List<Song> generated = new ArrayList<>();
                 try {
-                    Cursor playlistSongsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", getId()),
-                            null, null, null,
-                            MediaStore.Audio.Playlists.Members.PLAY_ORDER);
+                    Cursor playlistSongsCursor = ((Context) params[1]).getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", (long) params[2]),
+                            null, null, null, MediaStore.Audio.Playlists.Members.PLAY_ORDER);
 
+                    assert playlistSongsCursor != null : "Cursor is null";
                     int idColumn = playlistSongsCursor.getColumnIndex(MediaStore.Audio.Playlists.Members.AUDIO_ID);
 
                     playlistSongsCursor.moveToFirst();
                     do {
                         generated.add(Library.findSongById(playlistSongsCursor.getLong(idColumn)));
                     } while (playlistSongsCursor.moveToNext());
+                    playlistSongsCursor.close();
                 } catch (IndexOutOfBoundsException e) {
                     generated = Collections.emptyList();
                 }
@@ -95,11 +89,11 @@ public class Playlist {
             }
 
             @Override
-            protected void done(@Nullable List<Song> result) {
-                super.done(result);
-                setSongs(result);
+            protected void onPostExecute(List<Song> songs) {
+                super.onPostExecute(songs);
+                setSongs(songs);
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, getId());
     }
 
     ///////////////////////////////////////////////////////////////////////////

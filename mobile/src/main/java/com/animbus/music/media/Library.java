@@ -3,18 +3,11 @@ package com.animbus.music.media;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.afollestad.async.Action;
-import com.afollestad.async.Async;
-import com.afollestad.async.Done;
-import com.afollestad.async.Result;
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
@@ -29,7 +22,6 @@ import java.util.List;
 
 public class Library {
     public static volatile Context context;
-    private static volatile boolean mBuilt = false;
 
     private static volatile List<Song> mSongs = new ArrayList<>();
     private static volatile List<Album> mAlbums = new ArrayList<>();
@@ -43,32 +35,25 @@ public class Library {
         context = cxt;
     }
 
-    public static void buildAsync() {
-        Action<List<Album>> albums = new Action<List<Album>>() {
-            @NonNull
-            @Override
-            public String id() {
-                return "albums";
-            }
+    ///////////////////////////////////////////////////////////////////////////
+    // Builds the media library
+    ///////////////////////////////////////////////////////////////////////////
 
-            @Nullable
+    public static void buildAsync() {
+        //Albums
+        new AsyncTask<Void, Album, List<Album>>() {
             @Override
-            protected List<Album> run() throws InterruptedException {
+            protected List<Album> doInBackground(Void... params) {
                 List<Album> generated = new ArrayList<>();
                 try {
-                    Cursor albumsCursor = context.getContentResolver().query(
-                            MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
-                            null, null, null,
+                    Cursor albumsCursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, null, null, null,
                             MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
 
-                    int titleColumn = albumsCursor.getColumnIndex
-                            (MediaStore.Audio.Albums.ALBUM);
-                    int idColumn = albumsCursor.getColumnIndex
-                            (MediaStore.Audio.Albums._ID);
-                    int artistColumn = albumsCursor.getColumnIndex
-                            (MediaStore.Audio.Albums.ARTIST);
-                    int albumArtColumn = albumsCursor.getColumnIndex
-                            (MediaStore.Audio.Albums.ALBUM_ART);
+                    assert albumsCursor != null : "Cursor is null";
+                    int titleColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM);
+                    int idColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums._ID);
+                    int artistColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST);
+                    int albumArtColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART);
 
                     albumsCursor.moveToFirst();
                     do {
@@ -76,16 +61,13 @@ public class Library {
 
                         album.setId(albumsCursor.getLong(idColumn));
                         album.setContext(context);
-
                         album.setAlbumTitle(albumsCursor.getString(titleColumn));
                         album.setAlbumArtistName(albumsCursor.getString(artistColumn));
-
                         album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
-
                         /*album.generateSongs();*/
 
                         generated.add(album);
-                        updateUi(album);
+                        publishProgress(album);
                     } while (albumsCursor.moveToNext());
                     albumsCursor.close();
                 } catch (IndexOutOfBoundsException e) {
@@ -94,57 +76,49 @@ public class Library {
                 return generated;
             }
 
-            protected void updateUi(Album a) {
-                Library.mHandler.sendMessage(Message.obtain(Library.mHandler, Library.ALBUM_LOADED, a));
+            @Override
+            protected void onProgressUpdate(Album... values) {
+                super.onProgressUpdate(values);
+                updateAlbumListeners(values);
             }
 
             @Override
-            protected void done(@Nullable List<Album> result) {
-                super.done(result);
-                mAlbums = result;
+            protected void onPostExecute(List<Album> albums) {
+                super.onPostExecute(albums);
+                mAlbums = albums;
+                mArtistsBuilt = true;
             }
-        };
-        Action<List<Song>> songs = new Action<List<Song>>() {
-            @NonNull
-            @Override
-            public String id() {
-                return "songs";
-            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-            @Nullable
+        //Songs
+        new AsyncTask<Void, Song, List<Song>>() {
             @Override
-            protected List<Song> run() throws InterruptedException {
+            protected List<Song> doInBackground(Void... params) {
                 List<Song> generated = new ArrayList<>();
                 try {
-                    final String where = MediaStore.Audio.Media.IS_MUSIC + "=1";
-                    Cursor songsCursor = context.getContentResolver().query(
-                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                            null, where, null,
-                            MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+                    Cursor songsCursor = context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,
+                            MediaStore.Audio.Media.IS_MUSIC + "=1", null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 
-                    int titleColumn = songsCursor.getColumnIndex
-                            (MediaStore.Audio.Media.TITLE);
-                    int idColumn = songsCursor.getColumnIndex
-                            (MediaStore.Audio.Media._ID);
-                    int artistColumn = songsCursor.getColumnIndex
-                            (MediaStore.Audio.Media.ARTIST);
-                    int durColumn = songsCursor.getColumnIndex
-                            (MediaStore.Audio.Media.DURATION);
-                    int albumIdColumn = songsCursor.getColumnIndex
-                            (MediaStore.Audio.Media.ALBUM_ID);
+
+                    assert songsCursor != null : "Cursor is null";
+                    int titleColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
+                    int idColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+                    int artistColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+                    int durColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
                     int trackNumber = songsCursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
 
                     songsCursor.moveToFirst();
                     do {
                         Song s = new Song();
+
                         s.setSongTitle(songsCursor.getString(titleColumn));
                         s.setSongArtist(songsCursor.getString(artistColumn));
                         s.setSongID(songsCursor.getLong(idColumn));
-                        s.setAlbumID(songsCursor.getLong(albumIdColumn));
                         s.setSongDuration(songsCursor.getLong(durColumn));
                         s.setTrackNumber(songsCursor.getInt(trackNumber));
+
                         generated.add(s);
-                        updateUi(s);
+                        publishProgress(s);
                     } while (songsCursor.moveToNext());
                     songsCursor.close();
                 } catch (IndexOutOfBoundsException e) {
@@ -153,66 +127,53 @@ public class Library {
                 return generated;
             }
 
-            protected void updateUi(Song s) {
-                Library.mHandler.sendMessage(Message.obtain(Library.mHandler, Library.SONG_LOADED, s));
+            @Override
+            protected void onProgressUpdate(Song... values) {
+                super.onProgressUpdate(values);
+                updateSongListeners(values);
             }
 
             @Override
-            protected void done(@Nullable List<Song> result) {
-                super.done(result);
-                mSongs = result;
+            protected void onPostExecute(List<Song> songs) {
+                super.onPostExecute(songs);
+                mSongs = songs;
+                mSongsBuilt = true;
             }
-        };
-        Action<List<Artist>> artists = new Action<List<Artist>>() {
-            @NonNull
-            @Override
-            public String id() {
-                return "artists";
-            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-            @Nullable
+        //Artists
+        new AsyncTask<Void, Artist, List<Artist>>() {
             @Override
-            protected List<Artist> run() throws InterruptedException {
-                List<Artist> generated = new ArrayList<>();
-                try {
-                    //TODO: Implement this
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    generated = Collections.emptyList();
-                }
-                return generated;
-            }
-
-            protected void updateUi(Artist a) {
-                Library.mHandler.sendMessage(Message.obtain(Library.mHandler, Library.ARTIST_LOADED, a));
+            protected List<Artist> doInBackground(Void... params) {
+                //TODO: Implement this
+                return null;
             }
 
             @Override
-            protected void done(@Nullable List<Artist> result) {
-                super.done(result);
-                mArtists = result;
-            }
-        };
-        Action<List<Playlist>> playlists = new Action<List<Playlist>>() {
-            @NonNull
-            @Override
-            public String id() {
-                return "playlists";
+            protected void onProgressUpdate(Artist... values) {
+                super.onProgressUpdate(values);
+                updateArtistListeners(values);
             }
 
-            @Nullable
             @Override
-            protected List<Playlist> run() throws InterruptedException {
+            protected void onPostExecute(List<Artist> artists) {
+                super.onPostExecute(artists);
+                mArtists = artists;
+                mArtistsBuilt = true;
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        //Playlists
+        new AsyncTask<Void, Playlist, List<Playlist>>() {
+            @Override
+            protected List<Playlist> doInBackground(Void... params) {
                 List<Playlist> generated = new ArrayList<>();
                 try {
-                    Cursor playlistsCursor = context.getContentResolver().query(
-                            MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
-                            null, null, null,
-                            MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
+                    Cursor playlistsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
 
-                    int titleColumn = playlistsCursor.getColumnIndex
-                            (MediaStore.Audio.Playlists.NAME);
-                    int idColumn = playlistsCursor.getColumnIndex
-                            (MediaStore.Audio.Playlists._ID);
+                    assert playlistsCursor != null : "Cursor is null";
+                    int titleColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists.NAME);
+                    int idColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
 
                     playlistsCursor.moveToFirst();
                     do {
@@ -225,7 +186,6 @@ public class Library {
                         playlist.generateSongs(context);
 
                         generated.add(playlist);
-                        updateUi(playlist);
                     } while (playlistsCursor.moveToNext());
                     Collections.sort(mPlaylists, new Comparator<Playlist>() {
                         @Override
@@ -240,23 +200,14 @@ public class Library {
                 return generated;
             }
 
-            protected void updateUi(Playlist p) {
-                Library.mHandler.sendMessage(Message.obtain(Library.mHandler, Library.PLAYLIST_LOADED, p));
-            }
-
             @Override
-            protected void done(@Nullable List<Playlist> result) {
-                super.done(result);
-                mPlaylists = result;
+            protected void onPostExecute(List<Playlist> playlists) {
+                super.onPostExecute(playlists);
+                mPlaylists = playlists;
+                updatePlaylistListeners();
+                mPlaylistsBuilt = true;
             }
-        };
-        Async.parallel(albums, songs, artists, playlists).done(new Done() {
-            @Override
-            public void result(@NonNull Result result) {
-                buildDataMesh();
-                mBuilt = true;
-            }
-        });
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     /**
@@ -276,19 +227,87 @@ public class Library {
         }
     }
 
+    private static void registerMediaStoreListener() {
+
+    }
+
     ///////////////////////////////////////////////////////////////////////////
-    // Handles UI updates from the async loading going on in the background
+    // The isBuilt variable
     ///////////////////////////////////////////////////////////////////////////
 
-    public static final int ALBUM_LOADED = 0;
-    public static final int ALBUM_SONG_LOADED = 1;
-    public static final int SONG_LOADED = 2;
-    public static final int ARTIST_LOADED = 3;
-    public static final int PLAYLIST_LOADED = 4;
-    public static final int PLAYLIST_SONG_LOADED = 5;
-    public static final Handler mHandler = new Handler(Looper.getMainLooper()) {
+    private static volatile boolean
+            mAlbumsBuilt = false,
+            mSongsBuilt = false,
+            mArtistsBuilt = false,
+            mPlaylistsBuilt = false;
 
-    };
+    public static boolean isBuilt() {
+        return mAlbumsBuilt && mSongsBuilt && mArtistsBuilt && mPlaylistsBuilt;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Handles UI updates
+    ///////////////////////////////////////////////////////////////////////////
+
+    //Artist
+    interface AlbumListener {
+        void onChange(Album... values);
+    }
+
+    static volatile List<AlbumListener> albumListeners = new ArrayList<>();
+
+    public static void registerAlbumListener(AlbumListener albumListener) {
+        albumListeners.add(albumListener);
+    }
+
+    public static void updateAlbumListeners(Album... values) {
+        for (AlbumListener l : albumListeners) l.onChange(values);
+    }
+
+    //Song
+    interface SongListener {
+        void onChange(Song... values);
+    }
+
+    static volatile List<SongListener> songListeners = new ArrayList<>();
+
+    public static void registerSongListener(SongListener songListener) {
+        songListeners.add(songListener);
+    }
+
+    public static void updateSongListeners(Song... values) {
+        for (SongListener l : songListeners) l.onChange(values);
+    }
+
+    // Artist
+    interface ArtistListener {
+        void onChange(Artist... values);
+    }
+
+    static volatile List<ArtistListener> artistListeners = new ArrayList<>();
+
+    public static void registerArtistListener(ArtistListener artistListener) {
+        artistListeners.add(artistListener);
+    }
+
+    public static void updateArtistListeners(Artist... values) {
+        for (ArtistListener l : artistListeners) l.onChange(values);
+    }
+
+    //Playlist
+    interface PlaylistListener {
+        void onChange();
+    }
+
+    static volatile List<PlaylistListener> playlistListeners = new ArrayList<>();
+
+    public static void registerPlaylstListener(PlaylistListener playlistListener) {
+        playlistListeners.add(playlistListener);
+    }
+
+    public static void updatePlaylistListeners() {
+        for (PlaylistListener l : playlistListeners) l.onChange();
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Playlist Management
@@ -316,9 +335,9 @@ public class Library {
         return mArtists;
     }
 
-    public static boolean isBuilt() {
-        return mBuilt;
-    }
+    ///////////////////////////////////////////////////////////////////////////
+    // Methods for finding a media object by ID
+    ///////////////////////////////////////////////////////////////////////////
 
     @Nullable
     public static Song findSongById(long id) {
@@ -335,11 +354,6 @@ public class Library {
     @Nullable
     public static Album findAlbumById(long id) {
         for (Album album : getAlbums()) if (album.getId() == id) return album;
-        return null;
-    }
-
-    @Nullable
-    public static Artist findArtistById(long id) {
         return null;
     }
 

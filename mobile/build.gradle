@@ -61,7 +61,6 @@ dependencies {
     compile 'com.github.afollestad:app-theme-engine:1.0.0'
     compile 'com.github.afollestad.material-dialogs:core:0.8.5.4'
     compile 'com.github.afollestad.material-dialogs:commons:0.8.5.4'
-    compile 'com.github.afollestad:async:0.2.1'
     /*Google*/
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
