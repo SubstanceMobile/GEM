@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
+                    app:navigationIcon="@drawable/abc_ic_ab_back_material" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
 

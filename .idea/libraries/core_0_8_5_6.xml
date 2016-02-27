@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="core-0.8.5.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.6/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.afollestad.material-dialogs/core/0.8.5.6/4956e8b314a97fc0ee1a51e5c071659889a129d9/core-0.8.5.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

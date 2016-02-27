@@ -34,7 +34,7 @@ public class QueueManager{
     public List<Song> toSongList(List<QueueItem> itemList) {
         List<Song> songList = Collections.emptyList();
         for (int i = 0; i <= itemList.size(); i++) {
-            songList.add(Song.parse(itemList.get(i)));
+            songList.add(Song.parse());
         }
         return songList;
     }
@@ -69,8 +69,8 @@ public class QueueManager{
         queue.add(queueItem);
     }
 
-    public void addToQueue(QueueItem queueItem) {
-        queue.add(Song.parse(queueItem));
+    public void addToQueue() {
+        queue.add(Song.parse());
     }
 
     public int getCurrentSongPos() {

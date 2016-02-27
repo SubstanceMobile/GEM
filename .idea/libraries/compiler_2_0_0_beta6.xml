@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="compiler-2.0.0-beta6">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/databinding/compiler/2.0.0-beta6/compiler-2.0.0-beta6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

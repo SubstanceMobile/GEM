@@ -65,37 +65,6 @@ public class Playlist {
         for (Song s : songs) removeSong(s);
     }
 
-    public void generateSongs(Context context) {
-        new AsyncTask<Object, Void, List<Song>>() {
-            @Override
-            protected List<Song> doInBackground(Object... params) {
-                List<Song> generated = new ArrayList<>();
-                try {
-                    Cursor playlistSongsCursor = ((Context) params[1]).getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", (long) params[2]),
-                            null, null, null, MediaStore.Audio.Playlists.Members.PLAY_ORDER);
-
-                    assert playlistSongsCursor != null : "Cursor is null";
-                    int idColumn = playlistSongsCursor.getColumnIndex(MediaStore.Audio.Playlists.Members.AUDIO_ID);
-
-                    playlistSongsCursor.moveToFirst();
-                    do {
-                        generated.add(Library.findSongById(playlistSongsCursor.getLong(idColumn)));
-                    } while (playlistSongsCursor.moveToNext());
-                    playlistSongsCursor.close();
-                } catch (IndexOutOfBoundsException e) {
-                    generated = Collections.emptyList();
-                }
-                return generated;
-            }
-
-            @Override
-            protected void onPostExecute(List<Song> songs) {
-                super.onPostExecute(songs);
-                setSongs(songs);
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, getId());
-    }
-
     ///////////////////////////////////////////////////////////////////////////
     // ID
     ///////////////////////////////////////////////////////////////////////////

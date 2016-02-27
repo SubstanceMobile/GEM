@@ -42,9 +42,6 @@ public class Album {
     public boolean animated;
     public Context cxt;
 
-    public Album() {
-    }
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //This manages the songs of the album
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,37 +62,6 @@ public class Album {
                 return lhs.getTrackNumber().compareTo(rhs.getTrackNumber());
             }
         });
-    }
-
-    public void generateSongs(Context context) {
-        new AsyncTask<Object, Void, List<Song>>() {
-            @Override
-            protected List<Song> doInBackground(Object... params) {
-                List<Song> generated = new ArrayList<>();
-                try {
-                    Cursor albumSongsCursor = ((Context) params[1]).getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", (long) params[2]),
-                            null, MediaStore.Audio.Media.ALBUM_ID + "?=", new String[]{String.valueOf((long) params[2])}, MediaStore.Audio.Playlists.Members.PLAY_ORDER);
-
-                    assert albumSongsCursor != null : "Cursor is null";
-                    int idColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
-
-                    albumSongsCursor.moveToFirst();
-                    do {
-                        generated.add(Library.findSongById(albumSongsCursor.getLong(idColumn)));
-                    } while (albumSongsCursor.moveToNext());
-                    albumSongsCursor.close();
-                } catch (IndexOutOfBoundsException e) {
-                    generated = Collections.emptyList();
-                }
-                return generated;
-            }
-
-            @Override
-            protected void onPostExecute(List<Song> songs) {
-                super.onPostExecute(songs);
-                setSongs(songs);
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, getId());
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

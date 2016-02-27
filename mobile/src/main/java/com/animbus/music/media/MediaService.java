@@ -282,7 +282,7 @@ public class MediaService extends Service {
 
         @Override
         public void play(Song song) {
-            Log.d(TAG, "play(Song) called. Song = " + song.getSongID());
+            Log.d(TAG, "play(Song) called. Song = " + song.getId());
             play(song.getSongURI(), false);
             PlaybackRemote.updateSongListeners(song);
         }
@@ -698,7 +698,7 @@ public class MediaService extends Service {
         PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
             @Override
             public void onSongChanged(Song newSong) {
-                mSession.setMetadata(newSong.getMetaData(MediaService.this));
+                mSession.setMetadata(newSong.data);
             }
         });
     }

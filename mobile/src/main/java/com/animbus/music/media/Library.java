@@ -64,7 +64,6 @@ public class Library {
                         album.setAlbumTitle(albumsCursor.getString(titleColumn));
                         album.setAlbumArtistName(albumsCursor.getString(artistColumn));
                         album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
-                        /*album.generateSongs();*/
 
                         generated.add(album);
                         publishProgress(album);
@@ -79,6 +78,7 @@ public class Library {
             @Override
             protected void onProgressUpdate(Album... values) {
                 super.onProgressUpdate(values);
+                buildSongsForAlbums(values);
                 updateAlbumListeners(values);
             }
 
@@ -86,7 +86,7 @@ public class Library {
             protected void onPostExecute(List<Album> albums) {
                 super.onPostExecute(albums);
                 mAlbums = albums;
-                mArtistsBuilt = true;
+                mAlbumsBuilt = true;
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
@@ -103,6 +103,7 @@ public class Library {
                     assert songsCursor != null : "Cursor is null";
                     int titleColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
                     int idColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+                    int albumIdColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
                     int artistColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
                     int durColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
                     int trackNumber = songsCursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
@@ -113,9 +114,10 @@ public class Library {
 
                         s.setSongTitle(songsCursor.getString(titleColumn));
                         s.setSongArtist(songsCursor.getString(artistColumn));
-                        s.setSongID(songsCursor.getLong(idColumn));
+                        s.setId(songsCursor.getLong(idColumn));
+                        s.setAlbumID(songsCursor.getLong(albumIdColumn));
                         s.setSongDuration(songsCursor.getLong(durColumn));
-                        s.setTrackNumber(songsCursor.getInt(trackNumber));
+                        s.setTrackNumber(songsCursor.getLong(trackNumber));
 
                         generated.add(s);
                         publishProgress(s);
@@ -141,6 +143,58 @@ public class Library {
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
+        //Playlists
+        new AsyncTask<Void, Playlist, List<Playlist>>() {
+            @Override
+            protected List<Playlist> doInBackground(Void... params) {
+                List<Playlist> generated = new ArrayList<>();
+                try {
+                    Cursor playlistsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
+
+                    assert playlistsCursor != null : "Cursor is null";
+                    int titleColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists.NAME);
+                    int idColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
+
+                    playlistsCursor.moveToFirst();
+                    do {
+                        Playlist playlist = new Playlist();
+
+                        String name = playlistsCursor.getString(titleColumn);
+                        playlist.setName(name);
+                        playlist.setType(TextUtils.equals(name.toLowerCase(), "favorites") ? 0 : 1);
+                        playlist.setId(playlistsCursor.getLong(idColumn));
+
+                        generated.add(playlist);
+                        publishProgress(playlist);
+                    } while (playlistsCursor.moveToNext());
+                    Collections.sort(mPlaylists, new Comparator<Playlist>() {
+                        @Override
+                        public int compare(Playlist lhs, Playlist rhs) {
+                            return ((Integer) lhs.getType()).compareTo(rhs.getType());
+                        }
+                    });
+                    playlistsCursor.close();
+                } catch (IndexOutOfBoundsException e) {
+                    generated = Collections.emptyList();
+                }
+                return generated;
+            }
+
+            @Override
+            protected void onProgressUpdate(Playlist... values) {
+                super.onProgressUpdate(values);
+                for (Playlist p : values) buildSongsForPlaylist(p);
+            }
+
+            @Override
+            protected void onPostExecute(List<Playlist> playlists) {
+                super.onPostExecute(playlists);
+                mPlaylists = playlists;
+                updatePlaylistListeners();
+                mPlaylistsBuilt = true;
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
         //Artists
         new AsyncTask<Void, Artist, List<Artist>>() {
             @Override
@@ -162,38 +216,44 @@ public class Library {
                 mArtistsBuilt = true;
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
 
-        //Playlists
-        new AsyncTask<Void, Playlist, List<Playlist>>() {
+    //Loads songs for the provided albums
+    public static void buildSongsForAlbums(Album... values) {
+        for (final Album album : values)
+            new AsyncTask<Object, Void, List<Song>>() {
             @Override
-            protected List<Playlist> doInBackground(Void... params) {
-                List<Playlist> generated = new ArrayList<>();
+            protected List<Song> doInBackground(Object... params) {
+                List<Song> generated = new ArrayList<>();
                 try {
-                    Cursor playlistsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
+                    Cursor albumSongsCursor = ((Context) params[0]).getContentResolver().query(
+                            MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+                            null, MediaStore.Audio.Media.ALBUM_ID + "?=",
+                            new String[]{String.valueOf((long) params[1])},
+                            MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 
-                    assert playlistsCursor != null : "Cursor is null";
-                    int titleColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists.NAME);
-                    int idColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
+                    assert albumSongsCursor != null : "Cursor is null";
+                    int titleColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
+                    int idColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+                    int albumIdColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+                    int artistColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+                    int durColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
+                    int trackNumber = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
 
-                    playlistsCursor.moveToFirst();
+                    albumSongsCursor.moveToFirst();
                     do {
-                        Playlist playlist = new Playlist();
+                        Song s = new Song();
 
-                        String name = playlistsCursor.getString(titleColumn);
-                        playlist.setName(name);
-                        playlist.setType(TextUtils.equals(name.toLowerCase(), "favorites") ? 0 : 1);
-                        playlist.setId(playlistsCursor.getLong(idColumn));
-                        playlist.generateSongs(context);
+                        s.setSongTitle(albumSongsCursor.getString(titleColumn));
+                        s.setSongArtist(albumSongsCursor.getString(artistColumn));
+                        s.setId(albumSongsCursor.getLong(idColumn));
+                        s.setAlbumID(albumSongsCursor.getLong(albumIdColumn));
+                        s.setSongDuration(albumSongsCursor.getLong(durColumn));
+                        s.setTrackNumber(albumSongsCursor.getLong(trackNumber));
 
-                        generated.add(playlist);
-                    } while (playlistsCursor.moveToNext());
-                    Collections.sort(mPlaylists, new Comparator<Playlist>() {
-                        @Override
-                        public int compare(Playlist lhs, Playlist rhs) {
-                            return ((Integer) lhs.getType()).compareTo(rhs.getType());
-                        }
-                    });
-                    playlistsCursor.close();
+                        generated.add(s);
+                    } while (albumSongsCursor.moveToNext());
+                    albumSongsCursor.close();
                 } catch (IndexOutOfBoundsException e) {
                     generated = Collections.emptyList();
                 }
@@ -201,30 +261,49 @@ public class Library {
             }
 
             @Override
-            protected void onPostExecute(List<Playlist> playlists) {
-                super.onPostExecute(playlists);
-                mPlaylists = playlists;
-                updatePlaylistListeners();
-                mPlaylistsBuilt = true;
+            protected void onPostExecute(List<Song> songs) {
+                super.onPostExecute(songs);
+                album.setSongs(songs);
+                mSongs.addAll(songs);
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, album.getId(), album);
     }
 
-    /**
-     * This takes the individual lists and combines objects.
-     * So it basically links songs and albums, songs and playlists, albums and artists (which ends up linking songs and artists), etc, etc.
-     */
-    private static void buildDataMesh() {
-        if (!mSongs.isEmpty() && !mAlbums.isEmpty()) {
-            for (Album a : mAlbums) {
-                for (Song s : mSongs) {
-                    if (s.getAlbumID() == a.getId()) {
-                        a.addSong(s);
-                        s.setAlbum(a);
-                    }
-                }
-            }
+    public static void injectSongIntoAlbum(Song... values) {
+        if (mSongsBuilt) for (Song song : values) {
+            for (Album a : getAlbums());
         }
+    }
+
+    public static void buildSongsForPlaylist(Playlist... values) {
+        for (Playlist playlist: values) new AsyncTask<Object, Void, List<Song>>() {
+            @Override
+            protected List<Song> doInBackground(Object... params) {
+                List<Song> generated = new ArrayList<>();
+                try {
+                    Cursor playlistSongsCursor = ((Context) params[0]).getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", (long) params[1]),
+                            null, null, null, MediaStore.Audio.Playlists.Members.PLAY_ORDER);
+
+                    assert playlistSongsCursor != null : "Cursor is null";
+                    int idColumn = playlistSongsCursor.getColumnIndex(MediaStore.Audio.Playlists.Members.AUDIO_ID);
+
+                    playlistSongsCursor.moveToFirst();
+                    do {
+                        generated.add(Library.findSongById(playlistSongsCursor.getLong(idColumn)));
+                    } while (playlistSongsCursor.moveToNext());
+                    playlistSongsCursor.close();
+                } catch (IndexOutOfBoundsException e) {
+                    generated = Collections.emptyList();
+                }
+                return generated;
+            }
+
+            @Override
+            protected void onPostExecute(List<Song> songs) {
+                super.onPostExecute(songs);
+                setSongs(songs);
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, playlist.getId());
     }
 
     private static void registerMediaStoreListener() {
@@ -341,7 +420,7 @@ public class Library {
 
     @Nullable
     public static Song findSongById(long id) {
-        for (Song song : getSongs()) if (song.getSongID() == id) return song;
+        for (Song song : getSongs()) if (song.getId() == id) return song;
         return null;
     }
 

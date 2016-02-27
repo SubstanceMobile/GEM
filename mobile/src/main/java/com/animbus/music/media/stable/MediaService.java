@@ -66,7 +66,7 @@ public class MediaService extends Service implements PlaybackManager.OnChangedLi
 
     @Override
     public void onSongChanged(Song song) {
-        mSession.setMetadata(song.getMetaData(this));
+        mSession.setMetadata(song.data);
     }
 
     @Override

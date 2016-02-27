@@ -2,7 +2,6 @@ package com.animbus.music.media;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Path;
 import android.net.Uri;
 import android.support.v4.media.session.MediaControllerCompat.TransportControls;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -111,7 +110,7 @@ public class PlaybackRemote {
             PlaybackManager.get().play(song);
             return;
         }
-        if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getSongID()), null); else {
+        if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getId()), null); else {
             tempCommand = 1;
             tempSong = song;
         }

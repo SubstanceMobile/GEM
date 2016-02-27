@@ -1,178 +1,134 @@
 package com.animbus.music.media.objects;
 
-
 import android.content.ContentUris;
-import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v4.media.MediaDescriptionCompat;
-import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat.QueueItem;
 
+import com.animbus.music.media.Library;
+import com.animbus.music.util.GEMUtil;
+
+import static android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+import static android.support.v4.media.MediaMetadataCompat.METADATA_KEY_ARTIST;
+import static android.support.v4.media.MediaMetadataCompat.METADATA_KEY_DURATION;
+import static android.support.v4.media.MediaMetadataCompat.METADATA_KEY_TITLE;
+import static android.support.v4.media.MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER;
+
 /**
- * Created by Adrian on 7/5/2015.
+ * Wrapper around a MediaMetadataCompat optimised for Song metadata
  */
-public class Song {
-    public Integer trackNumber;
-    public String songTitle, songArtist, songGenre;
-    public long songID, songDuration;
-    Uri songURI;
-    boolean repeating;
-    Album songAlbum;
-    long albumID;
-    String songDurString = "";
+public class Song extends MediaObject {
+    public long ID, albumID;
 
-    public Song() {
-
-    }
+    ///////////////////////////////////////////////////////////////////////////
+    // Uri
+    ///////////////////////////////////////////////////////////////////////////
 
     public Uri getSongURI() {
-        return ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, songID);
+        return ContentUris.withAppendedId(EXTERNAL_CONTENT_URI, getId());
     }
 
-    public long getSongDuration() {
-        return songDuration;
-    }
 
-    public void setSongDuration(long songDuration) {
-        this.songDuration = songDuration;
-    }
-
-    public String getTrackNumberString() {
-        return trackNumber != 0 ? String.valueOf(trackNumber) : "-";
-    }
-
-    public Integer getTrackNumber() {
-        return trackNumber;
-    }
-
-    public void setTrackNumber(Integer trackNumber) {
-        this.trackNumber = trackNumber;
-    }
-
-    public String getSongArtist() {
-        return songArtist;
-    }
-
-    public void setSongArtist(String songArtist) {
-        this.songArtist = songArtist;
-    }
-
-    public long getSongID() {
-        return songID;
-    }
-
-    public void setSongID(long songID) {
-        this.songID = songID;
-    }
-
-    public String getSongGenre() {
-        return songGenre;
-    }
-
-    public void setSongGenre(String songGenre) {
-        this.songGenre = songGenre;
-    }
+    ///////////////////////////////////////////////////////////////////////////
+    // Title
+    ///////////////////////////////////////////////////////////////////////////
 
     public String getSongTitle() {
-        return songTitle;
+        return data.getString(METADATA_KEY_TITLE);
     }
 
-    public void setSongTitle(String songTitle) {
-        this.songTitle = songTitle;
+    public Song setSongTitle(String songTitle) {
+        putString(METADATA_KEY_TITLE, songTitle);
+        return this;
     }
 
-    public boolean isRepeating() {
-        return repeating;
+    ///////////////////////////////////////////////////////////////////////////
+    // Artist
+    ///////////////////////////////////////////////////////////////////////////
+
+    public String getSongArtist() {
+        return data.getString(METADATA_KEY_ARTIST);
     }
 
-    public void setRepeating(boolean repeating) {
-        this.repeating = repeating;
+    public Song setSongArtist(String songArtist) {
+        putString(METADATA_KEY_ARTIST, songArtist);
+        return this;
     }
 
-    public void setAlbum(Album songAlbum) {
-        this.songAlbum = songAlbum;
+    ///////////////////////////////////////////////////////////////////////////
+    // IDs
+    ///////////////////////////////////////////////////////////////////////////
+
+    public long getId() {
+        return ID;
     }
 
-    public Album getAlbum() {
-        return songAlbum;
-    }
-
-    public String getSongDurString() {
-        if (!songDurString.equals("")) {
-            return songDurString;
-        } else {
-            songDurString = stringForTime(getSongDuration());
-            return songDurString;
-        }
-    }
-
-    private String stringForTime(long timeMs) {
-        int totalSeconds = (int) timeMs / 1000;
-
-        int seconds = totalSeconds % 60;
-        int minutes = (totalSeconds / 60) % 60;
-        int hours   = totalSeconds / 3600;
-
-        if (hours > 0) {
-            return String.format("%d:%02d:%02d", hours, minutes, seconds);
-        } else {
-            return  String.format("%02d:%02d", minutes, seconds);
-        }
-    }
-
-    public void setSongDurString(String songDurString) {
-        this.songDurString = songDurString;
-    }
-
-    public QueueItem toQueueItem(){
-        MediaDescriptionCompat description = new MediaDescriptionCompat.Builder()
-                .setTitle(getSongTitle())
-                .setDescription(getSongArtist())
-                .setIconBitmap(null)
-                .setMediaId(String.valueOf(getSongID()))
-                .build();
-        return new QueueItem(description, 1);
-    }
-
-    public static Song parse(QueueItem queueItem){
-        Song song = new Song();
-        MediaDescriptionCompat data = queueItem.getDescription();
-        song.setSongTitle(String.valueOf((data.getTitle())));
-        song.setSongArtist(String.valueOf(data.getDescription()));
-        song.setSongID(Long.valueOf(data.getMediaId()));
-        return song;
+    public Song setId(long id) {
+        this.ID = id;
+        return this;
     }
 
     public long getAlbumID() {
         return albumID;
     }
 
-    public Album getSongAlbum() {
-        return songAlbum;
-    }
-
-    public void setAlbumID(long albumID) {
+    public Song setAlbumID(long albumID) {
         this.albumID = albumID;
+        return this;
     }
 
-    public void setSongAlbum(Album songAlbum) {
-        this.songAlbum = songAlbum;
+    ///////////////////////////////////////////////////////////////////////////
+    // Song Duration
+    ///////////////////////////////////////////////////////////////////////////
+
+    public long getSongDuration() {
+        return data.getLong(METADATA_KEY_DURATION);
     }
 
-    public MediaMetadataCompat getMetaData(Context cxt){
-        final MediaMetadataCompat.Builder builder = new MediaMetadataCompat.Builder();
-        builder.putText(MediaMetadataCompat.METADATA_KEY_TITLE, getSongTitle());
-        builder.putText(MediaMetadataCompat.METADATA_KEY_ARTIST, getSongArtist());
-        builder.putText(MediaMetadataCompat.METADATA_KEY_ALBUM, getAlbum().getAlbumTitle());
-        getAlbum().requestArt(new Album.ArtRequest() {
-            @Override
-            public void respond(Bitmap albumArt) {
-                builder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, albumArt);
-            }
-        });
-        builder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, getSongDuration());
-        return builder.build();
+    public Song setSongDuration(long songDuration) {
+        putLong(METADATA_KEY_DURATION, songDuration);
+        return this;
+    }
+
+    public String getSongDurString() {
+        return GEMUtil.stringForTime(getSongDuration());
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Track Number
+    ///////////////////////////////////////////////////////////////////////////
+
+    public String getTrackNumberString() {
+        return getTrackNumber() != 0 ? String.valueOf(getTrackNumber()) : "-";
+    }
+
+    public long getTrackNumber() {
+        return data.getLong(METADATA_KEY_TRACK_NUMBER);
+    }
+
+    public Song setTrackNumber(long trackNumber) {
+        putLong(METADATA_KEY_TRACK_NUMBER, trackNumber);
+        return this;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Album
+    ///////////////////////////////////////////////////////////////////////////
+
+    public Album getAlbum() {
+        return Library.findAlbumById(getAlbumID());
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Misc
+    ///////////////////////////////////////////////////////////////////////////
+
+    public QueueItem toQueueItem() {
+        return new QueueItem(data.getDescription(), getId());
+    }
+
+    @Deprecated
+    public static Song parse() {
+        //Do nothing. This method will be removed soon
+        return new Song();
     }
 }
