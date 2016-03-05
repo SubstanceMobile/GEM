@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/abc_ic_ab_back_material" />
+            app:navigationIcon="@drawable/ic_back" />
 
     </android.support.design.widget.AppBarLayout>
 

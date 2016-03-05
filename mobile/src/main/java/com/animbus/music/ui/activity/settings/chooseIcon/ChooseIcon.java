@@ -48,10 +48,6 @@ public class ChooseIcon extends ThemeActivity {
 
     @Override
     protected void setUp() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
-        DrawableCompat.setTint(DrawableCompat.wrap(menu), getResources().getColor(!Options.isLightTheme() ? R.color.faithfulPrimaryLight : R.color.faithfulPrimaryDark));
-        getSupportActionBar().setHomeAsUpIndicator(menu);
     }
 
     @Override

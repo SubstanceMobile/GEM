@@ -616,8 +616,8 @@ public class MediaService extends Service {
             mBuilder = new NotificationCompat.Builder(mService);
 
             mBuilder
-                    .setContentTitle(song.songTitle)
-                    .setContentText(song.songArtist)
+                    .setContentTitle(song.getSongTitle())
+                    .setContentText(song.getSongArtist())
                     .setSubText(song.getAlbum().getAlbumTitle())
                     .setStyle(
                             new NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2)

@@ -400,7 +400,7 @@ public class PlaybackRemote {
             s.setSongTitle(mContext.getString(R.string.title_uri));
             s.setSongArtist(mContext.getString(R.string.artist_uri));
             a.setContext(mContext);
-            s.setAlbum(a);
+
             updateSongListeners(s);
         }
 

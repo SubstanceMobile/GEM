@@ -22,13 +22,13 @@ import java.util.List;
 
 public class Library {
     public static volatile Context context;
-
     private static volatile List<Song> mSongs = new ArrayList<>();
     private static volatile List<Album> mAlbums = new ArrayList<>();
     private static volatile List<Playlist> mPlaylists = new ArrayList<>();
     private static volatile List<Artist> mArtists = new ArrayList<>();
 
     private Library() {
+        //So this class cannot be instantiated with a new statement
     }
 
     public static void setContext(Context cxt) {
@@ -39,7 +39,11 @@ public class Library {
     // Builds the media library
     ///////////////////////////////////////////////////////////////////////////
 
-    public static void buildAsync() {
+    public static void build() {
+      //TODO: This
+    }
+
+   /* public static void buildAsync() {
         //Albums
         new AsyncTask<Void, Album, List<Album>>() {
             @Override
@@ -308,7 +312,7 @@ public class Library {
 
     private static void registerMediaStoreListener() {
 
-    }
+    }*/
 
     ///////////////////////////////////////////////////////////////////////////
     // The isBuilt variable

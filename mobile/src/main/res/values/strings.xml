@@ -55,9 +55,11 @@
     <string name="about_icon">Designed icons</string>
     <string name="about_helped">Helped Development</string>
     <string name="about_managed">Managed the Project</string>
+    <string name="about_created">Created the App</string>
     <string name="about_Karim" translatable="false">Karim Abou Zeid</string>
     <string name="about_Neel" translatable="false">Neel Raj</string>
-    <string name="about_Substance" translatable="false">Substance Project</string>
+    <string name="about_Substance" translatable="false">Substance Mobile</string>
+    <string name="about_Adrian" translatable="false">Adrian Vovk</string>
 
     <!-- Settings -->
     <string name="settings_header_general">General</string>
@@ -100,7 +102,7 @@
 
     <string name="settings_page_names">Dynamic page names</string>
     <string name="settings_page_names_summary">Uses name of the currently showing page instead of \"Music\"</string>
-    
+
     <string name="settings_bigger_space">Bigger Space in list</string>
     <string name="settings_bigger_space_summary">Increases the space between the albums</string>
 

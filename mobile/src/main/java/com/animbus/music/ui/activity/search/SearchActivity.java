@@ -1,6 +1,7 @@
 package com.animbus.music.ui.activity.search;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.view.MenuItemCompat;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +23,19 @@ import com.animbus.music.ui.list.ListAdapter;
 import java.util.List;
 
 public class SearchActivity extends ThemeActivity {
+    public static final String EXTRA_MENU_LEFT = "EXTRA_MENU_LEFT";
+    public static final String EXTRA_MENU_CENTER_X = "EXTRA_MENU_CENTER_X";
     SearchView mSearchView;
+
+    private int searchBackDistanceX;
+    private int searchIconCenterX;
+
+    public static Intent createStartIntent(Context context, int menuIconLeft, int menuIconCenterX) {
+        Intent starter = new Intent(context, SearchActivity.class);
+        starter.putExtra(EXTRA_MENU_LEFT, menuIconLeft);
+        starter.putExtra(EXTRA_MENU_CENTER_X, menuIconCenterX);
+        return starter;
+    }
 
     @Override
     protected void init() {
@@ -30,7 +44,14 @@ public class SearchActivity extends ThemeActivity {
 
     @Override
     protected void setVariables() {
-
+        try {
+            // extract the search icon's location passed from the launching activity, minus 4dp to
+            // compensate for different paddings in the views
+            searchBackDistanceX = getIntent().getIntExtra(EXTRA_MENU_LEFT, 0) - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+            searchIconCenterX = getIntent().getIntExtra(EXTRA_MENU_CENTER_X, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -39,6 +60,10 @@ public class SearchActivity extends ThemeActivity {
 
         //Search
         handleIntent(getIntent());
+    }
+
+    private void setupSearchView() {
+
     }
 
     @Override
@@ -132,8 +157,7 @@ public class SearchActivity extends ThemeActivity {
     }
 
     private String getSuggestion(int position) {
-        Cursor cursor = (Cursor) mSearchView.getSuggestionsAdapter().getItem(
-                position);
+        Cursor cursor = (Cursor) mSearchView.getSuggestionsAdapter().getItem(position);
         return cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1));
     }
 

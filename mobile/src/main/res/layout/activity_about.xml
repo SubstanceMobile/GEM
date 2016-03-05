@@ -17,6 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
@@ -52,14 +53,14 @@
 
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
                             <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                                 android:id="@+id/about_icon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:src="@android:mipmap/sym_def_app_icon" />
+                                android:src="@mipmap/ic_launcher_srini_black" />
                         </FrameLayout>
 
                         <FrameLayout
@@ -82,8 +83,8 @@
                         android:layout_height="@dimen/listViewSizeBig"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openSourceCode"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/about_source_code">
 
                         <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                             android:layout_width="wrap_content"
@@ -106,9 +107,8 @@
                         android:layout_height="@dimen/listViewSizeBig"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openBaseSource"
                         android:orientation="horizontal"
-                        android:id="@+id/origional_source_item">
+                        android:id="@+id/about_base_source_code">
 
                         <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                             android:layout_width="wrap_content"
@@ -131,7 +131,8 @@
                         android:layout_height="@dimen/listViewSizeBig"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/about_version">
 
                         <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                             android:layout_width="wrap_content"
@@ -156,7 +157,7 @@
                         android:background="?attr/ripple"
                         android:clickable="true"
                         android:orientation="horizontal"
-                        android:onClick="openPlayStore">
+                        android:id="@+id/about_play">
 
                         <com.animbus.music.ui.custom.view.SquareImageViewHeight_Based
                             android:layout_width="wrap_content"
@@ -172,6 +173,73 @@
                             android:layout_gravity="center_vertical"
                             android:text="@string/about_visit_play" />
 
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="?attr/cardStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_medium"
+                        android:background="?attr/ripple"
+                        android:clickable="true"
+                        android:id="@+id/about_adrian">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/about_Adrian"
+                            android:layout_gravity="center_horizontal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/about_created"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_medium"
+                        android:background="?attr/ripple"
+                        android:clickable="true"
+                        android:id="@+id/about_substance">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/about_Substance"
+                            android:layout_gravity="center_horizontal" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:text="@string/about_managed"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -202,8 +270,8 @@
                         android:layout_height="match_parent"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openAppCompat"
-                        android:padding="@dimen/margin_medium">
+                        android:padding="@dimen/margin_medium"
+                        android:id="@+id/about_support">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -219,8 +287,8 @@
                         android:layout_height="match_parent"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openPalette"
-                        android:padding="@dimen/margin_medium">
+                        android:padding="@dimen/margin_medium"
+                        android:id="@+id/about_palette">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -236,8 +304,8 @@
                         android:layout_height="match_parent"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openGlide"
-                        android:padding="@dimen/margin_medium">
+                        android:padding="@dimen/margin_medium"
+                        android:id="@+id/about_glide">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -253,8 +321,8 @@
                         android:layout_height="match_parent"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openGitty"
-                        android:padding="@dimen/margin_medium">
+                        android:padding="@dimen/margin_medium"
+                        android:id="@+id/about_gitty">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -270,8 +338,8 @@
                         android:layout_height="match_parent"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openAppIntro"
-                        android:padding="@dimen/margin_medium">
+                        android:padding="@dimen/margin_medium"
+                        android:id="@+id/about_appintro">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -287,8 +355,8 @@
                         android:layout_height="match_parent"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openFastScroll"
-                        android:padding="@dimen/margin_medium">
+                        android:padding="@dimen/margin_medium"
+                        android:id="@+id/about_fast_scroll">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -304,8 +372,8 @@
                         android:layout_height="match_parent"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openDialogs"
-                        android:padding="@dimen/margin_medium">
+                        android:padding="@dimen/margin_medium"
+                        android:id="@+id/about_material_dialogs">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -348,7 +416,7 @@
                         android:padding="@dimen/margin_medium"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openSrini">
+                        android:id="@+id/about_srini">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -375,7 +443,7 @@
                         android:padding="@dimen/margin_medium"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openAlex">
+                        android:id="@+id/about_alex">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -401,7 +469,7 @@
                         android:padding="@dimen/margin_medium"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openJaka">
+                        android:id="@+id/about_jaka">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -427,7 +495,7 @@
                         android:padding="@dimen/margin_medium"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openNguyen">
+                        android:id="@+id/about_nguyen">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -453,7 +521,7 @@
                         android:padding="@dimen/margin_medium"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openKarim">
+                        android:id="@+id/about_karim">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -479,7 +547,7 @@
                         android:padding="@dimen/margin_medium"
                         android:background="?attr/ripple"
                         android:clickable="true"
-                        android:onClick="openNeel">
+                        android:id="@+id/about_neel">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -495,32 +563,6 @@
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="?android:attr/textColorSecondary"
                             android:text="@string/about_helped"
-                            android:layout_gravity="center_horizontal" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/margin_medium"
-                        android:background="?attr/ripple"
-                        android:clickable="true"
-                        android:onClick="openSubstance" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:text="@string/about_Substance"
-                            android:layout_gravity="center_horizontal" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:text="@string/about_managed"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 

@@ -1,9 +1,7 @@
 package com.animbus.music.ui.activity.settings;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +11,8 @@ import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
+
+import butterknife.OnClick;
 
 public class About extends ThemeActivity {
 
@@ -43,58 +43,66 @@ public class About extends ThemeActivity {
                 Options.isLightTheme() ?
                         R.mipmap.ic_launcher_srini_black :
                         R.mipmap.ic_launcher_srini_white);
-        findViewById(R.id.origional_source_item).setVisibility(!SOURCE.equals(BASE_SOURCE) ? View.VISIBLE : View.GONE);
-    }
-
-    private void startUrl(String url) {
-        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
+        findViewById(R.id.about_base_source_code).setVisibility(!SOURCE.equals(BASE_SOURCE) ? View.VISIBLE : View.GONE);
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Top Card
     ///////////////////////////////////////////////////////////////////////////
 
-    public void openSourceCode(View v) {
+    @OnClick(R.id.about_source_code) void openSourceCode() {
         startUrl(SOURCE);
     }
 
-    public void openBaseSource(View v) {
+    @OnClick(R.id.about_base_source_code) void openBaseSource() {
         startUrl(BASE_SOURCE);
     }
 
-    public void openPlayStore(View v) {
+    @OnClick(R.id.about_play) void openPlayStore() {
         startUrl("https://play.google.com/store/apps/dev?id=4871620813352984682");
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Main Credits
+    ///////////////////////////////////////////////////////////////////////////
+
+    @OnClick(R.id.about_substance) void openSubstance() {
+        startUrl("https://substanceproject.net/");
+    }
+
+    @OnClick(R.id.about_adrian) void openAdrian() {
+        startUrl("https://substanceproject.net/");
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Libraries
     ///////////////////////////////////////////////////////////////////////////
 
-    public void openAppCompat(View v) {
+    @OnClick(R.id.about_support) void openAppCompat() {
         startUrl("https://developer.android.com/tools/support-library/index.html");
     }
 
-    public void openPalette(View v) {
+    @OnClick(R.id.about_palette) void openPalette() {
         startUrl("https://developer.android.com/tools/support-library/features.html#v7-palette");
     }
 
-    public void openGlide(View v) {
+    @OnClick(R.id.about_glide) void openGlide() {
         startUrl("https://github.com/bumptech/glide");
     }
 
-    public void openGitty(View v) {
+    @OnClick(R.id.about_gitty) void openGitty() {
         startUrl("https://github.com/PaoloRotolo/GittyReporter");
     }
 
-    public void openAppIntro(View v) {
+    @OnClick(R.id.about_appintro) void openAppIntro() {
         startUrl("https://github.com/PaoloRotolo/AppIntro");
     }
 
-    public void openFastScroll(View v) {
+    @OnClick(R.id.about_fast_scroll) void openFastScroll() {
         startUrl("https://github.com/plusCubed/recycler-fast-scroll");
     }
 
-    public void openDialogs(View v) {
+    @OnClick(R.id.about_material_dialogs) void openDialogs() {
         startUrl("https://github.com/afollestad/material-dialogs");
     }
 
@@ -102,32 +110,28 @@ public class About extends ThemeActivity {
     // Special thanks
     ///////////////////////////////////////////////////////////////////////////
 
-    public void openSrini(View v) {
+    @OnClick(R.id.about_srini) void openSrini() {
         startUrl("https://plus.google.com/+SriniKumarREM/posts");
     }
 
-    public void openAlex(View v) {
+    @OnClick(R.id.about_alex) void openAlex() {
         startUrl("https://plus.google.com/+AlexMueller392/posts");
     }
 
-    public void openJaka(View v) {
+    @OnClick(R.id.about_jaka) void openJaka() {
         startUrl("https://plus.google.com/+JakaMusic/posts");
     }
 
-    public void openNguyen(View v) {
+    @OnClick(R.id.about_nguyen) void openNguyen() {
         startUrl("https://plus.google.com/111080505870850761155/posts");
     }
 
-    public void openKarim(View v) {
+    @OnClick(R.id.about_karim) void openKarim() {
         startUrl("https://plus.google.com/+KarimAbouZeid23697/posts");
     }
 
-    public void openNeel(View v) {
+    @OnClick(R.id.about_neel) void openNeel() {
         startUrl("https://plus.google.com/+NeelRaj/posts");
-    }
-
-    public void openSubstance(View v) {
-        startUrl("https://substanceproject.net/");
     }
 
 }

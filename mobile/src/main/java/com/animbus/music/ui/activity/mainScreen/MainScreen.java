@@ -1,6 +1,8 @@
 package com.animbus.music.ui.activity.mainScreen;
 
 import android.animation.Animator;
+import android.app.ActivityOptions;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
@@ -18,7 +20,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,14 +47,17 @@ import com.animbus.music.util.Options;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 
+import butterknife.Bind;
+import butterknife.BindString;
+
 
 public class MainScreen extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener {
-    DrawerLayout mDrawerLayout;
-    TabLayout mTabs;
-    LockableViewPager mPager;
-    NavigationView mNavigationView;
-    View quickToolbar;
-    String mScreenName;
+    @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    @Bind(R.id.main_tab_layout) TabLayout mTabs;
+    @Bind(R.id.main_view_pager) LockableViewPager mPager;
+    @Bind(R.id.navigation) NavigationView mNavigationView;
+    @Bind(R.id.main_screen_now_playing_toolbar) View quickToolbar;
+    @BindString(R.string.title_activity_main) String mScreenName;
 
     @Override
     protected void init() {
@@ -59,11 +66,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     @Override
     protected void setVariables() {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNavigationView = (NavigationView) findViewById(R.id.navigation);
-        quickToolbar = findViewById(R.id.main_screen_now_playing_toolbar);
-        mTabs = (TabLayout) findViewById(R.id.main_tab_layout);
-        mPager = (LockableViewPager) findViewById(R.id.main_view_pager);
+
     }
 
     @Override
@@ -73,13 +76,14 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         mPager.setAdapter(new RecyclerPagerAdapter());
         mPager.setOffscreenPageLimit(3);
         goToDefaultPage();
-        mToolbar.setTitle(Options.usingCategoryNames() ? mScreenName : getResources().getString(R.string.title_activity_main));
+        mToolbar.setTitle(mScreenName);
         configureNowPlayingBar();
     }
 
     private void configureNowPlayingBar() {
         if (!PlaybackRemote.isActive()) {
             /*quickToolbar.setVisibility(View.GONE);*/
+            //TODO: Add This
         } else {
             try {
                 setUpNowPlayingBarWithSong(PlaybackRemote.getCurrentSong());
@@ -106,10 +110,10 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
             @Override
             public void onClick(View v) {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
-                        new Pair<View, String>(v.findViewById(R.id.main_screen_now_playing_toolbar_artist), "artist")
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_artist), "artist")
                 );
                 ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, NowPlaying.class), options.toBundle());
             }
@@ -206,7 +210,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         setUpDrawerHeader(PlaybackRemote.getCurrentSong());
     }
 
-    private void updateDrawerHeaderVisibility(){
+    private void updateDrawerHeaderVisibility() {
         if (PlaybackRemote.isActive() && mNavigationView.getHeaderCount() == 0)
             mNavigationView.inflateHeaderView(R.layout.drawer_header);
         else mNavigationView.removeHeaderView(mNavigationView.getHeaderView(0));
@@ -263,7 +267,8 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     private void selectTab(int pos) {
         try {
             mTabs.getTabAt(pos).select();
-        } catch (NullPointerException | IndexOutOfBoundsException ignored) {}
+        } catch (NullPointerException | IndexOutOfBoundsException ignored) {
+        }
 
     }
 
@@ -284,6 +289,12 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.action_search:
+                /*View searchMenuView = mToolbar.findViewById(R.id.action_search);
+                int[] loc = new int[2];
+                searchMenuView.getLocationOnScreen(loc);
+                Intent intent = SearchActivity.createStartIntent(this, loc[0], loc[0] + (searchMenuView.getWidth() / 2));
+                ActivityCompat.startActivity(this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                searchMenuView.setAlpha(0f);*/
                 startActivity(new Intent(this, SearchActivity.class));
                 return true;
         }

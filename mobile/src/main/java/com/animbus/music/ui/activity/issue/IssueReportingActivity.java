@@ -2,10 +2,13 @@ package com.animbus.music.ui.activity.issue;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.widget.EditText;
 
+import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
+import com.animbus.music.util.GEMUtil;
 import com.github.paolorotolo.gitty_reporter.GittyReporter;
 
 /**
@@ -30,6 +33,8 @@ public class IssueReportingActivity extends GittyReporter {
                 getResources().getColor(R.color.ripple_material_dark));
         setFabColor2(getResources().getColor(R.color.issue_report_blue), getResources().getColor(R.color.issue_report_blue),
                 getResources().getColor(R.color.ripple_material_dark));
+
+        if (GEMUtil.isLollipop()) getWindow().setStatusBarColor(ATEUtil.darkenColor(ContextCompat.getColor(this, R.color.greyDark)));
     }
 
     public String getExtraInfo(@Nullable String stackTrace) {

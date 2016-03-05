@@ -9,7 +9,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_search"
-        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:icon="@drawable/ic_search"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"
         android:title="@string/action_search"/>

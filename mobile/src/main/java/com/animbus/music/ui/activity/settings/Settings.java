@@ -18,6 +18,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -114,7 +115,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             //Uses ATE because I am lazy to implement it myself...
-            Config.markChanged(getActivity(), null);
+            Config.markChanged(getActivity());
         }
 
         public void configure() {

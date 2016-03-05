@@ -1,9 +1,12 @@
 package com.animbus.music.ui.custom.activity;
 
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.AttrRes;
@@ -12,23 +15,31 @@ import android.support.annotation.MenuRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.ATEActivity;
 import com.afollestad.appthemeengine.Config;
+import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.settings.Settings;
+import com.animbus.music.util.GEMUtil;
 import com.animbus.music.util.IconManager;
+
+import butterknife.ButterKnife;
 
 public abstract class ThemeActivity extends ATEActivity {
     public Toolbar mToolbar;
     public AppBarLayout mAppBar;
-    public CoordinatorLayout mRoot;
+    public View mRoot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +58,19 @@ public abstract class ThemeActivity extends ATEActivity {
      * call this when adding code to the sequence of default methods. The default sequence can be triggered by
      * <code>super.sequence()</code>.
      * Everything before triggering will happen before, everything after will happen after. The default sequence is:
-     * <code>init()</code>,
-     * <code>setVariables()</code>,
-     * <code>setInternalVariables()</code>,
-     * <code>setSupportActionBar(mToolbar)</code>,
-     * <code>setUp()</code>,
-     * <code>setUpTheme()</code>
+     * {@link #init()},
+     * {@link #setInternalVariables()},
+     * {@link #setVariables()},
+     * {@link ButterKnife#bind(Activity)},
+     * {@link AppCompatActivity#setSupportActionBar(Toolbar)},
+     * {@link #setUp()},
+     * {@link #setUpTheme()}
      */
     protected void sequence() {
         init();
-        setVariables();
         setInternalVariables();
-        setSupportActionBar(mToolbar);
+        setVariables();
+        ButterKnife.bind(this);
         setUp();
         setUpTheme();
     }
@@ -68,9 +80,18 @@ public abstract class ThemeActivity extends ATEActivity {
     protected abstract void setVariables();
 
     private void setInternalVariables() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mAppBar = (AppBarLayout) findViewById(R.id.appbar);
-        mRoot = (CoordinatorLayout) findViewById(R.id.root);
+        try {
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(mToolbar);
+        } catch (Exception e) {
+            Log.e(getClass().getSimpleName(), "No toolbar found");
+        }
+        try {
+            mAppBar = (AppBarLayout) findViewById(R.id.appbar);
+        } catch (Exception e) {
+            Log.e(getClass().getSimpleName(), "No AppBarLayout found");
+        }
+        mRoot = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
     }
 
     protected abstract void setUp();
@@ -81,15 +102,11 @@ public abstract class ThemeActivity extends ATEActivity {
             ViewCompat.setElevation(mAppBar, 0.0f);
 
         //Changes background color of the root view
-        themeBackground();
+        mRoot.setBackgroundColor(resolveColorAttr(android.R.attr.windowBackground));
     }
 
     protected boolean shouldKeepAppBarShadow() {
         return false;
-    }
-
-    private void themeBackground() {
-        mRoot.setBackgroundColor(resolveColorAttr(android.R.attr.windowBackground));
     }
 
     public void configureTaskDescription(@ColorInt int color, String title) {
@@ -189,6 +206,18 @@ public abstract class ThemeActivity extends ATEActivity {
     public boolean onSearchRequested() {
         startActivity(new Intent(this, SearchActivity.class));
         return true;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Convenience
+    ///////////////////////////////////////////////////////////////////////////
+
+    /**
+     * A convenience method to call {@link GEMUtil#startUrl(Context, String)}
+     * @param url The url to launch
+     */
+    protected void startUrl(String url) {
+        GEMUtil.startUrl(this, url);
     }
 
 }

@@ -59,7 +59,9 @@ public class Album {
         Collections.sort(albumSongs, new Comparator<Song>() {
             @Override
             public int compare(Song lhs, Song rhs) {
-                return lhs.getTrackNumber().compareTo(rhs.getTrackNumber());
+                Integer a = ((Long) lhs.getTrackNumber()).intValue();
+                Integer b = ((Long) rhs.getTrackNumber()).intValue();
+                return a.compareTo(b);
             }
         });
     }
