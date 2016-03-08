@@ -6,7 +6,9 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -14,10 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.afollestad.appthemeengine.util.ATEUtil;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.R;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.IconManager;
 import com.animbus.music.util.Options;
+
+import butterknife.OnClick;
 
 import static com.animbus.music.util.IconManager.COLOR_BLACK;
 import static com.animbus.music.util.IconManager.COLOR_BLUE;
@@ -44,6 +50,7 @@ public class ChooseIcon extends ThemeActivity {
         IconManager.get().setContext(this);
         iconOld = IconManager.get().getIcon();
         icon = iconOld;
+        selectIcon(icon);
     }
 
     @Override
@@ -52,10 +59,10 @@ public class ChooseIcon extends ThemeActivity {
 
     @Override
     protected void setUpTheme() {
-        super.setUpTheme();
+        super.setUpTheme();/*
         FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.save_fab);
         mFab.setBackgroundTintList(ColorStateList.valueOf(getAccentColor()));
-        DrawableCompat.setTint(DrawableCompat.wrap(mFab.getDrawable()), !ATEUtil.isColorLight(getAccentColor()) ? Color.WHITE : Color.BLACK);
+        DrawableCompat.setTint(DrawableCompat.wrap(mFab.getDrawable()), !ATEUtil.isColorLight(getAccentColor()) ? Color.WHITE : Color.BLACK);*/
     }
 
     @Override
@@ -145,19 +152,15 @@ public class ChooseIcon extends ThemeActivity {
         findViewById(R.id.settings_choose_icon_nguyen_red).setBackgroundColor(Color.TRANSPARENT);
     }
 
-    public void save() {
+    void save() {
         Options.setSavedIconID(icon.getId());
         iconOld = icon;
         IconManager.get().switchTo(icon);
     }
 
-    /**
-     * Its a wrapper so I can use it in an onClick attribute.
-     *
-     * @param v useless to me...
-     */
-    public void save(View v) {
+    @OnClick(R.id.fab) void saveAndNotify() {
         save();
+        Snackbar.make(mRoot, R.string.saved, Snackbar.LENGTH_SHORT).show();
     }
 
    /* private void addShortcut() {
@@ -180,27 +183,24 @@ public class ChooseIcon extends ThemeActivity {
     }*/
 
     @Override
-    public void onBackPressed() {
+    public void supportFinishAfterTransition() {
         if (iconOld.getId() != icon.getId()) {
-            new AlertDialog.Builder(this).setTitle(R.string.settings_choose_icon_save_title)
-                    .setMessage(R.string.settings_choose_icon_save_message)
-                    .setPositiveButton(R.string.settings_choose_icon_save_positive, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            save();
-                            finish();
-                        }
-                    })
-                    .setNegativeButton(R.string.settings_choose_icon_save_negative, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
-                    .setNeutralButton(R.string.settings_choose_icon_save_neutral, null)
-                    .create().show();
+            new MaterialDialog.Builder(this).title(R.string.settings_choose_icon_save_title)
+                    .content(R.string.settings_choose_icon_save_message).positiveText(android.R.string.yes)
+                    .negativeText(android.R.string.no).onPositive(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    save();
+                    ChooseIcon.super.supportFinishAfterTransition();
+                }
+            }).onNegative(new MaterialDialog.SingleButtonCallback() {
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    ChooseIcon.super.supportFinishAfterTransition();
+                }
+            }).show();
         } else {
-            super.onBackPressed();
+            super.supportFinishAfterTransition();
         }
     }
 
@@ -208,25 +208,5 @@ public class ChooseIcon extends ThemeActivity {
         IconManager.get().disableAll();
         IconManager.get().enable(IconManager.get().getIcon(DESIGNER_SRINI, COLOR_BLACK));
         save();
-    }
-
-    public void openSrini(View v) {
-        String url = "https://plus.google.com/+SriniKumarREM";
-        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
-    }
-
-    public void openAlex(View v) {
-        String url = "https://plus.google.com/+AlexMueller392";
-        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
-    }
-
-    public void openJaka(View v) {
-        String url = "https://plus.google.com/+JakaMusic";
-        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
-    }
-
-    public void openNguyen(View v) {
-        String url = "https://plus.google.com/111080505870850761155";
-        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
     }
 }

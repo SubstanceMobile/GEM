@@ -44,6 +44,12 @@ public class About extends ThemeActivity {
                         R.mipmap.ic_launcher_srini_black :
                         R.mipmap.ic_launcher_srini_white);
         findViewById(R.id.about_base_source_code).setVisibility(!SOURCE.equals(BASE_SOURCE) ? View.VISIBLE : View.GONE);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                supportFinishAfterTransition();
+            }
+        });
     }
 
     ///////////////////////////////////////////////////////////////////////////

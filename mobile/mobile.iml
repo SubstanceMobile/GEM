@@ -139,8 +139,8 @@
     <orderEntry type="library" exported="" name="org.abego.treelayout.core-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="gitty_reporter-1.2.2" level="project" />
     <orderEntry type="library" exported="" name="library-1.0-rc5" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.2.0" level="project" />
     <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.2.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.2.0" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-23.2.0" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-23.2.0" level="project" />

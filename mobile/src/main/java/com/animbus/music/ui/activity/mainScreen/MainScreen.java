@@ -1,9 +1,12 @@
 package com.animbus.music.ui.activity.mainScreen;
 
+import android.Manifest;
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -40,9 +43,11 @@ import com.animbus.music.ui.activity.issue.IssueReportingActivity;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.settings.Settings;
+import com.animbus.music.ui.activity.setup.SetupActivity;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.custom.view.LockableViewPager;
 import com.animbus.music.ui.list.ListAdapter;
+import com.animbus.music.util.GEMUtil;
 import com.animbus.music.util.Options;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScroller;
 import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
@@ -66,11 +71,13 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     @Override
     protected void setVariables() {
-
+        //Thanks Butterknife!
     }
 
     @Override
     protected void setUp() {
+        if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_VIEW))
+            PlaybackRemote.play(getIntent().getData());
         setUpNavdrawer();
         setUpTabs();
         mPager.setAdapter(new RecyclerPagerAdapter());
@@ -78,6 +85,19 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         goToDefaultPage();
         mToolbar.setTitle(mScreenName);
         configureNowPlayingBar();
+        requestPermissions();
+    }
+
+    @SuppressLint("NewApi")
+    public void requestPermissions() {
+        if (GEMUtil.isMarshmallow() && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))
+            startActivityForResult(new Intent(this, SetupActivity.class), 1);
+        else Library.build();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) recreate();
     }
 
     private void configureNowPlayingBar() {
@@ -338,11 +358,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     }
 
     public void switchToSongs() {
-        mScreenName = getResources().getString(R.string.page_songs);
         mNavigationView.setCheckedItem(R.id.navdrawer_songs);
         selectTab(0);
         mPager.setCurrentItem(0);
         if (Options.usingCategoryNames()) {
+            mScreenName = getResources().getString(R.string.page_songs);
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }
@@ -351,11 +371,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     }
 
     public void switchToAlbum() {
-        mScreenName = getResources().getString(R.string.page_albums);
         mNavigationView.setCheckedItem(R.id.navdrawer_album_icon);
         selectTab(1);
         mPager.setCurrentItem(1);
         if (Options.usingCategoryNames()) {
+            mScreenName = getResources().getString(R.string.page_albums);
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }
@@ -366,10 +386,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     public void switchToArtists() {
         //Sets the current screen
         mScreenName = getResources().getString(R.string.page_artists);
-        mNavigationView.getMenu().findItem(R.id.navdrawer_artists).setChecked(true);
+        mNavigationView.setCheckedItem(R.id.navdrawer_artists);
         selectTab(2);
         mPager.setCurrentItem(2);
         if (Options.usingCategoryNames()) {
+            mScreenName = getResources().getString(R.string.page_albums);
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }
@@ -378,12 +399,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     }
 
     public void switchToPlaylists() {
-        //Sets the current screen
-        mScreenName = getResources().getString(R.string.page_playlists);
-        mNavigationView.getMenu().findItem(R.id.navdrawer_playlists).setChecked(true);
+        mNavigationView.setCheckedItem(R.id.navdrawer_playlists);
         selectTab(3);
         mPager.setCurrentItem(3);
         if (Options.usingCategoryNames()) {
+            mScreenName = getResources().getString(R.string.page_playlists);
             mToolbar.setTitle(mScreenName);
             configureTaskDescription(0, mScreenName);
         }

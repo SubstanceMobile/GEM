@@ -110,7 +110,7 @@ public abstract class ThemeActivity extends ATEActivity {
     }
 
     public void configureTaskDescription(@ColorInt int color, String title) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (GEMUtil.isLollipop()) {
             IconManager iconM = IconManager.get().setContext(this);
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), getPrimaryColor()).getId()));
             setTaskDescription(new ActivityManager.TaskDescription(title, bm, color));

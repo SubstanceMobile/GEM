@@ -4,37 +4,35 @@
     package="com.animbus.music">
 
     <!--
-   ___ ___ __  __   ___ _
-  / __| __|  \/  | | _ \ |__ _ _  _ ___ _ _
- | (_ | _|| |\/| | |  _/ / _` | || / -_) '_|
-  \___|___|_|  |_| |_| |_\__,_|\_, \___|_|
-                               |__/
+      ___ ___ __  __   ___ _
+     / __| __|  \/  | | _ \ |__ _ _  _ ___ _ _
+    | (_ | _|| |\/| | |  _/ / _` | || / -_) '_|
+     \___|___|_|  |_| |_| |_\__,_|\_, \___|_|
+                                  |__/
     -->
-
 
     <!-- To be able to hold the partial wake lock for playback when the screen is off -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <!-- Used to read the media library -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <!-- Used for donations -->
     <uses-permission android:name="com.android.vending.BILLING" />
-
-    <!-- Used for restarting GEM when resetting it -->
+    <!-- Used for restarting GEM -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
+        android:name=".GEMApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_srini_black"
         android:label="@string/app_name_actual"
         android:theme="@style/AppTheme.Faithful"
         tools:ignore="AllowBackup">
 
-        <!-- Splash Screen Activity -->
+        <!-- Home activity in GEM -->
         <activity
-            android:name=".ui.activity.splash.LaunchActivity"
-            android:label="@string/app_name_actual">
+            android:name=".ui.activity.mainScreen.MainScreen"
+            android:exported="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MUSIC_PLAYER" />
@@ -52,7 +50,7 @@
             android:enabled="true"
             android:icon="@mipmap/ic_launcher_srini_black"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +62,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_white"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,7 +74,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_red"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,7 +86,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_slate"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -100,7 +98,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_green"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -112,7 +110,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_srini_blue"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -124,7 +122,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_alex_black"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -136,7 +134,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_alex_white"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -148,7 +146,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_alex_color"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -160,7 +158,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_jaka_dark"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -172,7 +170,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_jaka_light"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -184,7 +182,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_nguyen_orange"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -196,7 +194,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_nguyen_green"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -208,7 +206,7 @@
             android:enabled="false"
             android:icon="@mipmap/ic_launcher_nguyen_red"
             android:label="@string/app_name"
-            android:targetActivity=".ui.activity.splash.LaunchActivity">
+            android:targetActivity=".ui.activity.mainScreen.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -220,12 +218,6 @@
         <activity
             android:name=".ui.activity.setup.SetupActivity"
             android:label="@string/app_name_actual" />
-
-        <!-- Home activity in GEM -->
-        <activity
-            android:name=".ui.activity.mainScreen.MainScreen"
-            android:exported="true"
-            android:label="@string/app_name" />
 
         <!-- Settings Screen -->
         <activity
@@ -295,7 +287,7 @@
         <activity
             android:name=".ui.activity.search.SearchActivity"
             android:label="@string/title_activity_search"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

@@ -8,7 +8,9 @@ import android.view.WindowManager;
 
 import com.afollestad.appthemeengine.util.ATEUtil;
 import com.animbus.music.BuildConfig;
+import com.animbus.music.GEMApp;
 import com.animbus.music.R;
+import com.animbus.music.media.Library;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -45,11 +47,13 @@ public class SetupActivity extends AppIntro2 {
                 R.drawable.ic_smile_white_112dp, background));
 
         askForPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+        setSwipeLock(false);
     }
 
     @Override
     public void onDonePressed() {
         finish();
+        Library.build();
     }
 
     @Override
@@ -59,7 +63,7 @@ public class SetupActivity extends AppIntro2 {
 
     @Override
     public void onSlideChanged() {
-
+        setSwipeLock(pager.getCurrentItem() == 2);
     }
 }
 

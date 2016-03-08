@@ -8,9 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Process;
 import android.preference.PreferenceManager;
 
-import com.afollestad.appthemeengine.ATE;
-import com.afollestad.appthemeengine.Config;
-import com.animbus.music.ui.activity.splash.LaunchActivity;
+import com.animbus.music.ui.activity.mainScreen.MainScreen;
 
 import static android.content.Intent.ACTION_MAIN;
 
@@ -44,13 +42,9 @@ public class Options {
         Options.prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static boolean shouldRecreate(long updateTime) {
-        return updatedAt > updateTime;
-    }
-
     public static void resetPrefs() {
         PendingIntent mGEMIntent = PendingIntent.getActivity(context, 2138535432,
-                new Intent(context, LaunchActivity.class).setAction(ACTION_MAIN), PendingIntent.FLAG_CANCEL_CURRENT);
+                new Intent(context, MainScreen.class).setAction(ACTION_MAIN), PendingIntent.FLAG_CANCEL_CURRENT);
         ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).set(AlarmManager.RTC, System.currentTimeMillis() + 100, mGEMIntent);
         Options.prefs.edit().clear().commit();
         context.getSharedPreferences("[[afollestad_theme-engine]]", 0).edit().clear().commit();
