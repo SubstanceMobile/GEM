@@ -38,8 +38,8 @@ public class SearchActivity extends ThemeActivity {
     }
 
     @Override
-    protected void init() {
-        setContentView(R.layout.activity_search);
+    protected int getLayout() {
+        return R.layout.activity_search;
     }
 
     @Override

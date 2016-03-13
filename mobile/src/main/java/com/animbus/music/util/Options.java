@@ -1,5 +1,7 @@
 package com.animbus.music.util;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.os.Process;
 import android.preference.PreferenceManager;
 
 import com.animbus.music.ui.activity.mainScreen.MainScreen;
+import com.animbus.music.ui.custom.activity.ThemeActivity;
 
 import static android.content.Intent.ACTION_MAIN;
 
@@ -42,13 +45,30 @@ public class Options {
         Options.prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
+    @SuppressLint("CommitPrefEdits")
     public static void resetPrefs() {
-        PendingIntent mGEMIntent = PendingIntent.getActivity(context, 2138535432,
-                new Intent(context, MainScreen.class).setAction(ACTION_MAIN), PendingIntent.FLAG_CANCEL_CURRENT);
-        ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).set(AlarmManager.RTC, System.currentTimeMillis() + 100, mGEMIntent);
         Options.prefs.edit().clear().commit();
         context.getSharedPreferences("[[afollestad_theme-engine]]", 0).edit().clear().commit();
-        Process.killProcess(Process.myPid());
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("did_reset", true).commit();
+    }
+
+    public static void restartApp() {
+        PendingIntent mGEMIntent = PendingIntent.getActivity(context, 2138535432,
+                new Intent(context, MainScreen.class).setAction(ACTION_MAIN).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP), PendingIntent.FLAG_CANCEL_CURRENT);
+        ((AlarmManager) context.getSystemService(Context.ALARM_SERVICE)).set(AlarmManager.RTC, System.currentTimeMillis() + 2, mGEMIntent);
+        System.exit(0);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Update activities
+    ///////////////////////////////////////////////////////////////////////////
+
+    public static void markChanged() {
+        Options.prefs.edit().putLong("last_update_time", System.currentTimeMillis()).commit();
+    }
+
+    public static void invalidateActivity(ThemeActivity activity) {
+        if (activity.lastSettingsUpdate < Options.prefs.getLong("last_update_time",0)) activity.recreate();
     }
 
     ///////////////////////////////////////////////////////////////////////////

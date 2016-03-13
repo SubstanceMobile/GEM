@@ -26,15 +26,14 @@ public class IssueReportingActivity extends GittyReporter {
         setExtraInfo(getExtraInfo(getIntent().getStringExtra("error")));
         configureMessage(getIntent().getStringExtra("msg"), getIntent().getStringExtra("type"));
 
-        setBackgroundColor1(getResources().getColor(R.color.greyDark));
-        setBackgroundColor2(getResources().getColor(R.color.greyDark));
-        setRippleColor(getResources().getColor(R.color.issue_report_blue));
-        setFabColor1(getResources().getColor(R.color.issue_report_blue), getResources().getColor(R.color.issue_report_blue),
-                getResources().getColor(R.color.ripple_material_dark));
-        setFabColor2(getResources().getColor(R.color.issue_report_blue), getResources().getColor(R.color.issue_report_blue),
-                getResources().getColor(R.color.ripple_material_dark));
-
-        if (GEMUtil.isLollipop()) getWindow().setStatusBarColor(ATEUtil.darkenColor(ContextCompat.getColor(this, R.color.greyDark)));
+        int background = ContextCompat.getColor(this, R.color.greyDark), accent = ContextCompat.getColor(this, R.color.default_accent),
+                ripple = ContextCompat.getColor(this, R.color.ripple_material_dark);
+        setBackgroundColor1(background);
+        setBackgroundColor2(background);
+        setRippleColor(accent);
+        setFabColor1(accent, accent, ripple);
+        setFabColor2(accent, accent, ripple);
+        if (GEMUtil.isLollipop()) getWindow().setStatusBarColor(ATEUtil.darkenColor(background));
     }
 
     public String getExtraInfo(@Nullable String stackTrace) {

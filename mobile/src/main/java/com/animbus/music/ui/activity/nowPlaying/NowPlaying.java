@@ -41,11 +41,8 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     MusicControlsView mControls;
 
     @Override
-    protected void init() {
-        setContentView(R.layout.activity_now_playing);
-        PlaybackRemote.registerSongListener(this);
-        configureTransition();
-        mSong = PlaybackRemote.getCurrentSong();
+    protected int getLayout() {
+        return R.layout.activity_now_playing;
     }
 
     private void configureTransition() {
@@ -65,10 +62,13 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
         mList = (RecyclerView) findViewById(R.id.now_playing_recycler);
         mControlsRoot = (LinearLayout) findViewById(R.id.now_playing_controls_root);
         mControls = (MusicControlsView) findViewById(R.id.now_playing_media_controller_view);
+        mSong = PlaybackRemote.getCurrentSong();
     }
 
     @Override
     protected void setUp() {
+        PlaybackRemote.registerSongListener(this);
+        configureTransition();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawable menu = getResources().getDrawable(R.drawable.ic_close_24dp);
         DrawableCompat.setTint(menu, getResources().getColor(R.color.faithfulPrimaryLight));

@@ -1,21 +1,12 @@
 package com.animbus.music.ui.activity.settings.chooseIcon;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.afollestad.appthemeengine.util.ATEUtil;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.R;
@@ -41,8 +32,8 @@ public class ChooseIcon extends ThemeActivity {
     Icon icon, iconOld;
 
     @Override
-    protected void init() {
-        setContentView(R.layout.activity_settings_choose_icon);
+    protected int getLayout() {
+        return R.layout.activity_settings_choose_icon;
     }
 
     @Override
@@ -55,14 +46,6 @@ public class ChooseIcon extends ThemeActivity {
 
     @Override
     protected void setUp() {
-    }
-
-    @Override
-    protected void setUpTheme() {
-        super.setUpTheme();/*
-        FloatingActionButton mFab = (FloatingActionButton) findViewById(R.id.save_fab);
-        mFab.setBackgroundTintList(ColorStateList.valueOf(getAccentColor()));
-        DrawableCompat.setTint(DrawableCompat.wrap(mFab.getDrawable()), !ATEUtil.isColorLight(getAccentColor()) ? Color.WHITE : Color.BLACK);*/
     }
 
     @Override
@@ -158,7 +141,8 @@ public class ChooseIcon extends ThemeActivity {
         IconManager.get().switchTo(icon);
     }
 
-    @OnClick(R.id.fab) void saveAndNotify() {
+    @OnClick(R.id.fab)
+    void saveAndNotify() {
         save();
         Snackbar.make(mRoot, R.string.saved, Snackbar.LENGTH_SHORT).show();
     }

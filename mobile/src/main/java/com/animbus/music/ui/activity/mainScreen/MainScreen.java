@@ -3,11 +3,11 @@ package com.animbus.music.ui.activity.mainScreen;
 import android.Manifest;
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -23,9 +23,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +33,7 @@ import android.widget.TextView;
 
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.util.ATEUtil;
+import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -55,7 +54,6 @@ import com.pluscubed.recyclerfastscroll.RecyclerFastScrollerUtils;
 import butterknife.Bind;
 import butterknife.BindString;
 
-
 public class MainScreen extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
     @Bind(R.id.main_tab_layout) TabLayout mTabs;
@@ -63,30 +61,38 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     @Bind(R.id.navigation) NavigationView mNavigationView;
     @Bind(R.id.main_screen_now_playing_toolbar) View quickToolbar;
     @BindString(R.string.title_activity_main) String mScreenName;
+    private static final int RESET_AT = 16;
 
     @Override
-    protected void init() {
-        setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    protected void setVariables() {
-        //Thanks Butterknife!
+    protected int getLayout() {
+        return R.layout.activity_main;
     }
 
     @Override
     protected void setUp() {
+        //noinspection ConstantConditions, PointlessBooleanExpression;
+        if ((BuildConfig.VERSION_CODE == RESET_AT || BuildConfig.BUILD_TYPE.equals("debug")) && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("did_reset", false)) {
+            Options.resetPrefs();
+            Options.restartApp();
+        }
+
+        //Play a song if the intent wants it to
         if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_VIEW))
             PlaybackRemote.play(getIntent().getData());
-        setUpNavdrawer();
-        setUpTabs();
+
+        //The rest of the UI
+        setUpNavigation();
         mPager.setAdapter(new RecyclerPagerAdapter());
         mPager.setOffscreenPageLimit(3);
-        goToDefaultPage();
-        mToolbar.setTitle(mScreenName);
-        configureNowPlayingBar();
+        switchToAlbum();
+        setTitle(mScreenName);
+        setUpNowPlayingBar(null, null);
         requestPermissions();
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Permissions
+    ///////////////////////////////////////////////////////////////////////////
 
     @SuppressLint("NewApi")
     public void requestPermissions() {
@@ -100,118 +106,39 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         if (requestCode == 1) recreate();
     }
 
-    private void configureNowPlayingBar() {
-        if (!PlaybackRemote.isActive()) {
-            /*quickToolbar.setVisibility(View.GONE);*/
-            //TODO: Add This
-        } else {
-            try {
-                setUpNowPlayingBarWithSong(PlaybackRemote.getCurrentSong());
-                setUpNowPlayingBarWithState(PlaybackRemote.getState());
-            } catch (Exception ignored) {
+    ///////////////////////////////////////////////////////////////////////////
+    // Configuration and setup
+    ///////////////////////////////////////////////////////////////////////////
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpDrawerHeader(PlaybackRemote.getCurrentSong());
+    }
+
+    private void setUpDrawerHeader(Song song) {
+        if (song != null) {
+            View header = mNavigationView.getHeaderView(0);
+            if (header != null && song != null) {
+                song.getAlbum().requestArt((ImageView) header.findViewById(R.id.navdrawer_header_image));
+                header.findViewById(R.id.navdrawer_header_clickable).setBackground(ContextCompat.getDrawable(this, !ATEUtil.isColorLight(song.getAlbum().getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
             }
         }
 
-        PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
-            @Override
-            public void onSongChanged(Song newSong) {
-                setUpNowPlayingBarWithSong(newSong);
-            }
-        });
-
-        PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
-            @Override
-            public void onStateChanged(PlaybackStateCompat newState) {
-                setUpNowPlayingBarWithState(newState);
-            }
-        });
-
-        quickToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
-                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
-                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
-                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
-                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_artist), "artist")
-                );
-                ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, NowPlaying.class), options.toBundle());
-            }
-        });
+        if (PlaybackRemote.isActive() && mNavigationView.getHeaderCount() == 0)
+            mNavigationView.inflateHeaderView(R.layout.drawer_header);
+        else mNavigationView.removeHeaderView(mNavigationView.getHeaderView(0));
     }
 
-    private void setUpNowPlayingBarWithSong(Song song) {
-        song.getAlbum().requestArt((ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
-        TextView title = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_title),
-                artist = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_artist);
-        title.setText(song.getSongTitle());
-        artist.setText(song.getSongArtist());
-    }
-
-    private void setUpNowPlayingBarWithState(PlaybackStateCompat state) {
-        if (state.getState() == PlaybackStateCompat.STATE_STOPPED || state.getState() == PlaybackStateCompat.STATE_NONE) {
-            if (quickToolbar.getVisibility() != View.GONE) {
-                quickToolbar.setTranslationY(0f);
-                quickToolbar.animate().translationY(200f).setInterpolator(new FastOutSlowInInterpolator())
-                        .setListener(new Animator.AnimatorListener() {
-                            @Override
-                            public void onAnimationStart(Animator animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                quickToolbar.setVisibility(View.GONE);
-                            }
-
-                            @Override
-                            public void onAnimationCancel(Animator animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animator animation) {
-
-                            }
-                        }).start();
-            }
-        } else {
-            if (quickToolbar.getVisibility() != View.VISIBLE) {
-                quickToolbar.setTranslationY(200f);
-                quickToolbar.setVisibility(View.VISIBLE);
-                quickToolbar.animate().translationY(0f).setInterpolator(new FastOutSlowInInterpolator()).start();
-            }
-            //For inconsistency sake
-            quickToolbar.setVisibility(View.VISIBLE);
-        }
-        ImageButton button = (ImageButton) findViewById(R.id.main_screen_now_playing_toolbar_playpause);
-        boolean isPaused = state.getState() == PlaybackStateCompat.STATE_PAUSED;
-        if (isPaused) {
-            button.setImageResource(R.drawable.ic_play_arrow_white_48dp);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PlaybackRemote.resume();
-                }
-            });
-        } else {
-            button.setImageResource(R.drawable.ic_pause_white_48dp);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PlaybackRemote.pause();
-                }
-            });
-        }
-    }
-
-    private void setUpNavdrawer() {
+    private void setUpNavigation() {
+        ///////////////////////
+        // Navigation Drawer //
+        ///////////////////////
         mNavigationView.setNavigationItemSelectedListener(this);
-        mNavigationView.inflateMenu(R.menu.navigation_drawer_items);
         PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
             @Override
             public void onStateChanged(PlaybackStateCompat newState) {
-                updateDrawerHeaderVisibility();
+                setUpDrawerHeader(null);
             }
         });
 
@@ -221,35 +148,17 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 setUpDrawerHeader(newSong);
             }
         });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateDrawerHeaderVisibility();
-        setUpDrawerHeader(PlaybackRemote.getCurrentSong());
-    }
-
-    private void updateDrawerHeaderVisibility() {
-        if (PlaybackRemote.isActive() && mNavigationView.getHeaderCount() == 0)
-            mNavigationView.inflateHeaderView(R.layout.drawer_header);
-        else mNavigationView.removeHeaderView(mNavigationView.getHeaderView(0));
-    }
-
-    private void setUpDrawerHeader(Song s) {
-        View header = mNavigationView.getHeaderView(0);
-        if (header != null && s != null) {
-            s.getAlbum().requestArt((ImageView) header.findViewById(R.id.navdrawer_header_image));
-            header.findViewById(R.id.navdrawer_header_clickable).setBackground(ContextCompat.getDrawable(this, !ATEUtil.isColorLight(s.getAlbum().getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
+        if (GEMUtil.isLollipop()) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            getWindow().setNavigationBarColor(Color.RED);
         }
-    }
 
-    private void goToDefaultPage() {
-        switchToAlbum();
-    }
+        mDrawerLayout.setStatusBarBackgroundColor(getPrimaryDarkColor());
 
-    private void setUpTabs() {
-        //Skips everything if tabs are not being used
+        //////////
+        // Tabs //
+        //////////
         if (!Options.usingTabs()) {
             mPager.lock();
             mTabs.setVisibility(View.GONE);
@@ -283,19 +192,113 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabs));
     }
 
-    @SuppressWarnings("ConstantConditions")
-    private void selectTab(int pos) {
-        try {
-            mTabs.getTabAt(pos).select();
-        } catch (NullPointerException | IndexOutOfBoundsException ignored) {
+    private void setUpNowPlayingBar(Song song, PlaybackStateCompat state) {
+        if (!PlaybackRemote.isActive()) {
+            /*quickToolbar.setVisibility(View.GONE);*/
+            //TODO: Add This
+        } else {
+            setUpNowPlayingBar(PlaybackRemote.getCurrentSong(), PlaybackRemote.getState());
         }
 
+        PlaybackRemote.registerSongListener(new PlaybackRemote.SongChangedListener() {
+            @Override
+            public void onSongChanged(Song newSong) {
+                setUpNowPlayingBar(newSong, null);
+            }
+        });
+
+        PlaybackRemote.registerStateListener(new PlaybackRemote.StateChangedListener() {
+            @Override
+            public void onStateChanged(PlaybackStateCompat newState) {
+                setUpNowPlayingBar(null, newState);
+            }
+        });
+
+        quickToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
+                        new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_artist), "artist")
+                );
+                ActivityCompat.startActivity(MainScreen.this, new Intent(MainScreen.this, NowPlaying.class), options.toBundle());
+            }
+        });
+        if (song != null) {
+            song.getAlbum().requestArt((ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
+            TextView title = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_title),
+                    artist = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_artist);
+            title.setText(song.getSongTitle());
+            artist.setText(song.getSongArtist());
+        }
+        if (state != null) {
+            if (state.getState() == PlaybackStateCompat.STATE_STOPPED || state.getState() == PlaybackStateCompat.STATE_NONE) {
+                if (quickToolbar.getVisibility() != View.GONE) {
+                    quickToolbar.setTranslationY(0f);
+                    quickToolbar.animate().translationY(200f).setInterpolator(new FastOutSlowInInterpolator())
+                            .setListener(new Animator.AnimatorListener() {
+                                @Override
+                                public void onAnimationStart(Animator animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    quickToolbar.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onAnimationCancel(Animator animation) {
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animator animation) {
+
+                                }
+                            }).start();
+                }
+            } else {
+                if (quickToolbar.getVisibility() != View.VISIBLE) {
+                    quickToolbar.setTranslationY(200f);
+                    quickToolbar.setVisibility(View.VISIBLE);
+                    quickToolbar.animate().translationY(0f).setInterpolator(new FastOutSlowInInterpolator()).start();
+                }
+                //For inconsistency sake
+                quickToolbar.setVisibility(View.VISIBLE);
+            }
+            ImageButton button = (ImageButton) findViewById(R.id.main_screen_now_playing_toolbar_playpause);
+            boolean isPaused = state.getState() == PlaybackStateCompat.STATE_PAUSED;
+            if (isPaused) {
+                button.setImageResource(R.drawable.ic_play_arrow_white_48dp);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PlaybackRemote.resume();
+                    }
+                });
+            } else {
+                button.setImageResource(R.drawable.ic_pause_white_48dp);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PlaybackRemote.pause();
+                    }
+                });
+            }
+        }
     }
 
     @Override
     protected boolean shouldKeepAppBarShadow() {
         return Options.usingTabs();
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Navigation
+    ///////////////////////////////////////////////////////////////////////////
 
     @Override
     protected int getOptionsMenu() {
@@ -357,14 +360,26 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         return true;
     }
 
+    public void switchTab(int pos) {
+        try {
+            //noinspection ConstantConditions
+            mTabs.getTabAt(pos).select();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Pages
+    ///////////////////////////////////////////////////////////////////////////
+
     public void switchToSongs() {
         mNavigationView.setCheckedItem(R.id.navdrawer_songs);
-        selectTab(0);
+        switchTab(0);
         mPager.setCurrentItem(0);
         if (Options.usingCategoryNames()) {
             mScreenName = getResources().getString(R.string.page_songs);
-            mToolbar.setTitle(mScreenName);
-            configureTaskDescription(0, mScreenName);
+            setTitle(mScreenName);
         }
         //Closes the Navdrawer
         mDrawerLayout.closeDrawers();
@@ -372,12 +387,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     public void switchToAlbum() {
         mNavigationView.setCheckedItem(R.id.navdrawer_album_icon);
-        selectTab(1);
+        switchTab(1);
         mPager.setCurrentItem(1);
         if (Options.usingCategoryNames()) {
             mScreenName = getResources().getString(R.string.page_albums);
-            mToolbar.setTitle(mScreenName);
-            configureTaskDescription(0, mScreenName);
+            setTitle(mScreenName);
         }
         //Closes the Navdrawer
         mDrawerLayout.closeDrawers();
@@ -387,12 +401,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         //Sets the current screen
         mScreenName = getResources().getString(R.string.page_artists);
         mNavigationView.setCheckedItem(R.id.navdrawer_artists);
-        selectTab(2);
+        switchTab(2);
         mPager.setCurrentItem(2);
         if (Options.usingCategoryNames()) {
-            mScreenName = getResources().getString(R.string.page_albums);
-            mToolbar.setTitle(mScreenName);
-            configureTaskDescription(0, mScreenName);
+            mScreenName = getResources().getString(R.string.page_artists);
+            setTitle(mScreenName);
         }
         //Closes the Navdrawer
         mDrawerLayout.closeDrawers();
@@ -400,12 +413,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
 
     public void switchToPlaylists() {
         mNavigationView.setCheckedItem(R.id.navdrawer_playlists);
-        selectTab(3);
+        switchTab(3);
         mPager.setCurrentItem(3);
         if (Options.usingCategoryNames()) {
             mScreenName = getResources().getString(R.string.page_playlists);
-            mToolbar.setTitle(mScreenName);
-            configureTaskDescription(0, mScreenName);
+            setTitle(mScreenName);
         }
 
         //Closes the Navdrawer

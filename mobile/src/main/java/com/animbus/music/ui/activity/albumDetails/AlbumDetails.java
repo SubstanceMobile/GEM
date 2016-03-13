@@ -58,10 +58,20 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     }
 
     @Override
-    protected void init() {
+    protected void inflate() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_album_details);
         binding.setAlbum(mAlbum);
         configureTransition();
+    }
+
+    @Override
+    protected boolean useInflate() {
+        return true;
+    }
+
+    @Override
+    protected int getLayout() {
+        return 0;
     }
 
     private void configureTransition() {

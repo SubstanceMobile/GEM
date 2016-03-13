@@ -249,6 +249,7 @@
             </intent-filter>
         </service>
         -->
+
         <service android:name=".media.stable.MediaService">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
@@ -298,6 +299,7 @@
 
         <!-- Opens when you click on a playlist in the home activity -->
         <activity android:name=".ui.activity.playlistDetails.PlaylistDetails" />
+
     </application>
 
 </manifest>

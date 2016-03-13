@@ -6,14 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.MenuRes;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,22 +22,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.ATEActivity;
 import com.afollestad.appthemeengine.Config;
-import com.afollestad.appthemeengine.util.ATEUtil;
+import com.animbus.music.GEMApp;
 import com.animbus.music.R;
 import com.animbus.music.ui.activity.search.SearchActivity;
 import com.animbus.music.ui.activity.settings.Settings;
 import com.animbus.music.util.GEMUtil;
 import com.animbus.music.util.IconManager;
+import com.animbus.music.util.Options;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public abstract class ThemeActivity extends ATEActivity {
-    public Toolbar mToolbar;
-    public AppBarLayout mAppBar;
+    @Nullable @Bind(R.id.toolbar) public Toolbar mToolbar;
+    @Nullable @Bind(R.id.appbar) public AppBarLayout mAppBar;
     public View mRoot;
+    public long lastSettingsUpdate = System.currentTimeMillis();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,40 +58,41 @@ public abstract class ThemeActivity extends ATEActivity {
      * call this when adding code to the sequence of default methods. The default sequence can be triggered by
      * <code>super.sequence()</code>.
      * Everything before triggering will happen before, everything after will happen after. The default sequence is:
-     * {@link #init()},
-     * {@link #setInternalVariables()},
-     * {@link #setVariables()},
+     * {@link #setContentView(int)} or {@link #inflate()},
      * {@link ButterKnife#bind(Activity)},
      * {@link AppCompatActivity#setSupportActionBar(Toolbar)},
+     * Setting {@link #mRoot},
+     * {@link #setVariables()},
      * {@link #setUp()},
      * {@link #setUpTheme()}
      */
     protected void sequence() {
-        init();
-        setInternalVariables();
-        setVariables();
+        if (!useInflate()) setContentView(getLayout());
+        else inflate();
         ButterKnife.bind(this);
+        try {
+            setSupportActionBar(mToolbar);
+        } catch (Exception e) {
+            Log.i(getClass().getSimpleName(), "This activity has no toolbar");
+        }
+        mRoot = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+        setVariables();
         setUp();
         setUpTheme();
     }
 
-    protected abstract void init();
+    protected boolean useInflate() {
+        return false;
+    }
 
-    protected abstract void setVariables();
+    protected void inflate() {
+        //Do nothing.
+    }
 
-    private void setInternalVariables() {
-        try {
-            mToolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(mToolbar);
-        } catch (Exception e) {
-            Log.e(getClass().getSimpleName(), "No toolbar found");
-        }
-        try {
-            mAppBar = (AppBarLayout) findViewById(R.id.appbar);
-        } catch (Exception e) {
-            Log.e(getClass().getSimpleName(), "No AppBarLayout found");
-        }
-        mRoot = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+    protected abstract int getLayout();
+
+    protected void setVariables() {
+        //Do nothing
     }
 
     protected abstract void setUp();
@@ -107,15 +108,6 @@ public abstract class ThemeActivity extends ATEActivity {
 
     protected boolean shouldKeepAppBarShadow() {
         return false;
-    }
-
-    public void configureTaskDescription(@ColorInt int color, String title) {
-        if (GEMUtil.isLollipop()) {
-            IconManager iconM = IconManager.get().setContext(this);
-            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), getPrimaryColor()).getId()));
-            setTaskDescription(new ActivityManager.TaskDescription(title, bm, color));
-            bm.recycle();
-        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -155,7 +147,24 @@ public abstract class ThemeActivity extends ATEActivity {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Simplifies Menus
+    // Lifecycle
+    ///////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        lastSettingsUpdate = System.currentTimeMillis();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Options.invalidateActivity(this);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Menu boilerplate
     ///////////////////////////////////////////////////////////////////////////
 
     @Override
@@ -214,10 +223,32 @@ public abstract class ThemeActivity extends ATEActivity {
 
     /**
      * A convenience method to call {@link GEMUtil#startUrl(Context, String)}
+     *
      * @param url The url to launch
      */
     protected void startUrl(String url) {
         GEMUtil.startUrl(this, url);
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        if (mToolbar != null) mToolbar.setTitle(title);
+        if (GEMUtil.isLollipop()) {
+            IconManager iconM = IconManager.get().setContext(this);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), getPrimaryColor()).getId()));
+            setTaskDescription(new ActivityManager.TaskDescription(title.toString(), bm, getPrimaryColor()));
+            bm.recycle();
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Proper ATE key
+    ///////////////////////////////////////////////////////////////////////////
+
+    @Nullable
+    @Override
+    public String getATEKey() {
+        return ((GEMApp) getApplication()).getATEKey();
+    }
 }

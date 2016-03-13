@@ -8,8 +8,7 @@
     <color name="greyLight">#d1d1d1</color>
     <color name="faithfulPrimaryDark">#ff0f0f0f</color>
     <color name="faithfulPrimaryLight">#F5F5F5</color>
-    <color name="issue_report_blue">#40c4ff</color>
-    <color name="default_accent">#00B0FF</color>
+    <color name="default_accent">#00BFA5</color>
 
     <!--Attrs-->
     <attr name="now_playing_toolbar_color" format="color" />

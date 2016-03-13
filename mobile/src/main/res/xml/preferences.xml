@@ -8,13 +8,13 @@
             android:persistent="true"
             android:summary="@string/settings_palette_summary"
             android:title="@string/settings_palette" />
-        <Preference
+        <com.afollestad.appthemeengine.prefs.ATEPreference
             android:summary="@string/settings_choose_icon_summary"
             android:title="@string/settings_choose_icon">
             <intent
                 android:targetClass="com.animbus.music.ui.activity.settings.chooseIcon.ChooseIcon"
                 android:targetPackage="com.animbus.music" />
-        </Preference>
+        </com.afollestad.appthemeengine.prefs.ATEPreference>
     </com.afollestad.appthemeengine.prefs.ATEPreferenceCategory>
 
     <com.afollestad.appthemeengine.prefs.ATEPreferenceCategory android:title="@string/settings_header_theme">
@@ -35,10 +35,15 @@
             android:persistent="false"
             android:summary="@string/settings_accent_summary"
             android:title="@string/settings_accent" />
-        <Preference
+        <com.afollestad.appthemeengine.prefs.ATEPreference
             android:key="reset_primary"
             android:summary="@string/settings_reset_primary_summary"
             android:title="@string/settings_reset_primary" />
+        <com.afollestad.appthemeengine.prefs.ATECheckBoxPreference
+            android:key="color_navbar"
+            android:persistent="true"
+            android:summary="@string/settings_color_navbar_summary"
+            android:title="@string/settings_color_navbar" />
     </com.afollestad.appthemeengine.prefs.ATEPreferenceCategory>
 
     <com.afollestad.appthemeengine.prefs.ATEPreferenceCategory android:title="@string/settings_header_main_screen">

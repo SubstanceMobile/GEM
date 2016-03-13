@@ -1,9 +1,15 @@
 package com.animbus.music;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.Config;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.util.Options;
@@ -12,6 +18,7 @@ import static com.animbus.music.media.PlaybackRemote.LOCAL;
 
 
 public class GEMApp extends Application {
+    private static final int LAST_ATE_CONFIG_UPDATE = 16;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -41,9 +48,5 @@ public class GEMApp extends Application {
 
     public String getATEKey() {
         return null;
-    }
-
-    public void buildLibrary() {
-        if (!Library.isBuilt()) Library.build();
     }
 }

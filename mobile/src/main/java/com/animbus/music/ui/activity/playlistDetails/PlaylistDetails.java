@@ -19,19 +19,20 @@ import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.ui.list.ListAdapter;
 
+import butterknife.Bind;
+
 public class PlaylistDetails extends ThemeActivity {
     Playlist mPlaylist;
-    RecyclerView mRecycler;
+    @Bind(R.id.playlist_details_recycler) RecyclerView mRecycler;
 
     @Override
-    protected void init() {
-        setContentView(R.layout.activity_playlist_details);
+    protected int getLayout() {
+        return R.layout.activity_playlist_details;
     }
 
     @Override
     protected void setVariables() {
         mPlaylist = Library.findPlaylistById(getIntent().getLongExtra("playlist_id", -1));
-        mRecycler = (RecyclerView) findViewById(R.id.playlist_details_recycler);
         setTitle(mPlaylist.getName());
     }
 

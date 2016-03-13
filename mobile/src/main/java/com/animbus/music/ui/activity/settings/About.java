@@ -16,19 +16,14 @@ import butterknife.OnClick;
 
 public class About extends ThemeActivity {
 
-    private static final String SOURCE = "https://github.com/Substance-Project/GEM";
+    private static final String SOURCE = "https://github.com/SubstanceMobile/GEM";
 
     //DO NOT edit this variable. If you do, you will be reported
-    private static final String BASE_SOURCE = "https://github.com/Substance-Project/GEM";
+    private static final String BASE_SOURCE = "https://github.com/SubstanceMobile/GEM";
 
     @Override
-    protected void init() {
-        setContentView(R.layout.activity_about);
-    }
-
-    @Override
-    protected void setVariables() {
-
+    protected int getLayout() {
+        return R.layout.activity_about;
     }
 
     @SuppressLint("SetTextI18n")

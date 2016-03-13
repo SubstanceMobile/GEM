@@ -3,7 +3,6 @@ package com.animbus.music.ui.activity.settings;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
@@ -18,9 +17,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -43,13 +40,8 @@ import org.json.JSONObject;
 public class Settings extends ThemeActivity implements ColorChooserDialog.ColorCallback {
 
     @Override
-    protected void init() {
-        setContentView(R.layout.activity_settings);
-    }
-
-    @Override
-    protected void setVariables() {
-        //Everything is done either in ThemeActivity or ATE
+    protected int getLayout() {
+        return R.layout.activity_settings;
     }
 
     @Override
@@ -67,6 +59,7 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
         switch (id) {
             case R.id.action_reset:
                 Options.resetPrefs();
+                Options.restartApp();
                 return true;
         }
         return super.processMenuItem(id);
@@ -112,10 +105,15 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
             configure();
         }
 
+        @SuppressWarnings("NullArgumentToVariableArgMethod")
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             //Uses ATE because I am lazy to implement it myself...
-            Config.markChanged(getActivity());
+            try {
+                Options.markChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         public void configure() {
@@ -167,6 +165,14 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
                             .primaryColor(((Settings) getActivity()).resolveColorAttr(android.R.attr.colorBackground))
                             .commit();
                     getActivity().recreate();
+                    return true;
+                }
+            });
+
+            findPreference("color_navbar").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    ATE.config(getActivity(), ((Settings) getActivity()).getATEKey()).coloredNavigationBar((Boolean) newValue).apply(getActivity());
                     return true;
                 }
             });
@@ -276,11 +282,11 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
             new MaterialDialog.Builder(this).title(R.string.settings_donate_terms_popup_title)
                     .content(R.string.settings_donate_terms_popup_message)
                     .positiveText(android.R.string.yes).negativeText(android.R.string.no).onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://plus.google.com/+AdrianVovkDev/posts/PUiDmRFzPLw")));
-                        }
-                    }).show();
+                @Override
+                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://plus.google.com/+AdrianVovkDev/posts/PUiDmRFzPLw")));
+                }
+            }).show();
         }
     }
 
