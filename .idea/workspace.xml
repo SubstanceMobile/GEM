@@ -45,11 +45,10 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Changes after changes after changers">
+    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/setup/SetupActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/setup/SetupActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -146,6 +145,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.033783782">
+              <caret line="88" column="56" selection-start-line="88" selection-start-column="56" selection-end-line="88" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Options.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -156,21 +165,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3071253">
-              <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GEMApp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="58" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="58" />
+              <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -2457,7 +2456,6 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/UpdateReset.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/issue/IssueReportingActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/xml/preferences.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/playlistDetails/PlaylistDetails.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/search/SearchActivity.java" />
@@ -2467,12 +2465,13 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/setup/SetupActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -3281,7 +3280,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457827857334</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixed issues with settings. All activities will apply all changes now">
+      <created>1457883689123</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1457883689124</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3357,7 +3362,8 @@
     <MESSAGE value="Started switching to butterknife" />
     <MESSAGE value="Removed LaunchActivity. All code is moved to a better place" />
     <MESSAGE value="Changes after changes after changers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes after changes after changers" />
+    <MESSAGE value="Fixed issues with settings. All activities will apply all changes now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issues with settings. All activities will apply all changes now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3558,14 +3564,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="88" column="91" selection-start-line="88" selection-start-column="91" selection-end-line="88" selection-end-column="91" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/xml/preferences.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3687,8 +3685,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="76" selection-start-line="18" selection-start-column="76" selection-end-line="18" selection-end-column="76" />
           <folding>
-            <element signature="e#792#793#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
+            <element signature="e#792#793#0" expanded="false" />
+            <element signature="e#838#839#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3747,14 +3745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="58" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-21.5">
@@ -3767,14 +3757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7235872">
           <caret line="65" column="48" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="94" selection-start-line="64" selection-start-column="94" selection-end-line="64" selection-end-column="94" />
           <folding />
         </state>
       </provider>
@@ -3835,6 +3817,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3071253">
           <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="94" selection-start-line="64" selection-start-column="94" selection-end-line="64" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.033783782">
+          <caret line="88" column="56" selection-start-line="88" selection-start-column="56" selection-end-line="88" selection-end-column="56" />
           <folding />
         </state>
       </provider>

@@ -86,7 +86,7 @@
     <string name="settings_reset_primary">Reset Primary Color</string>
     <string name="settings_reset_primary_summary">Sets the primary color to be transparent</string>
     <string name="settings_color_navbar">Colored Navigation Bar</string>
-    <string name="settings_color_navbar_summary">Weather or not to color the navigation bar</string>
+    <string name="settings_color_navbar_summary">Whether or not to color the navigation bar</string>
 
     <string name="settings_tab_mode">Tab Mode</string>
     <string-array name="settings_tab_mode_choices">
