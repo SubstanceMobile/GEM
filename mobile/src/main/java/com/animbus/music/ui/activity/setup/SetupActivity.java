@@ -63,7 +63,7 @@ public class SetupActivity extends AppIntro2 {
 
     @Override
     public void onSlideChanged() {
-        setSwipeLock(pager.getCurrentItem() == 2);
+        setSwipeLock(pager.getCurrentItem() == 1);
     }
 }
 

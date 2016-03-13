@@ -37,6 +37,8 @@ import com.animbus.music.util.Options;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Settings extends ThemeActivity implements ColorChooserDialog.ColorCallback {
 
     @Override
@@ -105,15 +107,9 @@ public class Settings extends ThemeActivity implements ColorChooserDialog.ColorC
             configure();
         }
 
-        @SuppressWarnings("NullArgumentToVariableArgMethod")
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            //Uses ATE because I am lazy to implement it myself...
-            try {
-                Options.markChanged();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            if (!key.equals("last_update_time")) Options.markChanged();
         }
 
         public void configure() {

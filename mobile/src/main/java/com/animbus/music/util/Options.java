@@ -1,13 +1,11 @@
 package com.animbus.music.util;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Process;
 import android.preference.PreferenceManager;
 
 import com.animbus.music.ui.activity.mainScreen.MainScreen;
@@ -68,7 +66,8 @@ public class Options {
     }
 
     public static void invalidateActivity(ThemeActivity activity) {
-        if (activity.lastSettingsUpdate < Options.prefs.getLong("last_update_time",0)) activity.recreate();
+        if (activity.lastSettingsUpdate < Options.prefs.getLong("last_update_time", 0))
+            activity.recreate();
     }
 
     ///////////////////////////////////////////////////////////////////////////
