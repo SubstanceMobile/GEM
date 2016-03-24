@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2016 Substance Mobile
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <!--"control" means checkbox / radio button-->
+
+    <!--LIGHT-->
+    <!--12%-->
+    <color name="ate_switch_track_disabled_light">#1F000000</color>
+    <color name="ate_button_disabled_light">#1F000000</color>
+    <!-- 26% -->
+    <color name="ate_control_disabled_light">#43000000</color>
+    <color name="ate_switch_track_normal_light">#43000000</color>
+    <color name="ate_button_text_disabled_light">#43000000</color>
+    <!-- 38% -->
+    <color name="ate_text_disabled_light">#61000000</color>
+    <!-- 54% -->
+    <color name="ate_secondary_text_light">#8A000000</color>
+    <color name="ate_icon_light">#8A000000</color>
+    <color name="ate_control_normal_light">#8A000000</color>
+    <!-- 87% -->
+    <color name="ate_primary_text_light">#DE000000</color>
+    <!--Grey 50, #FAFAFA, Opacity  100%-->
+    <color name="ate_switch_thumb_normal_light">#FFFAFAFA</color>
+    <!--Grey 400, #BDBDBD, Opacity  100%-->
+    <color name="ate_switch_thumb_disabled_light">#FFBDBDBD</color>
+    <!---->
+    <color name="ate_navigation_drawer_selected_light">#E8E8E8</color>
+
+    <!--DARK-->
+    <!--10%-->
+    <color name="ate_switch_track_disabled_dark">#1AFFFFFF</color>
+    <!--12%-->
+    <color name="ate_button_disabled_dark">#1F000000</color>
+    <!-- 30% -->
+    <color name="ate_control_disabled_dark">#4DFFFFFF</color>
+    <color name="ate_switch_track_normal_dark">#4DFFFFFF</color>
+    <color name="ate_button_text_disabled_dark">#4DFFFFFF</color>
+    <color name="ate_text_disabled_dark">#4DFFFFFF</color>
+    <!-- 70% -->
+    <color name="ate_secondary_text_dark">#B3FFFFFF</color>
+    <color name="ate_icon_dark">#B3FFFFFF</color>
+    <color name="ate_control_normal_dark">#B3FFFFFF</color>
+    <!-- 100% -->
+    <color name="ate_primary_text_dark">#FFFFFFFF</color>
+    <!--Grey 400, #BDBDBD, Opacity  100%-->
+    <color name="ate_switch_thumb_normal_dark">#FFBDBDBD</color>
+    <!--Grey 800, #424242, Opacity 100%-->
+    <color name="ate_switch_thumb_disabled_dark">#FF424242</color>
+    <!---->
+    <color name="ate_navigation_drawer_selected_dark">#202020</color>
+
+</resources>
