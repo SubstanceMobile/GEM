@@ -45,9 +45,99 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Update License">
+    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Update license badge">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/ATE.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/proguard-rules.pro" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ATE.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ATEActivity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ATEBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/Config.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ConfigInterface.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ConfigKeys.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATEActivityThemeCustomizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATECollapsingTbCustomizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATENavigationBarCustomizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATEStatusBarCustomizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATETaskDescriptionCustomizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATEToolbarCustomizer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEActionMenuItemView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEAutoCompleteTextView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATECheckBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATECheckedTextView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATECoordinatorLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEDrawerLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEEditText.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEFloatingActionButton.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEListView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEMultiAutoCompleteTextView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATENavigationView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATENestedScrollView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEProgressBar.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATERadioButton.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATERecyclerView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEScrollView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESearchViewAutoComplete.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESeekBar.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESpinner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEStockSpinner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEStockSwitch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESwitch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATETabLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATETextView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEToolbar.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEViewPager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEViewUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/InflationInterceptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/PostInflationApplier.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ViewInterface.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATECheckBoxPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEColorPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEDialogPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEEditTextPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEListPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEMultiSelectPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEPreferenceCategory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATESwitchPreference.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/BorderCircleView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/ATEDefaultTags.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/BackgroundTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/EdgeGlowTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/FontTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TabLayoutTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TextColorTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TextShadowColorTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TextSizeTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TintTagProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/ATEUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/EdgeGlowUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/MDUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/NestedScrollViewUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/RecyclerViewUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TabLayoutUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TextInputLayoutUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TintHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TypefaceHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/ViewPagerUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/DefaultProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/NavigationViewProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/SearchViewProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/ToolbarProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/ViewProcessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/drawable/ate_check.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_checkbox.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_color.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_custom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_switch.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/values-large/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/values/colors.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ATE/src/main/res/values/dimens.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -3122,7 +3212,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458850103404</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Update license badge">
+      <created>1458850190521</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1458850190521</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3136,7 +3232,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1934" height="1042" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3286385" sideWeight="0.49785176" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.31022328" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
@@ -3152,7 +3248,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.32955772" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.27567855" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="true" show_stripe_button="true" weight="0.27567855" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278496" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32955772" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.24973032" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3205,7 +3301,8 @@
     <MESSAGE value="Fix a string" />
     <MESSAGE value="Add Copyright" />
     <MESSAGE value="Update License" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update License" />
+    <MESSAGE value="Update license badge" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update license badge" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
