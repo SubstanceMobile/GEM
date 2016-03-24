@@ -46,236 +46,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Update License">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/ATE.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/proguard-rules.pro" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ATE.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ATEActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ATEBase.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/Config.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ConfigInterface.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/ConfigKeys.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATEActivityThemeCustomizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATECollapsingTbCustomizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATENavigationBarCustomizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATEStatusBarCustomizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATETaskDescriptionCustomizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/customizers/ATEToolbarCustomizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEActionMenuItemView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEAutoCompleteTextView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATECheckBox.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATECheckedTextView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATECoordinatorLayout.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEDrawerLayout.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEEditText.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEFloatingActionButton.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEListView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEMultiAutoCompleteTextView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATENavigationView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATENestedScrollView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEProgressBar.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATERadioButton.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATERecyclerView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEScrollView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESearchViewAutoComplete.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESeekBar.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESpinner.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEStockSpinner.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEStockSwitch.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATESwitch.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATETabLayout.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATETextView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEToolbar.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEViewPager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ATEViewUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/InflationInterceptor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/PostInflationApplier.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/inflation/ViewInterface.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATECheckBoxPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEColorPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEDialogPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEEditTextPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEListPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEMultiSelectPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATEPreferenceCategory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/ATESwitchPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/prefs/BorderCircleView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/ATEDefaultTags.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/BackgroundTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/EdgeGlowTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/FontTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TabLayoutTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TextColorTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TextShadowColorTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TextSizeTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/tagprocessors/TintTagProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/ATEUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/EdgeGlowUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/MDUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/NestedScrollViewUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/RecyclerViewUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TabLayoutUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TextInputLayoutUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TintHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/TypefaceHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/util/ViewPagerUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/DefaultProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/NavigationViewProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/SearchViewProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/ToolbarProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/java/com/afollestad/appthemeengine/viewprocessors/ViewProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/drawable/ate_check.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_checkbox.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_color.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_custom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/layout/ate_preference_switch.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/values-large/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/values/attrs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/values/colors.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ATE/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/GEM.xml" afterPath="$PROJECT_DIR$/.idea/copyright/GEM.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE.md" afterPath="$PROJECT_DIR$/LICENSE.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle.properties" afterPath="$PROJECT_DIR$/gradle.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/build.gradle" afterPath="$PROJECT_DIR$/mobile/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/mobile.iml" afterPath="$PROJECT_DIR$/mobile/mobile.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/androidTest/java/com/animbus/music/ApplicationTest.java" afterPath="$PROJECT_DIR$/mobile/src/androidTest/java/com/animbus/music/ApplicationTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/MediaService.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/MediaService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/PlaybackRemote.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/PlaybackRemote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Album.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Album.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Artist.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Artist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Genre.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Genre.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/MediaObject.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/MediaObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Playlist.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Playlist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Song.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Song.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/MediaNotification.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/MediaNotification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/MediaService.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/MediaService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/PlaybackManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/PlaybackManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/QueueManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/QueueManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/ServiceHelper.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/ServiceHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/MusicPlaybackWidget.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/MusicPlaybackWidget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/issue/IssueReportingActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/issue/IssueReportingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/playlistDetails/PlaylistDetails.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/playlistDetails/PlaylistDetails.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/search/SearchActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/search/SearchActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/search/SearchResult.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/search/SearchResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/DependencyListPreference.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/DependencyListPreference.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/ChooseIcon.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/ChooseIcon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/Icon.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/Icon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/setup/SetupActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/setup/SetupActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/CustomFabBehavior.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/CustomFabBehavior.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/LockableViewPager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/LockableViewPager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/MusicControlsView.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/MusicControlsView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/SquareImageViewHeight_Based.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/SquareImageViewHeight_Based.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/SquareImageViewWidth_Based.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/view/SquareImageViewWidth_Based.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/CustomLinearLayoutManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/CustomLinearLayoutManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/FabHelper.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/FabHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/GEMUtil.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/GEMUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/IconManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/IconManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/util/Options.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_hide_arrow_head.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_hide_arrow_head.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_hide_circle.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_hide_circle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_show_arrow_head.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_show_arrow_head.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_show_circle.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_show_circle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_stem_back_to_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_stem_back_to_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_stem_search_to_back.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/animator/searchback_stem_search_to_back.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ic_info_black_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ic_info_black_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ic_notifications_black_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ic_notifications_black_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ic_sync_black_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ic_sync_black_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_circle_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable-v21/ripple_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/avd_back_to_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/avd_back_to_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/avd_search_to_back.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/avd_search_to_back.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/gradient_black_ontop.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/gradient_black_ontop.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/gradient_block_onbottom.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/gradient_block_onbottom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_album_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_album_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_artist_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_artist_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_audiotrack_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_audiotrack_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_back.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_back.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_bug_report_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_bug_report_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_close_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_close_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_code_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_code_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_equalizer_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_equalizer_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_favorite_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_favorite_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_favorite_outline_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_favorite_outline_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_folder_white_112dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_folder_white_112dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_gem_simple_white_112dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_gem_simple_white_112dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_info_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_info_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_menu_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_menu_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_play_arrow_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_play_arrow_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_playlist_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_playlist_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_settings_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_settings_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_shop_black_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_shop_black_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_smile_white_112dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_smile_white_112dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_timer_24dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_timer_24dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_warning_white_112dp.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_warning_white_112dp.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_circle_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_dark.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_dark.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_light.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/ripple_light.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/searchback_back.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/searchback_back.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/searchback_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/searchback_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/drawable/slider_alternate_thumb.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/drawable/slider_alternate_thumb.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_launch.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_launch.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_now_playing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_playlist_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_settings_choose_icon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/blank_page.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/blank_page.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/current_song_toolbar.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/current_song_toolbar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/drawer_header.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/drawer_header.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_now_playing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_playlist.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_playlist.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/now_playing_controls_view.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/now_playing_controls_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/widget.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/widget.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_now_playing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_playlist_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_playlist_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_search.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_search.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_settings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_settings_choose_icon.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/menu_settings_choose_icon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/menu/navigation_drawer_items.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/menu/navigation_drawer_items.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values-fr/strings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values-fr/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values-v14/dimens.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values-v14/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values-v21/dimens.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values-v21/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values-w820dp/dimens.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values-w820dp/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/xml/music_playback_widget_info.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/xml/music_playback_widget_info.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/xml/preferences.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/xml/preferences.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/xml/search_config.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/xml/search_config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -316,10 +88,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="Library.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Library.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6756757">
+            <state vertical-scroll-proportion="0.0">
               <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
               <folding>
                 <element signature="e#0#20000#0" expanded="true" />
@@ -340,6 +112,22 @@
                 <element signature="e#19607#19649#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.101626016">
+                <caret line="3" column="134" selection-start-line="3" selection-start-column="134" selection-end-line="3" selection-end-column="134" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2597,7 +2385,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/mobile/src/main/res/drawable/avd_back_to_search.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/animator/back_to_search.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/animator/search_to_back.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/drawable/ic_search.xml" />
@@ -2648,6 +2435,7 @@
         <option value="$PROJECT_DIR$/mobile/build.gradle" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" />
         <option value="$PROJECT_DIR$/LICENSE.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -3328,7 +3116,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458838616903</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Update License">
+      <created>1458850103404</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1458850103404</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3767,20 +3561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.101626016">
-            <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="54" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -3797,7 +3577,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6756757">
+        <state vertical-scroll-proportion="0.0">
           <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
           <folding>
             <element signature="e#0#20000#0" expanded="true" />
@@ -3818,6 +3598,20 @@
             <element signature="e#19607#19649#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.101626016">
+            <caret line="3" column="134" selection-start-line="3" selection-start-column="134" selection-end-line="3" selection-end-column="134" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>
