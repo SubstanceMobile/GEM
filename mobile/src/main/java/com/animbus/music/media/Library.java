@@ -3,13 +3,12 @@ package com.animbus.music.media;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 
+import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Genre;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.media.objects.Album;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -250,7 +249,7 @@ public class Library {
     }
 
     public static Album findAlbumById(long id) {
-        for (Album album : instance.mAlbums) if (album.getId() == id)  return album;
+        for (Album album : instance.mAlbums) if (album.getId() == id) return album;
         return null;
     }
 

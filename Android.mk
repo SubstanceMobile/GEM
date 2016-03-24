@@ -14,7 +14,7 @@ LOCAL_OVERRIDES_PACKAGES := Music
 LOCAL_CERTIFICATE := platform
 
 # Builds with Gradle (Temporary) [http://stackoverflow.com/questions/32898340/build-gradle-system-app-as-part-of-aosp-build]
-$(info $(shell ($(LOCAL_PATH)/gradlew build -p $(LOCAL_PATH)/)) )
+$(info $(shell ($(LOCAL_PATH)/gradlew build -p $(LOCAL_PATH)/)))
 $(info $(shell ($(LOCAL_PATH)/gradlehack.sh $(PRODUCT_OUT))))
 
 # Build
