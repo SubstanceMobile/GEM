@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2016 Substance Mobile
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+ */
+
 package com.animbus.music.media;
 
 import android.content.Context;
@@ -43,7 +53,7 @@ public class Library {
       //TODO: This
     }
 
-   /* public static void buildAsync() {
+    public static void buildAsync() {
         //Albums
         new AsyncTask<Void, Album, List<Album>>() {
             @Override
@@ -232,27 +242,20 @@ public class Library {
                 try {
                     Cursor albumSongsCursor = ((Context) params[0]).getContentResolver().query(
                             MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
-                            null, MediaStore.Audio.Media.ALBUM_ID + "?=",
+                            new String[]{}, MediaStore.Audio.Media.ALBUM_ID + "?=",
                             new String[]{String.valueOf((long) params[1])},
-                            MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+                            MediaStore.Audio.Media.TRACK);
 
                     assert albumSongsCursor != null : "Cursor is null";
-                    int titleColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
                     int idColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
-                    int albumIdColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
-                    int artistColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
-                    int durColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
                     int trackNumber = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
 
                     albumSongsCursor.moveToFirst();
                     do {
                         Song s = new Song();
 
-                        s.setSongTitle(albumSongsCursor.getString(titleColumn));
-                        s.setSongArtist(albumSongsCursor.getString(artistColumn));
+
                         s.setId(albumSongsCursor.getLong(idColumn));
-                        s.setAlbumID(albumSongsCursor.getLong(albumIdColumn));
-                        s.setSongDuration(albumSongsCursor.getLong(durColumn));
                         s.setTrackNumber(albumSongsCursor.getLong(trackNumber));
 
                         generated.add(s);
@@ -268,7 +271,6 @@ public class Library {
             protected void onPostExecute(List<Song> songs) {
                 super.onPostExecute(songs);
                 album.setSongs(songs);
-                mSongs.addAll(songs);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, album.getId(), album);
     }
@@ -312,7 +314,7 @@ public class Library {
 
     private static void registerMediaStoreListener() {
 
-    }*/
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // The isBuilt variable
