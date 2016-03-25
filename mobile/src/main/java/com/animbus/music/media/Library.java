@@ -17,23 +17,23 @@
 package com.animbus.music.media;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.animbus.music.R;
 import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
+import com.animbus.music.tasks.AlbumsTask;
+import com.animbus.music.tasks.ArtistsTask;
+import com.animbus.music.tasks.PlaylistsTask;
+import com.animbus.music.tasks.SongsTask;
+import com.animbus.music.tasks.TaskListener;
 import com.animbus.music.ui.activity.search.SearchResult;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Library {
@@ -42,6 +42,11 @@ public class Library {
     private static volatile List<Album> mAlbums = new ArrayList<>();
     private static volatile List<Playlist> mPlaylists = new ArrayList<>();
     private static volatile List<Artist> mArtists = new ArrayList<>();
+
+    private static volatile SongsTask mSongsTask;
+    private static volatile AlbumsTask mAlbumsTask;
+    private static volatile PlaylistsTask mPlaylistsTask;
+    private static volatile ArtistsTask mArtistsTask;
 
     private Library() {
         //So this class cannot be instantiated with a new statement
@@ -56,267 +61,71 @@ public class Library {
     ///////////////////////////////////////////////////////////////////////////
 
     public static void build() {
-        //TODO: This
-    }
+        //Sets the tasks
+        mSongsTask = new SongsTask(context);
+        mAlbumsTask = new AlbumsTask(context);
+        mPlaylistsTask = new PlaylistsTask(context);
+        mArtistsTask = new ArtistsTask(context);
 
-    public static void buildAsync() {
-        //Albums
-        new AsyncTask<Void, Album, List<Album>>() {
+        //Adds all non-UI listeners
+        mSongsTask.addListener(new TaskListener<Song>() {
             @Override
-            protected List<Album> doInBackground(Void... params) {
-                List<Album> generated = new ArrayList<>();
-                try {
-                    Cursor albumsCursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, null, null, null,
-                            MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
-
-                    assert albumsCursor != null : "Cursor is null";
-                    int titleColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM);
-                    int idColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums._ID);
-                    int artistColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST);
-                    int albumArtColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART);
-
-                    albumsCursor.moveToFirst();
-                    do {
-                        Album album = new Album();
-
-                        album.setId(albumsCursor.getLong(idColumn));
-                        album.setContext(context);
-                        album.setAlbumTitle(albumsCursor.getString(titleColumn));
-                        album.setAlbumArtistName(albumsCursor.getString(artistColumn));
-                        album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
-
-                        generated.add(album);
-                        publishProgress(album);
-                    } while (albumsCursor.moveToNext());
-                    albumsCursor.close();
-                } catch (IndexOutOfBoundsException e) {
-                    generated = Collections.emptyList();
-                }
-                return generated;
+            public void onOneLoaded(Song item) {
+                updateLinks();
             }
 
             @Override
-            protected void onProgressUpdate(Album... values) {
-                super.onProgressUpdate(values);
-                buildSongsForAlbums(values);
-                updateAlbumListeners(values);
-            }
-
-            @Override
-            protected void onPostExecute(List<Album> albums) {
-                super.onPostExecute(albums);
-                mAlbums = albums;
-                mAlbumsBuilt = true;
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-        //Songs
-        new AsyncTask<Void, Song, List<Song>>() {
-            @Override
-            protected List<Song> doInBackground(Void... params) {
-                List<Song> generated = new ArrayList<>();
-                try {
-                    Cursor songsCursor = context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,
-                            MediaStore.Audio.Media.IS_MUSIC + "=1", null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
-
-
-                    assert songsCursor != null : "Cursor is null";
-                    int titleColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-                    int idColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
-                    int albumIdColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
-                    int artistColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
-                    int durColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
-                    int trackNumber = songsCursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
-
-                    songsCursor.moveToFirst();
-                    do {
-                        Song s = new Song();
-
-                        s.setSongTitle(songsCursor.getString(titleColumn));
-                        s.setSongArtist(songsCursor.getString(artistColumn));
-                        s.setId(songsCursor.getLong(idColumn));
-                        s.setAlbumID(songsCursor.getLong(albumIdColumn));
-                        s.setSongDuration(songsCursor.getLong(durColumn));
-                        s.setTrackNumber(songsCursor.getLong(trackNumber));
-
-                        generated.add(s);
-                        publishProgress(s);
-                    } while (songsCursor.moveToNext());
-                    songsCursor.close();
-                } catch (IndexOutOfBoundsException e) {
-                    generated = Collections.emptyList();
-                }
-                return generated;
-            }
-
-            @Override
-            protected void onProgressUpdate(Song... values) {
-                super.onProgressUpdate(values);
-                updateSongListeners(values);
-            }
-
-            @Override
-            protected void onPostExecute(List<Song> songs) {
-                super.onPostExecute(songs);
-                mSongs = songs;
+            public void onCompleted(List<Song> result) {
                 mSongsBuilt = true;
+                mSongs = result;
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-        //Playlists
-        new AsyncTask<Void, Playlist, List<Playlist>>() {
+        });
+        mAlbumsTask.addListener(new TaskListener<Album>() {
             @Override
-            protected List<Playlist> doInBackground(Void... params) {
-                List<Playlist> generated = new ArrayList<>();
-                try {
-                    Cursor playlistsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
-
-                    assert playlistsCursor != null : "Cursor is null";
-                    int titleColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists.NAME);
-                    int idColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
-
-                    playlistsCursor.moveToFirst();
-                    do {
-                        Playlist playlist = new Playlist();
-
-                        String name = playlistsCursor.getString(titleColumn);
-                        playlist.setName(name);
-                        playlist.setType(TextUtils.equals(name.toLowerCase(), "favorites") ? 0 : 1);
-                        playlist.setId(playlistsCursor.getLong(idColumn));
-
-                        generated.add(playlist);
-                        publishProgress(playlist);
-                    } while (playlistsCursor.moveToNext());
-                    Collections.sort(mPlaylists, new Comparator<Playlist>() {
-                        @Override
-                        public int compare(Playlist lhs, Playlist rhs) {
-                            return ((Integer) lhs.getType()).compareTo(rhs.getType());
-                        }
-                    });
-                    playlistsCursor.close();
-                } catch (IndexOutOfBoundsException e) {
-                    generated = Collections.emptyList();
-                }
-                return generated;
+            public void onOneLoaded(Album item) {
+                updateLinks();
             }
 
             @Override
-            protected void onProgressUpdate(Playlist... values) {
-                super.onProgressUpdate(values);
-                for (Playlist p : values) buildSongsForPlaylist(p);
+            public void onCompleted(List<Album> result) {
+                mAlbumsBuilt = true;
+                mAlbums = result;
+            }
+        });
+        mPlaylistsTask.addListener(new TaskListener<Playlist>() {
+            @Override
+            public void onOneLoaded(Playlist item) {
+                updateLinks();
             }
 
             @Override
-            protected void onPostExecute(List<Playlist> playlists) {
-                super.onPostExecute(playlists);
-                mPlaylists = playlists;
-                updatePlaylistListeners();
+            public void onCompleted(List<Playlist> result) {
                 mPlaylistsBuilt = true;
+                mPlaylists = result;
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-        //Artists
-        new AsyncTask<Void, Artist, List<Artist>>() {
+        });
+        mArtistsTask.addListener(new TaskListener<Artist>() {
             @Override
-            protected List<Artist> doInBackground(Void... params) {
-                //TODO: Implement this
-                return null;
+            public void onOneLoaded(Artist item) {
+                updateLinks();
             }
 
             @Override
-            protected void onProgressUpdate(Artist... values) {
-                super.onProgressUpdate(values);
-                updateArtistListeners(values);
-            }
-
-            @Override
-            protected void onPostExecute(List<Artist> artists) {
-                super.onPostExecute(artists);
-                mArtists = artists;
+            public void onCompleted(List<Artist> result) {
                 mArtistsBuilt = true;
+                mArtists = result;
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        });
+
+        //Runs all of the tasks
+        mSongsTask.run();
+        mAlbumsTask.run();
+        mPlaylistsTask.run();
+        mArtistsTask.run();
     }
 
-    //Loads songs for the provided albums
-    public static void buildSongsForAlbums(Album... values) {
-        for (final Album album : values)
-            new AsyncTask<Object, Void, List<Song>>() {
-                @Override
-                protected List<Song> doInBackground(Object... params) {
-                    List<Song> generated = new ArrayList<>();
-                    try {
-                        Cursor albumSongsCursor = ((Context) params[0]).getContentResolver().query(
-                                MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
-                                new String[]{}, MediaStore.Audio.Media.ALBUM_ID + "?=",
-                                new String[]{String.valueOf((long) params[1])},
-                                MediaStore.Audio.Media.TRACK);
+    private static void updateLinks() {
 
-                        assert albumSongsCursor != null : "Cursor is null";
-                        int idColumn = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
-                        int trackNumber = albumSongsCursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
-
-                        albumSongsCursor.moveToFirst();
-                        do {
-                            Song s = new Song();
-
-
-                            s.setId(albumSongsCursor.getLong(idColumn));
-                            s.setTrackNumber(albumSongsCursor.getLong(trackNumber));
-
-                            generated.add(s);
-                        } while (albumSongsCursor.moveToNext());
-                        albumSongsCursor.close();
-                    } catch (IndexOutOfBoundsException e) {
-                        generated = Collections.emptyList();
-                    }
-                    return generated;
-                }
-
-                @Override
-                protected void onPostExecute(List<Song> songs) {
-                    super.onPostExecute(songs);
-                    album.setSongs(songs);
-                }
-            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, album.getId(), album);
-    }
-
-    public static void injectSongIntoAlbum(Song... values) {
-        if (mSongsBuilt) for (Song song : values) {
-            for (Album a : getAlbums()) ;
-        }
-    }
-
-    public static void buildSongsForPlaylist(Playlist... values) {
-        for (Playlist playlist : values)
-            new AsyncTask<Object, Void, Void>() {
-                @Override
-                protected List<Song> doInBackground(Object... params) {
-                    List<Song> generated = new ArrayList<>();
-                    try {
-                        Cursor playlistSongsCursor = ((Context) params[0]).getContentResolver().query(MediaStore.Audio.Playlists.Members.getContentUri("external", (long) params[1]),
-                                null, null, null, MediaStore.Audio.Playlists.Members.PLAY_ORDER);
-
-                        assert playlistSongsCursor != null : "Cursor is null";
-                        int idColumn = playlistSongsCursor.getColumnIndex(MediaStore.Audio.Playlists.Members.AUDIO_ID);
-
-                        playlistSongsCursor.moveToFirst();
-                        do {
-                            generated.add(Library.findSongById(playlistSongsCursor.getLong(idColumn)));
-                        } while (playlistSongsCursor.moveToNext());
-                        playlistSongsCursor.close();
-                    } catch (IndexOutOfBoundsException e) {
-                        generated = Collections.emptyList();
-                    }
-                    return generated;
-                }
-
-                @Override
-                protected void onPostExecute(List<Song> songs) {
-                    super.onPostExecute(songs);
-                    Library.findPlaylistById((long) params[1])
-                }
-            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, context, playlist.getId());
     }
 
     private static void registerMediaStoreListener() {
@@ -334,78 +143,50 @@ public class Library {
             mPlaylistsBuilt = false;
 
     public static boolean isBuilt() {
-        return mAlbumsBuilt && mSongsBuilt && mArtistsBuilt && mPlaylistsBuilt;
+        return areSongsBuilt() && areAlbumsBuilt() && arePlaylistsBuilt() && areArtistsBuilt();
+    }
+
+    public static boolean areSongsBuilt() {
+        return mSongsBuilt;
+    }
+
+    public static boolean areAlbumsBuilt() {
+        return mAlbumsBuilt;
+    }
+
+    public static boolean arePlaylistsBuilt() {
+        return mPlaylistsBuilt;
+    }
+
+    public static boolean areArtistsBuilt() {
+        return mArtistsBuilt;
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Handles UI updates
+    // Helper methods for adding listeners to tasks
     ///////////////////////////////////////////////////////////////////////////
 
-    //Artist
-    interface AlbumListener {
-        void onChange(Album... values);
+    public static void registerSongListener(TaskListener<Song> songListener) {
+        mSongsTask.addListener(songListener);
     }
 
-    static volatile List<AlbumListener> albumListeners = new ArrayList<>();
-
-    public static void registerAlbumListener(AlbumListener albumListener) {
-        albumListeners.add(albumListener);
+    public static void registerAlbumListener(TaskListener<Album> albumListener) {
+        mAlbumsTask.addListener(albumListener);
     }
 
-    public static void updateAlbumListeners(Album... values) {
-        for (AlbumListener l : albumListeners) l.onChange(values);
+    public static void registerPlaylstListener(TaskListener<Playlist> playlistListener) {
+        mPlaylistsTask.addListener(playlistListener);
     }
 
-    //Song
-    interface SongListener {
-        void onChange(Song... values);
-    }
-
-    static volatile List<SongListener> songListeners = new ArrayList<>();
-
-    public static void registerSongListener(SongListener songListener) {
-        songListeners.add(songListener);
-    }
-
-    public static void updateSongListeners(Song... values) {
-        for (SongListener l : songListeners) l.onChange(values);
-    }
-
-    // Artist
-    interface ArtistListener {
-        void onChange(Artist... values);
-    }
-
-    static volatile List<ArtistListener> artistListeners = new ArrayList<>();
-
-    public static void registerArtistListener(ArtistListener artistListener) {
-        artistListeners.add(artistListener);
-    }
-
-    public static void updateArtistListeners(Artist... values) {
-        for (ArtistListener l : artistListeners) l.onChange(values);
-    }
-
-    //Playlist
-    interface PlaylistListener {
-        void onChange();
-    }
-
-    static volatile List<PlaylistListener> playlistListeners = new ArrayList<>();
-
-    public static void registerPlaylstListener(PlaylistListener playlistListener) {
-        playlistListeners.add(playlistListener);
-    }
-
-    public static void updatePlaylistListeners() {
-        for (PlaylistListener l : playlistListeners) l.onChange();
+    public static void registerArtistListener(TaskListener<Artist> artistListener) {
+        mArtistsTask.addListener(artistListener);
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Playlist Management
     ///////////////////////////////////////////////////////////////////////////
 
-    //TODO: Do this thing
+    //TODO
 
     ///////////////////////////////////////////////////////////////////////////
     // Getters
