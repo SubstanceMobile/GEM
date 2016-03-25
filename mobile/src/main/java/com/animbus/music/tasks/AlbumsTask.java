@@ -26,14 +26,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AlbumsTask extends BaseTask<Album> {
+public class AlbumsTask extends LoadTask<Album> {
 
     public AlbumsTask(Context context, Object... params) {
         super(context, params);
     }
 
     @Override
-    protected List<Album> doInBackground(Object... params) {
+    protected List<Album> doJob(Object... params) {
         List<Album> generated = new ArrayList<>();
         try {
             Cursor albumsCursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, null, null, null,

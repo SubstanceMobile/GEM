@@ -31,13 +31,13 @@ import java.util.List;
 /**
  * Created by Adrian on 3/25/2016.
  */
-public class PlaylistsTask extends BaseTask<Playlist> {
+public class PlaylistsTask extends LoadTask<Playlist> {
     public PlaylistsTask(Context context, Object... params) {
         super(context, params);
     }
 
     @Override
-    protected List<Playlist> doInBackground(Object... params) {
+    protected List<Playlist> doJob(Object... params) {
         List<Playlist> generated = new ArrayList<>();
         try {
             Cursor playlistsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);

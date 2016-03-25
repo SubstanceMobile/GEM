@@ -29,14 +29,14 @@ import java.util.List;
 /**
  * Created by Adrian on 3/25/2016.
  */
-public class SongsTask extends BaseTask<Song> {
+public class SongsTask extends LoadTask<Song> {
 
     public SongsTask(Context context, Object... params) {
         super(context, params);
     }
 
     @Override
-    protected List<Song> doInBackground(Object... params) {
+    protected List<Song> doJob(Object... params) {
         List<Song> generated = new ArrayList<>();
         try {
             Cursor songsCursor = context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,

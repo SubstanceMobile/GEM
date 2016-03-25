@@ -122,14 +122,25 @@ public class Library {
         mAlbumsTask.run();
         mPlaylistsTask.run();
         mArtistsTask.run();
+
+        //Whenever a new song is added, everything is rebuilt
+        registerMediaStoreListener();
+    }
+
+    private static void update() {
+        mSongsTask.update(getSongs());
+        mAlbumsTask.update(getAlbums());
+        mPlaylistsTask.update(getPlaylists());
+        mArtistsTask.update(getArtists());
     }
 
     private static void updateLinks() {
-
+        //TODO
     }
 
     private static void registerMediaStoreListener() {
-
+        //TODO
+        //update();
     }
 
     ///////////////////////////////////////////////////////////////////////////
