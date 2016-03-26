@@ -43,25 +43,27 @@ abstract class LoadTask<Return> extends AsyncTask<Object, Return, List<Return>> 
     private TaskListener<Return> mVerifyListener = new TaskListener<Return>() {
         @Override
         public void onOneLoaded(Return item) {
-            if (!currentData.contains(item)) for (TaskListener<Return> listener : mListeners) listener.onOneLoaded(item);
+            if (!currentData.contains(item))
+                for (TaskListener<Return> listener : mListeners) listener.onOneLoaded(item);
         }
 
         @Override
         public void onCompleted(List<Return> result) {
-            if (currentData != result) for (TaskListener<Return> listener : mListeners) listener.onCompleted(result);
+            if (currentData != result)
+                for (TaskListener<Return> listener : mListeners) listener.onCompleted(result);
         }
     };
     private boolean mUpdateQueued = false;
 
     public void update(final List<Return> currentData) {
-        if (!isExecuting) {
+        if (!isExecuting && currentData != null) {
             mUpdateQueued = false;
             this.currentData = currentData;
             run();
-        } else {
-            Log.e("LoadTask", "Update failed: is currently executing");
-            mUpdateQueued = true;
-        }
+            return;
+        } else if (isExecuting) Log.e("LoadTask", "Update failed: is currently executing");
+        else Log.e("LoadTask", "Update failed: currentData is null");
+        mUpdateQueued = true;
     }
 
     ///////////////////////////////////////////////////////////////////////////

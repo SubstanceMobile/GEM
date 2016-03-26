@@ -17,7 +17,10 @@
 package com.animbus.music.media;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.net.Uri;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 
 import com.animbus.music.R;
@@ -127,20 +130,68 @@ public class Library {
         registerMediaStoreListener();
     }
 
-    private static void update() {
-        mSongsTask.update(getSongs());
-        mAlbumsTask.update(getAlbums());
-        mPlaylistsTask.update(getPlaylists());
-        mArtistsTask.update(getArtists());
-    }
-
     private static void updateLinks() {
         //TODO
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // Update Listener from MediaStore
+    ///////////////////////////////////////////////////////////////////////////
+
+    static final ContentObserver mObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            mSongsTask.update(getSongs());
+            mAlbumsTask.update(getAlbums());
+            mPlaylistsTask.update(getPlaylists());
+            mArtistsTask.update(getArtists());
+        }
+    };
+
+    static final ContentObserver mSongsObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            mSongsTask.update(getSongs());
+        }
+    };
+
+    static final ContentObserver mAlbumsObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            mAlbumsTask.update(getAlbums());
+        }
+    };
+
+    static final ContentObserver mPlaylistsObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            mPlaylistsTask.update(getPlaylists());
+        }
+    };
+
+    static final ContentObserver mArtistsObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            mArtistsTask.update(getArtists());
+        }
+    };
+
     private static void registerMediaStoreListener() {
-        //TODO
-        //update();
+        context.getContentResolver().registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mObserver);
+
+        context.getContentResolver().registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mSongsObserver);
+        context.getContentResolver().registerContentObserver(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, true, mAlbumsObserver);
+        context.getContentResolver().registerContentObserver(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, true, mPlaylistsObserver);
+        context.getContentResolver().registerContentObserver(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, true, mArtistsObserver);
+    }
+
+    private static void unregisterMediaStoreListener() {
+        context.getContentResolver().unregisterContentObserver(mObserver);
+
+        context.getContentResolver().unregisterContentObserver(mSongsObserver);
+        context.getContentResolver().unregisterContentObserver(mAlbumsObserver);
+        context.getContentResolver().unregisterContentObserver(mPlaylistsObserver);
+        context.getContentResolver().unregisterContentObserver(mArtistsObserver);
     }
 
     ///////////////////////////////////////////////////////////////////////////
