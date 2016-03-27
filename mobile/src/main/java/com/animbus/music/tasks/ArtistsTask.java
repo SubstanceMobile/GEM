@@ -25,14 +25,14 @@ import java.util.List;
 /**
  * Created by Adrian on 3/25/2016.
  */
-public class ArtistsTask extends LoadTask<Artist> {
+public class ArtistsTask extends Loader<Artist> {
 
     public ArtistsTask(Context context, Object... params) {
         super(context, params);
     }
 
     @Override
-    protected List<Artist> doJob(Object... params) {
+    protected List<Artist> doLoad(Object... params) {
         //TODO
         return null;
     }

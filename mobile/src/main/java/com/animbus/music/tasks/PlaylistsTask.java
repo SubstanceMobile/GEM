@@ -31,16 +31,16 @@ import java.util.List;
 /**
  * Created by Adrian on 3/25/2016.
  */
-public class PlaylistsTask extends LoadTask<Playlist> {
+public class PlaylistsTask extends Loader<Playlist> {
     public PlaylistsTask(Context context, Object... params) {
         super(context, params);
     }
 
     @Override
-    protected List<Playlist> doJob(Object... params) {
+    protected List<Playlist> doLoad(Object... params) {
         List<Playlist> generated = new ArrayList<>();
         try {
-            Cursor playlistsCursor = context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
+            Cursor playlistsCursor = getContext().getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
 
             assert playlistsCursor != null : "Cursor is null";
             int titleColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists.NAME);
@@ -56,7 +56,7 @@ public class PlaylistsTask extends LoadTask<Playlist> {
                 playlist.setId(playlistsCursor.getLong(idColumn));
 
                 generated.add(playlist);
-                publishProgress(playlist);
+                notifyOneLoaded(playlist);
             } while (playlistsCursor.moveToNext());
             Collections.sort(generated, new Comparator<Playlist>() {
                 @Override

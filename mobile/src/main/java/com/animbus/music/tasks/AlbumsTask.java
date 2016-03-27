@@ -26,17 +26,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AlbumsTask extends LoadTask<Album> {
+public class AlbumsTask extends Loader<Album> {
 
     public AlbumsTask(Context context, Object... params) {
         super(context, params);
     }
 
     @Override
-    protected List<Album> doJob(Object... params) {
+    protected List<Album> doLoad(Object... params) {
         List<Album> generated = new ArrayList<>();
         try {
-            Cursor albumsCursor = context.getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, null, null, null,
+            Cursor albumsCursor = getContext().getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, null, null, null,
                     MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
 
             assert albumsCursor != null : "Cursor is null";
@@ -50,13 +50,13 @@ public class AlbumsTask extends LoadTask<Album> {
                 Album album = new Album();
 
                 album.setId(albumsCursor.getLong(idColumn));
-                album.setContext(context);
+                album.setContext(getContext());
                 album.setAlbumTitle(albumsCursor.getString(titleColumn));
                 album.setAlbumArtistName(albumsCursor.getString(artistColumn));
                 album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
 
                 generated.add(album);
-                publishProgress(album);
+                notifyOneLoaded(album);
             } while (albumsCursor.moveToNext());
             albumsCursor.close();
         } catch (IndexOutOfBoundsException e) {

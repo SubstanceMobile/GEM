@@ -29,17 +29,17 @@ import java.util.List;
 /**
  * Created by Adrian on 3/25/2016.
  */
-public class SongsTask extends LoadTask<Song> {
+public class SongsTask extends Loader<Song> {
 
     public SongsTask(Context context, Object... params) {
         super(context, params);
     }
 
     @Override
-    protected List<Song> doJob(Object... params) {
+    protected List<Song> doLoad(Object... params) {
         List<Song> generated = new ArrayList<>();
         try {
-            Cursor songsCursor = context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,
+            Cursor songsCursor = getContext().getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,
                     MediaStore.Audio.Media.IS_MUSIC + "=1", null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 
 
@@ -63,7 +63,7 @@ public class SongsTask extends LoadTask<Song> {
                 s.setTrackNumber(songsCursor.getLong(trackNumber));
 
                 generated.add(s);
-                publishProgress(s);
+                notifyOneLoaded(s);
             } while (songsCursor.moveToNext());
             songsCursor.close();
         } catch (IndexOutOfBoundsException e) {

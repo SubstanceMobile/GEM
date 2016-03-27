@@ -17,10 +17,7 @@
 package com.animbus.music.media;
 
 import android.content.Context;
-import android.database.ContentObserver;
 import android.net.Uri;
-import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 
 import com.animbus.music.R;
@@ -30,9 +27,9 @@ import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.tasks.AlbumsTask;
 import com.animbus.music.tasks.ArtistsTask;
+import com.animbus.music.tasks.Loader;
 import com.animbus.music.tasks.PlaylistsTask;
 import com.animbus.music.tasks.SongsTask;
-import com.animbus.music.tasks.TaskListener;
 import com.animbus.music.ui.activity.search.SearchResult;
 
 import java.util.ArrayList;
@@ -51,8 +48,14 @@ public class Library {
     private static volatile PlaylistsTask mPlaylistsTask;
     private static volatile ArtistsTask mArtistsTask;
 
-    private Library() {
-        //So this class cannot be instantiated with a new statement
+    public Library(Context context) {
+        Library.context = context.getApplicationContext();
+
+        //Creates tasks
+        mSongsTask = new SongsTask(context);
+        mAlbumsTask = new AlbumsTask(context);
+        mPlaylistsTask = new PlaylistsTask(context);
+        mArtistsTask = new ArtistsTask(context);
     }
 
     public static void setContext(Context cxt) {
@@ -64,14 +67,8 @@ public class Library {
     ///////////////////////////////////////////////////////////////////////////
 
     public static void build() {
-        //Sets the tasks
-        mSongsTask = new SongsTask(context);
-        mAlbumsTask = new AlbumsTask(context);
-        mPlaylistsTask = new PlaylistsTask(context);
-        mArtistsTask = new ArtistsTask(context);
-
         //Adds all non-UI listeners
-        mSongsTask.addListener(new TaskListener<Song>() {
+        mSongsTask.addListener(new Loader.TaskListener<Song>() {
             @Override
             public void onOneLoaded(Song item) {
                 updateLinks();
@@ -83,7 +80,7 @@ public class Library {
                 mSongs = result;
             }
         });
-        mAlbumsTask.addListener(new TaskListener<Album>() {
+        mAlbumsTask.addListener(new Loader.TaskListener<Album>() {
             @Override
             public void onOneLoaded(Album item) {
                 updateLinks();
@@ -95,7 +92,7 @@ public class Library {
                 mAlbums = result;
             }
         });
-        mPlaylistsTask.addListener(new TaskListener<Playlist>() {
+        mPlaylistsTask.addListener(new Loader.TaskListener<Playlist>() {
             @Override
             public void onOneLoaded(Playlist item) {
                 updateLinks();
@@ -107,7 +104,7 @@ public class Library {
                 mPlaylists = result;
             }
         });
-        mArtistsTask.addListener(new TaskListener<Artist>() {
+        mArtistsTask.addListener(new Loader.TaskListener<Artist>() {
             @Override
             public void onOneLoaded(Artist item) {
                 updateLinks();
@@ -125,9 +122,6 @@ public class Library {
         mAlbumsTask.run();
         mPlaylistsTask.run();
         mArtistsTask.run();
-
-        //Whenever a new song is added, everything is rebuilt
-        registerMediaStoreListener();
     }
 
     private static void updateLinks() {
@@ -138,60 +132,11 @@ public class Library {
     // Update Listener from MediaStore
     ///////////////////////////////////////////////////////////////////////////
 
-    static final ContentObserver mObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            mSongsTask.update(getSongs());
-            mAlbumsTask.update(getAlbums());
-            mPlaylistsTask.update(getPlaylists());
-            mArtistsTask.update(getArtists());
-        }
-    };
-
-    static final ContentObserver mSongsObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            mSongsTask.update(getSongs());
-        }
-    };
-
-    static final ContentObserver mAlbumsObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            mAlbumsTask.update(getAlbums());
-        }
-    };
-
-    static final ContentObserver mPlaylistsObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            mPlaylistsTask.update(getPlaylists());
-        }
-    };
-
-    static final ContentObserver mArtistsObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            mArtistsTask.update(getArtists());
-        }
-    };
-
-    private static void registerMediaStoreListener() {
-        context.getContentResolver().registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mObserver);
-
-        context.getContentResolver().registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mSongsObserver);
-        context.getContentResolver().registerContentObserver(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, true, mAlbumsObserver);
-        context.getContentResolver().registerContentObserver(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, true, mPlaylistsObserver);
-        context.getContentResolver().registerContentObserver(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, true, mArtistsObserver);
-    }
-
-    private static void unregisterMediaStoreListener() {
-        context.getContentResolver().unregisterContentObserver(mObserver);
-
-        context.getContentResolver().unregisterContentObserver(mSongsObserver);
-        context.getContentResolver().unregisterContentObserver(mAlbumsObserver);
-        context.getContentResolver().unregisterContentObserver(mPlaylistsObserver);
-        context.getContentResolver().unregisterContentObserver(mArtistsObserver);
+    private static void registerMediaStoreListeners() {
+        mSongsTask.registerMediaStoreListener();
+        mAlbumsTask.registerMediaStoreListener();
+        mPlaylistsTask.registerMediaStoreListener();
+        mArtistsTask.registerMediaStoreListener();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -228,19 +173,19 @@ public class Library {
     // Helper methods for adding listeners to tasks
     ///////////////////////////////////////////////////////////////////////////
 
-    public static void registerSongListener(TaskListener<Song> songListener) {
+    public static void registerSongListener(Loader.TaskListener<Song> songListener) {
         mSongsTask.addListener(songListener);
     }
 
-    public static void registerAlbumListener(TaskListener<Album> albumListener) {
+    public static void registerAlbumListener(Loader.TaskListener<Album> albumListener) {
         mAlbumsTask.addListener(albumListener);
     }
 
-    public static void registerPlaylstListener(TaskListener<Playlist> playlistListener) {
+    public static void registerPlaylstListener(Loader.TaskListener<Playlist> playlistListener) {
         mPlaylistsTask.addListener(playlistListener);
     }
 
-    public static void registerArtistListener(TaskListener<Artist> artistListener) {
+    public static void registerArtistListener(Loader.TaskListener<Artist> artistListener) {
         mArtistsTask.addListener(artistListener);
     }
 

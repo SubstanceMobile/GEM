@@ -28,6 +28,7 @@ import static com.animbus.music.media.PlaybackRemote.LOCAL;
 
 
 public class GEMApp extends Application {
+    private static final int ATE_REVISION_NUMBER = 0;
 
     @Override
     public void onCreate() {
@@ -48,8 +49,13 @@ public class GEMApp extends Application {
                     .commit();
         }
 
+        //noinspection StatementWithEmptyBody
+        if (!ATE.config(this, getATEKey()).isConfigured(ATE_REVISION_NUMBER)) {
+            //Do something in later versions
+        }
+
         Options.init(this);
-        Library.setContext(this);
+        new Library(this);
 
         //Initiates the process of setting up all of the media objects to be triggered instantly
         PlaybackRemote.setUp(this);
