@@ -17,14 +17,15 @@
 package com.animbus.music.tasks;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 
+import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Album;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class AlbumsTask extends Loader<Album> {
 
@@ -33,35 +34,34 @@ public class AlbumsTask extends Loader<Album> {
     }
 
     @Override
-    protected List<Album> doLoad(Object... params) {
-        List<Album> generated = new ArrayList<>();
-        try {
-            Cursor albumsCursor = getContext().getContentResolver().query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, null, null, null,
-                    MediaStore.Audio.Albums.DEFAULT_SORT_ORDER);
+    protected Album load(@NonNull Cursor cursor) {
+        Album album = new Album();
+        album.setContext(getContext());
+        album.setId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Albums._ID)));
+        album.setAlbumTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM)));
+        album.setAlbumArtistName(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST)));
+        album.setAlbumArtPath(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART)));
+        return album;
+    }
 
-            assert albumsCursor != null : "Cursor is null";
-            int titleColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM);
-            int idColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums._ID);
-            int artistColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST);
-            int albumArtColumn = albumsCursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART);
+    @Override
+    protected Uri getUri() {
+        return MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI;
+    }
 
-            albumsCursor.moveToFirst();
-            do {
-                Album album = new Album();
+    @Override
+    protected String getSortOrder() {
+        return MediaStore.Audio.Albums.DEFAULT_SORT_ORDER;
+    }
 
-                album.setId(albumsCursor.getLong(idColumn));
-                album.setContext(getContext());
-                album.setAlbumTitle(albumsCursor.getString(titleColumn));
-                album.setAlbumArtistName(albumsCursor.getString(artistColumn));
-                album.setAlbumArtPath(albumsCursor.getString(albumArtColumn));
-
-                generated.add(album);
-                notifyOneLoaded(album);
-            } while (albumsCursor.moveToNext());
-            albumsCursor.close();
-        } catch (IndexOutOfBoundsException e) {
-            generated = Collections.emptyList();
-        }
-        return generated;
+    @Override
+    protected ContentObserver getObserver() {
+        return new ContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+                super.onChange(selfChange);
+                update(Library.getAlbums());
+            }
+        };
     }
 }

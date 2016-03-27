@@ -17,13 +17,17 @@
 package com.animbus.music.tasks;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Playlist;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -37,37 +41,43 @@ public class PlaylistsTask extends Loader<Playlist> {
     }
 
     @Override
-    protected List<Playlist> doLoad(Object... params) {
-        List<Playlist> generated = new ArrayList<>();
-        try {
-            Cursor playlistsCursor = getContext().getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
+    protected Playlist load(@NonNull Cursor cursor) {
+        Playlist playlist = new Playlist();
+        String name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Playlists.NAME));
+        playlist.setName(name);
+        playlist.setType(TextUtils.equals(name.toLowerCase(), "favorites") ? 0 : 1);
+        playlist.setId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Playlists._ID)));
+        return playlist;
+    }
 
-            assert playlistsCursor != null : "Cursor is null";
-            int titleColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists.NAME);
-            int idColumn = playlistsCursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
+    @Override
+    protected void sort(List<Playlist> data) {
+        Collections.sort(data, new Comparator<Playlist>() {
+            @Override
+            public int compare(Playlist lhs, Playlist rhs) {
+                return ((Integer) lhs.getType()).compareTo(rhs.getType());
+            }
+        });
+    }
 
-            playlistsCursor.moveToFirst();
-            do {
-                Playlist playlist = new Playlist();
+    @Override
+    protected Uri getUri() {
+        return MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
+    }
 
-                String name = playlistsCursor.getString(titleColumn);
-                playlist.setName(name);
-                playlist.setType(TextUtils.equals(name.toLowerCase(), "favorites") ? 0 : 1);
-                playlist.setId(playlistsCursor.getLong(idColumn));
+    @Override
+    protected String getSortOrder() {
+        return MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER;
+    }
 
-                generated.add(playlist);
-                notifyOneLoaded(playlist);
-            } while (playlistsCursor.moveToNext());
-            Collections.sort(generated, new Comparator<Playlist>() {
-                @Override
-                public int compare(Playlist lhs, Playlist rhs) {
-                    return ((Integer) lhs.getType()).compareTo(rhs.getType());
-                }
-            });
-            playlistsCursor.close();
-        } catch (IndexOutOfBoundsException e) {
-            generated = Collections.emptyList();
-        }
-        return generated;
+    @Override
+    protected ContentObserver getObserver() {
+        return new ContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+                super.onChange(selfChange);
+                update(Library.getPlaylists());
+            }
+        };
     }
 }

@@ -45,15 +45,15 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="More progress">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/LoadTask.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java" />
+    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Even more progress">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/TaskLIstener.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ArtistsTask.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ArtistsTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/PlaylistsTask.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/PlaylistsTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/SongsTask.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/SongsTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,130 +94,93 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="Library.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="140" column="5" selection-start-line="140" selection-start-column="5" selection-end-line="140" selection-end-column="5" />
-              <folding>
-                <element signature="class#2602:2920" expanded="false" />
-                <element signature="method#onCompleted#0;class#2602:2920" expanded="false" />
-                <element signature="class#2959:3282" expanded="false" />
-                <element signature="class#3324:3662" expanded="false" />
-                <element signature="class#3702:4030" expanded="false" />
-                <element signature="method#isBuilt#0;class#Library#0" expanded="false" />
-                <element signature="method#registerSongListener#0;class#Library#0" expanded="false" />
-                <element signature="method#registerAlbumListener#0;class#Library#0" expanded="false" />
-                <element signature="method#registerPlaylstListener#0;class#Library#0" expanded="false" />
-                <element signature="method#registerArtistListener#0;class#Library#0" expanded="false" />
-                <element signature="method#findSongById#0;class#Library#0" expanded="false" />
-                <element signature="method#findSongByUri#0;class#Library#0" expanded="false" />
-                <element signature="method#findAlbumById#0;class#Library#0" expanded="false" />
-                <element signature="method#findPlaylistById#0;class#Library#0" expanded="false" />
-                <element signature="method#filterAlbums#0;class#Library#0" expanded="false" />
-                <element signature="e#8615#8654#0" expanded="true" />
-                <element signature="method#filterSongs#0;class#Library#0" expanded="false" />
-                <element signature="e#9164#9202#0" expanded="true" />
-                <element signature="method#filterPlaylists#0;class#Library#0" expanded="false" />
-                <element signature="e#9569#9611#0" expanded="true" />
-                <element signature="method#search#0;class#Library#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GEMApp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="60" column="26" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+              <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Loader.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Loader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43366092">
-              <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
               <folding>
+                <element signature="e#1796#1797#0" expanded="true" />
+                <element signature="e#1823#1824#0" expanded="true" />
+                <element signature="e#1862#1863#0" expanded="true" />
+                <element signature="e#1889#1890#0" expanded="true" />
+                <element signature="e#1934#1935#0" expanded="true" />
+                <element signature="e#1961#1962#0" expanded="true" />
+                <element signature="e#2000#2001#0" expanded="true" />
+                <element signature="e#2027#2028#0" expanded="true" />
                 <element signature="method#onPreExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
-                <element signature="method#doInBackground#0;class#LoadTask#0;class#Loader#0" expanded="false" />
                 <element signature="method#onProgressUpdate#0;class#LoadTask#0;class#Loader#0" expanded="false" />
                 <element signature="method#onPostExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
                 <element signature="method#run#0;class#Loader#0" expanded="false" />
-                <element signature="class#3542:4004" expanded="false" />
-                <element signature="method#onOneLoaded#0;class#3542:4004" expanded="false" />
-                <element signature="method#onCompleted#0;class#3542:4004" expanded="false" />
+                <element signature="class#5344:5806" expanded="false" />
+                <element signature="method#onOneLoaded#0;class#5344:5806" expanded="false" />
+                <element signature="method#onCompleted#0;class#5344:5806" expanded="false" />
                 <element signature="method#update#0;class#Loader#0" expanded="false" />
-                <element signature="e#5402#5403#0" expanded="true" />
-                <element signature="e#5442#5443#0" expanded="true" />
-                <element signature="e#5827#5828#0" expanded="true" />
-                <element signature="e#5868#5869#0" expanded="true" />
-                <element signature="e#5984#5985#0" expanded="true" />
-                <element signature="e#6014#6015#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AlbumsTask.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java">
+      <file leaf-file-name="ArtistsTask.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ArtistsTask.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+              <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#doLoad#0;class#AlbumsTask#0" expanded="false" />
+                <element signature="method#load#0;class#ArtistsTask#0" expanded="false" />
+                <element signature="method#getObserver#0;class#ArtistsTask#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlaylistsTask.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PlaylistsTask.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/PlaylistsTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.57002455">
+              <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#sort#0;class#PlaylistsTask#0" expanded="false" />
+                <element signature="method#getObserver#0;class#PlaylistsTask#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsyncTask.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/os/AsyncTask.java">
+      <file leaf-file-name="MainScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.659091">
-              <caret line="639" column="40" selection-start-line="639" selection-start-column="25" selection-end-line="639" selection-end-column="40" />
+            <state vertical-scroll-proportion="18.045454">
+              <caret line="138" column="30" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
               <folding>
-                <element signature="e#12204#12626#0" expanded="true" />
-                <element signature="e#12625#12626#0" expanded="true" />
+                <element signature="method#onNavigationItemSelected#0;class#MainScreen#0" expanded="false" />
+                <element signature="method#switchToArtists#0;class#MainScreen#0" expanded="false" />
+                <element signature="class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+                <element signature="method#configureRecycler#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+                <element signature="method#configureAsSongs#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+                <element signature="method#configureAsArtists#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+                <element signature="method#instantiateItem#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsyncTaskLoader.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0-sources.jar!/android/support/v4/content/AsyncTaskLoader.java">
+      <file leaf-file-name="AppCompatActivity.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.2.0/appcompat-v7-23.2.0-sources.jar!/android/support/v7/app/AppCompatActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.9545455">
-              <caret line="230" column="25" selection-start-line="230" selection-start-column="25" selection-end-line="230" selection-end-column="25" />
-              <folding>
-                <element signature="e#11102#11103#0" expanded="true" />
-                <element signature="e#11143#11144#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Loader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/Loader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.818182">
-              <caret line="408" column="59" selection-start-line="408" selection-start-column="55" selection-end-line="408" selection-end-column="59" />
+            <state vertical-scroll-proportion="-12.5">
+              <caret line="56" column="43" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -2491,7 +2454,6 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/chooseIcon/ChooseIcon.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
@@ -2506,18 +2468,19 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/LoadAlbumsTask.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/TaskLIstener.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/LibraryTempCode.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ArtistsTask.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ExecutingException.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/BaseTask.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/GEMLoader.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/LoadTask.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/SongsTask.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/PlaylistsTask.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/TaskListener.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/SongsTask.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ArtistsTask.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java" />
+        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/PlaylistsTask.java" />
       </list>
     </option>
   </component>
@@ -2658,6 +2621,84 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="music" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GEM" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="music" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mainScreen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -3169,7 +3210,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458965433125</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Even more progress">
+      <created>1459054357832</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1459054357832</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3257,7 +3304,8 @@
     <MESSAGE value="Progress on async loading" />
     <MESSAGE value="Update method for async loading" />
     <MESSAGE value="More progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="More progress" />
+    <MESSAGE value="Even more progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="Even more progress" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3267,108 +3315,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/LauncherActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3071253">
-          <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/1.0.1/jars/classes.jar!/com/afollestad/appthemeengine/customizers/ATETaskDescriptionCustomizer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19379845">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/About.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="76" selection-start-line="18" selection-start-column="76" selection-end-line="18" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1666665">
-          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/preference/PreferenceFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33292383">
-          <caret line="297" column="16" selection-start-line="297" selection-start-column="16" selection-end-line="297" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/1.0.1/jars/classes.jar!/com/afollestad/appthemeengine/Config.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.45">
-          <caret line="330" column="16" selection-start-line="330" selection-start-column="16" selection-end-line="330" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4801" column="19" selection-start-line="4801" selection-start-column="19" selection-end-line="4801" selection-end-column="19" />
-          <folding>
-            <element signature="e#205912#205913#0" expanded="false" />
-            <element signature="e#205944#205945#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/1.0.1/jars/classes.jar!/com/afollestad/appthemeengine/ATE.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.45">
-          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.afollestad/app-theme-engine/1.0.1/jars/classes.jar!/com/afollestad/appthemeengine/ATEActivity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36563307">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.5">
-          <caret line="304" column="11" selection-start-line="304" selection-start-column="11" selection-end-line="304" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/setup/SetupActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7235872">
-          <caret line="65" column="48" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3071253">
-          <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/res/xml/music_playback_widget_info.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3455,34 +3401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33292383">
-          <caret line="116" column="26" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="26" />
-          <folding>
-            <element signature="method#onNavigationItemSelected#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#switchToArtists#0;class#MainScreen#0" expanded="false" />
-            <element signature="class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureRecycler#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureAsSongs#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#configureAsArtists#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-            <element signature="method#instantiateItem#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ArtistsTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.522113">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#888#889#0" expanded="true" />
-            <element signature="e#926#927#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/util/concurrent/ExecutionException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3992629">
@@ -3514,17 +3432,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
           <folding>
-            <element signature="e#1214#1215#0" expanded="true" />
-            <element signature="e#1248#1249#0" expanded="true" />
+            <element signature="e#1214#1215#0" expanded="false" />
+            <element signature="e#1248#1249#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/ContentResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33292383">
-          <caret line="2561" column="24" selection-start-line="2561" selection-start-column="24" selection-end-line="2561" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3533,16 +3443,6 @@
         <state vertical-scroll-proportion="0.12285012">
           <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/provider/MediaStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1428" column="33" selection-start-line="1428" selection-start-column="33" selection-end-line="1428" selection-end-column="33" />
-          <folding>
-            <element signature="class#AudioColumns#0;class#Audio#0;class#MediaStore#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3635,38 +3535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0-sources.jar!/android/support/v4/content/AsyncTaskLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.9545455">
-          <caret line="230" column="25" selection-start-line="230" selection-start-column="25" selection-end-line="230" selection-end-column="25" />
-          <folding>
-            <element signature="e#11102#11103#0" expanded="true" />
-            <element signature="e#11143#11144#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/SongsTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33292383">
-          <caret line="41" column="45" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#2786#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/PlaylistsTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33292383">
@@ -3674,6 +3542,48 @@
           <folding>
             <element signature="e#11152#11153#0" expanded="true" />
             <element signature="e#11187#11188#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="class#2566:2884" expanded="false" />
+            <element signature="method#onCompleted#0;class#2566:2884" expanded="false" />
+            <element signature="class#2923:3246" expanded="false" />
+            <element signature="class#3288:3626" expanded="false" />
+            <element signature="class#3666:3994" expanded="false" />
+            <element signature="method#isBuilt#0;class#Library#0" expanded="false" />
+            <element signature="method#registerSongListener#0;class#Library#0" expanded="false" />
+            <element signature="method#registerAlbumListener#0;class#Library#0" expanded="false" />
+            <element signature="method#registerPlaylstListener#0;class#Library#0" expanded="false" />
+            <element signature="method#registerArtistListener#0;class#Library#0" expanded="false" />
+            <element signature="method#findSongById#0;class#Library#0" expanded="false" />
+            <element signature="method#findSongByUri#0;class#Library#0" expanded="false" />
+            <element signature="method#findAlbumById#0;class#Library#0" expanded="false" />
+            <element signature="method#findPlaylistById#0;class#Library#0" expanded="false" />
+            <element signature="method#filterAlbums#0;class#Library#0" expanded="false" />
+            <element signature="e#8579#8618#0" expanded="false" />
+            <element signature="method#filterSongs#0;class#Library#0" expanded="false" />
+            <element signature="e#9128#9166#0" expanded="false" />
+            <element signature="method#filterPlaylists#0;class#Library#0" expanded="false" />
+            <element signature="e#9533#9575#0" expanded="false" />
+            <element signature="method#search#0;class#Library#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0-sources.jar!/android/support/v4/content/AsyncTaskLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4318182">
+          <caret line="230" column="25" selection-start-line="230" selection-start-column="25" selection-end-line="230" selection-end-column="25" />
+          <folding>
+            <element signature="e#11102#11103#0" expanded="true" />
+            <element signature="e#11143#11144#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3689,75 +3599,235 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#doLoad#0;class#AlbumsTask#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="140" column="5" selection-start-line="140" selection-start-column="5" selection-end-line="140" selection-end-column="5" />
-          <folding>
-            <element signature="class#2602:2920" expanded="false" />
-            <element signature="method#onCompleted#0;class#2602:2920" expanded="false" />
-            <element signature="class#2959:3282" expanded="false" />
-            <element signature="class#3324:3662" expanded="false" />
-            <element signature="class#3702:4030" expanded="false" />
-            <element signature="method#isBuilt#0;class#Library#0" expanded="false" />
-            <element signature="method#registerSongListener#0;class#Library#0" expanded="false" />
-            <element signature="method#registerAlbumListener#0;class#Library#0" expanded="false" />
-            <element signature="method#registerPlaylstListener#0;class#Library#0" expanded="false" />
-            <element signature="method#registerArtistListener#0;class#Library#0" expanded="false" />
-            <element signature="method#findSongById#0;class#Library#0" expanded="false" />
-            <element signature="method#findSongByUri#0;class#Library#0" expanded="false" />
-            <element signature="method#findAlbumById#0;class#Library#0" expanded="false" />
-            <element signature="method#findPlaylistById#0;class#Library#0" expanded="false" />
-            <element signature="method#filterAlbums#0;class#Library#0" expanded="false" />
-            <element signature="e#8615#8654#0" expanded="true" />
-            <element signature="method#filterSongs#0;class#Library#0" expanded="false" />
-            <element signature="e#9164#9202#0" expanded="true" />
-            <element signature="method#filterPlaylists#0;class#Library#0" expanded="false" />
-            <element signature="e#9569#9611#0" expanded="true" />
-            <element signature="method#search#0;class#Library#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/GEMApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="26" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.2.0/appcompat-v7-23.2.0-sources.jar!/android/support/v7/app/ActionBarDrawerToggle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5405406">
+          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0-sources.jar!/android/support/v4/app/FragmentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="56" selection-start-line="79" selection-start-column="56" selection-end-line="79" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0-sources.jar!/android/support/v4/app/BaseFragmentActivityDonut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0-sources.jar!/android/support/v4/app/BaseFragmentActivityHoneycomb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27641279">
+          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36493507">
+          <caret line="4080" column="0" selection-start-line="4080" selection-start-column="0" selection-end-line="4080" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07272727">
+          <caret line="1289" column="33" selection-start-line="1289" selection-start-column="33" selection-end-line="1289" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/23.2.0/appcompat-v7-23.2.0-sources.jar!/android/support/v7/app/AppCompatActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.5">
+          <caret line="56" column="43" selection-start-line="56" selection-start-column="43" selection-end-line="56" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/util/AbstractList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3943489">
+          <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33292383">
+          <caret line="88" column="52" selection-start-line="88" selection-start-column="52" selection-end-line="88" selection-end-column="52" />
+          <folding>
+            <element signature="e#77377#77378#0" expanded="true" />
+            <element signature="e#77410#77411#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/database/Cursor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3022113">
+          <caret line="107" column="7" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/database/CursorWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33246753">
+          <caret line="70" column="29" selection-start-line="70" selection-start-column="29" selection-end-line="70" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#5899#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/database/CrossProcessCursorWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58441556">
+          <caret line="35" column="56" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/os/IInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24570024">
+          <caret line="22" column="27" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/IContentProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.87346435">
+          <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/content/ContentResolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33292383">
+          <caret line="309" column="40" selection-start-line="309" selection-start-column="40" selection-end-line="309" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+          <folding>
+            <element signature="e#1840#1841#0" expanded="true" />
+            <element signature="e#1907#1908#0" expanded="true" />
+            <element signature="e#1960#1961#0" expanded="true" />
+            <element signature="e#2025#2026#0" expanded="true" />
+            <element signature="method#getObserver#0;class#AlbumsTask#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/SongsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70638824">
+          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;class#SongsTask#0" expanded="false" />
+            <element signature="method#load#0;class#SongsTask#0" expanded="false" />
+            <element signature="method#getObserver#0;class#SongsTask#0" expanded="false" />
+            <element signature="class#2348:2569" expanded="false" />
+            <element signature="method#onChange#0;class#2348:2569" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/ArtistsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
+          <folding>
+            <element signature="method#load#0;class#ArtistsTask#0" expanded="false" />
+            <element signature="method#getObserver#0;class#ArtistsTask#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="18.045454">
+          <caret line="138" column="30" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
+          <folding>
+            <element signature="method#onNavigationItemSelected#0;class#MainScreen#0" expanded="false" />
+            <element signature="method#switchToArtists#0;class#MainScreen#0" expanded="false" />
+            <element signature="class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+            <element signature="method#configureRecycler#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+            <element signature="method#configureAsSongs#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+            <element signature="method#configureAsArtists#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+            <element signature="method#instantiateItem#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43366092">
-          <caret line="87" column="9" selection-start-line="87" selection-start-column="9" selection-end-line="87" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="150" column="13" selection-start-line="150" selection-start-column="13" selection-end-line="150" selection-end-column="13" />
           <folding>
+            <element signature="e#1796#1797#0" expanded="true" />
+            <element signature="e#1823#1824#0" expanded="true" />
+            <element signature="e#1862#1863#0" expanded="true" />
+            <element signature="e#1889#1890#0" expanded="true" />
+            <element signature="e#1934#1935#0" expanded="true" />
+            <element signature="e#1961#1962#0" expanded="true" />
+            <element signature="e#2000#2001#0" expanded="true" />
+            <element signature="e#2027#2028#0" expanded="true" />
             <element signature="method#onPreExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
-            <element signature="method#doInBackground#0;class#LoadTask#0;class#Loader#0" expanded="false" />
             <element signature="method#onProgressUpdate#0;class#LoadTask#0;class#Loader#0" expanded="false" />
             <element signature="method#onPostExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
             <element signature="method#run#0;class#Loader#0" expanded="false" />
-            <element signature="class#3542:4004" expanded="false" />
-            <element signature="method#onOneLoaded#0;class#3542:4004" expanded="false" />
-            <element signature="method#onCompleted#0;class#3542:4004" expanded="false" />
+            <element signature="class#5344:5806" expanded="false" />
+            <element signature="method#onOneLoaded#0;class#5344:5806" expanded="false" />
+            <element signature="method#onCompleted#0;class#5344:5806" expanded="false" />
             <element signature="method#update#0;class#Loader#0" expanded="false" />
-            <element signature="e#5402#5403#0" expanded="true" />
-            <element signature="e#5442#5443#0" expanded="true" />
-            <element signature="e#5827#5828#0" expanded="true" />
-            <element signature="e#5868#5869#0" expanded="true" />
-            <element signature="e#5984#5985#0" expanded="true" />
-            <element signature="e#6014#6015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/provider/MediaStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33292383">
+          <caret line="1665" column="39" selection-start-line="1665" selection-start-column="39" selection-end-line="1665" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/PlaylistsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57002455">
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#sort#0;class#PlaylistsTask#0" expanded="false" />
+            <element signature="method#getObserver#0;class#PlaylistsTask#0" expanded="false" />
           </folding>
         </state>
       </provider>

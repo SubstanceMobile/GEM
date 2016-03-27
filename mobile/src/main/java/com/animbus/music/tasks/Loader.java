@@ -18,14 +18,21 @@ package com.animbus.music.tasks;
 
 import android.content.Context;
 import android.database.ContentObserver;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A cals that needs to be extended in order to load a list of a certain type of object.
+ * @param <Return> The type to return when done loading. This type should <b>NOT</b> be a {@link List}
+ */
 public abstract class Loader<Return> {
     protected Context context;
 
@@ -35,11 +42,29 @@ public abstract class Loader<Return> {
         mObserver = getObserver();
     }
 
-    protected abstract ContentObserver getObserver();
+    protected abstract Return load(@NonNull Cursor cursor);
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Used for generating the Cursor
+    ///////////////////////////////////////////////////////////////////////////
 
     protected abstract Uri getUri();
 
-    protected abstract List<Return> doLoad(Object... params);
+    protected String[] getProjection() {
+        return null;
+    }
+
+    protected String getSelection() {
+        return null;
+    }
+
+    protected String[] getSelectionArgs() {
+        return null;
+    }
+
+    protected String getSortOrder() {
+        return null;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Underlying AsyncTask
@@ -59,9 +84,23 @@ public abstract class Loader<Return> {
         @Override
         protected List<Return> doInBackground(Object... params) {
             isExecuting = true;
+            Cursor cursor = getContext().getContentResolver().query(getUri(), getProjection(), getSelection(), getSelectionArgs(), getSortOrder());
             try {
-                return doLoad(params);
+                //If there is no data return an empty list
+                if (cursor == null || !cursor.moveToFirst()) return new ArrayList<>();
+
+                //If there is data then continue
+                List<Return> generated = new ArrayList<>();
+                do {
+                    Return obj = load(cursor);
+                    if (obj != null) {
+                        generated.add(obj);
+                        notifyOneLoaded(obj);
+                    }
+                } while (cursor.moveToNext() && !cursor.isClosed() && !isCancelled());
+                return generated;
             } finally {
+                if (cursor != null && !cursor.isClosed()) cursor.close();
                 isExecuting = false;
             }
         }
@@ -82,6 +121,7 @@ public abstract class Loader<Return> {
         @Override
         protected void onPostExecute(List<Return> result) {
             super.onPostExecute(result);
+            sort(result);
             mVerifyListener.onCompleted(result);
             registerMediaStoreListener();
             if (mUpdateQueued) update(result);
@@ -104,6 +144,15 @@ public abstract class Loader<Return> {
     }
 
     ///////////////////////////////////////////////////////////////////////////
+    // Sorting
+    ///////////////////////////////////////////////////////////////////////////
+
+    @UiThread
+    protected void sort(List<Return> data) {
+        //Do nothing
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
     // Update
     ///////////////////////////////////////////////////////////////////////////
 
@@ -123,6 +172,8 @@ public abstract class Loader<Return> {
     };
     private boolean mUpdateQueued = false;
     protected final ContentObserver mObserver;
+
+    protected abstract ContentObserver getObserver();
 
     public void update(final List<Return> currentData) {
         if (mTask != null && !mTask.isExecuting() && currentData != null) {

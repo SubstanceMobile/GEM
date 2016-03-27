@@ -135,7 +135,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     private void setUpDrawerHeader(Song song) {
         if (song != null) {
             View header = mNavigationView.getHeaderView(0);
-            if (header != null && song != null) {
+            if (header != null) {
                 song.getAlbum().requestArt((ImageView) header.findViewById(R.id.navdrawer_header_image));
                 header.findViewById(R.id.navdrawer_header_clickable).setBackground(ContextCompat.getDrawable(this, !ATEUtil.isColorLight(song.getAlbum().getBackgroundColor()) ? R.drawable.ripple_dark : R.drawable.ripple_light));
             }

@@ -17,14 +17,15 @@
 package com.animbus.music.tasks;
 
 import android.content.Context;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 
+import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Song;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Adrian on 3/25/2016.
@@ -36,39 +37,40 @@ public class SongsTask extends Loader<Song> {
     }
 
     @Override
-    protected List<Song> doLoad(Object... params) {
-        List<Song> generated = new ArrayList<>();
-        try {
-            Cursor songsCursor = getContext().getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null,
-                    MediaStore.Audio.Media.IS_MUSIC + "=1", null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+    protected Song load(@NonNull Cursor cursor) {
+        Song song = new Song();
+        song.setSongTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+        song.setSongArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+        song.setId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+        song.setAlbumID(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+        song.setSongDuration(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)));
+        song.setTrackNumber(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.TRACK)));
+        return song;
+    }
 
+    @Override
+    protected Uri getUri() {
+        return MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+    }
 
-            assert songsCursor != null : "Cursor is null";
-            int titleColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-            int idColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media._ID);
-            int albumIdColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
-            int artistColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
-            int durColumn = songsCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
-            int trackNumber = songsCursor.getColumnIndex(MediaStore.Audio.Media.TRACK);
+    @Override
+    protected String getSelection() {
+        return MediaStore.Audio.Media.IS_MUSIC + "=1";
+    }
 
-            songsCursor.moveToFirst();
-            do {
-                Song s = new Song();
+    @Override
+    protected String getSortOrder() {
+        return MediaStore.Audio.Media.DEFAULT_SORT_ORDER;
+    }
 
-                s.setSongTitle(songsCursor.getString(titleColumn));
-                s.setSongArtist(songsCursor.getString(artistColumn));
-                s.setId(songsCursor.getLong(idColumn));
-                s.setAlbumID(songsCursor.getLong(albumIdColumn));
-                s.setSongDuration(songsCursor.getLong(durColumn));
-                s.setTrackNumber(songsCursor.getLong(trackNumber));
-
-                generated.add(s);
-                notifyOneLoaded(s);
-            } while (songsCursor.moveToNext());
-            songsCursor.close();
-        } catch (IndexOutOfBoundsException e) {
-            generated = Collections.emptyList();
-        }
-        return generated;
+    @Override
+    protected ContentObserver getObserver() {
+        return new ContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+                super.onChange(selfChange);
+                update(Library.getSongs());
+            }
+        };
     }
 }

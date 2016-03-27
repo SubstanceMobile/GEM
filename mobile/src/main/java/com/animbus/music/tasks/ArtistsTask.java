@@ -17,10 +17,15 @@
 package com.animbus.music.tasks;
 
 import android.content.Context;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Handler;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 
+import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Artist;
-
-import java.util.List;
 
 /**
  * Created by Adrian on 3/25/2016.
@@ -32,8 +37,24 @@ public class ArtistsTask extends Loader<Artist> {
     }
 
     @Override
-    protected List<Artist> doLoad(Object... params) {
+    protected Artist load(@NonNull Cursor cursor) {
         //TODO
         return null;
+    }
+
+    @Override
+    protected Uri getUri() {
+        return MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI;
+    }
+
+    @Override
+    protected ContentObserver getObserver() {
+        return new ContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+                super.onChange(selfChange);
+                update(Library.getArtists());
+            }
+        };
     }
 }
