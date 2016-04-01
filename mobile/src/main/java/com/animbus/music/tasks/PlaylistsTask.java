@@ -41,7 +41,7 @@ public class PlaylistsTask extends Loader<Playlist> {
     }
 
     @Override
-    protected Playlist load(@NonNull Cursor cursor) {
+    protected Playlist buildObject(@NonNull Cursor cursor) {
         Playlist playlist = new Playlist();
         String name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Playlists.NAME));
         playlist.setName(name);

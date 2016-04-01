@@ -37,7 +37,7 @@ public class ArtistsTask extends Loader<Artist> {
     }
 
     @Override
-    protected Artist load(@NonNull Cursor cursor) {
+    protected Artist buildObject(@NonNull Cursor cursor) {
         //TODO
         return null;
     }

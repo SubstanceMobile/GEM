@@ -164,7 +164,7 @@ public class SearchActivity extends ThemeActivity {
         findViewById(R.id.recycler).setVisibility(results.isEmpty() ? View.GONE : View.VISIBLE);
         if (results.isEmpty()) return;
 
-        ListAdapter adapter = new ListAdapter(ListAdapter.TYPE_SEARCH, results, this);
+        ListAdapter adapter = new ListAdapter(ListAdapter.Type.TYPE_SEARCH, results, this);
         adapter.withTransitionActivity(this);
         RecyclerView recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setAdapter(adapter);

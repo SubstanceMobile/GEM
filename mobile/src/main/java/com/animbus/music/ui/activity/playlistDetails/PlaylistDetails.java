@@ -57,7 +57,7 @@ public class PlaylistDetails extends ThemeActivity {
     }
 
     private void configureRecycler() {
-        mRecycler.setAdapter(new ListAdapter(ListAdapter.TYPE_SONG, mPlaylist.getSongs(), this));
+        mRecycler.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_SONG, mPlaylist.getSongs(), this));
         mRecycler.setItemAnimator(new DefaultItemAnimator());
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
     }

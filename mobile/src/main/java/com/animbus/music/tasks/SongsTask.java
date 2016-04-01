@@ -37,7 +37,7 @@ public class SongsTask extends Loader<Song> {
     }
 
     @Override
-    protected Song load(@NonNull Cursor cursor) {
+    protected Song buildObject(@NonNull Cursor cursor) {
         Song song = new Song();
         song.setSongTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
         song.setSongArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));

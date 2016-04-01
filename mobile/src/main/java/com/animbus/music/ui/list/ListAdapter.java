@@ -28,15 +28,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.annotation.IntDef;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v4.view.ViewPropertyAnimatorUpdateListener;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,15 +44,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
 
-import com.animbus.music.BR;
 import com.afollestad.appthemeengine.ATE;
+import com.animbus.music.BR;
 import com.animbus.music.R;
+import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
 import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.ui.ItemAlbumDetailsList;
+import com.animbus.music.tasks.Loader;
 import com.animbus.music.ui.ItemAlbum;
+import com.animbus.music.ui.ItemAlbumDetailsList;
 import com.animbus.music.ui.ItemNowPlaying;
 import com.animbus.music.ui.ItemPlaylist;
 import com.animbus.music.ui.ItemSearch;
@@ -65,13 +65,10 @@ import com.animbus.music.ui.activity.playlistDetails.PlaylistDetails;
 import com.animbus.music.ui.activity.search.SearchResult;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
 import com.animbus.music.util.Options;
-import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -83,23 +80,81 @@ import static com.animbus.music.media.objects.Album.SUBTITLE_COLOR;
 import static com.animbus.music.media.objects.Album.TITLE_COLOR;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
-    public static final int TYPE_SONG = 0, TYPE_ALBUM = 1, TYPE_PLAYLIST = 2, TYPE_GENRE = 3, TYPE_ARTIST = 4, TYPE_SEARCH = 5;
-    public static final int TYPE_ALBUM_DETAILS = -1, TYPE_NOW_PLAYING = -2;
-    List data;
-    int type;
+    List data = new ArrayList();
+    Type type;
     LayoutInflater inflater;
     Context context;
 
-    @IntDef({TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_GENRE, TYPE_ARTIST, TYPE_ALBUM_DETAILS, TYPE_NOW_PLAYING, TYPE_SEARCH})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
+    public enum Type {
+        TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_ARTIST, TYPE_ALBUM_DETAILS, TYPE_NOW_PLAYING, TYPE_SEARCH, UNDEFINED
     }
 
-    public ListAdapter(@Type int type, List data, Context cxt) {
+    public ListAdapter(Type type, List data, Context cxt) {
         this.type = type;
         this.data = data;
+        this.context = cxt.getApplicationContext();
+        this.inflater = LayoutInflater.from(cxt);
+    }
+
+    public ListAdapter(Type type, Context cxt) {
+        this.type = type;
         this.context = cxt;
         this.inflater = LayoutInflater.from(cxt);
+
+        switch (type) {
+            case TYPE_SONG:
+                Library.registerSongListener(new Loader.TaskListener<Song>() {
+                    @Override
+                    public void onOneLoaded(Song item) {
+
+                    }
+
+                    @Override
+                    public void onCompleted(List<Song> result) {
+                        ListAdapter.this.data = result;
+                        notifyDataSetChanged();
+                    }
+                });
+            case TYPE_ALBUM:
+                Library.registerAlbumListener(new Loader.TaskListener<Album>() {
+                    @Override
+                    public void onOneLoaded(Album item) {
+
+                    }
+
+                    @Override
+                    public void onCompleted(List<Album> result) {
+                        ListAdapter.this.data = result;
+                        notifyDataSetChanged();
+                    }
+                });
+            case TYPE_PLAYLIST:
+                Library.registerPlaylstListener(new Loader.TaskListener<Playlist>() {
+                    @Override
+                    public void onOneLoaded(Playlist item) {
+
+                    }
+
+                    @Override
+                    public void onCompleted(List<Playlist> result) {
+                        ListAdapter.this.data = result;
+                        notifyDataSetChanged();
+                    }
+                });
+            case TYPE_ARTIST:
+                Library.registerArtistListener(new Loader.TaskListener<Artist>() {
+                    @Override
+                    public void onOneLoaded(Artist item) {
+
+                    }
+
+                    @Override
+                    public void onCompleted(List<Artist> result) {
+                        ListAdapter.this.data = result;
+                        notifyDataSetChanged();
+                    }
+                });
+        }
     }
 
     @Override
@@ -579,14 +634,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         @Override
         protected void configure(SearchResult object) {
             binding.getRoot().setClickable(false);
-            @Type int type = -999;
-            if (object.results.get(0) instanceof Album) type = TYPE_ALBUM;
-            else if (object.results.get(0) instanceof Song) type = TYPE_SONG;
-            else if (object.results.get(0) instanceof Playlist) type = TYPE_PLAYLIST;
+            Type type = Type.UNDEFINED;
+            if (object.results.get(0) instanceof Album) type = Type.TYPE_ALBUM;
+            else if (object.results.get(0) instanceof Song) type = Type.TYPE_SONG;
+            else if (object.results.get(0) instanceof Playlist) type = Type.TYPE_PLAYLIST;
             ListAdapter adapter = new ListAdapter(type, object.results, context);
             adapter.withTransitionActivity(transitionActivity);
             binding.recycler.setAdapter(adapter);
-            if (type != TYPE_ALBUM) {
+            if (type != Type.TYPE_ALBUM) {
                 binding.recycler.setLayoutManager(new CustomLinearLayoutManager(context));
                 binding.recycler.setLayoutFrozen(true);
                 binding.recycler.setHasFixedSize(false);

@@ -62,9 +62,10 @@ public class Album {
         if (albumSongs != null) return albumSongs;
         else {
             for (long id : songIDs) {
-                albumSongs.add();
+                //albumSongs.add();
             }
         }
+        return null;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

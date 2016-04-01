@@ -56,18 +56,9 @@ public class Library {
         mAlbumsTask = new AlbumsTask(context);
         mPlaylistsTask = new PlaylistsTask(context);
         mArtistsTask = new ArtistsTask(context);
-    }
 
-    public static void setContext(Context cxt) {
-        context = cxt;
-    }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Builds the media library
-    ///////////////////////////////////////////////////////////////////////////
-
-    public static void build() {
-        //Adds all non-UI listeners
+        //Adds all non-UI listeners to tasks
         mSongsTask.addListener(new Loader.TaskListener<Song>() {
             @Override
             public void onOneLoaded(Song item) {
@@ -116,8 +107,17 @@ public class Library {
                 mArtists = result;
             }
         });
+    }
 
-        //Runs all of the tasks
+    public static void setContext(Context cxt) {
+        context = cxt;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Builds the media library
+    ///////////////////////////////////////////////////////////////////////////
+
+    public static void build() {
         mSongsTask.run();
         mAlbumsTask.run();
         mPlaylistsTask.run();
@@ -125,6 +125,14 @@ public class Library {
     }
 
     private static void updateLinks() {
+        for (Song s : getSongs()) {
+            Album a = findAlbumById(s.getAlbumID());
+            if (a != null) {
+                //Link 'em
+
+            }
+        }
+
         //TODO
     }
 
@@ -132,11 +140,18 @@ public class Library {
     // Update Listener from MediaStore
     ///////////////////////////////////////////////////////////////////////////
 
-    private static void registerMediaStoreListeners() {
+    public static void registerMediaStoreListeners() {
         mSongsTask.registerMediaStoreListener();
         mAlbumsTask.registerMediaStoreListener();
         mPlaylistsTask.registerMediaStoreListener();
         mArtistsTask.registerMediaStoreListener();
+    }
+
+    public static void unregisterMediaStoreListeners() {
+        mSongsTask.unregisterMediaStoreListener();
+        mAlbumsTask.unregisterMediaStoreListener();
+        mPlaylistsTask.unregisterMediaStoreListener();
+        mArtistsTask.unregisterMediaStoreListener();
     }
 
     ///////////////////////////////////////////////////////////////////////////

@@ -130,6 +130,13 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     protected void onResume() {
         super.onResume();
         setUpDrawerHeader(PlaybackRemote.getCurrentSong());
+        Library.registerMediaStoreListeners();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Library.unregisterMediaStoreListeners();
     }
 
     private void setUpDrawerHeader(Song song) {
@@ -474,13 +481,13 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsSongs(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.TYPE_SONG, Library.getSongs(), MainScreen.this));
+            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_SONG, MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         private void configureAsAlbums(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.TYPE_ALBUM, Library.getAlbums(), MainScreen.this).withTransitionActivity(MainScreen.this));
+            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_ALBUM, MainScreen.this).withTransitionActivity(MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
             if (MainScreen.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
                 list.setLayoutManager(new GridLayoutManager(MainScreen.this, 2, GridLayoutManager.VERTICAL, false));
@@ -489,13 +496,13 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsArtists(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.TYPE_ARTIST, Library.getArtists(), MainScreen.this));
+            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_ARTIST, MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         private void configureAsPlaylists(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.TYPE_PLAYLIST, Library.getPlaylists(), MainScreen.this).withTransitionActivity(MainScreen.this));
+            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_PLAYLIST, MainScreen.this).withTransitionActivity(MainScreen.this));
             list.setItemAnimator(new DefaultItemAnimator());
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }

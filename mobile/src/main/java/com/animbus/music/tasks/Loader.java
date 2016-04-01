@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A cals that needs to be extended in order to load a list of a certain type of object.
+ * A class that needs to be extended in order to load a list of a certain type of object.
  * @param <Return> The type to return when done loading. This type should <b>NOT</b> be a {@link List}
  */
 public abstract class Loader<Return> {
@@ -42,7 +43,8 @@ public abstract class Loader<Return> {
         mObserver = getObserver();
     }
 
-    protected abstract Return load(@NonNull Cursor cursor);
+    @WorkerThread
+    protected abstract Return buildObject(@NonNull Cursor cursor);
 
     ///////////////////////////////////////////////////////////////////////////
     // Used for generating the Cursor
@@ -78,7 +80,7 @@ public abstract class Loader<Return> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            unregisterMediaStoreListener();
+            unregisterMediaStoreListenerTemporarily();
         }
 
         @Override
@@ -92,7 +94,7 @@ public abstract class Loader<Return> {
                 //If there is data then continue
                 List<Return> generated = new ArrayList<>();
                 do {
-                    Return obj = load(cursor);
+                    Return obj = buildObject(cursor);
                     if (obj != null) {
                         generated.add(obj);
                         notifyOneLoaded(obj);
@@ -123,7 +125,7 @@ public abstract class Loader<Return> {
             super.onPostExecute(result);
             sort(result);
             mVerifyListener.onCompleted(result);
-            registerMediaStoreListener();
+            if (!mObserverLock) registerMediaStoreListener();
             if (mUpdateQueued) update(result);
         }
 
@@ -138,8 +140,9 @@ public abstract class Loader<Return> {
 
     protected Object[] runParams;
 
+    @UiThread
     public void run() {
-        if (mTask.getStatus() == AsyncTask.Status.FINISHED) mTask = new LoadTask();
+        if (mTask == null || mTask.getStatus() == AsyncTask.Status.FINISHED) mTask = new LoadTask();
         mTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, runParams);
     }
 
@@ -172,9 +175,19 @@ public abstract class Loader<Return> {
     };
     private boolean mUpdateQueued = false;
     protected final ContentObserver mObserver;
+    private boolean mObserverLock = false;
 
-    protected abstract ContentObserver getObserver();
+    /**
+     * Make a content observer to be registered/unregistered. Do <b>NOT</b> pass variables. Whatever is returned here will be set in a final variable and accessed from there
+     * @return The content observer
+     */
+    @Nullable
+    @UiThread
+    protected ContentObserver getObserver() {
+        return null;
+    }
 
+    @UiThread
     public void update(final List<Return> currentData) {
         if (mTask != null && !mTask.isExecuting() && currentData != null) {
             mUpdateQueued = false;
@@ -186,12 +199,37 @@ public abstract class Loader<Return> {
         }
     }
 
+    /**
+     * Registers a {@link ContentObserver} and removes any previous calls to {@link #unregisterMediaStoreListener()}
+     */
+    @UiThread
     public void registerMediaStoreListener() {
-        getContext().getContentResolver().registerContentObserver(getUri(), true, mObserver);
+        if (mObserver != null) {
+            getContext().getContentResolver().registerContentObserver(getUri(), true, mObserver);
+            mObserverLock = false;
+        }
     }
 
+
+    /**
+     * Unregisters a content observer until the async task will register it again when it completes.
+     */
+    @UiThread
+    protected void unregisterMediaStoreListenerTemporarily() {
+        if (mObserver != null) {
+            getContext().getContentResolver().unregisterContentObserver(mObserver);
+        }
+    }
+
+    /**
+     * Same as {@link #unregisterMediaStoreListenerTemporarily()} except it also makes sure the async task doesn't ever register the listener again until {@link #registerMediaStoreListener()} is called from an outside source
+     */
+    @UiThread
     public void unregisterMediaStoreListener() {
-        getContext().getContentResolver().unregisterContentObserver(mObserver);
+        if (mObserver != null) {
+            unregisterMediaStoreListenerTemporarily();
+            mObserverLock = true;
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -210,6 +248,7 @@ public abstract class Loader<Return> {
 
     protected List<TaskListener<Return>> mListeners = new ArrayList<>();
 
+    @UiThread
     public void addListener(TaskListener<Return> listener) {
         mListeners.add(listener);
     }

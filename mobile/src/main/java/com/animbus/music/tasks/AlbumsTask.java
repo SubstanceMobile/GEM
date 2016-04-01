@@ -34,7 +34,7 @@ public class AlbumsTask extends Loader<Album> {
     }
 
     @Override
-    protected Album load(@NonNull Cursor cursor) {
+    protected Album buildObject(@NonNull Cursor cursor) {
         Album album = new Album();
         album.setContext(getContext());
         album.setId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Albums._ID)));
