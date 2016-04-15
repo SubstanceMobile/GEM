@@ -18,11 +18,17 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'GEM'
-            keyPassword 'AnimbusDev'
+        release {
             storeFile file('C:/Users/Adrian/Documents/Developer/ApkSigning.jks')
             storePassword 'AnimbusDev'
+            keyAlias 'GEM'
+            keyPassword 'AnimbusDev'
+        }
+        debug {
+            storeFile file('keystore.jks')
+            storePassword 'GEMPlayer'
+            keyAlias 'debug'
+            keyPassword 'GEMPlayerDebug'
         }
     }
 
@@ -33,26 +39,26 @@ android {
         targetSdkVersion 23
         versionName '0.3.0'
         versionCode 16
-        signingConfig signingConfigs.config
+        signingConfig signingConfigs.release
         minSdkVersion 17
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            signingConfig signingConfigs.release
+            proguardFile 'proguard-rules.pro'
             minifyEnabled false
         }
         internal {
-            signingConfig signingConfigs.config
-            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            proguardFile 'proguard-rules.pro'
             minifyEnabled false
             versionNameSuffix ' Internal'
         }
         debug {
-            signingConfig signingConfigs.config
-            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            proguardFile 'proguard-rules.pro'
             versionNameSuffix ' Debug'
         }
     }
