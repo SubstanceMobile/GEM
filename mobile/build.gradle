@@ -41,18 +41,18 @@ android {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
-            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            proguardFile 'proguard-rules.pro'
             minifyEnabled false
         }
         internal {
             signingConfig signingConfigs.config
-            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            proguardFile 'proguard-rules.pro'
             minifyEnabled false
             versionNameSuffix ' Internal'
         }
         debug {
             signingConfig signingConfigs.config
-            proguardFile 'C:/Users/Adrian/StudioProjects/GEM/mobile/proguard-rules.pro'
+            minifyEnabled false
             versionNameSuffix ' Debug'
         }
     }
