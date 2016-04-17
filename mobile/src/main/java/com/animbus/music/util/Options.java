@@ -35,20 +35,16 @@ import static android.content.Intent.ACTION_MAIN;
 public class Options {
     private static volatile Context context;
     private static volatile SharedPreferences prefs;
-    private static final String TAG = "Options";
 
     //Keys
     private static final String base = "com.animbus.music";
     private static final String
-            KEY_FIRST_RUN = base + ".FIRST_RUN",
             KEY_ICON = base + ".ICON",
             KEY_TABS_MODE = "tab_mode",
             KEY_CATEGORY_NAMES = "screen_name",
             KEY_PALETTE = "use_palette",
             KEY_BIG_GRID_SPACE = "big_grid_space",
             KEY_LIGHT_THEME = base + ".theme.IS_LIGHT";
-
-    private static volatile long updatedAt;
 
     private Options() {
 
@@ -118,18 +114,6 @@ public class Options {
     // All of the settings
     ///////////////////////////////////////////////////////////////////////////
 
-    ///////////////
-    // First Run //
-    ///////////////
-
-    public static boolean isFirstRun() {
-        return prefs.getBoolean(KEY_FIRST_RUN, true);
-    }
-
-    public static void tripFirstRunIfNeeded() {
-        if (isFirstRun()) prefs.edit().putBoolean(KEY_FIRST_RUN, false).apply();
-    }
-
     //////////
     // Icon //
     //////////
@@ -190,10 +174,6 @@ public class Options {
     // Category Names //
     ////////////////////
 
-    public static void setUseCategoryNames(boolean useCategoryNames) {
-        set(KEY_CATEGORY_NAMES, useCategoryNames);
-    }
-
     public static boolean usingCategoryNames() {
         return getBool(KEY_CATEGORY_NAMES);
     }
@@ -202,10 +182,6 @@ public class Options {
     /////////////////
     // Use Palette //
     /////////////////
-
-    /*public static void setUsePalette(boolean usePalette) {
-        set(KEY_PALETTE, usePalette);
-    }*/
 
     public static boolean usingPalette() {
         return getBool(KEY_PALETTE);
@@ -221,6 +197,7 @@ public class Options {
 
     ///////////////////////////////////////////////////////////////////////////
     // Temporary
+    // TODO: Remove
     ///////////////////////////////////////////////////////////////////////////
 
     public static boolean useStableService() {

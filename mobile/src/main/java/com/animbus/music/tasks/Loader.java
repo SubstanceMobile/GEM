@@ -27,6 +27,8 @@ import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
+import com.animbus.music.media.objects.MediaObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ import java.util.List;
  * A class that needs to be extended in order to load a list of a certain type of object.
  * @param <Return> The type to return when done loading. This type should <b>NOT</b> be a {@link List}
  */
-public abstract class Loader<Return> {
+public abstract class Loader<Return extends MediaObject> {
     protected Context context;
 
     public Loader(Context context, Object... params) {
@@ -44,6 +46,7 @@ public abstract class Loader<Return> {
     }
 
     @WorkerThread
+    @Nullable
     protected abstract Return buildObject(@NonNull Cursor cursor);
 
     ///////////////////////////////////////////////////////////////////////////
@@ -96,6 +99,9 @@ public abstract class Loader<Return> {
                 do {
                     Return obj = buildObject(cursor);
                     if (obj != null) {
+                        obj.setPosInList(cursor.getPosition())
+                                .setContext(getContext())
+                                .lock();
                         generated.add(obj);
                         notifyOneLoaded(obj);
                     }
@@ -117,7 +123,7 @@ public abstract class Loader<Return> {
         @Override
         protected final void onProgressUpdate(Return... values) {
             super.onProgressUpdate(values);
-            for (Return val : values) mVerifyListener.onOneLoaded(val);
+            for (Return val : values) mVerifyListener.onOneLoaded(val, val.getPosInList());
         }
 
         @Override
@@ -163,8 +169,8 @@ public abstract class Loader<Return> {
     private List<Return> currentData = new ArrayList<>();
     private TaskListener<Return> mVerifyListener = new TaskListener<Return>() {
         @Override
-        public void onOneLoaded(Return item) {
-            if (!currentData.contains(item)) for (TaskListener<Return> listener : mListeners) listener.onOneLoaded(item);
+        public void onOneLoaded(Return item, int pos) {
+            if (!currentData.contains(item)) for (TaskListener<Return> listener : mListeners) listener.onOneLoaded(item, pos);
         }
 
         @Override
@@ -241,7 +247,7 @@ public abstract class Loader<Return> {
      * @param <Return> What type of variable should be passed to the listener. When extending {@link Loader}, you will specify what this should be
      */
     public interface TaskListener<Return> {
-        void onOneLoaded(Return item);
+        void onOneLoaded(Return item, int pos);
 
         void onCompleted(List<Return> result);
     }

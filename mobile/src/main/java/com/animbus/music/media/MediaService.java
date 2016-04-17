@@ -16,66 +16,66 @@
 
 package com.animbus.music.media;
 
-        import android.app.Notification;
-        import android.app.PendingIntent;
-        import android.app.Service;
-        import android.content.BroadcastReceiver;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.content.IntentFilter;
-        import android.graphics.Bitmap;
-        import android.media.AudioManager;
-        import android.media.MediaPlayer;
-        import android.net.Uri;
-        import android.os.Bundle;
-        import android.os.IBinder;
-        import android.os.PowerManager;
-        import android.support.annotation.Nullable;
-        import android.support.v4.app.NotificationManagerCompat;
-        import android.support.v4.media.session.MediaButtonReceiver;
-        import android.support.v4.media.session.MediaSessionCompat;
-        import android.support.v4.media.session.PlaybackStateCompat;
-        import android.support.v7.app.NotificationCompat;
-        import android.util.Log;
-        import android.widget.Toast;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.PowerManager;
+import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.media.session.MediaButtonReceiver;
+import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.v7.app.NotificationCompat;
+import android.util.Log;
+import android.widget.Toast;
 
-        import com.animbus.music.R;
-        import com.animbus.music.media.objects.Album;
-        import com.animbus.music.media.objects.Song;
-        import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
+import com.animbus.music.R;
+import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.Song;
+import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-        import static android.content.Intent.ACTION_MEDIA_BUTTON;
-        import static android.media.AudioManager.AUDIOFOCUS_GAIN;
-        import static android.media.AudioManager.AUDIOFOCUS_LOSS;
-        import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
-        import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
-        import static android.media.AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
-        import static android.media.AudioManager.STREAM_MUSIC;
-        import static android.support.v4.app.NotificationCompat.CATEGORY_TRANSPORT;
-        import static android.support.v4.app.NotificationCompat.PRIORITY_MAX;
-        import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
-        import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS;
-        import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS;
-        import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PAUSE;
-        import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PLAY;
-        import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID;
-        import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SEEK_TO;
-        import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_TO_NEXT;
-        import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS;
-        import static android.support.v4.media.session.PlaybackStateCompat.ACTION_STOP;
-        import static android.support.v4.media.session.PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_BUFFERING;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_FAST_FORWARDING;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_NONE;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_PAUSED;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_PLAYING;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_REWINDING;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_SKIPPING_TO_NEXT;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_SKIPPING_TO_PREVIOUS;
-        import static android.support.v4.media.session.PlaybackStateCompat.STATE_STOPPED;
+import static android.content.Intent.ACTION_MEDIA_BUTTON;
+import static android.media.AudioManager.AUDIOFOCUS_GAIN;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
+import static android.media.AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
+import static android.media.AudioManager.STREAM_MUSIC;
+import static android.support.v4.app.NotificationCompat.CATEGORY_TRANSPORT;
+import static android.support.v4.app.NotificationCompat.PRIORITY_MAX;
+import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
+import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS;
+import static android.support.v4.media.session.MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS;
+import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PAUSE;
+import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PLAY;
+import static android.support.v4.media.session.PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID;
+import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SEEK_TO;
+import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_TO_NEXT;
+import static android.support.v4.media.session.PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS;
+import static android.support.v4.media.session.PlaybackStateCompat.ACTION_STOP;
+import static android.support.v4.media.session.PlaybackStateCompat.PLAYBACK_POSITION_UNKNOWN;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_BUFFERING;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_FAST_FORWARDING;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_NONE;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_PAUSED;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_PLAYING;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_REWINDING;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_SKIPPING_TO_NEXT;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_SKIPPING_TO_PREVIOUS;
+import static android.support.v4.media.session.PlaybackStateCompat.STATE_STOPPED;
 
 /**
  * Created by Adrian on 11/21/2015.
@@ -298,7 +298,7 @@ public class MediaService extends Service {
 
         @Override
         public void play(Song song) {
-            Log.d(TAG, "play(Song) called. Song = " + song.getId());
+            Log.d(TAG, "play(Song) called. Song = " + song.getID());
             play(song.getSongURI(), false);
             PlaybackRemote.updateSongListeners(song);
         }
@@ -632,9 +632,9 @@ public class MediaService extends Service {
             mBuilder = new NotificationCompat.Builder(mService);
 
             mBuilder
-                    .setContentTitle(song.getSongTitle())
+                    .setContentTitle(song.getTitle())
                     .setContentText(song.getSongArtist())
-                    .setSubText(song.getAlbum().getAlbumTitle())
+                    .setSubText(song.getAlbum().getTitle())
                     .setStyle(
                             new NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2)
                                     .setMediaSession(mService.mSession.getSessionToken()).setShowCancelButton(true).setCancelButtonIntent(stopServiceIntent))

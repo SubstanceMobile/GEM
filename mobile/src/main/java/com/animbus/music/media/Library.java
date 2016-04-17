@@ -27,7 +27,7 @@ import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.tasks.AlbumsTask;
 import com.animbus.music.tasks.ArtistsTask;
-import com.animbus.music.tasks.Loader;
+import com.animbus.music.tasks.Loader.TaskListener;
 import com.animbus.music.tasks.PlaylistsTask;
 import com.animbus.music.tasks.SongsTask;
 import com.animbus.music.ui.activity.search.SearchResult;
@@ -59,51 +59,47 @@ public class Library {
 
 
         //Adds all non-UI listeners to tasks
-        mSongsTask.addListener(new Loader.TaskListener<Song>() {
+        mSongsTask.addListener(new TaskListener<Song>() {
             @Override
-            public void onOneLoaded(Song item) {
+            public void onOneLoaded(Song item, int pos) {
                 updateLinks();
             }
 
             @Override
             public void onCompleted(List<Song> result) {
-                mSongsBuilt = true;
                 mSongs = result;
             }
         });
-        mAlbumsTask.addListener(new Loader.TaskListener<Album>() {
+        mAlbumsTask.addListener(new TaskListener<Album>() {
             @Override
-            public void onOneLoaded(Album item) {
+            public void onOneLoaded(Album item, int pos) {
                 updateLinks();
             }
 
             @Override
             public void onCompleted(List<Album> result) {
-                mAlbumsBuilt = true;
                 mAlbums = result;
             }
         });
-        mPlaylistsTask.addListener(new Loader.TaskListener<Playlist>() {
+        mPlaylistsTask.addListener(new TaskListener<Playlist>() {
             @Override
-            public void onOneLoaded(Playlist item) {
+            public void onOneLoaded(Playlist item, int pos) {
                 updateLinks();
             }
 
             @Override
             public void onCompleted(List<Playlist> result) {
-                mPlaylistsBuilt = true;
                 mPlaylists = result;
             }
         });
-        mArtistsTask.addListener(new Loader.TaskListener<Artist>() {
+        mArtistsTask.addListener(new TaskListener<Artist>() {
             @Override
-            public void onOneLoaded(Artist item) {
+            public void onOneLoaded(Artist item, int pos) {
                 updateLinks();
             }
 
             @Override
             public void onCompleted(List<Artist> result) {
-                mArtistsBuilt = true;
                 mArtists = result;
             }
         });
@@ -117,7 +113,20 @@ public class Library {
     // Builds the media library
     ///////////////////////////////////////////////////////////////////////////
 
+    @SuppressWarnings("all")
     public static void build() {
+        if (LibraryLegacy.use()) {
+            LibraryLegacy.build(new LibraryLegacy.Data() {
+                @Override
+                public void done(List<Song> songs, List<Album> albums, List<Playlist> playlists) {
+                    mSongs = songs;
+                    mAlbums = albums;
+                    mPlaylists = playlists;
+                    mArtists = new ArrayList<>();
+                }
+            }, context);
+            return;
+        }
         mSongsTask.run();
         mAlbumsTask.run();
         mPlaylistsTask.run();
@@ -125,14 +134,6 @@ public class Library {
     }
 
     private static void updateLinks() {
-        for (Song s : getSongs()) {
-            Album a = findAlbumById(s.getAlbumID());
-            if (a != null) {
-                //Link 'em
-
-            }
-        }
-
         //TODO
     }
 
@@ -155,52 +156,22 @@ public class Library {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // The isBuilt variable
-    ///////////////////////////////////////////////////////////////////////////
-
-    private static volatile boolean
-            mAlbumsBuilt = false,
-            mSongsBuilt = false,
-            mArtistsBuilt = false,
-            mPlaylistsBuilt = false;
-
-    public static boolean isBuilt() {
-        return areSongsBuilt() && areAlbumsBuilt() && arePlaylistsBuilt() && areArtistsBuilt();
-    }
-
-    public static boolean areSongsBuilt() {
-        return mSongsBuilt;
-    }
-
-    public static boolean areAlbumsBuilt() {
-        return mAlbumsBuilt;
-    }
-
-    public static boolean arePlaylistsBuilt() {
-        return mPlaylistsBuilt;
-    }
-
-    public static boolean areArtistsBuilt() {
-        return mArtistsBuilt;
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
     // Helper methods for adding listeners to tasks
     ///////////////////////////////////////////////////////////////////////////
 
-    public static void registerSongListener(Loader.TaskListener<Song> songListener) {
+    public static void registerSongListener(TaskListener<Song> songListener) {
         mSongsTask.addListener(songListener);
     }
 
-    public static void registerAlbumListener(Loader.TaskListener<Album> albumListener) {
+    public static void registerAlbumListener(TaskListener<Album> albumListener) {
         mAlbumsTask.addListener(albumListener);
     }
 
-    public static void registerPlaylstListener(Loader.TaskListener<Playlist> playlistListener) {
+    public static void registerPlaylstListener(TaskListener<Playlist> playlistListener) {
         mPlaylistsTask.addListener(playlistListener);
     }
 
-    public static void registerArtistListener(Loader.TaskListener<Artist> artistListener) {
+    public static void registerArtistListener(TaskListener<Artist> artistListener) {
         mArtistsTask.addListener(artistListener);
     }
 
@@ -236,19 +207,19 @@ public class Library {
 
     @Nullable
     public static Song findSongById(long id) {
-        for (Song song : getSongs()) if (song.getId() == id) return song;
+        for (Song song : getSongs()) if (song.getID() == id) return song;
         return null;
     }
 
     @Nullable
     public static Song findSongByUri(Uri uri) {
-        for (Song song : getSongs()) if (song.getSongURI() == uri) return song;
+        for (Song song : getSongs()) if (song.getUri() == uri) return song;
         return null;
     }
 
     @Nullable
     public static Album findAlbumById(long id) {
-        for (Album album : getAlbums()) if (album.getId() == id) return album;
+        for (Album album : getAlbums()) if (album.getID() == id) return album;
         return null;
     }
 
@@ -265,7 +236,7 @@ public class Library {
     public static SearchResult filterAlbums(String query) {
         List<Album> results = new ArrayList<>();
         for (Album a : getAlbums()) {
-            if (a.getAlbumTitle().toLowerCase().contains(query.toLowerCase())) {
+            if (a.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 if (!results.contains(a)) results.add(a);
             }
 
@@ -279,7 +250,7 @@ public class Library {
     public static SearchResult filterSongs(String query) {
         List<Song> results = new ArrayList<>();
         for (Song s : getSongs()) {
-            if (s.getSongTitle().toLowerCase().contains(query.toLowerCase())) {
+            if (s.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 if (!results.contains(s)) results.add(s);
             }
 

@@ -17,11 +17,11 @@
 package com.animbus.music.util;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.util.TypedValue;
 
 public class GEMUtil {
 
@@ -62,5 +62,13 @@ public class GEMUtil {
 
     public static boolean isMarshmallow() {
         return Build.VERSION.SDK_INT >= 23;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Unit conversions
+    ///////////////////////////////////////////////////////////////////////////
+
+    public static float dpToPx(Context context, float dp) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
     }
 }

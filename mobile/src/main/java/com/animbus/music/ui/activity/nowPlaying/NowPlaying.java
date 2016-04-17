@@ -107,7 +107,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     }
 
     private void configureRecyclerView() {
-        mList.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_NOW_PLAYING, PlaybackRemote.getQueue(), this));
+        mList.setAdapter(new ListAdapter<>(ListAdapter.Type.TYPE_NOW_PLAYING, PlaybackRemote.getQueue(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
         mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mList.setNestedScrollingEnabled(true);
@@ -130,14 +130,14 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
         configureRepeatIcon(mSong);
         configureUIColors();
 
-        ((TextView) findViewById(R.id.current_song_title)).setText(mSong.getSongTitle());
+        ((TextView) findViewById(R.id.current_song_title)).setText(mSong.getTitle());
         ((TextView) findViewById(R.id.current_song_artist)).setText(mSong.getSongArtist());
 
         //Sets Window description in Multitasking menu
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             IconManager iconM = IconManager.get().setContext(this);
             Bitmap bm = BitmapFactory.decodeResource(getResources(), iconM.getDrawable(iconM.getOverviewIcon(iconM.getIcon(), mSong.getAlbum().getAccentColor()).getId()));
-            setTaskDescription(new ActivityManager.TaskDescription(mSong.getSongTitle(), bm, mSong.getAlbum().getAccentColor()));
+            setTaskDescription(new ActivityManager.TaskDescription(mSong.getTitle(), bm, mSong.getAlbum().getAccentColor()));
             bm.recycle();
         }
     }

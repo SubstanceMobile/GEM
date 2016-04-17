@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Playlist;
@@ -47,6 +48,7 @@ public class PlaylistsTask extends Loader<Playlist> {
         playlist.setName(name);
         playlist.setType(TextUtils.equals(name.toLowerCase(), "favorites") ? 0 : 1);
         playlist.setId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Playlists._ID)));
+        Log.i("PlaylistsTask", "Loaded ID " + playlist.getId());
         return playlist;
     }
 

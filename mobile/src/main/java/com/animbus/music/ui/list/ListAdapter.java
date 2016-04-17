@@ -20,20 +20,20 @@ import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.AsyncTask;
+import android.graphics.Rect;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +42,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout.LayoutParams;
 
 import com.afollestad.appthemeengine.ATE;
 import com.animbus.music.BR;
@@ -53,7 +52,7 @@ import com.animbus.music.media.objects.Album;
 import com.animbus.music.media.objects.Artist;
 import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
-import com.animbus.music.tasks.Loader;
+import com.animbus.music.tasks.Loader.TaskListener;
 import com.animbus.music.ui.ItemAlbum;
 import com.animbus.music.ui.ItemAlbumDetailsList;
 import com.animbus.music.ui.ItemNowPlaying;
@@ -64,10 +63,8 @@ import com.animbus.music.ui.activity.albumDetails.AlbumDetails;
 import com.animbus.music.ui.activity.playlistDetails.PlaylistDetails;
 import com.animbus.music.ui.activity.search.SearchResult;
 import com.animbus.music.ui.custom.activity.ThemeActivity;
+import com.animbus.music.util.GEMUtil;
 import com.animbus.music.util.Options;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,8 +76,8 @@ import static com.animbus.music.media.objects.Album.FRAME_COLOR;
 import static com.animbus.music.media.objects.Album.SUBTITLE_COLOR;
 import static com.animbus.music.media.objects.Album.TITLE_COLOR;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
-    List data = new ArrayList();
+public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
+    List<TYPE> data = new ArrayList<>();
     Type type;
     LayoutInflater inflater;
     Context context;
@@ -89,71 +86,46 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_ARTIST, TYPE_ALBUM_DETAILS, TYPE_NOW_PLAYING, TYPE_SEARCH, UNDEFINED
     }
 
-    public ListAdapter(Type type, List data, Context cxt) {
+    public ListAdapter(Type type, List<TYPE> data, Context cxt) {
         this.type = type;
         this.data = data;
         this.context = cxt.getApplicationContext();
         this.inflater = LayoutInflater.from(cxt);
     }
 
+    @SuppressWarnings("unchecked")
     public ListAdapter(Type type, Context cxt) {
         this.type = type;
         this.context = cxt;
         this.inflater = LayoutInflater.from(cxt);
 
+        //Listens for data changes
+        TaskListener<TYPE> listener = new TaskListener<TYPE>() {
+            @Override
+            public void onOneLoaded(TYPE item, int pos) {
+                if (!data.contains(item)) {
+                    data.add(item);
+                    notifyItemInserted(pos);
+                }
+            }
+
+            @Override
+            public void onCompleted(List<TYPE> result) {
+                if (!data.equals(result)) {
+                    data = result;
+                    notifyDataSetChanged();
+                }
+            }
+        };
         switch (type) {
             case TYPE_SONG:
-                Library.registerSongListener(new Loader.TaskListener<Song>() {
-                    @Override
-                    public void onOneLoaded(Song item) {
-
-                    }
-
-                    @Override
-                    public void onCompleted(List<Song> result) {
-                        ListAdapter.this.data = result;
-                        notifyDataSetChanged();
-                    }
-                });
+                Library.registerSongListener((TaskListener<Song>) listener);
             case TYPE_ALBUM:
-                Library.registerAlbumListener(new Loader.TaskListener<Album>() {
-                    @Override
-                    public void onOneLoaded(Album item) {
-
-                    }
-
-                    @Override
-                    public void onCompleted(List<Album> result) {
-                        ListAdapter.this.data = result;
-                        notifyDataSetChanged();
-                    }
-                });
+                Library.registerAlbumListener((TaskListener<Album>) listener);
             case TYPE_PLAYLIST:
-                Library.registerPlaylstListener(new Loader.TaskListener<Playlist>() {
-                    @Override
-                    public void onOneLoaded(Playlist item) {
-
-                    }
-
-                    @Override
-                    public void onCompleted(List<Playlist> result) {
-                        ListAdapter.this.data = result;
-                        notifyDataSetChanged();
-                    }
-                });
+                Library.registerPlaylstListener((TaskListener<Playlist>) listener);
             case TYPE_ARTIST:
-                Library.registerArtistListener(new Loader.TaskListener<Artist>() {
-                    @Override
-                    public void onOneLoaded(Artist item) {
-
-                    }
-
-                    @Override
-                    public void onCompleted(List<Artist> result) {
-                        ListAdapter.this.data = result;
-                        notifyDataSetChanged();
-                    }
-                });
+                Library.registerArtistListener((TaskListener<Artist>) listener);
         }
     }
 
@@ -173,7 +145,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             case TYPE_NOW_PLAYING:
                 return new NowPlayingViewHolder(ItemNowPlaying.inflate(inflater, parent, false));
             case TYPE_SEARCH:
-            return new SearchViewHolder(ItemSearch.inflate(inflater, parent, false));
+                return new SearchViewHolder(ItemSearch.inflate(inflater, parent, false));
             default:
                 return null;
         }
@@ -198,33 +170,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         return this;
     }
 
-
     ///////////////////////////////////////////////////////////////////////////
     // Holders
     ///////////////////////////////////////////////////////////////////////////
 
-    protected abstract class BasicViewHolder<BINDING extends ViewDataBinding, TYPE> extends RecyclerView.ViewHolder
+    protected abstract class BasicViewHolder<BINDING extends ViewDataBinding, OBJ> extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
         protected BINDING binding;
-
-        protected final int COLOR_DUR = 300;
-        protected final int COLOR_DELAY_BASE = 550;
-        protected final int COLOR_DELAY_MAX = 750;
-
-        protected final int LIST_ANIM_DELAY = 10;
-        protected final int LIST_ANIM_DUR = 500;
+        protected Context context;
 
         protected BasicViewHolder(BINDING binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void update(TYPE object) {
+        public void update(OBJ object) {
             binding.setVariable(getVarId(), object);
             binding.getRoot().setOnClickListener(this);
             binding.getRoot().setOnLongClickListener(this);
             configure(object);
-            animate();
         }
 
         private int getVarId() {
@@ -255,11 +219,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             return varId;
         }
 
-        protected abstract void configure(TYPE object);
-
-        protected void animate() {
-
-        }
+        protected abstract void configure(OBJ object);
 
         @Override
         public boolean onLongClick(View v) {
@@ -269,13 +229,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
 
     }
 
-    protected abstract class SimpleViewHolder<BINDING extends ViewDataBinding, TYPE> extends BasicViewHolder<BINDING, TYPE> {
+    protected abstract class SimpleViewHolder<BINDING extends ViewDataBinding, OBJ> extends BasicViewHolder<BINDING, OBJ> {
         protected SimpleViewHolder(BINDING binding) {
             super(binding);
         }
 
         @Override
-        protected void configure(TYPE object) {
+        protected void configure(OBJ object) {
             //Do nothing. The default impl should do everything automatically
         }
     }
@@ -292,154 +252,40 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public void onClick(View v) {
-            PlaybackRemote.play(data, getAdapterPosition());
+            PlaybackRemote.play((List<Song>) data, getAdapterPosition());
         }
     }
 
-    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbum, Album> implements RequestListener<String, GlideDrawable>,
-            Palette.PaletteAsyncListener {
-
-        private AsyncTask<Bitmap, Void, Palette> paletteTask;
-        private ObjectAnimator backgroundAnimator, titleAnimator, subtitleAnimator;
-        private int defaultBackground = context.getResources().getColor(!Options.isLightTheme() ? R.color.greyDark : R.color.greyLight);
-        private int defaultTitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light);
-        private int defaultSubtitle = context.getResources().getColor(!Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
+    @SuppressLint("PrivateResource")
+    protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbum, Album> implements Palette.PaletteAsyncListener, Album.ArtRequest {
+        private final int defaultBackground = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.greyDark : R.color.greyLight),
+        defaultTitle = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
+        defaultSubtitle = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
 
         public AlbumsViewHolder(ItemAlbum binding) {
             super(binding);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void configure(Album object) {
-            resetPalette();
-            binding.getAlbum().requestArt(binding.AlbumArtGridItemAlbumArt, this);
-            if (Options.usingBiggerSpaceInAlbumList()) {
-                LayoutParams params = new LayoutParams(binding.getRoot().getLayoutParams());
-                int margin = Math.round(context.getResources().getDimension(R.dimen.margin_pico));
-                params.setMargins(margin, margin, margin, margin);
-                binding.getRoot().setLayoutParams(params);
-            }
+            resetColors();
+            binding.getAlbum().requestArt(binding.AlbumArtGridItemAlbumArt);
+            binding.getAlbum().requestArt(this);
         }
 
         @Override
-        protected void animate() {
-            if (!binding.getAlbum().animated) {
-                binding.getAlbum().animated = true;
-
-                int animateTill;
-                if (!Options.usingTabs()) {
-                    animateTill = 5;
-                } else {
-                    Configuration configuration = context.getResources().getConfiguration();
-                    if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                        animateTill = 3;
-                    } else {
-                        animateTill = 2;
-                    }
-                }
-
-                if (getAdapterPosition() <= animateTill) {
-                    binding.AlbumGridItemRootView.setTranslationY(800.0f);
-                    binding.AlbumGridItemRootView.animate()
-                            .translationY(0.0f)
-                            .alpha(1.0f)
-                            .setDuration(LIST_ANIM_DUR)
-                            .setStartDelay(LIST_ANIM_DELAY + (getAdapterPosition() * 100))
-                            .start();
-                } else binding.AlbumGridItemRootView.setAlpha(1.0f);
+        public void respond(Bitmap art) {
+            if (!binding.getAlbum().colorsLoaded && !binding.getAlbum().defaultArt) {
+                Palette.from(art).generate(this);
+                return;
             }
-        }
-
-        @Override
-        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-            return false;
-        }
-
-        @Override
-        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target,
-                                       boolean isFromMemoryCache, boolean isFirstResource) {
-            if (isFromMemoryCache || binding.getAlbum().colorAnimated) {
-                updatePalette(resource);
-            } else {
-                animatePalette(resource);
-            }
-            return false;
-        }
-
-        private void resetPalette() {
-            if (paletteTask != null && !paletteTask.isCancelled()) paletteTask.cancel(true);
-
-            if (backgroundAnimator != null) backgroundAnimator.cancel();
-            if (titleAnimator != null) titleAnimator.cancel();
-            if (subtitleAnimator != null) subtitleAnimator.cancel();
-
-            binding.AlbumInfoToolbar.setBackgroundColor(defaultBackground);
-            binding.AlbumTitle.setTextColor(defaultTitle);
-            binding.AlbumArtist.setTextColor(defaultSubtitle);
-        }
-
-        private void updatePalette(GlideDrawable drawable) {
-            if (binding.getAlbum().colorsLoaded) {
-                int[] colors = binding.getAlbum().mainColors;
-                binding.AlbumInfoToolbar.setBackgroundColor(colors[FRAME_COLOR]);
-                binding.AlbumTitle.setTextColor(colors[TITLE_COLOR]);
-                binding.AlbumArtist.setTextColor(colors[SUBTITLE_COLOR]);
-            } else {
-                resetPalette();
-                generatePalette(drawable);
-            }
-        }
-
-        private void animatePalette(GlideDrawable drawable) {
-            if (binding.getAlbum().colorsLoaded) {
-                int[] colors = binding.getAlbum().mainColors;
-                Random colorDelayRandom = new Random();
-                int COLOR_DELAY = colorDelayRandom.nextInt(COLOR_DELAY_MAX) + COLOR_DELAY_BASE;
-
-                backgroundAnimator = ObjectAnimator.ofObject(
-                        binding.AlbumInfoToolbar,
-                        "backgroundColor",
-                        new ArgbEvaluator(),
-                        defaultBackground,
-                        colors[FRAME_COLOR]);
-                backgroundAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                backgroundAnimator.start();
-
-                titleAnimator = ObjectAnimator.ofObject(
-                        binding.AlbumTitle,
-                        "textColor",
-                        new ArgbEvaluator(),
-                        defaultTitle,
-                        colors[TITLE_COLOR]);
-                titleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                titleAnimator.start();
-
-                subtitleAnimator = ObjectAnimator.ofObject(
-                        binding.AlbumArtist,
-                        "textColor",
-                        new ArgbEvaluator(),
-                        defaultSubtitle,
-                        colors[SUBTITLE_COLOR]);
-                subtitleAnimator.setDuration(COLOR_DUR).setStartDelay(COLOR_DELAY);
-                subtitleAnimator.start();
-
-                binding.getAlbum().colorAnimated = true;
-            } else {
-                generatePalette(drawable);
-            }
-        }
-
-        private void generatePalette(GlideDrawable drawable) {
-            if (!binding.getAlbum().colorsLoaded) {
-                Bitmap art = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(art);
-                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                drawable.draw(canvas);
-                paletteTask = Palette.from(art).generate(this);
-            }
+            if (binding.getAlbum().colorAnimated) {
+                binding.AlbumInfoToolbar.setBackgroundColor(binding.getAlbum().getBackgroundColor());
+                binding.AlbumTitle.setTextColor(binding.getAlbum().getTitleTextColor());
+                binding.AlbumArtist.setTextColor(binding.getAlbum().getSubtitleTextColor());
+            } else animatePalette();
         }
 
         @Override
@@ -447,7 +293,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             int back = defaultBackground, title = defaultTitle, subtitle = defaultSubtitle;
             int accent = Color.BLACK, accentIcon = Color.WHITE, accentSubIcon = Color.GRAY;
 
-            if (!binding.getAlbum().defaultArt && Options.usingPalette()) {
+            if (Options.usingPalette()) {
 
                 //Gets main swatches
                 ArrayList<Palette.Swatch> sortedSwatches = new ArrayList<>(palette.getSwatches());
@@ -458,61 +304,71 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
                     }
                 });
 
-                Palette.Swatch[] swatches = null;
-
+                //Applies swatches to album
                 try {
-                    swatches = new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
-                } catch (Exception ignored) {
-                }
+                    Palette.Swatch[] swatches = new Palette.Swatch[]{sortedSwatches.get(sortedSwatches.size() - 1), sortedSwatches.get(0)};
 
-                try {
                     back = swatches[0].getRgb();
-                } catch (Exception ignored) {
-                }
-                try {
                     title = swatches[0].getBodyTextColor();
-                } catch (Exception ignored) {
-                }
-
-                try {
                     subtitle = swatches[0].getTitleTextColor();
-                } catch (Exception ignored) {
-                }
 
-                try {
                     accent = swatches[1].getRgb();
-                } catch (Exception ignored) {
-                }
-
-                try {
                     accentIcon = swatches[1].getBodyTextColor();
-                } catch (Exception ignored) {
-                }
-
-                try {
                     accentSubIcon = swatches[1].getTitleTextColor();
-                } catch (Exception ignored) {
+                } catch (Exception e) {
+                    resetColors();
+                    return;
                 }
-
             }
 
             binding.getAlbum().mainColors = new int[]{back, title, subtitle};
             binding.getAlbum().accentColors = new int[]{accent, accentIcon, accentSubIcon};
-
             binding.getAlbum().colorsLoaded = true;
 
-            animatePalette(null);
+            animatePalette();
         }
+
+        private void animatePalette() {
+            int[] colors = binding.getAlbum().mainColors;
+            Random colorDelayRandom = new Random();
+            int COLOR_DELAY = colorDelayRandom.nextInt(750) + 550;
+
+            ObjectAnimator backgroundAnimator = ObjectAnimator.ofObject(
+                    binding.AlbumInfoToolbar, "backgroundColor", new ArgbEvaluator(), defaultBackground, colors[FRAME_COLOR]).setDuration(300);
+            backgroundAnimator.setStartDelay(COLOR_DELAY);
+            backgroundAnimator.start();
+
+            ObjectAnimator titleAnimator = ObjectAnimator.ofObject(
+                    binding.AlbumTitle, "textColor", new ArgbEvaluator(), defaultTitle, colors[TITLE_COLOR]).setDuration(300);
+            titleAnimator.setStartDelay(COLOR_DELAY);
+            titleAnimator.start();
+
+            ObjectAnimator subtitleAnimator = ObjectAnimator.ofObject(
+                    binding.AlbumArtist, "textColor", new ArgbEvaluator(), defaultSubtitle, colors[SUBTITLE_COLOR]).setDuration(300);
+            subtitleAnimator.setStartDelay(COLOR_DELAY);
+            subtitleAnimator.start();
+        }
+
+        private void resetColors() {
+            binding.AlbumInfoToolbar.setBackgroundColor(defaultBackground);
+            binding.AlbumTitle.setTextColor(defaultTitle);
+            binding.AlbumArtist.setTextColor(defaultSubtitle);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////
+        // Click events
+        ///////////////////////////////////////////////////////////////////////////
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, AlbumDetails.class).putExtra("album_id", binding.getAlbum().getId());
+            Intent intent = new Intent(context, AlbumDetails.class).putExtra("album_id", binding.getAlbum().getID());
             try {
+                @SuppressWarnings("unchecked")
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(transitionActivity,
                         new Pair<View, String>(transitionAppBar, "appbar"),
                         new Pair<View, String>(transitionAppBar, "appbar_text_protection"),
-                        new Pair<View, String>(binding.getRoot().findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
-                        new Pair<View, String>(binding.getRoot().findViewById(R.id.AlbumInfoToolbar), "info")
+                        new Pair<>(binding.getRoot().findViewById(R.id.AlbumArtGridItemAlbumArt), "art"),
+                        new Pair<>(binding.getRoot().findViewById(R.id.AlbumInfoToolbar), "info")
                 );
                 ActivityCompat.startActivity(transitionActivity, intent, options.toBundle());
             } catch (Exception e) {
@@ -535,8 +391,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         public void onClick(View v) {
-            PlaybackRemote.play(data, getAdapterPosition());
+            PlaybackRemote.play((List<Song>) data, getAdapterPosition());
         }
     }
 
@@ -587,7 +444,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             anim.start();
         }
 
-        private void transition(){
+        private void transition() {
             Intent intent = new Intent(context, PlaylistDetails.class).putExtra("playlist_id", binding.getPlaylist().getId());
             try {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(transitionActivity, itemView, "window");
@@ -638,7 +495,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
             if (object.results.get(0) instanceof Album) type = Type.TYPE_ALBUM;
             else if (object.results.get(0) instanceof Song) type = Type.TYPE_SONG;
             else if (object.results.get(0) instanceof Playlist) type = Type.TYPE_PLAYLIST;
-            ListAdapter adapter = new ListAdapter(type, object.results, context);
+            ListAdapter<?> adapter = new ListAdapter<>(type, object.results, context);
             adapter.withTransitionActivity(transitionActivity);
             binding.recycler.setAdapter(adapter);
             if (type != Type.TYPE_ALBUM) {
@@ -659,6 +516,57 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BasicViewHolde
         @Override
         public void onClick(View v) {
             //Do nothing
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Album-specific classes
+    ///////////////////////////////////////////////////////////////////////////
+
+    public static final class AlbumAnimator extends DefaultItemAnimator {
+        @Override
+        public boolean animateAdd(final RecyclerView.ViewHolder holder) {
+            holder.itemView.setTranslationY(800.0f);
+            ViewCompat.animate(holder.itemView)
+                    .translationY(0.0f)
+                    .setDuration(500)
+                    .setStartDelay(10 + (holder.getAdapterPosition() * 100))
+                    .setListener(new ViewPropertyAnimatorListener() {
+                        @Override
+                        public void onAnimationStart(View view) {
+                            dispatchAddStarting(holder);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(View view) {
+                            dispatchAddFinished(holder);
+                        }
+
+                        @Override
+                        public void onAnimationCancel(View view) {
+
+                        }
+                    })
+                    .start();
+            return false;
+        }
+    }
+
+    public static final class AlbumDecor extends RecyclerView.ItemDecoration {
+        Context c;
+
+        public AlbumDecor(Context context) {
+            c = context;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            float px;
+            if (!Options.usingBiggerSpaceInAlbumList()) px = GEMUtil.dpToPx(c, 0.5f); else px = GEMUtil.dpToPx(c, 2);
+            outRect.top = (int) px;
+            outRect.bottom = (int) px;
+            outRect.left = (int) px;
+            outRect.right = (int) px;
         }
     }
 }

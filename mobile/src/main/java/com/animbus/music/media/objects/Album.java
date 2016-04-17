@@ -19,14 +19,14 @@ package com.animbus.music.media.objects;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.ImageView;
 
 import com.animbus.music.R;
 import com.animbus.music.util.Options;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
@@ -36,48 +36,22 @@ import java.util.List;
 /**
  * Created by Adrian on 7/5/2015.
  */
-public class Album {
-    public List<Song> albumSongs = new ArrayList<>();
-    public List<Long> songIDs = new ArrayList<>();
-
-    public String albumTitle;
-
+public class Album extends MediaObject {
     public String albumArtistName;
-    public Artist albumArtist;
-
-    public long id;
 
     public boolean animated;
-    public Context cxt;
+
+    @Override
+    protected Uri getBaseUri() {
+        return MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI;
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //This manages the songs of the album
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setSongs(List<Song> albumSongs) {
-        this.albumSongs = albumSongs;
-    }
-
     public List<Song> getSongs() {
-        if (albumSongs != null) return albumSongs;
-        else {
-            for (long id : songIDs) {
-                //albumSongs.add();
-            }
-        }
-        return null;
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //This manages the info of the album in strings
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public void setAlbumTitle(String albumTitle) {
-        this.albumTitle = albumTitle;
-    }
-
-    public String getAlbumTitle() {
-        return albumTitle;
+        return new ArrayList<>();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,6 +62,7 @@ public class Album {
     public boolean defaultArt = false;
 
     public void setAlbumArtPath(String albumArtPath) {
+        this.albumArtPath = "file://" + albumArtPath;
         if (albumArtPath != null) {
             defaultArt = false;
             colorAnimated = false;
@@ -95,7 +70,6 @@ public class Album {
             defaultArt = true;
             colorAnimated = true;
         }
-        this.albumArtPath = "file://" + albumArtPath;
     }
 
     public String getAlbumArtPath() {
@@ -107,11 +81,11 @@ public class Album {
     }
 
     public void requestArt(final ArtRequest request) {
-        Glide.with(getContext().getApplicationContext()).load(getAlbumArtPath())
+        Glide.with(getContext()).load(getAlbumArtPath())
                 .asBitmap()
                 .placeholder(!Options.isLightTheme() ? R.drawable.art_dark : R.drawable.art_light)
-                .animate(android.R.anim.fade_in)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .animate(android.R.anim.fade_in)
                 .centerCrop()
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
@@ -124,21 +98,9 @@ public class Album {
     public void requestArt(ImageView imageView) {
         Glide.with(imageView.getContext()).load(getAlbumArtPath())
                 .placeholder(!Options.isLightTheme() ? R.drawable.art_dark : R.drawable.art_light)
-                .animate(android.R.anim.fade_in)
-                .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .centerCrop()
-                .into(imageView);
-    }
-
-    public void requestArt(ImageView imageView, RequestListener<String, GlideDrawable> listener) {
-        Glide.with(imageView.getContext()).load(getAlbumArtPath())
-                .placeholder(!Options.isLightTheme() ? R.drawable.art_dark : R.drawable.art_light)
-                .animate(android.R.anim.fade_in)
                 .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .centerCrop()
-                .listener(listener)
                 .into(imageView);
     }
 
@@ -149,7 +111,9 @@ public class Album {
     public boolean colorAnimated = false;
     public static final int FRAME_COLOR = 0, TITLE_COLOR = 1, SUBTITLE_COLOR = 2;
     public int[] mainColors;
-    public int[] accentColors;
+    public int[] accentColors = new int[]{
+            Color.BLACK, Color.WHITE, Color.GRAY
+    };
     public boolean colorsLoaded = false;
 
     public int getBackgroundColor() {
@@ -188,51 +152,23 @@ public class Album {
         return albumArtistName;
     }
 
-    public void setArtist(Artist albumArtist) {
-        this.albumArtist = albumArtist;
-    }
-
-    public Artist getArtist() {
-        return albumArtist;
-    }
-
     ///////////////////////////////////////////////////////////////////////////
-    // ID
+    // Context behavior
     ///////////////////////////////////////////////////////////////////////////
 
-    public long getId() {
-        return id;
+    @Override
+    protected boolean isContextRequired() {
+        return true;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Context
-    ///////////////////////////////////////////////////////////////////////////
-
-    public void setContext(Context cxt) {
-        this.cxt = cxt;
+    @Override
+    protected void onContextSet(Context context) {
         mainColors = new int[]{
-                cxt.getResources().getColor(!Options.isLightTheme() ? R.color.greyDark : R.color.greyLight),
-                cxt.getResources().getColor(!Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
-                cxt.getResources().getColor(!Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light)
-        };
-        accentColors = new int[]{
-                Color.BLACK, Color.WHITE, Color.GRAY
+                context.getResources().getColor(!Options.isLightTheme() ? R.color.greyDark : R.color.greyLight),
+                context.getResources().getColor(!Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
+                context.getResources().getColor(!Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light)
         };
     }
-
-    public Context getContext() {
-        return cxt;
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Misc. Methods
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //Nothing Yet
 
 }
 

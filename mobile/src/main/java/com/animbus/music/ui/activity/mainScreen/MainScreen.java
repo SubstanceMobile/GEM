@@ -28,6 +28,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.AppLaunchChecker;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.support.v4.util.Pair;
@@ -35,7 +36,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +53,9 @@ import com.animbus.music.BuildConfig;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
+import com.animbus.music.media.objects.Album;
+import com.animbus.music.media.objects.Artist;
+import com.animbus.music.media.objects.Playlist;
 import com.animbus.music.media.objects.Song;
 import com.animbus.music.ui.activity.issue.IssueReportingActivity;
 import com.animbus.music.ui.activity.nowPlaying.NowPlaying;
@@ -71,12 +74,18 @@ import butterknife.Bind;
 import butterknife.BindString;
 
 public class MainScreen extends ThemeActivity implements NavigationView.OnNavigationItemSelectedListener {
-    @Bind(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-    @Bind(R.id.main_tab_layout) TabLayout mTabs;
-    @Bind(R.id.main_view_pager) LockableViewPager mPager;
-    @Bind(R.id.navigation) NavigationView mNavigationView;
-    @Bind(R.id.main_screen_now_playing_toolbar) View quickToolbar;
-    @BindString(R.string.title_activity_main) String mScreenName;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @Bind(R.id.main_tab_layout)
+    TabLayout mTabs;
+    @Bind(R.id.main_view_pager)
+    LockableViewPager mPager;
+    @Bind(R.id.navigation)
+    NavigationView mNavigationView;
+    @Bind(R.id.main_screen_now_playing_toolbar)
+    View quickToolbar;
+    @BindString(R.string.title_activity_main)
+    String mScreenName;
     private static final int RESET_AT = 16;
 
     @Override
@@ -114,7 +123,11 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     public void requestPermissions() {
         if (GEMUtil.isMarshmallow() && (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))
             startActivityForResult(new Intent(this, SetupActivity.class), 1);
-        else Library.build();
+        else {
+            if (AppLaunchChecker.hasStartedFromLauncher(this))
+                startActivity(new Intent(this, SetupActivity.class));
+            Library.build();
+        }
     }
 
     @Override
@@ -216,6 +229,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
     }
 
     private void setUpNowPlayingBar(Song song, PlaybackStateCompat state) {
+        //noinspection StatementWithEmptyBody
         if (!PlaybackRemote.isActive()) {
             /*quickToolbar.setVisibility(View.GONE);*/
             //TODO: Add This
@@ -240,7 +254,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         quickToolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
+                @SuppressWarnings("unchecked") ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainScreen.this,
                         new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_art), "art"),
                         new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_controls_transition), "controls"),
                         new Pair<>(v.findViewById(R.id.main_screen_now_playing_toolbar_title), "title"),
@@ -253,7 +267,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
             song.getAlbum().requestArt((ImageView) findViewById(R.id.main_screen_now_playing_toolbar_art));
             TextView title = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_title),
                     artist = (TextView) quickToolbar.findViewById(R.id.main_screen_now_playing_toolbar_artist);
-            title.setText(song.getSongTitle());
+            title.setText(song.getTitle());
             artist.setText(song.getSongArtist());
         }
         if (state != null) {
@@ -293,6 +307,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
                 quickToolbar.setVisibility(View.VISIBLE);
             }
             ImageButton button = (ImageButton) findViewById(R.id.main_screen_now_playing_toolbar_playpause);
+            assert button != null;
             boolean isPaused = state.getState() == PlaybackStateCompat.STATE_PAUSED;
             if (isPaused) {
                 button.setImageResource(R.drawable.ic_play_arrow_white_48dp);
@@ -481,14 +496,14 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsSongs(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_SONG, MainScreen.this));
-            list.setItemAnimator(new DefaultItemAnimator());
+            list.setAdapter(new ListAdapter<Song>(ListAdapter.Type.TYPE_SONG, MainScreen.this));
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         private void configureAsAlbums(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_ALBUM, MainScreen.this).withTransitionActivity(MainScreen.this));
-            list.setItemAnimator(new DefaultItemAnimator());
+            list.setAdapter(new ListAdapter<Album>(ListAdapter.Type.TYPE_ALBUM, MainScreen.this).withTransitionActivity(MainScreen.this));
+            list.setItemAnimator(new ListAdapter.AlbumAnimator());
+            list.addItemDecoration(new ListAdapter.AlbumDecor(MainScreen.this));
             if (MainScreen.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
                 list.setLayoutManager(new GridLayoutManager(MainScreen.this, 2, GridLayoutManager.VERTICAL, false));
             else
@@ -496,14 +511,12 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsArtists(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_ARTIST, MainScreen.this));
-            list.setItemAnimator(new DefaultItemAnimator());
+            list.setAdapter(new ListAdapter<Artist>(ListAdapter.Type.TYPE_ARTIST, MainScreen.this));
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         private void configureAsPlaylists(RecyclerView list) {
-            list.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_PLAYLIST, MainScreen.this).withTransitionActivity(MainScreen.this));
-            list.setItemAnimator(new DefaultItemAnimator());
+            list.setAdapter(new ListAdapter<Playlist>(ListAdapter.Type.TYPE_PLAYLIST, MainScreen.this).withTransitionActivity(MainScreen.this));
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 

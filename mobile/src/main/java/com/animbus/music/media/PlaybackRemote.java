@@ -36,8 +36,9 @@ import com.animbus.music.util.Options;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.animbus.music.media.MediaService.*;
 import static com.animbus.music.media.MediaService.ACTION_START;
+import static com.animbus.music.media.MediaService.LocalPlayback;
+import static com.animbus.music.media.MediaService.PlaybackBase;
 
 /**
  * Created by Adrian on 11/14/2015.
@@ -126,7 +127,7 @@ public class PlaybackRemote {
             PlaybackManager.get().play(song);
             return;
         }
-        if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getId()), null); else {
+        if (!startServiceIfNecessary()) remote.playFromMediaId(String.valueOf(song.getID()), null); else {
             tempCommand = 1;
             tempSong = song;
         }
@@ -413,7 +414,7 @@ public class PlaybackRemote {
             //Builds the song
             s = new Song();
             Album a = new Album();
-            s.setSongTitle(mContext.getString(R.string.title_uri));
+            s.setTitle(mContext.getString(R.string.title_uri));
             s.setSongArtist(mContext.getString(R.string.artist_uri));
             a.setContext(mContext);
 

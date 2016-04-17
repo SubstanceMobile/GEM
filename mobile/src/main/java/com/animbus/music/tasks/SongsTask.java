@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.animbus.music.media.Library;
 import com.animbus.music.media.objects.Song;
@@ -39,12 +40,13 @@ public class SongsTask extends Loader<Song> {
     @Override
     protected Song buildObject(@NonNull Cursor cursor) {
         Song song = new Song();
-        song.setSongTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+        song.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
         song.setSongArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
-        song.setId(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+        song.setID(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
         song.setAlbumID(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
         song.setSongDuration(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)));
         song.setTrackNumber(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.TRACK)));
+        Log.i("SongsTask", "Loaded ID " + song.getID());
         return song;
     }
 

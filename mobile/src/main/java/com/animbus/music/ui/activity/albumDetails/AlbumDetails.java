@@ -69,7 +69,7 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAlbum = Library.findAlbumById(getIntent().getLongExtra("album_id", -1));
-        setTitle(mAlbum.getAlbumTitle());
+        setTitle(mAlbum.getTitle());
         super.onCreate(savedInstanceState);
     }
 
@@ -109,10 +109,10 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
     protected void setUp() {
         //Sets up data
         mAlbum.requestArt((ImageView) findViewById(R.id.album_details_album_art));
-        mCollapsingToolbar.setTitle(mAlbum.getAlbumTitle());
+        mCollapsingToolbar.setTitle(mAlbum.getTitle());
 
         //Configures the recycler
-        mList.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_ALBUM_DETAILS, mAlbum.getSongs(), this));
+        mList.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_ALBUM_DETAILS,mAlbum.getSongs(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
         mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

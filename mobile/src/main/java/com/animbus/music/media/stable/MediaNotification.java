@@ -135,9 +135,9 @@ public class MediaNotification extends BroadcastReceiver {
         mBuilder = new NotificationCompat.Builder(mService);
         if (!mDisplayinQueue) {
             mBuilder
-                    .setContentTitle(song.getSongTitle())
+                    .setContentTitle(song.getTitle())
                     .setContentText(song.getSongArtist())
-                    .setSubText(song.getAlbum().getAlbumTitle())
+                    .setSubText(song.getAlbum().getTitle())
                     .setColor(mNotificationColor)
                     .setStyle(
                             new NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2)

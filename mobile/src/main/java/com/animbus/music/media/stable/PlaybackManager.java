@@ -142,7 +142,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
     public void play(Song item) {
         mPlayOnFocusGain = true;
         tryToGetAudioFocus();
-        long mediaId = item.getId();
+        long mediaId = item.getID();
         boolean mediaHasChanged = !(mediaId == mCurrentMediaId);
         if (mediaHasChanged) {
             mCurrentPosition = 0;
