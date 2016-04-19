@@ -161,7 +161,7 @@ public class PlaybackManager implements OnAudioFocusChangeListener, OnPreparedLi
                 mService.setState(STATE_PLAYING);
 
                 mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mMediaPlayer.setDataSource(mContext, item.getSongURI());
+                mMediaPlayer.setDataSource(mContext, item.getUri());
 
                 // Starts preparing the media player in the background. When
                 // it's done, it will call our OnPreparedListener (that is,

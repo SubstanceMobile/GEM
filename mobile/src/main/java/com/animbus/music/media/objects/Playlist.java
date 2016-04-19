@@ -16,29 +16,27 @@
 
 package com.animbus.music.media.objects;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.animbus.music.media.Library;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Adrian on 7/5/2015.
  */
-public class Playlist {
-    Context cxt;
+public class Playlist extends MediaObject{
     List<Song> songs = new ArrayList<>();
     String name;
     long id;
     int type;
 
     public Playlist() {
+    }
+
+    @Override
+    protected Uri getBaseUri() {
+        return MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////

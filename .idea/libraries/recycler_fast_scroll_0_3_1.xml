@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="recycler-fast-scroll-0.3.1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.plusCubed/recycler-fast-scroll/0.3.1/res" />
+      <root url="jar://$PROJECT_DIR$/mobile/build/intermediates/exploded-aar/com.github.plusCubed/recycler-fast-scroll/0.3.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.plusCubed/recycler-fast-scroll/0.3.1/83fafaf3109e2b547dac1c16c90e669ee70d63c5/recycler-fast-scroll-0.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

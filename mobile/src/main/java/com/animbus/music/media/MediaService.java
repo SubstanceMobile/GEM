@@ -299,7 +299,7 @@ public class MediaService extends Service {
         @Override
         public void play(Song song) {
             Log.d(TAG, "play(Song) called. Song = " + song.getID());
-            play(song.getSongURI(), false);
+            play(song.getUri(), false);
             PlaybackRemote.updateSongListeners(song);
         }
 

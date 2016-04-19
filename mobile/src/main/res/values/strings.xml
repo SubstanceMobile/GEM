@@ -188,4 +188,5 @@
     <string name="artist_uri">Unknown</string>
     <string name="saved">Saved</string>
     <string name="msg_upgrading">GEM Player is upgrading</string>
+    <string name="title_activity_test">Test</string>
 </resources>

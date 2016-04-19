@@ -17,13 +17,15 @@
 package com.animbus.music.media.objects;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 
 import java.util.List;
 
 /**
  * Created by Adrian on 7/5/2015.
  */
-public class Artist {
+public class Artist extends MediaObject{
     String artistName;
     String artistBio;
 
@@ -33,6 +35,11 @@ public class Artist {
     Bitmap artistImage;
 
     public Artist(){}
+
+    @Override
+    protected Uri getBaseUri() {
+        return MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI;
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //This manages the strings

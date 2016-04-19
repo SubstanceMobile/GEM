@@ -112,7 +112,7 @@ public class AlbumDetails extends ThemeActivity implements ATEStatusBarCustomize
         mCollapsingToolbar.setTitle(mAlbum.getTitle());
 
         //Configures the recycler
-        mList.setAdapter(new ListAdapter(ListAdapter.Type.TYPE_ALBUM_DETAILS,mAlbum.getSongs(), this));
+        mList.setAdapter(new ListAdapter(ListAdapter.Type.AlbumDetails,mAlbum.getSongs(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
         mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 

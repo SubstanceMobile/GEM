@@ -69,14 +69,24 @@ dependencies {
     /*Bump Technologies*/
     compile 'com.github.bumptech.glide:glide:3.7.0'
     /*Daniel Ciao*/
-    compile 'com.github.plusCubed:recycler-fast-scroll:0.3.0'
+    compile 'com.github.plusCubed:recycler-fast-scroll:0.3.1'
     /*Paolo Rotolo*/
     compile 'com.github.paolorotolo:appintro:3.4.0'
     compile 'com.github.paolorotolo:gitty_reporter:1.2.2'
     /*Aidan Follestad*/
-    compile 'com.github.afollestad:app-theme-engine:1.0.1'
-    compile 'com.github.afollestad.material-dialogs:core:0.8.5.6'
-    compile 'com.github.afollestad.material-dialogs:commons:0.8.5.6'
+    compile ('com.github.afollestad:app-theme-engine:1.0.1') {
+        transitive = true
+    }
+    compile ('com.github.afollestad.material-dialogs:core:0.8.5.8') {
+        transitive = true
+    }
+    compile('com.github.afollestad.material-dialogs:commons:0.8.5.8') {
+        transitive = true
+    }
+    /*Mike Penz*/
+    compile('com.mikepenz:aboutlibraries:5.6.5@aar') {
+        transitive = true
+    }
     /*Google*/
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'

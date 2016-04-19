@@ -109,7 +109,7 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         setUpNavigation();
         mPager.setAdapter(new RecyclerPagerAdapter());
         mPager.setOffscreenPageLimit(3);
-        switchToAlbum();
+        switchToArtists();
         setTitle(mScreenName);
         setUpNowPlayingBar(null, null);
         requestPermissions();
@@ -496,12 +496,12 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsSongs(RecyclerView list) {
-            list.setAdapter(new ListAdapter<Song>(ListAdapter.Type.TYPE_SONG, MainScreen.this));
+            list.setAdapter(new ListAdapter<Song>(ListAdapter.Type.Song, MainScreen.this));
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         private void configureAsAlbums(RecyclerView list) {
-            list.setAdapter(new ListAdapter<Album>(ListAdapter.Type.TYPE_ALBUM, MainScreen.this).withTransitionActivity(MainScreen.this));
+            list.setAdapter(new ListAdapter<Album>(ListAdapter.Type.Album, MainScreen.this).withTransitionActivity(MainScreen.this));
             list.setItemAnimator(new ListAdapter.AlbumAnimator());
             list.addItemDecoration(new ListAdapter.AlbumDecor(MainScreen.this));
             if (MainScreen.this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
@@ -511,12 +511,12 @@ public class MainScreen extends ThemeActivity implements NavigationView.OnNaviga
         }
 
         private void configureAsArtists(RecyclerView list) {
-            list.setAdapter(new ListAdapter<Artist>(ListAdapter.Type.TYPE_ARTIST, MainScreen.this));
+            list.setAdapter(new ListAdapter<Artist>(ListAdapter.Type.Artist, MainScreen.this));
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 
         private void configureAsPlaylists(RecyclerView list) {
-            list.setAdapter(new ListAdapter<Playlist>(ListAdapter.Type.TYPE_PLAYLIST, MainScreen.this).withTransitionActivity(MainScreen.this));
+            list.setAdapter(new ListAdapter<Playlist>(ListAdapter.Type.Playlist, MainScreen.this).withTransitionActivity(MainScreen.this));
             list.setLayoutManager(new LinearLayoutManager(MainScreen.this, LinearLayoutManager.VERTICAL, false));
         }
 

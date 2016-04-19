@@ -39,12 +39,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.afollestad.appthemeengine.ATE;
-import com.animbus.music.BR;
 import com.animbus.music.R;
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
@@ -77,13 +77,14 @@ import static com.animbus.music.media.objects.Album.SUBTITLE_COLOR;
 import static com.animbus.music.media.objects.Album.TITLE_COLOR;
 
 public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicViewHolder> {
+    private String TAG = "ListAdapter";
     List<TYPE> data = new ArrayList<>();
     Type type;
     LayoutInflater inflater;
     Context context;
 
     public enum Type {
-        TYPE_SONG, TYPE_ALBUM, TYPE_PLAYLIST, TYPE_ARTIST, TYPE_ALBUM_DETAILS, TYPE_NOW_PLAYING, TYPE_SEARCH, UNDEFINED
+        Song, Album, Playlist, Artist, AlbumDetails, NowPlaying, Search, Undefined
     }
 
     public ListAdapter(Type type, List<TYPE> data, Context cxt) {
@@ -91,6 +92,7 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
         this.data = data;
         this.context = cxt.getApplicationContext();
         this.inflater = LayoutInflater.from(cxt);
+        this.TAG = TAG + "<" + type.name() + ">";
     }
 
     @SuppressWarnings("unchecked")
@@ -98,6 +100,8 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
         this.type = type;
         this.context = cxt;
         this.inflater = LayoutInflater.from(cxt);
+        this.TAG = TAG + "<" + type.name() + ">";
+        Log.d(TAG, "Testing TAG ");
 
         //Listens for data changes
         TaskListener<TYPE> listener = new TaskListener<TYPE>() {
@@ -118,13 +122,13 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
             }
         };
         switch (type) {
-            case TYPE_SONG:
+            case Song:
                 Library.registerSongListener((TaskListener<Song>) listener);
-            case TYPE_ALBUM:
+            case Album:
                 Library.registerAlbumListener((TaskListener<Album>) listener);
-            case TYPE_PLAYLIST:
-                Library.registerPlaylstListener((TaskListener<Playlist>) listener);
-            case TYPE_ARTIST:
+            case Playlist:
+                Library.registerPlaylistListener((TaskListener<Playlist>) listener);
+            case Artist:
                 Library.registerArtistListener((TaskListener<Artist>) listener);
         }
     }
@@ -132,19 +136,19 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
     @Override
     public BasicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (type) {
-            case TYPE_SONG:
+            case Song:
                 return new SongsViewHolder(ItemSongList.inflate(inflater, parent, false));
-            case TYPE_ALBUM:
+            case Album:
                 return new AlbumsViewHolder(ItemAlbum.inflate(inflater, parent, false));
-            case TYPE_PLAYLIST:
+            case Playlist:
                 return new PlaylistsViewHolder(ItemPlaylist.inflate(inflater, parent, false));
-            case TYPE_ARTIST:
+            case Artist:
                 return null;
-            case TYPE_ALBUM_DETAILS:
+            case AlbumDetails:
                 return new AlbumDetailsViewHolder(ItemAlbumDetailsList.inflate(inflater, parent, false));
-            case TYPE_NOW_PLAYING:
+            case NowPlaying:
                 return new NowPlayingViewHolder(ItemNowPlaying.inflate(inflater, parent, false));
-            case TYPE_SEARCH:
+            case Search:
                 return new SearchViewHolder(ItemSearch.inflate(inflater, parent, false));
             default:
                 return null;
@@ -174,17 +178,16 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
     // Holders
     ///////////////////////////////////////////////////////////////////////////
 
-    protected abstract class BasicViewHolder<BINDING extends ViewDataBinding, OBJ> extends RecyclerView.ViewHolder
+    protected abstract class BasicViewHolder<BINDING extends ViewDataBinding, TYPEA> extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
         protected BINDING binding;
-        protected Context context;
 
         protected BasicViewHolder(BINDING binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void update(OBJ object) {
+        public void update(TYPEA object) {
             binding.setVariable(getVarId(), object);
             binding.getRoot().setOnClickListener(this);
             binding.getRoot().setOnLongClickListener(this);
@@ -192,34 +195,25 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
         }
 
         private int getVarId() {
-            int varId;
             switch (type) {
-                case TYPE_ALBUM:
-                    varId = BR.album;
-                    break;
-                case TYPE_SONG:
-                    varId = BR.song;
-                    break;
-                case TYPE_ALBUM_DETAILS:
-                    varId = BR.song;
-                    break;
-                case TYPE_PLAYLIST:
-                    varId = BR.playlist;
-                    break;
-                case TYPE_NOW_PLAYING:
-                    varId = BR.song;
-                    break;
-                case TYPE_SEARCH:
-                    varId = BR.result;
-                    break;
+                case Album:
+                    return com.animbus.music.BR.album;
+                case Song:
+                    return com.animbus.music.BR.song;
+                case AlbumDetails:
+                    return com.animbus.music.BR.song;
+                case Playlist:
+                    return com.animbus.music.BR.playlist;
+                case NowPlaying:
+                    return com.animbus.music.BR.song;
+                case Search:
+                    return com.animbus.music.BR.result;
                 default:
-                    varId = -1;
-                    break;
+                    return -1;
             }
-            return varId;
         }
 
-        protected abstract void configure(OBJ object);
+        protected abstract void configure(TYPEA object);
 
         @Override
         public boolean onLongClick(View v) {
@@ -229,13 +223,13 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
 
     }
 
-    protected abstract class SimpleViewHolder<BINDING extends ViewDataBinding, OBJ> extends BasicViewHolder<BINDING, OBJ> {
+    protected abstract class SimpleViewHolder<BINDING extends ViewDataBinding, TYPEB> extends BasicViewHolder<BINDING, TYPEB> {
         protected SimpleViewHolder(BINDING binding) {
             super(binding);
         }
 
         @Override
-        protected void configure(OBJ object) {
+        protected void configure(TYPEB object) {
             //Do nothing. The default impl should do everything automatically
         }
     }
@@ -261,8 +255,8 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
     @SuppressLint("PrivateResource")
     protected class AlbumsViewHolder extends BasicViewHolder<ItemAlbum, Album> implements Palette.PaletteAsyncListener, Album.ArtRequest {
         private final int defaultBackground = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.greyDark : R.color.greyLight),
-        defaultTitle = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
-        defaultSubtitle = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
+                defaultTitle = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.primary_text_default_material_dark : R.color.primary_text_default_material_light),
+                defaultSubtitle = ContextCompat.getColor(context, !Options.isLightTheme() ? R.color.secondary_text_default_material_dark : R.color.secondary_text_default_material_light);
 
         public AlbumsViewHolder(ItemAlbum binding) {
             super(binding);
@@ -491,14 +485,14 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
         @Override
         protected void configure(SearchResult object) {
             binding.getRoot().setClickable(false);
-            Type type = Type.UNDEFINED;
-            if (object.results.get(0) instanceof Album) type = Type.TYPE_ALBUM;
-            else if (object.results.get(0) instanceof Song) type = Type.TYPE_SONG;
-            else if (object.results.get(0) instanceof Playlist) type = Type.TYPE_PLAYLIST;
+            Type type = Type.Undefined;
+            if (object.results.get(0) instanceof Album) type = Type.Album;
+            else if (object.results.get(0) instanceof Song) type = Type.Song;
+            else if (object.results.get(0) instanceof Playlist) type = Type.Playlist;
             ListAdapter<?> adapter = new ListAdapter<>(type, object.results, context);
             adapter.withTransitionActivity(transitionActivity);
             binding.recycler.setAdapter(adapter);
-            if (type != Type.TYPE_ALBUM) {
+            if (type != Type.Album) {
                 binding.recycler.setLayoutManager(new CustomLinearLayoutManager(context));
                 binding.recycler.setLayoutFrozen(true);
                 binding.recycler.setHasFixedSize(false);
@@ -562,7 +556,8 @@ public class ListAdapter<TYPE> extends RecyclerView.Adapter<ListAdapter.BasicVie
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             float px;
-            if (!Options.usingBiggerSpaceInAlbumList()) px = GEMUtil.dpToPx(c, 0.5f); else px = GEMUtil.dpToPx(c, 2);
+            if (!Options.usingBiggerSpaceInAlbumList()) px = GEMUtil.dpToPx(c, 0.5f);
+            else px = GEMUtil.dpToPx(c, 2);
             outRect.top = (int) px;
             outRect.bottom = (int) px;
             outRect.left = (int) px;

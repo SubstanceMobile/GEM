@@ -87,7 +87,7 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:textSize="20sp"
-                                    android:text="@{album.getAlbumTitle, default=Title}"
+                                    android:text="@{album.getTitle, default=Title}"
                                     android:textColor="@{album.getTitleTextColor}"
                                     tools:textColor="?android:textColorPrimary" />
 

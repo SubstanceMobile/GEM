@@ -125,12 +125,12 @@ public class Library {
                     mArtists = new ArrayList<>();
                 }
             }, context);
-            return;
+        } else {
+            mSongsTask.run();
+            mAlbumsTask.run();
+            mPlaylistsTask.run();
+            mArtistsTask.run();
         }
-        mSongsTask.run();
-        mAlbumsTask.run();
-        mPlaylistsTask.run();
-        mArtistsTask.run();
     }
 
     private static void updateLinks() {
@@ -167,7 +167,7 @@ public class Library {
         mAlbumsTask.addListener(albumListener);
     }
 
-    public static void registerPlaylstListener(TaskListener<Playlist> playlistListener) {
+    public static void registerPlaylistListener(TaskListener<Playlist> playlistListener) {
         mPlaylistsTask.addListener(playlistListener);
     }
 

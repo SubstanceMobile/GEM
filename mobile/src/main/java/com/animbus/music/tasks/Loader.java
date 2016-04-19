@@ -170,7 +170,7 @@ public abstract class Loader<Return extends MediaObject> {
     private TaskListener<Return> mVerifyListener = new TaskListener<Return>() {
         @Override
         public void onOneLoaded(Return item, int pos) {
-            if (!currentData.contains(item)) for (TaskListener<Return> listener : mListeners) listener.onOneLoaded(item, pos);
+            /*if (!currentData.contains(item)) */for (TaskListener<Return> listener : mListeners) listener.onOneLoaded(item, pos);
         }
 
         @Override

@@ -107,7 +107,7 @@ public class NowPlaying extends ThemeActivity implements PlaybackRemote.SongChan
     }
 
     private void configureRecyclerView() {
-        mList.setAdapter(new ListAdapter<>(ListAdapter.Type.TYPE_NOW_PLAYING, PlaybackRemote.getQueue(), this));
+        mList.setAdapter(new ListAdapter<>(ListAdapter.Type.NowPlaying, PlaybackRemote.getQueue(), this));
         mList.setItemAnimator(new DefaultItemAnimator());
         mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mList.setNestedScrollingEnabled(true);

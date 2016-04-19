@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2016 Substance Mobile
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.animbus.music">
@@ -308,6 +306,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/search_config" />
@@ -315,7 +314,6 @@
 
         <!-- Opens when you click on a playlist in the home activity -->
         <activity android:name=".ui.activity.playlistDetails.PlaylistDetails" />
-
     </application>
 
 </manifest>

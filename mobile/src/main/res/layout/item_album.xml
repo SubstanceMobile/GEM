@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="@{album.getAlbumTitle, default=TITLE}"
+                    android:text="@{album.getTitle, default=TITLE}"
                     android:textSize="16sp" />
 
                 <TextView

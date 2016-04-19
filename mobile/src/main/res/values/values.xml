@@ -38,12 +38,7 @@
 
 
     <!--Styles-->
-    <style name="AppTheme.Dark" parent="Base" />
-    <style name="AppTheme.Faithful" parent="Base.Faithful" />
-    <style name="AppTheme.Light" parent="Base.Light" />
-
-    <!--Base Styles-->
-    <style name="Base" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
         <item name="android:windowBackground">@color/background_dark</item>
@@ -55,12 +50,7 @@
         <item name="now_playing_toolbar_color">@color/background_light</item>
     </style>
 
-    <style name="Base.LightActionBar">
-        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-    </style>
-
-    <style name="Base.Faithful" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme.Faithful" parent="Theme.AppCompat.NoActionBar">
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
         <item name="cardStyle">@style/CardView.Dark</item>
@@ -73,12 +63,7 @@
         <item name="android:colorBackground">@color/background_faithful</item>
     </style>
 
-    <style name="Base.Faithful.LightActionBar">
-        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-    </style>
-
-    <style name="Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="cardStyle">@style/CardView.Light</item>
@@ -90,8 +75,15 @@
         <item name="now_playing_toolbar_color">@color/background_faithful</item>
     </style>
 
-    <style name="Base.Light.DarkActionBar">
+    <style name="AppTheme.DayNight" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat</item>
+        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="ripple">@drawable/ripple_dark</item>
+        <item name="ripple_alt_color">@drawable/ripple_light</item>
+        <item name="ripple_circle">@drawable/ripple_circle_dark</item>
+        <item name="ripple_circle_alt_color">@drawable/ripple_circle_light</item>
+        <item name="now_playing_toolbar_color">@color/background_light</item>
     </style>
+
 </resources>
