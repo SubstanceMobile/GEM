@@ -19,10 +19,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'GEM'
-            keyPassword 'AnimbusDev'
-            storeFile file('C:/Users/Adrian/Documents/Developer/ApkSigning.jks')
-            storePassword 'AnimbusDev'
+            keyAlias '$KEYALIAS'
+            keyPassword '$KEYPASS'
+            storeFile file('$STOREFILE')
+            storePassword '$STOREPASS'
         }
     }
     compileSdkVersion 23
