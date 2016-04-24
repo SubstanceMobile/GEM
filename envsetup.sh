@@ -17,7 +17,7 @@ echo
 
 echo "Creating Gradle files"
 touch mobile/gradle.properties
-echo "STOREFILE = "$STOREFILE >> mobile/gradle.precooperties
+echo "STOREFILE = "$STOREFILE >> mobile/gradle.properties
 echo "" >> mobile/gradle.properties
 echo "STOREPASS = "$STOREPASS >> mobile/gradle.properties
 echo "" >> mobile/gradle.properties
@@ -36,6 +36,9 @@ if [ "$GO" = "y" ]; then
   echo 'if ! [[ :$PATH: == *:"$GEMDIR/scripts/linux":* ]] ; then' >> ~/.bashrc
   echo 'export PATH="$GEMDIR/scripts/linux:$PATH"' >> ~/.bashrc
   echo 'fi' >> ~/.bashrc
+
+  echo "Updating file permissions"
+  chmod +x scripts/linux/adbtool
 else
   echo "Skipping PATH modifications"
 fi
