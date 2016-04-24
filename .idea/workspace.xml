@@ -50,41 +50,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Many MANY changes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/aboutlibraries_5_6_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/fastadapter_1_4_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/iconics_core_2_5_11.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/BaseAdapter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_0_8_5_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_0_8_5_8.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/core_0_8_5_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/core_0_8_5_8.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/library_1_1_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_1_5.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/recycler_fast_scroll_0_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recycler_fast_scroll_0_3_1.xml" />
+    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Updates">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/build.gradle" afterPath="$PROJECT_DIR$/mobile/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/mobile.iml" afterPath="$PROJECT_DIR$/mobile/mobile.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/mobile/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/LibraryLegacy.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/LibraryLegacy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/MediaService.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/MediaService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Artist.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Artist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Playlist.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/objects/Playlist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/PlaybackManager.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/stable/PlaybackManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/AlbumsTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/Loader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/albumDetails/AlbumDetails.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/mainScreen/MainScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/nowPlaying/NowPlaying.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/playlistDetails/PlaylistDetails.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/playlistDetails/PlaylistDetails.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/search/SearchActivity.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/search/SearchActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" afterPath="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/ListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/activity_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album_details.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_album_details.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_now_playing.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_now_playing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/layout/item_songlist.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" afterPath="$PROJECT_DIR$/mobile/src/main/res/values/values.xml" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -209,7 +176,7 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/BaseAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.7235872">
-              <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
+              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#configure#0;class#BaseAdapter#0" expanded="false" />
@@ -285,12 +252,13 @@
         <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="174" column="83" selection-start-line="174" selection-start-column="83" selection-end-line="174" selection-end-column="83" />
+              <caret line="173" column="83" selection-start-line="173" selection-start-column="83" selection-end-line="173" selection-end-column="83" />
               <folding>
-                <element signature="class#2303:2587" expanded="false" />
-                <element signature="class#2626:2914" expanded="false" />
-                <element signature="class#2956:3256" expanded="false" />
-                <element signature="class#3296:3588" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="class#2278:2562" expanded="false" />
+                <element signature="class#2601:2889" expanded="false" />
+                <element signature="class#2931:3231" expanded="false" />
+                <element signature="class#3271:3563" expanded="false" />
                 <element signature="method#registerMediaStoreListeners#0;class#Library#0" expanded="false" />
                 <element signature="method#unregisterMediaStoreListeners#0;class#Library#0" expanded="false" />
                 <element signature="method#findSongById#0;class#Library#0" expanded="false" />
@@ -3736,7 +3704,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460855204037</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Updates">
+      <created>1461027980876</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1461027980876</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3865,7 +3839,8 @@
     <MESSAGE value="Even more progress" />
     <MESSAGE value="Got rid of some boilerplate" />
     <MESSAGE value="Many MANY changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Many MANY changes" />
+    <MESSAGE value="Updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -4164,8 +4139,8 @@
         <state vertical-scroll-proportion="0.6142506">
           <caret line="45" column="62" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
           <folding>
-            <element signature="e#1190#1191#0" expanded="true" />
-            <element signature="e#1260#1261#0" expanded="true" />
+            <element signature="e#1000#1001#0" expanded="true" />
+            <element signature="e#1070#1071#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4293,12 +4268,13 @@
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="174" column="83" selection-start-line="174" selection-start-column="83" selection-end-line="174" selection-end-column="83" />
+          <caret line="173" column="83" selection-start-line="173" selection-start-column="83" selection-end-line="173" selection-end-column="83" />
           <folding>
-            <element signature="class#2303:2587" expanded="false" />
-            <element signature="class#2626:2914" expanded="false" />
-            <element signature="class#2956:3256" expanded="false" />
-            <element signature="class#3296:3588" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="class#2278:2562" expanded="false" />
+            <element signature="class#2601:2889" expanded="false" />
+            <element signature="class#2931:3231" expanded="false" />
+            <element signature="class#3271:3563" expanded="false" />
             <element signature="method#registerMediaStoreListeners#0;class#Library#0" expanded="false" />
             <element signature="method#unregisterMediaStoreListeners#0;class#Library#0" expanded="false" />
             <element signature="method#findSongById#0;class#Library#0" expanded="false" />
@@ -4448,7 +4424,7 @@
     <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/BaseAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7235872">
-          <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#configure#0;class#BaseAdapter#0" expanded="false" />
