@@ -50,7 +50,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Windows scripts complete">
+    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="will it push?">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GEM.iws" />
@@ -209,7 +209,7 @@
       <file leaf-file-name="envsetup.bat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/envsetup.bat">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4785276">
+            <state vertical-scroll-proportion="0.76781327">
               <caret line="25" column="103" selection-start-line="25" selection-start-column="103" selection-end-line="25" selection-end-column="103" />
               <folding />
             </state>
@@ -3418,7 +3418,13 @@
       <option name="project" value="LOCAL" />
       <updated>1461542484653</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="will it push?">
+      <created>1461543195287</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1461543195287</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3526,7 +3532,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fixed DataBinding issues. AlbumsDetails is broken" />
     <MESSAGE value="AlbumDetails is a little messed up, but it runs" />
     <MESSAGE value="Prepared to get rid of old loading" />
     <MESSAGE value="Fixed a small issue" />
@@ -3551,7 +3556,8 @@
     <MESSAGE value="Yay! Scripts" />
     <MESSAGE value="Yay! More Scripts" />
     <MESSAGE value="Windows scripts complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Windows scripts complete" />
+    <MESSAGE value="will it push?" />
+    <option name="LAST_COMMIT_MESSAGE" value="will it push?" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -4053,7 +4059,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/envsetup.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4785276">
+        <state vertical-scroll-proportion="0.76781327">
           <caret line="25" column="103" selection-start-line="25" selection-start-column="103" selection-end-line="25" selection-end-column="103" />
           <folding />
         </state>
