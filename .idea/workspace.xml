@@ -50,12 +50,11 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Yay! Scripts">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/envsetup.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="300442f1-4a45-46ac-9697-8175e8d80381" name="Default" comment="Yay! More Scripts">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/envsetup.bat" afterPath="$PROJECT_DIR$/envsetup.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/envsetup.sh" afterPath="$PROJECT_DIR$/envsetup.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mobile/mobile.iml" afterPath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/windows/adbtool.bat" afterPath="$PROJECT_DIR$/scripts/windows/adbtool.bat" />
     </list>
     <ignored path="GEM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -102,6 +101,10 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="500" column="9" selection-start-line="497" selection-start-column="57" selection-end-line="500" selection-end-column="9" />
               <folding>
+                <element signature="e#0#22678#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#3650#3651#0" expanded="false" />
+                <element signature="e#3695#3696#0" expanded="false" />
                 <element signature="method#requestPermissions#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#onActivityResult#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#onResume#0;class#MainScreen#0" expanded="false" />
@@ -109,14 +112,30 @@
                 <element signature="method#setUpDrawerHeader#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#setUpNavigation#0;class#MainScreen#0" expanded="false" />
                 <element signature="e#6691#6714#0" expanded="false" />
+                <element signature="e#7024#7025#0" expanded="false" />
+                <element signature="e#7079#7080#0" expanded="false" />
+                <element signature="e#7255#7256#0" expanded="false" />
+                <element signature="e#7313#7314#0" expanded="false" />
                 <element signature="e#7578#7588#0" expanded="false" />
                 <element signature="method#setUpNowPlayingBar#0;class#MainScreen#0" expanded="false" />
+                <element signature="e#9690#9691#0" expanded="false" />
+                <element signature="e#9755#9756#0" expanded="false" />
                 <element signature="class#11814:12590" expanded="false" />
                 <element signature="method#onAnimationStart#0;class#11814:12590" expanded="false" />
                 <element signature="method#onAnimationEnd#0;class#11814:12590" expanded="false" />
                 <element signature="method#onAnimationCancel#0;class#11814:12590" expanded="false" />
                 <element signature="method#onAnimationRepeat#0;class#11814:12590" expanded="false" />
+                <element signature="e#13559#13560#0" expanded="false" />
+                <element signature="e#13630#13631#0" expanded="false" />
+                <element signature="e#13895#13896#0" expanded="false" />
+                <element signature="e#13965#13966#0" expanded="false" />
+                <element signature="e#14079#14080#0" expanded="false" />
+                <element signature="e#14121#14122#0" expanded="false" />
+                <element signature="e#14352#14353#0" expanded="false" />
+                <element signature="e#14391#14392#0" expanded="false" />
                 <element signature="method#processMenuItem#0;class#MainScreen#0" expanded="false" />
+                <element signature="e#15337#15338#0" expanded="false" />
+                <element signature="e#15364#15365#0" expanded="false" />
                 <element signature="method#onBackPressed#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#onNavigationItemSelected#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#switchTab#0;class#MainScreen#0" expanded="false" />
@@ -124,8 +143,14 @@
                 <element signature="method#switchToAlbum#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#switchToArtists#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#switchToPlaylists#0;class#MainScreen#0" expanded="false" />
+                <element signature="e#18884#18885#0" expanded="false" />
+                <element signature="e#18928#18929#0" expanded="false" />
                 <element signature="method#configureRecycler#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
                 <element signature="method#instantiateItem#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+                <element signature="e#22484#22485#0" expanded="false" />
+                <element signature="e#22531#22532#0" expanded="false" />
+                <element signature="e#22618#22619#0" expanded="false" />
+                <element signature="e#22668#22669#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -176,6 +201,8 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
               <folding>
+                <element signature="e#0#2713#0" expanded="false" />
+                <element signature="imports" expanded="false" />
                 <element signature="method#configure#0;class#BaseAdapter#0" expanded="false" />
                 <element signature="method#registerListener#0;class#BaseAdapter#0" expanded="false" />
                 <element signature="method#onLongClick#0;class#BaseAdapter#0" expanded="false" />
@@ -191,7 +218,7 @@
           </provider>
           <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor vertical-scroll-proportion="0.0">
+              <first_editor vertical-scroll-proportion="0.8468835">
                 <caret line="28" column="61" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="62" />
                 <folding />
               </first_editor>
@@ -204,7 +231,7 @@
         <entry file="file://$PROJECT_DIR$/envsetup.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+              <caret line="20" column="28" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -213,8 +240,18 @@
       <file leaf-file-name="envsetup.bat" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/envsetup.bat">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2936118">
+              <caret line="19" column="54" selection-start-line="18" selection-start-column="33" selection-end-line="19" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adbtool.bat" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/windows/adbtool.bat">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -238,14 +275,30 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="172" column="48" selection-start-line="172" selection-start-column="48" selection-end-line="172" selection-end-column="48" />
               <folding>
+                <element signature="e#0#9519#0" expanded="false" />
+                <element signature="imports" expanded="false" />
                 <element signature="docComment;class#Loader#0" expanded="false" />
                 <element signature="method#Loader#0;class#Loader#0" expanded="false" />
+                <element signature="e#1953#1954#0" expanded="false" />
+                <element signature="e#1980#1981#0" expanded="false" />
+                <element signature="e#2019#2020#0" expanded="false" />
+                <element signature="e#2046#2047#0" expanded="false" />
+                <element signature="e#2091#2092#0" expanded="false" />
+                <element signature="e#2118#2119#0" expanded="false" />
+                <element signature="e#2157#2158#0" expanded="false" />
+                <element signature="e#2184#2185#0" expanded="false" />
                 <element signature="method#onPreExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
                 <element signature="e#3893#3905#0" expanded="false" />
+                <element signature="e#3984#3985#0" expanded="false" />
+                <element signature="e#4033#4034#0" expanded="false" />
                 <element signature="e#4044#4056#0" expanded="false" />
                 <element signature="method#onPostExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
+                <element signature="e#4639#4640#0" expanded="false" />
+                <element signature="e#4681#4682#0" expanded="false" />
                 <element signature="method#sort#0;class#Loader#0" expanded="false" />
                 <element signature="docComment;method#getObserver#0;class#Loader#0" expanded="false" />
+                <element signature="e#6666#6667#0" expanded="false" />
+                <element signature="e#6693#6694#0" expanded="false" />
                 <element signature="method#update#0;class#Loader#0" expanded="false" />
                 <element signature="docComment;method#registerMediaStoreListener#0;class#Loader#0" expanded="false" />
                 <element signature="method#registerMediaStoreListener#0;class#Loader#0" expanded="false" />
@@ -254,43 +307,14 @@
                 <element signature="docComment;method#unregisterMediaStoreListener#0;class#Loader#0" expanded="false" />
                 <element signature="method#unregisterMediaStoreListener#0;class#Loader#0" expanded="false" />
                 <element signature="docComment;class#TaskListener#0;class#Loader#0" expanded="false" />
+                <element signature="e#8903#8904#0" expanded="false" />
+                <element signature="e#8943#8944#0" expanded="false" />
                 <element signature="docComment;method#notifyOneLoaded#0;class#Loader#0" expanded="false" />
+                <element signature="e#9328#9329#0" expanded="false" />
+                <element signature="e#9369#9370#0" expanded="false" />
                 <element signature="docComment;method#getContext#0;class#Loader#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecyclerView.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.3.0/recyclerview-v7-23.3.0-sources.jar!/android/support/v7/widget/RecyclerView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8587" column="33" selection-start-line="8587" selection-start-column="33" selection-end-line="8587" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Library.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/media/Library.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="173" column="83" selection-start-line="173" selection-start-column="83" selection-end-line="173" selection-end-column="83" />
-              <folding>
-                <element signature="class#2278:2562" expanded="false" />
-                <element signature="class#2601:2889" expanded="false" />
-                <element signature="class#2931:3231" expanded="false" />
-                <element signature="class#3271:3563" expanded="false" />
-                <element signature="method#registerMediaStoreListeners#0;class#Library#0" expanded="false" />
-                <element signature="method#unregisterMediaStoreListeners#0;class#Library#0" expanded="false" />
-                <element signature="method#findSongById#0;class#Library#0" expanded="false" />
-                <element signature="method#findSongByUri#0;class#Library#0" expanded="false" />
-                <element signature="method#findAlbumById#0;class#Library#0" expanded="false" />
-                <element signature="method#findPlaylistById#0;class#Library#0" expanded="false" />
-                <element signature="method#filterAlbums#0;class#Library#0" expanded="false" />
-                <element signature="method#filterSongs#0;class#Library#0" expanded="false" />
-                <element signature="method#filterPlaylists#0;class#Library#0" expanded="false" />
-                <element signature="method#search#0;class#Library#0" expanded="false" />
+                <element signature="e#9485#9486#0" expanded="false" />
+                <element signature="e#9515#9516#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -2691,10 +2715,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/mobile/src/main/res/layout/activity_about.xml" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/custom/activity/ThemeActivity.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/activity/settings/Settings.java" />
-        <option value="$PROJECT_DIR$/mobile/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/LICENSE.md" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/LoadAlbumsTask.java" />
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/tasks/TaskLIstener.java" />
@@ -2741,7 +2761,11 @@
         <option value="$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/BaseAdapter.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/mobile/build.gradle" />
+        <option value="$PROJECT_DIR$/scripts/windows/gemapp.cmd" />
         <option value="$PROJECT_DIR$/envsetup.sh" />
+        <option value="$PROJECT_DIR$/scripts/windowscommands/gemapp.cmd" />
+        <option value="$PROJECT_DIR$/envsetup.bat" />
+        <option value="$PROJECT_DIR$/scripts/windows/a.cmd" />
       </list>
     </option>
   </component>
@@ -2805,7 +2829,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2826,10 +2849,15 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="mobile">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -2844,6 +2872,46 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="GEM">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="GEM">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="GEM">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="GEM">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="GEM">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="scripts">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="windows">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -2869,6 +2937,9 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="514" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Adrian\StudioProjects\GEM\scripts\windowsgemspecific" />
+    </key>
     <key name="android.template.packageName">
       <recent name="com.animbus.music.ui" />
       <recent name="com.animbus.music" />
@@ -2879,6 +2950,7 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Adrian\StudioProjects\GEM\scripts\windows" />
       <recent name="C:\Users\Adrian\StudioProjects\GEM\mobile\src\main\res\drawable" />
       <recent name="C:\Users\Adrian\StudioProjects\GEM\mobile\src\main\res\values" />
       <recent name="C:\Users\Adrian\StudioProjects\GEM\mobile\src\main\res\animator" />
@@ -3387,7 +3459,13 @@
       <option name="project" value="LOCAL" />
       <updated>1461519638127</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Yay! More Scripts">
+      <created>1461521805977</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1461521805977</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3412,12 +3490,13 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.5828437" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.49785176" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32902467" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.5757932" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.6709753" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.32955772" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.2782194" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278496" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32955772" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.24973032" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.32955772" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -3437,7 +3516,6 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34789643" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32902467" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.37322274" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278496" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Mirror" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298122" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -3519,7 +3597,8 @@
     <MESSAGE value="Updates" />
     <MESSAGE value="Uploading changes just in case something goes wrong  with my pc" />
     <MESSAGE value="Yay! Scripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Yay! Scripts" />
+    <MESSAGE value="Yay! More Scripts" />
+    <option name="LAST_COMMIT_MESSAGE" value="Yay! More Scripts" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3529,20 +3608,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.2.0/recyclerview-v7-23.2.0-sources.jar!/android/support/v7/widget/SimpleItemAnimator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3943489">
-          <caret line="288" column="23" selection-start-line="288" selection-start-column="23" selection-end-line="288" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.2.0/recyclerview-v7-23.2.0-sources.jar!/android/support/v7/widget/RecyclerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.031941">
-          <caret line="8566" column="33" selection-start-line="8566" selection-start-column="33" selection-end-line="8566" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/util/DisplayMetrics.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33292383">
@@ -3842,14 +3907,30 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="172" column="48" selection-start-line="172" selection-start-column="48" selection-end-line="172" selection-end-column="48" />
           <folding>
+            <element signature="e#0#9519#0" expanded="false" />
+            <element signature="imports" expanded="false" />
             <element signature="docComment;class#Loader#0" expanded="false" />
             <element signature="method#Loader#0;class#Loader#0" expanded="false" />
+            <element signature="e#1953#1954#0" expanded="false" />
+            <element signature="e#1980#1981#0" expanded="false" />
+            <element signature="e#2019#2020#0" expanded="false" />
+            <element signature="e#2046#2047#0" expanded="false" />
+            <element signature="e#2091#2092#0" expanded="false" />
+            <element signature="e#2118#2119#0" expanded="false" />
+            <element signature="e#2157#2158#0" expanded="false" />
+            <element signature="e#2184#2185#0" expanded="false" />
             <element signature="method#onPreExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
             <element signature="e#3893#3905#0" expanded="false" />
+            <element signature="e#3984#3985#0" expanded="false" />
+            <element signature="e#4033#4034#0" expanded="false" />
             <element signature="e#4044#4056#0" expanded="false" />
             <element signature="method#onPostExecute#0;class#LoadTask#0;class#Loader#0" expanded="false" />
+            <element signature="e#4639#4640#0" expanded="false" />
+            <element signature="e#4681#4682#0" expanded="false" />
             <element signature="method#sort#0;class#Loader#0" expanded="false" />
             <element signature="docComment;method#getObserver#0;class#Loader#0" expanded="false" />
+            <element signature="e#6666#6667#0" expanded="false" />
+            <element signature="e#6693#6694#0" expanded="false" />
             <element signature="method#update#0;class#Loader#0" expanded="false" />
             <element signature="docComment;method#registerMediaStoreListener#0;class#Loader#0" expanded="false" />
             <element signature="method#registerMediaStoreListener#0;class#Loader#0" expanded="false" />
@@ -3858,8 +3939,14 @@
             <element signature="docComment;method#unregisterMediaStoreListener#0;class#Loader#0" expanded="false" />
             <element signature="method#unregisterMediaStoreListener#0;class#Loader#0" expanded="false" />
             <element signature="docComment;class#TaskListener#0;class#Loader#0" expanded="false" />
+            <element signature="e#8903#8904#0" expanded="false" />
+            <element signature="e#8943#8944#0" expanded="false" />
             <element signature="docComment;method#notifyOneLoaded#0;class#Loader#0" expanded="false" />
+            <element signature="e#9328#9329#0" expanded="false" />
+            <element signature="e#9369#9370#0" expanded="false" />
             <element signature="docComment;method#getContext#0;class#Loader#0" expanded="false" />
+            <element signature="e#9485#9486#0" expanded="false" />
+            <element signature="e#9515#9516#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3869,6 +3956,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="500" column="9" selection-start-line="497" selection-start-column="57" selection-end-line="500" selection-end-column="9" />
           <folding>
+            <element signature="e#0#22678#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3650#3651#0" expanded="false" />
+            <element signature="e#3695#3696#0" expanded="false" />
             <element signature="method#requestPermissions#0;class#MainScreen#0" expanded="false" />
             <element signature="method#onActivityResult#0;class#MainScreen#0" expanded="false" />
             <element signature="method#onResume#0;class#MainScreen#0" expanded="false" />
@@ -3876,14 +3967,30 @@
             <element signature="method#setUpDrawerHeader#0;class#MainScreen#0" expanded="false" />
             <element signature="method#setUpNavigation#0;class#MainScreen#0" expanded="false" />
             <element signature="e#6691#6714#0" expanded="false" />
+            <element signature="e#7024#7025#0" expanded="false" />
+            <element signature="e#7079#7080#0" expanded="false" />
+            <element signature="e#7255#7256#0" expanded="false" />
+            <element signature="e#7313#7314#0" expanded="false" />
             <element signature="e#7578#7588#0" expanded="false" />
             <element signature="method#setUpNowPlayingBar#0;class#MainScreen#0" expanded="false" />
+            <element signature="e#9690#9691#0" expanded="false" />
+            <element signature="e#9755#9756#0" expanded="false" />
             <element signature="class#11814:12590" expanded="false" />
             <element signature="method#onAnimationStart#0;class#11814:12590" expanded="false" />
             <element signature="method#onAnimationEnd#0;class#11814:12590" expanded="false" />
             <element signature="method#onAnimationCancel#0;class#11814:12590" expanded="false" />
             <element signature="method#onAnimationRepeat#0;class#11814:12590" expanded="false" />
+            <element signature="e#13559#13560#0" expanded="false" />
+            <element signature="e#13630#13631#0" expanded="false" />
+            <element signature="e#13895#13896#0" expanded="false" />
+            <element signature="e#13965#13966#0" expanded="false" />
+            <element signature="e#14079#14080#0" expanded="false" />
+            <element signature="e#14121#14122#0" expanded="false" />
+            <element signature="e#14352#14353#0" expanded="false" />
+            <element signature="e#14391#14392#0" expanded="false" />
             <element signature="method#processMenuItem#0;class#MainScreen#0" expanded="false" />
+            <element signature="e#15337#15338#0" expanded="false" />
+            <element signature="e#15364#15365#0" expanded="false" />
             <element signature="method#onBackPressed#0;class#MainScreen#0" expanded="false" />
             <element signature="method#onNavigationItemSelected#0;class#MainScreen#0" expanded="false" />
             <element signature="method#switchTab#0;class#MainScreen#0" expanded="false" />
@@ -3891,8 +3998,14 @@
             <element signature="method#switchToAlbum#0;class#MainScreen#0" expanded="false" />
             <element signature="method#switchToArtists#0;class#MainScreen#0" expanded="false" />
             <element signature="method#switchToPlaylists#0;class#MainScreen#0" expanded="false" />
+            <element signature="e#18884#18885#0" expanded="false" />
+            <element signature="e#18928#18929#0" expanded="false" />
             <element signature="method#configureRecycler#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
             <element signature="method#instantiateItem#0;class#RecyclerPagerAdapter#0;class#MainScreen#0" expanded="false" />
+            <element signature="e#22484#22485#0" expanded="false" />
+            <element signature="e#22531#22532#0" expanded="false" />
+            <element signature="e#22618#22619#0" expanded="false" />
+            <element signature="e#22668#22669#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3918,6 +4031,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33292383">
           <caret line="141" column="19" selection-start-line="141" selection-start-column="19" selection-end-line="141" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7850123">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/BaseAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#2713#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="method#configure#0;class#BaseAdapter#0" expanded="false" />
+            <element signature="method#registerListener#0;class#BaseAdapter#0" expanded="false" />
+            <element signature="method#onLongClick#0;class#BaseAdapter#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3958,31 +4093,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gradle.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7850123">
-          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mobile/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
           <folding>
             <element signature="e#0#595#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mobile/src/main/java/com/animbus/music/ui/list/BaseAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
-          <folding>
-            <element signature="method#configure#0;class#BaseAdapter#0" expanded="false" />
-            <element signature="method#registerListener#0;class#BaseAdapter#0" expanded="false" />
-            <element signature="method#onLongClick#0;class#BaseAdapter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3999,7 +4115,7 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="0.0">
+          <first_editor vertical-scroll-proportion="0.8468835">
             <caret line="28" column="61" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="62" />
             <folding />
           </first_editor>
@@ -4010,15 +4126,23 @@
     <entry file="file://$PROJECT_DIR$/envsetup.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/windows/adbtool.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/envsetup.bat">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.2936118">
+          <caret line="19" column="54" selection-start-line="18" selection-start-column="33" selection-end-line="19" selection-end-column="54" />
           <folding />
         </state>
       </provider>
