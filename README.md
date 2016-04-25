@@ -27,7 +27,7 @@ In order to develop for GEM Player, you will have to run some commands and do so
   * For Windows: `envsetup`
 3. Follow prompts. This will ask you for a keystore file, a key alias, a key password, and a store password.
 4. The script will configure your environment. It will create files where necessary and will edit your PATH (in order for some nice tools to work). **Only accept the request to edit the PATH if this is the first Substance app you are developing for**
-5. Done
+5. Complete
 
 ####Screenshots:
 ![GEM Preview](http://i.imgur.com/d25pxdS.png)
