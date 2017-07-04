@@ -15,7 +15,7 @@
  */
 
 plugins {
-	id("substance.SdkPlugin") version "0.0.0"
+	id("substance.SdkPlugin") version "0.0.1"
 }
 
 sdk {
@@ -28,11 +28,11 @@ sdk {
 		buildToolsVersion("26.0.0")
 		androidConfig {
 		    defaultConfig {
-		        applicationId 'substance.music'
-		        targetSdkVersion 26
-		        versionName '0.3.0'
-		        versionCode 16
-		        minSdkVersion 17
+		        applicationId("substance.music")
+		        targetSdkVersion(26)
+		        versionName("0.3.0")
+		        versionCode(16)
+		        minSdkVersion(21)
 		        vectorDrawables.useSupportLibrary = true
 		    }
 
@@ -66,7 +66,7 @@ sdk {
 			    compile("com.github.afollestad.material-dialogs:commons:$mdVersion")
 
 			    // Mike Penz
-			    compile('com.mikepenz:aboutlibraries:5.6.5@aar')
+			    compile("com.mikepenz:aboutlibraries:5.6.5@aar")
 
 			    // Google
 			    val supportVersion = "26.0.0"
