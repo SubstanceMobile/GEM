@@ -30,15 +30,14 @@ object Options {
 		prefs = PreferenceManager.getDefaultSharedPreferences(ctx)
 	}
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Update activities
-    ///////////////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////////////
+   // Update activities
+   ///////////////////////////////////////////////////////////////////////////
 
-    fun markChanged() = Options.prefs.edit().putLong("last_update_time", System.currentTimeMillis()).commit()
-
-    fun invalidateActivity(GemActivity activity) {
-        if (activity.lastSettingsUpdate < prefs.getLong("last_update_time", 0)) activity.recreate();
-    }
+   fun markChanged() = put("last_update_time", System.currentTimeMillis)
+   fun invalidateActivity(GemActivity activity) {
+      if (activity.lastSettingsUpdate < fetch("last_update_time", 0L)) activity.recreate()
+   }
 
    ///////////////////////////////////////////////////////////////////////////
    // Exception types
