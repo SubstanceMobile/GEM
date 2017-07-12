@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Substance Mobile
+ * Copyright 2017 Substance Mobile
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.animbus.music;
+package substance.music;
 
 import android.app.Application;
 
+//TODO: New theme lib
 import com.afollestad.appthemeengine.ATE;
 import com.afollestad.appthemeengine.Config;
+
+// TODO: New playback lib
 import com.animbus.music.media.Library;
 import com.animbus.music.media.PlaybackRemote;
-import com.animbus.music.util.Options;
-
 import static com.animbus.music.media.PlaybackRemote.LOCAL;
 
+import substance.music.util.Options
 
+class GemApp : Application() {
+
+	// Keeps metadata with updates
+	private const val THEME_REVISION_NUMBER = 0;
+
+	override fun onCreate() {
+		super.onCreate()
+		configureThemes()
+		Options.create(this) // Setup the settings storage
+		configurePlaybackLib()
+	}
+
+	inline fun configureThemes() {
+		//TODO: Impl
+	}
+
+	inline fun configurePlaybackLib() {
+		//TODO: Impl
+	}
+
+	inline fun getATEKey(): String? = null // TODO: Adapt to new theme engine
+}
+
+/* OLD JAVA CODE. TODO: Remove
 public class GEMApp extends Application {
     private static final int ATE_REVISION_NUMBER = 0;
 
@@ -66,3 +91,4 @@ public class GEMApp extends Application {
         return null;
     }
 }
+*/
