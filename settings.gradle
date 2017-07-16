@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Substance Mobile
+ * Copyright 2017 Substance Mobile
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,5 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+pluginManagement.repositories {
+	maven { url 'https://dl.bintray.com/jetbrains/kotlin-native-dependencies/' } // Let the compiler find Kotlin-Native
+	maven { url 'https://maven.google.com' } // Let the compiler find the Android build tools
+	gradlePluginPortal()
+}
 
-include ':mobile'
+include("android") // Build for Android
