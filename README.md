@@ -1,3 +1,5 @@
+#TODO: Switch to git-flow structure
+
 # GEM Player (Beta)
 App Manager: Adrian Vovk (@AnimbusDev)
 
